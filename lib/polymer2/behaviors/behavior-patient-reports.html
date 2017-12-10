@@ -1,0 +1,76 @@
+<script>
+  PatientReportsBehavior = {
+
+    properties: {
+      _optinomic_patient_reports: {
+        type: Array,
+        statePath: 'annotations.data.optinomic_patient_reports',
+        observer: '_optinomic_patient_reportsChange'
+      },
+
+      _apps_patient_all: {
+        type: Object,
+        statePath: 'apps.all.data.patient_modules',
+        observer: '_optinomic_patient_reportsChange'
+      }
+    },
+
+    // --------------------------- FUNCTIONS --------------------------- lifeCycle ---------------------------
+
+    _optinomic_patient_reportsChange: function () {
+      this.debounce('_optinomic_patient_reportsChange', function () {
+
+        var reports = this.get('_optinomic_patient_reports');
+        var patient_apps = this.get('_apps_patient_all');
+
+        if ((reports !== undefined) && (patient_apps !== undefined)) {
+          if ((reports.length > 0) && (patient_apps.length > 0)) {
+
+            reports.forEach(function (report, ID) {
+              report.id = ID;
+              report.app_grid.forEach(function (grid, gridID) {
+                grid.id = gridID;
+                grid.timer = gridID * 3500;
+
+                var pos_app_start = grid.source.indexOf("/modules/");
+                var pos_app_end = grid.source.indexOf("/view/");
+                grid.app_id = grid.source.substring(pos_app_start + 9, pos_app_end);
+                grid.app_template_id = grid.app_id.replace(/\./g, '_') + '___' + grid.name;
+
+                grid.app = null;
+                patient_apps.forEach(function (app, appID) {
+                  if (app.identifier === grid.app_id) {
+                    grid.app = app;
+                  };
+                });
+
+              });
+
+            });
+
+            Polymer.RenderStatus.afterNextRender(this, function () {
+              this.set('_optinomic_patient_reports_full', reports);
+              this.dispatch('setObject', 'clinic.reports', reports);
+              this.set('_optinomic_patient_reports_visible', true);
+            });
+            // console.warn('(???) _optinomic_patient_reports', this._optinomic_patient_reports_full, patient_apps);
+
+          };
+        } else {
+          this.set('_optinomic_patient_reports_visible', false);
+        };
+
+      }, 250);
+    },
+
+    // --------------------------- lifeCycle ---------------------------
+
+    created: function () {
+      Polymer.RenderStatus.afterNextRender(this, function () {
+        //console.error('GET: annotations');
+        this.dispatch('getGenericCalls', '/annotations', 'annotations', '');
+      });
+    }
+
+  };
+</script>

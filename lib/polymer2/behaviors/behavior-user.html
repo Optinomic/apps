@@ -1,0 +1,163 @@
+<script>
+  UserBehavior = {
+
+    properties: {
+      _signin: {
+        type: Object,
+        statePath: 'signin'
+      },
+
+      _logged_in: {
+        type: Object,
+        statePath: 'signin.isLoggedIn'
+      },
+
+      _current_user_uid: {
+        type: Object,
+        statePath: 'user.info.user_id'
+      },
+
+      _current_user_aid: {
+        type: Object,
+        statePath: 'user.current_app.aid'
+      },
+
+      _current_user_to_edit: {
+        type: Object,
+        statePath: 'current_user_to_edit.data'
+      },
+
+      _current_user_open_user_events: {
+        type: Array,
+        statePath: 'user.events.data.user_events'
+      },
+
+      _current_user_open_role_events: {
+        type: Array,
+        statePath: 'user.events.data.role_events'
+      },
+
+      _current_user_aid_template: {
+        type: Object,
+        statePath: 'user.current_app.template'
+      },
+
+      _current_user_app: {
+        type: Object,
+        statePath: function (state) {
+
+          if ((state.user.current_app) && (state.apps.all !== undefined)) {
+            if (state.apps.all.data !== undefined) {
+
+              var return_value = {};
+
+              function isCurrentApp(obj) {
+                if (obj.identifier === state.user.current_app.aid) {
+                  return true;
+                } else {
+                  return false;
+                };
+              };
+
+              var all_apps = state.apps.all.data.user_modules;
+              return_value = all_apps.filter(isCurrentApp);
+              return_value = return_value[0];
+              //console.log('_current_user_app', return_value);
+              return return_value;
+            };
+          };
+        }
+      },
+
+      _current_user_apps_activated: {
+        type: Array,
+        statePath: function (state) {
+          var return_array = [];
+          if (Session.getUserID() !== undefined) {
+            if (state.apps.all !== undefined) {
+              if (state.apps.all.data !== undefined) {
+                if (state.user.apps !== undefined) {
+                  if (state.user.apps.data !== undefined) {
+
+                    var all_apps = JSON.parse(JSON.stringify(state.apps.all.data.user_modules));
+                    var current_user_apps = state.user.apps.data;
+
+                    if (current_user_apps !== undefined) {
+                      all_apps.forEach(function (app, appID) {
+                        app.activated = false;
+                        current_user_apps.forEach(function (uapp, uappID) {
+                          if (app.identifier === uapp.module.identifier) {
+                            app.activated = true;
+                          }
+                        });
+                      });
+                      return_array = all_apps;
+                    };
+                  };
+                };
+              };
+            };
+          }
+
+          return return_array;
+
+        }
+      },
+
+      _user_patient_list_filter: {
+        type: Object,
+        statePath: 'user.annotations.data.patientListFilter'
+      },
+
+      _user_info: {
+        type: Object,
+        statePath: 'user.info.data'
+      },
+
+      _system_logs: {
+        type: Object,
+        statePath: 'logs.data'
+      },
+
+      _user_name: {
+        type: Object,
+        statePath: function (state) {
+          if (state.user.info) {
+            if (state.user.info.data) {
+              return state.user.info.data.last_name + ' ' + state.user.info.data.first_name + ' (' + state.user.info.data.initials + ')'
+            };
+          };
+
+        }
+      },
+
+      _patient_group_watchlist: {
+        type: Array,
+        statePath: 'patient_groups.user'
+      },
+
+      // --------------------------- Apps ---------------------------
+
+      _apps_user_all: {
+        type: Object,
+        statePath: 'apps.all.data.user_modules'
+      },
+
+      _apps_user: {
+        type: Object,
+        statePath: 'user.apps.data'
+      }
+
+    },
+
+    _logged_inChanged: function () {
+      this.debounce('_logged_inChanged', function () {
+
+        //console.log('(beh:user) _logged_inChanged', this._logged_in);
+
+      }, 350);
+    },
+
+    created: function () {}
+  };
+</script>

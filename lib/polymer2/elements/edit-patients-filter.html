@@ -1,0 +1,483 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu-light.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../../bower_components/paper-date-picker/paper-date-picker.html">
+<link rel="import" href="../../bower_components/paper-date-picker/paper-calendar.html">
+<link rel="import" href="../behaviors/behavior-app.html">
+<link rel="import" href="moment-element.html">
+<link rel="import" href="page-footer.html">
+<link rel="import" href="../shared-styles.html">
+<dom-module id="edit-patients-filter">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .entry_item {
+        margin-right: 12px;
+        margin-top: auto;
+        margin-bottom: 0;
+        min-width: 200px;
+      }
+
+      .collapse-content {
+        min-width: 200px;
+      }
+
+    </style>
+    <paper-card class="margin-bottom">
+      <div class="card-content">
+        <div>
+          <h1>Patientenauswahl bearbeiten</h1>
+          <p class="subtitle">Selektieren Sie hier die Patienten, welche Sie in Ihrer Patientenauswahl sehen möchten.</p>
+        </div>
+        <div>
+          <h2 class="indigo">Patienten</h2>
+        </div>
+        <div class="layout horizontal wrap">
+          <paper-dropdown-menu-light label="Geschlecht" class="flex entry_item">
+            <paper-listbox id="gender" slot="dropdown-content" fallback-selection="" class="dropdown-content" attr-for-selected="name" selected$="{{_user_patient_list_filter_copy.gender}}">
+              <paper-item name="">Alle Patienten</paper-item>
+              <paper-item name="male">Herr</paper-item>
+              <paper-item name="female">Frau</paper-item>
+            </paper-listbox>
+          </paper-dropdown-menu-light>
+          <paper-input id="zip_code" type="number" label="PLZ" value$="[[_user_patient_list_filter_copy.zip_code]]" class="flex entry_item"></paper-input>
+          <paper-input id="city" label="Stadt" value$="[[_user_patient_list_filter_copy.city]]" class="flex entry_item"></paper-input>
+        </div>
+        <div class="layout horizontal wrap entry_item">
+          <paper-input id="age_over" type="number" label="Alter über" value$="[[_user_patient_list_filter_copy.age_over]]" class="flex entry_item"></paper-input>
+          <paper-input id="age_under" type="number" label="Alter unter" value$="[[_user_patient_list_filter_copy.age_under]]" class="flex entry_item"></paper-input>
+        </div>
+
+        <div style="margin-top:48px;">
+          <h2 class="indigo">Behandlung</h2>
+        </div>
+        <div class="layout horizontal wrap">
+          <paper-dropdown-menu-light label="Behandlung" class="flex entry_item">
+            <paper-listbox id="in_stay" slot="dropdown-content" fallback-selection="" class="dropdown-content" attr-for-selected="name" selected$="[[_user_patient_list_filter_copy.in_stay]]">
+              <paper-item name="">Alle Patienten</paper-item>
+              <paper-item name="True">In aktueller Behandlung</paper-item>
+              <paper-item name="False">Aktuell nicht in Behandlung</paper-item>
+            </paper-listbox>
+          </paper-dropdown-menu-light>
+          <paper-dropdown-menu-light label="Therapeut" class="flex entry_item">
+            <paper-listbox id="lead_therapist" slot="dropdown-content" fallback-selection="" class="dropdown-content" attr-for-selected="name" selected$="[[_user_patient_list_filter_copy.lead_therapist]]">
+              <paper-item name="">Alle Benutzer</paper-item>
+              <template is="dom-repeat" items="[[_users_all]]" as="user">
+                <paper-item name$="[[user.id]]">[[user.data.last_name]] [[user.data.first_name]] ([[user.data.initials]])</paper-item>
+              </template>
+            </paper-listbox>
+          </paper-dropdown-menu-light>
+          <paper-dropdown-menu-light label="Arzt" class="flex entry_item">
+            <paper-listbox id="cis_lead_doctor" slot="dropdown-content" fallback-selection="" class="dropdown-content" attr-for-selected="name" selected$="[[_user_patient_list_filter_copy.cis_lead_doctor]]">
+              <paper-item name="">Alle Benutzer</paper-item>
+              <template is="dom-repeat" items="[[_users_all]]" as="user">
+                <paper-item name$="[[user.id]]">[[user.data.last_name]] [[user.data.first_name]] ([[user.data.initials]])</paper-item>
+              </template>
+            </paper-listbox>
+          </paper-dropdown-menu-light>
+        </div>
+
+        <div style="margin-top:48px;">
+          <h2 class="indigo">Zeiträume</h2>
+        </div>
+        <div class="horizontal wrap">
+
+          <iron-collapse opened="[[!toggle_dates.show_date_1]]">
+            <div class="entry_item flex">
+              <h3 class="caption">Eintritt nach</h3>
+              <div class="horizontal">
+                <div hidden$="{{!isEmpty(_user_patient_list_filter_copy.stay_start_after)}}">
+                  Kein Datum selektiert
+                  <paper-icon-button icon="icons:create" on-tap="_toggleDate1" class="grey"></paper-icon-button>
+                </div>
+                <div hidden$="{{isEmpty(_user_patient_list_filter_copy.stay_start_after)}}">
+                  <moment-element datetime="[[_user_patient_list_filter_copy.stay_start_after]]" output-format="DD.MM.YYYY"></moment-element>
+                  <paper-icon-button icon="icons:close" on-tap="_clearDate1" class="grey"></paper-icon-button>
+                </div>
+              </div>
+            </div>
+          </iron-collapse>
+
+          <iron-collapse opened="[[toggle_dates.show_date_1]]">
+            <div class="horizontal">
+              <div class="collapse-content">
+                <div class="flex" style="margin-left:auto;margin-right:auto;">
+                  <h3 class="caption">Eintritt nach</h3>
+                  <paper-date-picker id="stay_start_after" on-date-changed="setDate1"></paper-date-picker>
+                </div>
+              </div>
+              <div class="entry_item">
+                <paper-icon-button icon="icons:close" on-tap="_closeDates" class="grey"></paper-icon-button>
+              </div>
+            </div>
+          </iron-collapse>
+
+          <iron-collapse opened="[[!toggle_dates.show_date_2]]">
+            <div class="entry_item flex">
+              <h3 class="caption">Eintritt vor</h3>
+              <div class="horizontal">
+                <div hidden$="{{!isEmpty(_user_patient_list_filter_copy.stay_start_before)}}">
+                  Kein Datum selektiert
+                  <paper-icon-button icon="icons:create" on-tap="_toggleDate2" class="grey"></paper-icon-button>
+                </div>
+                <div hidden$="{{isEmpty(_user_patient_list_filter_copy.stay_start_before)}}">
+                  <moment-element datetime="[[_user_patient_list_filter_copy.stay_start_before]]" output-format="DD.MM.YYYY"></moment-element>
+                  <paper-icon-button icon="icons:close" on-tap="_clearDate2" class="grey"></paper-icon-button>
+                </div>
+              </div>
+            </div>
+          </iron-collapse>
+
+          <iron-collapse opened="[[toggle_dates.show_date_2]]">
+            <div class="horizontal">
+              <div class="collapse-content">
+                <div class="flex" style="margin-left:auto;margin-right:auto;">
+                  <h3 class="caption">Eintritt vor</h3>
+                  <paper-date-picker id="stay_start_before" on-date-changed="setDate2"></paper-date-picker>
+                </div>
+              </div>
+              <div class="entry_item">
+                <paper-icon-button icon="icons:close" on-tap="_closeDates" class="grey"></paper-icon-button>
+              </div>
+            </div>
+          </iron-collapse>
+
+        </div>
+        <div class="horizontal wrap">
+
+          <iron-collapse opened="[[!toggle_dates.show_date_3]]">
+            <div class="entry_item flex">
+              <h3 class="caption">Austritt nach</h3>
+              <div class="horizontal">
+                <div hidden$="{{!isEmpty(_user_patient_list_filter_copy.stay_stop_after)}}">
+                  Kein Datum selektiert
+                  <paper-icon-button icon="icons:create" on-tap="_toggleDate3" class="grey"></paper-icon-button>
+                </div>
+                <div hidden$="{{isEmpty(_user_patient_list_filter_copy.stay_stop_after)}}">
+                  <moment-element datetime="[[_user_patient_list_filter_copy.stay_stop_after]]" output-format="DD.MM.YYYY"></moment-element>
+                  <paper-icon-button icon="icons:close" on-tap="_clearDate3" class="grey"></paper-icon-button>
+                </div>
+              </div>
+            </div>
+          </iron-collapse>
+
+          <iron-collapse opened="[[toggle_dates.show_date_3]]">
+            <div class="horizontal">
+              <div class="collapse-content">
+                <div class="flex" style="margin-left:auto;margin-right:auto;">
+                  <h3 class="caption">Austritt nach</h3>
+                  <paper-date-picker id="stay_stop_after" on-date-changed="setDate3"></paper-date-picker>
+                </div>
+              </div>
+              <div class="entry_item">
+                <paper-icon-button icon="icons:close" on-tap="_closeDates" class="grey"></paper-icon-button>
+              </div>
+            </div>
+          </iron-collapse>
+
+          <iron-collapse opened="[[!toggle_dates.show_date_4]]">
+            <div class="entry_item flex">
+              <h3 class="caption">Austritt vor</h3>
+              <div class="horizontal">
+                <div hidden$="{{!isEmpty(_user_patient_list_filter_copy.stay_stop_before)}}">
+                  Kein Datum selektiert
+                  <paper-icon-button icon="icons:create" on-tap="_toggleDate4" class="grey"></paper-icon-button>
+                </div>
+                <div hidden$="{{isEmpty(_user_patient_list_filter_copy.stay_stop_before)}}">
+                  <moment-element datetime="[[_user_patient_list_filter_copy.stay_stop_before]]" output-format="DD.MM.YYYY"></moment-element>
+                  <paper-icon-button icon="icons:close" on-tap="_clearDate4" class="grey"></paper-icon-button>
+                </div>
+              </div>
+
+            </div>
+          </iron-collapse>
+
+          <iron-collapse opened="[[toggle_dates.show_date_4]]">
+            <div class="horizontal">
+              <div class="collapse-content">
+                <div class="flex" style="margin-left:auto;margin-right:auto;">
+                  <h3 class="caption">Austritt vor</h3>
+                  <paper-date-picker id="stay_stop_before" on-date-changed="setDate4"></paper-date-picker>
+                </div>
+              </div>
+              <div class="entry_item">
+                <paper-icon-button icon="icons:close" on-tap="_closeDates" class="grey"></paper-icon-button>
+              </div>
+            </div>
+          </iron-collapse>
+
+        </div>
+
+      </div>
+
+      <div class="card-actions horizontal">
+
+        <a class="undecorated-link" href="#/patients/filter" tabindex="-1">
+          <paper-button>Abbrechen</paper-button>
+        </a>
+
+        <paper-button class="accent" on-tap="_saveList">Speichern</paper-button>
+      </div>
+    </paper-card>
+
+    <page-footer></page-footer>
+  </template>
+  <script>
+    Polymer({
+      is: 'edit-patients-filter',
+      properties: {
+        _user_patient_list_filter: {
+          type: Object,
+          statePath: 'user.annotations.data.patientListFilter',
+          observer: '_user_patient_list_filterChanged'
+        },
+
+        _user_patient_list_filter_copy: {
+          type: Object
+        }
+      },
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior, OptinomicAppBehavior
+      ],
+
+      // --------------------------- Observers ---------------------------
+
+      _updateCopy: function () {
+        var _filter = this.get('_user_patient_list_filter_copy');
+        if (_filter !== undefined) {
+
+          var parameters = {
+            "gender": this.$$('#gender').selected || '',
+            "zip_code": this.$$('#zip_code').value || null,
+            "city": this.$$('#city').value || null,
+            "age_over": this.$$('#age_over').value || null,
+            "age_under": this.$$('#age_under').value || null,
+            "in_stay": this.$$('#in_stay').selected,
+            "lead_therapist": this.$$('#lead_therapist').selected || '',
+            "cis_lead_doctor": this.$$('#cis_lead_doctor').selected || '',
+            "stay_start_after": _filter.stay_start_after || null,
+            "stay_start_before": _filter.stay_start_before || null,
+            "stay_stop_after": _filter.stay_stop_after || null,
+            "stay_stop_before": _filter.stay_stop_before || null
+          };
+
+          this.set('_user_patient_list_filter_copy', {});
+          this.set('_user_patient_list_filter_copy', parameters);
+          // console.error('_updateCopy', parameters);
+          return parameters;
+
+        } else {
+          return null;
+        };
+
+      },
+
+      _runList: function () {
+
+        var parameters = this._updateCopy();
+        this.dispatch('getFilterPatients', parameters);
+
+      },
+
+      _saveList: function () {
+
+        var parameters = this._updateCopy();
+        this.dispatch('setCurrentUserAnnotations', Session.getUserID(), 'patientListFilter', parameters);
+
+        setTimeout(function () {
+          window.location.href = "#/patients/filter";
+        }, 350);
+
+      },
+
+      isEmpty: function (value) {
+        //console.log('isEmpty', value);
+        if ((value !== '') && (value !== null)) {
+          return false;
+        } else {
+          return true;
+        };
+      },
+
+      setDate1: function (e) {
+        this.debounce('setDate1', function () {
+          var date = e.detail.value;
+
+          var _user_patient_list_filter_copy = this._updateCopy();
+          if (_user_patient_list_filter_copy !== null) {
+            //_user_patient_list_filter_copy.stay_start_after = ''; this.set('_user_patient_list_filter_copy.stay_start_after', ''); _user_patient_list_filter_copy.stay_start_after = date.toISOString();
+            console.warn('_user_patient_list_filterChanged', _user_patient_list_filter_copy, date.toISOString());
+            this.set('_user_patient_list_filter_copy.stay_start_after', date.toISOString());
+            //this.set('_user_patient_list_filter_copy', _user_patient_list_filter_copy);
+          };
+
+        }, 250);
+      },
+      setDate2: function (e) {
+        this.debounce('setDate2', function () {
+          var date = e.detail.value;
+          this._updateCopy();
+          var _user_patient_list_filter_copy = this._updateCopy();
+          if (_user_patient_list_filter_copy !== null) {
+            this.set('_user_patient_list_filter_copy', {});
+            _user_patient_list_filter_copy.stay_start_before = date.toISOString();
+            console.log('_user_patient_list_filterChanged', _user_patient_list_filter_copy, date.toISOString());
+            this.set('_user_patient_list_filter_copy', _user_patient_list_filter_copy);
+          };
+        }, 250);
+      },
+      setDate3: function (e) {
+        this.debounce('setDate3', function () {
+          var date = e.detail.value;
+          this._updateCopy();
+          var _user_patient_list_filter_copy = this._updateCopy();
+          if (_user_patient_list_filter_copy !== null) {
+            this.set('_user_patient_list_filter_copy', {});
+            _user_patient_list_filter_copy.stay_stop_after = date.toISOString();
+            console.log('_user_patient_list_filterChanged', _user_patient_list_filter_copy, date.toISOString());
+            this.set('_user_patient_list_filter_copy', _user_patient_list_filter_copy);
+          };
+        }, 250);
+      },
+      setDate4: function (e) {
+        this.debounce('setDate4', function () {
+          var date = e.detail.value;
+
+          var _user_patient_list_filter_copy = this._updateCopy();
+          if (_user_patient_list_filter_copy !== null) {
+            this.set('_user_patient_list_filter_copy', {});
+            _user_patient_list_filter_copy.stay_stop_before = date.toISOString();
+            console.log('_user_patient_list_filterChanged', _user_patient_list_filter_copy, date.toISOString());
+            this.set('_user_patient_list_filter_copy', _user_patient_list_filter_copy);
+          };
+        }, 250);
+      },
+
+      _clearDate1: function () {
+        var _filter = this._updateCopy();
+        if (_filter !== null) {
+          console.error('_filter', _filter);
+          this.set('_user_patient_list_filter_copy', {});
+          _filter.stay_start_after = null;
+          this.set('_user_patient_list_filter_copy', _filter);
+        };
+      },
+      _clearDate2: function () {
+        var _filter = this._updateCopy();
+        if (_filter !== null) {
+          console.error('_filter', _filter);
+          this.set('_user_patient_list_filter_copy', {});
+          _filter.stay_start_before = null;
+          this.set('_user_patient_list_filter_copy', _filter);
+        };
+      },
+      _clearDate3: function () {
+        var _filter = this._updateCopy();
+        if (_filter !== null) {
+          console.error('_filter', _filter);
+          this.set('_user_patient_list_filter_copy', {});
+          _filter.stay_stop_after = null;
+          this.set('_user_patient_list_filter_copy', _filter);
+        };
+      },
+      _clearDate4: function () {
+        var _filter = this._updateCopy();
+        if (_filter !== null) {
+          console.error('_filter', _filter);
+          this.set('_user_patient_list_filter_copy', {});
+          _filter.stay_stop_before = null;
+          this.set('_user_patient_list_filter_copy', _filter);
+        };
+      },
+
+      _user_patient_list_filterChanged: function () {
+        this.debounce('_user_patient_list_filterChanged', function () {
+
+          var _user_patient_list_filter = this.get('_user_patient_list_filter');
+          if (_user_patient_list_filter !== undefined) {
+            console.log('_user_patient_list_filterChanged', _user_patient_list_filter);
+            this.set('_user_patient_list_filter_copy', _user_patient_list_filter);
+          };
+
+        }, 250);
+      },
+
+      // --------------------------- User ---------------------------
+
+      _closeDates: function () {
+        this._updateCopy();
+        var toggle_dates = {
+          show_date_1: false,
+          show_date_2: false,
+          show_date_3: false,
+          show_date_4: false
+        };
+        this.set('toggle_dates', toggle_dates);
+      },
+      _toggleDate1: function () {
+        this._updateCopy();
+        var toggle_dates = {
+          show_date_1: true,
+          show_date_2: false,
+          show_date_3: false,
+          show_date_4: false
+        };
+        this.set('toggle_dates', toggle_dates);
+      },
+      _toggleDate2: function () {
+        this._updateCopy();
+        var toggle_dates = {
+          show_date_1: false,
+          show_date_2: true,
+          show_date_3: false,
+          show_date_4: false
+        };
+        this.set('toggle_dates', toggle_dates);
+      },
+      _toggleDate3: function () {
+        this._updateCopy();
+        var toggle_dates = {
+          show_date_1: false,
+          show_date_2: false,
+          show_date_3: true,
+          show_date_4: false
+        };
+        this.set('toggle_dates', toggle_dates);
+      },
+      _toggleDate4: function () {
+        this._updateCopy();
+        var toggle_dates = {
+          show_date_1: false,
+          show_date_2: false,
+          show_date_3: false,
+          show_date_4: true
+        };
+        this.set('toggle_dates', toggle_dates);
+      },
+
+      // --------------------------- lifeCycle ---------------------------
+
+      ready: function () {
+        var toggle_dates = {
+          show_date_1: false,
+          show_date_2: false,
+          show_date_3: false,
+          show_date_4: false
+        };
+        this.set('toggle_dates', toggle_dates);
+      }
+
+    });
+  </script>
+</dom-module>

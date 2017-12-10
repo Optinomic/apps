@@ -1,0 +1,202 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid-sorter.html">
+<link rel="import" href="../store/optinomic-redux-store.html">
+<link rel="import" href="../shared-styles.html">
+
+<link rel="import" href="../../bower_components/juicy-ace-editor/juicy-ace-editor.html">
+<script src="../../bower_components/ace-builds/src-min-noconflict/mode-sql.js"></script>
+<script src="../../bower_components/ace-builds/src-min-noconflict/mode-json.js"></script>
+<script src="../../bower_components/ace-builds/src-min-noconflict/theme-chrome.js"></script>
+<script src="../../bower_components/ace-builds/src-min-noconflict/worker-json.js"></script>
+
+<dom-module id="sql-toolbox">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .tabs {
+        height: 52px;
+        margin-bottom: 12px;
+      }
+
+      .editor {
+        height: calc(100vh - 253px);
+        margin-right: 24px;
+      }
+
+      .frame_container {
+        height: calc(100vh - 113px);
+        overflow: hidden;
+      }
+
+      paper-tabs {
+        --paper-tabs-selection-bar-color: var(--app-primary-color);
+      }
+
+      paper-tab {
+        --paper-tab-ink: var(--app-primary-color);
+      }
+
+      paper-tab {
+        color: inherit;
+        min-width: 64px;
+        background-color: inherit;
+      }
+
+    </style>
+    <div class="frame_container">
+
+      <div class="tabs margin-left-right">
+        <paper-tabs selected="{{_app_state}}" attr-for-selected="name" fallback-selection="code" scrollable hide-scroll-buttons>
+          <paper-tab name="code">
+            SQL
+          </paper-tab>
+          <paper-tab name="data" disabled="[[sql_data_error]]">
+            <template is="dom-if" if="[[sql_data_error]]" restamp="true">
+              <span style="color:grey">No Data</span>
+            </template>
+            <template is="dom-if" if="[[!sql_data_error]]" restamp="true">
+              Data ([[sql_data.length]])
+            </template>
+          </paper-tab>
+          <paper-tab name="options">
+            Options
+          </paper-tab>
+        </paper-tabs>
+      </div>
+
+      <iron-pages selected="{{_app_state}}" attr-for-selected="name" fallback-selection="code">
+        <div name="code">
+          <juicy-ace-editor id="code_editor" class="editor" value="[[sql_code]]" theme="ace/theme/chrome" mode="ace/mode/sql" fontsize="14px" softtabs="true" wrapmode="false"></juicy-ace-editor>
+        </div>
+        <div name="data">
+
+          <vaadin-grid class="editor" style="margin-left: 24px;" aria-label="SQL - Data" items="[[sql_data]]" column-reordering-allowed>
+
+            <template is="dom-repeat" items="[[sql_data_header]]" as="header">
+              <vaadin-grid-column resizable>
+                <template class="header">
+                  <vaadin-grid-sorter path="[[header]]">[[header]]</vaadin-grid-sorter>
+                </template>
+                <template>[[get(header, item)]]</template>
+              </vaadin-grid-column>
+            </template>
+
+          </vaadin-grid>
+
+        </div>
+        <div name="options">
+          <juicy-ace-editor id="code_options" class="editor" value="[[sql_options]]" theme="ace/theme/chrome" mode="ace/mode/json" fontsize="14px" softtabs="true" wrapmode="false"></juicy-ace-editor>
+        </div>
+      </iron-pages>
+
+      <div class="footer_bar">
+        <div class="horizontal margin-left-right">
+          <paper-button class="" on-tap="_sql_clear">clear</paper-button>
+          <paper-button class="accent" on-tap="_sql_run">run</paper-button>
+        </div>
+      </div>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'sql-toolbox',
+
+      properties: {
+        sql_code: {
+          type: String,
+          value: 'SELECT * FROM stay'
+        },
+
+        _app_state: {
+          type: String,
+          value: 'code'
+        }
+      },
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior, OptinomicAppBehavior
+      ],
+
+      // --------------------------- userFunction ---------------------------
+
+      _sql_clear: function () {
+        //var editor = ace.edit("code_editor"); var code = editor.getValue();
+        var code_editor = this.$$('#code_editor');
+        var sql_code = code_editor.editor.setValue('');
+        this.set('sql_code', sql_code);
+      },
+
+      _sql_run: function () {
+        //SQL;
+        var code_editor = this.$$('#code_editor');
+        var sql_code = code_editor.editor.getValue();
+        this.set('sql_code', sql_code);
+
+        //PARAMS;
+        var code_options = this.$$('#code_options');
+        var sql_options = code_options.editor.getValue();
+        this.set('sql_options', sql_options);
+
+        var sql_parameters = {};
+        sql_parameters['query'] = sql_code;
+        Object.assign(sql_parameters, JSON.parse(sql_options));
+        console.error('_sql_run', sql_parameters);
+
+        // API-Call
+        ApiHelpers.callAPI('POST', '/run_sql', sql_parameters, {}, function (req) {
+          if (req.status == 200) {
+
+            if (sql_parameters.format === 'json') {
+              var resp = JSON.parse(req.response);
+            } else {
+              var resp = req.response;
+            };
+
+            this.set('sql_data_error', false);
+            this.set('sql_data_header', resp.headers);
+            this.set('sql_data', resp.rows);
+            this._app_state = "data";
+
+            var response = {
+              "data": resp
+            };
+            console.log('(✔) Data:', response.data);
+          } else {
+            this.set('sql_data_error', true);
+
+            var response = {
+              "error": true,
+              "error_message": "Failed with status code: " + req.status,
+              "status_code": req.status
+            };
+            console.error('(!) Error: ', response);
+            this._showToast('(!) Error: ' + response.error_message, false);
+          };
+        }.bind(this));
+
+      },
+
+      // --------------------------- lifeCycle ---------------------------
+
+      ready: function () {
+        var sql_options = {
+          "delimiter": ";",
+          // "including_headers": "True",
+          "format": "json",
+          "direct": "True"
+        };
+        this.set('sql_options', JSON.stringify(sql_options, null, 2));
+        this.set('sql_data', []);
+        this.set('sql_data_error', true);
+
+      }
+    });
+  </script>
+</dom-module>

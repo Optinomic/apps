@@ -1,0 +1,218 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/juicy-ace-editor/juicy-ace-editor.html">
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid-sorter.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid-filter.html">
+<link rel="import" href="../store/optinomic-redux-store.html">
+<link rel="import" href="../behaviors/behavior-app.html">
+<link rel="import" href="../behaviors/behavior-user.html">
+<link rel="import" href="../shared-styles.html">
+<link rel="import" href="../optinomic-icons.html">
+<dom-module id="admin-users">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .grid {
+        height: calc(100vh - 220px);
+        margin-right: 24px;
+      }
+
+      .frame_container {
+        height: calc(100vh - 137px);
+        overflow: hidden;
+      }
+
+      paper-icon-button {
+        color: var(--app-primary-color);
+        --paper-icon-button-ink-color: var(--app-primary-color);
+      }
+      paper-icon-button:hover {
+        color: #E91E63;
+        --paper-icon-button-ink-color: #E91E63;
+      }
+
+    </style>
+    <div class="frame_container">
+
+      <div name="data">
+
+        <div class="horizontal wrap">
+          <div class="margin-left-right">
+            <h2 class="indigo">Benutzer ([[_users_all.length]])</h2>
+          </div>
+          <a href="#/admin/user/create" class="link margin-left-right" tabindex="-1">
+            <paper-button class="accent">Erstellen</paper-button>
+          </a>
+        </div>
+
+        <vaadin-grid id="grid" class="grid" style="margin-left: 24px;" aria-label="Users" items="[[_users_all]]" column-reordering-allowed>
+
+          <vaadin-grid-column width="52px" flex-grow="0" frozen>
+            <template>
+              <paper-icon-button icon="create" on-tap="_user_edit"></paper-icon-button>
+            </template>
+          </vaadin-grid-column>
+
+          <vaadin-grid-column width="64px" flex-grow="0" resizable frozen>
+            <template class="header">
+              <vaadin-grid-sorter path="id">
+                ID
+              </vaadin-grid-sorter>
+            </template>
+            <template>
+              [[item.id]]
+            </template>
+          </vaadin-grid-column>
+
+          <vaadin-grid-column resizable width="200px" flex-grow="0">
+            <template class="header">
+              <vaadin-grid-sorter direction="asc" path="data.last_name">
+                Name
+              </vaadin-grid-sorter>
+              <vaadin-grid-filter aria-label="Applikation" path="data.last_name" value="[[_filterUserLast]]">
+                <paper-input style="width:90%;margin-top:-24px;" value="{{_filterUserLast}}" focus-target>
+                  <iron-icon icon="icons:search" slot="prefix" style="color:grey;"></iron-icon>
+                </paper-input>
+                >
+              </vaadin-grid-filter>
+            </template>
+            <template>
+              [[item.data.last_name]]
+            </template>
+          </vaadin-grid-column>
+
+          <vaadin-grid-column resizable width="160px" flex-grow="0">
+            <template class="header">
+              <vaadin-grid-sorter path="data.last_name">
+                Vorname
+              </vaadin-grid-sorter>
+              <vaadin-grid-filter aria-label="Applikation" path="data.first_name" value="[[_filterUserFirst]]">
+                <paper-input style="width:90%;margin-top:-24px;" value="{{_filterUserFirst}}" focus-target>
+                  <iron-icon icon="icons:search" slot="prefix" style="color:grey;"></iron-icon>
+                </paper-input>
+                >
+              </vaadin-grid-filter>
+            </template>
+            <template>
+              [[item.data.first_name]]
+            </template>
+          </vaadin-grid-column>
+
+          <vaadin-grid-column width="76px" flex-grow="0" resizable>
+            <template class="header">
+              <vaadin-grid-sorter path="data.initials">
+                <iron-icon icon="icons:account-circle" style="color:grey;"></iron-icon>
+              </vaadin-grid-sorter>
+              <vaadin-grid-filter aria-label="Applikation" path="data.initials" value="[[_filterUserInitials]]">
+                <paper-input style="width:90%;margin-top:-24px;" value="{{_filterUserInitials}}" focus-target>
+                  <iron-icon icon="icons:search" slot="prefix" style="color:grey;"></iron-icon>
+                </paper-input>
+                >
+              </vaadin-grid-filter>
+            </template>
+            <template>
+              [[item.data.initials]]
+            </template>
+          </vaadin-grid-column>
+
+          <vaadin-grid-column width="140px" flex-grow="0" resizable>
+            <template class="header">
+              <vaadin-grid-sorter path="data.role">
+                Rolle
+              </vaadin-grid-sorter>
+            </template>
+            <template>
+              [[item.data.role]]
+            </template>
+          </vaadin-grid-column>
+
+          <vaadin-grid-column width="140px" flex-grow="0" resizable>
+            <template class="header">
+              <vaadin-grid-sorter path="data.phone">
+                Telefon
+              </vaadin-grid-sorter>
+            </template>
+            <template>
+              [[item.data.phone]]
+            </template>
+          </vaadin-grid-column>
+
+          <vaadin-grid-column width="240px" flex-grow="3" resizable>
+            <template class="header">
+              <vaadin-grid-sorter path="data.email">
+                Email
+              </vaadin-grid-sorter>
+            </template>
+            <template>
+              [[item.data.email]]
+            </template>
+          </vaadin-grid-column>
+
+          <vaadin-grid-column width="96px" flex-grow="0" resizable>
+            <template class="header">
+              <vaadin-grid-sorter path="data.locked">
+                Archiv
+              </vaadin-grid-sorter>
+            </template>
+            <template>
+              <paper-checkbox disabled checked$="[[item.data.locked]]"></paper-checkbox>
+            </template>
+          </vaadin-grid-column>
+
+          <vaadin-grid-column resizable width="420px">
+            <template class="header">
+              <vaadin-grid-sorter path="data.description">
+                Beschreibung
+              </vaadin-grid-sorter>
+              <vaadin-grid-filter aria-label="Applikation" path="data.description" value="[[_filterUserDescription]]">
+                <paper-input style="width:90%;margin-top:-24px;" value="{{_filterUserDescription}}" focus-target>
+                  <iron-icon icon="icons:search" slot="prefix" style="color:grey;"></iron-icon>
+                </paper-input>
+                >
+              </vaadin-grid-filter>
+            </template>
+            <template>
+              [[item.data.description]]
+            </template>
+          </vaadin-grid-column>
+
+        </vaadin-grid>
+
+      </div>
+
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'admin-users',
+
+      properties: {},
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior, OptinomicAppBehavior, UserBehavior
+      ],
+
+      // --------------------------- Observers ---------------------------
+
+      _user_edit: function (e) {
+        console.log('_user_edit', e.model.item);
+        this.dispatch('setObject', 'current_user_to_edit.data', e.model.item);
+
+        // Forward to User
+        var url = "#/admin/user/" + e.model.item.id + "/edit";
+        window.location.href = url;
+      },
+
+      // --------------------------- lifeCycle ---------------------------
+      ready: function () {}
+
+    });
+  </script>
+</dom-module>

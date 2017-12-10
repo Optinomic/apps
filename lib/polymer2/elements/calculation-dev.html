@@ -1,0 +1,292 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../store/optinomic-redux-store.html">
+<link rel="import" href="../shared-styles.html">
+
+<link rel="import" href="../../bower_components/juicy-ace-editor/juicy-ace-editor.html">
+<script src="../../bower_components/ace-builds/src-min-noconflict/mode-html.js"></script>
+<script src="../../bower_components/ace-builds/src-min-noconflict/mode-json.js"></script>
+<script src="../../bower_components/ace-builds/src-min-noconflict/theme-chrome.js"></script>
+<script src="../../bower_components/ace-builds/src-min-noconflict/worker-json.js"></script>
+
+<dom-module id="calculation-dev">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .tabs {
+        height: 52px;
+        margin-bottom: 12px;
+      }
+
+      .overview {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .editor {
+        height: calc(100vh - 186px - 60px);
+        border-bottom: thin solid #BDBDBD;
+      }
+
+      .frame_container {
+        height: calc(100vh - 113px);
+        overflow: hidden;
+      }
+
+      .circle {
+        display: block;
+        height: 48px;
+        width: 48px;
+        border-radius: 50%;
+        margin-right: 6px;
+      }
+
+      paper-tabs {
+        --paper-tabs-selection-bar-color: var(--app-primary-color);
+      }
+
+      paper-tab {
+        --paper-tab-ink: var(--app-primary-color);
+      }
+
+      paper-tab {
+        color: inherit;
+        min-width: 128px;
+        background-color: inherit;
+      }
+
+    </style>
+    <div class="frame_container">
+
+      <div class="tabs margin-left-right">
+        <paper-tabs selected="{{_app_state}}" attr-for-selected="name" fallback-selection="input" scrollable hide-scroll-buttons>
+          <paper-tab name="input">
+            Input
+          </paper-tab>
+          <paper-tab name="code">
+            Calculation (JS)
+          </paper-tab>
+          <paper-tab name="output" disabled="[[!_output_success]]">
+            <template is="dom-if" if="[[_output_success]]" restamp="true">
+              Output
+            </template>
+          </paper-tab>
+        </paper-tabs>
+      </div>
+
+      <iron-pages selected="{{_app_state}}" attr-for-selected="name" fallback-selection="input">
+        <div name="input">
+          <juicy-ace-editor id="input" class="editor" value="[[_input]]" theme="ace/theme/chrome" mode="ace/mode/json" fontsize="14px" softtabs="true" wrapmode="false"></juicy-ace-editor>
+
+          <div class="footer_bar">
+            <div class="horizontal margin-left-right">
+              <div class="horizontal margin-left-right flex" style="margin-top:-6px;">
+                <paper-input id="pid" label="PID"></paper-input>&nbsp;
+                <paper-input id="module_identifier" class="flex" label="module_identifier"></paper-input>&nbsp;
+                <paper-input id="calculation_identifier" label="calculation_identifier"></paper-input>
+                <paper-checkbox id="minify" checked>
+                  <span class="caption">minified</span>
+                </paper-checkbox>
+              </div>
+              <paper-button class="indigo" on-tap="_requestInputData">Get Data</paper-button>
+            </div>
+          </div>
+        </div>
+        <div name="code">
+          <juicy-ace-editor id="code" on-keydown="_checkForRun" class="editor" value="[[_code]]" theme="ace/theme/chrome" mode="ace/mode/javascript" fontsize="14px" softtabs="true" wrapmode="false"></juicy-ace-editor>
+
+          <div class="footer_bar">
+            <div class="horizontal margin-left-right">
+              <div>&nbsp;</div>
+              <paper-button class="accent" on-tap="_calculationRun">Run (Ctrl-S)</paper-button>
+            </div>
+          </div>
+        </div>
+        <div name="output">
+          <template is="dom-if" if="[[_isCurrent('output', _app_state)]]" restamp="true">
+            <template is="dom-if" if="[[_output_success]]" restamp="true">
+              <juicy-ace-editor id="output" class="editor" value="[[_output]]" theme="ace/theme/chrome" mode="ace/mode/json" fontsize="14px" softtabs="true" wrapmode="false"></juicy-ace-editor>
+            </template>
+          </template>
+          <div class="footer_bar">
+            <div class="horizontal margin-left-right">
+              <p class="caption">[[_performance]]</p>
+              <paper-button class="grey" on-tap="_setAppStateCode">Calculation Bearbeiten</paper-button>
+            </div>
+          </div>
+        </div>
+      </iron-pages>
+    </div>
+
+  </div>
+
+</template>
+<script>
+  Polymer({
+    is: 'calculation-dev',
+
+    properties: {
+      _input: {
+        type: Object
+      },
+      _code: {
+        type: Object,
+        value: 'function main(responses) {\n\n\n    // Do stuff!\n\n\n    // Return\n    return responses;\n}'
+      },
+      _output: {
+        type: Object
+      }
+    },
+
+    behaviors: [
+      ReduxBehavior, AsyncActionsBehavior, OptinomicAppBehavior
+    ],
+
+    // --------------------------- userFunction ---------------------------
+
+    _setAppStateCode: function () {
+      this.set('_app_state', 'code');
+    },
+
+    _calculationRun: function () {
+
+      this.set('_output', {});
+      this.set('_output_success', false);
+
+      var error_found = false;
+
+      // Get Input
+      try {
+        var input_editor = this.$$('#input');
+        var responses = JSON.parse(input_editor.editor.getValue());
+      } catch (err) {
+        this._showToast('(!) Error: Input Data', false);
+        error_found = true;
+      }
+
+      // Get Code
+      try {
+        var code_editor = this.$$('#code');
+        var code = code_editor.editor.getValue();
+        code_runner = "{\n" + code + "\n  return main(responses);\n}"
+        // code = code.replace(/\n\s*/g, ' ');
+      } catch (err) {
+        this._showToast('(!) Error: Code', false);
+        error_found = true;
+      }
+
+      if (error_found === false) {
+        var output = null;
+
+        try {
+          var fn = new Function('responses', code_runner);
+
+          try {
+            var t0 = performance.now();
+            output = fn(responses);
+            var t1 = performance.now();
+
+            this.set('_output', JSON.stringify(output, null, ' '));
+            this.set('_performance', "Calculation took " + (t1 - t0) + " milliseconds.")
+            this.set('_output_success', true);
+            this.set('_app_state', 'output');
+          } catch (err) {
+            this._showToast('(!) Calculation-Error!  Check Console.', true);
+            console.error('(!) Calculation-Error: ', err);
+          }
+
+        } catch (err) {
+          output = "Function - Error: " + err;
+        };
+
+        console.log('_calculationRun', responses, output);
+      };
+
+    },
+
+    _requestInputData: function () {
+      var pid = this.$$('#pid');
+      var module_identifier = this.$$('#module_identifier');
+      var calculation_identifier = this.$$('#calculation_identifier');
+
+      this._getCalulationData(pid.value, module_identifier.value, calculation_identifier.value);
+
+    },
+
+    // --------------------------- Functions ---------------------------
+
+    _getCalulationData: function (patient_id, module_identifier, calculation_identifier) {
+
+      patient_id = patient_id || null;
+
+      if ((patient_id !== null) && (patient_id !== "")) {
+        var api_call = "/patients/" + patient_id + "/calculations/" + module_identifier + "/" + calculation_identifier + "/data";
+      } else {
+        var api_call = "/calculations/" + module_identifier + "/" + calculation_identifier + "/data";
+      };
+
+      // API-Call
+      ApiHelpers.callAPI('GET', api_call, {}, {}, function (req) {
+        if (req.status == 200) {
+          this._setAppStateCode();
+          var resp = JSON.parse(req.response);
+
+          var minify = this.$$('#minify');
+          if (minify.checked) {
+            this.set('_input', JSON.stringify(resp, null, 0));
+          } else {
+            this.set('_input', JSON.stringify(resp, null, ' '));
+          };
+
+          console.log('(✔) Data:', resp);
+        } else {
+          var response = {
+            "error": true,
+            "error_message": "Failed with status code: " + req.status,
+            "status_code": req.status
+          };
+          console.error('(!) Error: ', response);
+          this._showToast('(!) Error: ' + response.error_message, false);
+        };
+      }.bind(this));
+    },
+
+    _isCurrent: function (check, route) {
+      return route === check;
+    },
+
+    // --------------------------- lifeCycle ---------------------------
+
+    _checkForRun: function (e) {
+      // check if 'enter' was pressed
+      if (event.ctrlKey || event.metaKey) {
+        switch (String.fromCharCode(event.which).toLowerCase()) {
+          case 's':
+            event.preventDefault();
+            console.log('ctrl-s');
+            this._calculationRun();
+            break;
+        }
+      }
+    },
+
+    _init: function () {
+      this.set('_input', JSON.stringify({}, null, ' '));
+      this.set('_output_success', false);
+    },
+
+    // --------------------------- lifeCycle ---------------------------
+
+    ready: function () {
+      this._init();
+    }
+  });
+</script>
+</dom-module>

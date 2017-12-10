@@ -1,0 +1,172 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid-sorter.html">
+<link rel="import" href="../store/optinomic-redux-store.html">
+<link rel="import" href="../shared-styles.html">
+<dom-module id="stay-quickjump">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .full_grid {
+        max-width: none;
+        height: 100%;
+        width: 100% !important;
+        border-left-style: none;
+        border-right-style: none;
+        border-bottom-style: none;
+      }
+
+      .alias_link {
+        cursor: alias;
+      }
+
+    </style>
+
+    <template is="dom-if" if="[[_quickjumps.defined]]" restamp="true">
+      <paper-card class="margin-bottom">
+        <div name="reports" style="padding-left:3px;">
+
+          <vaadin-grid class="full_grid" aria-label="Applikationen" items="[[_quickjumps.data]]" column-reordering-allowed="false">
+
+            <vaadin-grid-column width="56px" flex-grow="0">
+              <template class="header">
+                <optinomic-avatar small firstname="" lastname="Q" gender="male"></optinomic-avatar>
+              </template>
+              <template>
+                <a class="iron-list-link alias_link" href$="#/patient/[[_current_patient_pid]]/stay/[[_current_patient_fid]]/app/[[item.app_id]]/template/[[item.app_template]]" tabindex="-1">
+                  <paper-icon-button icon="icons:timeline" class="alias_link" style="color:grey;"></paper-icon-button>
+                </a>
+              </template>
+            </vaadin-grid-column>
+
+            <vaadin-grid-column>
+              <template class="header">
+                <vaadin-grid-sorter path="name" direction="asc">
+                  <h2>Verknüpfungen</h2>
+                </vaadin-grid-sorter>
+              </template>
+              <template>
+                <a class="iron-list-link alias_link" href$="#/patient/[[_current_patient_pid]]/stay/[[_current_patient_fid]]/app/[[item.app_id]]/template/[[item.app_template]]" tabindex="-1">
+                  [[item.name]]
+                </a>
+              </template>
+            </vaadin-grid-column>
+          </vaadin-grid>
+
+        </div>
+
+      </paper-card>
+    </template>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'stay-quickjump',
+
+      properties: {
+        _optinomic_patient_stay_quickjumps: {
+          type: Array,
+          statePath: 'annotations.data.optinomic_patient_stay_quickjumps',
+          observer: '_quickjumpsChanged'
+        },
+
+        _current_patient_pid: {
+          type: Object,
+          statePath: 'current_patient.pid',
+          observer: '_quickjumpsChanged'
+        },
+
+        _current_patient_fid: {
+          type: Object,
+          statePath: 'current_patient.fid',
+          observer: '_quickjumpsChanged'
+        },
+
+        _apps_patient_all: {
+          type: Object,
+          statePath: 'apps.all.data.patient_modules',
+          observer: '_quickjumpsChanged'
+        }
+
+      },
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior
+      ],
+
+      // ------------------ Functions ------------------
+      _quickjumpsChanged: function () {
+        this.debounce('_quickjumpsChanged', function () {
+
+          if ((this._current_patient_pid !== null) && (this._current_patient_pid !== undefined)) {
+            if ((this._current_patient_fid !== null) && (this._current_patient_fid !== undefined)) {
+              if ((this._apps_patient_all !== null) && (this._apps_patient_all !== undefined)) {
+
+                var quickjumps = this.get('_optinomic_patient_stay_quickjumps');
+                if ((quickjumps !== null) && (quickjumps !== undefined)) {
+                  if (quickjumps.length > 0) {
+
+                    var enhanced_quickjumps = [];
+                    quickjumps.forEach(function (item, itemID) {
+                      item.app = null;
+
+                      if ((item.name === null) || (item.name === undefined)) {
+                        this._apps_patient_all.forEach(function (app, appID) {
+                          if (app.identifier === item.app_id) {
+                            item.name = app.name;
+                          };
+                        }.bind(this));
+                      };
+
+                      item.pid = this._current_patient_pid;
+                      item.fid = this._current_patient_fid;
+                      enhanced_quickjumps.push(item);
+                    }.bind(this));
+
+                    var _quickjumps = {
+                      "defined": true,
+                      "data": enhanced_quickjumps
+                    };
+
+                    if (JSON.stringify(this._quickjumps) !== JSON.stringify(_quickjumps)) {
+                      this.set('_quickjumps', _quickjumps);
+                      // console.error('_quickjumpsChanged: ', _quickjumps);
+                    };
+
+                  };
+                };
+              };
+            };
+          };
+
+        }, 250);
+      },
+
+      // ------------------ User Clicks ------------------
+      _forward_quickjump: function (e) {
+
+        var model = e.model.get('item');
+
+        if ((model !== undefined) && (model !== null)) {
+          if ((model.pid !== undefined) && (model.pid !== null)) {
+            if ((model.fid !== undefined) && (model.fid !== null)) {
+              if ((model.app_id !== undefined) && (model.app_id !== null)) {
+                if ((model.app_template !== undefined) && (model.app_template !== null)) {
+                  var location_str = "#/patient/" + model.pid + "/stay/" + model.fid + "/app/" + model.app_id + "/template/" + model.app_template;
+                  console.warn('(Quickjump) ', location_str);
+                  window.location.href = location_str;
+                };
+              };
+            };
+          };
+        };
+
+      }
+    });
+  </script>
+</dom-module>

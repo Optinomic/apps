@@ -1,0 +1,332 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu-light.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../../bower_components/paper-date-picker/paper-date-picker.html">
+<link rel="import" href="../../bower_components/paper-date-picker/paper-calendar.html">
+<link rel="import" href="../../bower_components/paper-date-picker/paper-year-list.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../store/optinomic-redux-store.html">
+<link rel="import" href="../behaviors/behavior-app.html">
+<link rel="import" href="../behaviors/behavior-user.html">
+<link rel="import" href="../shared-styles.html">
+<dom-module id="user-create">
+  <template>
+    <style include="shared-styles iron-flex iron-flex-alignment">
+      :host {
+        display: block;
+
+        --field-width: 100%;
+
+      }
+
+      paper-dropdown-menu-light,
+      paper-input {
+        min-width: var(--field-width);
+      }
+
+    </style>
+
+    <paper-card class="margin-bottom">
+      <div class="card-content">
+
+        <div>
+          <h1>Benutzer</h1>
+          <p class="subtitle">Erstellen</p>
+        </div>
+
+        <div class="">
+
+          <div class="layout horizontal wrap">
+            <paper-dropdown-menu-light label="Geschlecht">
+              <paper-listbox id="gender" slot="dropdown-content" fallback-selection="male" class="dropdown-content" attr-for-selected="name" selected$="[[_current_user_to_edit.data.gender]]">
+                <paper-item name="male">Herr</paper-item>
+                <paper-item name="female">Frau</paper-item>
+              </paper-listbox>
+            </paper-dropdown-menu-light>
+            <paper-input id="title" label="Titel" value=""></paper-input>
+          </div>
+
+          <div class="layout horizontal wrap">
+            <paper-input id="last_name" label="Name" value=""></paper-input>
+            <paper-input id="first_name" label="Vorname" value=""></paper-input>
+          </div>
+
+          <div class="layout horizontal wrap">
+
+            <paper-input id="email" label="Email" value=""></paper-input>
+            <paper-input id="password" label="Passwort" value="Optinomic"></paper-input>
+            <paper-dropdown-menu-light label="Rolle" style="width:100%">
+              <paper-listbox id="role" slot="dropdown-content" class="dropdown-content" fallback-selection="NoRole" attr-for-selected="name" selected$="[[_current_user_to_edit.data.role]]">
+                <template is="dom-repeat" items="[[_users_roles]]" as="role">
+                  <paper-item name$="[[role]]">[[role]]</paper-item>
+                </template>
+              </paper-listbox>
+            </paper-dropdown-menu-light>
+
+            <paper-input id="initials" label="Kürzel" value=""></paper-input>
+            <paper-input id="phone" label="Telefon" value=""></paper-input>
+
+          </div>
+
+          <div class="layout horizontal wrap">
+            <div style="margin-left:auto;margin-right:auto">
+              <h3 class="caption">Geburtstag</h3>
+              <paper-date-picker id="birthday"></paper-date-picker>
+            </div>
+
+            <paper-input style="width:100%" id="description" label="Beschreibung" value=""></paper-input>
+
+            <paper-input id="cis_uid" label="Klinik: User-ID" value=""></paper-input>
+            <paper-input id="ou" label="Klinik: Organisation Unit" value=""></paper-input>
+          </div>
+        </div>
+
+      </div>
+      <div class="card-actions horizontal wrap">
+
+        <a class="undecorated-link" href$="[[backUrl]]" tabindex="-1">
+          <paper-button>Abbrechen</paper-button>
+        </a>
+
+        <paper-button on-tap="_doCreateUser" class="accent">Speichern</paper-button>
+      </div>
+    </paper-card>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'user-create',
+
+      properties: {
+
+        backUrl: {
+          type: String
+        },
+
+        _is_small: {
+          type: Boolean,
+          statePath: 'device.sizes.small',
+          observer: '_sizeChanged'
+        },
+
+        _is_medium: {
+          type: Boolean,
+          statePath: 'device.sizes.medium',
+          observer: '_sizeChanged'
+        }
+      },
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior, OptinomicAppBehavior, UserBehavior
+      ],
+
+      // --------------------------- lifeCycle ---------------------------
+      _doCreateUser: function () {
+
+        var parameters = {
+          "email": this.$$('#email').value || "",
+          "password": this.$$('#password').value || "Optinomic",
+          "gender": this.$$('#gender').selected,
+          "role": this.$$('#role').selected,
+          "title": this.$$('#title').value || "",
+          "first_name": this.$$('#first_name').value || "",
+          "last_name": this.$$('#last_name').value || "",
+          "birthday": this.$$('#birthday').date.toISOString(),
+          "phone": this.$$('#phone').value || "",
+          "description": this.$$('#description').value || "",
+          "initials": this.$$('#initials').value || "",
+          "ou": this.$$('#ou').value || "0",
+          "cis_uid": this.$$('#cis_uid').value || "0"
+        };
+
+        var api_url = '/users/';
+        console.error('_doCreateUser', parameters, api_url);
+
+        // API-Call
+        ApiHelpers.callAPI('POST', api_url, {}, parameters, function (req) {
+          if (req.status == 201) {
+            // Update Users
+            this.dispatch('getGenericCalls', '/users', 'users.users', 'users');
+
+            var resp = JSON.parse(req.response);
+            var user = resp.user;
+
+            window.location.href = '#/admin/user/' + user.id + '/edit';
+
+            console.error('USER created', user);
+
+            // Toast & Forward
+            this._showToast('(✔) Benutzer erfolgreich erstellt', false);
+
+          } else {
+            var response = {
+              "error": true,
+              "error_message": "Failed with status code: " + req.status,
+              "status_code": req.status
+            };
+
+            this._showToast(response.error_message, true);
+            console.error('(!) Error: ', response);
+          };
+        }.bind(this));
+
+      },
+
+      _doUpdateRole: function () {
+
+        var parameters = {
+          "role": this.$$('#role').selected
+        };
+
+        var api_url = '/users/' + this._current_user_to_edit.id + '/role';
+        console.error('_doUpdateRole', parameters, api_url);
+
+        // API-Call
+        ApiHelpers.callAPI('PUT', api_url, {}, parameters, function (req) {
+          if (req.status == 204) {
+            // Update Users
+            this.dispatch('getGenericCalls', '/users', 'users.users', 'users');
+
+            // Toast & Forward
+            this._showToast('(✔) Benutzer-Rolle erfolgreich gespeichert', false);
+            window.location.href = this.backUrl;
+
+            console.log();
+          } else {
+            var response = {
+              "error": true,
+              "error_message": "Failed with status code: " + req.status,
+              "status_code": req.status
+            };
+
+            this._showToast(response.error_message, true);
+            console.error('(!) Error: ', response);
+          };
+        }.bind(this));
+
+      },
+
+      _callLock: function (lock) {
+
+        lock = lock || 'lock';
+
+        var api_url = '/users/' + this._current_user_to_edit.id + '/' + lock;
+        console.error('_doLock', lock, api_url);
+
+        // API-Call
+        ApiHelpers.callAPI('POST', api_url, {}, {}, function (req) {
+          if (req.status == 204) {
+            // Update Users
+            this.dispatch('getGenericCalls', '/users', 'users.users', 'users');
+
+            // Toast & Forward
+            if (lock === 'lock') {
+              var text = '(✔) Benutzer erfolgreich archiviert.'
+            } else {
+              var text = '(✔) Archivierung erfolgreich aufgehoben.'
+            };
+            this._showToast(text, true);
+            window.location.href = this.backUrl;
+
+            console.log();
+          } else {
+            var response = {
+              "error": true,
+              "error_message": "Failed with status code: " + req.status,
+              "status_code": req.status
+            };
+
+            this._showToast(response.error_message, true);
+            console.error('(!) Error: ', response);
+          };
+        }.bind(this));
+
+      },
+
+      _doLock: function () {
+        this._callLock('lock');
+      },
+
+      _doUnlock: function () {
+        this._callLock('unlock');
+      },
+
+      _callChangePW: function (pw) {
+
+        var parameters = {
+          "password": pw
+        };
+        var api_url = '/users/' + this._current_user_to_edit.id + '/password';
+
+        // API-Call
+        ApiHelpers.callAPI('PUT', api_url, {}, parameters, function (req) {
+          if (req.status == 204) {
+            // Update Users
+            this.dispatch('getGenericCalls', '/users', 'users.users', 'users');
+
+            // Toast & Forward
+            this._showToast('Passwort erfolgreich gespeichert', false);
+            window.location.href = this.backUrl;
+
+            console.log();
+          } else {
+            var response = {
+              "error": true,
+              "error_message": "Failed with status code: " + req.status,
+              "status_code": req.status
+            };
+
+            this._showToast(response.error_message, true);
+            console.error('(!) Error: ', response);
+          };
+        }.bind(this));
+
+      },
+
+      _doUpdatePW: function () {
+        var pw1 = this.$$('#pw1').value || "";
+        var pw2 = this.$$('#pw2').value || "";
+
+        // console.error('_doUpdatePW', pw1, pw2);
+
+        if (pw1 === pw2) {
+          if (pw1.length >= 6) {
+            this._callChangePW('pw1');
+          } else {
+            this._showToast('Uuups, das Passwort muss mindestens 6 Zeichen beinhalten.', true);
+          };
+        } else {
+          this._showToast('Uuups, Passwörter stimmen nicht überein.', true);
+        };
+      },
+
+      // --------------------------- Observer ---------------------------
+      _sizeChanged: function () {
+        this.debounce('_sizeChanged', function () {
+
+          if ((this._is_small === false) && (this._is_medium === false)) {
+            this.customStyle['--field-width'] = '48%';
+            this.updateStyles();
+          } else {
+            this.customStyle['--field-width'] = '100%';
+            this.updateStyles();
+          };
+
+        }, 250);
+      },
+
+      // --------------------------- lifeCycle ---------------------------
+      ready: function () {
+        var d = new Date();
+        var n = d.toISOString();
+        this.set('date_now', n);
+      }
+
+    });
+  </script>
+</dom-module>

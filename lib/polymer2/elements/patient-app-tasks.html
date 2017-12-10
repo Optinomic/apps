@@ -1,0 +1,259 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item-body.html">
+<link rel="import" href="../store/optinomic-redux-store.html">
+<link rel="import" href="../shared-styles.html">
+<link rel="import" href="moment-element.html">
+<dom-module id="patient-app-tasks">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        --paper-item-icon-width: 0;
+        --paper-item-icon {
+          background-color: blue;
+        }
+      }
+
+      paper-tabs {
+        --paper-tabs-selection-bar-color: var(--app-accent-color);
+      }
+
+      paper-tab {
+        --paper-tab-ink: var(--app-primary-color);
+      }
+
+      paper-tab {
+        color: inherit;
+        min-width: 64px;
+      }
+
+      .tabs_container {
+        background-color: #F5F5F5;
+        overflow: hidden;
+      }
+
+      .item {
+        background-color: inherit;
+      }
+      .item:hover {
+        background-color: #F5F5F5;
+      }
+
+    </style>
+    <paper-card class="margin-bottom">
+      <div class="tabs_container">
+        <paper-tabs selected="{{card_tab}}" attr-for-selected="name" fallback-selection="" scrollable hide-scroll-buttons>
+          <paper-tab name="app">
+            <div hidden$="{{!_is_empty_array(_current_patient_app_tasks_to_be_done.length)}}">
+              Erfassen
+            </div>
+            <div hidden$="{{_is_empty_array(_current_patient_app_tasks_to_be_done.length)}}">
+              Aufgaben Applikation
+              <span class="caption">&nbsp; ([[_current_patient_app_tasks_to_be_done.length]])</span>
+            </div>
+          </paper-tab>
+          <paper-tab name="all" link>
+            Alle Aufgaben
+            <span class="caption">&nbsp; ([[_current_patient_tasks_to_be_done.length]])</span>
+          </paper-tab>
+        </paper-tabs>
+      </div>
+      <div class="grid-border-top">
+        <iron-pages selected="[[card_tab]]" attr-for-selected="name" fallback-selection="user">
+
+          <div name="app">
+
+            <div hidden$="{{!_is_empty_array(_current_patient_app_tasks_to_be_done.length)}}">
+              <div class="horizontal wrap" style="margin:24px;">
+                <div class="margin-left-right">
+                  <h2 style="margin-bottom:18px;">[[_current_stay_app.name]]</h2>
+                  <p class="subtitle">Manuell ausführen</p>
+                </div>
+              </div>
+
+              <div class="grid-border-top">
+                <template is="dom-repeat" items="[[_current_stay_app.surveys]]" as="survey">
+                  <div style="margin:12px;">
+                    <paper-icon-item class="item">
+                      <div class="avatar" slot="item-icon">
+                        <optinomic-avatar small firstname="" lastname="[[survey.name]]" gender="male"></optinomic-avatar>
+                      </div>
+                      <paper-item-body>
+                        [[survey.name]]
+                      </paper-item-body>
+                      <paper-button on-tap="_doItNow" class="accent">Jetzt ausführen</paper-button>
+                    </paper-icon-item>
+                  </div>
+                </template>
+              </div>
+
+            </div>
+
+            <div hidden$="{{_is_empty_array(_current_patient_app_tasks_to_be_done.length)}}">
+              <div class="margin-left-right">
+                <h2 style="margin-bottom:18px;">Aufgaben</h2>
+                <p class="subtitle">[[_current_stay_app.name]]</p>
+              </div>
+              <div class="grid-border-top">
+
+                <template is="dom-repeat" items="[[_current_patient_app_tasks_to_be_done]]" as="task">
+                  <paper-icon-item class="item">
+                    <div class="avatar" slot="item-icon">
+                      <a href$="#/patient/[[_current_patient_pid]]/task/[[task.id]]" tabindex="-1">
+                        <optinomic-avatar small firstname="" lastname="E" gender="male"></optinomic-avatar>
+                      </a>
+                    </div>
+                    <paper-item-body two-line>
+                      <a href$="#/patient/[[_current_patient_pid]]/task/[[task.id]]" class="undecorated-link" tabindex="-1">
+                        <div>[[task.data.survey_name]]</div>
+                        <div secondary>
+                          [[task.data.description]]
+                          <moment-element datetime="[[task.data.created_at]]" from="now"></moment-element>
+                        </div>
+                      </a>
+                    </paper-item-body>
+                    <a href="[[task.data.url]]" class="undecorated-link" target="_blank" tabindex="-1">
+                      <paper-icon-button icon="check" class="pink" alt="Jetzt ausführen!"></paper-icon-button>
+                    </a>
+                  </paper-icon-item>
+                </template>
+              </div>
+
+            </div>
+          </div>
+
+          <div name="all">
+            <div class="margin-left-right">
+              <h2 style="margin-bottom:18px;">Alle Patienten-Aufgaben</h2>
+              <p class="subtitle">[[_current_patient_info.extras.name]] ([[_current_patient_info.extras.birthday_age]])</p>
+            </div>
+            <div class="grid-border-top">
+              <template is="dom-repeat" items="[[_current_patient_tasks_to_be_done]]" as="task">
+                <paper-icon-item class="item">
+                  <div class="avatar" slot="item-icon">
+                    <a href$="#/patient/[[_current_patient_pid]]/task/[[task.id]]" tabindex="-1">
+                      <optinomic-avatar small firstname="" lastname="E" gender="male"></optinomic-avatar>
+                    </a>
+                  </div>
+                  <paper-item-body two-line>
+                    <a href$="#/patient/[[_current_patient_pid]]/task/[[task.id]]" class="undecorated-link" tabindex="-1">
+                      <div>[[task.data.survey_name]]</div>
+                      <div secondary>
+                        [[task.data.description]]
+                        <moment-element datetime="[[task.data.created_at]]" from="now"></moment-element>
+                      </div>
+                    </a>
+                  </paper-item-body>
+                  <a href="[[task.data.url]]" class="undecorated-link" target="_blank" tabindex="-1">
+                    <paper-icon-button icon="check" class="pink" alt="Jetzt ausführen!"></paper-icon-button>
+                  </a>
+                </paper-icon-item>
+              </template>
+            </div>
+          </div>
+        </iron-pages>
+      </div>
+    </paper-card>
+  </template>
+  <script>
+    Polymer({
+      is: 'patient-app-tasks',
+
+      properties: {},
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior, OptinomicAppBehavior, PatientBehavior
+      ],
+
+      _doItNow: function (e) {
+
+        var model = e.model;
+        var _current_stay_app_pum = this.get('_current_stay_app_pum');
+
+        var patient_uses_module_id = _current_stay_app_pum.id || null;
+        var survey_identifier = model.survey.identifier || null
+
+        apiStr = '/patient_uses_modules/' + patient_uses_module_id + '/schedule_survey';
+
+        var body = {
+          "survey_identifier": survey_identifier
+        };
+
+        if ((patient_uses_module_id !== null) && (survey_identifier !== null)) {
+          this._callPUM(apiStr, body, true);
+        } else {
+          console.warn('_doItNow: Error', survey_identifier, _current_stay_app_pum, apiStr, body);
+        };
+
+      },
+
+      // --------------------------- API ---------------------------
+
+      _callPUM: function (api_url, parameters, now) {
+
+        now = now || false;
+
+        // API-Call
+        ApiHelpers.callAPI('POST', api_url, {}, parameters, function (req) {
+          if (req.status == 201) {
+            var resp = JSON.parse(req.response);
+            var e = resp.event;
+
+            //Update Events;
+            this.dispatch('getCurrentPatientEvents', this._current_patient_pid);
+
+            if (now) {
+              this._showToast(e.data.survey_name + ' wird gestartet. Bitte haben Sie 2-3 Minuten Geduld, bis das Resultat sichtbar wird.', true);
+              var win = window.open(e.data.url, '_blank');
+              if (win) {
+                //Browser has allowed it to be opened
+                win.focus();
+              } else {
+                //Browser has blocked it
+                this._showToast('Please allow popups for this website', true);
+              };
+            } else {
+              this._showToast(e.data.survey_name + ' erfolgreich erstellt.', true);
+            };
+
+            // console.error('resp', e);
+          } else {
+            var response = {
+              "error": true,
+              "error_message": "Failed with status code: " + req.status,
+              "status_code": req.status
+            };
+
+            this._showToast(response.error_message, true);
+            console.error('(!) Error: ', response);
+          };
+        }.bind(this));
+
+      },
+
+      // --------------------------- Check ---------------------------
+
+      _is_empty_array: function (count) {
+        if (count > 0) {
+          return false
+        } else {
+          return true
+        };
+      },
+
+      // --------------------------- lifeCycle ---------------------------
+
+      ready: function () {
+        this.card_tab = 'app';
+        this.set('show', false);
+      }
+
+    });
+  </script>
+</dom-module>

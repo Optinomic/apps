@@ -1,0 +1,95 @@
+<script>
+  OptinomicAppBehavior = {
+
+    properties: {
+
+      // --------------------------- Clinic ---------------------------
+
+      _clinic_info: {
+        type: Object,
+        statePath: 'clinic.info.data.clinic_obj'
+      },
+
+      _clinic_extra_config: {
+        type: Object,
+        statePath: 'clinic.extra_config.data'
+      },
+
+      // --------------------------- Users ---------------------------
+
+      _users_all: {
+        type: Array,
+        statePath: 'users.users.data'
+      },
+
+      _users_roles: {
+        type: Array,
+        statePath: 'users.roles.data'
+      },
+
+      // --------------------------- Device ---------------------------
+
+      _device_current: {
+        type: Boolean,
+        statePath: 'device.current'
+      },
+
+      _is_small: {
+        type: Boolean,
+        statePath: 'device.sizes.small'
+      },
+      _is_medium: {
+        type: Boolean,
+        statePath: 'device.sizes.medium'
+      },
+      _is_large: {
+        type: Boolean,
+        statePath: 'device.sizes.large'
+      },
+      _is_xlarge: {
+        type: Boolean,
+        statePath: 'device.sizes.xlarge'
+      }
+    },
+
+    // --------------------------- Navigation ---------------------------
+
+    _forward: function (page) {
+      this.page = page;
+      window.location.href = "#/" + page;
+      //console.log('--> Forwarding to /', page);
+    },
+
+    _forward_user: function () {
+      window.location.href = "#/user";
+    },
+
+    // --------------------------- Navigation ---------------------------
+
+    _app_signout: function (page) {
+      this.fire('app-signout');
+    },
+
+    // --------------------------- Show Toast ---------------------------
+
+    _showToast: function (text, persistant) {
+
+      text = text || 'Optinomic';
+      persistant = persistant || false;
+
+      var toastObj = {
+        "text": text,
+        "persistant": persistant
+      };
+
+      console.log('_showToast :: show-toast', toastObj);
+
+      this.fire('show-toast', toastObj);
+
+    },
+
+    created: function () {
+      // console.log('appToastBehavior for ', this, 'enabled!');
+    }
+  };
+</script>

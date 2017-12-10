@@ -1,0 +1,238 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../store/optinomic-redux-store.html">
+<link rel="import" href="../shared-styles.html">
+
+<link rel="import" href="../../bower_components/juicy-ace-editor/juicy-ace-editor.html">
+<script src="../../bower_components/ace-builds/src-min-noconflict/mode-html.js"></script>
+<script src="../../bower_components/ace-builds/src-min-noconflict/mode-json.js"></script>
+<script src="../../bower_components/ace-builds/src-min-noconflict/theme-chrome.js"></script>
+<script src="../../bower_components/ace-builds/src-min-noconflict/worker-json.js"></script>
+
+<dom-module id="hotload-toolbox">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .tabs {
+        height: 52px;
+        margin-bottom: 12px;
+      }
+
+      .overview {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .editor {
+        height: calc(100vh - 186px);
+        border-bottom: thin solid #BDBDBD;
+      }
+
+      .frame_container {
+        height: calc(100vh - 113px);
+        overflow: hidden;
+      }
+
+      .circle {
+        display: block;
+        height: 48px;
+        width: 48px;
+        border-radius: 50%;
+        margin-right: 6px;
+      }
+
+      paper-tabs {
+        --paper-tabs-selection-bar-color: var(--app-primary-color);
+      }
+
+      paper-tab {
+        --paper-tab-ink: var(--app-primary-color);
+      }
+
+      paper-tab {
+        color: inherit;
+        min-width: 64px;
+        background-color: inherit;
+      }
+
+    </style>
+    <div class="frame_container">
+
+      <div name="post">
+        <juicy-ace-editor id="code_editor" on-keydown="_checkForSave" class="editor" value="[[app_code]]" theme="ace/theme/chrome" mode="ace/mode/html" fontsize="14px" softtabs="true" wrapmode="false"></juicy-ace-editor>
+      </div>
+
+      <div class="footer_bar">
+
+        <div class="horizontal margin-left-right">
+          <div class="">
+            <div class="horizontal margin-left-right">
+              <div class="circle" on-tap="_hotload_get">
+                <h2 style="padding:0; margin-top:8px;">[[_hotloaded.length]]</h2>
+              </div>
+              <div on-tap="_hotload_get">
+                <p class="caption">
+                  <template is="dom-repeat" items="[[_hotloaded]]">
+                    <span>[[item]]&nbsp;</span>
+                  </template>
+                </p>
+              </div>
+              <template is="dom-if" if="[[_show_hotloaded]]" restamp="true">
+                <div class="horizontal margin-left-right">
+                  <paper-button on-tap="_hotload_delete">delete</paper-button>
+                </div>
+              </template>
+            </div>
+          </div>
+          <div class="horizontal margin-left-right">
+            <paper-button class="warn" on-tap="_run_component">app-fetcher</paper-button>
+          </div>
+          <paper-button class="accent" on-tap="_hotload_post">Save (Ctrl-S)</paper-button>
+        </div>
+      </div>
+    </div>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'hotload-toolbox',
+
+      properties: {
+        app_code: {
+          type: String,
+          value: '\n1.) Paste here content from a opapp file.\n    - You can find .opapp sources here: ( https://github.com/Optinomic/apps )\n\n2.) Happy coding. :-)\n    - Save working code constantly to your local source files.\n\n3.) Test your work with [SAVE].\n\n' +
+              '4.) When happy:\n    - Update local-files and commit as usual.\n    - [Delete] Hotload'
+        },
+        _app_state: {
+          type: String,
+          value: 'code',
+          observer: '_setFooterbar'
+        },
+        _hotloaded: {
+          type: Object,
+          statePath: 'hotloaded.data',
+          observer: '_showDelete'
+        }
+      },
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior, OptinomicAppBehavior
+      ],
+
+      // --------------------------- userFunction ---------------------------
+
+      _hotload_get: function () {
+        //var editor = ace.edit("code_editor"); var code = editor.getValue();
+        this._app_state = 'overview';
+        this._app_state = 'overview';
+        this.dispatch('getHotloaded');
+      },
+
+      _hotload_delete: function () {
+        //var editor = ace.edit("code_editor"); var code = editor.getValue();
+        this._app_state = 'overview';
+
+        this.dispatch('deleteHotloaded');
+        this._showToast('Deleted all hotloaded apps!', false);
+
+        setTimeout(function () {
+          this.dispatch('getHotloaded');
+        }.bind(this), 1000);
+      },
+
+      _hotload_post: function () {
+
+        var code_editor = this.$$('#code_editor');
+        var app_code = code_editor.editor.getValue();
+        this.set('app_code', app_code);
+
+        // console.log('app_code', app_code);
+        this.dispatch('postHotloaded', app_code);
+        this._showToast('App should be hotloaded: Check Console!', false);
+
+        setTimeout(function () {
+          this.dispatch('getHotloaded');
+        }.bind(this), 1000);
+
+      },
+
+      _checkForSave: function (e) {
+        // check if 'enter' was pressed
+        if (event.ctrlKey || event.metaKey) {
+          switch (String.fromCharCode(event.which).toLowerCase()) {
+            case 's':
+              event.preventDefault();
+              console.log('ctrl-s');
+              this._hotload_post();
+              break;
+          }
+        }
+      },
+
+      _run_component: function () {
+
+        var component = 'app-fetcher';
+
+        console.log('(!) Start (' + component + '):');
+
+        var api_url = '/run_component';
+        var body = {
+          "component": component
+        };
+
+        ApiHelpers.callAPI('POST', api_url, {}, body, function (req) {
+          var resp = JSON.parse(req.response);
+          if (req.status == 200) {
+            var text = '(✔) "' + component + '": ' + resp.message;
+            this._showToast(text, false);
+          } else {
+            var response = {
+              "error": true,
+              "body": body,
+              "status": req.status,
+              "response": resp
+            };
+            var text = '(!) Error "' + component + '": ' + resp.message;
+            this._showToast(text, true);
+            console.error('(!) Error: ', response);
+          };
+
+        }.bind(this));
+      },
+
+      // --------------------------- Observer ---------------------------
+
+      _showDelete: function () {
+        this.debounce('_showDelete', function () {
+
+          if (this._hotloaded.length !== 0) {
+            this.set('_show_hotloaded', true);
+          } else {
+            this.set('_show_hotloaded', false);
+          };
+
+        }, 250);
+      },
+
+      _setFooterbar: function () {
+        if (this._app_state === 'post') {
+          this.set('_overview_footerbar', false);
+        } else {
+          this.set('_overview_footerbar', true);
+        };
+      },
+
+      // --------------------------- lifeCycle ---------------------------
+
+      ready: function () {
+        this.dispatch('getHotloaded');
+        this._setFooterbar();
+      }
+    });
+  </script>
+</dom-module>

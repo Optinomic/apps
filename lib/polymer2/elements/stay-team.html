@@ -1,0 +1,580 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
+<link rel="import" href="../../bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item-body.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid-sorter.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid-filter.html">
+<link rel="import" href="../store/optinomic-redux-store.html">
+<link rel="import" href="../behaviors/behavior-app.html">
+<link rel="import" href="../behaviors/behavior-user.html">
+<link rel="import" href="../behaviors/behavior-patient.html">
+<link rel="import" href="../shared-styles.html">
+<dom-module id="stay-team">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        --paper-item-icon-width: 0;
+        --paper-item-icon {
+          background-color: blue;
+        }
+      }
+
+      .iron-list-link {
+        color: #424242;
+        text-decoration: none;
+      }
+      .iron-list-link-item:hover {
+        color: black;
+      }
+
+      .full_grid {
+        height: 360px;
+      }
+
+      paper-icon-button {
+        color: #9E9E9E;
+        --paper-icon-button-ink-color: var(--app-primary-color);
+      }
+      paper-icon-button:hover {
+        color: #E91E63;
+        --paper-icon-button-ink-color: #E91E63;
+      }
+
+    </style>
+    <paper-card class="">
+      <div class="card-content">
+        <div style="padding-left:9px;">
+          <h2 style="margin-bottom:18px;">Behandlungsteam</h2>
+          <p class="subtitle">[[_current_stay_info.extras.from_to]]</p>
+        </div>
+        <!--  THERAPIST -->
+        <paper-icon-item class="item">
+          <div class="avatar" slot="item-icon">
+            <optinomic-avatar small firstname="[[_current_stay_therapist.data.first_name]]" lastname="[[_current_stay_therapist.data.last_name]]" initials="[[_current_stay_therapist.data.initials]]" gender="[[_current_stay_therapist.data.gender]]"></optinomic-avatar>
+          </div>
+          <paper-item-body two-line>
+            <div>
+              [[therapist_name]]
+            </div>
+            <div secondary>Therapeut / Psychologe
+              <span class="caption" style="color:#BDBDBD;font-style:italic;">&nbsp;&nbsp;&nbsp;[[_current_stay_info.data.lead_therapist_id]]</span>
+            </div>
+          </paper-item-body>
+          <div hidden$="[[_toggle_theapist]]">
+            <paper-icon-button icon="create" on-tap="_toggleTheapist"></paper-icon-button>
+          </div>
+          <div hidden$="[[!_toggle_theapist]]">
+            <paper-icon-button icon="delete" on-tap="_clear_therapist"></paper-icon-button>
+            <paper-icon-button icon="close" on-tap="_toggleTheapist"></paper-icon-button>
+          </div>
+        </paper-icon-item>
+        <iron-collapse id="apps" opened="[[_toggle_theapist]]" class="collapse-content">
+          <div name="grid">
+            <vaadin-grid class="full_grid" aria-label="Applikationen" items="[[_users_all]]" column-reordering-allowed="false">
+              <vaadin-grid-column width="52px" flex-grow="0" frozen>
+                <template>
+                  <paper-icon-button icon="check" on-tap="_set_therapist"></paper-icon-button>
+                </template>
+              </vaadin-grid-column>
+              <vaadin-grid-column resizable>
+                <template class="header">
+                  <vaadin-grid-sorter direction="asc" path="data.last_name">
+                    Benutzer ([[_users_all.length]])
+                  </vaadin-grid-sorter>
+                  <vaadin-grid-filter aria-label="Applikation" path="data.last_name" value="[[_filterUser]]">
+                    <paper-input style="width:90%;margin-top:-24px;" placeholder="Nachname suchen" value="{{_filterUser}}" focus-target>
+                      <iron-icon icon="icons:search" slot="prefix" style="color:grey;"></iron-icon>
+                    </paper-input>
+                    >
+                  </vaadin-grid-filter>
+                </template>
+                <template>
+                  [[item.data.last_name]] [[item.data.first_name]] ([[item.data.initials]])
+                </template>
+              </vaadin-grid-column>
+            </vaadin-grid>
+          </div>
+        </iron-collapse>
+        <!---  Deputy -->
+        <paper-icon-item class="item">
+          <div class="avatar" slot="item-icon">
+            <optinomic-avatar
+              small
+              firstname="[[_current_stay_therapist_deputy.data.first_name]]"
+              lastname="[[_current_stay_therapist_deputy.data.last_name]]"
+              initials="[[_current_stay_therapist_deputy.data.initials]]"
+              gender="[[_current_stay_therapist_deputy.data.gender]]"></optinomic-avatar>
+          </div>
+          <paper-item-body two-line>
+            <div>
+              [[deputy_name]]
+            </div>
+            <div secondary>Stellvertretung
+              <span class="caption" style="color:#BDBDBD;font-style:italic;">&nbsp;&nbsp;&nbsp;[[_current_stay_info.data.deputy_lead_therapist_id]]</span>
+            </div>
+          </paper-item-body>
+          <div hidden$="[[_toggle_deputy]]">
+            <paper-icon-button icon="create" on-tap="_toggleDeputy"></paper-icon-button>
+          </div>
+          <div hidden$="[[!_toggle_deputy]]">
+            <paper-icon-button icon="delete" on-tap="_clear_deputy"></paper-icon-button>
+            <paper-icon-button icon="close" on-tap="_toggleDeputy"></paper-icon-button>
+          </div>
+        </paper-icon-item>
+        <iron-collapse id="apps" opened="[[_toggle_deputy]]" class="collapse-content">
+          <div name="grid">
+            <vaadin-grid class="full_grid" aria-label="Applikationen" items="[[_users_all]]" column-reordering-allowed="false">
+              <vaadin-grid-column width="52px" flex-grow="0" frozen>
+                <template>
+                  <paper-icon-button icon="check" on-tap="_set_deputy"></paper-icon-button>
+                </template>
+              </vaadin-grid-column>
+              <vaadin-grid-column resizable>
+                <template class="header">
+                  <vaadin-grid-sorter direction="asc" path="data.last_name">
+                    Benutzer ([[_users_all.length]])
+                  </vaadin-grid-sorter>
+                  <vaadin-grid-filter aria-label="Applikation" path="data.last_name" value="[[_filterUser]]">
+                    <paper-input style="width:90%;margin-top:-24px;" placeholder="Nachname suchen" value="{{_filterUser}}" focus-target>
+                      <iron-icon icon="icons:search" slot="prefix" style="color:grey;"></iron-icon>
+                    </paper-input>
+                    >
+                  </vaadin-grid-filter>
+                </template>
+                <template>
+                  [[item.data.last_name]] [[item.data.first_name]] ([[item.data.initials]])
+                </template>
+              </vaadin-grid-column>
+            </vaadin-grid>
+          </div>
+        </iron-collapse>
+        <!---  Doctor -->
+        <paper-icon-item class="item">
+          <div class="avatar" slot="item-icon">
+            <optinomic-avatar small firstname="[[_current_stay_doctor.data.first_name]]" lastname="[[_current_stay_doctor.data.last_name]]" initials="[[_current_stay_doctor.data.initials]]" gender="[[_current_stay_doctor.data.gender]]"></optinomic-avatar>
+          </div>
+          <paper-item-body two-line>
+            <div>
+              [[doctor_name]]
+            </div>
+            <div secondary>Arzt
+              <span class="caption" style="color:#BDBDBD;font-style:italic;">&nbsp;&nbsp;&nbsp;[[_current_stay_info.data.cis_lead_doctor]]</span>
+            </div>
+          </paper-item-body>
+          <div hidden$="[[_toggle_doctor]]">
+            <paper-icon-button icon="create" on-tap="_toggleDoctor"></paper-icon-button>
+          </div>
+          <div hidden$="[[!_toggle_doctor]]">
+            <paper-icon-button icon="delete" on-tap="_clear_doctor"></paper-icon-button>
+            <paper-icon-button icon="close" on-tap="_toggleDoctor"></paper-icon-button>
+          </div>
+        </paper-icon-item>
+        <iron-collapse id="apps" opened="[[_toggle_doctor]]" class="collapse-content">
+          <div name="grid">
+            <vaadin-grid class="full_grid" aria-label="Applikationen" items="[[_users_all]]" column-reordering-allowed="false">
+              <vaadin-grid-column width="52px" flex-grow="0" frozen>
+                <template>
+                  <paper-icon-button icon="check" on-tap="_set_doctor"></paper-icon-button>
+                </template>
+              </vaadin-grid-column>
+              <vaadin-grid-column resizable>
+                <template class="header">
+                  <vaadin-grid-sorter direction="asc" path="data.last_name">
+                    Benutzer ([[_users_all.length]])
+                  </vaadin-grid-sorter>
+                  <vaadin-grid-filter aria-label="Applikation" path="data.last_name" value="[[_filterUser]]">
+                    <paper-input style="width:90%;margin-top:-24px;" placeholder="Nachname suchen" value="{{_filterUser}}" focus-target>
+                      <iron-icon icon="icons:search" slot="prefix" style="color:grey;"></iron-icon>
+                    </paper-input>
+                    >
+                  </vaadin-grid-filter>
+                </template>
+                <template>
+                  [[item.data.last_name]] [[item.data.first_name]] ([[item.data.initials]])
+                </template>
+              </vaadin-grid-column>
+            </vaadin-grid>
+          </div>
+        </iron-collapse>
+      </div>
+    </paper-card>
+  </template>
+  <script>
+    Polymer({
+      is: 'stay-team',
+
+      properties: {
+
+        _current_stay_therapist: {
+          type: Object,
+          statePath: function (state) {
+            if (state.users !== undefined) {
+              if (state.users.users.data !== undefined) {
+                if ((state.current_patient.fid !== null) && (state.stays[state.current_patient.fid] !== undefined)) {
+                  var stay = state.stays[state.current_patient.fid].info;
+                  if (stay !== undefined) {
+                    if (stay.data !== undefined) {
+                      // console.error('==> ', stay.data.lead_therapist_id_overwrite, stay.data.lead_therapist_id);
+                      if ((stay.data.lead_therapist_id_overwrite !== "") && (stay.data.lead_therapist_id_overwrite !== null)) {
+                        return this._getUserName(stay.data.lead_therapist_id_overwrite);
+                      } else {
+                        return this._getUserName(stay.data.lead_therapist_id);
+                      };
+                    } else {
+                      return null;
+                    }
+                  } else {
+                    return null;
+                  };
+
+                } else {
+                  return null;
+                }
+              } else {
+                return null;
+              };
+            };
+          },
+          observer: '_current_stay_therapistChanged'
+        },
+
+        _current_stay_therapist_deputy: {
+          type: Object,
+          statePath: function (state) {
+            if (state.users !== undefined) {
+              if (state.users.users.data !== undefined) {
+                if ((state.current_patient.fid !== null) && (state.stays[state.current_patient.fid] !== undefined)) {
+                  var stay = state.stays[state.current_patient.fid].info;
+
+                  if (stay !== undefined) {
+                    if (stay.data !== undefined) {
+                      if ((stay.data.deputy_lead_therapist_id !== "") && (stay.data.deputy_lead_therapist_id !== null)) {
+                        return this._getUserName(stay.data.deputy_lead_therapist_id);
+                      } else {
+                        return null;
+                      };
+                    } else {
+                      return null;
+                    };
+                  } else {
+                    return null;
+                  };
+
+                } else {
+                  return null;
+                }
+              } else {
+                return null;
+              };
+            };
+          },
+          observer: '_current_stay_therapist_deputyChanged'
+        },
+
+        _current_stay_doctor: {
+          type: Object,
+          statePath: function (state) {
+            if (state.users !== undefined) {
+              if (state.users.users.data !== undefined) {
+                if ((state.current_patient.fid !== null) && (state.stays[state.current_patient.fid] !== undefined)) {
+                  var stay = state.stays[state.current_patient.fid].info;
+
+                  if (stay !== undefined) {
+                    if (stay.data !== undefined) {
+                      if ((stay.data.cis_lead_doctor !== "") && (stay.data.cis_lead_doctor !== null)) {
+                        return this._getUserName(stay.data.cis_lead_doctor);
+                      } else {
+                        return null;
+                      };
+                    } else {
+                      return null;
+                    };
+                  } else {
+                    return null;
+                  };
+
+                } else {
+                  return null;
+                };
+
+              } else {
+                return null;
+              };
+            };
+          },
+          observer: '_current_stay_doctorChanged'
+        }
+      },
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior, OptinomicAppBehavior, UserBehavior, PatientBehavior
+      ],
+
+      // --------------------------- Observers ---------------------------
+
+      _current_stay_therapistChanged: function () {
+        this.debounce('_current_stay_therapistChanged', function () {
+          var return_name = "Nicht festgelegt";
+          var current_user = this._current_stay_therapist;
+
+          if ((current_user !== undefined) && (current_user !== null)) {
+            if ("data" in current_user) {
+              return_name = current_user.data.last_name + ' ' + current_user.data.first_name;
+              if (current_user.data.initials) {
+                return_name = return_name + ' (' + current_user.data.initials + ')';
+              };
+            };
+          };
+          this.set('therapist_name', return_name);
+        }, 250);
+      },
+
+      _current_stay_therapist_deputyChanged: function () {
+        this.debounce('_current_stay_therapist_deputyChanged', function () {
+          var return_name = "Nicht festgelegt";
+          var current_user = this._current_stay_therapist_deputy;
+
+          if ((current_user !== undefined) && (current_user !== null)) {
+            if ("data" in current_user) {
+              return_name = current_user.data.last_name + ' ' + current_user.data.first_name;
+              if (current_user.data.initials) {
+                return_name = return_name + ' (' + current_user.data.initials + ')';
+              };
+            };
+          };
+          this.set('deputy_name', return_name);
+        }, 250);
+      },
+
+      _current_stay_doctorChanged: function () {
+        this.debounce('_current_stay_doctorChanged', function () {
+          var return_name = "Nicht festgelegt";
+          var current_user = this._current_stay_doctor;
+
+          if ((current_user !== undefined) && (current_user !== null)) {
+            if ("data" in current_user) {
+              // console.warn('current_user', current_user);
+              return_name = current_user.data.last_name + ' ' + current_user.data.first_name;
+              if (current_user.data.initials) {
+                return_name = return_name + ' (' + current_user.data.initials + ')';
+              };
+            };
+          };
+          this.set('doctor_name', return_name);
+        }, 250);
+      },
+
+      // --------------------------- helpers ---------------------------
+
+      _getUserName: function (uid) {
+
+        var selected_user = {};
+        var state = this.getState();
+        var users = state.users.users.data;
+
+        if (users !== undefined) {
+          users.forEach(function (user, userID) {
+            if (parseInt(uid) === parseInt(user.id)) {
+              selected_user = user;
+            };
+          });
+        };
+
+        //console.error('_getUserName', uid, users, selected_user);
+        return selected_user;
+      },
+
+      // --------------------------- userActions ---------------------------
+
+      _toggleTheapist: function () {
+        this._toggle_theapist = !this._toggle_theapist;
+      },
+
+      _toggleDeputy: function () {
+        this._toggle_deputy = !this._toggle_deputy;
+      },
+
+      _toggleDoctor: function () {
+        this._toggle_doctor = !this._toggle_doctor;
+      },
+
+      _doSetTherapists: function (parameters) {
+
+        var api_url = '/stays/' + this._current_stay_fid + '/therapists';
+        console.error('_doSetTherapists', parameters, api_url);
+
+        // API-Call
+        ApiHelpers.callAPI('PUT', api_url, {}, parameters, function (req) {
+          if (req.status == 204) {
+            // Update Users
+            this.dispatch('getCurrentPatientStays', this._current_patient_pid);
+
+            //Toast & Forward
+            this._showToast('(✔) Behandlungsteam erfolgreich gespeichert', false);
+          } else {
+            var response = {
+              "error": true,
+              "error_message": "Failed with status code: " + req.status,
+              "status_code": req.status
+            };
+
+            this._showToast(response.error_message, true);
+            console.error('(!) Error: ', response);
+          };
+        }.bind(this));
+
+      },
+
+      _set_therapist: function (e) {
+        var selected_therapist = e.model.item
+        var _current_stay_therapist = this._current_stay_therapist || {};
+        var _current_stay_therapist_deputy = this._current_stay_therapist_deputy || {};
+
+        var parameters = {
+          "therapist_id": selected_therapist.id,
+          "deputy_therapist_id": _current_stay_therapist_deputy.id || ''
+        };
+
+        this._doSetTherapists(parameters);
+
+        this._toggle_theapist = false;
+      },
+
+      _clear_therapist: function (e) {
+        var _current_stay_therapist_deputy = this._current_stay_therapist_deputy || {};
+
+        var parameters = {
+          "therapist_id": '',
+          "deputy_therapist_id": _current_stay_therapist_deputy.id || ''
+        };
+
+        this._doSetTherapists(parameters);
+
+        this._toggle_theapist = false;
+      },
+
+      _set_deputy: function (e) {
+        var selected_therapist = e.model.item
+        var _current_stay_therapist = this._current_stay_therapist || {};
+        var _current_stay_therapist_deputy = this._current_stay_therapist_deputy || {};
+
+        var parameters = {
+          "therapist_id": _current_stay_therapist.id,
+          "deputy_therapist_id": selected_therapist.id || ''
+        };
+
+        this._doSetTherapists(parameters);
+
+        this._toggle_deputy = false;
+      },
+
+      _clear_deputy: function () {
+        var _current_stay_therapist = this._current_stay_therapist || {};
+
+        var parameters = {
+          "therapist_id": _current_stay_therapist.id,
+          "deputy_therapist_id": ''
+        };
+
+        this._doSetTherapists(parameters);
+
+        this._toggle_deputy = false;
+      },
+
+      _doSetStay: function (parameters) {
+
+        var api_url = '/stays/' + this._current_stay_fid;
+        console.error('_doSetStays', parameters, api_url);
+
+        // API-Call
+        ApiHelpers.callAPI('PUT', api_url, {}, parameters, function (req) {
+          if (req.status == 204) {
+            // Update Users
+            this.dispatch('getCurrentPatientStays', this._current_patient_pid);
+
+            //Toast & Forward
+            this._showToast('(✔) Behandlungsteam erfolgreich gespeichert', false);
+          } else {
+            var response = {
+              "error": true,
+              "error_message": "Failed with status code: " + req.status,
+              "status_code": req.status
+            };
+
+            this._showToast(response.error_message, true);
+            console.error('(!) Error: ', response);
+          };
+        }.bind(this));
+
+      },
+
+      _set_doctor: function (e) {
+        var selected_doctor = e.model.item.id
+        var _current_stay = this._current_stay_info.data;
+
+        var parameters = {
+          "patient_id": _current_stay.patient_id,
+          "start": _current_stay.start,
+          "stop": _current_stay.stop,
+          "lead_therapist_id": _current_stay.lead_therapist_id,
+          "cis_fid": _current_stay.cis_fid,
+          "photo": _current_stay.photo,
+          "status": _current_stay.status,
+          "first_contact": _current_stay.first_contact,
+          "stop_status": _current_stay.stop_status,
+          "class": _current_stay.class,
+          "service_provider": _current_stay.service_provider,
+          "insurance_provider": _current_stay.insurance_provider,
+          "insurance_number": _current_stay.insurance_number,
+          "cis_lead_doctor": selected_doctor,
+          "notes": _current_stay.notes
+        };
+
+        console.error('_set_doctor', parameters);
+        this._doSetStay(parameters);
+        this._toggle_doctor = false;
+      },
+
+      _clear_doctor: function () {
+        var _current_stay = this._current_stay_info.data;
+
+        var parameters = {
+          "patient_id": _current_stay.patient_id,
+          "start": _current_stay.start,
+          "stop": _current_stay.stop,
+          "lead_therapist_id": _current_stay.lead_therapist_id,
+          "cis_fid": _current_stay.cis_fid,
+          "photo": _current_stay.photo,
+          "status": _current_stay.status,
+          "first_contact": _current_stay.first_contact,
+          "stop_status": _current_stay.stop_status,
+          "class": _current_stay.class,
+          "service_provider": _current_stay.service_provider,
+          "insurance_provider": _current_stay.insurance_provider,
+          "insurance_number": _current_stay.insurance_number,
+          "cis_lead_doctor": '',
+          "notes": _current_stay.notes
+        };
+
+        console.error('_set_doctor', parameters);
+        this._doSetStay(parameters);
+        this._toggle_doctor = false;
+      },
+
+      // --------------------------- lifeCycle ---------------------------
+
+      ready: function () {
+        this._toggle_theapist = false;
+        this._toggle_deputy = false;
+        this._toggle_doctor = false;
+      }
+
+    });
+  </script>
+</dom-module>

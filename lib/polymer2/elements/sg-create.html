@@ -1,0 +1,503 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../store/optinomic-redux-store.html">
+<link rel="import" href="select-patients.html">
+<link rel="import" href="select-apps.html">
+<link rel="import" href="../../bower_components/juicy-ace-editor/juicy-ace-editor.html">
+<script src="../../bower_components/ace-builds/src-min-noconflict/mode-sql.js"></script>
+<script src="../../bower_components/ace-builds/src-min-noconflict/theme-chrome.js"></script>
+<script src="../../bower_components/ace-builds/src-min-noconflict/worker-json.js"></script>
+<link rel="import" href="../shared-styles.html">
+<dom-module id="sg-create">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .code {
+        margin-top: -19px;
+      }
+
+      .editor {
+        height: calc(100vh - 653px);
+        margin-right: 24px;
+      }
+
+      .alias_link {
+        cursor: alias;
+      }
+
+      .pre_code {
+        margin-left: 42px;
+        margin-right: 24px;
+        padding: 4px;
+        font-size: 14.5px;
+        background-color: white;
+      }
+
+      .container {
+        margin-bottom: 64px;
+      }
+
+    </style>
+
+    <div class="container">
+
+      <div>
+        <h1>«[[_pg.name]]»</h1>
+        <p class="subtitle">Fallgruppe erstellen / bearbeiten</p>
+      </div>
+
+      <div class="grid-border-top margin-bottom">
+        <h2 style="color:#3F51B5">Name</h2>
+        <p style="margin-top:-24px;">Wie soll diese Fallgruppe heissen?</p>
+        <paper-input on-change="_checkReady" error-message="Eingabe benötigt!" label="Name" value="{{_pg.name}}" required auto-validate></paper-input>
+      </div>
+      <div class="grid-border-top margin-bottom">
+        <h2 style="color:#3F51B5">Modus</h2>
+        <p style="margin-top:-24px;">Sollen diese Fallgruppe automatisch oder manuell Patienten hinzugefügt werden?</p>
+
+        <paper-radio-group id="pg_mode" on-change="_pg_mode_change" aria-labelledby="Modus" selected="[[_pg_mode]]">
+          <paper-radio-button name="auto">Automtisch</paper-radio-button>
+          <paper-radio-button name="manually" disabled>Manuell</paper-radio-button>
+        </paper-radio-group>
+
+        <div hidden$="[[!_pg_auto]]">
+          <h5>Hinzufügen: [[sql_data_length]] Patienten via SQL-Filter</h5>
+          <p class="pre_code">
+            <span style="color:rgb(147, 15, 128)">SELECT</span>
+            s.*
+            <span style="color:rgb(147, 15, 128)">FROM</span>
+            stay AS s
+          </p>
+          <div class="code">
+            <juicy-ace-editor id="code_editor" class="editor" value="[[_pg.sql_filter]]" theme="ace/theme/chrome" mode="ace/mode/sql" fontsize="14px" softtabs="true" wrapmode="false"></juicy-ace-editor>
+            <div class="horizontal" style="margin-right:20px;">
+              <div>
+                <template is="dom-if" if="[[sql_data_error]]" restamp="true">
+                  <p style="color:#F44336">Error! Prüfen Sie Ihre Eingabe.</p>
+                </template>
+                <template is="dom-if" if="[[!sql_data_error]]" restamp="true">
+                  <p style="color:#4CAF50">Erfolgreich: Aktuell [[sql_data_length]] Fälle.</p>
+                </template>
+              </div>
+              <paper-button class="pink" on-tap="_sql_filter_run">Testen</paper-button>
+            </div>
+          </div>
+        </div>
+
+        <template is="dom-if" if="[[!_pg_auto]]" restamp="true">
+          <h5>Hinzufügen: Fälle</h5>
+          <p>Unneded!</p>
+        </template>
+
+      </div>
+
+      <div class="grid-border-top margin-bottom">
+        <h2 style="color:#3F51B5">Applikationen</h2>
+        <p style="margin-top:-24px;">Sollen dieser Fallgruppe automatisch Applikationen hinzugefügt / entfernt werden?</p>
+
+        <h5>Hinzufügen: [[_apps_to_activate.length]] Applikationen</h5>
+        <select-apps preselected$="[[_pg.modules_to_activate]]" on-selected-apps="_apps_activate"></select-apps>
+
+        <h5>Entfernen: [[_apps_to_deactivate.length]] Applikationen</h5>
+        <select-apps preselected$="[[_pg.modules_to_deactivate]]" on-selected-apps="_apps_deactivate"></select-apps>
+      </div>
+
+      <div class="grid-border-top margin-bottom">
+        <template is="dom-if" if="[[!_save_ready]]" restamp="true">
+          <div class="horizontal">
+            <div>&nbsp;</div>
+            <p>Save? Not yet! :-)</p>
+          </div>
+        </template>
+      </div>
+
+    </div>
+
+    <div class="speed_dial">
+      <template is="dom-if" if="[[_save_ready]]">
+        <paper-fab icon="icons:save" on-tap="_save"></paper-fab>
+      </template>
+    </div>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'sg-create',
+
+      properties: {
+        editPg: {
+          type: Array,
+          observer: '_init_pg'
+        },
+        _current_stay_group_id: {
+          type: Number,
+          statePath: 'current_stay_group.id'
+        },
+        _current_stay_group_patients: {
+          type: Array,
+          //statePath: '.patients_list.stay_groups[12].data',
+          statePath: function (state) {
+            var return_array = [];
+            if (state.current_stay_group !== undefined) {
+              if ((state.current_stay_group.id !== undefined) && (state.current_stay_group.id !== null)) {
+                if (state.patients_list.stay_groups[state.current_stay_group.id] !== undefined) {
+                  if (state.patients_list.stay_groups[state.current_stay_group.id].data !== undefined) {
+                    return_array = state.patients_list.stay_groups[state.current_stay_group.id].data;
+                    // console.error('_current_stay_group_patients', return_array);
+                  }
+                };
+              };
+            };
+            return return_array;
+          }
+        }
+      },
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior, OptinomicAppBehavior
+      ],
+
+      // ------------------ UserClickFunctions ------------------
+
+      _pg_mode_change: function () {
+        var pg_mode = this.$$('#pg_mode');
+
+        // console.log('_pg_mode_change', pg_mode.selected);
+
+        if (pg_mode.selected !== "auto") {
+          this.set('_pg_auto', true);
+        } else {
+          this.set('_pg_auto', false);
+        };
+        this._checkReady();
+
+      },
+
+      _sql_filter_run: function () {
+        //SQL;
+        this.set('sql_data_length', '?');
+
+        var code_editor = this.$$('#code_editor');
+        var sql_code = "SELECT s.* FROM stay AS s " + code_editor.editor.getValue();
+        var sql_parameters = {
+          "delimiter": ";",
+          "format": "json",
+          "direct": "True",
+          "query": sql_code
+        };
+
+        // API-Call
+        ApiHelpers.callAPI('POST', '/run_sql', sql_parameters, {}, function (req) {
+          if (req.status == 200) {
+
+            if (sql_parameters.format === 'json') {
+              var resp = JSON.parse(req.response);
+            } else {
+              var resp = req.response;
+            };
+
+            this.set('sql_data_error', false);
+            this.set('sql_data_length', resp.rows.length);
+            this._checkReady();
+
+            var response = {
+              "data": resp
+            };
+            console.log('(✔) Data:', response.data);
+          } else {
+            this.set('sql_data_error', true);
+
+            var response = {
+              "error": true,
+              "error_message": "Failed with status code: " + req.status,
+              "status_code": req.status
+            };
+            console.error('(!) Error: ', response);
+            this._showToast('(!) Error: ' + response.error_message, false);
+          };
+        }.bind(this));
+
+      },
+
+      // ------------------ Functions ------------------
+
+      _activate_patients: function (e) {
+        // console.warn('_patients_activate', e.detail);
+        this.set('_patients_activate', e.detail);
+        this._checkReady();
+      },
+
+      _apps_activate: function (e) {
+        // console.warn('_apps_to_activate', e.detail);
+        this.set('_apps_to_activate', e.detail);
+        this._checkReady();
+      },
+
+      _apps_deactivate: function (e) {
+        // console.warn('_apps_to_deactivate', e.detail);
+        this.set('_apps_to_deactivate', e.detail);
+        this._checkReady();
+      },
+
+      _checkReady: function () {
+        var ready = false;
+        var pg = Object.assign({}, this.get('_pg'));
+        var sql_data_error = this.get('sql_data_error');
+        var _pg_auto = this.get('_pg_auto');
+        var code_editor = this.$$('#code_editor');
+
+        if (_pg_auto) {
+          if (sql_data_error === false) {
+            if ((this._apps_to_activate !== undefined) && (this._apps_to_activate !== null)) {
+              if ((this._apps_to_deactivate !== undefined) && (this._apps_to_deactivate !== null)) {
+                if (pg.name !== "") {
+
+                  var api_pg = {
+                    "name": pg.name,
+                    // "sql_filter": null,
+                    "modules_to_activate": this._apps_to_activate.slice(0),
+                    "modules_to_deactivate": this._apps_to_deactivate.slice(0),
+                    "sql_filter": code_editor.editor.getValue()
+                  };
+
+                  ready = true;
+                  this.set('api_pg', api_pg);
+                };
+              };
+            };
+          };
+        } else {
+
+          if ((this._patients_activate !== undefined) && (this._patients_activate !== null)) {
+            if ((this._apps_to_activate !== undefined) && (this._apps_to_deactivate !== null)) {
+              if ((this._apps_to_deactivate !== undefined) && (this._apps_to_deactivate !== null)) {
+                if (pg.name !== "") {
+
+                  var api_patients_bulk = this._patients_activate.slice(0)
+                  var api_pg = {
+                    "name": pg.name,
+                    // "sql_filter": null,
+                    "modules_to_activate": this._apps_to_activate.slice(0),
+                    "modules_to_deactivate": this._apps_to_deactivate.slice(0)
+                  };
+
+                  ready = true;
+                  this.set('api_pg', api_pg);
+                  this.set('api_patients_bulk', api_patients_bulk);
+                  // console.log('MANUELL :: Ready', _pg_auto, api_pg, api_patients_bulk);
+                };
+              };
+            };
+          };
+        };
+
+        if (ready) {
+          this.set('_save_ready', true);
+        } else {
+          this.set('_save_ready', false);
+        };
+
+      },
+
+      // ------------------ Observers ------------------
+
+      _init_pg: function () {
+        this.debounce('_init_pg', function () {
+
+          var pg = {
+            "name": "",
+            "modules_to_activate": [],
+            "modules_to_deactivate": [],
+            "sql_filter": "",
+            "create": true
+          };
+
+          if ((this.editPg !== null) && (this.editPg !== undefined)) {
+
+            if (Object.keys(this.editPg).length > 0) {
+
+              var editPg = Object.assign({}, this.editPg);
+              pg.id = editPg.id;
+              pg.name = editPg.name;
+              pg.modules_to_activate = editPg.modules_to_activate;
+              pg.modules_to_deactivate = editPg.modules_to_deactivate;
+              pg.create = false;
+
+              if ("sql_filter" in editPg) {
+                pg.sql_filter = editPg.sql_filter;
+              };
+
+            };
+          };
+
+          this.set('_pg', pg);
+
+          if (pg.sql_filter === "") {
+            // this.set('_pg_auto', false); this.set('_pg_mode', "manually");
+            this.set('_pg_auto', true);
+            this.set('_pg_mode', "auto");
+          } else {
+            this.set('_pg_auto', true);
+            this.set('_pg_mode', "auto");
+          };
+
+          console.log('<create-sg> INIT', this._pg, this._pg_auto, this._pg_mode);
+
+        }, 250);
+      },
+
+      _save_patients(pg_id) {
+        pg_id = pg_id || null;
+        var _pg_auto = this.get('_pg_auto');
+
+        if ((pg_id !== null) && (!_pg_auto)) {
+          var _current_stay_group_patients = this.get('_current_stay_group_patients');
+          var api_patients_bulk = this.get('api_patients_bulk');
+
+          var saved_patients = [];
+          var selected_patients = [];
+          if ((_current_stay_group_patients !== undefined) && (_current_stay_group_patients !== null)) {
+            _current_stay_group_patients.forEach(function (p, pID) {
+              saved_patients.push(p.id);
+            });
+          };
+          if ((api_patients_bulk !== undefined) && (api_patients_bulk !== null)) {
+            api_patients_bulk.forEach(function (p, pID) {
+              selected_patients.push(p.id);
+            });
+          };
+
+          var to_add = selected_patients.filter(function (x) {
+            return saved_patients.indexOf(x) == -1;
+          });
+
+          var to_remove = saved_patients.filter(function (x) {
+            return selected_patients.indexOf(x) == -1;
+          });
+
+          // console.log('_save_patients', saved_patients, selected_patients, to_add, to_remove);
+
+          var api_url_patients = '/stay_groups/' + pg_id + '/patients/bulk';
+          var add = ApiHelpers.createList(to_add, 'patient_ids_to_add');
+          var remove = ApiHelpers.createList(to_remove, 'patient_ids_to_remove');
+          var patients_body = Object.assign(add, remove);
+
+          if (ApiHelpers.shouldCallNow(api_url_patients)) {
+            // console.warn('(PATCH) _save', api_url_patients, patients_body);
+
+            ApiHelpers.callAPI('PATCH', api_url_patients, {}, patients_body, function (req) {
+              if (req.status == 204) {
+
+                var api_pg = this.get('api_pg');
+                var text = "(✔) Fallgruppe «" + api_pg.name + "» gespeichert.";
+                this._showToast(text, false);
+                this.dispatch('getSGStays', pg_id);
+
+              } else {
+                console.error('Error:', req.status, patients_body, api_url_patients);
+              };
+
+            }.bind(this));
+
+          };
+
+        };
+
+        // Forward to PG-Page window.location.href = "#/patients/group/" + pg_id;
+
+      },
+
+      _save: function () {
+
+        var pg = Object.assign({}, this.get('_pg'));
+        var api_pg = Object.assign({}, this.get('api_pg'));
+        var api_patients_bulk = this.get('api_patients_bulk');
+
+        // Reduce Array -> Prepare for List
+        var modules_to_activate = [];
+        var modules_to_deactivate = [];
+        if ((api_pg !== undefined) && (api_pg !== null)) {
+          api_pg.modules_to_activate.forEach(function (app, appID) {
+            modules_to_activate.push(app.identifier);
+          });
+          api_pg.modules_to_deactivate.forEach(function (app, appID) {
+            modules_to_deactivate.push(app.identifier);
+          });
+        };
+
+        var body = Object.assign({}, api_pg);
+        var body = Object.assign(body, ApiHelpers.createList(modules_to_activate, 'modules_to_activate'));
+        var body = Object.assign(body, ApiHelpers.createList(modules_to_deactivate, 'modules_to_deactivate'));
+
+        // ----------------------------- Create Edit PG -----------------------------
+        if (pg.create) {
+
+          var api_url = '/stay_groups';
+          if ((ApiHelpers.shouldCallNow(api_url))) {
+            // console.warn('(CREATE) _save', pg, body, api_url);
+
+            ApiHelpers.callAPI('POST', api_url, {}, body, function (req) {
+              if (req.status == 201) {
+                this.dispatch('getSGStays');
+
+                var resp = JSON.parse(req.response);
+                var stay_group = resp.stay_group;
+                console.log('(✔) Success:', stay_group);
+
+                var text = "(✔) Fallgruppe «" + stay_group.data.name + "» erfolgreich erstellt.";
+                this._showToast(text, false);
+
+                // Save Patients to it
+                this._save_patients(stay_group.id);
+
+              } else {
+                console.error('Error:', req.status, api_pg, api_url);
+              };
+
+            }.bind(this));
+
+          };
+
+        } else {
+
+          var api_url = '/stay_groups/' + pg.id;
+          if (ApiHelpers.shouldCallNow(api_url)) {
+            // console.warn('(EDIT) _save', pg.id, api_pg, api_url);
+
+            ApiHelpers.callAPI('PUT', api_url, {}, body, function (req) {
+              if (req.status == 204) {
+                var text = "Fallgruppe «" + pg.name + "» gespeichert.";
+                this._showToast(text, false);
+
+                // Save Patients to it
+                this._save_patients(pg.id);
+                this.dispatch('getAllSG');
+
+              } else {
+                console.error('Error:', req.status, api_pg, api_url);
+              };
+
+            }.bind(this));
+
+          };
+
+        };
+
+      },
+
+      //------------------ Lifecycle ------------------
+      ready: function () {
+        this._init_pg();
+        this.dispatch('getAllSG');
+      }
+
+    });
+  </script>
+</dom-module>

@@ -1,0 +1,170 @@
+<script>
+  NewsBehavior = {
+
+    properties: {
+      news: {
+        type: Object,
+        value: null,
+        observer: '_getNews'
+      },
+      news_ready: {
+        type: Boolean,
+        value: false
+      },
+      _create: {
+        type: Object
+      },
+      _news_details: {
+        type: Object,
+        //statePath: '.patients_list.patient_groups[12].data',
+        statePath: function (state) {
+          var return_object = {};
+          if (state.news_detail !== undefined) {
+            if ((this.news !== undefined) && (this.news !== null)) {
+              return_object = this.news[state.news_detail];
+            };
+          };
+          return return_object;
+        }
+      }
+    },
+
+    // --------------------------- user clicks ---------------------------
+
+    _showAllNews: function () {
+      this._forward('news');
+    },
+
+    // --------------------------- observer ---------------------------
+
+    _getNews: function () {
+      this.set('news_ready', false);
+      this.debounce('_getNews', function () {
+        if ((this.news !== null) && (this.news !== undefined)) {
+
+          function sortByKey(array, key) {
+            return array.sort(function (a, b) {
+              var x = a[key];
+              var y = b[key];
+              return ((x > y)
+                ? -1
+                : ((x < y)
+                  ? 1
+                  : 0));
+            });
+          };
+
+          var news_all = [];
+
+          Object.keys(this.news).forEach(function (key, index) {
+            // console.log('--', key, index);
+            try {
+              var my_clinic = this._clinic_info.clinic_name;
+            } catch (err) {
+              var my_clinic = "Unknown";
+            };
+            var news_obj = this.news[key];
+            news_obj.id = key;
+            if ((news_obj.visibility === 'current_clinic') && (news_obj.clinic === my_clinic)) {
+              news_obj.is_editable = true;
+            } else {
+              news_obj.is_editable = false;
+            };
+            if ((news_obj.clinic === my_clinic) || (news_obj.visibility === 'all')) {
+              news_all.push(news_obj);
+            };
+          }.bind(this));
+
+          if (news_all.length > 0) {
+            news_all = sortByKey(news_all, 'date');
+            this.set('news_start', news_all.slice(0, parseInt(this.last)));
+            this.set('news_all', news_all.slice(0));
+            setTimeout(function () {
+              this.set('news_ready', true);
+            }.bind(this), 50);
+          };
+
+          console.log('(✔) Data :: News, Displayed', this.news, news_all);
+        };
+      }, 250);
+    },
+
+    _addNewsPreview: function () {
+
+      if (this.addStateCreate) {
+        var _create = Object.assign({}, this.get('_create'));
+        var d = new Date();
+        var n = d.toISOString();
+        _create.date = n;
+        _create.type = this.$$('#type').selected || 'info';
+        this.set('_create', _create);
+      };
+      this.addStateCreate = !this.addStateCreate;
+    },
+
+    _addNews: function () {
+      var news_item = Object.assign({}, this.get('_create'));
+      console.log('_addNews', news_item);
+      if ((news_item !== null) && (news_item !== undefined)) {
+        var _news = Object.assign({}, this.get('news'));
+        var d = new Date();
+        var n = d.toISOString();
+
+        function uuidv4() {
+          return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16))
+        }
+
+        if ("id" in news_item) {
+          // edit
+          news_item.date_edit = n;
+
+        } else {
+          // create
+          news_item.date = n;
+          news_item.id = uuidv4();
+
+          try {
+            var my_clinic = this._clinic_info.clinic_name;
+          } catch (err) {
+            var my_clinic = "Unknown";
+          };
+          news_item.clinic = my_clinic;
+
+          if ("visibility" in news_item) {} else {
+            news_item.visibility = "current_clinic"
+          };
+          news_item.clinic = my_clinic;
+
+        };
+
+        _news[news_item.id] = news_item;
+        console.warn('_news', _news);
+        this.set('news', _news);
+        this._forward('news');
+      };
+    },
+
+    _editNews: function () {
+      this.set('news_ready', false);
+      var _create = Object.assign({}, this.get('_news_details'));
+      this.set('_create', _create);
+      this._forward('news/edit');
+    },
+
+    _deleteNews: function () {
+      this.set('news_ready', false);
+      var _news = Object.assign({}, this.get('news'));
+      var _news_details = Object.assign({}, this.get('_news_details'));
+      console.log('_news', _news, _news_details.id);
+      delete _news[_news_details.id];
+      this.set('news', _news);
+      this._forward('news');
+    },
+
+    // --------------------------- liefecycle ---------------------------
+
+    created: function () {
+      // console.log('appToastBehavior for ', this, 'enabled!');
+    }
+  };
+</script>

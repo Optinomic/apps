@@ -1,0 +1,109 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../behaviors/behavior-user.html">
+<link rel="import" href="app-template.html">
+<link rel="import" href="../store/optinomic-redux-store.html">
+<link rel="import" href="../shared-styles.html">
+<dom-module id="app-template-viewer">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+    </style>
+
+    <template is="dom-if" if="[[_current_visibility]]">
+      <template is="dom-repeat" items="[[_current_templates]]">
+        <app-template app-identifier$="[[item.app_id]]" app-template$="[[item.app_template]]" app-height$="[[item.app_height]]"></app-template>
+      </template>
+
+      <!--
+      <app-template app-identifier="ch.suedhang.apps.asrs" app-template="asrs_scores" app-height="7"></app-template>
+      <app-template app-identifier="ch.suedhang.apps.actinfo_ein" app-template="score" app-height="14"></app-template>
+      -->
+    </template>
+
+    <!--
+    ADMIN - ADD/Remove
+    <template is="dom-if" if="[[_user_info.is_admin]]">
+
+      <paper-card class="margin-bottom" style="background-color:#C5CAE9">
+        <div class="card-content">
+          <template is="dom-repeat" items="[[_current_templates]]">
+            <p>[[item.app_id]], [[item.app_template]], [[item.app_height]]</p>
+          </template>
+        </div>
+        <div class="card-actions horizontal">
+          hallo
+        </div>
+      </paper-card>
+
+    </template>
+    -->
+
+  </template>
+  <script>
+    Polymer({
+      is: 'app-template-viewer',
+
+      properties: {
+        node: {
+          type: String,
+          observer: 'appChanged'
+        },
+
+        _current_templates: {
+          type: Array,
+          value: []
+        },
+
+        _current_visibility: {
+          type: Boolean,
+          value: false
+        }
+      },
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior, UserBehavior
+      ],
+
+      // ------------------ Functions ------------------
+      appChanged: function () {
+        this.debounce('appChanged', function () {
+          var node = this.get('node') || null;
+
+          var state = this.getState();
+          var annotations = state.annotations;
+
+          if ((node !== null) && (annotations !== undefined) && (annotations !== null)) {
+            annotations = state.annotations.data;
+            if ((annotations !== undefined) && (annotations !== null)) {
+              annotations = state.annotations.data;
+
+              var _current_templates = annotations[node];
+              if (_current_templates === undefined) {
+                _current_templates = [];
+              } else {
+                _current_templates = JSON.parse(JSON.stringify(_current_templates));
+              };
+
+              // console.error('VIEWER: node', this.node, annotations, _current_templates);
+              this.set('_current_templates', _current_templates);
+              this.set('_current_visibility', true);
+            };
+          };
+
+        }, 350);
+      },
+
+      // --------------------------- lifeCycle ---------------------------
+
+      created: function () {
+        Polymer.RenderStatus.afterNextRender(this, function () {
+          //console.error('GET: annotations');
+          this.dispatch('getGenericCalls', '/annotations', 'annotations', '');
+        });
+      }
+    });
+  </script>
+</dom-module>

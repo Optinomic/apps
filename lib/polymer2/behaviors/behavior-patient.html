@@ -1,0 +1,699 @@
+<script>
+  PatientBehavior = {
+
+    properties: {
+
+      // --------------------------- Patient ---------------------------
+      _current_page: {
+        type: Object,
+        statePath: 'current_page',
+        observer: '_current_pageChanged'
+      },
+
+      _current_route: {
+        type: Object,
+        statePath: 'current_route',
+        observer: '_current_pageChanged'
+      },
+
+      _current_patient: {
+        type: Object,
+        statePath: 'current_patient',
+        observer: '_current_pageChanged'
+      },
+
+      _current_patient_pid: {
+        type: Number,
+        statePath: 'current_patient.pid',
+        observer: '_current_patient_pidChanged'
+      },
+
+      _current_patient_info: {
+        type: Object,
+        statePath: function (state) {
+          if ((state.current_patient.pid !== null) && (state.patients[state.current_patient.pid] !== undefined)) {
+            return state.patients[state.current_patient.pid].info
+          } else {
+            return {};
+          }
+        }
+      },
+
+      _current_patient_access: {
+        type: Object,
+        statePath: function (state) {
+          if ((state.current_patient.pid !== null) && (state.patients[state.current_patient.pid] !== undefined)) {
+            var access = state.patients[state.current_patient.pid].access || {};
+            if ("access" in access) {
+              return access.access
+            } else {
+              return null
+            };
+          } else {
+            return null;
+          }
+        }
+      },
+
+      // --------------------------- Stay ---------------------------
+
+      _current_stay_fid: {
+        type: Number,
+        statePath: 'current_patient.fid'
+      },
+
+      _current_stay_info: {
+        type: Object,
+        statePath: function (state) {
+          if ((state.current_patient.fid !== null) && (state.stays[state.current_patient.fid] !== undefined)) {
+            return state.stays[state.current_patient.fid].info
+          } else {
+            return {};
+          }
+        }
+      },
+
+      _current_patient_stays_info: {
+        type: Object,
+        statePath: function (state) {
+          if ((state.current_patient.pid !== null) && (state.patients[state.current_patient.pid] !== undefined)) {
+
+            var stays_array = state.patients[state.current_patient.pid].stays || [];
+
+            if ("data" in stays_array) {
+              var return_array = [];
+              stays_array = stays_array.data;
+              stays_array.forEach(function (stay_id, ID) {
+                if (state.stays[stay_id] !== undefined) {
+                  return_array.push(state.stays[stay_id].info);
+                };
+              });
+
+              return return_array;
+            } else {
+              return [];
+            };
+          } else {
+            return [];
+          };
+        }
+      },
+
+      // --------------------------- Apps ---------------------------
+
+      _apps_patient_all: {
+        type: Object,
+        statePath: 'apps.all.data.patient_modules'
+      },
+
+      _current_app_aid: {
+        type: String,
+        statePath: 'current_patient.aid'
+      },
+
+      _current_app_aid_template: {
+        type: String,
+        statePath: 'current_patient.template'
+      },
+
+      _current_stay_apps: {
+        type: Object,
+        statePath: function (state) {
+          if ((state.current_patient.fid !== null) && (state.stays[state.current_patient.fid] !== undefined)) {
+            return state.stays[state.current_patient.fid].apps_activated
+          } else {
+            return {};
+          }
+        }
+      },
+
+      _current_stay_app: {
+        type: Object,
+        statePath: function (state) {
+
+          if ((state.current_patient.aid) && (state.apps.all !== undefined)) {
+
+            var return_value = {};
+
+            function isCurrentApp(obj) {
+              if (obj.identifier === state.current_patient.aid) {
+                return true;
+              } else {
+                return false;
+              };
+            };
+
+            var all_apps = state.apps.all.data.patient_modules;
+            return_value = all_apps.filter(isCurrentApp);
+            return_value = return_value[0];
+            // console.error('_current_stay_app', return_value);
+            return return_value;
+          };
+        }
+      },
+
+      _current_stay_app_pum: {
+        type: Object,
+        statePath: function (state) {
+          var return_object = {};
+
+          function isCurrentApp(obj) {
+            if (obj.module.identifier === state.current_patient.aid) {
+              return true;
+            } else {
+              return false;
+            };
+          };
+
+          if ((state.current_patient.aid) && (state.current_patient.fid)) {
+            if (state.stays[state.current_patient.fid] !== undefined) {
+              if (state.stays[state.current_patient.fid].apps_activated !== undefined) {
+                if (state.stays[state.current_patient.fid].apps_activated.activated !== undefined) {
+
+                  var all_apps = state.stays[state.current_patient.fid].apps_activated.activated;
+                  var return_array = all_apps.filter(isCurrentApp);
+                  if (return_array.length > 0) {
+                    return_object = return_array[0].entity;
+                  };
+                };
+              };
+            };
+
+            // console.error('_current_stay_app_pum', return_object);
+            return return_object;
+          };
+        }
+      },
+
+      _current_patient_apps_activated: {
+        type: Object,
+        statePath: function (state) {
+          if ((state.current_patient.fid !== null) && (state.stays[state.current_patient.fid] !== undefined)) {
+            if (state.apps.all !== undefined) {
+              if (state.apps.all.data !== undefined) {
+                if (state.apps.all.data.patient_modules !== undefined) {
+
+                  var all_apps = JSON.parse(JSON.stringify(state.apps.all.data.patient_modules));
+                  var current_patient_apps = state.stays[state.current_patient.fid].apps_activated;
+
+                  if (current_patient_apps !== undefined) {
+                    all_apps.forEach(function (app, appID) {
+                      app.activated = false;
+
+                      if (current_patient_apps.activated !== undefined) {
+
+                        current_patient_apps.activated.forEach(function (papp, pappID) {
+                          if (app.identifier === papp.module.identifier) {
+                            app.activated = true;
+                          }
+                        });
+                      };
+                    });
+                  };
+
+                  // console.error('_current_patient_apps_activated', all_apps);
+                  return all_apps;
+                };
+              };
+            };
+          } else {
+            return [];
+          };
+
+        }
+      },
+
+      // --------------------------- Tasks ---------------------------
+
+      _current_patient_selected_task: {
+        type: Object,
+        statePath: function (state) {
+          if ((state.current_patient.pid !== null) && (state.patients[state.current_patient.pid] !== undefined)) {
+            if (state.patients[state.current_patient.pid].events !== undefined) {
+              if (state.selected_task !== undefined) {
+
+                return state.events[state.selected_task];
+
+              } else {
+                return {};
+              }
+            } else {
+              return {};
+            }
+          } else {
+            return {};
+          }
+        }
+      },
+
+      _current_patient_tasks_done: {
+        type: Object,
+        statePath: function (state) {
+          if ((state.current_patient.pid !== null) && (state.patients[state.current_patient.pid] !== undefined)) {
+            if ((state.patients[state.current_patient.pid].events !== null) && (state.patients[state.current_patient.pid].events !== undefined)) {
+              if (state.patients[state.current_patient.pid].events.data !== undefined) {
+
+                var events_array = state.patients[state.current_patient.pid].events.data.done || [];
+                var return_array = [];
+                events_array.forEach(function (event_id, ID) {
+                  return_array.push(state.events[event_id]);
+                });
+
+                // console.error('===> ', return_array);
+                return return_array;
+              } else {
+                return [];
+              };
+            } else {
+              return [];
+            };
+          } else {
+            return [];
+          };
+        }
+      },
+
+      _current_patient_app_tasks_to_be_done: {
+        type: Object,
+        statePath: function (state) {
+          if ((state.current_patient.pid !== null) && (state.patients[state.current_patient.pid] !== undefined)) {
+            if ((state.current_patient.aid) && (state.apps.all !== undefined)) {
+              if ((state.patients[state.current_patient.pid].events !== null) && (state.patients[state.current_patient.pid].events !== undefined)) {
+                if (state.patients[state.current_patient.pid].events.data !== undefined) {
+
+                  var events_array = state.patients[state.current_patient.pid].events.data.to_be_done || [];
+                  var return_array = [];
+                  events_array.forEach(function (event_id, ID) {
+                    if (state.events[event_id].data.module === state.current_patient.aid) {
+                      return_array.push(state.events[event_id]);
+                    };
+                  });
+
+                  // console.error('===> ', return_array);
+                  return return_array;
+                } else {
+                  return [];
+                };
+              } else {
+                return [];
+              };
+            } else {
+              return [];
+            };
+          } else {
+            return [];
+          };
+        }
+      },
+
+      _current_patient_tasks_to_be_done: {
+        type: Object,
+        statePath: function (state) {
+          if ((state.current_patient.pid !== null) && (state.patients[state.current_patient.pid] !== undefined)) {
+            if ((state.patients[state.current_patient.pid].events !== null) && (state.patients[state.current_patient.pid].events !== undefined)) {
+              if (state.patients[state.current_patient.pid].events.data !== undefined) {
+
+                var events_array = state.patients[state.current_patient.pid].events.data.to_be_done || [];
+                var return_array = [];
+                events_array.forEach(function (event_id, ID) {
+                  return_array.push(state.events[event_id]);
+                });
+
+                // console.error('===> ', return_array);
+                return return_array;
+              } else {
+                return [];
+              };
+            } else {
+              return [];
+            };
+          } else {
+            return [];
+          };
+        }
+      },
+
+      _current_patient_tasks_aborted: {
+        type: Object,
+        statePath: function (state) {
+          if ((state.current_patient.pid !== null) && (state.patients[state.current_patient.pid] !== undefined)) {
+            if ((state.patients[state.current_patient.pid].events !== null) && (state.patients[state.current_patient.pid].events !== undefined)) {
+              if (state.patients[state.current_patient.pid].events.data !== undefined) {
+
+                var events_array = state.patients[state.current_patient.pid].events.data.aborted || [];
+                var return_array = [];
+                events_array.forEach(function (event_id, ID) {
+                  return_array.push(state.events[event_id]);
+                });
+
+                // console.error('===> ', return_array);
+                return return_array;
+              } else {
+                return [];
+              };
+            } else {
+              return [];
+            };
+          } else {
+            return [];
+          };
+        }
+      },
+
+      // --------------------------- Patient - Lists ---------------------------
+
+      _patient_list_my: {
+        type: Object,
+        statePath: 'patients_list.watchlist.data'
+      },
+
+      _patient_list_filter: {
+        type: Object,
+        statePath: 'patients_list.filter.data'
+      },
+
+      _patient_list_all: {
+        type: Object,
+        statePath: 'patients_list.all.data'
+      },
+
+      // --------------------------- patient_groups ---------------------------
+
+      _current_patient_group_id: {
+        type: Number,
+        statePath: 'current_patient_group.id'
+      },
+
+      _current_patient_group_info: {
+        type: Object,
+        //statePath: '.patients_list.patient_groups[12].data',
+        statePath: function (state) {
+          var return_object = {};
+          if (state.current_patient_group !== undefined) {
+            if ((state.current_patient_group.id !== undefined) && (state.current_patient_group.id !== null)) {
+              if (state.patient_groups.data[state.current_patient_group.id] !== undefined) {
+                if (state.patient_groups.data[state.current_patient_group.id].data !== undefined) {
+                  return_object = state.patient_groups.data[state.current_patient_group.id].data;
+                }
+              };
+            };
+          };
+          return return_object;
+        }
+      },
+
+      _current_patient_group_patients: {
+        type: Array,
+        //statePath: '.patients_list.patient_groups[12].data',
+        statePath: function (state) {
+          var return_array = [];
+          if (state.current_patient_group !== undefined) {
+            if ((state.current_patient_group.id !== undefined) && (state.current_patient_group.id !== null)) {
+              if (state.patients_list.patient_groups[state.current_patient_group.id] !== undefined) {
+                if (state.patients_list.patient_groups[state.current_patient_group.id].data !== undefined) {
+                  return_array = state.patients_list.patient_groups[state.current_patient_group.id].data;
+                  // console.error('_current_patient_group_patients', return_array);
+                }
+              };
+            };
+          };
+          return return_array;
+        }
+      },
+
+      _all_patient_groups: {
+        type: Array,
+        //statePath: '.patients_list.patient_groups[12].data',
+        statePath: function (state) {
+          var return_array = [];
+          if ((state.patient_groups.all !== undefined) && (state.patient_groups.data !== undefined)) {
+            state.patient_groups.all.forEach(function (pg, pgID) {
+              var pg_to_push = state.patient_groups.data[pg].data;
+              if ('sql_filter' in pg_to_push) {
+                pg_to_push.automatic = true;
+              } else {
+                pg_to_push.automatic = false;
+              };
+
+              if (pg_to_push.modules_to_activate.length > 0) {
+                pg_to_push.activate = true;
+              } else {
+                pg_to_push.activate = false;
+              };
+
+              if (pg_to_push.modules_to_deactivate.length > 0) {
+                pg_to_push.deactivate = true;
+              } else {
+                pg_to_push.deactivate = false;
+              };
+
+              return_array.push(state.patient_groups.data[pg].data);
+            });
+          };
+          return return_array;
+        }
+      }
+
+    },
+
+    _loadPatientData: function () {
+
+      this.debounce('_loadPatientData', function () {
+
+        if ((this._current_patient_pid !== NaN) && (this._current_patient_pid !== 0) && (this._current_patient_access !== null)) {
+          if (this._current_patient_access === true) {
+            // LOAD PATIENT-DATA if we have Access
+
+            if (ApiHelpers.shouldCallNow('_loadPatientData_' + this._current_patient_pid, 2)) {
+
+              this.dispatch('getCurrentPatientStays', this._current_patient_pid);
+
+              // When we have a lot of events => feels laggy -> timout & do other stuff first.
+              setTimeout(function () {
+                Polymer.RenderStatus.afterNextRender(this, function () {
+                  this.dispatch('getCurrentPatientEvents', this._current_patient_pid);
+                });
+              }.bind(this), 1000);
+
+              // console.log('(access) Zugriff erteilt auf ', this._current_patient_pid);
+
+            };
+
+          } else {
+            console.error('(access) Kein Zugriff auf ', this._current_patient_pid);
+            window.location.href = "#/patient/" + this._current_patient_pid + '/access';
+          };
+        };
+      }, 250);
+
+    },
+
+    _current_patient_pidChanged: function () {
+
+      this.debounce('_current_patient_pidChanged', function () {
+
+        this.pid = this._current_patient_pid;
+
+        if (this.pid !== 0) {
+          this._loadPatientData()
+        };
+        // console.log('(beh:patient) _current_patient_pidChanged', this.pid);
+
+      }, 250);
+
+    },
+
+    _current_pageChanged: function () {
+
+      var setPageTitle = function (type) {
+        if (ApiHelpers.shouldCallNow("__page__" + this._current_route.path)) {
+
+          var _page = {
+            "title": this._current_patient_info.extras.full_name,
+            "subtitle": null,
+            "defined": false
+          };
+
+          if (type === 'patient') {
+            _page.subtitle = "Start";
+            _page.defined = true;
+          };
+
+          if (type === 'stay') {
+            _page.subtitle = "Behandlung: " + this._current_stay_info.extras.from_to;
+            _page.defined = true;
+          };
+
+          if (type === 'tasks_to_be_done') {
+            _page.subtitle = "Offene Aufgaben (" + this._current_patient_tasks_to_be_done.length + ")";
+            _page.defined = true;
+          };
+
+          if (type === 'tasks_done') {
+            _page.subtitle = "Erledigte Aufgaben (" + this._current_patient_tasks_done.length + ")";
+            _page.defined = true;
+          };
+
+          if (type === 'tasks_aborted') {
+            _page.subtitle = "Abgebrochene Aufgaben (" + this._current_patient_tasks_aborted.length + ")";
+            _page.defined = true;
+          };
+
+          if (type === 'apps_activated') {
+            _page.subtitle = "Aktivierte Applikationen";
+            _page.defined = true;
+          };
+
+          if (type === 'apps_deactivated') {
+            _page.subtitle = "Deaktivierte Applikationen";
+            _page.defined = true;
+          };
+
+          if (type === 'apps_activate') {
+            _page.subtitle = "Applikationen (de-)aktivieren";
+            _page.defined = true;
+          };
+
+          if (type === 'app_start') {
+            _page.subtitle = this._current_stay_app.name + " | Start";
+            _page.defined = true;
+          };
+
+          if (type === 'app_template') {
+            _page.subtitle = this._current_stay_app.name + " | " + this._current_route.routePathArray[7];
+            _page.defined = true;
+          };
+
+          if (_page.defined) {
+            this.dispatch('setObject', 'current_page_title', _page);
+
+            document.title = this._current_patient_info.extras.name + " | " + _page.subtitle;
+            //console.warn('(beh:patient) _current_page', document.title);
+          };
+
+        };
+      }.bind(this);
+
+      this.debounce('_current_pageChanged', function () {
+
+        if ((this._current_page !== undefined) && (this._current_page !== null)) {
+          if (this._current_page.page === "patient") {
+            if ((this._current_patient !== undefined) && (this._current_patient !== null)) {
+              if ((this._current_route !== undefined) && (this._current_route !== null)) {
+                var _current_page = this._current_page;
+                var _current_patient = this._current_patient;
+                var _current_route = this._current_route;
+
+                var proceed = false;
+
+                if ((_current_patient.pid !== null) && (_current_patient.pid !== 0)) {
+                  if (parseInt(_current_route.routePathArray[1]) === parseInt(_current_patient.pid)) {
+
+                    if ((_current_patient.fid !== null) && (_current_patient.fid !== 0)) {
+                      if ((parseInt(_current_route.routePathArray[3]) === parseInt(_current_patient.fid)) || (_current_route.routePathArray[2] === "tasks")) {
+                        proceed = true;
+                      } else {
+                        proceed = false;
+                      };
+                    } else {
+                      proceed = true;
+                    };
+
+                  };
+                };
+
+                if (proceed) {
+
+                  if ("is_page" in this._current_page) {
+                    if (this._current_page.is_page.patient) {
+
+                      if ((this._current_patient_info !== undefined) && (this._current_patient_info !== null)) {
+
+                        if ((_current_route.routePathArray.length === 2) && (_current_route.routePathArray[0] === 'patient')) {
+                          if ((this._current_patient_info.data !== undefined) && (this._current_patient_info.data !== null)) {
+                            setPageTitle('patient');
+                          };
+                        };
+
+                        if ((_current_route.routePathArray.length === 4) && (_current_route.routePathArray[2] === 'stay')) {
+                          if ((this._current_patient_info.data !== undefined) && (this._current_patient_info.data !== null)) {
+                            if ((this._current_stay_info !== undefined) && (this._current_stay_info !== null)) {
+                              setPageTitle('stay');
+                            };
+                          };
+                        };
+
+                        if (((_current_route.routePathArray.length === 3) && (_current_route.routePathArray[2] === 'tasks')) || ((_current_route.routePathArray.length === 4) && (_current_route.routePathArray[3] === 'to_be_done'))) {
+                          if ((this._current_patient_info.data !== undefined) && (this._current_patient_info.data !== null)) {
+                            if ((this._current_patient_tasks_to_be_done !== undefined) && (this._current_patient_tasks_to_be_done !== null)) {
+                              setPageTitle('tasks_to_be_done');
+                            };
+                          };
+                        };
+
+                        if ((_current_route.routePathArray.length === 4) && (_current_route.routePathArray[3] === 'done')) {
+                          if ((this._current_patient_info.data !== undefined) && (this._current_patient_info.data !== null)) {
+                            if ((this._current_patient_tasks_done !== undefined) && (this._current_patient_tasks_done !== null)) {
+                              setPageTitle('tasks_done');
+                            };
+                          };
+                        };
+
+                        if ((_current_route.routePathArray.length === 4) && (_current_route.routePathArray[3] === 'aborted')) {
+                          if ((this._current_patient_info.data !== undefined) && (this._current_patient_info.data !== null)) {
+                            if ((this._current_patient_tasks_aborted !== undefined) && (this._current_patient_tasks_aborted !== null)) {
+                              setPageTitle('tasks_aborted');
+                            };
+                          };
+                        };
+
+                        if (((_current_route.routePathArray.length === 5) && (_current_route.routePathArray[4] === 'apps')) || ((_current_route.routePathArray.length === 6) && (_current_route.routePathArray[5] === 'activated'))) {
+                          if ((this._current_patient_info.data !== undefined) && (this._current_patient_info.data !== null)) {
+                            setPageTitle('apps_activated');
+                          };
+                        };
+
+                        if ((_current_route.routePathArray.length === 6) && (_current_route.routePathArray[4] === 'apps') && (_current_route.routePathArray[5] === 'deactivated')) {
+                          if ((this._current_patient_info.data !== undefined) && (this._current_patient_info.data !== null)) {
+                            setPageTitle('apps_deactivated');
+                          };
+                        };
+
+                        if ((_current_route.routePathArray.length === 6) && (_current_route.routePathArray[4] === 'apps') && (_current_route.routePathArray[5] === 'activate')) {
+                          if ((this._current_patient_info.data !== undefined) && (this._current_patient_info.data !== null)) {
+                            setPageTitle('apps_activate');
+                          };
+                        };
+
+                        if ((_current_route.routePathArray.length === 7) && (_current_route.routePathArray[4] === 'app') && (_current_route.routePathArray[6] === 'start')) {
+                          if ((this._current_patient_info.data !== undefined) && (this._current_patient_info.data !== null)) {
+                            if ((this._current_stay_app !== undefined) && (this._current_stay_app !== null)) {
+                              setPageTitle('app_start');
+                            };
+                          };
+                        };
+
+                        if ((_current_route.routePathArray.length === 8) && (_current_route.routePathArray[4] === 'app') && (_current_route.routePathArray[6] === 'template')) {
+                          if ((this._current_patient_info.data !== undefined) && (this._current_patient_info.data !== null)) {
+                            if ((this._current_stay_app !== undefined) && (this._current_stay_app !== null)) {
+                              setPageTitle('app_template');
+                            };
+                          };
+                        };
+
+                      };
+                    };
+                  };
+
+                };
+
+              };
+            };
+          };
+        };
+      }, 550);
+    },
+
+    created: function () {}
+  };
+</script>

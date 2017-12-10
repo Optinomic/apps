@@ -1,0 +1,166 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../store/optinomic-redux-store.html">
+<link rel="import" href="../behaviors/behavior-app.html">
+<link rel="import" href="../shared-styles.html">
+<dom-module id="admin-page-extras">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .content-block {
+        margin-bottom: 48px;
+      }
+
+    </style>
+    <template is="dom-if" if="[[_user.is_admin]]">
+
+      <template is="dom-if" if="[[_show_admin_extras]]">
+
+        <paper-card class="margin-bottom">
+          <div class="card-content">
+            <h1>State</h1>
+            <p>Console.log current
+              <b>State</b>. You could also log the state as a JSON-String with
+              <b>Stringify</b>. This could be useful for developping.</p>
+          </div>
+          <div class="card-actions">
+            <paper-button on-tap="_logState">getState</paper-button>
+            <paper-button on-tap="_logStateStringify">Stringify</paper-button>
+          </div>
+
+        </paper-card>
+
+        <paper-card class="margin-bottom">
+          <div class="card-content">
+            <h1>localStorage</h1>
+            <p>Controls for
+              <b>localStorage</b>. Do you want to have a persited state? Yes, enable
+              <b>USE</b>. You could also debug the state in console by the
+              <b>CONSOLE</b>
+              toggle.
+              <b>CLEAR</b>
+              does what it says.</p>
+
+          </div>
+          <div class="card-actions">
+            <paper-button on-tap="_localStorageUsingToggle">Use: [[_localStorageOptions.using]]</paper-button>
+            <template is="dom-if" if="[[_localStorageOptions.using]]">
+              <paper-button on-tap="_localStorageClear">Clear</paper-button>
+            </template>
+          </div>
+
+        </paper-card>
+
+        <paper-card class="margin-bottom">
+          <div class="card-content">
+            <h1>Signin</h1>
+            <p>User
+              <b>[[_signin.data.user_id]]</b>
+              is logged in =
+              <b>[[_signin.isLoggedIn]]</b>. Token = `<i>[[_signin.data.token]]</i>`</p>
+          </div>
+        </paper-card>
+
+      </template>
+
+    </template>
+    <template is="dom-if" if="[[!_user.is_admin]]">
+      <h1>Sorry, [[_user.first_name]]</h1>
+      <p>It looks you have been assigned with the following role:
+        <b>[[_user.role]]</b>.</p>
+    </template>
+  </template>
+  <script>
+    Polymer({
+      is: 'admin-page-extras',
+
+      properties: {
+        _signin: {
+          type: Object,
+          statePath: 'signin'
+        },
+
+        _user: {
+          type: Object,
+          statePath: 'user.info.data',
+          observer: '_userChanged'
+        }
+      },
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior, OptinomicAppBehavior
+      ],
+
+      // --------------------------- _logState ---------------------------
+
+      _logState: function () {
+        var now = Date();
+        // Toast
+        var text = '👋, ' + this._user.first_name + ': Current state is logged to the console.';
+        var persistant = false;
+        this._showToast(text, persistant);
+        console.log('state @', now, ' --> ', this.getState());
+      },
+
+      _logStateStringify: function () {
+        console.log(JSON.stringify(this.getState(), null, 4));
+        // Toast
+        var text = '👋, ' + this._user.first_name + ': Current state is printed to the console.';
+        var persistant = false;
+        this._showToast(text, persistant);
+      },
+
+      // --------------------------- localStorage ---------------------------
+
+      _setLocalStorageOptions: function () {
+        this.set('_localStorageOptions', {});
+        this.set('_localStorageOptions', UserStore.getOptions());
+      },
+
+      _localStorageClear: function () {
+        UserStore.clear();
+        // Toast
+        var text = '👋, ' + this._user.first_name + ': Your localStorage is now clear.';
+        var persistant = true;
+        this._showToast(text, persistant);
+      },
+
+      _localStorageUsingToggle: function () {
+        Session.setTrustComputer(!Session.setTrustComputer());
+        //localStorageToggle('using');
+        this._setLocalStorageOptions();
+
+        var _localStorageOptions = this.get('_localStorageOptions');
+        console.log('_localStorageOptions', _localStorageOptions);
+
+        if (_localStorageOptions.using) {
+          // Toast
+          var text = '👋, ' + this._user.first_name + ': Your state will be persitant @ localStorage now.';
+          var persistant = true;
+          this._showToast(text, persistant);
+        } else { // Toast
+          this._localStorageClear();
+        };
+      },
+
+      // --------------------------- lifeCycle ---------------------------
+
+      _show_admin_extrasToggle: function () {
+        this._show_admin_extras = !this._show_admin_extras;
+
+      },
+
+      _userChanged: function () {
+        this._setLocalStorageOptions();
+      },
+
+      ready: function () {
+        this.set('_show_admin_extras', true);
+      }
+    });
+  </script>
+</dom-module>

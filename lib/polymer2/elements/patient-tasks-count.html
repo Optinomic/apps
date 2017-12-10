@@ -1,0 +1,193 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-tooltip/paper-tooltip.html">
+<link rel="import" href="../store/optinomic-redux-store.html">
+<link rel="import" href="../shared-styles.html">
+<dom-module id="patient-tasks-count">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .circle {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        font-size: 14px;
+        font-weight: 500;
+        color: #fff;
+        line-height: 24px;
+        text-align: center;
+      }
+
+      .red {
+        color: #F44336;
+        background-color: #FFEBEE;
+      }
+      .red:hover {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+      }
+
+      .green {
+        color: #4CAF50;
+        background-color: #E8F5E9;
+      }
+      .green:hover {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+      }
+
+      .grey {
+        color: #9E9E9E;
+        background-color: #FAFAFA;
+      }
+      .grey:hover {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+      }
+
+      .count_box {
+        width: 54px !important;
+        min-width: 54px !important;
+        margin-right: 12px !important;
+      }
+
+      .task {
+        width: 28px !important;
+        min-width: 28px !important;
+        cursor: alias;
+      }
+
+      paper-tooltip {
+        --paper-tooltip-background: #424242;
+        --paper-tooltip-opacity: 0.9;
+        --paper-tooltip: {
+          font-size: 14px;
+        }
+      }
+
+    </style>
+
+    <div class="count_box">
+      <template is="dom-if" if="[[_events_loaded]]">
+        <div class="horizontal">
+          <div id="to_be_done" class="task" on-tap="_forward_to_open_tasks">
+            <template is="dom-if" if="[[show_to_be_done]]">
+              <p class="circle red">[[_events.data.to_be_done.length]]</p>
+              <paper-tooltip for="to_be_done" position="left">Offene Aufgaben: [[_events.data.to_be_done.length]]</paper-tooltip>
+            </template>
+          </div>
+          <div id="done" class="task" on-tap="_forward_to_done_tasks">
+            <template is="dom-if" if="[[show_done]]">
+              <p class="circle green">[[_events.data.done.length]]</p>
+              <paper-tooltip for="done" position="left">Erledigte Aufgaben: [[_events.data.done.length]]</paper-tooltip>
+            </template>
+            <template is="dom-if" if="[[!show_done]]">
+              <p class="circle grey">-</p>
+              <paper-tooltip for="done" position="left">Keine erledigten Aufgaben</paper-tooltip>
+            </template>
+          </div>
+        </div>
+      </template>
+    </div>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'patient-tasks-count',
+
+      properties: {
+        pid: {
+          type: String,
+          observer: '_getEvents'
+        },
+        _events: {
+          type: Object,
+          value: null,
+          //statePath: '.patients_list.patient_groups[12].data',
+          statePath: function (state) {
+            var return_obj = null;
+            if (this.pid !== undefined) {
+              if ((state.patients !== undefined) && (state.patients !== null)) {
+                if (state.patients[this.pid] !== undefined) {
+                  if (state.patients[this.pid].events !== undefined) {
+                    return_obj = state.patients[this.pid].events;
+                    this.set('_events_loaded', true);
+                    // console.error('_events', return_obj);
+                  }
+                };
+              };
+            };
+            return return_obj;
+          },
+          observer: '_displayData'
+        }
+      },
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior
+      ],
+
+      _forward_to_open_tasks: function () {
+        console.warn('(!) _forward_to_open_tasks :', this.pid);
+        window.location.href = "#/patient/" + this.pid + "/tasks";
+      },
+
+      _forward_to_done_tasks: function () {
+        console.warn('(!) _forward_to_open_tasks :', this.pid);
+        window.location.href = "#/patient/" + this.pid + "/tasks/done";
+      },
+
+      _getEvents: function () {
+        this.debounce('_getEvents', function () {
+
+          if ((this.pid !== undefined) && (this.pid !== null)) {
+
+            try {
+              var state = this.getState();
+              if (state.patients[this.pid].events) {
+                this.set('_events', state.patients[this.pid].events);
+                this.set('_events_loaded', true);
+                this._displayData();
+              };
+            } catch (err) {
+              Polymer.RenderStatus.afterNextRender(this, function () {
+                this.dispatch('getCurrentPatientEvents', this.pid, false);
+              });
+            };
+
+          };
+
+        }, 250);
+      },
+
+      _displayData: function () {
+
+        Polymer.RenderStatus.afterNextRender(this, function () {
+          this.set('show_to_be_done', false);
+          this.set('show_done', false);
+          if ((this._events !== undefined) && (this._events !== null)) {
+            if ((this._events.data !== undefined) && (this._events.data !== null)) {
+              if (this._events.data.to_be_done.length > 0) {
+                this.set('show_to_be_done', true);
+              };
+              if (this._events.data.done.length > 0) {
+                this.set('show_done', true);
+              };
+            };
+          };
+        });
+
+      },
+
+      //------------------ Lifecycle ------------------
+      ready: function () {
+        this.set('_events_loaded', false);
+      }
+
+    });
+  </script>
+</dom-module>

@@ -1,0 +1,243 @@
+<script>
+  PatientWatchlistBehavior = {
+
+    properties: {
+
+      _watchlisted_patients: {
+        type: Array,
+        statePath: 'patients_list.watchlist.data'
+      },
+
+      _patient_group_watchlist: {
+        type: Array,
+        statePath: 'patient_groups.user'
+      },
+
+      _current_patient_watchlist: {
+        type: Object,
+        statePath: function (state) {
+          var return_boolean = false;
+          if ((state.current_patient.pid !== null) && (state.patients_list.watchlist !== undefined)) {
+
+            var _watchlisted_patients = state.patients_list.watchlist.data;
+            if (_watchlisted_patients !== undefined) {
+              var filtered = _watchlisted_patients.filter(function (x) {
+                return x.id === state.current_patient.pid;
+              });
+              if (filtered.length > 0) {
+                return_boolean = true;
+              };
+            };
+
+          };
+          return return_boolean;
+        }
+      }
+    },
+
+    _is_pid_in_watchlist: function (pid) {
+      var return_boolean = false;
+      var state = this.getState();
+      var _watchlisted_patients = state.patients_list.watchlist.data;
+      if (_watchlisted_patients !== undefined) {
+        var filtered = _watchlisted_patients.filter(function (x) {
+          return x.id === pid;
+        });
+        if (filtered.length > 0) {
+          return_boolean = true;
+        };
+      };
+      //console.error('_is_pid_in_watchlist', pid, return_boolean, filtered);
+      return return_boolean;
+    },
+
+    _is_pgid_in_watchlist: function (pg_id) {
+      var return_boolean = false;
+      var state = this.getState();
+      var _watchlisted_patients = state.patient_groups.user;
+      if (_watchlisted_patients !== undefined) {
+        var filtered = _watchlisted_patients.filter(function (x) {
+          return x.id === pg_id;
+        });
+        if (filtered.length > 0) {
+          return_boolean = true;
+        };
+      };
+      //console.error('_is_pid_in_watchlist', pg_id, return_boolean, filtered);
+      return return_boolean;
+    },
+
+    _doWatch: function (action, pid, patient) {
+
+      action = action || 'watch';
+      pid = pid || 1;
+
+      user_id = Session.getUserID();
+
+      var api_url = '/watchlist/' + user_id + '/' + action + '/' + pid;
+      console.error('_doWatch', action, pid, api_url);
+
+      // API-Call
+      ApiHelpers.callAPI('POST', api_url, {}, {}, function (req) {
+        if (req.status == 204) {
+          // Update getWatchlistPatients
+          this.dispatch('getWatchlistPatients', user_id);
+          var patient_name = patient.extras.anrede;
+
+          // Toast & Forward
+          if (action === 'watch') {
+            var text = patient_name + ' wurde erfolgreich zu den Favoriten hinzugefügt.'
+          } else {
+            var text = patient_name + ' wurde erfolgreich von den Favoriten entfernt.'
+          };
+          this._showToast(text, true);
+        } else {
+          var response = {
+            "error": true,
+            "error_message": "Failed with status code: " + req.status,
+            "status_code": req.status
+          };
+
+          this._showToast(response.error_message, true);
+          console.error('(!) Error: ', response);
+        };
+      }.bind(this));
+
+    },
+
+    _doWatchGroup: function (action, pg_id, group) {
+
+      action = action || 'watch';
+      pg_id = pg_id || 1;
+      group = group || pg_id;
+
+      user_id = Session.getUserID();
+
+      var api_url = '/patient_group_watchlist/' + user_id + '/' + action + '/' + pg_id;
+
+      // API-Call
+      ApiHelpers.callAPI('POST', api_url, {}, {}, function (req) {
+        if (req.status == 204) {
+          // Update user patient_groups
+          this.dispatch('getUserPG');
+          var group_name = group.name;
+
+          // Toast & Forward
+          if (action === 'watch') {
+            var text = '«' + group_name + '» erfolgreich zur Merkliste hinzugefügt.'
+          } else {
+            var text = '«' + group_name + '» erfolgreich von der Merkliste entfernt.'
+          };
+          this._showToast(text, true);
+        } else {
+          var response = {
+            "error": true,
+            "error_message": "Failed with status code: " + req.status,
+            "status_code": req.status
+          };
+
+          this._showToast(response.error_message, true);
+          console.error('(!) Error: ', response);
+        };
+      }.bind(this));
+
+    },
+
+    _favorite_pid: function (e) {
+
+      var model = e.model;
+      if (model !== undefined) {
+        var patient = model.item || {};
+        var pid = model.item.id || 1;
+      } else {
+        var state = this.getState();
+        var patient = this._current_patient_info || {};
+        var pid = state.current_patient.pid || 1;
+      };
+
+      console.warn('(!) _favorite_pid :', pid, patient);
+      this._doWatch('watch', pid, patient);
+
+    },
+
+    _unfavorite_pid: function (e) {
+
+      var model = e.model;
+      if (model !== undefined) {
+        var patient = model.item || {};
+        var pid = model.item.id || 1;
+      } else {
+        var state = this.getState();
+        var patient = this._current_patient_info || {};
+        var pid = state.current_patient.pid || 1;
+      };
+
+      console.warn('(!) _unfavorite_pid :', pid, patient);
+      this._doWatch('unwatch', pid, patient);
+
+    },
+
+    _favorite_pg_id: function (e) {
+
+      var model = e.model;
+      if (model !== undefined) {
+        var group = model.item || {};
+        var pid = model.item.id || 1;
+
+      } else {
+        var state = store.getState();
+        var pid = state.current_patient_group.id;
+        var group = {
+          "name": "Patientengruppe " + pid
+        };
+      };
+
+      this._doWatchGroup('watch', pid, group);
+      console.warn('(!) _favorite_pg_id :', pid, group);
+
+    },
+
+    _unfavorite_pg_id: function (e) {
+
+      var model = e.model;
+      if (model !== undefined) {
+        var group = model.item || {};
+        var pid = model.item.id || 1;
+      } else {
+        var state = store.getState();
+        var pid = state.current_patient_group.id;
+        var group = {
+          "name": "Patientengruppe " + pid
+        };
+      };;
+
+      console.warn('(!) _unfavorite_pid :', pid, group);
+      this._doWatchGroup('unwatch', pid, group);
+
+    },
+
+    _something: function () {
+      this.debounce('_something', function () {}, 350);
+    },
+
+    // --------------------------- Show Toast ---------------------------
+
+    _showToast: function (text, persistant) {
+
+      text = text || 'Optinomic';
+      persistant = persistant || false;
+
+      var toastObj = {
+        "text": text,
+        "persistant": persistant
+      };
+
+      console.log('_showToast :: show-toast', toastObj);
+
+      this.fire('show-toast', toastObj);
+
+    },
+
+    created: function () {}
+  };
+</script>

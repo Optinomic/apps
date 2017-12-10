@@ -1,0 +1,449 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu-light.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../../bower_components/paper-date-picker/paper-date-picker.html">
+<link rel="import" href="../../bower_components/paper-date-picker/paper-calendar.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../store/optinomic-redux-store.html">
+<link rel="import" href="../behaviors/behavior-app.html">
+<link rel="import" href="../behaviors/behavior-user.html">
+<link rel="import" href="../shared-styles.html">
+<dom-module id="user-edit">
+  <template>
+    <style include="shared-styles iron-flex iron-flex-alignment">
+      :host {
+        display: block;
+
+        --field-width: 100%;
+
+      }
+
+      paper-dropdown-menu-light,
+      paper-input {
+        min-width: var(--field-width);
+      }
+
+      .birthday_left {
+        width: var(--field-width);
+      }
+
+      .birthday_right {
+        margin: 0 auto;
+        height: 300px;
+        width: 300px;
+        overflow: hidden;
+      }
+
+    </style>
+
+    <paper-card class="margin-bottom">
+      <div class="card-content">
+
+        <div>
+          <h1>Benutzerangaben</h1>
+          <p class="subtitle">Bearbeiten: [[_current_user_to_edit.data.last_name]] [[_current_user_to_edit.data.first_name]]
+            <span class="caption">
+              (ID: [[_current_user_to_edit.id]])
+            </span>
+          </p>
+        </div>
+
+        <div class="">
+
+          <div class="layout horizontal wrap">
+            <paper-dropdown-menu-light label="Geschlecht">
+              <paper-listbox id="gender" slot="dropdown-content" fallback-selection="male" class="dropdown-content" attr-for-selected="name" selected$="[[_current_user_to_edit.data.gender]]">
+                <paper-item name="male">Herr</paper-item>
+                <paper-item name="female">Frau</paper-item>
+              </paper-listbox>
+            </paper-dropdown-menu-light>
+            <paper-input id="title" label="Titel" value$="[[_current_user_to_edit.data.title]]"></paper-input>
+          </div>
+
+          <div class="layout horizontal wrap">
+            <paper-input id="last_name" label="Name" value$="[[_current_user_to_edit.data.last_name]]"></paper-input>
+            <paper-input id="first_name" label="Vorname" value$="[[_current_user_to_edit.data.first_name]]"></paper-input>
+            <paper-input id="initials" label="Kürzel" value$="[[_current_user_to_edit.data.initials]]"></paper-input>
+            <paper-input id="phone" label="Telefon" value$="[[_current_user_to_edit.data.phone]]"></paper-input>
+            <paper-input id="email" style="width:100%" label="Email" value$="[[_current_user_to_edit.data.email]]"></paper-input>
+          </div>
+
+          <div class="layout horizontal wrap">
+
+            <div style="margin-left:auto;margin-right:auto">
+              <h3 class="caption">Geburtstag</h3>
+              <paper-date-picker id="birthday" date$="[[_current_user_to_edit.data.birthday]]"></paper-date-picker>
+            </div>
+
+            <paper-input style="width:100%" id="description" label="Beschreibung" value$="[[_current_user_to_edit.data.description]]"></paper-input>
+
+            <paper-input id="cis_uid" label="Klinik: User-ID" value$="[[_current_user_to_edit.data.cis_uid]]"></paper-input>
+            <paper-input id="ou" label="Klinik: Organisation Unit" value$="[[_current_user_to_edit.data.ou]]"></paper-input>
+
+          </div>
+        </div>
+
+      </div>
+      <div class="card-actions horizontal wrap">
+
+        <a class="undecorated-link" href$="[[backUrl]]" tabindex="-1">
+          <paper-button>Abbrechen</paper-button>
+        </a>
+
+        <paper-button on-tap="_doSaveUser" class="accent">Speichern</paper-button>
+      </div>
+    </paper-card>
+
+    <paper-card class="margin-bottom">
+      <div class="card-content">
+
+        <div>
+          <h1>Passwort</h1>
+          <p class="subtitle">Festlegen: [[_current_user_to_edit.data.last_name]] [[_current_user_to_edit.data.first_name]]
+            <span class="caption">
+              (ID: [[_current_user_to_edit.id]])
+            </span>
+          </p>
+        </div>
+
+        <div class="">
+          <p>Das Passwort muss mindestens 6 Zeichen beinhalten.</p>
+          <div class="layout horizontal wrap">
+            <paper-input id="pw1" type="password" label="Passwort"></paper-input>
+            <paper-input id="pw2" type="password" label="Passwort verifizieren"></paper-input>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="card-actions horizontal">
+        <span>&nbsp;</span>
+        <paper-button on-tap="_doUpdatePW" class="accent">Speichern</paper-button>
+      </div>
+    </paper-card>
+
+    <template is="dom-if" if="[[_user_info.is_admin]]">
+      <paper-card class="margin-bottom" style="background-color:#C5CAE9">
+        <div class="card-content">
+
+          <div>
+            <h1>Benutzer-Rolle</h1>
+            <p class="subtitle" style="color:black">Festlegen: [[_current_user_to_edit.data.last_name]] [[_current_user_to_edit.data.first_name]]
+              <span class="caption">
+                (ID: [[_current_user_to_edit.id]])
+              </span>
+            </p>
+          </div>
+
+          <div class="">
+
+            <div class="layout horizontal wrap">
+              <paper-dropdown-menu-light label="Rolle" style="width:100%">
+                <paper-listbox id="role" slot="dropdown-content" class="dropdown-content" fallback-selection="NoRole" attr-for-selected="name" selected$="[[_current_user_to_edit.data.role]]">
+                  <template is="dom-repeat" items="[[_users_roles]]" as="role">
+                    <paper-item name$="[[role]]">[[role]]</paper-item>
+                  </template>
+                </paper-listbox>
+              </paper-dropdown-menu-light>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="card-actions horizontal">
+
+          <a class="undecorated-link" href$="[[backUrl]]" tabindex="-1">
+            <paper-button>Abbrechen</paper-button>
+          </a>
+
+          <span>&nbsp;</span>
+          <paper-button on-tap="_doUpdateRole" class="accent">Speichern</paper-button>
+        </div>
+      </paper-card>
+    </template>
+
+    <template is="dom-if" if="[[_user_info.is_admin]]">
+      <paper-card class="margin-bottom" style="background-color:#C5CAE9">
+        <div class="card-content">
+
+          <div>
+            <h1>Löschen / Archivieren</h1>
+            <p class="subtitle" style="color:black">Benutzer: [[_current_user_to_edit.data.last_name]] [[_current_user_to_edit.data.first_name]]
+              <span class="caption">
+                (ID: [[_current_user_to_edit.id]])
+              </span>
+            </p>
+          </div>
+
+        </div>
+        <div class="card-actions horizontal">
+
+          <div hidden$="[[_current_user_to_edit.data.locked]]">
+            <paper-button on-tap="_doLock">Archivieren</paper-button>
+          </div>
+          <div hidden$="[[!_current_user_to_edit.data.locked]]">
+            <paper-button on-tap="_doUnlock" class="accent">Archivierung aufheben</paper-button>
+          </div>
+
+          <span>&nbsp;</span>
+          <paper-button on-tap="_doDeleteUser" class="accent">Löschen</paper-button>
+        </div>
+      </paper-card>
+    </template>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'user-edit',
+
+      properties: {
+
+        backUrl: {
+          type: String
+        },
+
+        _is_small: {
+          type: Boolean,
+          statePath: 'device.sizes.small',
+          observer: '_sizeChanged'
+        },
+
+        _is_medium: {
+          type: Boolean,
+          statePath: 'device.sizes.medium',
+          observer: '_sizeChanged'
+        }
+      },
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior, OptinomicAppBehavior, UserBehavior
+      ],
+
+      // --------------------------- lifeCycle ---------------------------
+      _doSaveUser: function () {
+
+        var parameters = {
+          "email": this.$$('#email').value || "",
+          "gender": this.$$('#gender').selected,
+          "title": this.$$('#title').value || "",
+          "first_name": this.$$('#first_name').value || "",
+          "last_name": this.$$('#last_name').value || "",
+          "birthday": this.$$('#birthday').date.toISOString(),
+          "phone": this.$$('#phone').value || "",
+          "description": this.$$('#description').value || "",
+          "initials": this.$$('#initials').value || "",
+          "ou": this.$$('#ou').value || "",
+          "cis_uid": this.$$('#cis_uid').value || ""
+        };
+
+        var api_url = '/users/' + this._current_user_to_edit.id;
+        console.error('_doSaveUser', parameters, api_url);
+
+        // API-Call
+        ApiHelpers.callAPI('PUT', api_url, {}, parameters, function (req) {
+          if (req.status == 204) {
+            // Update Users
+            this.dispatch('getGenericCalls', '/users', 'users.users', 'users');
+
+            // Toast & Forward
+            this._showToast('(✔) Benutzer erfolgreich gespeichert', false);
+            window.location.href = this.backUrl;
+
+          } else {
+            var response = {
+              "error": true,
+              "error_message": "Failed with status code: " + req.status,
+              "status_code": req.status
+            };
+
+            this._showToast(response.error_message, true);
+            console.error('(!) Error: ', response);
+          };
+        }.bind(this));
+
+      },
+
+      _doUpdateRole: function () {
+
+        var parameters = {
+          "role": this.$$('#role').selected
+        };
+
+        var api_url = '/users/' + this._current_user_to_edit.id + '/role';
+        console.error('_doUpdateRole', parameters, api_url);
+
+        // API-Call
+        ApiHelpers.callAPI('PUT', api_url, {}, parameters, function (req) {
+          if (req.status == 204) {
+            // Update Users
+            this.dispatch('getGenericCalls', '/users', 'users.users', 'users');
+
+            // Toast & Forward
+            this._showToast('(✔) Benutzer-Rolle erfolgreich gespeichert', false);
+            window.location.href = this.backUrl;
+
+            console.log();
+          } else {
+            var response = {
+              "error": true,
+              "error_message": "Failed with status code: " + req.status,
+              "status_code": req.status
+            };
+
+            this._showToast(response.error_message, true);
+            console.error('(!) Error: ', response);
+          };
+        }.bind(this));
+
+      },
+
+      _doDeleteUser: function () {
+
+        var api_url = '/users/' + this._current_user_to_edit.id;
+        console.error('_doDeleteUser', api_url);
+
+        // API-Call
+        ApiHelpers.callAPI('DELETE', api_url, {}, {}, function (req) {
+          if (req.status == 204) {
+            // Update Users
+            this.dispatch('getGenericCalls', '/users', 'users.users', 'users');
+
+            // Toast & Forward
+            this._showToast('(✔) Benutzer erfolgreich gelöscht', true);
+            window.location.href = this.backUrl;
+
+            console.log();
+          } else {
+            var response = {
+              "error": true,
+              "error_message": "Failed with status code: " + req.status,
+              "status_code": req.status
+            };
+
+            this._showToast(response.error_message, true);
+            console.error('(!) Error: ', response);
+          };
+        }.bind(this));
+
+      },
+
+      _callLock: function (lock) {
+
+        lock = lock || 'lock';
+
+        var api_url = '/users/' + this._current_user_to_edit.id + '/' + lock;
+        console.error('_doLock', lock, api_url);
+
+        // API-Call
+        ApiHelpers.callAPI('POST', api_url, {}, {}, function (req) {
+          if (req.status == 204) {
+            // Update Users
+            this.dispatch('getGenericCalls', '/users', 'users.users', 'users');
+
+            // Toast & Forward
+            if (lock === 'lock') {
+              var text = '(✔) Benutzer erfolgreich archiviert.'
+            } else {
+              var text = '(✔) Archivierung erfolgreich aufgehoben.'
+            };
+            this._showToast(text, true);
+            window.location.href = this.backUrl;
+
+            console.log();
+          } else {
+            var response = {
+              "error": true,
+              "error_message": "Failed with status code: " + req.status,
+              "status_code": req.status
+            };
+
+            this._showToast(response.error_message, true);
+            console.error('(!) Error: ', response);
+          };
+        }.bind(this));
+
+      },
+
+      _doLock: function () {
+        this._callLock('lock');
+      },
+
+      _doUnlock: function () {
+        this._callLock('unlock');
+      },
+
+      _callChangePW: function (pw) {
+
+        var parameters = {
+          "password": pw
+        };
+        var api_url = '/users/' + this._current_user_to_edit.id + '/password';
+
+        // API-Call
+        ApiHelpers.callAPI('PUT', api_url, {}, parameters, function (req) {
+          if (req.status == 204) {
+            // Update Users
+            this.dispatch('getGenericCalls', '/users', 'users.users', 'users');
+
+            // Toast & Forward
+            this._showToast('Passwort erfolgreich gespeichert', false);
+            window.location.href = this.backUrl;
+
+            console.log();
+          } else {
+            var response = {
+              "error": true,
+              "error_message": "Failed with status code: " + req.status,
+              "status_code": req.status
+            };
+
+            this._showToast(response.error_message, true);
+            console.error('(!) Error: ', response);
+          };
+        }.bind(this));
+
+      },
+
+      _doUpdatePW: function () {
+        var pw1 = this.$$('#pw1').value || "";
+        var pw2 = this.$$('#pw2').value || "";
+
+        // console.error('_doUpdatePW', pw1, pw2);
+
+        if (pw1 === pw2) {
+          if (pw1.length >= 6) {
+            this._callChangePW('pw1');
+          } else {
+            this._showToast('Uuups, das Passwort muss mindestens 6 Zeichen beinhalten.', true);
+          };
+        } else {
+          this._showToast('Uuups, Passwörter stimmen nicht überein.', true);
+        };
+      },
+
+      // --------------------------- Observer ---------------------------
+      _sizeChanged: function () {
+        this.debounce('_sizeChanged', function () {
+
+          if ((this._is_small === false) && (this._is_medium === false)) {
+            this.customStyle['--field-width'] = '48%';
+            this.updateStyles();
+          } else {
+            this.customStyle['--field-width'] = '100%';
+            this.updateStyles();
+          };
+
+        }, 250);
+      },
+
+      // --------------------------- lifeCycle ---------------------------
+      ready: function () {}
+
+    });
+  </script>
+</dom-module>

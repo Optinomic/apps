@@ -1,0 +1,64 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/polymerfire/polymerfire.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../behaviors/behavior-app.html">
+<link rel="import" href="../behaviors/behavior-news.html">
+<link rel="import" href="../behaviors/behavior-user.html">
+<link rel="import" href="moment-element.html">
+<link rel="import" href="news-item.html">
+<link rel="import" href="../shared-styles.html">
+<dom-module id="news-block">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .type {
+        width: 58px;
+        max-width: 58px;
+        margin-right: 6px;
+      }
+
+    </style>
+
+    <firebase-document id="news" path="/news" data="{{news}}"></firebase-document>
+
+    <template is="dom-if" if="[[news_ready]]">
+      <paper-card>
+        <template is="dom-repeat" items="[[news_start]]">
+          <news-item item="[[item]]" small style="height:100%;"></news-item>
+        </div>
+      </template>
+      <div class="card-actions horizontal" style="background-color: #fafafa;">
+        <paper-icon-button class="grey" icon="icons:autorenew" on-tap="_getNews"></paper-icon-button>
+        <paper-button class="item" on-tap="_showAllNews">Alle Neuigkeiten</paper-button>
+      </div>
+    </paper-card>
+  </template>
+
+</template>
+<script>
+  Polymer({
+    is: 'news-block',
+
+    properties: {
+
+      last: {
+        type: Number
+      }
+    },
+
+    behaviors: [
+      ReduxBehavior, AsyncActionsBehavior, OptinomicAppBehavior, NewsBehavior, UserBehavior
+    ],
+
+    // --------------------------- lifeCycle ---------------------------
+
+    ready: function () {}
+
+  });
+</script>
+</dom-module>

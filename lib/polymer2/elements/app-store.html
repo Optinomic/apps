@@ -1,0 +1,216 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../bower_components/g-r-i-d/g-r-i-d.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/poly-filter/poly-filter.html">
+<link rel="import" href="../../bower_components/paper-searchbox/paper-searchbox.html">
+<link rel="import" href="app-store-item.html">
+<link rel="import" href="../shared-styles.html">
+<dom-module id="app-store">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .patient_app {
+        color: #E8EAF6;
+      }
+
+      .truncate {
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .patient_app {
+        color: #3F51B5;
+      }
+
+      .user_app {
+        color: #E91E63;
+      }
+
+      .app_store {
+        overflow-x: hidden !important;
+        overflow-y: hidden !important;
+      }
+
+      .app_store_sections {
+        margin-top: -48px;
+        margin-bottom: 64px;
+      }
+
+      .tabs {
+        margin-top: 64px;
+        height: 52px;
+        margin-bottom: 12px;
+      }
+
+      paper-tabs {
+        --paper-tabs-selection-bar-color: var(--app-accent-color);
+      }
+
+      paper-tab {
+        --paper-tab-ink: var(--app-accent-color);
+      }
+
+      paper-tab {
+        color: inherit;
+        min-width: 64px;
+        background-color: inherit;
+      }
+
+      .searchbox {
+        margin-top: 8px;
+        margin-left: 24px;
+
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+      }
+
+      paper-searchbox {
+        --paper-searchbox-background: #FAFAFA;
+        --paper-searchbox-color: var(--paper-searchbox-dark-color);
+      }
+
+    </style>
+
+    <div class="app_store">
+      <div class="tabs margin-left-right">
+        <paper-tabs selected="{{_appStoreState}}" attr-for-selected="name" fallback-selection="activated" scrollable hide-scroll-buttons>
+          <paper-tab name="activated">
+            Aktiviert (&nbsp;<span class="patient_app">[[_apps_patient_activated.length]]</span>&nbsp;|&nbsp;
+            <span class="user_app">[[_apps_user_activated.length]]</span>&nbsp;)
+          </paper-tab>
+          <paper-tab name="deactivated">
+            Deaktiviert (&nbsp;<span class="patient_app">[[_apps_patient_deactivated.length]]</span>&nbsp;|&nbsp;
+            <span class="user_app">[[_apps_user_deactivated.length]]</span>&nbsp;)
+          </paper-tab>
+          <paper-tab name="error">
+            Error (&nbsp;[[_apps_error.length]]&nbsp;)
+          </paper-tab>
+        </paper-tabs>
+      </div>
+
+      <div class="search_bar">
+        <div class="searchbox margin-left-right">
+          <paper-searchbox name="apps" value="{{searchTerm_apps}}" raise-on-active raise-on-value placeholder="Applikationen durchsuchen"></paper-searchbox>
+        </div>
+      </div>
+
+      <div class="page_content">
+        <iron-pages selected="{{_appStoreState}}" attr-for-selected="name">
+          <div name="activated" class="app_store_sections">
+            <template is="dom-if" if="[[_isCurrent('activated', _appStoreState)]]" restamp="true">
+              <poly-filter filter="{{searchTerm_apps}}" array-to-filter="[[_apps_patient_activated]]" filtered-array="{{_apps_patient_activated_filtered}}" stop-words="" logical-or="or"></poly-filter>
+              <poly-filter filter="{{searchTerm_apps}}" array-to-filter="[[_apps_user_activated]]" filtered-array="{{_apps_user_activated_filtered}}" stop-words="" logical-or="or"></poly-filter>
+
+              <h2>Aktiverte Applikationen</h2>
+              <g-r-i-d min-column-width="346" gutter="12" max-columns="2" max-column-width="100%" no-outer-gutter responsive-when-narrow>
+                <template is="dom-repeat" items="[[_apps_patient_activated_filtered]]" index-as="index">
+                  <div class="grid-item">
+                    <app-store-item item="[[item]]" type="patient_app" activated="true"></app-store-item>
+                  </div>
+                </template>
+                <template is="dom-repeat" items="[[_apps_user_activated_filtered]]" index-as="index">
+                  <div class="grid-item">
+                    <app-store-item item="[[item]]" type="user_app" activated="true"></app-store-item>
+                  </div>
+                </template>
+              </g-r-i-d>
+            </template>
+          </div>
+          <div name="deactivated" class="app_store_sections">
+            <template is="dom-if" if="[[_isCurrent('deactivated', _appStoreState)]]" restamp="true">
+              <poly-filter filter="{{searchTerm_apps}}" array-to-filter="[[_apps_patient_deactivated]]" filtered-array="{{_apps_patient_deactivated_filtered}}" stop-words="" logical-or="or"></poly-filter>
+              <poly-filter filter="{{searchTerm_apps}}" array-to-filter="[[_apps_user_deactivated]]" filtered-array="{{_apps_user_deactivated_filtered}}" stop-words="" logical-or="or"></poly-filter>
+
+              <h2>Deaktiverte Applikationen</h2>
+              <g-r-i-d min-column-width="346" gutter="12" max-columns="2" max-column-width="100%" no-outer-gutter responsive-when-narrow>
+                <template is="dom-repeat" items="[[_apps_patient_deactivated_filtered]]" index-as="index">
+                  <div class="grid-item">
+                    <app-store-item item="[[item]]" type="patient_app" activated="false"></app-store-item>
+                  </div>
+                </template>
+                <template is="dom-repeat" items="[[_apps_user_deactivated_filtered]]" index-as="index">
+                  <div class="grid-item">
+                    <app-store-item item="[[item]]" type="user_app" activated="false"></app-store-item>
+                  </div>
+                </template>
+              </g-r-i-d>
+            </template>
+          </div>
+          <div name="error" class="app_store_sections">
+            <h2>Fehlerhafte Applikationen</h2>
+            <template is="dom-repeat" items="[[_apps_error]]" index-as="index">
+              <div class="grid-item">
+                <paper-card>
+                  <div class="card-content">[[item]]</div>
+                </paper-card>
+              </div>
+            </template>
+          </div>
+        </iron-pages>
+
+      </div>
+    </div>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'app-store',
+
+      properties: {
+
+        _apps_patient_activated: {
+          type: Array,
+          statePath: 'apps.all.data.patient_modules'
+        },
+        _apps_user_activated: {
+          type: Array,
+          statePath: 'apps.all.data.user_modules'
+        },
+        _apps_patient_deactivated: {
+          type: Array,
+          statePath: 'apps.disabled.data.disabled_patient_modules'
+        },
+        _apps_user_deactivated: {
+          type: Array,
+          statePath: 'apps.disabled.data.disabled_user_modules'
+        },
+        _apps_error: {
+          type: Array,
+          statePath: 'apps.error.data'
+        }
+      },
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior
+      ],
+
+      // ------------------ Functions ------------------
+
+      _isCurrent: function (check, route) {
+        return route === check;
+      },
+
+      // --------------------------- lifeCycle ---------------------------
+
+      created: function () {
+        Polymer.RenderStatus.afterNextRender(this, function () {
+          //console.error('GET: annotations');
+          this.dispatch('getGenericCalls', '/modules', 'apps.all', '');
+          this.dispatch('getGenericCalls', '/module_activations', 'apps.activated', 'module_activations');
+          this.dispatch('getGenericCalls', '/modules/disabled', 'apps.disabled', '');
+          this.dispatch('getGenericCalls', '/modules/errors', 'apps.error', 'module_errors');
+        });
+      },
+
+      ready: function () {
+        this.set('_appStoreState', 'activated');
+      }
+    });
+  </script>
+</dom-module>

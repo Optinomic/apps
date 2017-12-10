@@ -1,0 +1,42 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item-body.html">
+<link rel="import" href="../store/optinomic-redux-store.html">
+<link rel="import" href="../shared-styles.html">
+<link rel="import" href="moment-element.html">
+<dom-module id="patient-app-task-create">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+    </style>
+    <paper-card class="margin-bottom" style="background-color:#C5CAE9">
+      <div class="card-content">
+        ERSTELLEN</div>
+      <div class="card-actions"></div>
+    </paper-card>
+  </template>
+  <script>
+    Polymer({
+      is: 'patient-app-task-create',
+
+      properties: {},
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior, OptinomicAppBehavior, PatientBehavior
+      ],
+
+      // --------------------------- lifeCycle ---------------------------
+
+      ready: function () {}
+
+    });
+  </script>
+</dom-module>

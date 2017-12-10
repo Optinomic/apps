@@ -1,0 +1,114 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../store/optinomic-redux-store.html">
+<link rel="import" href="../behaviors/behavior-user.html">
+<link rel="import" href="../behaviors/behavior-patient.html">
+<link rel="import" href="../shared-styles.html">
+<dom-module id="stay-treatment-phase">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+    </style>
+
+    <template is="dom-if" if="[[_user_info.is_admin]]">
+
+      <paper-card class="margin-bottom" style="background-color:#C5CAE9">
+        <div class="card-content">
+          <div class="">
+            <h2 style="margin-bottom:18px;">Behandlungsphase</h2>
+            <p class="subtitle">[[_current_stay_info.extras.from_to]]</p>
+          </div>
+          <p>[[_current_stay_info.extras.phase_de]] ([[_current_stay_info.data.phase]]).</p>
+        </div>
+        <div class="card-actions horizontal">
+          <div hidden$="[[_current_stay_info.data.frozen]]">
+            <paper-button on-tap="_doFreeze">Archivieren</paper-button>
+          </div>
+          <div hidden$="[[!_current_stay_info.data.frozen]]">
+            <paper-button on-tap="_doUnfreeze">Archivierung aufheben</paper-button>
+          </div>
+          <div hidden$="{{!_showAutomatic(_current_stay_info.data.phase)}}">
+            <paper-button class="accent" on-tap="_doAutomatic">Automatisch</paper-button>
+          </div>
+        </div>
+      </paper-card>
+
+    </template>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'stay-treatment-phase',
+
+      properties: {},
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior, OptinomicAppBehavior, UserBehavior, PatientBehavior
+      ],
+
+      // --------------------------- userAction ---------------------------
+
+      _doFreeze: function () {
+        this._stayPostPhase('freeze');
+      },
+
+      _doUnfreeze: function () {
+        this._stayPostPhase('unfreeze');
+      },
+
+      _doAutomatic: function () {
+        this._stayPostPhase('automatic');
+      },
+
+      // --------------------------- helpers ---------------------------
+
+      _showAutomatic: function (phase) {
+        var show = false;
+
+        if ((phase === 'unfrozen') || (phase === 'frozen')) {
+          show = true;
+        };
+
+        return show;
+      },
+
+      _stayPostPhase: function (action) {
+        action = action || 'automatic';
+        var stay_id = this.get('_current_stay_fid') || null;
+
+        if (stay_id !== null) {
+          var api_url = '/stays/' + stay_id + '/phase/' + action;
+          // API-Call
+          ApiHelpers.callAPI('POST', api_url, {}, {}, function (req) {
+            if (req.status == 204) {
+              this.dispatch('getCurrentPatientStays', this.get('_current_patient_pid'));
+
+              var text = 'Behandlungsphase (' + action + ') wurde erfolgreich gesetzt.';
+              this._showToast(text, true);
+              console.log('(✔) ', text);
+            } else {
+              var response = {
+                "error": true,
+                "error_message": "Failed with status code: " + req.status,
+                "status_code": req.status
+              };
+              console.error('(!) Error: ', response);
+              var text = 'Error:  Behandlungsphase (' + action + ') konnte nicht erfolgreich gesetzt werden.';
+              this._showToast(text, true);
+
+            };
+          }.bind(this));
+        };
+      },
+
+      // --------------------------- lifeCycle ---------------------------
+
+      ready: function () {}
+
+    });
+  </script>
+</dom-module>

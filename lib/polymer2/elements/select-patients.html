@@ -1,0 +1,282 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid-sorter.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid-filter.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid-selection-column.html">
+<link rel="import" href="../store/optinomic-redux-store.html">
+<link rel="import" href="../shared-styles.html">
+<dom-module id="select-patients">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .top_grid {
+        max-width: none;
+        width: 100% !important;
+        border-left-style: none;
+        border-right-style: none;
+        border-bottom-style: none;
+      }
+
+      .no_grid {
+        max-width: none;
+        width: 100% !important;
+        border-style: none;
+      }
+
+      .alias_link {
+        cursor: alias;
+      }
+
+    </style>
+
+    <paper-card>
+
+      <div class="card-content" hidden$="[[!editmode]]">
+        <div class="horizontal">
+          <p>Selektieren Sie die gewünschten Patienten: [[_patients_all.length]]</p>
+        </div>
+
+        <vaadin-grid id="grid" class="top_grid" aria-label="Suchen" items="[[_patients_all]]" column-reordering-allowed="false">
+
+          <vaadin-grid-selection-column auto-select></vaadin-grid-selection-column>
+
+          <vaadin-grid-column width="64px" flex-grow="0" resizable>
+            <template class="header">
+              <vaadin-grid-sorter path="data.extras.ansprache">
+                Geschlecht
+              </vaadin-grid-sorter>
+              <vaadin-grid-filter aria-label="Typ" path="data.extras.ansprache" value="[[_filterAnspr]]">
+                <paper-input style="width:90%;margin-top:-24px;" placeholder="" value="{{_filterAnspr}}" focus-target></paper-input>
+              </vaadin-grid-filter>
+            </template>
+            <template>
+              [[item.extras.ansprache]]
+            </template>
+          </vaadin-grid-column>
+
+          <vaadin-grid-column resizable>
+            <template class="header">
+              <vaadin-grid-sorter direction="asc" path="data.extras.name">
+                Name | Vorname
+              </vaadin-grid-sorter>
+              <vaadin-grid-filter aria-label="Name" path="data.extras.name" value="[[_filterName]]">
+                <paper-input style="width:90%;margin-top:-24px;" placeholder="Suchen suchen" value="{{_filterName}}" focus-target>
+                  <iron-icon icon="icons:search" slot="prefix" style="color:grey;"></iron-icon>
+                </paper-input>
+              </vaadin-grid-filter>
+            </template>
+            <template>
+              [[item.extras.name]]
+            </template>
+          </vaadin-grid-column>
+
+          <vaadin-grid-column width="112px" flex-grow="0" resizable>
+            <template class="header">
+              <vaadin-grid-sorter path="data.extras.birthday">
+                Geburtstag
+              </vaadin-grid-sorter>
+              <vaadin-grid-filter aria-label="Typ" path="data.extras.birthday" value="[[_filterBirthday]]">
+                <paper-input style="width:90%;margin-top:-24px;" placeholder="" value="{{_filterBirthday}}" focus-target></paper-input>
+              </vaadin-grid-filter>
+            </template>
+            <template>
+              <span class="caption">[[item.extras.birthday_age]]</span>
+            </template>
+          </vaadin-grid-column>
+
+          <vaadin-grid-column resizable>
+            <template class="header">
+              <vaadin-grid-sorter direction="asc" path="data.extras.infoline">
+                Info
+              </vaadin-grid-sorter>
+              <vaadin-grid-filter aria-label="Name" path="data.extras.infoline" value="[[_filterName]]">
+                <paper-input style="width:90%;margin-top:-24px;" placeholder="Suchen" value="{{_filterName}}" focus-target>
+                  <iron-icon icon="icons:search" slot="prefix" style="color:grey;"></iron-icon>
+                </paper-input>
+              </vaadin-grid-filter>
+            </template>
+            <template>
+              <span class="caption">[[item.extras.infoline]]</span>
+            </template>
+          </vaadin-grid-column>
+        </vaadin-grid>
+
+      </div>
+
+      <div class="" hidden$="[[editmode]]">
+        <template is="dom-if" if="[[_have_selected_items]]" restamp="true">
+
+          <vaadin-grid id="grid" class="no_grid" aria-label="Suchen" items="[[_selected_items]]" column-reordering-allowed="false">
+
+            <vaadin-grid-column>
+              <template class="header">
+                <vaadin-grid-sorter direction="asc" path="data.extras.name">
+                  <h3 class="margin-left-right">[[_selected_items.length]] Patienten</h3>
+                </vaadin-grid-sorter>
+                <vaadin-grid-filter aria-label="Name" path="data.extras.name" value="[[_filterName]]">
+                  <paper-input style="width:90%;margin-top:-48px;" placeholder="suchen" value="{{_filterName}}" focus-target>
+                    <iron-icon icon="icons:search" slot="prefix" style="color:grey;"></iron-icon>
+                  </paper-input>
+                </vaadin-grid-filter>
+              </template>
+              <template>
+                <p style="margin:0;padding:0;">&nbsp;-&nbsp; [[item.extras.ansprache]] [[item.extras.name]]
+                  <span class="caption">([[item.extras.birthday_age]])</span>
+                </p>
+              </template>
+            </vaadin-grid-column>
+          </vaadin-grid>
+
+        </template>
+        <template is="dom-if" if="[[!_have_selected_items]]" restamp="true">
+          <div class="margin-left-right">
+            <p>Keine Patienten selektiert.</p>
+          </div>
+        </template>
+
+      </div>
+
+      <div class="card-actions" hidden$="[[editmode]]">
+        <div class="horizontal">
+          <div>&nbsp;</div>
+          <paper-button class="pink" on-tap="_toggleEditmode">Bearbeiten</paper-button>
+        </div>
+      </div>
+
+      <div class="card-actions" hidden$="[[!editmode]]">
+        <div class="horizontal">
+          <paper-button class="grey" on-tap="_toggleEditmode">Abbrechen</paper-button>
+          <paper-button class="pink" on-tap="_select">Selektieren</paper-button>
+        </div>
+      </div>
+
+    </paper-card>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'select-patients',
+
+      properties: {
+        preselected: {
+          type: Array,
+          observer: '_preselect_patients'
+        },
+        editmode: {
+          type: Boolean,
+          value: false
+        },
+        _all_data: {
+          type: Object,
+          statePath: 'patients_list.all.data',
+          observer: '_all_dataChanged'
+        }
+      },
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior
+      ],
+
+      // ------------------ Functions ------------------
+
+      _all_dataChanged: function () {
+        this.debounce('_all_dataChanged', function () {
+
+          if ((this._all_data !== null) && (this._all_data !== undefined)) {
+
+            // console.log('<select-patients> ', this._all_data);
+            this.set('_patients_all', this._all_data);
+            this._preselect_patients();
+
+          };
+
+        }, 250);
+      },
+
+      _preselect_patients: function () {
+        this.debounce('_preselect_patients', function () {
+
+          if ((this._patients_all !== null) && (this._patients_all !== undefined)) {
+            if ((this.preselected !== null) && (this.preselected !== undefined)) {
+              var preselected = [];
+
+              this.preselected.forEach(function (item, itemID) {
+                this._patients_all.forEach(function (p, pID) {
+                  if (item.id === p.id) {
+                    preselected.push(p);
+                  };
+                }.bind(this));
+              }.bind(this));
+
+              var grid = this.$$('#grid');
+              grid.selectedItems = preselected.slice(0);
+              this._select(true);
+              // console.error('<select-patients> _preselect_patients', this.preselected, preselected);
+            };
+          };
+
+        }, 250);
+      },
+
+      // ------------------ User Clicks ------------------
+
+      _select: function (doNotToggle) {
+        var grid = this.$$('#grid');
+        var selectedItems = grid.selectedItems.slice(0);
+        var savedItems = this.get('_selected_items');
+
+        if (selectedItems.length > 0) {
+          this.set('_have_selected_items', true);
+        } else {
+          this.set('_have_selected_items', false);
+        };
+
+        // console.log('<select-apps> selectedItems', selectedItems); console.error('_selected_items', this._have_selected_items, selectedItems);
+        this.set('_selected_items', selectedItems);
+        this.fire('selected-patients', selectedItems);
+
+        // Check current Selection
+        if (doNotToggle !== true) {;
+          var to_add = selectedItems.filter(function (x) {
+            return savedItems.indexOf(x) == -1;
+          });
+
+          var to_remove = savedItems.filter(function (x) {
+            return selectedItems.indexOf(x) == -1;
+          });
+
+          console.log('<select-patients> add, remove, selected, saved:', to_add, to_remove, selectedItems, savedItems);
+          this.set('_items_added', to_add);
+          this.fire('items-added', to_add);
+          this.set('_items_removed', to_remove);
+          this.fire('items-removed', to_remove);
+        };
+
+        if (doNotToggle !== true) {
+          this._toggleEditmode();
+        };
+
+      },
+
+      _toggleEditmode: function () {
+        this.editmode = !this.editmode;
+      },
+
+      // ------------------ Lifecycle ------------------
+      ready: function () {
+        // Update Patients
+        this.dispatch('getAllPatients');
+        this._select(true);
+
+      }
+
+    });
+  </script>
+</dom-module>

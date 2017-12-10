@@ -1,0 +1,268 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid-sorter.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid-filter.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid-selection-column.html">
+<link rel="import" href="../store/optinomic-redux-store.html">
+<link rel="import" href="../shared-styles.html">
+<dom-module id="select-apps">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .top_grid {
+        max-width: none;
+        width: 100% !important;
+        border-left-style: none;
+        border-right-style: none;
+        border-bottom-style: none;
+      }
+
+      .no_grid {
+        height: 100%;
+        border-style: none;
+      }
+
+      .alias_link {
+        cursor: alias;
+      }
+
+    </style>
+
+    <paper-card>
+
+      <div class="card-content" hidden$="[[!editmode]]">
+        <div class="horizontal">
+          <p>Selektieren Sie die gewünschten Applikationen:</p>
+          <div class="">
+            <paper-checkbox id="filter_apps_patient" checked on-change="_changeFilter">Patienten&nbsp;&nbsp;</paper-checkbox>
+            <paper-checkbox id="filter_apps_user" checked on-change="_changeFilter">Benutzer</paper-checkbox>
+          </div>
+        </div>
+
+        <vaadin-grid id="grid" class="top_grid" aria-label="Applikationen" items="[[_apps_all]]" column-reordering-allowed="false">
+
+          <vaadin-grid-selection-column auto-select></vaadin-grid-selection-column>
+
+          <vaadin-grid-column resizable>
+            <template class="header">
+              <vaadin-grid-sorter direction="asc" path="name">
+                Name
+              </vaadin-grid-sorter>
+              <vaadin-grid-filter aria-label="Name" path="name" value="[[_filterName]]">
+                <paper-input style="width:90%;margin-top:-24px;" placeholder="Applikationen suchen" value="{{_filterName}}" focus-target>
+                  <iron-icon icon="icons:search" slot="prefix" style="color:grey;"></iron-icon>
+                </paper-input>
+              </vaadin-grid-filter>
+            </template>
+            <template>
+              [[item.name]] ([[item.version]])
+            </template>
+          </vaadin-grid-column>
+
+          <vaadin-grid-column width="74px" flex-grow="0" resizable>
+            <template class="header">
+              <vaadin-grid-sorter path="type">
+                Typ
+              </vaadin-grid-sorter>
+              <vaadin-grid-filter aria-label="Typ" path="type" value="[[_filterType]]">
+                <paper-input style="width:90%;margin-top:-24px;" placeholder="" value="{{_filterType}}" focus-target></paper-input>
+              </vaadin-grid-filter>
+            </template>
+            <template>
+              <span class="caption">[[item.type]]</span>
+            </template>
+          </vaadin-grid-column>
+
+          <vaadin-grid-column resizable>
+            <template class="header">
+              <vaadin-grid-sorter path="identifier">
+                ID
+              </vaadin-grid-sorter>
+              <vaadin-grid-filter aria-label="identifier" path="identifier" value="[[_filterID]]">
+                <paper-input style="width:90%;margin-top:-24px;" placeholder="App-ID suchen" value="{{_filterID}}" focus-target>
+                  <iron-icon icon="icons:search" slot="prefix" style="color:grey;"></iron-icon>
+                </paper-input>
+              </vaadin-grid-filter>
+            </template>
+            <template>
+              <span class="caption">[[item.identifier]]</span>
+            </template>
+          </vaadin-grid-column>
+        </vaadin-grid>
+
+      </div>
+
+      <div class="" hidden$="[[editmode]]">
+        <template is="dom-if" if="[[_have_selected_items]]" restamp="true">
+          <vaadin-grid id="grid" class="no_grid" aria-label="Applikationen" items="[[_selected_items]]" column-reordering-allowed="false">
+
+            <vaadin-grid-column>
+              <template class="header">
+                <vaadin-grid-sorter direction="asc" path="name">
+                  <h3 class="margin-left-right">[[_selected_items.length]] Applikationen</h3>
+                </vaadin-grid-sorter>
+                <vaadin-grid-filter aria-label="Name" path="name" value="[[_filterName]]">
+                  <paper-input style="width:90%;margin-top:-48px;" placeholder="suchen" value="{{_filterName}}" focus-target>
+                    <iron-icon icon="icons:search" slot="prefix" style="color:grey;"></iron-icon>
+                  </paper-input>
+                </vaadin-grid-filter>
+              </template>
+              <template>
+                <p style="margin:0;padding:0;">&nbsp;-&nbsp; [[item.name]]
+                  <span class="caption">([[item.identifier]] | [[item.type]]-app)</span>
+                </p>
+              </template>
+            </vaadin-grid-column>
+
+          </vaadin-grid>
+        </template>
+        <template is="dom-if" if="[[!_have_selected_items]]" restamp="true">
+          <div class="margin-left-right">
+            <p>Keine Applikationen selektiert.</p>
+          </div>
+        </template>
+
+      </div>
+
+      <div class="card-actions" hidden$="[[editmode]]">
+        <div class="horizontal">
+          <div>&nbsp;</div>
+          <paper-button class="pink" on-tap="_toggleEditmode">Bearbeiten</paper-button>
+        </div>
+      </div>
+
+      <div class="card-actions" hidden$="[[!editmode]]">
+        <div class="horizontal">
+          <paper-button class="grey" on-tap="_toggleEditmode">Abbrechen</paper-button>
+          <paper-button class="pink" on-tap="_select">Selektieren</paper-button>
+        </div>
+      </div>
+
+    </paper-card>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'select-apps',
+
+      properties: {
+        preselected: {
+          type: Array,
+          observer: '_preselect_apps'
+        },
+        editmode: {
+          type: Boolean,
+          value: false
+        },
+        _apps_all_data: {
+          type: Object,
+          statePath: 'apps.all.data',
+          observer: '_apps_all_dataChanged'
+        }
+      },
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior
+      ],
+
+      // ------------------ Functions ------------------
+      _apps_all_dataChanged: function () {
+        this.debounce('_apps_all_dataChanged', function () {
+
+          if ((this._apps_all_data !== null) && (this._apps_all_data !== undefined)) {
+
+            var _apps_all = this._apps_all_data.patient_modules.concat(this._apps_all_data.user_modules);
+            // console.log('<select-apps> ', _apps_all);
+            this.set('_apps_all', _apps_all);
+
+          };
+
+        }, 250);
+      },
+
+      _preselect_apps: function () {
+        this.debounce('_preselect_apps', function () {
+
+          if ((this.preselected !== null) && (this.preselected !== undefined)) {
+            if ((this._apps_all !== null) && (this._apps_all !== undefined)) {
+
+              var preselected = [];
+
+              this.preselected.forEach(function (item, itemID) {
+                this._apps_all.forEach(function (app, appID) {
+                  if (item === app.identifier) {
+                    preselected.push(app);
+                  };
+                }.bind(this));
+              }.bind(this));
+
+              var grid = this.$$('#grid');
+              grid.selectedItems = preselected.slice(0);
+              //console.log('<select-apps> _preselect_apps', this.preselected, preselected);
+              this._select(true);
+            };
+          };
+
+        }, 250);
+      },
+
+      // ------------------ User Clicks ------------------
+      _select: function (doNotToggle) {
+        var grid = this.$$('#grid');
+        var selectedItems = grid.selectedItems.slice(0);
+
+        if (selectedItems.length > 0) {
+          this.set('_have_selected_items', true);
+        } else {
+          this.set('_have_selected_items', false);
+        };
+
+        // console.log('<select-apps> selectedItems', selectedItems);
+        this.set('_selected_items', selectedItems);
+        this.fire('selected-apps', selectedItems);
+
+        if (doNotToggle !== true) {
+          this._toggleEditmode();
+        };
+      },
+
+      _toggleEditmode: function () {
+        this.editmode = !this.editmode;
+      },
+
+      _changeFilter: function () {
+        var filter_apps_patient = this.$$('#filter_apps_patient');
+        var filter_apps_user = this.$$('#filter_apps_user');
+
+        this._filterType = "";
+
+        if (filter_apps_patient.checked && !filter_apps_user.checked) {
+          this._filterType = "patient";
+        };
+
+        if (!filter_apps_patient.checked && filter_apps_user.checked) {
+          this._filterType = "user";
+        };
+
+        if (!filter_apps_patient.checked && !filter_apps_user.checked) {
+          this._filterType = "?";
+        };
+
+      },
+
+      // ------------------ Lifecycle ------------------
+      ready: function () {
+        // Update Apps
+        this.dispatch('getApps');
+      }
+
+    });
+  </script>
+</dom-module>

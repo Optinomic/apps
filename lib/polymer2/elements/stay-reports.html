@@ -1,0 +1,95 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid-sorter.html">
+<link rel="import" href="../store/optinomic-redux-store.html">
+<link rel="import" href="../behaviors/behavior-patient-reports.html">
+<link rel="import" href="../shared-styles.html">
+<dom-module id="stay-reports">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .iron-list-link {
+        color: #424242;
+        text-decoration: none;
+      }
+      .iron-list-link-item:hover {
+        color: black;
+      }
+
+      .full_grid {
+        max-width: none;
+        height: 100%;
+        width: 100% !important;
+        border-left-style: none;
+        border-right-style: none;
+        border-bottom-style: none;
+      }
+
+      .alias_link {
+        cursor: alias;
+      }
+
+    </style>
+
+    <template is="dom-if" if="[[_optinomic_patient_reports_visible]]">
+      <paper-card class="margin-bottom">
+        <div name="reports" style="padding-left:3px;">
+
+          <vaadin-grid class="full_grid" aria-label="Applikationen" items="[[_optinomic_patient_reports_full]]" column-reordering-allowed="false">
+
+            <vaadin-grid-column width="56px" flex-grow="0">
+              <template class="header">
+                <optinomic-avatar small firstname="" lastname="R" gender="female"></optinomic-avatar>
+              </template>
+              <template>
+                <a class="iron-list-link alias_link" href$="#/patient/[[_current_patient_pid]]/stay/[[_current_patient_fid]]/report/[[item.title_str]]" tabindex="-1">
+                  <paper-icon-button icon="icons:timeline" class="alias_link" style="color:grey;"></paper-icon-button>
+                </a>
+              </template>
+            </vaadin-grid-column>
+
+            <vaadin-grid-column>
+              <template class="header">
+                <vaadin-grid-sorter direction="asc" path="title">
+                  <h2>Berichte</h2>
+                </vaadin-grid-sorter>
+              </template>
+              <template>
+                <a class="iron-list-link" href$="#/patient/[[_current_patient_pid]]/stay/[[_current_patient_fid]]/report/[[item.title_str]]/start" tabindex="-1">
+                  [[item.title]]
+                </a>
+              </template>
+            </vaadin-grid-column>
+          </vaadin-grid>
+
+        </div>
+      </paper-card>
+    </template>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'stay-reports',
+
+      properties: {
+        _current_patient_pid: {
+          type: Object,
+          statePath: 'current_patient.pid'
+        },
+
+        _current_patient_fid: {
+          type: Object,
+          statePath: 'current_patient.fid'
+        }
+      },
+
+      behaviors: [ReduxBehavior, AsyncActionsBehavior, PatientReportsBehavior]
+    });
+  </script>
+</dom-module>

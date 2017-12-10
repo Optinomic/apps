@@ -1,0 +1,359 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../optinomic-icons.html">
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../bower_components/paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../store/optinomic-redux-store.html">
+<link rel="import" href="../behaviors/behavior-user.html">
+<link rel="import" href="../shared-styles.html">
+<dom-module id="user-navbar">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        --tabs-width: 420px;
+      }
+
+      #patient_navbar {
+        height: 48px;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .bottom {
+        margin-top: auto;
+      }
+
+      iron-collapse {
+        --iron-collapse-transition-duration: 700ms;
+      }
+
+      .collapse-content {
+        max-height: 48px;
+        overflow: hidden;
+      }
+
+      paper-tabs {
+        margin-left: -16px;
+        width: var(--tabs-width);
+        --paper-tabs-selection-bar-color: var(--app-secondary-color);
+      }
+
+      paper-tab {
+        --paper-tab-ink: var(--app-secondary-color);
+      }
+
+      paper-tab .link {
+        @apply --layout-horizontal;
+        @apply --layout-center-center;
+        min-width: 112px;
+        color: inherit;
+        background-color: inherit;
+      }
+
+      paper-icon-button {
+        --paper-icon-button-ink-color: #E91E63;
+        --paper-icon-button: {
+          margin-left: 8px;
+          margin-right: 8px;
+        }
+        --paper-icon-button-hover: {
+          color: #3F51B5;
+          margin-left: 8px;
+          margin-right: 8px;
+        }
+      }
+
+      paper-button {
+        --paper-button-disabled: {
+          color: #9E9E9E !important;
+          background-color: #E0E0E0 !important;
+        }
+        --paper-button: {
+          background-color: #E0E0E0 !important;
+          max-width: 47px;
+          overflow: hidden;
+        }
+      }
+
+      .selected_icon {
+        color: #E91E63;
+      }
+
+      .unselected_icon {
+        color: inherit;
+      }
+
+      .divider {
+        border-left: thin solid #bdbdbd;
+        width: 1px;
+      }
+
+      .button-container {
+        text-align: center;
+        margin-top: 12px;
+      }
+
+      .button {
+        margin: 0;
+        height: 47px;
+      }
+      .button:hover {
+        color: #3F51B5 !important;
+      }
+
+      .button-text {
+        font-size: 10px;
+        margin-top: -8px;
+        color: inherit;
+      }
+
+    </style>
+    <div id="patient_navbar" class="horizontal">
+      <iron-collapse id="apps" opened="[[_mainbar]]" horizontal class="collapse-content">
+        <template is="dom-if" if="[[_is_big]]">
+          <div class="horizontal" style="width:320px;">
+            <paper-button class="button" on-tap="_open_start">
+              <div class$="button-container {{conditionalClass(opened_start)}}">
+                <iron-icon icon="icons:account-circle"></iron-icon>
+                <p class="button-text">[[_user_info.first_name]]</p>
+              </div>
+            </paper-button>
+            <paper-button class="button" on-tap="_open_apps">
+              <div class$="button-container {{conditionalClass(opened_apps)}}">
+                <iron-icon icon="icons:apps"></iron-icon>
+                <p class="button-text">Applikationen</p>
+              </div>
+            </paper-button>
+            <paper-button class="button" on-tap="_open_settings" disabled="[[!_have_fid]]">
+              <div class$="button-container {{conditionalClass(opened_settings)}}">
+                <iron-icon icon="icons:settings"></iron-icon>
+                <p class="button-text">Einstellungen</p>
+              </div>
+            </paper-button>
+          </template>
+          <template is="dom-if" if="[[!_is_big]]">
+            <div class="horizontal">
+              <paper-icon-button icon="icons:account-circle" class$="{{conditionalClass(opened_start)}}" on-tap="_open_start"></paper-icon-button>
+              <paper-icon-button icon="icons:apps" class$="{{conditionalClass(opened_apps)}}" on-tap="_open_apps"></paper-icon-button>
+              <paper-icon-button icon="icons:settings" class$="{{conditionalClass(opened_settings)}}" on-tap="_open_settings"></paper-icon-button>
+            </div>
+          </template>
+        </iron-collapse>
+        <iron-collapse id="apps" opened="[[!_mainbar]]" horizontal class="collapse-content ">
+          <div hidden$="[[!opened_apps]]">
+            <div class="bottom horizontal" style="margin-left:-8px;">
+              <paper-icon-button icon="icons:arrow-back" on-tap="_open_start"></paper-icon-button>
+              <paper-tabs selected="[[_inner_state]]" attr-for-selected="name" fallback-selection="apps" scrollable hide-scroll-buttons$="[[!_device.sizes.small]]">
+                <paper-tab name="apps" link>
+                  <a href="#/user/apps" class="link" tabindex="-1">
+                    Aktiviert ([[_apps_user.length]])
+                  </a>
+                </paper-tab>
+                <paper-tab name="apps_activate" link>
+                  <a href="#/user/apps/activate" class="link" tabindex="-1">
+                    (De-)Aktivieren
+                  </a>
+                </paper-tab>
+              </paper-tabs>
+            </div>
+          </div>
+          <div hidden$="[[!opened_app]]">
+            <div class="bottom horizontal" style="margin-left:-8px;">
+              <paper-icon-button icon="icons:arrow-back" on-tap="_open_start"></paper-icon-button>
+              <paper-tabs selected="{{_current_user_aid_template}}" attr-for-selected="name" fallback-selection="start" scrollable hide-scroll-buttons$="[[!_device.sizes.small]]">
+                <paper-tab name="start" link>
+                  <a href$="#/user/app/[[_current_user_aid]]" class="link" tabindex="-1">
+                    Inhalt
+                  </a>
+                </paper-tab>
+                <template is="dom-repeat" items="[[_current_user_app.templates]]" as="template">
+                  <paper-tab name$="[[template.name]]" link>
+                    <a href$="#/user/app/[[_current_user_aid]]/template/[[template.name]]" class="link" tabindex="-1">
+                      &nbsp;
+                      {{format_view_name(template.name)}}
+                      &nbsp;
+                    </a>
+                  </paper-tab>
+                </template>
+              </paper-tabs>
+            </div>
+          </div>
+        </div>
+      </iron-collapse>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'user-navbar',
+
+      properties: {
+
+        state: {
+          type: String,
+          observer: 'stateChange'
+        },
+
+        _device: {
+          type: String,
+          statePath: 'device',
+          observer: '_deviceChange'
+        },
+
+        _is_big: {
+          type: Boolean,
+          statePath: 'device.current.is_big'
+        },
+
+        _inner_state: {
+          type: String
+        }
+
+      },
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior, UserBehavior
+      ],
+
+      // --------------------------- Collapse  ---------------------------
+
+      conditionalClass: function (selected) {
+        return selected
+          ? 'selected_icon'
+          : 'unselected_icon';
+      },
+
+      format_view_name: function (name) {
+        return name.split('_').join(' ').toUpperCase();
+      },
+
+      _deviceChange: function () {
+        if (this._device.current.app_width !== undefined) {
+          // Update Layout
+          this.customStyle['--tabs-width'] = this._device.current.app_width - 42 + "px";
+          this.updateStyles();
+
+          // console.warn('_deviceChange', this._device.current.app_width);
+        };
+      },
+
+      _open_toggle: function () {
+
+        this._deviceChange();
+
+        var state = this.get('state');
+        var inner_state = this.get('_inner_state') || state;
+
+        if (inner_state === 'user') {
+          this.set('opened_start', true);
+          this.set('_mainbar', true);
+        } else {
+          this.set('opened_start', false);
+        };
+
+        if ((inner_state === 'apps') || (inner_state === 'apps_activate')) {
+          this.set('opened_apps', true);
+          this.set('_mainbar', false);
+        } else {
+          this.set('opened_apps', false);
+        };
+
+        if ((inner_state === 'app') || (inner_state === 'template')) {
+          this.set('opened_app', true);
+          this.set('_mainbar', false);
+        } else {
+          this.set('opened_app', false);
+        };
+
+        if (inner_state === 'settings') {
+          this.set('opened_settings', true);
+          this.set('_mainbar', true);
+        } else {
+          this.set('opened_settings', false);
+        };
+
+        this.set('_inner_state', inner_state);
+
+        var aid = this.get('_current_user_aid');
+        if (aid !== null) {
+          this.set('_have_aid', true);
+        } else {
+          this.set('_have_aid', false);
+        };
+
+        //console.log('_open_toggle', this._inner_state, this._have_fid, this._have_aid);
+
+      },
+
+      _open_settings: function () {
+        this.set('_inner_state', 'settings');
+        this._open_toggle();
+
+        setTimeout(function () {
+          window.location.href = "#/user/settings";
+        }.bind(this), 350);
+      },
+
+      _open_app: function () {
+        this.set('_inner_state', 'app');
+        this._open_toggle();
+
+        setTimeout(function () {
+          window.location.href = "#/patient/" + this._current_patient_pid + "/stay/" + this._current_stay_fid + "/app/" + this._current_user_aid;
+        }.bind(this), 350);
+      },
+
+      _open_apps: function () {
+        this.set('_inner_state', 'apps');
+        this._open_toggle();
+
+        setTimeout(function () {
+          window.location.href = "#/user/apps";
+        }.bind(this), 350);
+      },
+
+      _open_tasks: function () {
+        this.set('_inner_state', 'tasks');
+        this._open_toggle();
+
+        setTimeout(function () {
+          window.location.href = "#/patient/" + this._current_patient_pid + "/tasks";
+        }.bind(this), 350);
+      },
+
+      _open_start: function () {
+        this.set('_inner_state', 'user');
+        this._open_toggle();
+        this.set('_mainbar', true);
+
+        setTimeout(function () {
+          window.location.href = "#/user";
+        }.bind(this), 350);
+      },
+
+      // --------------------------- Overserver  ---------------------------
+      stateChange: function () {
+        // console.error('user-navbar', this.state);
+        this.set('_inner_state', this.state);
+
+        setTimeout(function () {
+          this._open_toggle();
+        }.bind(this), 350);
+
+      },
+
+      // --------------------------- lifeCycle ---------------------------
+
+      ready: function () {
+        this.set('_inner_state', null);
+        this.set('_have_aid', false);
+        this.set('_mainbar', true);
+      },
+
+      attached: function () {
+        this._deviceChange();
+      }
+
+    });
+  </script>
+</dom-module>

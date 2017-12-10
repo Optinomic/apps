@@ -1,0 +1,147 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item-body.html">
+<link rel="import" href="../store/optinomic-redux-store.html">
+<link rel="import" href="../behaviors/behavior-user.html">
+<link rel="import" href="../behaviors/behavior-app.html">
+<link rel="import" href="../shared-styles.html">
+<link rel="import" href="moment-element.html">
+<dom-module id="user-tasks">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        --paper-item-icon-width: 0;
+        --paper-item-icon {
+          background-color: blue;
+        }
+      }
+
+      paper-tabs {
+        --paper-tabs-selection-bar-color: var(--app-accent-color);
+      }
+
+      paper-tab {
+        --paper-tab-ink: var(--app-primary-color);
+      }
+
+      paper-tab {
+        color: inherit;
+        min-width: 64px;
+      }
+
+      .tabs_container {
+        background-color: #F5F5F5;
+        overflow: hidden;
+      }
+
+      .item {
+        background-color: inherit;
+      }
+      .item:hover {
+        background-color: #F5F5F5;
+      }
+
+    </style>
+    <paper-card>
+      <div class="tabs_container">
+        <paper-tabs selected="{{card_tab}}" attr-for-selected="name" fallback-selection="" scrollable hide-scroll-buttons>
+          <paper-tab name="user">
+            Meine Aufgaben
+            <span class="caption">&nbsp; ([[_current_user_open_user_events.length]])</span>
+          </paper-tab>
+          <template is="dom-if" if="[[_user_info.is_admin]]" restamp="true">
+            <paper-tab name="role" link>
+              Rollenaufgaben
+              <span class="caption">&nbsp; ([[_current_user_open_role_events.length]])</span>
+            </paper-tab>
+          </template>
+        </paper-tabs>
+      </div>
+      <div class="grid-border-top">
+        <iron-pages selected="[[card_tab]]" attr-for-selected="name" fallback-selection="user">
+          <div name="user">
+            <div class="margin-left-right">
+              <h2 style="margin-bottom:18px;">Meine Aufgaben</h2>
+              <p class="subtitle">[[_user_name]]</p>
+            </div>
+            <div class="grid-border-top">
+              <template is="dom-repeat" items="[[_current_user_open_user_events]]" as="task">
+                <paper-icon-item class="item">
+                  <div class="avatar" slot="item-icon">
+                    <a href$="#/patient/[[task.patient.id]]" class="undecorated-link" tabindex="-1">
+                      <optinomic-avatar small firstname="[[task.patient.data.first_name]]" lastname="[[task.patient.data.last_name]]" gender="[[task.patient.data.gender]]"></optinomic-avatar>
+                    </a>
+                  </div>
+                  <paper-item-body two-line>
+                    <a href$="#/patient/[[task.patient.id]]" class="undecorated-link" tabindex="-1">
+                      <div>[[task.patient.extras.name]] ([[task.patient.extras.birthday_age]])</div>
+                      <div secondary>[[task.data.survey_name]] |
+                        <moment-element datetime="[[task.data.created_at]]" from="now"></moment-element>
+                      </div>
+                    </a>
+                  </paper-item-body>
+                  <a href="[[task.data.url]]" class="undecorated-link" target="_blank" tabindex="-1">
+                    <paper-icon-button icon="check" class="pink" alt="Jetzt ausführen!"></paper-icon-button>
+                  </a>
+                </paper-icon-item>
+              </template>
+            </div>
+          </div>
+          <div name="role">
+            <div class="margin-left-right">
+              <h2 style="margin-bottom:18px;">Rollenaufgaben</h2>
+              <p class="subtitle">[[_user_info.role]]</p>
+            </div>
+            <div class="grid-border-top">
+              <template is="dom-repeat" items="[[_current_user_open_role_events]]" as="task">
+                <paper-icon-item class="item">
+                  <div class="avatar" slot="item-icon">
+                    <a href$="#/patient/[[task.patient.id]]" class="undecorated-link" tabindex="-1">
+                      <optinomic-avatar small firstname="[[task.patient.data.first_name]]" lastname="[[task.patient.data.last_name]]" gender="[[task.patient.data.gender]]"></optinomic-avatar>
+                    </a>
+                  </div>
+                  <paper-item-body two-line>
+                    <a href$="#/patient/[[task.patient.id]]" class="undecorated-link" tabindex="-1">
+                      <div>[[task.patient.extras.name]] ([[task.patient.extras.birthday_age]])</div>
+                      <div secondary>[[task.data.survey_name]] |
+                        <moment-element datetime="[[task.data.created_at]]" from="now"></moment-element>
+                      </div>
+                    </a>
+                  </paper-item-body>
+                  <a href="[[task.data.url]]" class="undecorated-link" target="_blank" tabindex="-1">
+                    <paper-icon-button icon="check" alt="favourite this!"></paper-icon-button>
+                  </a>
+                </paper-icon-item>
+              </template>
+            </div>
+          </div>
+        </iron-pages>
+      </div>
+    </paper-card>
+  </template>
+  <script>
+    Polymer({
+      is: 'user-tasks',
+
+      properties: {},
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior, OptinomicAppBehavior, UserBehavior
+      ],
+
+      // --------------------------- lifeCycle ---------------------------
+
+      ready: function () {
+        this.card_tab = 'user';
+        this.set('show', false);
+      }
+
+    });
+  </script>
+</dom-module>

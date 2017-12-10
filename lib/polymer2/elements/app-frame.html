@@ -1,0 +1,213 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-progress/paper-progress.html">
+<link rel="import" href="../store/optinomic-redux-store.html">
+<link rel="import" href="../shared-styles.html">
+<link rel="import" href="../optinomic-icons.html">
+<dom-module id="app-frame">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+      iframe:focus {
+        outline: none;
+      }
+
+      iframe[seamless] {
+        display: block;
+      }
+
+      iframe {
+        width: 100%;
+      }
+
+      .frame_container {
+        height: calc(100vh - 113px);
+        overflow: hidden;
+      }
+
+      .overlay {
+        position: absolute;
+        top: 49px;
+        right: 6px;
+        z-index: 100;
+      }
+
+      paper-icon-button {
+        --paper-icon-button-ink-color: #E91E63;
+        --paper-icon-button: {
+          color: #BDBDBD;
+        }
+        --paper-icon-button-hover: {
+          color: #3F51B5;
+        }
+      }
+
+    </style>
+    <div class="frame_container">
+      <iframe id="idIframe" height$="[[frame_height]]" src$="[[frame_url]]" scrolling="auto" frameborder="0" seamless="true"></iframe>
+      <div class="overlay">
+        <a href$="[[frame_url]]" target="_blank" class="undecorated-link" tabindex="-1">
+          <paper-icon-button icon="icons:exit-to-app"></paper-icon-button>
+        </a>
+      </div>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'app-frame',
+
+      properties: {
+        app: {
+          type: Object
+        },
+
+        template: {
+          type: String,
+          observer: '_appChanged'
+        },
+
+        selected: {
+          type: String,
+          observer: '_appChanged'
+        },
+
+        timer: {
+          type: Number,
+          observer: '_appChanged'
+        },
+
+        appType: {
+          type: String
+        },
+
+        alldata: {
+          type: Boolean
+        }
+
+      },
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior
+      ],
+
+      _createSrcPath: function (current_app, current_template, timer) {
+
+        var app_type = this.get('appType') || 'Patient';
+        // console.error('app_type', app_type);
+
+        var state = store.getState();
+        var alldata = this.get('alldata') || false;
+        var selected = this.get('selected');
+        var is_current = false;
+        if (current_template === selected) {
+          is_current = true;
+        };
+
+        // http://demo.optinomic.org/api/modules/com.optinomic.apps.aus/view/aus_result#patient_id=1,token=daa1b670-9326-4c33-9582-509081424cf7,app_name=Autoritarismus (AUS),app_id=com.optinomic.apps.aus,api_url=//demo.optinomic.org/api,user_id=2,stay_id=144
+
+        var api_url = Config.apiUrl;
+        var current_uid = Session.getUserID();
+        var current_token = Session.getToken();
+
+        if (app_type === 'Patient') {
+          var current_pid = state.current_patient.pid;
+          var current_aid = current_app.identifier || state.current_patient.aid;
+          var current_fid = state.current_patient.fid;
+        } else {
+          var current_pid = 0;
+          var current_aid = current_app.identifier || state.user.current_app.aid;
+          var current_fid = null;
+        };
+
+        var current_app_name = current_app.name;
+        var current_view = current_template;
+
+        // Make sure api_url ends with '/'
+        var last = api_url.substr(api_url.length - 1);
+        if (last !== '/') {
+          api_url = api_url + '/';
+        };
+
+        var srcString = '';
+        srcString = srcString + api_url;
+        srcString = srcString + 'modules/' + current_aid + '/view/';
+        srcString = srcString + current_view;
+        srcString = srcString + '#patient_id=' + current_pid;
+        srcString = srcString + ',token=' + current_token;
+        srcString = srcString + ',app_name=' + current_app_name;
+        srcString = srcString + ',app_id=' + current_aid;
+        srcString = srcString + ',api_url=' + api_url;
+        srcString = srcString + ',user_id=' + current_uid;
+
+        // Do we show all data or just from current stay?
+        if (current_fid) {
+          srcString = srcString + ',stay_id=' + current_fid;
+        };
+
+        if (timer === null) {
+          if (is_current) {
+            if (this.frame_url !== srcString) {
+              this.set('frame_url', srcString);
+              //console.error('FRAME (CURRENT) :: ', current_view, srcString, alldata, selected, is_current, current_app);
+            };
+
+          } else {
+            setTimeout(function () {
+              if (this.frame_url !== srcString) {
+                this.set('frame_url', srcString);
+                //console.error('FRAME (LATER) :: ', current_view, srcString, alldata, selected, is_current, current_app);
+              };
+            }.bind(this), 3500);
+          };
+        } else {
+          setTimeout(function () {
+            if (this.frame_url !== srcString) {
+              this.set('frame_url', srcString);
+              //console.error('FRAME (TIMER) :: ', current_view, srcString, alldata, selected, is_current, current_app);
+            };
+          }.bind(this), timer);
+        };
+
+        this._getIframeHeight();
+
+      },
+
+      // --------------------------- observer ---------------------------
+
+      _appChanged: function () {
+        this.debounce('_appChanged', function () {
+
+          var current_app = this.app || null;
+          var current_template = this.template || null;
+          var selected = this.selected || null;
+
+          if ((current_template !== null) && (current_app !== null) && (selected !== null)) {
+
+            var timer = this.timer || null;
+
+            // console.error('FRAME :: _appChanged', current_app, current_template, selected, timer);
+            this._createSrcPath(current_app, current_template, timer);
+          };
+
+        }, 250);
+      },
+
+      // --------------------------- lifeCycle ---------------------------
+
+      _getIframeHeight: function () {
+        var myHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        myHeight = myHeight - 114;
+        this.frame_height = myHeight;
+        // console.error('height', this.frame_height);
+      },
+
+      ready: function () {
+        this.app = null;
+        this.template = null;
+      }
+
+    });
+  </script>
+</dom-module>

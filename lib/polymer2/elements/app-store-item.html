@@ -1,0 +1,240 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../shared-styles.html">
+<dom-module id="app-store-item">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .truncate {
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .patient_app {
+        color: #3F51B5;
+      }
+
+      .user_app {
+        color: #E91E63;
+      }
+
+    </style>
+
+    <div class="item">
+      <paper-card style="height:100%" class$="[[type]]">
+        <div class="card-content">
+          <div class="horizontal">
+            <h3 class$="[[type]] truncate" style="margin-bottom:0">[[item.name]]</h3>
+            <p style="font-size:12px;color:#757575;margin-top:36px;">V.[[item.version]]</p>
+          </div>
+          <div class="horizontal" style="margin-top:-24px;">
+            <p class="caption">[[item.identifier]]</p>
+            <p class$="[[type]]" style="font-size:12px; text-align:right;">[[app_type]]</p>
+          </div>
+        </div>
+
+        <div class="card-content grid-border-top">
+
+          <iron-pages selected="[[mode]]" attr-for-selected="name" fallback-selection="normal">
+            <div name="normal">
+              <p class="truncate" style="font-size:14px;">[[item.short_description]]</p>
+            </div>
+            <div name="confirm_deactivate">
+              <p>
+                <span class$="[[type]]">Bestätigen:</span>
+                Sind Sie sicher, dass Sie die App «[[item.name]]» deaktivieren wollen?
+              </p>
+            </div>
+            <div name="rename">
+              <p class$="[[type]]" style="margin-bottom:0;">Applikation umbenennen</p>
+              <paper-input label="Name" value="{{item.name}}"></paper-input>
+            </div>
+            <div name="activate">
+              <p class$="[[type]]" style="margin-bottom:0;">Applikation aktivieren</p>
+              <paper-input label="Name" value="{{item.name}}"></paper-input>
+            </div>
+            <div name="confirm_activate">
+              <p>
+                <span class$="[[type]]">Bestätigen:</span>
+                Sind Sie sicher, dass Sie die App «[[item.name]]» aktivieren wollen?
+              </p>
+            </div>
+          </iron-pages>
+        </div>
+
+        <div >
+
+          <template is="dom-if" if="[[!mode_deactivate]]" restamp="true">
+            <div class="horizontal">
+              <div class="flex">
+                <paper-input label="Name" value="{{item.name}}"></paper-input>
+              </div>
+              <paper-icon-button on-tap="_renameApp" style="margin-top:22px;" class="indigo" icon="icons:save"></paper-icon-button>
+            </div>
+          </template>
+
+        </div>
+
+        <div class="card-actions">
+          <iron-pages selected="[[mode]]" attr-for-selected="name" fallback-selection="normal">
+            <div name="normal" class="horizontal">
+              <paper-button class="grey" on-tap="__toggleRenameMode">Umbenennen</paper-button>
+              <paper-button class="grey" on-tap="__toggleDeactivateMode">Deaktivieren</paper-button>
+            </div>
+            <div name="confirm_deactivate" class="horizontal">
+              <paper-button class="grey" on-tap="__toggleDeactivateMode">Abbrechen</paper-button>
+              <paper-button class="pink" on-tap="_deactivateApp">Deaktivieren</paper-button>
+            </div>
+            <div name="rename" class="horizontal">
+              <paper-button class="grey" on-tap="__toggleRenameMode">Abbrechen</paper-button>
+              <paper-button class="pink" on-tap="_renameApp">Speichern</paper-button>
+            </div>
+            <div name="activate" class="horizontal">
+              <div class="">&nbsp;</div>
+              <paper-button class="grey" on-tap="__toggleActivateMode">Aktivieren</paper-button>
+            </div>
+            <div name="confirm_activate" class="horizontal">
+              <paper-button class="grey" on-tap="__toggleActivateMode">Abbrechen</paper-button>
+              <paper-button class="pink" on-tap="_activateApp">Aktivieren</paper-button>
+            </div>
+          </iron-pages>
+        </div>
+      </paper-card>
+    </div>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'app-store-item',
+
+      properties: {
+        item: {
+          type: Object
+        },
+        type: {
+          type: String,
+          observer: 'setTypeMode'
+        },
+        activated: {
+          type: Object,
+          observer: '_init'
+        },
+        _apps_activated: {
+          type: Object,
+          statePath: 'apps.activated.data'
+        }
+      },
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior
+      ],
+
+      // ------------------ User Functions ------------------
+      __toggleDeactivateMode: function () {
+        if (this.mode === 'normal') {
+          this.set('mode', 'confirm_deactivate');
+        } else {
+          this.set('mode', 'normal');
+        };
+      },
+
+      __toggleActivateMode: function () {
+        if (this.mode === 'activate') {
+          this.set('mode', 'confirm_activate');
+        } else {
+          this.set('mode', 'activate');
+        };
+      },
+
+      __toggleRenameMode: function () {
+        if (this.mode === 'normal') {
+          this.set('mode', 'rename');
+        } else {
+          this.set('mode', 'normal');
+        };
+      },
+
+      // ------------------ Functions ------------------
+      setTypeMode: function () {
+        if (this.type === 'patient_app') {
+          this.set('app_type', 'Patient-App');
+        } else {
+          this.set('app_type', 'User-App');
+        };
+      },
+
+      _renameApp: function () {
+        var app_to_rename = this.item;
+        var app_activation = null;
+
+        // Find activation ID
+        if ((this._apps_activated !== undefined) && (this._apps_activated !== null)) {
+          this._apps_activated.forEach(function (activation, activationID) {
+            if (activation.data.module === app_to_rename.identifier) {
+              app_activation = activation;
+            };
+          });
+          if (app_activation !== null) {
+
+            this.dispatch('renameAppStoreApp', app_activation.id, app_to_rename.name);
+            this.__toggleRenameMode();
+            console.log('_renameApp', app_to_rename, app_activation);
+
+          };
+        };
+      },
+
+      _activateApp: function () {
+        var app_to_activate = this.item;
+
+        if ((app_to_activate !== null) && (app_to_activate !== undefined)) {
+
+          console.log('_activateApp', app_to_activate);
+
+          this.dispatch('activateAppStoreApp', app_to_activate.identifier, app_to_activate.version, app_to_activate.name);
+          this.__toggleActivateMode();
+
+        };
+      },
+
+      _deactivateApp: function () {
+        var app_to_deactivate = this.item;
+        var app_deactivation = null;
+
+        // Find activation ID
+        if ((this._apps_activated !== undefined) && (this._apps_activated !== null)) {
+          this._apps_activated.forEach(function (deactivation, deactivationID) {
+            if (deactivation.data.module === app_to_deactivate.identifier) {
+              app_deactivation = deactivation;
+            };
+          });
+          if (app_deactivation !== null) {
+
+            this.dispatch('deactivateAppStoreApp', app_deactivation.id);
+            this.__toggleDeactivateMode();
+            console.log('_deactivateApp', app_to_deactivate, app_deactivation);
+
+          };
+        };
+      },
+
+      _init: function () {
+        if (this.activated) {
+          this.set('mode', 'normal');
+        } else {
+          this.set('mode', 'activate');
+        };
+      },
+
+      // --------------------------- lifeCycle ---------------------------
+
+      ready: function () {}
+    });
+  </script>
+</dom-module>

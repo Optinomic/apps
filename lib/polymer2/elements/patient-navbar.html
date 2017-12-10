@@ -1,0 +1,667 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../bower_components/paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-badge/paper-badge.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu-light.html">
+<link rel="import" href="../optinomic-icons.html">
+<link rel="import" href="../store/optinomic-redux-store.html">
+<link rel="import" href="../behaviors/behavior-patient.html">
+<link rel="import" href="../shared-styles.html">
+<dom-module id="patient-navbar">
+  <template>
+    <style include="shared-styles iron-flex iron-flex-alignment">
+      :host {
+        display: block;
+        --tabs-width: 420px;
+      }
+
+      #patient_navbar {
+        height: 48px;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .tab_fullwidth {
+        width: var(--tabs-width) !important;
+      }
+
+      .bottom {
+        margin-top: auto;
+      }
+
+      iron-collapse {
+        --iron-collapse-transition-duration: 700ms;
+      }
+
+      .collapse-content {
+        max-height: 48px;
+        overflow: hidden;
+      }
+
+      paper-tabs {
+        margin-left: -16px;
+        width: var(--tabs-width);
+        --paper-tabs-selection-bar-color: var(--app-secondary-color);
+      }
+
+      paper-tab {
+        --paper-tab-ink: var(--app-secondary-color);
+      }
+
+      paper-tab .link {
+        @apply --layout-horizontal;
+        @apply --layout-center-center;
+        min-width: 112px;
+        color: inherit;
+        background-color: inherit;
+      }
+
+      paper-icon-button {
+        --paper-icon-button-ink-color: #E91E63;
+        --paper-icon-button: {
+          margin-left: 8px;
+          margin-right: 8px;
+        }
+        --paper-icon-button-hover: {
+          color: #3F51B5;
+          margin-left: 8px;
+          margin-right: 8px;
+        }
+      }
+
+      paper-button {
+        --paper-button-disabled: {
+          color: #9E9E9E !important;
+          background-color: #E0E0E0 !important;
+        }
+        --paper-button: {
+          background-color: #E0E0E0 !important;
+          max-width: 47px;
+          overflow: hidden;
+        }
+      }
+
+      .selected_icon {
+        color: #E91E63;
+      }
+
+      .unselected_icon {
+        color: inherit;
+      }
+
+      .divider {
+        border-left: thin solid #bdbdbd;
+        width: 1px;
+      }
+
+      .button-container {
+        text-align: center;
+        margin-top: 12px;
+      }
+
+      .button {
+        margin: 0;
+        height: 47px;
+      }
+      .button:hover {
+        color: #3F51B5 !important;
+      }
+
+      .button-text {
+        font-size: 10px;
+        margin-top: -8px;
+        color: inherit;
+      }
+
+      .container {
+        @apply(--layout-horizontal);
+      }
+      .flexchild {
+        margin-top: auto;
+        margin-bottom: auto;
+        @apply(--layout-flex);
+      }
+
+    </style>
+
+    <div id="patient_navbar" class="horizontal">
+      <iron-collapse id="start" opened="[[_mainbar]]" horizontal class="collapse-content">
+        <template is="dom-if" if="[[_is_big]]" restamp="true">
+          <div class="horizontal" style="width:420px !important;">
+            <paper-button class="button" on-tap="_open_start">
+              <div class$="button-container {{conditionalClass(opened_start)}}">
+                <iron-icon icon="icons:face"></iron-icon>
+                <p class="button-text">Patient</p>
+              </div>
+            </paper-button>
+            <paper-button class="button" on-tap="_open_tasks">
+              <div class$="button-container {{conditionalClass(opened_tasks)}}">
+                <iron-icon icon="icons:spellcheck"></iron-icon>
+                <p id="button_task" class="button-text">Aufgaben</p>
+                <template is="dom-if" if="[[_current_patient_tasks_to_be_done.length]]" restamp="true">
+                  <paper-badge class="blue" for="button_task" label$="[[_current_patient_tasks_to_be_done.length]]"></paper-badge>
+                </template>
+              </div>
+            </paper-button>
+            <paper-button class="button" on-tap="_open_start" disabled="[[!_have_fid]]">
+              <div class$="button-container {{conditionalClass(opened_stay)}}">
+                <iron-icon icon="icons:event"></iron-icon>
+                <p class="button-text">Behandlung</p>
+              </div>
+            </paper-button>
+            <paper-button class="button" on-tap="_open_apps" disabled="[[!_have_fid]]">
+              <div class$="button-container {{conditionalClass(opened_apps)}}">
+                <iron-icon icon="icons:apps"></iron-icon>
+                <p id="button_apps" class="button-text">Applikationen</p>
+              </div>
+            </paper-button>
+          </div>
+        </template>
+        <template is="dom-if" if="[[!_is_big]]" restamp="true">
+          <template is="dom-if" if="[[_have_fid]]" restamp="true">
+            <div class="horizontal" style="width:300px !important;">
+              <paper-icon-button icon="icons:face" class$="{{conditionalClass(opened_start)}}" on-tap="_open_start"></paper-icon-button>
+              <paper-icon-button icon="icons:spellcheck" class$="{{conditionalClass(opened_tasks)}}" on-tap="_open_tasks"></paper-icon-button>
+              <paper-icon-button icon="icons:event" class$="{{conditionalClass(opened_stay)}}" on-tap="_open_start"></paper-icon-button>
+              <paper-icon-button icon="icons:apps" hidden$="[[!_have_fid]]" class$="{{conditionalClass(opened_apps)}}" on-tap="_open_apps"></paper-icon-button>
+            </div>
+          </template>
+          <template is="dom-if" if="[[!_have_fid]]" restamp="true">
+            <div class="horizontal" style="width:137px !important;">
+              <paper-icon-button icon="icons:face" class$="{{conditionalClass(opened_start)}}" on-tap="_open_start"></paper-icon-button>
+              <paper-icon-button icon="icons:spellcheck" class$="{{conditionalClass(opened_tasks)}}" on-tap="_open_tasks"></paper-icon-button>
+            </div>
+          </template>
+
+        </template>
+      </iron-collapse>
+      <iron-collapse id="apps" opened="[[!_mainbar]]" horizontal class="collapse-content ">
+
+        <template is="dom-if" if="[[opened_tasks]]" restamp="true">
+          <div class="bottom horizontal tab_fullwidth" style="margin-left:-8px;">
+            <div>
+              <paper-icon-button icon="icons:arrow-back" on-tap="_open_back"></paper-icon-button>
+            </div>
+            <paper-tabs selected="[[state]]" attr-for-selected="name" fallback-selection="apps" scrollable hide-scroll-buttons$="[[!_device.sizes.small]]">
+              <paper-tab name="tasks_to_be_done" link>
+                <a href$="#/patient/[[_current_patient_pid]]/tasks/to_be_done" class="link" tabindex="-1">
+                  Offen ([[_current_patient_tasks_to_be_done.length]])
+                </a>
+              </paper-tab>
+              <paper-tab name="tasks_done" link>
+                <a href$="#/patient/[[_current_patient_pid]]/tasks/done" class="link" tabindex="-1">
+                  Erledigt ([[_current_patient_tasks_done.length]])
+                </a>
+              </paper-tab>
+              <paper-tab name="tasks_aborted" link>
+                <a href$="#/patient/[[_current_patient_pid]]/tasks/aborted" class="link" tabindex="-1">
+                  Abgebrochen ([[_current_patient_tasks_aborted.length]])
+                </a>
+              </paper-tab>
+            </paper-tabs>
+          </div>
+        </template>
+
+        <template is="dom-if" if="[[opened_apps]]" restamp="true">
+          <div class="bottom horizontal tab_fullwidth" style="margin-left:-8px;">
+            <div>
+              <paper-icon-button icon="icons:arrow-back" on-tap="_open_stay"></paper-icon-button>
+            </div>
+            <paper-tabs selected="[[state]]" attr-for-selected="name" fallback-selection="apps" scrollable hide-scroll-buttons$="[[!_device.sizes.small]]">
+              <paper-tab name="apps" link>
+                <a href$="#/patient/[[_current_patient_pid]]/stay/[[_current_stay_fid]]/apps/activated" class="link" tabindex="-1">
+                  Aktiviert ([[_current_stay_apps.activated.length]])
+                </a>
+              </paper-tab>
+              <paper-tab name="apps_deactivated" link>
+                <a href$="#/patient/[[_current_patient_pid]]/stay/[[_current_stay_fid]]/apps/deactivated" class="link" tabindex="-1">
+                  Deaktiviert ([[_current_stay_apps.deactivated.length]])
+                </a>
+              </paper-tab>
+              <paper-tab name="apps_activate" link>
+                <a href$="#/patient/[[_current_patient_pid]]/stay/[[_current_stay_fid]]/apps/activate" class="              link" tabindex="-1">
+                  (De-)Aktivieren
+                </a>
+              </paper-tab>
+            </paper-tabs>
+          </div>
+        </template>
+
+        <template is="dom-if" if="[[opened_app]]" restamp="true">
+          <div class="bottom horizontal tab_fullwidth" style="margin-left:-8px;">
+            <div>
+              <paper-icon-button icon="icons:arrow-back" on-tap="_open_stay"></paper-icon-button>
+            </div>
+
+            <paper-tabs selected="{{_current_app_aid_template}}" fallback-selection="home" attr-for-selected="name" scrollable hide-scroll-buttons$="[[!_device.sizes.small]]">
+              <paper-tab name="home" link>
+                <a href$="#/patient/[[_current_patient_pid]]/stay/[[_current_stay_fid]]/app/[[_current_app_aid]]/start" class="link" tabindex="-1">
+                  Inhalt
+                </a>
+              </paper-tab>
+              <template is="dom-repeat" items="[[_current_stay_app.templates]]" as="template">
+                <paper-tab name$="[[template.name]]" link>
+                  <template is="dom-if" if="{{!_is_report_only(template.name)}}">
+                    <a href$="#/patient/[[_current_patient_pid]]/stay/[[_current_stay_fid]]/app/[[_current_app_aid]]/template/[[template.name]]" class="link" tabindex="-1">
+                      &nbsp;
+                      {{format_view_name(template.name)}}
+                      &nbsp;
+                    </a>
+                  </template>
+                </paper-tab>
+              </template>
+            </paper-tabs>
+
+          </div>
+        </template>
+
+        <template is="dom-if" if="[[opened_report]]" restamp="true">
+          <div class="container tab_fullwidth" style="margin-left:-8px;">
+            <div>
+              <paper-icon-button icon="icons:arrow-back" on-tap="_open_stay"></paper-icon-button>
+            </div>
+
+            <paper-button class="button" on-tap="_open_report_back">
+              <div class$="button-container {{conditionalClass(opened_start)}}">
+                <iron-icon icon="icons:chevron-left"></iron-icon>
+                <p class="button-text">Zurück</p>
+              </div>
+            </paper-button>
+
+            <div hidden$="[[!opened_report_start]]" class="flexchild">
+              <div hidden$="[[!_is_big]]" class="flexchild">
+                <p on-tap="_open_report" style="margin:0!important; color:#616161; text-align:center">[[_current_report.title]]</p>
+              </div>
+            </div>
+            <div hidden$="[[opened_report_start]]" class="flexchild">
+              <div hidden$="[[!_is_big]]" class="flexchild">
+                <p on-tap="_open_report" style="margin:0!important; color:#616161; text-align:center">[[current_grid_title]]</p>
+              </div>
+            </div>
+
+            <paper-button class="button" on-tap="_open_report">
+              <div class$="button-container {{conditionalClass(opened_report_start)}}">
+                <iron-icon icon="icons:expand-more"></iron-icon>
+                <p class="button-text">Inhalt</p>
+              </div>
+            </paper-button>
+
+            <paper-button class="button" on-tap="_open_report_next">
+              <div class$="button-container {{conditionalClass(opened_start)}}">
+                <iron-icon icon="icons:chevron-right"></iron-icon>
+                <p class="button-text">Weiter</p>
+              </div>
+            </paper-button>
+
+          </div>
+        </template>
+
+      </iron-collapse>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'patient-navbar',
+
+      properties: {
+
+        state: {
+          type: String,
+          observer: 'stateChange'
+        },
+
+        _device: {
+          type: String,
+          statePath: 'device',
+          observer: '_deviceChange'
+        },
+
+        _is_big: {
+          type: Boolean,
+          statePath: 'device.current.is_big'
+        },
+
+        _inner_state: {
+          type: String
+        },
+
+        current_grid_title: {
+          type: String,
+          value: 'Bericht'
+        },
+
+        _current_report: {
+          type: Object,
+          statePath: function (state) {
+            var return_report = {};
+            if ((state.current_patient.report !== null) && (state.clinic !== undefined)) {
+              if ((state.clinic.reports !== null) && (state.clinic.reports !== undefined)) {
+                state.clinic.reports.forEach(function (report, ID) {
+                  if (report.title_str === state.current_patient.report) {
+                    return_report = report;
+                  };
+                });
+              };
+            };
+            return return_report;
+          }
+        },
+
+        _current_report_template: {
+          type: Object,
+          statePath: function (state) {
+            var return_report_template = {};
+            if ((state.current_patient.report !== null) && (state.clinic !== undefined) && (state.current_patient.template !== undefined)) {
+              if ((state.clinic.reports !== null) && (state.clinic.reports !== undefined)) {
+                state.clinic.reports.forEach(function (report, ID) {
+                  if (report.title_str === state.current_patient.report) {
+                    report.app_grid.forEach(function (grid, gridID) {
+                      if (grid.name === state.current_patient.template) {
+                        return_report_template = grid;
+                      };
+                    });
+                  };
+                });
+              };
+            };
+            return return_report_template;
+          }
+        }
+      },
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior, PatientBehavior
+      ],
+
+      // --------------------------- Collapse  ---------------------------
+
+      _is_report_only: function (name) {
+        if (name.indexOf("report_only") !== -1) {
+          return true;
+        } else {
+          return false;
+        };
+      },
+
+      conditionalClass: function (selected) {
+        return selected
+          ? 'selected_icon'
+          : 'unselected_icon';
+      },
+
+      format_view_name: function (name) {
+        return name.split('_').join(' ').toUpperCase();
+      },
+
+      _deviceChange: function () {
+        if (this._device.current.app_width !== undefined) {
+          // Update Layout
+          this.customStyle['--tabs-width'] = this._device.current.app_width - 4 + "px";
+          this.updateStyles();
+
+          // console.warn('_deviceChange', this._device.current.app_width);
+        };
+      },
+
+      _open_toggle: function () {
+
+        this._deviceChange();
+
+        var state = this.get('state');
+        var inner_state = this.get('_inner_state') || state;
+
+        if (inner_state === 'start') {
+          this.set('opened_start', true);
+          this.set('_mainbar', true);
+        } else {
+          this.set('opened_start', false);
+        };
+
+        if (inner_state === 'stay') {
+          this.set('opened_stay', true);
+          this.set('_mainbar', true);
+        } else {
+          this.set('opened_stay', false);
+        };
+
+        if ((inner_state === 'app') || (inner_state === 'app_template') || (inner_state === 'app_start')) {
+          this.set('_mainbar', false);
+          this.set('opened_app', true);
+        } else {
+          this.set('opened_app', false);
+        };
+
+        if ((inner_state === 'task') || (inner_state === 'tasks') || (inner_state === 'tasks_done') || (inner_state === 'tasks_to_be_done') || (inner_state === 'tasks_aborted')) {
+          this.set('_mainbar', false);
+          this.set('opened_tasks', true);
+        } else {
+          this.set('opened_tasks', false);
+        };
+
+        if ((inner_state === 'apps') || (inner_state === 'apps_deactivated') || (inner_state === 'apps_activate')) {
+          this.set('_mainbar', false);
+          this.set('opened_apps', true);
+        } else {
+          this.set('opened_apps', false);
+        };
+
+        if ((inner_state === 'report') || (inner_state === 'report_start') || (inner_state === 'report_template')) {
+          this.set('_mainbar', false);
+          this.set('opened_report', true);
+          if (inner_state === 'report_start') {
+            this.set('opened_report_start', true);
+          } else {
+            this.set('opened_report_start', false);
+            this._nav_report_init();
+          };
+        } else {
+          this.set('opened_report', false);
+        };
+
+        this.set('_inner_state', inner_state);
+
+        var fid = this.get('_current_stay_fid');
+        if ((fid !== null) && (fid !== undefined)) {
+          this.set('_have_fid', true);
+        } else {
+          this.set('_have_fid', false);
+        };
+
+        var aid = this.get('_current_app_aid');
+        if ((aid !== null) && (aid !== undefined)) {
+          this.set('_have_aid', true);
+        } else {
+          this.set('_have_aid', false);
+        };
+
+        // console.error('_open_toggle', this._inner_state, this._have_fid, this._have_aid);
+
+      },
+
+      _open_back: function () {
+        if (this._have_fid) {
+          this._open_stay();
+        } else {
+          this._open_start();
+        };
+      },
+
+      _open_app: function () {
+        this.set('_inner_state', 'app');
+        this._open_toggle();
+
+        setTimeout(function () {
+          window.location.href = "#/patient/" + this._current_patient_pid + "/stay/" + this._current_stay_fid + "/app/" + this._current_app_aid;
+        }.bind(this), 350);
+      },
+
+      _open_apps: function () {
+        this.set('_inner_state', 'apps');
+        this._open_toggle();
+
+        setTimeout(function () {
+          window.location.href = "#/patient/" + this._current_patient_pid + "/stay/" + this._current_stay_fid + "/apps";
+        }.bind(this), 350);
+      },
+
+      _open_report: function () {
+        this.set('_inner_state', 'report_start');
+        this._open_toggle();
+
+        this.set('current_grid_title', this._current_report.title);
+
+        setTimeout(function () {
+          window.location.href = "#/patient/" + this._current_patient_pid + "/stay/" + this._current_stay_fid + "/report/" + this._current_report.title_str + "/start";
+        }.bind(this), 350);
+      },
+
+      _open_tasks: function () {
+        this.set('_inner_state', 'tasks');
+        this._open_toggle();
+
+        setTimeout(function () {
+          window.location.href = "#/patient/" + this._current_patient_pid + "/tasks";
+        }.bind(this), 350);
+      },
+
+      _open_start: function () {
+        this.set('_inner_state', 'start');
+        this._open_toggle();
+        this.set('_mainbar', true);
+
+        setTimeout(function () {
+          window.location.href = "#/patient/" + this._current_patient_pid;
+        }.bind(this), 350);
+      },
+
+      _open_stay: function () {
+        this.set('_inner_state', 'stay');
+        this._open_toggle();
+        this.set('_mainbar', true);
+
+        if (this._current_stay_fid !== null) {
+          setTimeout(function () {
+            window.location.href = "#/patient/" + this._current_patient_pid + "/stay/" + this._current_stay_fid;
+          }.bind(this), 350);
+        };
+      },
+
+      _nav_report_init: function () {
+
+        var is_overview = this.get('opened_report_start');
+        var _current_report = this.get('_current_report');
+        var state = this.getState();
+
+        var current_grid_id = null;
+        var back_grid_id = null;
+        var next_grid_id = null;
+
+        if (is_overview) {
+          var _current_report_template = null;
+          back_grid_id = this._current_report.app_grid.length - 1;
+          next_grid_id = 0;
+        } else {
+          var _current_report_template = state.current_patient.template;
+
+          if (this._current_report.app_grid !== undefined) {
+            this._current_report.app_grid.forEach(function (grid, gridID) {
+
+              if (grid.app_template_id === _current_report_template) {
+
+                current_grid_id = gridID;
+                back_grid_id = gridID - 1;
+                next_grid_id = gridID + 1;
+
+                if (back_grid_id < 0) {
+                  back_grid_id = this._current_report.app_grid.length - 1;
+                };
+                if (back_grid_id > this._current_report.app_grid.length - 1) {
+                  back_grid_id = 0;
+                };
+
+                if (next_grid_id < 0) {
+                  next_grid_id = this._current_report.app_grid.length - 1;
+                };
+                if (next_grid_id > this._current_report.app_grid.length - 1) {
+                  next_grid_id = 0;
+                };
+
+              };
+
+            }.bind(this));
+          };
+
+        };
+
+        this.set('current_grid_title', _current_report.app_grid[current_grid_id].title);
+
+        var back_url = "#/patient/" + this._current_patient_pid + "/stay/" + this._current_stay_fid + "/report/" + this._current_report.title_str + "/" + this._current_report.app_grid[back_grid_id].app_template_id;
+        var forward_url = "#/patient/" + this._current_patient_pid + "/stay/" + this._current_stay_fid + "/report/" + this._current_report.title_str + "/" + this._current_report.app_grid[next_grid_id].app_template_id;
+        this.set('back_url', back_url);
+        this.set('forward_url', forward_url);
+
+        //console.error('???', current_grid_id, _current_report_template, _current_report);
+
+      },
+
+      _open_report_back: function () {
+        window.location.href = this.back_url;
+        setTimeout(function () {
+          this._nav_report_init();
+        }.bind(this), 250);
+      },
+
+      _open_report_next: function () {
+        window.location.href = this.forward_url;
+        setTimeout(function () {
+          this._nav_report_init();
+        }.bind(this), 250);
+      },
+
+      // --------------------------- Overserver  ---------------------------
+      stateChange: function () {
+        this.debounce('stateChange', function () {
+
+          //console.error('patient-navbar', this.state);
+          this.set('_inner_state', this.state);
+
+          setTimeout(function () {
+            this._open_toggle();
+          }.bind(this), 250);
+
+        }, 150);
+
+      },
+
+      // --------------------------- lifeCycle ---------------------------
+
+      ready: function () {
+        this.set('opened_start', false);
+        this.set('opened_stay', false);
+        this.set('opened_app', false);
+        this.set('opened_tasks', false);
+        this.set('opened_apps', false);
+        this.set('opened_report', false);
+
+        this.set('_inner_state', null);
+        this.set('_have_fid', false);
+        this.set('_have_aid', false);
+        this.set('_mainbar', true);
+
+        this.set('current_grid_title', this._current_report.title);
+
+      },
+
+      attached: function () {
+        this._deviceChange();
+      }
+
+    });
+  </script>
+</dom-module>

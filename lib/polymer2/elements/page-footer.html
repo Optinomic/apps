@@ -1,0 +1,104 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../store/optinomic-redux-store.html">
+<link rel="import" href="../shared-styles.html">
+<dom-module id="page-footer">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .footer-block {
+        min-height: 64px;
+        margin-top: 12px;
+        margin-bottom: 64px;
+        padding-left: 27px;
+        padding-right: 27px;
+        max-width: 1024px;
+      }
+
+      b,
+      p {
+        color: #9E9E9E;
+        font-size: 13px;
+        line-height: normal;
+      }
+
+    </style>
+    <div class="footer-block horizontal">
+      <div hidden="[[!_logged_in]]">
+        <div class="horizontal">
+          <div style="width:52px;">
+            <a href="#/home" class="link" tabindex="-1">
+              <paper-icon-button class="grey" icon="home"></paper-icon-button>
+            </a>
+          </div>
+          <div class="flex">
+            <p>
+              <b>[[_clinic_info.data.clinic_obj.clinic_name]]</b>
+              <br>[[_clinic_info.data.clinic_obj.clinic_slogan]]
+            </p>
+          </div>
+          <div style="width:96px; text-align:center">
+            <a class="undecorated-link" href="https://doc.optinomic.org/" target="_blank">
+              <paper-icon-button icon="icons:help-outline" class="grey"></paper-icon-button>
+            </a>
+          </div>
+          <div class="horizontal">
+            <p>
+              <b>[[_user_info.data.first_name]]</b>
+              <br>[[_user_info.data.role]]
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="horizontal">
+        <span>&nbsp;</span>
+        <div class="horizontal">
+          <a class="undecorated-link" href="http://www.optinomic.com/" target="_blank">
+            <img id="optinomic_logo" src="../../images/manifest/favicon-32x32.png" alt="Optinomic" height="32" width="32" style="margin-right: 6px;">
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'page-footer',
+
+      properties: {
+        _user_info: {
+          type: Object,
+          statePath: 'user.info'
+        },
+
+        _logged_in: {
+          type: Object,
+          statePath: 'signin.isLoggedIn'
+        },
+
+        _clinic_info: {
+          type: Object,
+          statePath: 'clinic.info'
+        },
+
+        _app_version: {
+          type: Object,
+          statePath: 'app.version'
+        }
+      },
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior
+      ],
+
+      // --------------------------- lifeCycle ---------------------------
+
+      ready: function () {}
+
+    });
+  </script>
+</dom-module>

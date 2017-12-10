@@ -1,0 +1,161 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid-sorter.html">
+<link rel="import" href="../store/optinomic-redux-store.html">
+<link rel="import" href="../behaviors/behavior-patient-reports.html">
+<link rel="import" href="../shared-styles.html">
+<dom-module id="app-template">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+      iframe:focus {
+        outline: none;
+      }
+
+      iframe[seamless] {
+        display: block;
+      }
+
+      iframe {
+        width: 100%;
+      }
+
+    </style>
+
+    <template is="dom-if" if="[[_current_visibility]]" restamp="true">
+      <paper-card class="margin-bottom">
+        <div class="card-content">
+          <iframe id="idIframe" height$="[[_current_height]]" src$="[[_current_url]]" scrolling="auto" frameborder="0" seamless="true"></iframe>
+        </div>
+      </paper-card>
+    </template>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'app-template',
+
+      properties: {
+        appIdentifier: {
+          type: String,
+          observer: 'appChanged'
+        },
+
+        appTemplate: {
+          type: String,
+          observer: 'appChanged'
+        },
+
+        appHeight: {
+          type: Number,
+          observer: 'appChanged'
+        },
+
+        _current_patient_pid: {
+          type: Object,
+          statePath: 'current_patient.pid'
+        },
+
+        _current_patient_fid: {
+          type: Object,
+          statePath: 'current_patient.fid',
+          observer: 'appChanged'
+        },
+
+        _current_url: {
+          type: String
+        },
+
+        _current_visibility: {
+          type: Boolean,
+          value: false
+        },
+
+        _current_height: {
+          type: Number,
+          value: 48
+        }
+      },
+
+      behaviors: [
+        ReduxBehavior, AsyncActionsBehavior
+      ],
+
+      // ------------------ Functions ------------------
+      appChanged: function () {
+        this.debounce('appChanged', function () {
+          var app_id = this.get('appIdentifier') || null;
+          var app_template = this.get('appTemplate') || null;
+          var app_height = this.get('appHeight') || null;
+
+          this.set('_current_visibility', false);
+          this.set('_current_height', '48px');
+
+          if ((app_id !== null) || (app_template !== null) || (app_height !== null)) {
+            var url = this._createSrcPath(app_id, app_template);
+
+            if (this._current_url !== url) {
+              this.set('_current_url', '');
+              this.set('_current_url', url);
+            };
+            this.set('_current_visibility', true);
+
+            setTimeout(function () {
+              this.set('_current_height', app_height * 64 + 'px');
+            }.bind(this), 1500);
+
+            //console.error('TEMPLATE: ', app_id, app_template, app_height, this._current_url);
+          };
+
+        }, 250);
+      },
+
+      // ------------------ Functions ------------------
+      _createSrcPath: function (current_app_id, current_template) {
+
+        var app_type = 'Patient';
+        // console.error('app_type', app_type); http://demo.optinomic.org/api/modules/com.optinomic.apps.aus/view/aus_result#patient_id=1,token=daa1b670-9326-4c33-9582-509081424cf7,app_name=Autoritarismus
+        // (AUS),app_id=com.optinomic.apps.aus,api_url=//demo.optinomic.org/api,user_id=2,stay_id=144
+
+        var api_url = Config.apiUrl;
+        var current_uid = Session.getUserID();
+        var current_token = Session.getToken();
+
+        var state = this.getState();
+        var current_pid = state.current_patient.pid;
+        var current_fid = state.current_patient.fid;
+
+        var current_aid = current_app_id;
+        var current_view = current_template;
+        //var current_app_name = current_app.name; Make sure api_url ends with '/'
+        var last = api_url.substr(api_url.length - 1);
+        if (last !== '/') {
+          api_url = api_url + '/';
+        };
+
+        var srcString = '';
+        srcString = srcString + api_url;
+        srcString = srcString + 'modules/' + current_aid + '/view/';
+        srcString = srcString + current_view;
+        srcString = srcString + '#patient_id=' + current_pid;
+        srcString = srcString + ',token=' + current_token;
+        //srcString = srcString + ',app_name=' + current_app_name;
+        srcString = srcString + ',app_id=' + current_aid;
+        srcString = srcString + ',api_url=' + api_url;
+        srcString = srcString + ',user_id=' + current_uid;
+
+        // Do we show all data or just from current stay?
+        if (current_fid) {
+          srcString = srcString + ',stay_id=' + current_fid;
+        };
+
+        return srcString;
+
+      }
+    });
+  </script>
+</dom-module>
