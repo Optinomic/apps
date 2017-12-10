@@ -107,7 +107,7 @@
   </template>
 
   <script>
-    class optinomicTemplate extends ReduxBehavior(Polymer.Element) {
+    class optinomicTemplate extends Polymer.mixinBehaviors([OptinomicAppBehavior], ReduxBehavior(Polymer.Element)) {
       static get is() {
         return 'optinomic-template';
       }
