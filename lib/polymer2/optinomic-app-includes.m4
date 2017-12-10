@@ -1,5 +1,6 @@
 <link rel="import" href="polymer/polymer-element.html">
 <link rel="import" href="polymer-redux/polymer-redux.html">
+__opapp_include(../lib/polymer2/store/optinomic-redux-store.html)
 <link rel="import" href="optinomic-elements/optinomic-title/optinomic-title.html">
 <link rel="import" href="iron-icons/iron-icons.html">
 <link rel="import" href="neon-animation/web-animations.html">
