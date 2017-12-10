@@ -211,7 +211,7 @@
 
                   return a;
                 }
-                var srs = Object.assign({}, state.survey_responses.data[this._focus_app]);
+                var srs = Object.assign({}, state.survey_responses.data[ApiHelpers.safeAppID(this._focus_app)]);
 
                 srs.response_fields = [];
 
