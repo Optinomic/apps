@@ -22,7 +22,7 @@ __opapp_include(readme.md)
 
 [template export 6 7]
 __opapp_include(../lib/polymer2/index_fullscreen.m4)
-__opapp_include(../elements/behavior-export-toolbox.html)
+__opapp_include(../org.optinomic.export.toolbox/elements/behavior-export-toolbox.html)
 __opapp_include(elements/app.html)
 
 
