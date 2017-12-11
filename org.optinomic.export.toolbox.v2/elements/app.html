@@ -39,18 +39,22 @@
 
       .left_bar {
         background: #E0E0E0;
-        min-width: 110px;
+        min-width: 256px;
         max-width: 256px;
         padding: 12px;
       }
 
       .right_top {
         height: var(--right-top-height);
+        min-height: var(--right-top-height);
+        max-height: var(--right-top-height);
         transition: all 0.25s;
       }
 
       .right_bottom {
         height: var(--right-bottom-height);
+        min-height: var(--right-bottom-height);
+        max-height: var(--right-bottom-height);
         transition: all 0.25s;
       }
 
@@ -66,20 +70,29 @@
         <h2>Export-Toolbox</h2>
         <div class="horizontal" style="margin-top:-24px;">
           <p>[[_export_files.length]] Files</p>
-          <p>[[_calculation_sources.array.length]] Datenquellen</p>
+          <p>[[_calculation_sources.array.length]] Quellen</p>
         </div>
 
-        <vaadin-checkbox checked="[[_autorequest]]">
-          Automatisches Anfordern
+        <hr>
+        <h3>Datenbezug</h3>
+
+        <vaadin-checkbox checked="{{_autorequest}}">
+          automatisch
         </vaadin-checkbox>
 
         <hr>
-        <h2>Filter</h2>
-        <p>Filterdetails</p>
+        <h3>Filter</h3>
+        <div class="horizontal" style="margin-top:-24px;">
+          <p>&nbsp;</p>
+          <paper-button class="grey" on-click="_showFilter">Bearbeiten</paper-button>
+        </div>
 
         <hr>
-        <h2>Globale Einstellungen</h2>
-        <p>Einstellungen</p>
+        <h3>Globale Einstellungen</h3>
+        <div class="horizontal" style="margin-top:-24px;">
+          <p>&nbsp;</p>
+          <paper-button class="grey" on-click="_showSettings">Bearbeiten</paper-button>
+        </div>
 
       </div>
 
@@ -88,7 +101,12 @@
 
           <iron-pages selected="[[_app_state]]" attr-for-selected="name" fallback-selection="start" role="main">
             <div name="start">
-              <optinomic-title h1="Export-Toolbox" h2="Daten exportieren"></optinomic-title>
+              <div class="horizontal">
+                <paper-icon-button class="grey" on-click="_showStart" style="margin-right:6px;" icon="home"></paper-icon-button>
+                <optinomic-title class="flex" h1="Export-Toolbox" h2="Daten exportieren"></optinomic-title>
+              </div>
+
+              <p>{{_autorequest}}, [[_show_extras]]</p>
 
               <template is="dom-repeat" items="[[_export_files]]" as="ef">
                 <element-export definition="[[ef]]" autorequest="[[_autorequest]]"></element-export>
@@ -100,11 +118,13 @@
         </div>
 
         <div class="right_bottom">
+
           <iron-pages selected="[[_app_state]]" attr-for-selected="name" fallback-selection="start">
             <div name="start">...Selektieren Sie!</div>
           </iron-pages>
 
         </div>
+
       </vaadin-split-layout>
     </vaadin-split-layout>
 
@@ -149,24 +169,41 @@
       // --------------- Functions ---------------
 
       _showStart() {
-        this.updateStyles({'--right-top-height': '100%', '--right-bottom-height': '0%'});
+        this._showExtras(false);
         this.set('_app_state', 'start');
       }
 
       _showFilter() {
-        this.updateStyles({'--right-top-height': '20%', '--right-bottom-height': '80%'});
+        this._showExtras(true);
         this.set('_app_state', '_filter');
       }
 
       _showSettings() {
-        this.updateStyles({'--right-top-height': '20%', '--right-bottom-height': '80%'});
+        this._showExtras(true);
         this.set('_app_state', '_settings');
+      }
+
+      _showExtras(should) {
+
+        var h = window.innerHeight;
+        var top = 96;
+        var top_px = top + 'px';
+        var bottom = h - top;
+        var bottom_px = bottom + 'px';
+        console.log(h, top_px, bottom_px);
+
+        if (should) {
+          this.updateStyles({'--right-top-height': top_px, '--right-bottom-height': bottom_px});
+        } else {
+          this.updateStyles({'--right-top-height': '100%', '--right-bottom-height': '0%'});
+        };
+
       }
 
       // --------------- Observers --------------- --------------- Lifecycle ---------------
 
       _init() {
-
+        this._showStart();
         console.warn('_init :: Export-Toolbox');
       }
 
