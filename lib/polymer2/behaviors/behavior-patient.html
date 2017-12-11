@@ -13,8 +13,7 @@
 
       _current_patient_pid: {
         type: Number,
-        statePath: 'current_patient.pid',
-        observer: '_current_patient_pidChanged'
+        statePath: 'current_patient.pid'
       },
 
       _current_patient_info: {
@@ -442,21 +441,6 @@
           return return_array;
         }
       }
-
-    },
-
-    _current_patient_pidChanged: function () {
-
-      this.debounce('_current_patient_pidChanged', function () {
-
-        this.pid = this._current_patient_pid;
-
-        if (this.pid !== 0) {
-          this._loadPatientData()
-        };
-        // console.log('(beh:patient) _current_patient_pidChanged', this.pid);
-
-      }, 250);
 
     },
 
