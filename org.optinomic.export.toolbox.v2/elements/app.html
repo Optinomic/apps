@@ -84,8 +84,8 @@
             <div name="start">
               <optinomic-title h1="Export-Toolbox" h2="Daten exportieren"></optinomic-title>
 
-              <template is="dom-repeat" items="[[_calculation_sources.array.length]]" as="fd">
-                <element-export definition="[[fd]]"></element-export>
+              <template is="dom-repeat" items="[[_calculation_sources.array]]" as="fd">
+                <element-export definition="[[fd]]" autorequest></element-export>
               </template>
             </div>
 

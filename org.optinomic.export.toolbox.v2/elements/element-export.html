@@ -1,4 +1,5 @@
 <link rel="import" href="polymer/polymer-element.html">
+<link rel="import" href="paper-button/paper-button.html">
 
 <dom-module id="element-export">
   <template>
@@ -11,14 +12,14 @@
 
     <div class="horizontal">
       <p>Element-Export</p>
-      <paper-button on-tap="_loadData"></paper-button>
+      <paper-button class="grey" on-click="_loadData">Load</paper-button>
     </div>
 
   </template>
 
   <script>
 
-    class optinomicTemplate extends Polymer.mixinBehaviors([opappBehavior], ReduxBehavior(Polymer.Element)) {
+    class elementExport extends Polymer.mixinBehaviors([opappBehavior], ReduxBehavior(Polymer.Element)) {
 
       static get is() {
         return 'element-export';
@@ -32,8 +33,13 @@
       static get properties() {
         return {
 
-          definitions: {
+          definition: {
             type: Object
+          },
+
+          autorequest: {
+            type: Boolean,
+            value: false
           }
         };
       }
@@ -42,11 +48,11 @@
 
       _loadData() {
         this._debouncer = Polymer.Debouncer.debounce(this._debouncer, Polymer.Async.timeOut.after(250), () => {
-
-          if ((this.definitions !== null) && (this.definitions !== undefined)) {
+          if ((this.definition !== null) && (this.definition !== undefined)) {
             Polymer.RenderStatus.afterNextRender(this, function () {
 
-              this.dispatch('actionGetUserAppCalculation', this.definitions.options.userapp_id, this.definitions.options.userapp_calculation_id);
+              console.log('_loadData', this.definition, this.autorequest);
+              // this.dispatch('actionGetUserAppCalculation', this.definition.options.userapp_id, this.definition.options.userapp_calculation_id);
 
             });
           };
@@ -57,8 +63,7 @@
       // --------------- Lifecycle ---------------
 
       _init() {
-
-        console.warn('_init :: Export-Toolbox');
+        // console.warn('_init :: Export-Toolbox');
       }
 
       ready() {
@@ -67,6 +72,6 @@
       }
     }
 
-    window.customElements.define(optinomicTemplate.is, optinomicTemplate);
+    window.customElements.define(elementExport.is, elementExport);
   </script>
 </dom-module>
