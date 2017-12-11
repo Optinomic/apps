@@ -15,6 +15,17 @@
         statePath: 'current_patient.pid'
       },
 
+      _current_patient_full: {
+        type: Object,
+        statePath: function (state) {
+          if ((state.current_patient.pid !== null) && (state.patients[state.current_patient.pid] !== undefined)) {
+            return state.patients[state.current_patient.pid]
+          } else {
+            return {};
+          }
+        }
+      },
+
       _current_patient_info: {
         type: Object,
         statePath: function (state) {
@@ -72,6 +83,8 @@
               stays_array = stays_array.data;
               stays_array.forEach(function (stay_id, ID) {
                 if (state.stays[stay_id] !== undefined) {
+                  state.stays[stay_id].info.label = state.stays[stay_id].info.extras.from_to;
+                  state.stays[stay_id].info.value = state.stays[stay_id].info.id;
                   return_array.push(state.stays[stay_id].info);
                 };
               });

@@ -1,5 +1,6 @@
 <link rel="import" href="polymer/polymer-element.html">
 <link rel="import" href="paper-checkbox/paper-checkbox.html">
+<link rel="import" href="iron-pages/iron-pages.html">
 <link rel="import" href="optinomic-elements/optinomic-title/optinomic-title.html">
 <link rel="import" href="optinomic-elements/optinomic-clipboard/optinomic-clipboard.html">
 <link rel="import" href="juicy-jsoneditor/juicy-jsoneditor.html">
@@ -22,13 +23,13 @@
 <link rel="import" href="vaadin-dialog/vaadin-dialog.html">
 <link rel="import" href="vaadin-combo-box/vaadin-combo-box.html">
 
-<link rel="stylesheet" type="text/css" href="jsoneditor/examples/css/darktheme.css">
-
 <dom-module id="optinomic-template">
   <template>
     <style include="optinomic-styles">
       :host {
         display: block;
+        --right-top-height: 100%;
+        --right-bottom-height: 0;
       }
 
       .fullscreen {
@@ -47,16 +48,18 @@
       .left_bar {
         background: #E0E0E0;
         min-width: 110px;
-        max-width: 220px;
+        max-width: 250px;
         padding: 12px;
       }
 
       .right_top {
-        height: 25%;
+        height: var(--right-top-height);
+        transition: all 0.25s;
       }
 
       .right_bottom {
-        height: 75%;
+        height: var(--right-bottom-height);
+        transition: all 0.25s;
       }
 
       .page {
@@ -89,19 +92,90 @@
 
     <vaadin-split-layout class="fullscreen">
       <div class="left_bar">
-        <p>First content element</p>
-        <vaadin-button on-click="_openDialog">Show dialog</vaadin-button>
+
+        <h2>[[_current_patient_info.extras.anrede]] [[_current_patient_info.data.first_name]]</h2>
+        <div class="horizontal" style="margin-top:-24px;">
+          <p>&nbsp;</p>
+          <paper-button class="grey" on-click="_showPatientDetails">Anzeigen</paper-button>
+        </div>
+
+        <hr>
+        <vaadin-combo-box id="select_stay" style="width:100%" label="Behandlungen" items="[[_current_patient_stays_info]]" value="[[_current_stay_fid]]"></vaadin-combo-box>
+        <div class="horizontal">
+          <p>&nbsp;</p>
+          <paper-button class="grey" on-click="_showStayDetails">Anzeigen</paper-button>
+        </div>
+
+        <hr>
+        <vaadin-combo-box id="select_app" style="width:100%" label$="Alle Apps ([[_apps_patient_all.length]])" items="[[_computeAppLabels(_apps_patient_all)]]" value="{{_focus_app}}"></vaadin-combo-box>
+
+        <template is="dom-if" if="[[_sr.data.length]]" restamp="true">
+
+          <vaadin-combo-box id="select_sr" style="width:100%" label="Survey Responses ([[_sr.data.length]])" items="[[_sr.data]]" value="{{_selected_sr}}"></vaadin-combo-box>
+
+          <div class="horizontal">
+            <paper-button class="grey" on-click="_showSRs">Alle anzeigen</paper-button>
+            <template is="dom-if" if="[[_sr_selected]]" restamp="true">
+              <paper-button class="grey" on-click="_showSelectedSR">Anzeigen</paper-button>
+            </template>
+          </div>
+        </template>
 
       </div>
 
       <vaadin-split-layout vertical>
         <div class="right_top page">
-          <optinomic-title h1="Fragebogen-Daten" h2="Anzeigen und Editieren"></optinomic-title>
-          <p>DATA: [[_sr.have_data]], [[_sr.data.length]]</p>
-          <vaadin-combo-box id="demo1-1" label="Element" items="[[_sr.data]]"></vaadin-combo-box>
+
+          <iron-pages selected="[[_app_state]]" attr-for-selected="name" fallback-selection="start" role="main">
+            <div name="start">
+              <optinomic-title h1="Admin Data-Tools" h2="Daten anzeigen, editieren, verschieben."></optinomic-title>
+
+              <paper-button class="grey" on-click="_openDialog">Show dialog</paper-button>
+            </div>
+
+            <div name="_current_stay_info">
+              <div class="horizontal">
+                <paper-icon-button on-click="_showStart" icon="arrow-back"></paper-icon-button>
+                <optinomic-title class="flex" h1="Fall-Daten" h2="Admin Data-Tools"></optinomic-title>
+              </div>
+            </div>
+
+            <div name="_current_patient_full">
+              <div class="horizontal">
+                <paper-icon-button on-click="_showStart" icon="arrow-back"></paper-icon-button>
+                <optinomic-title class="flex" h1="Patienten-Daten" h2="Admin Data-Tools"></optinomic-title>
+              </div>
+            </div>
+
+            <div name="_srs">
+              <div class="horizontal">
+                <paper-icon-button on-click="_showStart" icon="arrow-back"></paper-icon-button>
+                <optinomic-title class="flex" h1="[[_focus_app]]" h2="Survey-Responses"></optinomic-title>
+              </div>
+            </div>
+
+            <div name="_sr_selected">
+              <div class="horizontal">
+                <paper-icon-button on-click="_showStart" icon="arrow-back"></paper-icon-button>
+                <optinomic-title class="flex" h1="Survey-Response" h2="[[_focus_app]]"></optinomic-title>
+              </div>
+
+              <p>Erfassungsdatum: [[_sr_selected.date]]</p>
+            </div>
+
+          </iron-pages>
+
         </div>
+
         <div class="right_bottom">
-          <juicy-jsoneditor class="jsoneditor" name="response" history mode="tree" modes="[[modes]]" json="{{_sr}}"></juicy-jsoneditor>
+          <iron-pages selected="[[_app_state]]" attr-for-selected="name" fallback-selection="start">
+            <div name="start">...Selektieren Sie!</div>
+            <juicy-jsoneditor name="_current_stay_info" class="jsoneditor" history mode="tree" modes="[[modes]]" json="{{_current_stay_info}}"></juicy-jsoneditor>
+            <juicy-jsoneditor name="_current_patient_full" class="jsoneditor" history mode="tree" modes="[[modes]]" json="{{_current_patient_full}}"></juicy-jsoneditor>
+            <juicy-jsoneditor name="_srs" class="jsoneditor" history mode="tree" modes="[[modes]]" json="{{_sr}}"></juicy-jsoneditor>
+            <juicy-jsoneditor name="_sr_selected" class="jsoneditor" history mode="tree" modes="[[modes]]" json="{{_sr_selected}}"></juicy-jsoneditor>
+          </iron-pages>
+
         </div>
       </vaadin-split-layout>
     </vaadin-split-layout>
@@ -126,6 +200,11 @@
       static get properties() {
         return {
 
+          _app_state: {
+            type: String,
+            value: 'start'
+          },
+
           _user: {
             type: Object,
             statePath: '_app_user.data'
@@ -133,7 +212,12 @@
 
           _focus_app: {
             type: String,
-            value: 'com.optinomic.apps.aus'
+            observer: '_loadSR'
+          },
+
+          _selected_sr: {
+            type: Number,
+            observer: '_selected_srChanged'
           },
 
           _sr: {
@@ -156,11 +240,11 @@
 
                 var srs = Object.assign({}, state.survey_responses.data[ApiHelpers.safeAppID(this._focus_app)]);
                 srs.response_fields = [];
-                srs.data.forEach(function (sr) {
+                srs.data.forEach(function (sr, srID) {
                   sr.response_fields = [];
                   sr.date_only = sr.date.substring(0, 10);
                   sr.label = sr.date_only;
-                  sr.value = sr.response_id;
+                  sr.value = srID;
                   Object.keys(sr.response).forEach(function (key, index) {
                     sr.response_fields.push(key);
                   });
@@ -194,7 +278,8 @@
         };
       }
 
-      // Functions
+      // --------------- Functions ---------------
+
       _openDialog() {
         this.$.dialog.opened = true;
         console.log('_openDialog');
@@ -205,6 +290,35 @@
         console.log('_closeDialog');
       }
 
+      _showStart() {
+        this.updateStyles({'--right-top-height': '100%', '--right-bottom-height': '0%'});
+        this.set('_app_state', 'start');
+      }
+
+      _showStayDetails() {
+        var select_stay = this.$.select_stay;
+        console.log('select_stay', select_stay.value);
+        this.dispatch('setObject', 'current_patient.fid', select_stay.value);
+
+        this.updateStyles({'--right-top-height': '20%', '--right-bottom-height': '80%'});
+        this.set('_app_state', '_current_stay_info');
+      }
+
+      _showPatientDetails() {
+        this.updateStyles({'--right-top-height': '20%', '--right-bottom-height': '80%'});
+        this.set('_app_state', '_current_patient_full');
+      }
+
+      _showSRs() {
+        this.updateStyles({'--right-top-height': '20%', '--right-bottom-height': '80%'});
+        this.set('_app_state', '_srs');
+      }
+
+      _showSelectedSR() {
+        this.updateStyles({'--right-top-height': '20%', '--right-bottom-height': '80%'});
+        this.set('_app_state', '_sr_selected');
+      }
+
       _saveResponse(e) {
         var data = e.model.item;
         console.log('_saveResponse', data);
@@ -212,10 +326,49 @@
         // https://doc.optinomic.org/V2/Developers/api.html#put-surveyresponsessurveyresponseid
       }
 
-      _init() {
-        // Replace later with: op app_identifier()...
+      // --------------- Observers ---------------
 
-        this.dispatch('actionGetSurveyResponses', this._focus_app);
+      _computeAppLabels(apps) {
+        apps.forEach(function (app) {
+          app.label = app.name;
+          app.value = app.identifier;
+        });
+        console.log('apps', apps);
+        return apps;
+      }
+
+      _loadSR() {
+        this._debouncer = Polymer.Debouncer.debounce(this._debouncer, Polymer.Async.timeOut.after(250), () => {
+
+          if ((this._focus_app !== undefined) && (this._focus_app !== null) && (this._focus_app !== '')) {
+
+            this.set('_selected_sr', null);
+
+            // Replace later with: op app_identifier()...
+            this.dispatch('actionGetSurveyResponses', this._focus_app);
+
+          };
+
+        });
+
+      }
+
+      _selected_srChanged() {
+        this._debouncer = Polymer.Debouncer.debounce(this._debouncer, Polymer.Async.timeOut.after(250), () => {
+
+          if ((this._sr !== undefined) && (this._sr !== null)) {
+
+            this.set('_sr_selected', this._sr.data[this._selected_sr]);
+            console.warn('_selected_srChanged', this._sr_selected);
+
+          };
+
+        });
+      }
+
+      // --------------- Lifecycle ---------------
+
+      _init() {
 
         // Set Modes
         var modes = [];
@@ -226,10 +379,10 @@
         modes.push("text");
 
         this.set('modes', modes);
-        console.warn('_init :: Fragebogen-Daten');
+
+        console.warn('_init :: Admin-Data-Tools');
       }
 
-      // Lifecycle
       ready() {
         super.ready();
         this._init();
