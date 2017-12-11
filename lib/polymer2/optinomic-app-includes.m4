@@ -7,4 +7,4 @@ __opapp_include(../lib/polymer2/store/optinomic-redux-store.html)
 <link rel="import" href="paper-button/paper-button.html">
 <link rel="import" href="paper-icon-button/paper-icon-button.html">
 <link rel="import" href="paper-tooltip/paper-tooltip.html">
-__opapp_include(../lib/polymer2/behaviors/behavior-app.html)
+__opapp_include(../lib/polymer2/behaviors/behavior-opapp.html)
