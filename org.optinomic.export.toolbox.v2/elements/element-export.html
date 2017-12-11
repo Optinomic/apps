@@ -1,0 +1,78 @@
+<link rel="import" href="polymer/polymer-element.html">
+
+<dom-module id="element-export">
+  <template>
+    <style include="optinomic-styles">
+      :host {
+        display: block;
+      }
+
+    </style>
+
+    <div class="horizontal">
+      <p>Element-Export</p>
+      <paper-button on-tap="_loadData"></paper-button>
+    </div>
+
+  </template>
+
+  <script>
+
+    class optinomicTemplate extends Polymer.mixinBehaviors([opappBehavior], ReduxBehavior(Polymer.Element)) {
+
+      static get is() {
+        return 'element-export';
+      }
+
+      static get actions() {
+        return AsyncActionsBehavior.actions;
+      }
+
+      // Properties
+      static get properties() {
+        return {
+
+          definitions: {
+            type: Object
+          }
+        };
+      }
+
+      // --------------- Functions ---------------
+
+      _loadData : function () {
+        this._debouncer = Polymer.Debouncer.debounce(this._debouncer, Polymer.Async.timeOut.after(250), () => {
+
+          if ((this.definitions !== null) && (this.definitions !== undefined)) {
+            Polymer.RenderStatus.afterNextRender(this, function () {
+
+              var _d = this.get('_d');
+              _d.init_done = false;
+              this._d = null;
+              this.set('_d', _d);
+
+              this.dispatch('actionGetUserAppCalculation', this.definitions.options.userapp_id, this.definitions.options.userapp_calculation_id);
+
+            });
+          };
+
+        });
+
+      }
+
+      // --------------- Lifecycle ---------------
+
+      _init() {
+
+        console.warn('_init :: Export-Toolbox');
+      }
+
+      ready() {
+        super.ready();
+        this._init();
+      }
+    }
+
+    window.customElements.define(optinomicTemplate.is, optinomicTemplate);
+  </script>
+</dom-module>

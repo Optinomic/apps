@@ -64,6 +64,7 @@
       <div class="left_bar">
 
         <h2>Export-Toolbox</h2>
+        <p>[[_calculation_sources.array.length]] Files</p>
         <p>[] Auto-Request</p>
 
         <hr>
@@ -82,6 +83,10 @@
           <iron-pages selected="[[_app_state]]" attr-for-selected="name" fallback-selection="start" role="main">
             <div name="start">
               <optinomic-title h1="Export-Toolbox" h2="Daten exportieren"></optinomic-title>
+
+              <template is="dom-repeat" items="[[_calculation_sources.array.length]]" as="fd">
+                <element-export definition="[[fd]]"></element-export>
+              </template>
             </div>
 
           </iron-pages>
