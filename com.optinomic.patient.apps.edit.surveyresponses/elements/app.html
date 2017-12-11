@@ -110,7 +110,9 @@
 
   <script>
 
-    class optinomicTemplate extends Polymer.mixinBehaviors([OptinomicAppBehavior], ReduxBehavior(Polymer.Element)) {
+    class optinomicTemplate extends Polymer.mixinBehaviors([
+      opappBehavior, PatientBehavior
+    ], ReduxBehavior(Polymer.Element)) {
 
       static get is() {
         return 'optinomic-template';
