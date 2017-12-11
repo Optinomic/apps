@@ -12,7 +12,13 @@
 
     <div class="horizontal">
       <p>Element-Export</p>
-      <paper-button class="grey" on-click="_loadData">Load</paper-button>
+      <template is="dom-if" if="[[autorequest]]" restamp="true">
+        <paper-button class="grey" on-click="_loadData">Loaded...</paper-button>
+      </template>
+      <template is="dom-if" if="[[!autorequest]]" restamp="true">
+        <paper-button class="grey" on-click="_loadData">Load</paper-button>
+      </template>
+
     </div>
 
   </template>
