@@ -120,7 +120,17 @@
         <div class="right_bottom">
 
           <iron-pages selected="[[_app_state]]" attr-for-selected="name" fallback-selection="start">
-            <div name="start">...Selektieren Sie!</div>
+            <div name="start" class="page">Selektieren Sie eine Aktion!</div>
+
+            <div name="filter" class="page">
+              <h2>Filter</h2>
+              <p>coming soon...</p>
+            </div>
+
+            <div name="settings" class="page">
+              <h2>Einstellungen</h2>
+              <p>coming soon...</p>
+            </div>
           </iron-pages>
 
         </div>
@@ -175,12 +185,12 @@
 
       _showFilter() {
         this._showExtras(true);
-        this.set('_app_state', '_filter');
+        this.set('_app_state', 'filter');
       }
 
       _showSettings() {
         this._showExtras(true);
-        this.set('_app_state', '_settings');
+        this.set('_app_state', 'settings');
       }
 
       _showExtras(should) {
