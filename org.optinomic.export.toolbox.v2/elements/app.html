@@ -1,0 +1,163 @@
+<link rel="import" href="polymer/polymer-element.html">
+<link rel="import" href="paper-checkbox/paper-checkbox.html">
+<link rel="import" href="iron-pages/iron-pages.html">
+<link rel="import" href="optinomic-elements/optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-elements/optinomic-clipboard/optinomic-clipboard.html">
+<link rel="import" href="juicy-jsoneditor/juicy-jsoneditor.html">
+
+<link rel="import" href="vaadin-valo-theme/vaadin-button.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-checkbox.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-combo-box.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-date-picker.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-form-item.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-form-layout.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-grid.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-overlay.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-text-field.html">
+
+<link rel="import" href="vaadin-grid/vaadin-grid.html">
+<link rel="import" href="vaadin-form-layout/vaadin-form-layout.html">
+<link rel="import" href="vaadin-text-field/vaadin-text-field.html">
+<link rel="import" href="vaadin-date-picker/vaadin-date-picker.html">
+<link rel="import" href="vaadin-split-layout/vaadin-split-layout.html">
+<link rel="import" href="vaadin-dialog/vaadin-dialog.html">
+<link rel="import" href="vaadin-combo-box/vaadin-combo-box.html">
+
+<dom-module id="optinomic-template">
+  <template>
+    <style include="optinomic-styles">
+      :host {
+        display: block;
+        --right-top-height: 100%;
+        --right-bottom-height: 0;
+      }
+
+      .fullscreen {
+        height: calc(100vh);
+        min-height: calc(100vh);
+      }
+
+      .left_bar {
+        background: #E0E0E0;
+        min-width: 110px;
+        max-width: 250px;
+        padding: 12px;
+      }
+
+      .right_top {
+        height: var(--right-top-height);
+        transition: all 0.25s;
+      }
+
+      .right_bottom {
+        height: var(--right-bottom-height);
+        transition: all 0.25s;
+      }
+
+      .page {
+        padding: 12px;
+      }
+
+    </style>
+
+    <vaadin-split-layout class="fullscreen">
+      <div class="left_bar">
+
+        <h2>Export-Toolbox</h2>
+        <p>[] Auto-Request</p>
+
+        <hr>
+        <h2>Filter</h2>
+        <p>Filterdetails</p>
+
+        <hr>
+        <h2>Globale Einstellungen</h2>
+        <p>Einstellungen</p>
+
+      </div>
+
+      <vaadin-split-layout vertical>
+        <div class="right_top page">
+
+          <iron-pages selected="[[_app_state]]" attr-for-selected="name" fallback-selection="start" role="main">
+            <div name="start">
+              <optinomic-title h1="Export-Toolbox" h2="Daten exportieren"></optinomic-title>
+            </div>
+
+          </iron-pages>
+
+        </div>
+
+        <div class="right_bottom">
+          <iron-pages selected="[[_app_state]]" attr-for-selected="name" fallback-selection="start">
+            <div name="start">...Selektieren Sie!</div>
+          </iron-pages>
+
+        </div>
+      </vaadin-split-layout>
+    </vaadin-split-layout>
+
+  </template>
+
+  <script>
+
+    class optinomicTemplate extends Polymer.mixinBehaviors([opappBehavior], ReduxBehavior(Polymer.Element)) {
+
+      static get is() {
+        return 'optinomic-template';
+      }
+
+      static get actions() {
+        return AsyncActionsBehavior.actions;
+      }
+
+      // Properties
+      static get properties() {
+        return {
+
+          _app_state: {
+            type: String,
+            value: 'start'
+          },
+
+          _user: {
+            type: Object,
+            statePath: '_app_user.data'
+          }
+
+        };
+      }
+
+      // --------------- Functions ---------------
+
+      _showStart() {
+        this.updateStyles({'--right-top-height': '100%', '--right-bottom-height': '0%'});
+        this.set('_app_state', 'start');
+      }
+
+      _showFilter() {
+        this.updateStyles({'--right-top-height': '20%', '--right-bottom-height': '80%'});
+        this.set('_app_state', '_filter');
+      }
+
+      _showSettings() {
+        this.updateStyles({'--right-top-height': '20%', '--right-bottom-height': '80%'});
+        this.set('_app_state', '_settings');
+      }
+
+      // --------------- Observers --------------- --------------- Lifecycle ---------------
+
+      _init() {
+
+        console.warn('_init :: Export-Toolbox');
+      }
+
+      ready() {
+        super.ready();
+        this._init();
+      }
+    }
+
+    window.customElements.define(optinomicTemplate.is, optinomicTemplate);
+  </script>
+</dom-module>

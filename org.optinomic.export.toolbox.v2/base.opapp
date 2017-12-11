@@ -21,27 +21,9 @@ website = http://www.optinomic.com/
 __opapp_include(readme.md)
 
 [template export 6 7]
-__opapp_include(../lib/polymer/index.m4)
-__opapp_include(elements/behavior-export-toolbox.html)
-__opapp_include(elements/element-export.html)
-__opapp_include(elements/element-filter.html)
-__opapp_include(elements/element-override-settings.html)
-__opapp_include(elements/view.html)
-
-[template live_run 6 7]
-__opapp_include(../lib/polymer/index.m4)
-__opapp_include(elements/behavior-export-toolbox.html)
-__opapp_include(elements/element-export.html)
-__opapp_include(elements/element-filter.html)
-__opapp_include(elements/element-override-settings.html)
-__opapp_include(elements/live-run.html)
-
-[template create 6 7]
-__opapp_include(../lib/polymer/index.m4)
-__opapp_include(elements/timeu-wizard.html)
-__opapp_include(elements/behavior-export-toolbox.html)
-__opapp_include(elements/element-select-datasource.html)
-__opapp_include(elements/create.html)
+__opapp_include(../lib/polymer2/patient_app.m4)
+__opapp_include(../lib/polymer2/index_fullscreen.m4)
+__opapp_include(elements/app.html)
 
 
 [javascript]
