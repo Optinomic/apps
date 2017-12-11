@@ -64,29 +64,7 @@
       window.location.href = "#/user";
     },
 
-    // --------------------------- Navigation ---------------------------
-
-    _app_signout: function (page) {
-      this.fire('app-signout');
-    },
-
-    // --------------------------- Show Toast ---------------------------
-
-    _showToast: function (text, persistant) {
-
-      text = text || 'Optinomic';
-      persistant = persistant || false;
-
-      var toastObj = {
-        "text": text,
-        "persistant": persistant
-      };
-
-      console.log('_showToast :: show-toast', toastObj);
-
-      this.fire('show-toast', toastObj);
-
-    },
+    // --------------------------- Lifecycle ---------------------------
 
     created: function () {
       // console.log('appToastBehavior for ', this, 'enabled!');

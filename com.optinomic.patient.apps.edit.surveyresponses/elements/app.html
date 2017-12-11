@@ -135,6 +135,7 @@
           _sr: {
             type: Object,
             statePath: function (state) {
+
               try {
 
                 function arrayUnique(array) {
@@ -148,10 +149,9 @@
 
                   return a;
                 }
+
                 var srs = Object.assign({}, state.survey_responses.data[ApiHelpers.safeAppID(this._focus_app)]);
-
                 srs.response_fields = [];
-
                 srs.data.forEach(function (sr) {
                   sr.response_fields = [];
                   sr.date_only = sr.date.substring(0, 10);
@@ -173,12 +173,13 @@
                   });
                   srs.response_fields = srs.response_fields.concat(sr.response_fields);
                 });
-
                 srs.response_fields = arrayUnique(srs.response_fields);
 
-                console.warn('(!) _sr', srs);
-
+                if (JSON.stringify(this._sr) !== JSON.stringify(srs)) {
+                  console.warn('(!) _sr', srs);
+                };
                 return srs
+
               } catch (err) {
                 return null;
               }
