@@ -1,0 +1,100 @@
+<script>
+  optinomicExportToolbox = {
+
+    behaviors: [],
+
+    properties: {
+      _calculation_data_source: {
+        type: Object
+      }
+    },
+
+    // -------------------------------- INIT --------------------------------
+
+    __setSources: function () {
+      var _array_source = [];
+
+      // -------------------------------------------- Datenquellen definieren! -------------------------------------------- "userapp_calculation_id" muss mit .opapp übereinstimmen!   Bsp.: "tmt_full" bei: [calculation tmt_full javascript
+      // ch.suedhang.apps.tmt_V3 ch.suedhang.apps.tmt_V3:tmt_score] Index ist eine ID zur Quelle :: Nicht ändern, auch falls "userapp_calculation_id" ändert!
+
+      _array_source.push({"name": "AASE-G", "index": "aase", "userapp_calculation_id": "aase"});
+
+      _array_source.push({"name": "ActInfo | Austritt", "index": "actinfo_aus", "userapp_calculation_id": "actinfo_aus"});
+
+      _array_source.push({"name": "ActInfo | Eintritt", "index": "actinfo_ein", "userapp_calculation_id": "actinfo_ein"});
+
+      _array_source.push({"name": "ASRS", "index": "asrs", "userapp_calculation_id": "asrs"});
+
+      _array_source.push({"name": "BDI-II", "index": "bdi", "userapp_calculation_id": "bdi"});
+
+      _array_source.push({"name": "BSCL (ANQ)", "index": "bscl", "userapp_calculation_id": "bscl"});
+
+      _array_source.push({"name": "CASE", "index": "case", "userapp_calculation_id": "case"});
+
+      _array_source.push({"name": "Einzelassessment", "index": "einzelassessment", "userapp_calculation_id": "einzelassessment"});
+
+      _array_source.push({"name": "Soziale Kompetenzen (ISK)", "index": "isk", "userapp_calculation_id": "isk"});
+
+      _array_source.push({"name": "SCI", "index": "sci", "userapp_calculation_id": "sci"});
+
+      _array_source.push({"name": "Trail Making Test (TMT)", "index": "tmt", "userapp_calculation_id": "tmt"});
+
+      _array_source.push({"name": "WHOQOL-BREF", "index": "whoqol", "userapp_calculation_id": "whoqol"});
+
+      _array_source.push({"name": "ZuePaZ", "index": "zuepaz", "userapp_calculation_id": "zuepaz"});
+
+      // Create Indexed Object & Default for all
+      var _object_source = {};
+
+      _array_source.forEach(function (d, dID) {
+        d.id = dID;
+        d.userapp_id = "org.optinomic.export.toolbox";
+
+        _object_source[d.index] = d;
+      });
+
+      var save_object = {
+        "array": _array_source,
+        "object": _object_source,
+        "init_done": true
+      };
+
+      // Save
+      this.set('_calculation_sources', save_object);
+      this._calculation_sources = {};
+      this._calculation_sources = save_object;
+
+      // ------------------------------------------------------------- Inculde Export-File Definitons Create Array of all Export-File Definitons Add NEW Files here!
+
+      var export_files = [];
+      export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/bscl.json));
+      export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/bscl_anq.json));
+      export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/isk.json));
+      export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/tmt.json));
+      export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/aase.json));
+      export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/bdi.json));
+      export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/case.json));
+
+      // Find Sources Index and enhance options!
+      export_files.forEach(function (f, fID) {
+        if ("options" in f) {
+          if ("source" in f.options) {
+            var source_options = Object.assign({}, _object_source[f.options.source]);
+            delete source_options.name;
+            f.options = Object.assign(f.options, source_options);
+          }
+        };
+      });
+
+      this.set('_export_files', export_files);
+
+      console.log('optinomicExportToolbox (Behavior)', this._export_files);
+    },
+
+    // -------------------------------- Liefecycle --------------------------------
+
+    created: function () {
+      this.__setSources();
+    }
+  };
+</script>
