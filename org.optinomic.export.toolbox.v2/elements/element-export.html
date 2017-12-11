@@ -40,16 +40,11 @@
 
       // --------------- Functions ---------------
 
-      _loadData : function () {
+      _loadData() {
         this._debouncer = Polymer.Debouncer.debounce(this._debouncer, Polymer.Async.timeOut.after(250), () => {
 
           if ((this.definitions !== null) && (this.definitions !== undefined)) {
             Polymer.RenderStatus.afterNextRender(this, function () {
-
-              var _d = this.get('_d');
-              _d.init_done = false;
-              this._d = null;
-              this.set('_d', _d);
 
               this.dispatch('actionGetUserAppCalculation', this.definitions.options.userapp_id, this.definitions.options.userapp_calculation_id);
 
@@ -57,7 +52,6 @@
           };
 
         });
-
       }
 
       // --------------- Lifecycle ---------------
