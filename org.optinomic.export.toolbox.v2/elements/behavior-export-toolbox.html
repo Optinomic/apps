@@ -17,31 +17,83 @@
       // -------------------------------------------- Datenquellen definieren! -------------------------------------------- "userapp_calculation_id" muss mit .opapp übereinstimmen!   Bsp.: "tmt_full" bei: [calculation tmt_full javascript
       // ch.suedhang.apps.tmt_V3 ch.suedhang.apps.tmt_V3:tmt_score] Index ist eine ID zur Quelle :: Nicht ändern, auch falls "userapp_calculation_id" ändert!
 
-      _array_source.push({"name": "AASE-G", "index": "aase", "userapp_calculation_id": "aase"});
+      _array_source.push({
+        "name": "AASE-G",
+        "index": "aase",
+        "userapp_calculation_id": "aase"
+      });
 
-      _array_source.push({"name": "ActInfo | Austritt", "index": "actinfo_aus", "userapp_calculation_id": "actinfo_aus"});
+      _array_source.push({
+        "name": "ActInfo | Austritt",
+        "index": "actinfo_aus",
+        "userapp_calculation_id": "actinfo_aus"
+      });
 
-      _array_source.push({"name": "ActInfo | Eintritt", "index": "actinfo_ein", "userapp_calculation_id": "actinfo_ein"});
+      _array_source.push({
+        "name": "ActInfo | Eintritt",
+        "index": "actinfo_ein",
+        "userapp_calculation_id": "actinfo_ein"
+      });
 
-      _array_source.push({"name": "ASRS", "index": "asrs", "userapp_calculation_id": "asrs"});
+      _array_source.push({
+        "name": "ASRS",
+        "index": "asrs",
+        "userapp_calculation_id": "asrs"
+      });
 
-      _array_source.push({"name": "BDI-II", "index": "bdi", "userapp_calculation_id": "bdi"});
+      _array_source.push({
+        "name": "BDI-II",
+        "index": "bdi",
+        "userapp_calculation_id": "bdi"
+      });
 
-      _array_source.push({"name": "BSCL (ANQ)", "index": "bscl", "userapp_calculation_id": "bscl"});
+      _array_source.push({
+        "name": "BSCL (ANQ)",
+        "index": "bscl",
+        "userapp_calculation_id": "bscl"
+      });
 
-      _array_source.push({"name": "CASE", "index": "case", "userapp_calculation_id": "case"});
+      _array_source.push({
+        "name": "CASE",
+        "index": "case",
+        "userapp_calculation_id": "case"
+      });
 
-      _array_source.push({"name": "Einzelassessment", "index": "einzelassessment", "userapp_calculation_id": "einzelassessment"});
+      _array_source.push({
+        "name": "Einzelassessment",
+        "index": "einzelassessment",
+        "userapp_calculation_id": "einzelassessment"
+      });
 
-      _array_source.push({"name": "Soziale Kompetenzen (ISK)", "index": "isk", "userapp_calculation_id": "isk"});
+      _array_source.push({
+        "name": "Soziale Kompetenzen (ISK)",
+        "index": "isk",
+        "userapp_calculation_id": "isk"
+      });
 
-      _array_source.push({"name": "SCI", "index": "sci", "userapp_calculation_id": "sci"});
+      _array_source.push({
+        "name": "SCI",
+        "index": "sci",
+        "userapp_calculation_id": "sci"
+      });
 
-      _array_source.push({"name": "Trail Making Test (TMT)", "index": "tmt", "userapp_calculation_id": "tmt"});
+      _array_source.push({
+        "name": "Trail Making Test (TMT)",
+        "index": "tmt",
+        "userapp_calculation_id": "tmt"
+      });
 
-      _array_source.push({"name": "WHOQOL-BREF", "index": "whoqol", "userapp_calculation_id": "whoqol"});
+      _array_source.push({
+        "name": "WHOQOL-BREF",
+        "index": "whoqol",
+        "userapp_calculation_id": "whoqol"
+      });
 
-      _array_source.push({"name": "ZuePaZ", "index": "zuepaz", "userapp_calculation_id": "zuepaz"});
+      _array_source.push({
+        "name": "ZuePaZ",
+        "index": "zuepaz",
+        "userapp_calculation_id": "zuepaz"
+      });
 
       // Create Indexed Object & Default for all
       var _object_source = {};
@@ -88,7 +140,7 @@
 
       this.set('_export_files', export_files);
 
-      console.log('optinomicExportToolbox (Behavior)', this._export_files);
+      console.log('optinomicExportToolbox (Behavior)', this._export_files, this._calculation_sources);
     },
 
     // -------------------------------- Liefecycle --------------------------------

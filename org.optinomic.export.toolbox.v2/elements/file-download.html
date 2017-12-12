@@ -8,7 +8,6 @@
       :host {
         display: block;
       }
-
     </style>
 
     <div>
@@ -90,7 +89,7 @@
       }
 
       _createFile(text) {
-        const textBlob = new Blob([text], {type: 'text/plain'});
+        const textBlob = new Blob([text], { type: 'text/plain' });
         return window.URL.createObjectURL(textBlob);
       }
 

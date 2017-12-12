@@ -1,0 +1,72 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="export-filter">
+    <template>
+        <style>
+             :host {
+                display: block
+            }
+
+            .gaga {
+                text-align: center
+            }
+        </style>
+
+
+    </template>
+
+    <script>
+        /**
+         * `export-filter` Description
+         *
+         * @summary ShortDescription.
+         * @customElement
+         * @polymer
+         * @extends {Polymer.Element}
+         */
+        class exportFilter extends Polymer.Element {
+            /**
+             * String providing the tag name to register the element under.
+             */
+            static get is() {
+                return 'export-filter';
+            }
+
+            /**
+             * Object describing property-related metadata used by Polymer features
+             */
+            static get properties() {
+                return {
+                    /**
+                     * Description for prop
+                     */
+                    something: {
+                        type: Object,
+                    },
+                };
+            }
+
+            /**
+             * Instance of the element is created/upgraded. Use: initializing state,
+             * set up event listeners, create shadow dom.
+             * @constructor
+             */
+            constructor() {
+                super();
+            }
+
+
+            /**
+             * Use for one-time configuration of your component after local DOM is initialized. 
+             */
+            ready() {
+                super.ready();
+
+                Polymer.RenderStatus.afterNextRender(this, function () {});
+            }
+
+        }
+
+        window.customElements.define(exportFilter.is, exportFilter);
+    </script>
+</dom-module>

@@ -26,7 +26,7 @@
 <dom-module id="optinomic-template">
   <template>
     <style include="optinomic-styles">
-      :host {
+       :host {
         display: block;
         --right-top-height: 100%;
         --right-bottom-height: 0;
@@ -61,7 +61,6 @@
       .page {
         padding: 12px;
       }
-
     </style>
 
     <vaadin-split-layout class="fullscreen">
@@ -141,7 +140,6 @@
   </template>
 
   <script>
-
     class optinomicTemplate extends Polymer.mixinBehaviors([
       opappBehavior, optinomicExportToolbox
     ], ReduxBehavior(Polymer.Element)) {
@@ -203,9 +201,15 @@
         console.log(h, top_px, bottom_px);
 
         if (should) {
-          this.updateStyles({'--right-top-height': top_px, '--right-bottom-height': bottom_px});
+          this.updateStyles({
+            '--right-top-height': top_px,
+            '--right-bottom-height': bottom_px
+          });
         } else {
-          this.updateStyles({'--right-top-height': '100%', '--right-bottom-height': '0%'});
+          this.updateStyles({
+            '--right-top-height': '100%',
+            '--right-bottom-height': '0%'
+          });
         };
 
       }
