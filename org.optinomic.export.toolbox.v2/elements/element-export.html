@@ -25,7 +25,7 @@
           </template>
           <template is="dom-if" if="[[!_loading]]" restamp="true">
             <template is="dom-if" if="[[_data_ready]]" restamp="true">
-              <paper-icon-button icon="file-download" on-click="_getInputData" class="grey"></paper-icon-button>
+              <file-download icon="file-download" file="[[_sr]]" name="[[definition.options.name]] - [[definition.options.userapp_id]] - [[definition.options.userapp_calculation_id]]" extension="json"></file-download>
             </template>
           </template>
         </div>
@@ -120,10 +120,6 @@
 
       _getState() {
         console.warn(store.getState());
-      }
-
-      _getInputData() {
-        console.warn(this._sr);
       }
 
       _showMore() {
