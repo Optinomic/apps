@@ -1,6 +1,6 @@
 <link rel="import" href="polymer/polymer-element.html">
 <link rel="import" href="paper-button/paper-button.html">
-<link rel="import" href="paper-icon-button/paper-icon-button.html">
+<link rel="import" href="paper-tooltip/paper-tooltip.html">
 
 <dom-module id="file-download">
   <template>
@@ -18,8 +18,10 @@
         </template>
         <template is="dom-if" if="[[!_button_mode]]">
           <paper-icon-button class="grey" on-click="_onDownloadFile" icon="[[icon]]"></paper-icon-button>
+
         </template>
       </template>
+      <paper-tooltip position="top">[[_filename_full]]</paper-tooltip>
       <a href="#" id="fileLink" hidden download$="[[_filename_full]]"></a>
     </div>
 
