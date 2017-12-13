@@ -37,12 +37,12 @@
           <p class="caption" style="margin-top:-6px;">[[definition.options.description]]</p>
         </div>
 
-        <div style="width:128px;">
+        <div>
           <template is="dom-if" if="[[_data_ready]]" restamp="true">
             <template is="dom-if" if="[[_created_CSV]]" restamp="true">
               <div class="horizontal">
-                <file-download file="[[_csv_file]]" stringify="false" extension="csv" name="[[definition.options.name]]" tooltip="right"
-                  button-color="indigo"></file-download>
+                <file-download button-color="pink" file="[[_json_file]]" extension="json" name="[[definition.options.name]]" tooltip="left"></file-download>
+                <file-download file="[[_csv_file]]" stringify="false" extension="csv" name="[[definition.options.name]]" tooltip="left" button-color="indigo"></file-download>
               </div>
             </template>
             <template is="dom-if" if="[[!_created_CSV]]" restamp="true">
@@ -51,33 +51,33 @@
           </template>
 
           <template is="dom-if" if="[[!_data_ready]]" restamp="true">
-            <paper-button class="grey" on-click="_loadData">Anfordern</paper-button>
+            <template is="dom-if" if="[[!_loading]]" restamp="true">
+              <paper-button class="grey" on-click="_loadData">Anfordern</paper-button>
+            </template>
           </template>
-          <paper-icon-button icon="more-vert" on-click="_showMore" class="grey"></paper-icon-button>
-        </div>
 
+        </div>
+        <paper-icon-button icon="more-vert" on-click="_showMore" class="grey"></paper-icon-button>
       </div>
+
       <iron-collapse id="collapse">
         <div class="horizontal">
           <div style="width:48px;text-align:center">&nbsp;</div>
 
-          <div class="flex" style="margin-top:24px;margin-bottom:24px;">
+          <div class="flex" style="margin-top:24px;margin-bottom:24px;margin-right:48px;">
             <div class="horizontal">
 
-              Definition
-              <optinomic-clipboard text="[[definition]]"></optinomic-clipboard>
-
+              <p class="flex">Definition:
+                <span class="caption">Felder: [[definition.fields.length]]</span>
+                <br>
+                <span class="caption">Quelle: [[definition.source.name]] | [[definition.source.userapp_id]]:[[definition.source.userapp_calculation_id]]</span>
+              </p>
+              <div class="horizontal">
+                <optinomic-clipboard text="[[_downloadDefinition]]"></optinomic-clipboard>
+                <file-download button-color="pink" file="[[_downloadDefinition]]" extension="json" name="Definition - [[definition.options.name]]"
+                  tooltip="right"></file-download>
+              </div>
             </div>
-
-            <template is="dom-if" if="[[_created_CSV]]" restamp="true">
-              <h3>JSON: [[_created_JSON]]</h3>
-              <file-download button-color="pink" file="[[_json_file]]" extension="json" name="[[definition.options.name]]" tooltip="right"></file-download>
-
-              <h3>CSV: [[_created_CSV]]</h3>
-              <file-download button-color="indigo" file="[[_csv_file]]" extension="csv" name="[[definition.options.name]]" tooltip="right"
-                stringify="false"></file-download>
-            </template>
-
 
           </div>
 
@@ -103,7 +103,8 @@
         return {
 
           definition: {
-            type: Object
+            type: Object,
+            observer: 'definitionChanged'
           },
 
           autorequest: {
@@ -168,124 +169,128 @@
 
       _dataDive(source, field) {
 
-        if (field.path === "_function") {
+        Polymer.RenderStatus.afterNextRender(this, function () {
 
-          var ExportHelpers = (function () {
+          if (field.path === "_function") {
 
-            var formatDateCH = function (date_string) {
-              date_string = date_string || null
-              if (date_string !== null) {
+            var ExportHelpers = (function () {
 
-                // 1952-11-19T00:00:00.000000000000Z
-                var year = parseInt(date_string.substring(0, 4));
-                var month = parseInt(date_string.substring(5, 7));
-                var day = parseInt(date_string.substring(8, 10));
-                var date_string_return = day + "." + month + "." + year
+              var formatDateCH = function (date_string) {
+                date_string = date_string || null
+                if (date_string !== null) {
 
-                return date_string_return;
-              } else {
-                return null;
-              }
-            };
+                  // 1952-11-19T00:00:00.000000000000Z
+                  var year = parseInt(date_string.substring(0, 4));
+                  var month = parseInt(date_string.substring(5, 7));
+                  var day = parseInt(date_string.substring(8, 10));
+                  var date_string_return = day + "." + month + "." + year
 
-            var formatDateISONoTime = function (date_string) {
-              date_string = date_string || null
-              if (date_string !== null) {
-
-                var date_string_return = date_string.substring(0, 10);
-
-                return date_string_return;
-              } else {
-                return null;
-              }
-            };
-
-            var formatDateYYYYMMDD = function (date_string) {
-              date_string = date_string || null
-              if (date_string !== null) {
-                var date_string_return = date_string.substring(0, 10);
-                date_string_return = date_string_return.split('-').join('');
-                return date_string_return;
-              } else {
-                return null;
-              }
-            };
-
-            var formatDateISO = function (date_string) {
-              date_string = date_string || null
-              if (date_string !== null) {
-
-                var date = new Date(date_string);
-                date_string_return = date.toISOString();
-
-                return date_string_return;
-              } else {
-                return null;
-              }
-            };
-
-            var stringToDate = function (_date, _format, _delimiter) {
-              var formatLowerCase = _format.toLowerCase();
-              var formatItems = formatLowerCase.split(_delimiter);
-              var dateItems = _date.split(_delimiter);
-              var monthIndex = formatItems.indexOf("mm");
-              var dayIndex = formatItems.indexOf("dd");
-              var yearIndex = formatItems.indexOf("yyyy");
-              var month = parseInt(dateItems[monthIndex]);
-              month -= 1;
-              var formatedDate = new Date(dateItems[yearIndex], month, dateItems[dayIndex]);
-              return formatedDate;
-            }
-
-
-            return {
-              formatDateCH: formatDateCH,
-              formatDateISO: formatDateISO,
-              formatDateISONoTime: formatDateISONoTime,
-              formatDateYYYYMMDD: formatDateYYYYMMDD,
-              stringToDate: stringToDate
-            };
-          })();
-
-
-          if ("function" in field) {
-            // Call given Function
-            if ((field.function !== null) && (field.function !== undefined)) {
-              //console.warn('field.function', field.function);
-
-              try {
-                var fn = new Function('source', 'ExportHelpers', field.function);
-                value = fn(source, ExportHelpers);
-              } catch (err) {
-                value = "Error: Undefined Function";
+                  return date_string_return;
+                } else {
+                  return null;
+                }
               };
 
+              var formatDateISONoTime = function (date_string) {
+                date_string = date_string || null
+                if (date_string !== null) {
+
+                  var date_string_return = date_string.substring(0, 10);
+
+                  return date_string_return;
+                } else {
+                  return null;
+                }
+              };
+
+              var formatDateYYYYMMDD = function (date_string) {
+                date_string = date_string || null
+                if (date_string !== null) {
+                  var date_string_return = date_string.substring(0, 10);
+                  date_string_return = date_string_return.split('-').join('');
+                  return date_string_return;
+                } else {
+                  return null;
+                }
+              };
+
+              var formatDateISO = function (date_string) {
+                date_string = date_string || null
+                if (date_string !== null) {
+
+                  var date = new Date(date_string);
+                  date_string_return = date.toISOString();
+
+                  return date_string_return;
+                } else {
+                  return null;
+                }
+              };
+
+              var stringToDate = function (_date, _format, _delimiter) {
+                var formatLowerCase = _format.toLowerCase();
+                var formatItems = formatLowerCase.split(_delimiter);
+                var dateItems = _date.split(_delimiter);
+                var monthIndex = formatItems.indexOf("mm");
+                var dayIndex = formatItems.indexOf("dd");
+                var yearIndex = formatItems.indexOf("yyyy");
+                var month = parseInt(dateItems[monthIndex]);
+                month -= 1;
+                var formatedDate = new Date(dateItems[yearIndex], month, dateItems[dayIndex]);
+                return formatedDate;
+              }
+
+
+              return {
+                formatDateCH: formatDateCH,
+                formatDateISO: formatDateISO,
+                formatDateISONoTime: formatDateISONoTime,
+                formatDateYYYYMMDD: formatDateYYYYMMDD,
+                stringToDate: stringToDate
+              };
+            })();
+
+
+            if ("function" in field) {
+              // Call given Function
+              if ((field.function !== null) && (field.function !== undefined)) {
+                //console.warn('field.function', field.function);
+
+                try {
+                  var fn = new Function('source', 'ExportHelpers', field.function);
+                  value = fn(source, ExportHelpers);
+                } catch (err) {
+                  value = "Error: Undefined Function";
+                };
+
+              };
+            } else {
+              value = "Undefined Function";
             };
+
           } else {
-            value = "Undefined Function";
+
+
+            var getMyVal = function (path, origin) {
+              return path.split('.').reduce(function (prev, curr) {
+                return prev[curr];
+              }, origin || this);
+            };
+
+            var value = getMyVal(field.path, source);
+
+
           };
 
-        } else {
-
-
-          var getMyVal = function (path, origin) {
-            return path.split('.').reduce(function (prev, curr) {
-              return prev[curr];
-            }, origin || this);
+          if ((value === undefined) || (value === null) || (value === NaN) || (value === "NaN")) {
+            value = "";
           };
 
-          var value = getMyVal(field.path, source);
+          // console.log('(_dataDive) ', value, source, path_array);
 
+          return value;
+        });
 
-        };
-
-        if ((value === undefined) || (value === null) || (value === NaN) || (value === "NaN")) {
-          value = "";
-        };
-
-        // console.log('(_dataDive) ', value, source, path_array);
-
-        return value;
       }
 
       _createCSVandJSONFile(def, filtered) {
@@ -428,8 +433,6 @@
 
         });
 
-
-
       }
 
       // --------------- Observers ---------------
@@ -461,9 +464,30 @@
           });
       }
 
+      definitionChanged() {
+
+        this._definitionChangedDebouncer = Polymer.Debouncer.debounce(this._definitionChangedDebouncer, Polymer.Async
+          .timeOut.after(250), () => {
+
+            if ((this.definition !== null) && (this.definition !== undefined)) {
+
+              var def = Object.assign({}, this.definition);
+
+              var _downloadDefinition = {
+                "fields": def.fields,
+                "options": def.options
+              };
+
+              this.set('_downloadDefinition', _downloadDefinition);
+            };
+
+          });
+      }
+
       // --------------- Lifecycle ---------------
 
       _init() {
+        this.set('_loading', false);
         this.set('_data_ready', false);
         console.warn('_init :: Export-Toolbox', this.definition);
       }
