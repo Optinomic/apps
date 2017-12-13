@@ -25,7 +25,7 @@
           </template>
           <template is="dom-if" if="[[!_loading]]" restamp="true">
             <template is="dom-if" if="[[_data_ready]]" restamp="true">
-              <file-download icon="file-download" file="[[_sr]]" name="[[definition.options.name]] - [[definition.options.userapp_id]] - [[definition.options.userapp_calculation_id]]" extension="json"></file-download>
+              <file-download icon="file-download" file="[[_sr]]" extension="json" name="Calculation - [[definition.options.userapp_id]] - [[definition.options.userapp_calculation_id]]" tooltip="right"></file-download>
             </template>
           </template>
         </div>
