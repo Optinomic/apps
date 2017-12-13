@@ -4,17 +4,17 @@
 <link rel="import" href="iron-collapse/iron-collapse.html">
 <link rel="import" href="optinomic-elements/optinomic-clipboard/optinomic-clipboard.html">
 
+
 <dom-module id="element-export">
   <template>
     <style include="optinomic-styles">
-      :host {
+       :host {
         display: block;
       }
 
       .container {
         border-top: 1px solid #E0E0E0;
       }
-
     </style>
 
 
@@ -26,7 +26,8 @@
           </template>
           <template is="dom-if" if="[[!_loading]]" restamp="true">
             <template is="dom-if" if="[[_data_ready]]" restamp="true">
-              <file-download icon="file-download" file="[[_sr]]" extension="json" name="Calculation - [[definition.options.userapp_id]] - [[definition.options.userapp_calculation_id]]" tooltip="right"></file-download>
+              <file-download icon="file-download" file="[[_sr]]" extension="json" name="Calculation - [[definition.options.userapp_id]] - [[definition.options.userapp_calculation_id]]"
+                tooltip="right"></file-download>
             </template>
           </template>
         </div>
@@ -38,8 +39,13 @@
 
         <div style="width:128px;">
           <template is="dom-if" if="[[_data_ready]]" restamp="true">
-            <paper-button class="indigo" on-click="_loadData">CSV</paper-button>
-            <paper-icon-button icon="more-vert" on-click="_showMore" class="grey"></paper-icon-button>
+            <template is="dom-if" if="[[_created_CSV]]" restamp="true">
+              <file-download file="[[_csv_file]]" stringify="false" extension="csv" name="[[definition.options.name]]" tooltip="right" button-color="indigo"></file-download>
+              <paper-icon-button icon="more-vert" on-click="_showMore" class="grey"></paper-icon-button>
+            </template>
+            <template is="dom-if" if="[[!_created_CSV]]" restamp="true">
+              <paper-spinner active></paper-spinner>
+            </template>
           </template>
           <template is="dom-if" if="[[!_data_ready]]" restamp="true">
             <paper-button class="grey" on-click="_loadData">Anfordern</paper-button>
@@ -59,6 +65,13 @@
 
             </div>
 
+            <h3>JSON: [[_created_JSON]]</h3>
+            <file-download file="[[_json_file]]" extension="json" name="[[definition.options.name]]" tooltip="right"></file-download>
+
+            <h3>CSV: [[_created_CSV]]</h3>
+            <file-download file="[[_csv_file]]" extension="csv" name="[[definition.options.name]]" tooltip="right" stringify="false"></file-download>
+
+
           </div>
 
         </div>
@@ -68,7 +81,6 @@
   </template>
 
   <script>
-
     class elementExport extends Polymer.mixinBehaviors([opappBehavior], ReduxBehavior(Polymer.Element)) {
 
       static get is() {
@@ -102,7 +114,8 @@
 
                   var home_str = this.definition.source.userapp_id.split('.').join("_");
                   var path = home_str + "___" + this.definition.source.userapp_calculation_id;
-                  if ((state._app_userapp_calculations[path] !== null) && (state._app_userapp_calculations[path] !== undefined)) {
+                  if ((state._app_userapp_calculations[path] !== null) && (state._app_userapp_calculations[path] !==
+                      undefined)) {
 
                     return_obj = state._app_userapp_calculations[path].data;
 
@@ -128,13 +141,15 @@
       }
 
       _loadData() {
-        this._loadDataDebouncer = Polymer.Debouncer.debounce(this._loadDataDebouncer, Polymer.Async.timeOut.after(250), () => {
+        this._loadDataDebouncer = Polymer.Debouncer.debounce(this._loadDataDebouncer, Polymer.Async.timeOut.after(
+          250), () => {
           if ((this.definition !== null) && (this.definition !== undefined)) {
             Polymer.RenderStatus.afterNextRender(this, function () {
 
               this.set('_loading', true);
               console.log('_loadData', this.definition, this.autorequest);
-              this.dispatch('actionGetUserAppCalculation', this.definition.source.userapp_id, this.definition.source.userapp_calculation_id);
+              this.dispatch('actionGetUserAppCalculation', this.definition.source.userapp_id, this.definition
+                .source.userapp_calculation_id);
 
             });
           };
@@ -142,29 +157,300 @@
         });
       }
 
+      _dataDive(source, field) {
+
+        if (field.path === "_function") {
+
+          var ExportHelpers = (function () {
+
+            var formatDateCH = function (date_string) {
+              date_string = date_string || null
+              if (date_string !== null) {
+
+                // 1952-11-19T00:00:00.000000000000Z
+                var year = parseInt(date_string.substring(0, 4));
+                var month = parseInt(date_string.substring(5, 7));
+                var day = parseInt(date_string.substring(8, 10));
+                var date_string_return = day + "." + month + "." + year
+
+                return date_string_return;
+              } else {
+                return null;
+              }
+            };
+
+            var formatDateISONoTime = function (date_string) {
+              date_string = date_string || null
+              if (date_string !== null) {
+
+                var date_string_return = date_string.substring(0, 10);
+
+                return date_string_return;
+              } else {
+                return null;
+              }
+            };
+
+            var formatDateYYYYMMDD = function (date_string) {
+              date_string = date_string || null
+              if (date_string !== null) {
+                var date_string_return = date_string.substring(0, 10);
+                date_string_return = date_string_return.split('-').join('');
+                return date_string_return;
+              } else {
+                return null;
+              }
+            };
+
+            var formatDateISO = function (date_string) {
+              date_string = date_string || null
+              if (date_string !== null) {
+
+                var date = new Date(date_string);
+                date_string_return = date.toISOString();
+
+                return date_string_return;
+              } else {
+                return null;
+              }
+            };
+
+            var stringToDate = function (_date, _format, _delimiter) {
+              var formatLowerCase = _format.toLowerCase();
+              var formatItems = formatLowerCase.split(_delimiter);
+              var dateItems = _date.split(_delimiter);
+              var monthIndex = formatItems.indexOf("mm");
+              var dayIndex = formatItems.indexOf("dd");
+              var yearIndex = formatItems.indexOf("yyyy");
+              var month = parseInt(dateItems[monthIndex]);
+              month -= 1;
+              var formatedDate = new Date(dateItems[yearIndex], month, dateItems[dayIndex]);
+              return formatedDate;
+            }
+
+
+            return {
+              formatDateCH: formatDateCH,
+              formatDateISO: formatDateISO,
+              formatDateISONoTime: formatDateISONoTime,
+              formatDateYYYYMMDD: formatDateYYYYMMDD,
+              stringToDate: stringToDate
+            };
+          })();
+
+
+          if ("function" in field) {
+            // Call given Function
+            if ((field.function !== null) && (field.function !== undefined)) {
+              //console.warn('field.function', field.function);
+
+              try {
+                var fn = new Function('source', 'ExportHelpers', field.function);
+                value = fn(source, ExportHelpers);
+              } catch (err) {
+                value = "Error: Undefined Function";
+              };
+
+            };
+          } else {
+            value = "Undefined Function";
+          };
+
+        } else {
+
+
+          var getMyVal = function (path, origin) {
+            return path.split('.').reduce(function (prev, curr) {
+              return prev[curr];
+            }, origin || this);
+          };
+
+          var value = getMyVal(field.path, source);
+
+
+        };
+
+        if ((value === undefined) || (value === null) || (value === NaN) || (value === "NaN")) {
+          value = "";
+        };
+
+        // console.log('(_dataDive) ', value, source, path_array);
+
+        return value;
+      }
+
+      _createCSVandJSONFile(def, filtered) {
+
+
+        function create_json(survey_responses, _dataDive) {
+          // console.log('-> survey_responses', survey_responses);
+
+          var header_array = [];
+          var rows_array = [];
+          var header_written = false;
+
+          survey_responses.forEach(function (sr, srID) {
+
+            var fields = def.fields;
+            var fields_obj = {};
+
+            if ((fields !== null) && (fields !== undefined)) {
+              fields.forEach(function (field, fieldID) {
+
+                // Header
+                if ((header_written === false) && (sr.all_found)) {
+                  header_array.push(field.name);
+                };
+
+                // Rows
+                fields_obj[field.name] = _dataDive(sr, field);
+
+              }.bind(this));
+
+              rows_array.push(fields_obj);
+
+              if (header_array.length > 0) {
+                header_written = true;
+              };
+            };
+
+
+          }.bind(this));
+
+          var file = {
+            "header": header_array,
+            "rows": rows_array
+          };
+          // console.log('-> JSON file', file);
+
+          return file;
+        };
+
+        function create_csv(json) {
+
+
+          var f = "";
+          var header_str = "";
+          var header_written = false;
+          var rows_str = "";
+          var delimitter = def.options.delimter;
+          var newline = "\r\n";
+
+
+
+          json.rows.forEach(function (sr, srID) {
+
+            if ((sr !== null) && (sr !== undefined)) {
+              json.header.forEach(function (field, fieldID) {
+
+                // Rows
+                rows_str = rows_str + sr[field];
+                if (fieldID === json.header.length - 1) {
+                  // Last
+                  if (srID !== json.rows.length - 1) {
+                    // Not File-End
+                    rows_str = rows_str + newline;
+                  };
+                } else {
+                  // Not last
+                  rows_str = rows_str + delimitter;
+                };
+
+              });
+
+            };
+          });
+
+          // Header
+          if (def.options.export_header !== false) {
+
+            json.header.forEach(function (h, hID) {
+              header_str = header_str + h;
+
+              if (hID === json.header.length - 1) {
+                // Last
+                header_str = header_str + newline;
+              } else {
+                // Not last
+                header_str = header_str + delimitter;
+              };
+            });
+
+            var file = header_str + rows_str;
+          } else {
+            var file = rows_str;
+          };
+
+          return file;
+        };
+
+        Polymer.RenderStatus.afterNextRender(this, function () {
+
+          
+          if ((this._sr !== undefined) && (this._sr !== null)) {
+            if (this._sr.survey_responses.length > 0) {
+
+
+              // We have data -> Proceed.
+              var _sr = Object.assign({}, this.get('_sr'));
+              if ("survey_responses" in _sr) {
+                this.set('_json_file', null);
+                this.set('_json_file', create_json(_sr.survey_responses, this._dataDive));
+                this.set('_created_JSON', true);
+
+
+                this.set('_csv_file', null);
+                this.set('_csv_file', create_csv(this._json_file));
+                this.set('_created_CSV', true);
+
+                console.log('_createCSVandJSONFile', this._csv_file, this._json_file);
+                
+                this.dispatchEvent(new CustomEvent('json', {
+                  detail: this._json_file
+                }));
+
+                this.dispatchEvent(new CustomEvent('csv', {
+                  detail: this._csv_file
+                }));
+
+
+              };
+            };
+          };
+
+          // this.set('_created_JSON', true);
+          //this.set('_created_CSV', true);
+        });
+
+
+
+      }
+
       // --------------- Observers ---------------
 
       _sr_ready() {
-        this._sr_readyDebouncer = Polymer.Debouncer.debounce(this._sr_readyDebouncer, Polymer.Async.timeOut.after(250), () => {
+        this._sr_readyDebouncer = Polymer.Debouncer.debounce(this._sr_readyDebouncer, Polymer.Async.timeOut.after(
+          250), () => {
 
           if ((this._sr !== undefined) && (this._sr !== null)) {
             this._getState();
             this.set('_loading', false);
             this.set('_data_ready', true);
-            this.set('_sr_string', JSON.stringify(this._sr));
+            this._createCSVandJSONFile(this.definition, false);
           };
 
         });
       }
 
       autorequestChanged() {
-        this._autorequestChangedDebouncer = Polymer.Debouncer.debounce(this._autorequestChangedDebouncer, Polymer.Async.timeOut.after(250), () => {
+        this._autorequestChangedDebouncer = Polymer.Debouncer.debounce(this._autorequestChangedDebouncer, Polymer.Async
+          .timeOut.after(250), () => {
 
-          if ((this.autorequest) && ((this._data_ready === false))) {
-            this._loadData();
-          };
+            if ((this.autorequest) && ((this._data_ready === false))) {
+              this._loadData();
+            };
 
-        });
+          });
       }
 
       // --------------- Lifecycle ---------------

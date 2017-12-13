@@ -39,7 +39,7 @@
 
       .left_bar {
         background: #E0E0E0;
-        min-width: 256px;
+        min-width: 128px;
         max-width: 256px;
         padding: 12px;
       }
@@ -47,13 +47,11 @@
       .right_top {
         height: var(--right-top-height);
         min-height: var(--right-top-height);
-        max-height: var(--right-top-height);
         transition: all 0.25s;
       }
 
       .right_bottom {
         height: var(--right-bottom-height);
-        min-height: var(--right-bottom-height);
         max-height: var(--right-bottom-height);
         transition: all 0.25s;
       }
@@ -104,8 +102,6 @@
                 <paper-icon-button class="grey" on-click="_showStart" style="margin-right:6px;" icon="home"></paper-icon-button>
                 <optinomic-title class="flex" h1="Export-Toolbox" h2="Daten exportieren"></optinomic-title>
               </div>
-
-              <p>{{_autorequest}}, [[_show_extras]]</p>
 
               <template is="dom-repeat" items="[[_export_files]]" as="ef">
                 <element-export definition="[[ef]]" autorequest="[[_autorequest]]"></element-export>
