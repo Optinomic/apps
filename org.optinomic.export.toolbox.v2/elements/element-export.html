@@ -43,16 +43,17 @@
               <div class="horizontal">
                 <file-download file="[[_csv_file]]" stringify="false" extension="csv" name="[[definition.options.name]]" tooltip="right"
                   button-color="indigo"></file-download>
-                <paper-icon-button icon="more-vert" on-click="_showMore" class="grey"></paper-icon-button>
               </div>
             </template>
             <template is="dom-if" if="[[!_created_CSV]]" restamp="true">
               <paper-spinner active></paper-spinner>
             </template>
           </template>
+
           <template is="dom-if" if="[[!_data_ready]]" restamp="true">
             <paper-button class="grey" on-click="_loadData">Anfordern</paper-button>
           </template>
+          <paper-icon-button icon="more-vert" on-click="_showMore" class="grey"></paper-icon-button>
         </div>
 
       </div>
@@ -153,6 +154,8 @@
             Polymer.RenderStatus.afterNextRender(this, function () {
 
               this.set('_loading', true);
+              this.set('_created_JSON', false);
+              this.set('_created_CSV', false);
               console.log('_loadData', this.definition, this.autorequest);
               this.dispatch('actionGetUserAppCalculation', this.definition.source.userapp_id, this.definition
                 .source.userapp_calculation_id);
@@ -396,7 +399,6 @@
           if ((this._sr !== undefined) && (this._sr !== null)) {
             if (this._sr.survey_responses.length > 0) {
 
-
               // We have data -> Proceed.
               var _sr = Object.assign({}, this.get('_sr'));
               if ("survey_responses" in _sr) {
@@ -424,8 +426,6 @@
             };
           };
 
-          // this.set('_created_JSON', true);
-          //this.set('_created_CSV', true);
         });
 
 
@@ -442,6 +442,8 @@
             this._getState();
             this.set('_loading', false);
             this.set('_data_ready', true);
+            this.set('_created_JSON', false);
+            this.set('_created_CSV', false);
             this._createCSVandJSONFile(this.definition, false);
           };
 
