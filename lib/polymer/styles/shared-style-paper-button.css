@@ -16,25 +16,25 @@ paper-button.grey:hover {
 }
 
 paper-button.pink {
-  background-color: var(--paper-pink-500);
+  color: var(--paper-pink-800);
+  background-color: var(--paper-pink-50);
   --paper-button-ink-color: var(--paper-pink-500);
-  color: white;
 }
 
 paper-button.pink:hover {
-  color: var(--paper-pink-800);
-  background-color: var(--paper-pink-50);
-}
-
-paper-button.indigo {
-  background-color: var(--paper-indigo-500);
-  --paper-button-ink-color: var(--paper-pink-500);
+  background-color: var(--paper-pink-500);
   color: white;
 }
 
-paper-button.indigo:hover {
+paper-button.indigo {
   background-color: var(--paper-indigo-50);
   color: var(--paper-indigo-800);
+  --paper-button-ink-color: var(--paper-pink-500);
+}
+
+paper-button.indigo:hover {
+  background-color: var(--paper-indigo-500);
+  color: white;
 }
 
 paper-button.disabled {

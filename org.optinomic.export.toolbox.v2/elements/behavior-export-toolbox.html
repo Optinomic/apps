@@ -131,13 +131,20 @@
       export_files.forEach(function (f, fID) {
         if ("options" in f) {
           if ("source" in f.options) {
-            var source_options = Object.assign({}, _object_source[f.options.source]);
-            delete source_options.name;
-            f.options = Object.assign(f.options, source_options);
+            f.source = Object.assign({}, _object_source[f.options.source]);
           }
         };
       });
 
+      function compare(a, b) {
+        if (a.options.name < b.options.name)
+          return -1;
+        if (a.options.name > b.options.name)
+          return 1;
+        return 0;
+      }
+
+      export_files.sort(compare);
       this.set('_export_files', export_files);
 
       console.log('optinomicExportToolbox (Behavior)', this._export_files, this._calculation_sources);
