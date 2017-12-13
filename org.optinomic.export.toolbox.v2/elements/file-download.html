@@ -13,11 +13,10 @@
     <div>
       <template is="dom-if" if="[[_filename_set]]">
         <template is="dom-if" if="[[_button_mode]]">
-          <paper-button class="[[button]]" on-click="_onDownloadFile">[[extension]]</paper-button>
+          <paper-button class$="[[buttonColor]]" on-click="_onDownloadFile">[[extension]]</paper-button>
         </template>
         <template is="dom-if" if="[[!_button_mode]]">
-          <paper-icon-button class="[[button]]" on-click="_onDownloadFile" icon="[[icon]]"></paper-icon-button>
-
+          <paper-icon-button class$="[[buttonColor]]" on-click="_onDownloadFile" icon="[[icon]]"></paper-icon-button>
         </template>
       </template>
       <paper-tooltip position="[[tooltip]]">[[_filename_full]]</paper-tooltip>

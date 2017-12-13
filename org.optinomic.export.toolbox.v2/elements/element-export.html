@@ -40,8 +40,11 @@
         <div style="width:128px;">
           <template is="dom-if" if="[[_data_ready]]" restamp="true">
             <template is="dom-if" if="[[_created_CSV]]" restamp="true">
-              <file-download file="[[_csv_file]]" stringify="false" extension="csv" name="[[definition.options.name]]" tooltip="right" button-color="indigo"></file-download>
-              <paper-icon-button icon="more-vert" on-click="_showMore" class="grey"></paper-icon-button>
+              <div class="horizontal">
+                <file-download file="[[_csv_file]]" stringify="false" extension="csv" name="[[definition.options.name]]" tooltip="right"
+                  button-color="indigo"></file-download>
+                <paper-icon-button icon="more-vert" on-click="_showMore" class="grey"></paper-icon-button>
+              </div>
             </template>
             <template is="dom-if" if="[[!_created_CSV]]" restamp="true">
               <paper-spinner active></paper-spinner>
@@ -386,7 +389,7 @@
 
         Polymer.RenderStatus.afterNextRender(this, function () {
 
-          
+
           if ((this._sr !== undefined) && (this._sr !== null)) {
             if (this._sr.survey_responses.length > 0) {
 
@@ -404,7 +407,7 @@
                 this.set('_created_CSV', true);
 
                 console.log('_createCSVandJSONFile', this._csv_file, this._json_file);
-                
+
                 this.dispatchEvent(new CustomEvent('json', {
                   detail: this._json_file
                 }));
