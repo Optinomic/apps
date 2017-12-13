@@ -68,11 +68,14 @@
 
             </div>
 
-            <h3>JSON: [[_created_JSON]]</h3>
-            <file-download file="[[_json_file]]" extension="json" name="[[definition.options.name]]" tooltip="right"></file-download>
+            <template is="dom-if" if="[[_created_CSV]]" restamp="true">
+              <h3>JSON: [[_created_JSON]]</h3>
+              <file-download button-color="pink" file="[[_json_file]]" extension="json" name="[[definition.options.name]]" tooltip="right"></file-download>
 
-            <h3>CSV: [[_created_CSV]]</h3>
-            <file-download file="[[_csv_file]]" extension="csv" name="[[definition.options.name]]" tooltip="right" stringify="false"></file-download>
+              <h3>CSV: [[_created_CSV]]</h3>
+              <file-download button-color="indigo" file="[[_csv_file]]" extension="csv" name="[[definition.options.name]]" tooltip="right"
+                stringify="false"></file-download>
+            </template>
 
 
           </div>

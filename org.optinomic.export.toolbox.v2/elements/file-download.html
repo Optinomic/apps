@@ -56,12 +56,12 @@
           },
 
           dateprefix: {
-            type: Boolean,
+            type: Object,
             value: true
           },
 
           stringify: {
-            type: Boolean,
+            type: Object,
             value: true
           },
 
@@ -125,6 +125,8 @@
             if ((this.file !== null) && (this.file !== undefined)) {
               if (this.stringify) {
                 _file = JSON.stringify(this.file, null, 2);
+              } else {
+                _file = this.file;
               };
 
               this.set('_file', _file);
