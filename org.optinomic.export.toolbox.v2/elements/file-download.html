@@ -5,9 +5,10 @@
 <dom-module id="file-download">
   <template>
     <style include="optinomic-styles">
-       :host {
+      :host {
         display: block;
       }
+
     </style>
 
     <div>
@@ -97,9 +98,7 @@
       }
 
       _createFile(text) {
-        const textBlob = new Blob([text], {
-          type: 'text/plain'
-        });
+        const textBlob = new Blob([text], {type: 'text/plain'});
         return window.URL.createObjectURL(textBlob);
       }
 
@@ -118,26 +117,24 @@
       }
 
       _setFile() {
-        this._setFileDebouncer = Polymer.Debouncer.debounce(this._setFileDebouncer, Polymer.Async.timeOut.after(200),
-          () => {
+        this._setFileDebouncer = Polymer.Debouncer.debounce(this._setFileDebouncer, Polymer.Async.timeOut.after(200), () => {
 
-            var _file = null;
-            if ((this.file !== null) && (this.file !== undefined)) {
-              if (this.stringify) {
-                _file = JSON.stringify(this.file, null, 2);
-              } else {
-                _file = this.file;
-              };
-
-              this.set('_file', _file);
+          var _file = null;
+          if ((this.file !== null) && (this.file !== undefined)) {
+            if (this.stringify) {
+              _file = JSON.stringify(this.file, null, 2);
+            } else {
+              _file = this.file;
             };
 
-          });
+            this.set('_file', _file);
+          };
+
+        });
       }
 
       _setFilename() {
-        this._setFilenameDebouncer = Polymer.Debouncer.debounce(this._setFilenameDebouncer, Polymer.Async.timeOut.after(
-          250), () => {
+        this._setFilenameDebouncer = Polymer.Debouncer.debounce(this._setFilenameDebouncer, Polymer.Async.timeOut.after(250), () => {
 
           if ((this.name !== null) && (this.name !== undefined)) {
             if ((this.extension !== null) && (this.extension !== undefined)) {
@@ -180,7 +177,7 @@
       _init() {
         this.set('_filename_set', false);
         this.set('_button_mode', true);
-        console.warn('_init :: fileDownload');
+        // console.warn('_init :: fileDownload');
       }
 
       ready() {

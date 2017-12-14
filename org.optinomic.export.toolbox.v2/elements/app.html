@@ -100,14 +100,13 @@
 
           <iron-pages selected="[[_app_state]]" attr-for-selected="name" fallback-selection="start" role="main">
             <div name="start">
-
               <div class="horizontal">
                 <paper-icon-button class="grey" on-click="_showStart" style="margin-right:6px;" icon="home"></paper-icon-button>
                 <optinomic-title class="flex" h1="Export-Toolbox" h2="Daten exportieren"></optinomic-title>
               </div>
 
               <template is="dom-repeat" items="[[_export_files]]" as="ef">
-                <element-export definition="[[ef]]" autorequest="[[_autorequest]]" on-json="_e_data"></element-export>
+                <element-export on-json="_e_data" definition="[[ef]]" autorequest="[[_autorequest]]"></element-export>
               </template>
             </div>
 
@@ -118,7 +117,7 @@
         <div class="right_bottom">
 
           <iron-pages selected="[[_app_state]]" attr-for-selected="name" fallback-selection="start">
-            <div name="start" class="page">:-)</div>
+            <div name="start" class="page">Selektieren Sie eine Aktion!</div>
 
             <div name="filter" class="page">
               <h2>Filter</h2>
@@ -127,7 +126,7 @@
 
             <div name="settings" class="page">
               <h2>Einstellungen</h2>
-              <export-settings></export-settings>
+
             </div>
           </iron-pages>
 
@@ -190,6 +189,10 @@
         this.set('_app_state', 'settings');
       }
 
+      _e_data(e) {
+        console.warn('_e_data', e.detail);
+      }
+
       _showExtras(should) {
 
         var h = window.innerHeight;
@@ -197,7 +200,7 @@
         var top_px = top + 'px';
         var bottom = h - top;
         var bottom_px = bottom + 'px';
-        // console.log(h, top_px, bottom_px);
+        console.log(h, top_px, bottom_px);
 
         if (should) {
           this.updateStyles({'--right-top-height': top_px, '--right-bottom-height': bottom_px});
@@ -207,18 +210,11 @@
 
       }
 
-      // --------------- Observers ---------------
-
-      _e_data(e) {
-        // JSON - Data from <element-export>
-        console.warn('_e_data', e.detail);
-      }
-
-      // --------------- Lifecycle ---------------
+      // --------------- Observers --------------- --------------- Lifecycle ---------------
 
       _init() {
         this._showStart();
-        // console.warn('_init :: Export-Toolbox');
+        console.warn('_init :: Export-Toolbox');
       }
 
       ready() {
