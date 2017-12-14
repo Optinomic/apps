@@ -25,6 +25,8 @@ __opapp_include(../lib/polymer2/index_fullscreen.m4)
 __opapp_include(elements/behavior-export-toolbox.html)
 __opapp_include(elements/file-download.html)
 __opapp_include(elements/element-export.html)
+__opapp_include(elements/export-filter.html)
+__opapp_include(elements/export-settings.html)
 __opapp_include(elements/app.html)
 
 

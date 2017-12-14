@@ -1,6 +1,6 @@
 <link rel="import" href="polymer/polymer-element.html">
 
-<dom-module id="export-filter">
+<dom-module id="export-settings">
   <template>
     <style include="optinomic-styles">
       :host {
@@ -9,26 +9,26 @@
 
     </style>
 
-    <h2>Export-Filter</h2>
-    <p>Filtereinstellungen</p>
+    <h2>Export-Settings</h2>
+    <p>Einstellungen global überschreiben...</p>
 
   </template>
 
   <script>
     /**
-         * `export-filter` Description
+         * `export-settings` Description
          *
          * @summary ShortDescription.
          * @customElement
          * @polymer
          * @extends {Polymer.Element}
          */
-    class exportFilter extends Polymer.Element {
+    class exportSettings extends Polymer.Element {
       /**
              * String providing the tag name to register the element under.
              */
       static get is() {
-        return 'export-filter';
+        return 'export-settings';
       }
 
       /**
@@ -65,6 +65,6 @@
 
     }
 
-    window.customElements.define(exportFilter.is, exportFilter);
+    window.customElements.define(exportSettings.is, exportSettings);
   </script>
 </dom-module>

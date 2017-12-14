@@ -26,7 +26,7 @@
 <dom-module id="optinomic-template">
   <template>
     <style include="optinomic-styles">
-       :host {
+      :host {
         display: block;
         --right-top-height: 100%;
         --right-bottom-height: 0;
@@ -40,7 +40,7 @@
       .left_bar {
         background: #E0E0E0;
         min-width: 128px;
-        max-width: 256px;
+        max-width: 128px;
         padding: 12px;
       }
 
@@ -59,11 +59,13 @@
       .page {
         padding: 12px;
       }
+
     </style>
 
-    
     <vaadin-split-layout class="fullscreen">
       <div class="left_bar">
+
+        <paper-icon-button style="float:right" class="grey" on-click="_showStart" style="margin-right:6px;" icon="home"></paper-icon-button>
         <h2>Export-Toolbox</h2>
         <div class="horizontal" style="margin-top:-24px;">
           <p>[[_export_files.length]] Files</p>
@@ -98,13 +100,14 @@
 
           <iron-pages selected="[[_app_state]]" attr-for-selected="name" fallback-selection="start" role="main">
             <div name="start">
+
               <div class="horizontal">
                 <paper-icon-button class="grey" on-click="_showStart" style="margin-right:6px;" icon="home"></paper-icon-button>
                 <optinomic-title class="flex" h1="Export-Toolbox" h2="Daten exportieren"></optinomic-title>
               </div>
 
               <template is="dom-repeat" items="[[_export_files]]" as="ef">
-                <element-export definition="[[ef]]" autorequest="[[_autorequest]]"></element-export>
+                <element-export definition="[[ef]]" autorequest="[[_autorequest]]" on-json="_e_data"></element-export>
               </template>
             </div>
 
@@ -115,16 +118,16 @@
         <div class="right_bottom">
 
           <iron-pages selected="[[_app_state]]" attr-for-selected="name" fallback-selection="start">
-            <div name="start" class="page">Selektieren Sie eine Aktion!</div>
+            <div name="start" class="page">:-)</div>
 
             <div name="filter" class="page">
               <h2>Filter</h2>
-              <p>coming soon...</p>
+              <export-filter></export-filter>
             </div>
 
             <div name="settings" class="page">
               <h2>Einstellungen</h2>
-              <p>coming soon...</p>
+              <export-settings></export-settings>
             </div>
           </iron-pages>
 
@@ -194,27 +197,28 @@
         var top_px = top + 'px';
         var bottom = h - top;
         var bottom_px = bottom + 'px';
-        console.log(h, top_px, bottom_px);
+        // console.log(h, top_px, bottom_px);
 
         if (should) {
-          this.updateStyles({
-            '--right-top-height': top_px,
-            '--right-bottom-height': bottom_px
-          });
+          this.updateStyles({'--right-top-height': top_px, '--right-bottom-height': bottom_px});
         } else {
-          this.updateStyles({
-            '--right-top-height': '100%',
-            '--right-bottom-height': '0%'
-          });
+          this.updateStyles({'--right-top-height': '100%', '--right-bottom-height': '0%'});
         };
 
       }
 
-      // --------------- Observers --------------- --------------- Lifecycle ---------------
+      // --------------- Observers ---------------
+
+      _e_data(e) {
+        // JSON - Data from <element-export>
+        console.warn('_e_data', e.detail);
+      }
+
+      // --------------- Lifecycle ---------------
 
       _init() {
         this._showStart();
-        console.warn('_init :: Export-Toolbox');
+        // console.warn('_init :: Export-Toolbox');
       }
 
       ready() {
