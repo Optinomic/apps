@@ -2,6 +2,7 @@
 <link rel="import" href="paper-button/paper-button.html">
 <link rel="import" href="paper-spinner/paper-spinner.html">
 <link rel="import" href="iron-collapse/iron-collapse.html">
+<link rel="import" href="paper-tooltip/paper-tooltip.html">
 <link rel="import" href="optinomic-elements/optinomic-clipboard/optinomic-clipboard.html">
 
 <dom-module id="element-export">
@@ -15,6 +16,35 @@
         border-top: 1px solid #E0E0E0;
       }
 
+      .circle {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        font-size: 14px;
+        font-weight: 500;
+        color: #fff;
+        line-height: 24px;
+        text-align: center;
+      }
+
+      .red {
+        color: #F44336;
+        background-color: #FFEBEE;
+      }
+      .red:hover {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+      }
+
+      .green {
+        color: #4CAF50;
+        background-color: #E8F5E9;
+      }
+      .green:hover {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+      }
+
     </style>
 
     <div class="container">
@@ -25,7 +55,7 @@
           </template>
           <template is="dom-if" if="[[!_loading]]" restamp="true">
             <template is="dom-if" if="[[_data_ready]]" restamp="true">
-              <file-download icon="file-download" file="[[_sr]]" extension="json" name="Calculation - [[definition.options.userapp_id]] - [[definition.options.userapp_calculation_id]]" tooltip="right"></file-download>
+              <file-download icon="file-download" file="[[_sr]]" extension="json" name="Calculation - [[definition.source.userapp_id]]-[[definition.source.userapp_calculation_id]]" tooltip="right"></file-download>
             </template>
           </template>
         </div>
@@ -37,9 +67,22 @@
 
         <div>
           <template is="dom-if" if="[[_data_ready]]" restamp="true">
+            <template is="dom-if" if="[[_settings_override]]" restamp="true">
+              <p class="circle green">S</p>
+              <paper-tooltip position="left">Globale-Einstellungen</paper-tooltip>
+            </template>
+            <template is="dom-if" if="[[_filter_override]]" restamp="true">
+              <p class="circle red">F</p>
+              <paper-tooltip position="left">Filter</paper-tooltip>
+            </template>
+          </template>
+        </div>
+
+        <div>
+          <template is="dom-if" if="[[_data_ready]]" restamp="true">
             <template is="dom-if" if="[[_created_CSV]]" restamp="true">
               <div class="horizontal">
-                <file-download button-color="pink" file="[[_json_file]]" extension="json" name="[[definition.options.name]]" tooltip="left"></file-download>
+                <file-download icon="file-download" button-color="pink" file="[[_json_file]]" extension="json" name="[[definition.options.name]]" tooltip="left"></file-download>
                 <file-download file="[[_csv_file]]" stringify="false" extension="csv" name="[[definition.options.name]]" tooltip="left" button-color="indigo"></file-download>
               </div>
             </template>
@@ -102,6 +145,16 @@
           definition: {
             type: Object,
             observer: 'definitionChanged'
+          },
+
+          settings: {
+            type: Object,
+            observer: 'settingsChanged'
+          },
+
+          filter: {
+            type: Object,
+            observer: 'filterChanged'
           },
 
           autorequest: {
@@ -413,9 +466,37 @@
             this._getState();
             this.set('_loading', false);
             this.set('_data_ready', true);
+
             this.set('_created_JSON', false);
             this.set('_created_CSV', false);
             this._createCSVandJSONFile(this.definition, false);
+          };
+
+        });
+      }
+
+      settingsChanged() {
+        this._settingsChangedDebouncer = Polymer.Debouncer.debounce(this._settingsChangedDebouncer, Polymer.Async.timeOut.after(250), () => {
+
+          if ((this.settings !== null) && (this.settings !== undefined)) {
+            this.set('_settings_override', true);
+            var enhanced_definition = Object.assign({}, this.get('definition'));
+            this.set('_created_JSON', false);
+            this.set('_created_CSV', false);
+            this._createCSVandJSONFile(enhanced_definition, false);
+            console.warn('settingsChanged', this.settings);
+          } else {
+            this.set('_settings_override', false);
+          };
+
+        });
+      }
+
+      filterChanged() {
+        this._filterChangedDebouncer = Polymer.Debouncer.debounce(this._filterChangedDebouncer, Polymer.Async.timeOut.after(250), () => {
+
+          if ((this.filter !== null) && (this.filter !== undefined)) {
+            console.warn('filterChanged', this.filter);
           };
 
         });

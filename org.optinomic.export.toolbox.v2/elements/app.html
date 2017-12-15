@@ -106,7 +106,7 @@
               </div>
 
               <template is="dom-repeat" items="[[_export_files]]" as="ef">
-                <element-export on-json="_e_data" definition="[[ef]]" autorequest="[[_autorequest]]"></element-export>
+                <element-export on-json="_e_data" definition="[[ef]]" autorequest="[[_autorequest]]" settings="[[_settings]]" filter="[[_filter]]"></element-export>
               </template>
             </div>
 
@@ -213,10 +213,19 @@
       }
 
       _e_settings(e) {
+
+        if (e.detail.action === 'cancel') {
+          this.set('_settings', null);
+        } else {
+          this.set('_settings', Object.assign({}, e.detail.settings));
+        };
+
+        this._showExtras(false);
         console.warn('_e_settings', e.detail);
       }
 
       _e_filter(e) {
+        this._showExtras(false);
         console.warn('_e_filter', e.detail);
       }
 
@@ -224,6 +233,8 @@
 
       _init() {
         this._showStart();
+        this.set('_settings', null);
+        this.set('_filter', null);
         console.warn('_init :: Export-Toolbox');
       }
 
