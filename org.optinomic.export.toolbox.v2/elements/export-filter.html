@@ -1,9 +1,12 @@
 <link rel="import" href="polymer/polymer-element.html">
 <link rel="import" href="paper-input/paper-input.html">
+<link rel="import" href="paper-card/paper-card.html">
 <link rel="import" href="vaadin-combo-box/vaadin-combo-box.html">
 <link rel="import" href="iron-dropdown/iron-dropdown.html">
 <link rel="import" href="vaadin-valo-theme/vaadin-checkbox.html">
 <link rel="import" href="vaadin-checkbox/vaadin-checkbox.html">
+<link rel="import" href="vaadin-dialog/vaadin-dialog.html">
+<link rel="import" href="paper-card/paper-card.html">
 
 <dom-module id="export-filter">
   <template>
@@ -24,6 +27,31 @@
       }
 
     </style>
+
+    <vaadin-dialog id="dialog_add_pg_filter" no-close-on-esc no-close-on-outside-click>
+      <template>
+        <paper-card heading="Patientengruppe: Regel hinzufügen" style="width:350px;">
+          <div class="card-content">
+            <vaadin-combo-box id="pg" style="width:100%" value="{{_pg_rule_edit.operator}}" label="Selektiere alle Patienten, welche sich..." items="[[_pg_operators]]" item-value-path="value" item-label-path="label">
+              <template>
+                <b>[[item.label]]</b>
+              </template>
+            </vaadin-combo-box>
+            <p>...in folgender Gruppe befinden:</p>
+            <vaadin-combo-box id="pg" style="width:100%" value="{{_pg_rule_edit.pg}}" label="Patientengruppe" items="[[_patient_groups]]" item-value-path="value" item-label-path="label">
+              <template>
+                <b>[[item.label]]&nbsp;</b>(PG[[item.value]])
+              </template>
+            </vaadin-combo-box>
+          </div>
+          <div class="card-actions">
+            <paper-button on-click="_pg_rule_cancel" style="color:grey">Abbrechen</paper-button>&nbsp;&nbsp;
+            <paper-button on-click="_pg_rule_save">Hinzufügen</paper-button>
+          </div>
+        </paper-card>
+
+      </template>
+    </vaadin-dialog>
 
     <div id="element">
       <div class="filter_container">
@@ -61,16 +89,21 @@
       </div>
       <div class="filter_container">
         <div class="selector">
-          <h3 >Patientengruppen</h3>
+          <h3>Patientengruppen ([[_patient_groups.length]])</h3>
           <vaadin-checkbox checked="{{_patientgroups_use}}">
             <template is="dom-if" if="[[!_patientgroups_use]]" restamp="true">nicht
             </template>einschränken
           </vaadin-checkbox>
         </div>
         <template is="dom-if" if="[[_patientgroups_use]]" restamp="true">
-          <p>Patient-Groups: [[_patient_groups.length]]</p>
 
-          <p>[[_patient_groups.data[8].data.name]]</p>
+          <h3>Regeln: [[_pg_rules.length]]</h3>
+
+          <template is="dom-repeat" items="[[_pg_rules]]">
+            <p style="color:#3F51B5">[[item.operator]] ([[item.pg_name]])</p>
+          </template>
+
+          <paper-button on-click="_pg_rule_add" class="indigo">Regel hinzufügen</paper-button>
         </template>
 
       </div>
@@ -101,15 +134,71 @@
 
           _patient_groups: {
             type: Object,
-            statePath: 'patient_groups.all'
-          }
+            statePath: function (state) {
+              var return_array = [];
+              if ((state.patient_groups.all !== null) && (state.patient_groups.all !== undefined)) {
+                if ((state.patient_groups.data !== null) && (state.patient_groups.data !== undefined)) {
 
-          _patient_groups_data: {
-            type: Object,
-            statePath: 'patient_groups.data'
-          }
+                  state.patient_groups.all.forEach(function (pg, pgID) {
+                    var current_pg = state.patient_groups.data[pg];
+                    var push_pg = {
+                      label: current_pg.data.name,
+                      value: pg
+                    };
+                    return_array.push(push_pg);
+                  });
 
+                };
+              };
+              return return_array;
+            }
+          }
         };
+      }
+
+      _pg_rule_add() {
+
+        var operators = [
+          {
+            "label": "NICHT IN",
+            "value": "NOT"
+          }, {
+            "label": "IN",
+            "value": "IN"
+          }
+        ];
+
+        this.set('_pg_rule_edit', {"operator": "IN"});
+        this.set('_pg_operators', operators);
+
+        var dialog_add_pg_filter = this.$.dialog_add_pg_filter;
+        dialog_add_pg_filter.opened = true;
+
+      }
+
+      _pg_rule_save() {
+
+        var _pg_rules = this.get('_pg_rules');
+        _pg_rules = _pg_rules.slice(0);
+
+        var _pg_rule_edit = Object.assign({}, this.get('_pg_rule_edit'));
+        var state = this.getState();
+        var pg_data = state.patient_groups.data[_pg_rule_edit.pg];
+        console.warn('pg_data', pg_data, _pg_rule_edit.pg);
+        _pg_rule_edit.pg_name = pg_data.data.name;
+
+        _pg_rules.push(_pg_rule_edit);
+        this.set('_pg_rules', _pg_rules);
+
+        var dialog_add_pg_filter = this.$.dialog_add_pg_filter;
+        dialog_add_pg_filter.opened = false;
+
+      }
+
+      _pg_rule_cancel() {
+        var dialog_add_pg_filter = this.$.dialog_add_pg_filter;
+        dialog_add_pg_filter.opened = false;
+
       }
 
       _init() {
@@ -152,6 +241,7 @@
 
         this.set('_erhungszeitraum_use', false);
         this.set('_patientgroups_use', false);
+        this.set('_pg_rules', []);
 
       }
 
