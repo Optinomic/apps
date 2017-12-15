@@ -232,15 +232,24 @@
       // --------------- Lifecycle ---------------
 
       _init() {
+        this.dispatch('getAllPG');
         this._showStart();
         this.set('_settings', null);
         this.set('_filter', null);
+
         console.warn('_init :: Export-Toolbox');
+      }
+
+      constructor() {
+        super();
       }
 
       ready() {
         super.ready();
-        this._init();
+
+        Polymer.RenderStatus.afterNextRender(this, function () {
+          this._init();
+        });
       }
     }
 

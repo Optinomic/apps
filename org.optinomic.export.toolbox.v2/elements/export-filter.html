@@ -58,15 +58,24 @@
             </template>
           </vaadin-combo-box>
         </template>
-
-        <div class="horizontal">
-          <p>patientGroups - Matrix</p>
+      </div>
+      <div class="filter_container">
+        <div class="selector">
+          <h3 >Patientengruppen</h3>
+          <vaadin-checkbox checked="{{_patientgroups_use}}">
+            <template is="dom-if" if="[[!_patientgroups_use]]" restamp="true">nicht
+            </template>einschränken
+          </vaadin-checkbox>
         </div>
+        <template is="dom-if" if="[[_patientgroups_use]]" restamp="true">
+          <p>Patient-Groups</p>
+        </template>
+
       </div>
 
       <div class="horizontal">
         <div class="flex">
-          <paper-button class="grey" on-tap="_getFilter">Nicht verwenden</paper-button>
+          <paper-button class="grey" on-tap="_getFilter">Nicht anwenden</paper-button>
         </div>
         <div style="height:42px;">
           <paper-button class="pink" on-tap="_getFilter">Anwenden</paper-button>
@@ -147,6 +156,8 @@
         console.log('(INIT) <element-filter>', d);
 
         this.set('_erhungszeitraum_use', false);
+        this.set('_patientgroups_use', false);
+
       }
 
       /**
