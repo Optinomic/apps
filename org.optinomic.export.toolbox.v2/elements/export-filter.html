@@ -68,7 +68,9 @@
           </vaadin-checkbox>
         </div>
         <template is="dom-if" if="[[_patientgroups_use]]" restamp="true">
-          <p>Patient-Groups</p>
+          <p>Patient-Groups: [[_patient_groups.length]]</p>
+
+          <p>[[_patient_groups.data[8].data.name]]</p>
         </template>
 
       </div>
@@ -87,33 +89,26 @@
   </template>
 
   <script>
-    /**
-         * `export-filter` Description
-         *
-         * @summary ShortDescription.
-         * @customElement
-         * @polymer
-         * @extends {Polymer.Element}
-         */
-    class exportFilter extends Polymer.Element {
-      /**
-             * String providing the tag name to register the element under.
-             */
+
+    class exportFilter extends Polymer.mixinBehaviors([opappBehavior], ReduxBehavior(Polymer.Element)) {
+
       static get is() {
         return 'export-filter';
       }
 
-      /**
-             * Object describing property-related metadata used by Polymer features
-             */
       static get properties() {
         return {
-          /**
-                     * Description for prop
-                     */
-          something: {
-            type: Object
+
+          _patient_groups: {
+            type: Object,
+            statePath: 'patient_groups.all'
           }
+
+          _patient_groups_data: {
+            type: Object,
+            statePath: 'patient_groups.data'
+          }
+
         };
       }
 
@@ -160,18 +155,10 @@
 
       }
 
-      /**
-             * Instance of the element is created/upgraded. Use: initializing state,
-             * set up event listeners, create shadow dom.
-             * @constructor
-             */
       constructor() {
         super();
       }
 
-      /**
-             * Use for one-time configuration of your component after local DOM is initialized.
-             */
       ready() {
         super.ready();
 
