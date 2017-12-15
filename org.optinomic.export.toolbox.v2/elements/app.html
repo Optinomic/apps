@@ -121,12 +121,12 @@
 
             <div name="filter" class="page">
               <h2>Filter</h2>
-              <export-filter></export-filter>
+              <export-filter on-filter="_e_filter"></export-filter>
             </div>
 
             <div name="settings" class="page">
               <h2>Einstellungen</h2>
-              <export-settings></export-settings>
+              <export-settings on-settings="_e_settings"></export-settings>
             </div>
           </iron-pages>
 
@@ -189,10 +189,6 @@
         this.set('_app_state', 'settings');
       }
 
-      _e_data(e) {
-        console.warn('_e_data', e.detail);
-      }
-
       _showExtras(should) {
 
         var h = window.innerHeight;
@@ -210,7 +206,21 @@
 
       }
 
-      // --------------- Observers --------------- --------------- Lifecycle ---------------
+      // --------------- Events ---------------
+
+      _e_data(e) {
+        console.warn('_e_data', e.detail);
+      }
+
+      _e_settings(e) {
+        console.warn('_e_settings', e.detail);
+      }
+
+      _e_filter(e) {
+        console.warn('_e_filter', e.detail);
+      }
+
+      // --------------- Lifecycle ---------------
 
       _init() {
         this._showStart();
