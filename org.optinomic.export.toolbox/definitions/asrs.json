@@ -1,0 +1,24 @@
+{
+  "options": {
+    "name": "ASRS",
+    "description": "asrs",
+    "export_optinomic_ids": false,
+    "export_patient_details": false,
+    "export_stay_details": false,
+    "export_header": true,
+    "delimter": ";",
+    "source": "asrs"
+
+  },
+  "fields": [
+    { "path": "_function", "function": "return source.stay.cis_fid/100", "name":"FID" },
+    {"path": "calculation.messzeitpunkt.mz_datum","name": "datum"},
+    {"path": "survey_response.response.ASRS_1","name": "ASRS_1"},
+    {"path": "survey_response.response.ASRS_2","name": "ASRS_2"},
+    {"path": "survey_response.response.ASRS_3","name": "ASRS_3"},
+    {"path": "survey_response.response.ASRS_4","name": "ASRS_4"},
+    {"path": "survey_response.response.ASRS_5","name": "ASRS_5"},
+    {"path": "survey_response.response.ASRS_6","name": "ASRS_6"},
+    {"path": "calculation.score.score","name": "ASRS_Sum"}
+  ]
+}
