@@ -12,9 +12,8 @@
 
   "fields": [
     { "path": "_function", "function": "return source.stay.cis_fid/100", "name":"FID" },
-    { "path": "_function", "function": "return ExportHelpers.formatDateCH(source.survey_response.filled);", "name": "filled" },
     { "path": "survey_response.response.Messzeitpunkt", "name": "Messzeitpunkt" },
-    { "path": "_function", "function": "return ExportHelpers.formatDateISONoTime(source.survey_response.response.Date);", "name": "Datum" },
+    { "path": "_function", "function": "var resp = source.survey_response.response; if ('Date' in resp) {return ExportHelpers.formatDateISONoTime(source.survey_response.response.Date)} else {return ExportHelpers.formatDateCH(source.survey_response.filled)};", "name": "Datum_test"},
     { "path": "patient.gender", "name": "Geschlecht" },
     { "path": "calculation.percentile.education", "name": "Bildungsgruppe" },
     { "path": "survey_response.response.Ausbildungsjahre", "name": "Ausbildungsjahre" },
