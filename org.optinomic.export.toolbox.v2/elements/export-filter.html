@@ -26,6 +26,20 @@
         margin-bottom: 12px;
       }
 
+      .rule {
+        padding: 8px;
+        height: 20px;
+        background-color: #FCE4EC;
+        color: #E91E63;
+        border-radius: 3px;
+      }
+
+      .criterion {
+        width: 128px;
+        color: #E91E63;
+        margin-right: 12px;
+      }
+
     </style>
 
     <vaadin-dialog id="dialog_add_pg_filter" no-close-on-esc no-close-on-outside-click>
@@ -37,7 +51,7 @@
                 <b>[[item.label]]</b>
               </template>
             </vaadin-combo-box>
-            <p>...in folgender Gruppe befinden:</p>
+            <p>...folgender Gruppe befinden:</p>
             <vaadin-combo-box id="pg" style="width:100%" value="{{_pg_rule_edit.pg}}" label="Patientengruppe" items="[[_patient_groups]]" item-value-path="value" item-label-path="label">
               <template>
                 <b>[[item.label]]&nbsp;</b>(PG[[item.value]])
@@ -57,7 +71,7 @@
       <div class="filter_container">
 
         <div class="selector">
-          <h3 >Erhebungszeitraum</h3>
+          <h3>Erhebungszeitraum</h3>
           <vaadin-checkbox checked="{{_erhungszeitraum_use}}">
             <template is="dom-if" if="[[!_erhungszeitraum_use]]" restamp="true">nicht
             </template>einschränken
@@ -87,6 +101,7 @@
           </vaadin-combo-box>
         </template>
       </div>
+
       <div class="filter_container">
         <div class="selector">
           <h3>Patientengruppen ([[_patient_groups.length]])</h3>
@@ -95,15 +110,38 @@
             </template>einschränken
           </vaadin-checkbox>
         </div>
-        <template is="dom-if" if="[[_patientgroups_use]]" restamp="true">
+        <template is="dom-if" if="[[_patientgroups_use]]">
 
-          <h3>Regeln: [[_pg_rules.length]]</h3>
+          <h3>Alle Patienten welche folgender Regel entsprechen:</h3>
 
-          <template is="dom-repeat" items="[[_pg_rules]]">
-            <p style="color:#3F51B5">[[item.operator]] ([[item.pg_name]])</p>
-          </template>
+          <div>
+            <template is="dom-repeat" items="[[_pg_rules]]">
+              <div class="horizontal">
 
-          <paper-button on-click="_pg_rule_add" class="indigo">Regel hinzufügen</paper-button>
+                <div class="criterion">
+
+                  <template is="dom-if" if="[[!item.first]]" restamp="true">
+                    <vaadin-combo-box id="pg" style="width:100%" value="{{item.criterion}}" items="[[_pg_criterions]]" item-value-path="value" item-label-path="value">
+                      <template>
+                        <b>[[item.value]]</b>([[item.label]])
+                      </template>
+                    </vaadin-combo-box>
+                  </template>
+
+                  <template is="dom-if" if="[[item.first]]">
+                    <span stlye="padding-left:48px;">WHERE</span>
+                  </template>
+
+                </div>
+                <div class="rule flex" on-click="_pg_edit_rule">[[item.operator]] ([[item.pg_name]])</div>
+              </div>
+            </template>
+          </div>
+          <div class="horizontal">
+
+            <paper-button on-click="_pg_rule_add" class="grey">Regel hinzufügen</paper-button>
+            <p class="caption">[[_pg_rules.length]]</p>
+          </div>
         </template>
 
       </div>
@@ -168,8 +206,19 @@
           }
         ];
 
+        var criterions = [
+          {
+            "label": "ODER",
+            "value": "OR"
+          }, {
+            "label": "UND",
+            "value": "AND"
+          }
+        ];
+
         this.set('_pg_rule_edit', {"operator": "IN"});
         this.set('_pg_operators', operators);
+        this.set('_pg_criterions', criterions);
 
         var dialog_add_pg_filter = this.$.dialog_add_pg_filter;
         dialog_add_pg_filter.opened = true;
@@ -186,6 +235,13 @@
         var pg_data = state.patient_groups.data[_pg_rule_edit.pg];
         console.warn('pg_data', pg_data, _pg_rule_edit.pg);
         _pg_rule_edit.pg_name = pg_data.data.name;
+        if (_pg_rules.length === 0) {
+          _pg_rule_edit.criterion = null;
+          _pg_rule_edit.first = true;
+        } else {
+          _pg_rule_edit.criterion = 'AND';
+          _pg_rule_edit.first = false;
+        };
 
         _pg_rules.push(_pg_rule_edit);
         this.set('_pg_rules', _pg_rules);
@@ -193,6 +249,15 @@
         var dialog_add_pg_filter = this.$.dialog_add_pg_filter;
         dialog_add_pg_filter.opened = false;
 
+      }
+
+      _pg_edit_rule(e) {
+        var selected_item = Object.assign({}, e.model.item);
+        console.log('_pg_edit_rule', selected_item);
+        this.set('_pg_rule_edit', selected_item);
+
+        var dialog_add_pg_filter = this.$.dialog_add_pg_filter;
+        dialog_add_pg_filter.opened = true;
       }
 
       _pg_rule_cancel() {
