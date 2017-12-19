@@ -32,6 +32,7 @@
         background-color: #FCE4EC;
         color: #E91E63;
         border-radius: 3px;
+        cursor: pointer;
       }
 
       .criterion {
@@ -60,7 +61,7 @@
           </div>
           <div class="card-actions">
             <paper-button on-click="_pg_rule_cancel" style="color:grey">Abbrechen</paper-button>&nbsp;&nbsp;
-            <paper-button on-click="_pg_rule_save">Hinzufügen</paper-button>
+            <paper-button on-click="_pg_rule_save">Speichern</paper-button>
           </div>
         </paper-card>
 
@@ -81,14 +82,14 @@
         <template is="dom-if" if="[[_erhungszeitraum_use]]" restamp="true">
           <div class="horizontal">
             <div class="field flex">
-              <paper-input id="erhebungszeitraum_von" label="Von" placeholder="YYYY-MM-DD"></paper-input>
+              <paper-input id="erhebungszeitraum_von" label="Von" placeholder="YYYY-MM-DD" value$="{{_erhebungszeitraum_von}}"></paper-input>
             </div>
             <div class="field flex">
-              <paper-input id="erhebungszeitraum_bis" label="Bis" placeholder="YYYY-MM-DD"></paper-input>
+              <paper-input id="erhebungszeitraum_bis" label="Bis" placeholder="YYYY-MM-DD" value$="{{_erhebungszeitraum_bis}}"></paper-input>
             </div>
           </div>
 
-          <vaadin-combo-box id="falltyp" style="width:100%" value="[[_d.falltyp.selected.typ]]" label="Falltyp" items="[[_d.falltyp.all]]" item-value-path="typ" item-label-path="typ">
+          <vaadin-combo-box id="falltyp" style="width:100%" value="{{_d.falltyp.selected.typ}}" label="Falltyp" items="[[_d.falltyp.all]]" item-value-path="typ" item-label-path="typ">
             <template>
               <paper-icon-item>
                 <paper-item-body two-line>
@@ -116,7 +117,7 @@
 
           <div>
             <template is="dom-repeat" items="[[_pg_rules]]">
-              <div class="horizontal">
+              <div class="horizontal" style="height: 42px;">
 
                 <div class="criterion">
 
@@ -148,10 +149,10 @@
 
       <div class="horizontal">
         <div class="flex">
-          <paper-button class="grey" on-tap="_getFilter">Nicht anwenden</paper-button>
+          <paper-button class="grey" on-tap="_cancelFilter">Nicht anwenden</paper-button>
         </div>
         <div style="height:42px;">
-          <paper-button class="pink" on-tap="_getFilter">Anwenden</paper-button>
+          <paper-button class="pink" on-tap="_setFilter">Anwenden</paper-button>
         </div>
       </div>
 
@@ -235,16 +236,30 @@
         var pg_data = state.patient_groups.data[_pg_rule_edit.pg];
         console.warn('pg_data', pg_data, _pg_rule_edit.pg);
         _pg_rule_edit.pg_name = pg_data.data.name;
-        if (_pg_rules.length === 0) {
-          _pg_rule_edit.criterion = null;
-          _pg_rule_edit.first = true;
+
+        if ("id" in _pg_rule_edit) {
+          _pg_rules[_pg_rule_edit.id] = _pg_rule_edit;
         } else {
-          _pg_rule_edit.criterion = 'AND';
-          _pg_rule_edit.first = false;
+          _pg_rules.push(_pg_rule_edit);
+
         };
 
-        _pg_rules.push(_pg_rule_edit);
+        _pg_rules.forEach(function (r, rID) {
+          r.id = rID;
+          if (r.id === 0) {
+            r.criterion = null;
+            r.first = true;
+          } else {
+            r.first = false;
+            if ("criterion" in r) {} else {
+              r.criterion = 'AND';
+            };
+
+          };
+        });
+
         this.set('_pg_rules', _pg_rules);
+        // console.log('_pg_rules', _pg_rules);
 
         var dialog_add_pg_filter = this.$.dialog_add_pg_filter;
         dialog_add_pg_filter.opened = false;
@@ -253,7 +268,6 @@
 
       _pg_edit_rule(e) {
         var selected_item = Object.assign({}, e.model.item);
-        console.log('_pg_edit_rule', selected_item);
         this.set('_pg_rule_edit', selected_item);
 
         var dialog_add_pg_filter = this.$.dialog_add_pg_filter;
@@ -264,6 +278,54 @@
         var dialog_add_pg_filter = this.$.dialog_add_pg_filter;
         dialog_add_pg_filter.opened = false;
 
+      }
+
+      _setDefaultDates() {
+        var erhebungszeitraum_von = this.$.erhebungszeitraum_von;
+        var erhebungszeitraum_bis = this.$.erhebungszeitraum_bis;
+
+        var current_year = new Date().getFullYear();
+        erhebungszeitraum_von.value = current_year + "-01-01";
+        erhebungszeitraum_bis.value = current_year + "-12-31";
+      }
+
+      _setFilter() {;
+
+        var erhebungszeitraum_von = this.$.erhebungszeitraum_von;
+        var erhebungszeitraum_bis = this.$.erhebungszeitraum_bis;
+
+        var _pg_rules = this.get('_pg_rules');
+        _pg_rules = _pg_rules.slice(0);
+
+        var return_object = {
+          detail: {
+            "action": "filter",
+            "filter": {
+              "erhungszeitraum": {
+                "active": this._erhungszeitraum_use,
+                "typ": this._d.falltyp.selected.typ,
+                "from": this._erhebungszeitraum_von,
+                "to": this._erhebungszeitraum_bis
+              },
+              "pg": {
+                "active": this._patientgroups_use,
+                "rules": _pg_rules
+              }
+            }
+          }
+        };
+        this.dispatchEvent(new CustomEvent('filter', return_object));
+      }
+
+      _cancelFilter() {
+
+        var return_object = {
+          detail: {
+            "action": "cancel",
+            "filter": null
+          }
+        };
+        this.dispatchEvent(new CustomEvent('filter', return_object));
       }
 
       _init() {
@@ -304,7 +366,11 @@
         this._d = d;
         console.log('(INIT) <element-filter>', d);
 
+        var current_year = new Date().getFullYear();
         this.set('_erhungszeitraum_use', false);
+        this.set('_erhebungszeitraum_von', current_year + "-01-01");
+        this.set('_erhebungszeitraum_bis', current_year + "-12-31");
+
         this.set('_patientgroups_use', false);
         this.set('_pg_rules', []);
 

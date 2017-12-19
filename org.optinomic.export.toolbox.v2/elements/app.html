@@ -81,6 +81,10 @@
 
         <hr>
         <h3>Filter</h3>
+
+        <template is="dom-if" if="[[_filter_have]]" restamp="true">
+          Filterregeln
+        </template>
         <div class="horizontal" style="margin-top:-24px;">
           <p>&nbsp;</p>
           <paper-button class="grey" on-click="_showFilter">Bearbeiten</paper-button>
@@ -88,6 +92,9 @@
 
         <hr>
         <h3>Globale Einstellungen</h3>
+        <template is="dom-if" if="[[_settings_have]]" restamp="true">
+          Einstellungen
+        </template>
         <div class="horizontal" style="margin-top:-24px;">
           <p>&nbsp;</p>
           <paper-button class="grey" on-click="_showSettings">Bearbeiten</paper-button>
@@ -216,17 +223,28 @@
 
         if (e.detail.action === 'cancel') {
           this.set('_settings', null);
+          this.set('_settings_have', false);
         } else {
           this.set('_settings', Object.assign({}, e.detail.settings));
+          this.set('_settings_have', true);
         };
 
         this._showExtras(false);
-        console.warn('_e_settings', e.detail);
+        console.warn('_e_settings', this._settings);
       }
 
       _e_filter(e) {
+
+        if (e.detail.action === 'cancel') {
+          this.set('_filter', null);
+          this.set('_filter_have', false);
+        } else {
+          this.set('_filter', Object.assign({}, e.detail.filter));
+          this.set('_filter_have', true);
+        };
+
         this._showExtras(false);
-        console.warn('_e_filter', e.detail);
+        console.warn('_e_filter', this._filter);
       }
 
       // --------------- Lifecycle ---------------
@@ -235,7 +253,9 @@
         this.dispatch('getAllPG');
         this._showStart();
         this.set('_settings', null);
+        this.set('_settings_have', false);
         this.set('_filter', null);
+        this.set('_filter_have', false);
 
         console.warn('_init :: Export-Toolbox');
       }
