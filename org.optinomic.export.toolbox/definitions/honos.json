@@ -1,0 +1,36 @@
+{
+  "options": {
+    "name": "HoNOS",
+    "description": "honos",
+    "export_optinomic_ids": false,
+    "export_patient_details": false,
+    "export_stay_details": false,
+    "export_header": true,
+    "delimter": ";",
+    "source": "honos"
+  },
+  "fields": [
+    {"path": "_function", "function": "return 'PH';","name": "Rekordart"},
+    {"path": "_function", "function": "return '71286515';","name": "betriebsnummer_bur"},
+    {"path": "_function", "function": "return source.stay.cis_fid/100","name":"Fall_nummer"},
+    {"path": "survey_response.response.q401V04","name": "zeitpunkt_honos"},
+    {"path": "survey_response.response.q401V05","name": "dropoutcode_honos"},
+    {"path": "survey_response.response.q401V06","name": "spezifikation_dropout_honos_andere"},
+    {"path": "_function", "function": "var mzp = source.survey_response.response.q401V04; if (mzp === '1') { return ExportHelpers.formatDateYYYYMMDD(source.stay.start); }; if (mzp === '2') { return ExportHelpers.formatDateYYYYMMDD(source.stay.stop); }; if ((mzp !== '1') && ((mzp !== '2'))) {return ExportHelpers.formatDateYYYYMMDD(source.survey_response.response.q402V00);}","name": "datum_erhebung_bscl"},
+    {"path": "survey_response.response.q402V00","name": "datum_erhebung_honos"},
+    {"path": "survey_response.response.H1[402V01]","name": "honos_h1"},
+    {"path": "survey_response.response.H1[402V02]","name": "honos_h2"},
+    {"path": "survey_response.response.H1[402V03]","name": "honos_h3"},
+    {"path": "survey_response.response.H1[402V04]","name": "honos_h4"},
+    {"path": "survey_response.response.H1[402V05]","name": "honos_h5"},
+    {"path": "survey_response.response.H1[402V06]","name": "honos_h6"},
+    {"path": "survey_response.response.H1[402V07]","name": "honos_h7"},
+    {"path": "survey_response.response.H1[402V08]","name": "honos_h8"},
+    {"path": "survey_response.response.q402V09","name": "honos_h8a"},
+    {"path": "survey_response.response.q402V10","name": "honos_h8b"},
+    {"path": "survey_response.response.H2[402V11]","name": "honos_h9"},
+    {"path": "survey_response.response.H2[402V12]","name": "honos_h10"},
+    {"path": "survey_response.response.H2[402V13]","name": "honos_h11"},
+    {"path": "survey_response.response.H2[402V14]","name": "honos_h12"}
+  ]
+}
