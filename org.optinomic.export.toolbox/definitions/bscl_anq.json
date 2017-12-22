@@ -6,7 +6,7 @@
         "export_patient_details": false,
         "export_stay_details": false,
         "export_header": true,
-        "delimter": "|",
+        "delimter": ";",
         "source": "bscl"
     },
     "fields": [
