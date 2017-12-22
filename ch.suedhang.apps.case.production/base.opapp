@@ -1,7 +1,7 @@
 [module]
 id = __opapp_identifier()
 name = CASE
-parent = ch.suedhang.apps.case.new
+parent = ch.suedhang.apps.case
 short_description = Checkliste zur Abschätzung der Schwere einer Alkoholabhängigkeit (CASE) und Behandlungsindikation
 version = __opapp_version()
 type = patient
