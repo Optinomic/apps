@@ -647,11 +647,11 @@
 
           if ((this.settings !== null) && (this.settings !== undefined)) {
             this.set('_settings_override', true);
-            this._create_files();
             console.warn('settingsChanged', this.settings);
           } else {
             this.set('_settings_override', false);
           };
+          this._create_files();
 
         });
       }
@@ -662,10 +662,14 @@
           if ((this.filter !== null) && (this.filter !== undefined)) {
             if ((this.filter.pg.active) || (this.filter.erhungszeitraum.active)) {
               this.set('_filter_override', true);
-              this._create_files();
               console.warn('filterChanged', this.filter);
+            } else {
+              this.set('_filter_override', false);
             };
+          } else {
+            this.set('_filter_override', false);
           };
+          this._create_files();
 
         });
       }
