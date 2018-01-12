@@ -79,7 +79,7 @@
           </vaadin-checkbox>
         </div>
 
-        <template is="dom-if" if="[[_erhungszeitraum_use]]" restamp="true">
+        <div hidden$="[[!_erhungszeitraum_use]]">
           <div class="horizontal">
             <div class="field flex">
               <paper-input id="erhebungszeitraum_von" label="Von" placeholder="YYYY-MM-DD" value$="{{_erhebungszeitraum_von}}"></paper-input>
@@ -100,7 +100,7 @@
               </paper-icon-item>
             </template>
           </vaadin-combo-box>
-        </template>
+        </div>
       </div>
 
       <div class="filter_container">
@@ -139,9 +139,11 @@
             </template>
           </div>
           <div class="horizontal">
-
-            <paper-button on-click="_pg_rule_add" class="grey">Regel hinzufügen</paper-button>
-            <p class="caption">[[_pg_rules.length]]</p>
+            <div class="horizontal">
+              <paper-button on-click="_pg_rule_add" class="grey">Regel hinzufügen</paper-button>
+              <p class="caption">[[_pg_rules.length]]</p>
+            </div>
+            <paper-button on-click="_pg_rule_delete" class="grey">Regeln löschen</paper-button>
           </div>
         </template>
 
@@ -226,6 +228,10 @@
 
       }
 
+      _pg_rule_delete() {
+        this.set('_pg_rules', []);
+      }
+
       _pg_rule_save() {
 
         var _pg_rules = this.get('_pg_rules');
@@ -304,8 +310,8 @@
               "erhungszeitraum": {
                 "active": this._erhungszeitraum_use,
                 "typ": this._d.falltyp.selected.typ,
-                "from": this._erhebungszeitraum_von,
-                "to": this._erhebungszeitraum_bis
+                "from": erhebungszeitraum_von.value,
+                "to": erhebungszeitraum_bis.value
               },
               "pg": {
                 "active": this._patientgroups_use,

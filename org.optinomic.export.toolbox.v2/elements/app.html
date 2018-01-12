@@ -81,23 +81,26 @@
 
         <hr>
         <h3>Filter</h3>
-
-        <template is="dom-if" if="[[_filter_have]]" restamp="true">
-          Filterregeln
-        </template>
         <div class="horizontal" style="margin-top:-24px;">
           <p>&nbsp;</p>
-          <paper-button class="grey" on-click="_showFilter">Bearbeiten</paper-button>
+          <template is="dom-if" if="[[_filter_have]]" restamp="true">
+            <paper-button class="pink" on-click="_showFilter">Bearbeiten</paper-button>
+          </template>
+          <template is="dom-if" if="[[!_filter_have]]" restamp="true">
+            <paper-button class="grey" on-click="_showFilter">Bearbeiten</paper-button>
+          </template>
         </div>
 
         <hr>
         <h3>Globale Einstellungen</h3>
-        <template is="dom-if" if="[[_settings_have]]" restamp="true">
-          Einstellungen
-        </template>
         <div class="horizontal" style="margin-top:-24px;">
           <p>&nbsp;</p>
-          <paper-button class="grey" on-click="_showSettings">Bearbeiten</paper-button>
+          <template is="dom-if" if="[[_settings_have]]" restamp="true">
+            <paper-button class="pink" on-click="_showSettings">Bearbeiten</paper-button>
+          </template>
+          <template is="dom-if" if="[[!_settings_have]]" restamp="true">
+            <paper-button class="grey" on-click="_showSettings">Bearbeiten</paper-button>
+          </template>
         </div>
 
       </div>

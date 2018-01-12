@@ -75,17 +75,19 @@
 
         <div style="width:96px;">
           <template is="dom-if" if="[[_data_ready]]" restamp="true">
-            <template is="dom-if" if="[[_settings_override]]" restamp="true">
-              <p class="circle green">S</p>
-              <paper-tooltip position="left">Globale-Einstellungen</paper-tooltip>
-            </template>
-            <template is="dom-if" if="[[_filter_override]]" restamp="true">
-              <p class=" circle red">[[_json_file.rows.length]]</p>
-              <paper-tooltip position="left">Filter</paper-tooltip>
-            </template>
-            <template is="dom-if" if="[[!_filter_override]]" restamp="true">
-              <p class="circle green">[[_json_file.rows.length]]</p>
-              <paper-tooltip position="left">Filter</paper-tooltip>
+            <template is="dom-if" if="[[_created_CSV]]" restamp="true">
+              <template is="dom-if" if="[[_settings_override]]" restamp="true">
+                <p class="circle green">S</p>
+                <paper-tooltip position="left">Globale-Einstellungen</paper-tooltip>
+              </template>
+              <template is="dom-if" if="[[_filter_override]]" restamp="true">
+                <p class=" circle red">[[_json_file.rows.length]]</p>
+                <paper-tooltip position="right">Filter</paper-tooltip>
+              </template>
+              <template is="dom-if" if="[[!_filter_override]]" restamp="true">
+                <p class="circle green">[[_json_file.rows.length]]</p>
+                <paper-tooltip position="right">Ungefiltert</paper-tooltip>
+              </template>
             </template>
           </template>
         </div>
@@ -392,29 +394,26 @@
 
           json.rows.forEach(function (sr, srID) {
 
-            Polymer.RenderStatus.afterNextRender(this, function () {
+            if ((sr !== null) && (sr !== undefined)) {
+              json.header.forEach(function (field, fieldID) {
 
-              if ((sr !== null) && (sr !== undefined)) {
-                json.header.forEach(function (field, fieldID) {
-
-                  // Rows
-                  rows_str = rows_str + sr[field];
-                  if (fieldID === json.header.length - 1) {
-                    // Last
-                    if (srID !== json.rows.length - 1) {
-                      // Not File-End
-                      rows_str = rows_str + newline;
-                    };
-                  } else {
-                    // Not last
-                    rows_str = rows_str + delimitter;
+                // Rows
+                rows_str = rows_str + sr[field];
+                if (fieldID === json.header.length - 1) {
+                  // Last
+                  if (srID !== json.rows.length - 1) {
+                    // Not File-End
+                    rows_str = rows_str + newline;
                   };
+                } else {
+                  // Not last
+                  rows_str = rows_str + delimitter;
+                };
 
-                });
+              });
 
-              };
+            };
 
-            });
           });
 
           // Header
@@ -440,6 +439,30 @@
           return file;
         };
 
+        function check_pg_group(group, value) {
+          var return_boolean = false;
+          group.forEach(function (g, gID) {
+            if (g === value) {
+              return_boolean = true;
+            };
+          });
+          return return_boolean;
+        };
+
+        function dateCheck(from, to, check) {
+          var fDate,
+            lDate,
+            cDate;
+          fDate = Date.parse(from);
+          lDate = Date.parse(to);
+          cDate = Date.parse(check);
+
+          if ((cDate <= lDate && cDate >= fDate)) {
+            return true;
+          }
+          return false;
+        };
+
         Polymer.RenderStatus.afterNextRender(this, function () {
 
           if ((this._sr !== undefined) && (this._sr !== null)) {
@@ -448,8 +471,123 @@
               // We have data -> Proceed.
               var _sr = Object.assign({}, this.get('_sr'));
               if ("survey_responses" in _sr) {
+
+                var file_responses = [];
+                if (filtered) {
+                  // filter responses
+
+                  var date_rules = false;
+                  var pg_rules = false;
+
+                  if ((this.filter !== null) && (this.filter !== undefined)) {
+                    if (this.filter.erhungszeitraum.active) {
+                      date_rules = true;
+                      console.log('date_rules', date_rules, this.filter.erhungszeitraum);
+                    };
+                    if ((this.filter.pg.active) && (this.filter.pg.rules.length > 0)) {
+                      pg_rules = true;
+                      console.log('pg_rules', pg_rules, this.filter.pg.rules);
+                    };
+                  };
+
+                  _sr.survey_responses.forEach(function (sr, srID) {
+
+                    // Patientengruppen Regeln
+                    if (pg_rules) {
+                      var to_add = null;
+                      this.filter.pg.rules.forEach(function (r, rID) {
+                        if (r.operator === "IN") {
+                          if ((r.criterion === "AND") || (r.criterion === null)) {
+                            if ((to_add === true) || (to_add === null)) {
+                              to_add = check_pg_group(sr.patient_groups.patient_in_group.yes, r.pg);
+                            };
+                          } else {
+                            if ((to_add === false)) {
+                              to_add = check_pg_group(sr.patient_groups.patient_in_group.yes, r.pg);
+                            };
+                          };
+
+                        } else {
+                          if ((r.criterion === "AND") || (r.criterion === null)) {
+                            if ((to_add === true) || (to_add === null)) {
+                              to_add = check_pg_group(sr.patient_groups.patient_in_group.no, r.pg);
+                            };
+                          } else {
+                            if ((to_add === false)) {
+                              to_add = check_pg_group(sr.patient_groups.patient_in_group.no, r.pg);
+                            };
+                          };
+                        };
+                      });
+
+                      if (to_add) {
+                        file_responses.push(sr);
+                      };
+                    } else {
+                      // all responses
+                      file_responses = _sr.survey_responses;
+                    };
+
+                    // Erhebungszeitraum Regeln
+                    if (date_rules) {
+                      var stored_responses = file_responses.slice(0);
+                      file_responses = [];
+                      stored_responses.forEach(function (r, rID) {
+
+                        var filled = r.survey_response.filled;
+                        var filter = this.filter.erhungszeitraum;
+
+                        var eintritt_in_range = dateCheck(filter.from, filter.to, r.stay.start);
+                        var austritt_in_range = dateCheck(filter.from, filter.to, r.stay.stop);
+
+                        // Falltyp: Alle
+                        if (filter.typ === "Alle") {
+                          if (dateCheck(filter.from, filter.to, filled)) {
+                            file_responses.push(sr);
+                          };
+                        };
+
+                        // Falltyp: A1
+                        if (filter.typ === "A1") {
+                          if ((eintritt_in_range === true) && (austritt_in_range === true)) {
+                            file_responses.push(sr);
+                          };
+                        };
+
+                        // Falltyp: A2
+                        if (filter.typ === "A2") {
+                          if ((eintritt_in_range === false) && (austritt_in_range === true)) {
+                            file_responses.push(sr);
+                          };
+                        };
+
+                        // Falltyp: B
+                        if (filter.falltyp === "B") {
+                          if ((eintritt_in_range === true) && (austritt_in_range === false)) {
+                            file_responses.push(sr);
+                          };
+                        };
+
+                        // Falltyp: C
+                        if (filter.typ === "C") {
+                          if ((eintritt_in_range === false) && (austritt_in_range === false)) {
+                            file_responses.push(sr);
+                          };
+                        };
+
+                        // console.log('Erhebungszeitraum', filled, eintritt_in_range, austritt_in_range);
+
+                      }.bind(this));
+                    };
+
+                  }.bind(this));
+                } else {
+                  // all responses
+                  file_responses = _sr.survey_responses;
+                };
+
                 this.set('_json_file', null);
-                this.set('_json_file', create_json(_sr.survey_responses, this._dataDive));
+                this.set('_json_file', create_json(file_responses, this._dataDive));
                 this.set('_created_JSON', true);
 
                 this.set('_csv_file', null);
@@ -508,8 +646,23 @@
       filterChanged() {
         this._filterChangedDebouncer = Polymer.Debouncer.debounce(this._filterChangedDebouncer, Polymer.Async.timeOut.after(250), () => {
 
+          this.set('_created_JSON', false);
+          this.set('_created_CSV', false);
+
           if ((this.filter !== null) && (this.filter !== undefined)) {
-            console.warn('filterChanged', this.filter);
+            if ((this.filter.pg.active) || (this.filter.erhungszeitraum.active)) {
+              this.set('_filter_override', true);
+
+              this._createCSVandJSONFile(this.definition, true);
+
+              console.warn('filterChanged', this.filter);
+            } else {
+              this.set('_filter_override', false);
+              this._createCSVandJSONFile(this.definition, false);
+            };
+          } else {
+            this.set('_filter_override', false);
+            this._createCSVandJSONFile(this.definition, false);
           };
 
         });
