@@ -610,31 +610,44 @@
 
       // --------------- Observers ---------------
 
+      _create_files() {
+        if (this._data_ready) {
+          this.set('_created_JSON', false);
+          this.set('_created_CSV', false);
+
+          var enhanced_definition = Object.assign({}, this.get('definition'));
+
+          if (this._settings_override) {
+            // console.warn('Enhanced ????????', this._settings_override, this.settings, enhanced_definition);
+            enhanced_definition.options = Object.assign(this.settings, enhanced_definition.options);
+          };
+
+          var filter_active = this._filter_override || false;
+          this._createCSVandJSONFile(enhanced_definition, filter_active);
+
+        };
+      }
+
       _sr_ready() {
-        this._sr_readyDebouncer = Polymer.Debouncer.debounce(this._sr_readyDebouncer, Polymer.Async.timeOut.after(250), () => {
+        this._sr_readyDebouncer = Polymer.Debouncer.debounce(this._sr_readyDebouncer, Polymer.Async.timeOut.after(280), () => {
 
           if ((this._sr !== undefined) && (this._sr !== null)) {
             this._getState();
             this.set('_loading', false);
             this.set('_data_ready', true);
+            this._create_files();
 
-            this.set('_created_JSON', false);
-            this.set('_created_CSV', false);
-            this._createCSVandJSONFile(this.definition, false);
           };
 
         });
       }
 
       settingsChanged() {
-        this._settingsChangedDebouncer = Polymer.Debouncer.debounce(this._settingsChangedDebouncer, Polymer.Async.timeOut.after(250), () => {
+        this._settingsChangedDebouncer = Polymer.Debouncer.debounce(this._settingsChangedDebouncer, Polymer.Async.timeOut.after(150), () => {
 
           if ((this.settings !== null) && (this.settings !== undefined)) {
             this.set('_settings_override', true);
-            var enhanced_definition = Object.assign({}, this.get('definition'));
-            this.set('_created_JSON', false);
-            this.set('_created_CSV', false);
-            this._createCSVandJSONFile(enhanced_definition, false);
+            this._create_files();
             console.warn('settingsChanged', this.settings);
           } else {
             this.set('_settings_override', false);
@@ -644,25 +657,14 @@
       }
 
       filterChanged() {
-        this._filterChangedDebouncer = Polymer.Debouncer.debounce(this._filterChangedDebouncer, Polymer.Async.timeOut.after(250), () => {
-
-          this.set('_created_JSON', false);
-          this.set('_created_CSV', false);
+        this._filterChangedDebouncer = Polymer.Debouncer.debounce(this._filterChangedDebouncer, Polymer.Async.timeOut.after(150), () => {
 
           if ((this.filter !== null) && (this.filter !== undefined)) {
             if ((this.filter.pg.active) || (this.filter.erhungszeitraum.active)) {
               this.set('_filter_override', true);
-
-              this._createCSVandJSONFile(this.definition, true);
-
+              this._create_files();
               console.warn('filterChanged', this.filter);
-            } else {
-              this.set('_filter_override', false);
-              this._createCSVandJSONFile(this.definition, false);
             };
-          } else {
-            this.set('_filter_override', false);
-            this._createCSVandJSONFile(this.definition, false);
           };
 
         });
