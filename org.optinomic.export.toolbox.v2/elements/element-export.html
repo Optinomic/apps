@@ -483,11 +483,11 @@
                   if ((this.filter !== null) && (this.filter !== undefined)) {
                     if (this.filter.erhungszeitraum.active) {
                       date_rules = true;
-                      console.log('date_rules', date_rules, this.filter.erhungszeitraum);
+                      // console.log('date_rules', date_rules, this.filter.erhungszeitraum);
                     };
                     if ((this.filter.pg.active) && (this.filter.pg.rules.length > 0)) {
                       pg_rules = true;
-                      console.log('pg_rules', pg_rules, this.filter.pg.rules);
+                      // console.log('pg_rules', pg_rules, this.filter.pg.rules);
                     };
                   };
 
@@ -634,11 +634,11 @@
               enhanced_definition.fields = this._default_fields.default_optinomic_fields.concat(enhanced_definition.fields);
             };
 
-            console.error('==> enhanced_definition & fields', enhanced_definition, this._default_fields);
+            // console.error('==> enhanced_definition & fields', enhanced_definition, this._default_fields);
           };
 
           var filter_active = this._filter_override || false;
-          console.error('==> _createCSVandJSONFile', enhanced_definition, this._filter_override);
+          // console.error('==> _createCSVandJSONFile', enhanced_definition, this._filter_override);
           this._createCSVandJSONFile(enhanced_definition, filter_active);
 
         };
