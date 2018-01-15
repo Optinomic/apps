@@ -69,7 +69,7 @@ __opapp_include(calculations/case.m4)
 [calculation einzelassessment javascript ch.suedhang.apps.neuroanamnese.production ch.suedhang.apps.neuroanamnese.production:another_calculation]
 __opapp_include(calculations/einzelassessment.m4)
 
-[calculation honos javascript ch.suedhang.apps.honos.production ch.suedhang.apps.honos.production:honos_calculation]
+[calculation honos_new javascript ch.suedhang.apps.honos.production ch.suedhang.apps.honos.production:honos_calculation]
 __opapp_include(calculations/honos.m4)
 
 [calculation isk javascript ch.suedhang.apps.isk.production ch.suedhang.apps.isk.production:scores_calculation]
