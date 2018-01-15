@@ -618,8 +618,10 @@
           var enhanced_definition = Object.assign({}, this.get('definition'));
 
           if (this._settings_override) {
-            // console.warn('Enhanced ????????', this._settings_override, this.settings, enhanced_definition);
-            enhanced_definition.options = Object.assign(this.settings, enhanced_definition.options);
+            
+            enhanced_definition.options = Object.assign(enhanced_definition.options, this.settings);
+            
+            console.error('==> enhanced_definition & fields', enhanced_definition, this._default_fields);
           };
 
           var filter_active = this._filter_override || false;

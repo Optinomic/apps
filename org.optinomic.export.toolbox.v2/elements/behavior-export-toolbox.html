@@ -148,6 +148,12 @@
         };
       });
 
+      var d = {};
+      d.default_patient = __opapp_include(../org.optinomic.export.toolbox/definitions/_default_patient.js);
+      d.default_stay = __opapp_include(../org.optinomic.export.toolbox/definitions/_default_stay.js);
+      d.default_optinomic_fields = __opapp_include(../org.optinomic.export.toolbox/definitions/_optinomic_ids.js);
+      
+
       function compare(a, b) {
         if (a.options.name < b.options.name)
           return -1;
@@ -158,6 +164,7 @@
 
       export_files.sort(compare);
       this.set('_export_files', export_files);
+      this.set('_default_fields', d);
 
       console.log('optinomicExportToolbox (Behavior)', this._export_files, this._calculation_sources);
     },
