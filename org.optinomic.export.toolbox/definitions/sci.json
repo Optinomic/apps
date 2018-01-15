@@ -58,13 +58,13 @@
     { "path": "_function", "function": "var resp = source.survey_response.response; if ('ESCICoping[ESCIC19]' in resp) {return source.survey_response.response['ESCICoping[ESCIC19]']}; if ('ASCICoping[ESCIC19]' in resp) {return source.survey_response.response['ASCICoping[ESCIC19]']} else {return source.survey_response.response.ESCICoping_ESCIC19};", "name": "SCI_39" },
     { "path": "_function", "function": "var resp = source.survey_response.response; if ('ESCICoping[ESCIC20]' in resp) {return source.survey_response.response['ESCICoping[ESCIC20]']}; if ('ASCICoping[ESCIC20]' in resp) {return source.survey_response.response['ASCICoping[ESCIC20]']} else {return source.survey_response.response.ESCICoping_ESCIC20};", "name": "SCI_40" },
 
-    {"path": "calculation.response.data.response.ESCI_Score_Belastung","name": "SCI_Belastung"},
-    {"path": "calculation.response.data.response.ESCI_Score_Stress","name": "SCI_Stress"},
-    {"path": "calculation.response.data.response.ESCI_Score_Coping_Pos","name": "SCI_Coping_Pos"},
-    {"path": "calculation.response.data.response.ESCI_Score_Coping_AB","name": "SCI_Coping_AB"},
-    {"path": "calculation.response.data.response.ESCI_Score_Coping_SU","name": "SCI_Coping_SU"},
-    {"path": "calculation.response.data.response.ESCI_Score_Coping_REL","name": "SCI_Coping_REL"},
-    {"path": "calculation.response.data.response.ESCI_Score_Coping_ALK","name": "SCI_Coping_ALK"}
+    {"path": "calculation.scores.0.sum_score","name": "SCI_Belastung"},
+    {"path": "calculation.scores.1.sum_score","name": "SCI_Stress"},
+    {"path": "calculation.scores.2.sum_score","name": "SCI_Coping_Pos"},
+    {"path": "calculation.scores.3.sum_score","name": "SCI_Coping_AB"},
+    {"path": "calculation.scores.4.sum_score","name": "SCI_Coping_SU"},
+    {"path": "calculation.scores.5.sum_score","name": "SCI_Coping_REL"},
+    {"path": "calculation.scores.6.sum_score","name": "SCI_Coping_ALK"}
 
   ]
 }
