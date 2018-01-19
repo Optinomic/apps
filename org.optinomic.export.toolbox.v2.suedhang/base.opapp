@@ -35,3 +35,8 @@ __opapp_include(elements/app.html)
 
 
 [css]
+
+
+[calculation honos_ucalc javascript ch.suedhang.apps.honos.production ch.suedhang.apps.honos.production:honos_calculation]
+__opapp_include(../org.optinomic.export.toolbox/calculations/honos.m4)
+
