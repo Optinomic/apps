@@ -40,7 +40,5 @@ __opapp_include(elements/app.html)
 [calculation honos_ua_calc javascript ch.suedhang.apps.honos.production ch.suedhang.apps.honos.production:honos_calculation]
 __opapp_include(../org.optinomic.export.toolbox.v2.suedhang/calculations/honos.m4)
 
-[calculation bscl_full javascript ch.suedhang.apps.bscl_anq.production ch.suedhang.apps.bscl_anq.production:scores_calculation]
-__opapp_include(../org.optinomic.export.toolbox.suedhang/calculations/full.js)
 
 
