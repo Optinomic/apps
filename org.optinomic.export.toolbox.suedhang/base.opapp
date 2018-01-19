@@ -60,7 +60,7 @@ __opapp_include(calculations/asrs.m4)
 [calculation bdi javascript ch.suedhang.apps.bdi.production ch.suedhang.apps.bdi.production:bdi_score]
 __opapp_include(calculations/bdi.m4)
 
-[calculation bscl javascript ch.suedhang.apps.bscl_anq.production ch.suedhang.apps.bscl_anq.production:scores_calculation]
+[calculation bscl_new javascript ch.suedhang.apps.bscl_anq.production ch.suedhang.apps.bscl_anq.production:scores_calculation]
 __opapp_include(calculations/bscl.m4)
 
 [calculation case javascript ch.suedhang.apps.case.production ch.suedhang.apps.case.production:another_calculation]
