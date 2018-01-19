@@ -68,7 +68,8 @@
         _array_source.push({
             "name": "HoNOS",
             "index": "honos",
-            "userapp_calculation_id": "honos_ua_calc"
+            "userapp_calculation_id": "honos_ua_calc",
+            "userapp_id": "org.optinomic.export.toolbox.v2.suedhang"
         });        
           
         _array_source.push({
@@ -107,7 +108,12 @@
 
       _array_source.forEach(function (d, dID) {
         d.id = dID;
-        d.userapp_id = "org.optinomic.export.toolbox.v2.suedhang";
+
+        if ("userapp_id" in d) {
+            // use the given
+        } else {
+            d.userapp_id = "org.optinomic.export.toolbox.suedhang";
+        };
 
         _object_source[d.index] = d;
       });
