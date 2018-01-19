@@ -1,0 +1,281 @@
+<link rel="import" href="polymer/polymer-element.html">
+<link rel="import" href="iron-pages/iron-pages.html">
+<link rel="import" href="optinomic-elements/optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-elements/optinomic-clipboard/optinomic-clipboard.html">
+<link rel="import" href="juicy-jsoneditor/juicy-jsoneditor.html">
+
+<link rel="import" href="vaadin-valo-theme/vaadin-button.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-checkbox.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-combo-box.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-date-picker.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-form-item.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-form-layout.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-grid.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-overlay.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-text-field.html">
+
+<link rel="import" href="vaadin-checkbox/vaadin-checkbox.html">
+<link rel="import" href="vaadin-grid/vaadin-grid.html">
+<link rel="import" href="vaadin-form-layout/vaadin-form-layout.html">
+<link rel="import" href="vaadin-text-field/vaadin-text-field.html">
+<link rel="import" href="vaadin-date-picker/vaadin-date-picker.html">
+<link rel="import" href="vaadin-split-layout/vaadin-split-layout.html">
+<link rel="import" href="vaadin-dialog/vaadin-dialog.html">
+<link rel="import" href="vaadin-combo-box/vaadin-combo-box.html">
+
+<dom-module id="optinomic-template">
+  <template>
+    <style include="optinomic-styles">
+      :host {
+        display: block;
+        --right-top-height: 100%;
+        --right-bottom-height: 0;
+      }
+
+      .fullscreen {
+        height: calc(100vh);
+        min-height: calc(100vh);
+      }
+
+      .left_bar {
+        background: #E0E0E0;
+        min-width: 128px;
+        max-width: 128px;
+        padding: 12px;
+      }
+
+      .right_top {
+        height: var(--right-top-height);
+        min-height: var(--right-top-height);
+        transition: all 0.25s;
+      }
+
+      .right_bottom {
+        height: var(--right-bottom-height);
+        max-height: var(--right-bottom-height);
+        transition: all 0.25s;
+      }
+
+      .page {
+        padding: 12px;
+      }
+
+    </style>
+
+    <vaadin-split-layout class="fullscreen">
+      <div class="left_bar">
+
+        <paper-icon-button style="float:right" class="grey" on-click="_showStart" style="margin-right:6px;" icon="home"></paper-icon-button>
+        <h2>Export-Toolbox</h2>
+        <div class="horizontal" style="margin-top:-24px;">
+          <p>[[_export_files.length]] Files</p>
+          <p>[[_calculation_sources.array.length]] Quellen</p>
+        </div>
+
+        <hr>
+        <h3>Datenbezug</h3>
+
+        <vaadin-checkbox checked="{{_autorequest}}">
+          automatisch
+        </vaadin-checkbox>
+
+        <hr>
+        <h3>Filter</h3>
+        <div class="horizontal" style="margin-top:-24px;">
+          <p>&nbsp;</p>
+          <template is="dom-if" if="[[_filter_have]]" restamp="true">
+            <paper-button class="pink" on-click="_showFilter">Bearbeiten</paper-button>
+          </template>
+          <template is="dom-if" if="[[!_filter_have]]" restamp="true">
+            <paper-button class="grey" on-click="_showFilter">Erstellen</paper-button>
+          </template>
+        </div>
+
+        <hr>
+        <h3>Globale Einstellungen</h3>
+        <div class="horizontal" style="margin-top:-24px;">
+          <p>&nbsp;</p>
+          <template is="dom-if" if="[[_settings_have]]" restamp="true">
+            <paper-button class="pink" on-click="_showSettings">Bearbeiten</paper-button>
+          </template>
+          <template is="dom-if" if="[[!_settings_have]]" restamp="true">
+            <paper-button class="grey" on-click="_showSettings">Erstellen</paper-button>
+          </template>
+        </div>
+
+      </div>
+
+      <vaadin-split-layout vertical>
+        <div class="right_top page">
+
+          <iron-pages selected="[[_app_state]]" attr-for-selected="name" fallback-selection="start" role="main">
+            <div name="start">
+              <div class="horizontal">
+                <paper-icon-button class="grey" on-click="_showStart" style="margin-right:6px;" icon="home"></paper-icon-button>
+                <optinomic-title class="flex" h1="Export-Toolbox" h2="Daten exportieren"></optinomic-title>
+              </div>
+
+              <template is="dom-repeat" items="[[_export_files]]" as="ef">
+                <element-export on-json="_e_data" definition="[[ef]]" autorequest="[[_autorequest]]" settings="[[_settings]]" filter="[[_filter]]"></element-export>
+              </template>
+            </div>
+
+          </iron-pages>
+
+        </div>
+
+        <div class="right_bottom">
+
+          <iron-pages selected="[[_app_state]]" attr-for-selected="name" fallback-selection="start">
+            <div name="start" class="page">Selektieren Sie eine Aktion!</div>
+
+            <div name="filter" class="page">
+              <h2>Filter</h2>
+              <export-filter on-filter="_e_filter"></export-filter>
+            </div>
+
+            <div name="settings" class="page">
+              <h2>Einstellungen</h2>
+              <export-settings on-settings="_e_settings"></export-settings>
+            </div>
+          </iron-pages>
+
+        </div>
+
+      </vaadin-split-layout>
+    </vaadin-split-layout>
+
+  </template>
+
+  <script>
+    class optinomicTemplate extends Polymer.mixinBehaviors([
+      opappBehavior, optinomicExportToolbox
+    ], ReduxBehavior(Polymer.Element)) {
+
+      static get is() {
+        return 'optinomic-template';
+      }
+
+      static get actions() {
+        return AsyncActionsBehavior.actions;
+      }
+
+      // Properties
+      static get properties() {
+        return {
+
+          _app_state: {
+            type: String,
+            value: 'start'
+          },
+
+          _autorequest: {
+            type: Boolean,
+            value: false
+          },
+
+          _user: {
+            type: Object,
+            statePath: '_app_user.data'
+          }
+
+        };
+      }
+
+      // --------------- Functions ---------------
+
+      _showStart() {
+        this._showExtras(false);
+        this.set('_app_state', 'start');
+      }
+
+      _showFilter() {
+        this._showExtras(true);
+        this.set('_app_state', 'filter');
+      }
+
+      _showSettings() {
+        this._showExtras(true);
+        this.set('_app_state', 'settings');
+      }
+
+      _showExtras(should) {
+
+        var h = window.innerHeight;
+        var top = 96;
+        var top_px = top + 'px';
+        var bottom = h - top;
+        var bottom_px = bottom + 'px';
+        console.log(h, top_px, bottom_px);
+
+        if (should) {
+          this.updateStyles({'--right-top-height': top_px, '--right-bottom-height': bottom_px});
+        } else {
+          this.updateStyles({'--right-top-height': '100%', '--right-bottom-height': '0%'});
+        };
+
+      }
+
+      // --------------- Events ---------------
+
+      _e_data(e) {
+        console.warn('_e_data', e.detail);
+      }
+
+      _e_settings(e) {
+
+        if (e.detail.action === 'cancel') {
+          this.set('_settings', null);
+          this.set('_settings_have', false);
+        } else {
+          this.set('_settings', Object.assign({}, e.detail.settings));
+          this.set('_settings_have', true);
+        };
+
+        this._showExtras(false);
+        console.warn('_e_settings', this._settings);
+      }
+
+      _e_filter(e) {
+
+        if (e.detail.action === 'cancel') {
+          this.set('_filter', null);
+          this.set('_filter_have', false);
+        } else {
+          this.set('_filter', Object.assign({}, e.detail.filter));
+          this.set('_filter_have', true);
+        };
+
+        this._showExtras(false);
+        console.warn('_e_filter', this._filter);
+      }
+
+      // --------------- Lifecycle ---------------
+
+      _init() {
+        this.dispatch('getAllPG');
+        this._showStart();
+        this.set('_settings', null);
+        this.set('_settings_have', false);
+        this.set('_filter', null);
+        this.set('_filter_have', false);
+
+        console.warn('_init :: Export-Toolbox');
+      }
+
+      constructor() {
+        super();
+      }
+
+      ready() {
+        super.ready();
+
+        Polymer.RenderStatus.afterNextRender(this, function () {
+          this._init();
+        });
+      }
+    }
+
+    window.customElements.define(optinomicTemplate.is, optinomicTemplate);
+  </script>
+</dom-module>

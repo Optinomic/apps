@@ -1,0 +1,738 @@
+<link rel="import" href="polymer/polymer-element.html">
+<link rel="import" href="paper-button/paper-button.html">
+<link rel="import" href="paper-spinner/paper-spinner.html">
+<link rel="import" href="iron-collapse/iron-collapse.html">
+<link rel="import" href="paper-tooltip/paper-tooltip.html">
+<link rel="import" href="optinomic-elements/optinomic-clipboard/optinomic-clipboard.html">
+<dom-module id="element-export">
+  <template>
+    <style include="optinomic-styles">
+      :host {
+        display: block;
+      }
+
+      .container {
+        border-top: 1px solid #E0E0E0;
+      }
+
+      .circle {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        font-size: 14px;
+        font-weight: 500;
+        color: #fff;
+        line-height: 24px;
+        text-align: center;
+      }
+
+      .red {
+        color: #F44336;
+        background-color: #FFEBEE;
+      }
+      .red:hover {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+      }
+
+      .green {
+        color: #4CAF50;
+        background-color: #E8F5E9;
+      }
+      .green:hover {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+      }
+
+    </style>
+
+    <div class="container">
+      <div class="horizontal">
+        <div style="width:48px;text-align:center">
+          <template is="dom-if" if="[[_loading]]" restamp="true">
+            <paper-spinner active></paper-spinner>
+          </template>
+          <template is="dom-if" if="[[!_loading]]" restamp="true">
+            <template is="dom-if" if="[[_data_ready]]" restamp="true">
+
+              <file-download icon="input" file="[[_sr]]" extension="json" name="Calculation - [[definition.source.userapp_id]]-[[definition.source.userapp_calculation_id]]" tooltip="right"></file-download>
+
+            </template>
+          </template>
+        </div>
+
+        <div style="width:42px;">
+          <template is="dom-if" if="[[_data_ready]]" restamp="true">
+            <p class=" circle green">[[_sr.survey_responses.length]]</p>
+          </template>
+        </div>
+
+        <div class="flex" style="padding-top:10px;">
+          <h4 style="margin:0;color:#3F51B5">[[definition.options.name]]</h4>
+          <p class="caption" style="margin-top:-6px;">[[definition.options.description]]</p>
+        </div>
+
+        <div style="width:96px;">
+          <template is="dom-if" if="[[_data_ready]]" restamp="true">
+            <template is="dom-if" if="[[_created_CSV]]" restamp="true">
+              <template is="dom-if" if="[[_settings_override]]" restamp="true">
+                <p class="circle green">S</p>
+                <paper-tooltip position="left">Globale-Einstellungen</paper-tooltip>
+              </template>
+              <template is="dom-if" if="[[_filter_override]]" restamp="true">
+                <p class=" circle red">[[_json_file.rows.length]]</p>
+                <paper-tooltip position="right">Filter</paper-tooltip>
+              </template>
+              <template is="dom-if" if="[[!_filter_override]]" restamp="true">
+                <p class="circle green">[[_json_file.rows.length]]</p>
+                <paper-tooltip position="right">Ungefiltert</paper-tooltip>
+              </template>
+            </template>
+          </template>
+        </div>
+
+        <div>
+          <template is="dom-if" if="[[_data_ready]]" restamp="true">
+            <template is="dom-if" if="[[_created_CSV]]" restamp="true">
+              <div class="horizontal">
+                <file-download file="[[_csv_file]]" stringify="false" extension="csv" name="[[definition.options.name]]" tooltip="left" button-color="indigo"></file-download>
+                <file-download icon="file-download" button-color="indigo" file="[[_json_file]]" extension="json" name="[[definition.options.name]]" tooltip="left"></file-download>
+
+              </div>
+            </template>
+            <template is="dom-if" if="[[!_created_CSV]]" restamp="true">
+              <paper-spinner active></paper-spinner>
+            </template>
+          </template>
+
+          <template is="dom-if" if="[[!_data_ready]]" restamp="true">
+            <template is="dom-if" if="[[!_loading]]" restamp="true">
+              <paper-button class="grey" on-click="_loadData">Anfordern</paper-button>
+            </template>
+          </template>
+
+        </div>
+        <paper-icon-button icon="more-vert" on-click="_showMore" class="grey"></paper-icon-button>
+      </div>
+
+      <iron-collapse id="collapse">
+        <div class="horizontal">
+          <div style="width:48px;text-align:center">&nbsp;</div>
+
+          <div class="flex" style="margin-top:24px;margin-bottom:24px;margin-right:48px;">
+            <div class="horizontal">
+
+              <p class="flex">Definition:
+                <span class="caption">Felder: [[definition.fields.length]]</span>
+                <br>
+                <span class="caption">Quelle: [[definition.source.name]] | [[definition.source.userapp_id]]:[[definition.source.userapp_calculation_id]]</span>
+              </p>
+              <div class="horizontal">
+                <optinomic-clipboard text="[[_downloadDefinition]]"></optinomic-clipboard>
+                <file-download button-color="pink" file="[[_downloadDefinition]]" extension="json" name="Definition - [[definition.options.name]]" tooltip="right"></file-download>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </iron-collapse>
+    </div>
+
+  </template>
+
+  <script>
+    class elementExport extends Polymer.mixinBehaviors([
+      opappBehavior, optinomicExportToolbox
+    ], ReduxBehavior(Polymer.Element)) {
+
+      static get is() {
+        return 'element-export';
+      }
+
+      static get actions() {
+        return AsyncActionsBehavior.actions;
+      }
+
+      // Properties
+      static get properties() {
+        return {
+
+          definition: {
+            type: Object,
+            observer: 'definitionChanged'
+          },
+
+          settings: {
+            type: Object,
+            observer: 'settingsChanged'
+          },
+
+          filter: {
+            type: Object,
+            observer: 'filterChanged'
+          },
+
+          autorequest: {
+            type: Boolean,
+            value: false,
+            observer: 'autorequestChanged'
+          },
+
+          _sr: {
+            type: Object,
+            statePath: function (state) {
+              var return_obj = null;
+              if ((state._app_userapp_calculations !== null) && (state._app_userapp_calculations !== undefined)) {
+                if ((this.definition !== null) && (this.definition !== undefined)) {
+
+                  var home_str = this.definition.source.userapp_id.split('.').join("_");
+                  var path = home_str + "___" + this.definition.source.userapp_calculation_id;
+                  if ((state._app_userapp_calculations[path] !== null) && (state._app_userapp_calculations[path] !== undefined)) {
+
+                    return_obj = state._app_userapp_calculations[path].data;
+
+                  };
+                };
+              };
+              return return_obj;
+            },
+            observer: '_sr_ready'
+          }
+
+        };
+      }
+
+      // --------------- Functions ---------------
+
+      _getState() {
+        console.warn(store.getState());
+      }
+
+      _showMore() {
+        this.$.collapse.toggle();
+      }
+
+      _loadData() {
+        this._loadDataDebouncer = Polymer.Debouncer.debounce(this._loadDataDebouncer, Polymer.Async.timeOut.after(250), () => {
+          if ((this.definition !== null) && (this.definition !== undefined)) {
+            Polymer.RenderStatus.afterNextRender(this, function () {
+
+              this.set('_loading', true);
+              this.set('_created_JSON', false);
+              this.set('_created_CSV', false);
+              console.log('_loadData', this.definition, this.autorequest);
+              this.dispatch('actionGetUserAppCalculation', this.definition.source.userapp_id, this.definition.source.userapp_calculation_id);
+
+            });
+          };
+
+        });
+      }
+
+      _dataDive(source, field) {
+
+        if (field.path === "_function") {
+
+          var ExportHelpers = (function () {
+
+            var formatDateCH = function (date_string) {
+              date_string = date_string || null
+              if (date_string !== null) {
+
+                // 1952-11-19T00:00:00.000000000000Z
+                var year = parseInt(date_string.substring(0, 4));
+                var month = parseInt(date_string.substring(5, 7));
+                var day = parseInt(date_string.substring(8, 10));
+                var date_string_return = day + "." + month + "." + year
+
+                return date_string_return;
+              } else {
+                return null;
+              }
+            };
+
+            var formatDateISONoTime = function (date_string) {
+              date_string = date_string || null
+              if (date_string !== null) {
+
+                var date_string_return = date_string.substring(0, 10);
+
+                return date_string_return;
+              } else {
+                return null;
+              }
+            };
+
+            var formatDateYYYYMMDD = function (date_string) {
+              date_string = date_string || null
+              if (date_string !== null) {
+                var date_string_return = date_string.substring(0, 10);
+                date_string_return = date_string_return.split('-').join('');
+                return date_string_return;
+              } else {
+                return null;
+              }
+            };
+
+            var formatDateISO = function (date_string) {
+              date_string = date_string || null
+              if (date_string !== null) {
+
+                var date = new Date(date_string);
+                date_string_return = date.toISOString();
+
+                return date_string_return;
+              } else {
+                return null;
+              }
+            };
+
+            var stringToDate = function (_date, _format, _delimiter) {
+              var formatLowerCase = _format.toLowerCase();
+              var formatItems = formatLowerCase.split(_delimiter);
+              var dateItems = _date.split(_delimiter);
+              var monthIndex = formatItems.indexOf("mm");
+              var dayIndex = formatItems.indexOf("dd");
+              var yearIndex = formatItems.indexOf("yyyy");
+              var month = parseInt(dateItems[monthIndex]);
+              month -= 1;
+              var formatedDate = new Date(dateItems[yearIndex], month, dateItems[dayIndex]);
+              return formatedDate;
+            }
+
+            return {formatDateCH: formatDateCH, formatDateISO: formatDateISO, formatDateISONoTime: formatDateISONoTime, formatDateYYYYMMDD: formatDateYYYYMMDD, stringToDate: stringToDate};
+          })();
+
+          if ("function" in field) {
+            // Call given Function
+            if ((field.function !== null) && (field.function !== undefined)) {
+              //console.warn('field.function', field.function);
+
+              try {
+                var fn = new Function('source', 'ExportHelpers', field.function);
+                value = fn(source, ExportHelpers);
+              } catch (err) {
+                value = "Error: Undefined Function";
+              };
+
+            };
+          } else {
+            value = "Undefined Function";
+          };
+
+        } else {
+
+          var getMyVal = function (path, origin) {
+            return path.split('.').reduce(function (prev, curr) {
+              return prev[curr];
+            }, origin || this);
+          };
+
+          var value = getMyVal(field.path, source);
+
+        };
+
+        if ((value === undefined) || (value === null) || (value === NaN) || (value === "NaN")) {
+          value = "";
+        };
+
+        // console.log('(_dataDive) ', value, field.path, source);
+        return value;
+
+      }
+
+      _createCSVandJSONFile(def, filtered) {
+
+        function create_json(survey_responses, _dataDive) {
+
+          var header_array = [];
+          var rows_array = [];
+          var header_written = false;
+
+          survey_responses.forEach(function (sr, srID) {
+
+            var fields = def.fields;
+            var fields_obj = {};
+
+            if ((fields !== null) && (fields !== undefined)) {
+              fields.forEach(function (field, fieldID) {
+
+                // Header
+                if ((header_written === false) && (sr.all_found)) {
+                  header_array.push(field.name);
+                };
+
+                // Rows
+                fields_obj[field.name] = _dataDive(sr, field);
+              }.bind(this));
+
+              rows_array.push(fields_obj);
+
+              if (header_array.length > 0) {
+                header_written = true;
+              };
+            };
+
+          }.bind(this));
+
+          var file = {
+            "header": header_array,
+            "rows": rows_array
+          };
+
+          return file;
+        };
+
+        function create_csv(json) {
+
+          var f = "";
+          var header_str = "";
+          var header_written = false;
+          var rows_str = "";
+          var delimitter = def.options.delimter;
+          var newline = "\r\n";
+
+          json.rows.forEach(function (sr, srID) {
+
+            if ((sr !== null) && (sr !== undefined)) {
+              json.header.forEach(function (field, fieldID) {
+
+                // Rows
+                rows_str = rows_str + sr[field];
+                if (fieldID === json.header.length - 1) {
+                  // Last
+                  if (srID !== json.rows.length - 1) {
+                    // Not File-End
+                    rows_str = rows_str + newline;
+                  };
+                } else {
+                  // Not last
+                  rows_str = rows_str + delimitter;
+                };
+
+              });
+
+            };
+
+          });
+
+          // Header
+          if (def.options.export_header !== false) {
+
+            json.header.forEach(function (h, hID) {
+              header_str = header_str + h;
+
+              if (hID === json.header.length - 1) {
+                // Last
+                header_str = header_str + newline;
+              } else {
+                // Not last
+                header_str = header_str + delimitter;
+              };
+            });
+
+            var file = header_str + rows_str;
+          } else {
+            var file = rows_str;
+          };
+
+          return file;
+        };
+
+        function check_pg_group(group, value) {
+          var return_boolean = false;
+          group.forEach(function (g, gID) {
+            if (g === value) {
+              return_boolean = true;
+            };
+          });
+          return return_boolean;
+        };
+
+        function dateCheck(from, to, check) {
+          var fDate,
+            lDate,
+            cDate;
+          fDate = Date.parse(from);
+          lDate = Date.parse(to);
+          cDate = Date.parse(check);
+
+          if ((cDate <= lDate && cDate >= fDate)) {
+            return true;
+          }
+          return false;
+        };
+
+        Polymer.RenderStatus.afterNextRender(this, function () {
+
+          if ((this._sr !== undefined) && (this._sr !== null)) {
+            if (this._sr.survey_responses.length > 0) {
+
+              // We have data -> Proceed.
+              var _sr = Object.assign({}, this.get('_sr'));
+              if ("survey_responses" in _sr) {
+
+                var file_responses = [];
+                if (filtered) {
+                  // filter responses
+
+                  var date_rules = false;
+                  var pg_rules = false;
+
+                  if ((this.filter !== null) && (this.filter !== undefined)) {
+                    if (this.filter.erhungszeitraum.active) {
+                      date_rules = true;
+                      // console.log('date_rules', date_rules, this.filter.erhungszeitraum);
+                    };
+                    if ((this.filter.pg.active) && (this.filter.pg.rules.length > 0)) {
+                      pg_rules = true;
+                      // console.log('pg_rules', pg_rules, this.filter.pg.rules);
+                    };
+                  };
+
+                  _sr.survey_responses.forEach(function (sr, srID) {
+
+                    // Patientengruppen Regeln
+                    if (pg_rules) {
+                      var to_add = null;
+                      this.filter.pg.rules.forEach(function (r, rID) {
+                        if (r.operator === "IN") {
+                          if ((r.criterion === "AND") || (r.criterion === null)) {
+                            if ((to_add === true) || (to_add === null)) {
+                              to_add = check_pg_group(sr.patient_groups.patient_in_group.yes, r.pg);
+                            };
+                          } else {
+                            if ((to_add === false)) {
+                              to_add = check_pg_group(sr.patient_groups.patient_in_group.yes, r.pg);
+                            };
+                          };
+
+                        } else {
+                          if ((r.criterion === "AND") || (r.criterion === null)) {
+                            if ((to_add === true) || (to_add === null)) {
+                              to_add = check_pg_group(sr.patient_groups.patient_in_group.no, r.pg);
+                            };
+                          } else {
+                            if ((to_add === false)) {
+                              to_add = check_pg_group(sr.patient_groups.patient_in_group.no, r.pg);
+                            };
+                          };
+                        };
+                      });
+
+                      if (to_add) {
+                        file_responses.push(sr);
+                      };
+                    } else {
+                      // all responses
+                      file_responses = _sr.survey_responses;
+                    };
+
+                    // Erhebungszeitraum Regeln
+                    if (date_rules) {
+                      var stored_responses = file_responses.slice(0);
+                      file_responses = [];
+                      stored_responses.forEach(function (r, rID) {
+
+                        var filled = r.survey_response.filled;
+                        var filter = this.filter.erhungszeitraum;
+
+                        var eintritt_in_range = dateCheck(filter.from, filter.to, r.stay.start);
+                        var austritt_in_range = dateCheck(filter.from, filter.to, r.stay.stop);
+
+                        // Falltyp: Alle
+                        if (filter.typ === "Alle") {
+                          if (dateCheck(filter.from, filter.to, filled)) {
+                            file_responses.push(sr);
+                          };
+                        };
+
+                        // Falltyp: A1
+                        if (filter.typ === "A1") {
+                          if ((eintritt_in_range === true) && (austritt_in_range === true)) {
+                            file_responses.push(sr);
+                          };
+                        };
+
+                        // Falltyp: A2
+                        if (filter.typ === "A2") {
+                          if ((eintritt_in_range === false) && (austritt_in_range === true)) {
+                            file_responses.push(sr);
+                          };
+                        };
+
+                        // Falltyp: B
+                        if (filter.falltyp === "B") {
+                          if ((eintritt_in_range === true) && (austritt_in_range === false)) {
+                            file_responses.push(sr);
+                          };
+                        };
+
+                        // Falltyp: C
+                        if (filter.typ === "C") {
+                          if ((eintritt_in_range === false) && (austritt_in_range === false)) {
+                            file_responses.push(sr);
+                          };
+                        };
+
+                        // console.log('Erhebungszeitraum', filled, eintritt_in_range, austritt_in_range);
+
+                      }.bind(this));
+                    };
+
+                  }.bind(this));
+                } else {
+                  // all responses
+                  file_responses = _sr.survey_responses;
+                };
+
+                this.set('_json_file', null);
+                this.set('_json_file', create_json(file_responses, this._dataDive));
+                this.set('_created_JSON', true);
+
+                this.set('_csv_file', null);
+                this.set('_csv_file', create_csv(this._json_file));
+                this.set('_created_CSV', true);
+
+                // console.log('_createCSVandJSONFile', this._csv_file, this._json_file);
+
+                this.dispatchEvent(new CustomEvent('json', {detail: this._json_file}));
+
+                this.dispatchEvent(new CustomEvent('csv', {detail: this._csv_file}));
+
+              };
+            };
+          };
+
+        });
+
+      }
+
+      // --------------- Observers ---------------
+
+      _create_files() {
+        if (this._data_ready) {
+          this.set('_created_JSON', false);
+          this.set('_created_CSV', false);
+
+          var enhanced_definition = Object.assign({}, this.get('definition'));
+
+          if (this._settings_override) {
+
+            enhanced_definition.options = Object.assign(enhanced_definition.options, this.settings);
+
+            if (enhanced_definition.options.export_stay_details === true) {
+              enhanced_definition.fields = this._default_fields.default_stay.concat(enhanced_definition.fields);
+            };
+
+            if (enhanced_definition.options.export_patient_details === true) {
+              enhanced_definition.fields = this._default_fields.default_patient.concat(enhanced_definition.fields);
+            };
+
+            if (enhanced_definition.options.export_optinomic_ids === true) {
+              enhanced_definition.fields = this._default_fields.default_optinomic_fields.concat(enhanced_definition.fields);
+            };
+
+            // console.error('==> enhanced_definition & fields', enhanced_definition, this._default_fields);
+          };
+
+          var filter_active = this._filter_override || false;
+          // console.error('==> _createCSVandJSONFile', enhanced_definition, this._filter_override);
+          this._createCSVandJSONFile(enhanced_definition, filter_active);
+
+        };
+      }
+
+      _sr_ready() {
+        this._sr_readyDebouncer = Polymer.Debouncer.debounce(this._sr_readyDebouncer, Polymer.Async.timeOut.after(280), () => {
+
+          if ((this._sr !== undefined) && (this._sr !== null)) {
+            this._getState();
+            this.set('_loading', false);
+            this.set('_data_ready', true);
+            this._create_files();
+
+          };
+
+        });
+      }
+
+      settingsChanged() {
+        this._settingsChangedDebouncer = Polymer.Debouncer.debounce(this._settingsChangedDebouncer, Polymer.Async.timeOut.after(150), () => {
+
+          if ((this.settings !== null) && (this.settings !== undefined)) {
+            this.set('_settings_override', true);
+            console.warn('settingsChanged', this.settings);
+          } else {
+            this.set('_settings_override', false);
+          };
+          this._create_files();
+
+        });
+      }
+
+      filterChanged() {
+        this._filterChangedDebouncer = Polymer.Debouncer.debounce(this._filterChangedDebouncer, Polymer.Async.timeOut.after(150), () => {
+
+          if ((this.filter !== null) && (this.filter !== undefined)) {
+            if ((this.filter.pg.active) || (this.filter.erhungszeitraum.active)) {
+              this.set('_filter_override', true);
+              console.warn('filterChanged', this.filter);
+            } else {
+              this.set('_filter_override', false);
+            };
+          } else {
+            this.set('_filter_override', false);
+          };
+          this._create_files();
+
+        });
+      }
+
+      autorequestChanged() {
+        this._autorequestChangedDebouncer = Polymer.Debouncer.debounce(this._autorequestChangedDebouncer, Polymer.Async.timeOut.after(250), () => {
+
+          if ((this.autorequest) && ((this._data_ready === false))) {
+            this._loadData();
+          };
+
+        });
+      }
+
+      definitionChanged() {
+
+        this._definitionChangedDebouncer = Polymer.Debouncer.debounce(this._definitionChangedDebouncer, Polymer.Async.timeOut.after(250), () => {
+
+          if ((this.definition !== null) && (this.definition !== undefined)) {
+
+            var def = Object.assign({}, this.definition);
+
+            var _downloadDefinition = {
+              "fields": def.fields,
+              "options": def.options
+            };
+
+            this.set('_downloadDefinition', _downloadDefinition);
+          };
+
+        });
+      }
+
+      // --------------- Lifecycle ---------------
+
+      _init() {
+        this.set('_loading', false);
+        this.set('_data_ready', false);
+        // console.warn('_init :: Export-Toolbox', this.definition);
+      }
+
+      ready() {
+        super.ready();
+        this._init();
+      }
+    }
+
+    window.customElements.define(elementExport.is, elementExport);
+  </script>
+</dom-module>

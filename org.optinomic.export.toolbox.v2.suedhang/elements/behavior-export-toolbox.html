@@ -1,0 +1,178 @@
+<script>
+  optinomicExportToolbox = {
+
+    behaviors: [],
+
+    properties: {
+      _calculation_data_source: {
+        type: Object
+      }
+    },
+
+    // -------------------------------- INIT --------------------------------
+
+    __setSources: function () {
+      var _array_source = [];
+
+      // -------------------------------------------- Datenquellen definieren! -------------------------------------------- "userapp_calculation_id" muss mit .opapp übereinstimmen!   Bsp.: "tmt_full" bei: [calculation tmt_full javascript
+      // ch.suedhang.apps.tmt_V3 ch.suedhang.apps.tmt_V3:tmt_score] Index ist eine ID zur Quelle :: Nicht ändern, auch falls "userapp_calculation_id" ändert!
+
+        _array_source.push({
+            "name": "AASE-G",
+            "index": "aase",
+            "userapp_calculation_id": "aase"
+        });
+
+        _array_source.push({
+            "name": "ActInfo | Austritt",
+            "index": "actinfo_aus",
+            "userapp_calculation_id": "actinfo_aus"
+        });
+
+        _array_source.push({
+            "name": "ActInfo | Eintritt",
+            "index": "actinfo_ein",
+            "userapp_calculation_id": "actinfo_ein"
+        });
+
+        _array_source.push({
+            "name": "ASRS",
+            "index": "asrs",
+            "userapp_calculation_id": "asrs"
+        });
+
+        _array_source.push({
+            "name": "BDI-II",
+            "index": "bdi",
+            "userapp_calculation_id": "bdi"
+        });
+
+        _array_source.push({
+            "name": "BSCL (ANQ)",
+            "index": "bscl",
+            "userapp_calculation_id": "bscl"
+        });
+
+        _array_source.push({
+            "name": "CASE",
+            "index": "case",
+            "userapp_calculation_id": "case"
+        });
+
+        _array_source.push({
+            "name": "Einzelassessment",
+            "index": "einzelassessment",
+            "userapp_calculation_id": "einzelassessment"
+        });
+
+        _array_source.push({
+            "name": "HoNOS",
+            "index": "honos",
+            "userapp_calculation_id": "honos"
+        });        
+        
+        _array_source.push({
+            "name": "Soziale Kompetenzen (ISK)",
+            "index": "isk",
+            "userapp_calculation_id": "isk"
+        });
+
+        _array_source.push({
+            "name": "SCI",
+            "index": "sci",
+            "userapp_calculation_id": "sci"
+        });
+
+        _array_source.push({
+            "name": "Trail Making Test (TMT)",
+            "index": "tmt",
+            "userapp_calculation_id": "tmt"
+        });
+
+        _array_source.push({
+            "name": "WHOQOL-BREF",
+            "index": "whoqol",
+            "userapp_calculation_id": "whoqol"
+        });
+
+        _array_source.push({
+            "name": "ZuePaZ",
+            "index": "zuepaz",
+            "userapp_calculation_id": "zuepaz"
+        });
+
+
+      // Create Indexed Object & Default for all
+      var _object_source = {};
+
+      _array_source.forEach(function (d, dID) {
+        d.id = dID;
+        d.userapp_id = "org.optinomic.export.toolbox";
+
+        _object_source[d.index] = d;
+      });
+
+      var save_object = {
+        "array": _array_source,
+        "object": _object_source,
+        "init_done": true
+      };
+
+      // Save
+      this.set('_calculation_sources', save_object);
+      this._calculation_sources = {};
+      this._calculation_sources = save_object;
+
+      // ------------------------------------------------------------- Inculde Export-File Definitons Create Array of all Export-File Definitons Add NEW Files here!
+
+      var export_files = [];
+      export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/aase.json));
+      export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/asrs.json));
+      export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/bdi.json));
+      export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/bscl_anq.json));
+      export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/bscl_intra.json));
+      export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/bscl.json));
+      export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/case.json));
+      export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/honos.json));
+      export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/isk.json));
+      export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/sci.json));
+      export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/tmt.json));
+      export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/whoqol.json));
+
+      // Find Sources Index and enhance options!
+      export_files.forEach(function (f, fID) {
+        if ("options" in f) {
+          if ("source" in f.options) {
+            f.source = Object.assign({}, _object_source[f.options.source]);
+          }
+        };
+      });
+
+      var d = {};
+      d.default_patient = __opapp_include(../org.optinomic.export.toolbox/definitions/_default_patient.js);
+      d.default_stay = __opapp_include(../org.optinomic.export.toolbox/definitions/_default_stay.js);
+      d.default_optinomic_fields = __opapp_include(../org.optinomic.export.toolbox/definitions/_optinomic_ids.js);
+      
+
+      function compare(a, b) {
+        if (a.options.name < b.options.name)
+          return -1;
+        if (a.options.name > b.options.name)
+          return 1;
+        return 0;
+      }
+
+      export_files.sort(compare);
+      this.set('_export_files', export_files);
+      this.set('_default_fields', d);
+
+      console.log('optinomicExportToolbox (Behavior)', this._export_files, this._calculation_sources);
+    },
+
+    // -------------------------------- Liefecycle --------------------------------
+
+    created: function () {
+      this.__setSources();
+    }
+  };
+</script>

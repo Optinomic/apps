@@ -35,8 +35,3 @@ __opapp_include(elements/app.html)
 
 
 [css]
-
-
-[calculation honos javascript ch.suedhang.apps.honos.production ch.suedhang.apps.honos.production:honos_calculation]
-__opapp_include(calculations/honos.m4)
-

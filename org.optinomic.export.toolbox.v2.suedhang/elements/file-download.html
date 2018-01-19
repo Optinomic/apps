@@ -1,0 +1,191 @@
+<link rel="import" href="polymer/polymer-element.html">
+<link rel="import" href="paper-button/paper-button.html">
+<link rel="import" href="paper-tooltip/paper-tooltip.html">
+
+<dom-module id="file-download">
+  <template>
+    <style include="optinomic-styles">
+      :host {
+        display: block;
+      }
+
+    </style>
+
+    <div>
+      <template is="dom-if" if="[[_filename_set]]">
+        <template is="dom-if" if="[[_button_mode]]">
+          <paper-button class$="[[buttonColor]]" on-click="_onDownloadFile">[[extension]]</paper-button>
+        </template>
+        <template is="dom-if" if="[[!_button_mode]]">
+          <paper-icon-button class$="[[buttonColor]]" on-click="_onDownloadFile" icon="[[icon]]"></paper-icon-button>
+        </template>
+      </template>
+      <paper-tooltip position="[[tooltip]]">[[_filename_full]]</paper-tooltip>
+      <a href="#" id="fileLink" hidden download$="[[_filename_full]]"></a>
+    </div>
+
+  </template>
+
+  <script>
+    class fileDownload extends Polymer.Element {
+
+      static get is() {
+        return 'file-download';
+      }
+
+      static get actions() {
+        return AsyncActionsBehavior.actions;
+      }
+
+      // Properties
+      static get properties() {
+        return {
+
+          file: {
+            type: Object,
+            observer: '_setFile'
+          },
+
+          name: {
+            type: Object,
+            observer: '_setFilename'
+          },
+
+          extension: {
+            type: String,
+            observer: '_setFilename'
+          },
+
+          dateprefix: {
+            type: Object,
+            value: true
+          },
+
+          stringify: {
+            type: Object,
+            value: true
+          },
+
+          icon: {
+            type: String,
+            observer: '_setMode'
+          },
+
+          tooltip: {
+            type: String,
+            value: 'top'
+          },
+
+          buttonColor: {
+            type: String,
+            value: 'grey'
+          }
+
+        };
+      }
+
+      // --------------- Functions ---------------
+
+      _onDownloadFile(e) {
+
+        var content = this._file;
+
+        e.preventDefault();
+        var myLink = this.$.fileLink;
+        const link = this._createFile(content);
+        myLink.href = link;
+        myLink.click();
+      }
+
+      _createFile(text) {
+        const textBlob = new Blob([text], {type: 'text/plain'});
+        return window.URL.createObjectURL(textBlob);
+      }
+
+      // --------------- Observers ---------------
+
+      _setMode() {
+        this._debouncer = Polymer.Debouncer.debounce(this._debouncer, Polymer.Async.timeOut.after(250), () => {
+
+          var _button_mode = true;
+          if ((this.icon !== null) && (this.icon !== undefined)) {
+            _button_mode = false;
+          };
+          this.set('_button_mode', _button_mode);
+
+        });
+      }
+
+      _setFile() {
+        this._setFileDebouncer = Polymer.Debouncer.debounce(this._setFileDebouncer, Polymer.Async.timeOut.after(200), () => {
+
+          var _file = null;
+          if ((this.file !== null) && (this.file !== undefined)) {
+            if (this.stringify) {
+              _file = JSON.stringify(this.file, null, 2);
+            } else {
+              _file = this.file;
+            };
+
+            this.set('_file', _file);
+          };
+
+        });
+      }
+
+      _setFilename() {
+        this._setFilenameDebouncer = Polymer.Debouncer.debounce(this._setFilenameDebouncer, Polymer.Async.timeOut.after(250), () => {
+
+          if ((this.name !== null) && (this.name !== undefined)) {
+            if ((this.extension !== null) && (this.extension !== undefined)) {
+
+              var getDatePrefix = function () {
+                var d = new Date();
+                var y = d.getFullYear();
+                var m = d.getMonth() + 1;
+                var t = d.getUTCDate();
+
+                if (m < 10) {
+                  m = "0" + m;
+                };
+
+                if (t < 10) {
+                  t = "0" + t;
+                };
+
+                return y + "_" + m + "_" + t + " - ";
+              }
+
+              var fn = "";
+              if (this.dateprefix) {
+                fn = getDatePrefix();
+              };
+
+              fn = fn + this.name + "." + this.extension;
+
+              this.set('_filename_full', fn);
+              this.set('_filename_set', true);
+
+            };
+          };
+
+        });
+      }
+
+      // --------------- Lifecycle ---------------
+
+      _init() {
+        this.set('_filename_set', false);
+        this.set('_button_mode', true);
+        // console.warn('_init :: fileDownload');
+      }
+
+      ready() {
+        super.ready();
+        this._init();
+      }
+    }
+
+    window.customElements.define(fileDownload.is, fileDownload);
+  </script>
+</dom-module>

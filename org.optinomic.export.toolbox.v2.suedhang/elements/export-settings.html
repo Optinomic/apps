@@ -1,0 +1,134 @@
+<link rel="import" href="polymer/polymer-element.html">
+<link rel="import" href="paper-input/paper-input.html">
+<link rel="import" href="paper-checkbox/paper-checkbox.html">
+
+<dom-module id="export-settings">
+  <template>
+    <style include="optinomic-styles">
+      :host {
+        display: block;
+      }
+
+      .field {
+        padding-right: 6px;
+      }
+
+      .filter_container {
+        margin-bottom: 12px;
+      }
+
+      .section {
+        width: 200px;
+      }
+
+      .settings_container {
+        padding: 24px;
+        background-color: #F5F5F5;
+        border-radius: 24px;
+        margin-bottom: 12px;
+      }
+
+    </style>
+
+    <div class="settings_container">
+      <h2>Export-Settings</h2>
+      <p>Sie können hier die Standardeinstellungen der einzelnen Files global übersteuern:</p>
+      <div style="padding:18px;">
+        <div class="horizontal">
+          <h4 class="section">Inhalt</h4>
+          <div class="flex horizontal">
+            <paper-checkbox id="export_optinomic_ids" checked>Optinomic - ID's</paper-checkbox>
+            <paper-checkbox id="export_patient_details" checked>Patienten-Details</paper-checkbox>
+            <paper-checkbox id="export_stay_details" checked>Fall-Details</paper-checkbox>
+          </div>
+        </div>
+        <div class="horizontal">
+          <h4 class="section">CSV - Optionen</h4>
+          <div class="flex horizontal">
+            <paper-checkbox class="flex" id="export_header" checked>Header-Zeile exportieren</paper-checkbox>
+            <paper-input id="csv_delimter" label="CSV : delimter" placeholder="CSV : delimter" value=";"></paper-input>
+          </div>
+        </div>
+      </div>
+      <div class="horizontal">
+        <div style="height:42px;">
+          <paper-button class="grey" on-tap="_cancelOverrideSettings">Schliessen</paper-button>
+        </div>
+        <div style="height:42px;">
+          <paper-button class="pink" on-tap="_saveOverrideSettings">Anwenden</paper-button>
+        </div>
+      </div>
+    </div>
+
+  </template>
+
+  <script>
+
+    class exportSettings extends Polymer.Element {
+
+      static get is() {
+        return 'export-settings';
+      }
+
+      static get properties() {
+        return {
+
+          something: {
+            type: Object
+          }
+        };
+      }
+
+      _cancelOverrideSettings() {
+
+        var return_object = {
+          detail: {
+            "action": "cancel",
+            "settings": null
+          }
+        };
+        this.dispatchEvent(new CustomEvent('settings', return_object));
+
+      }
+
+      _saveOverrideSettings() {
+
+        var settings = {};
+        var export_optinomic_ids = this.$.export_optinomic_ids;
+        var export_patient_details = this.$.export_patient_details;
+        var export_stay_details = this.$.export_stay_details;
+        var delimter = this.$.csv_delimter;
+        var export_header = this.$.export_header;
+
+        settings.export_optinomic_ids = export_optinomic_ids.checked;
+        settings.export_patient_details = export_patient_details.checked;
+        settings.export_stay_details = export_stay_details.checked;
+        settings.export_header = export_header.checked;
+        settings.delimter = delimter.value;
+        settings.override = true;
+
+        var return_object = {
+          detail: {
+            "action": "override",
+            "settings": settings
+          }
+        };
+        this.dispatchEvent(new CustomEvent('settings', return_object));
+
+      }
+
+      constructor() {
+        super();
+      }
+
+      ready() {
+        super.ready();
+
+        Polymer.RenderStatus.afterNextRender(this, function () {});
+      }
+
+    }
+
+    window.customElements.define(exportSettings.is, exportSettings);
+  </script>
+</dom-module>
