@@ -7,6 +7,7 @@
 <link rel="import" href="vaadin-grid/vaadin-grid.html">
 <link rel="import" href="vaadin-grid/vaadin-grid-sorter.html">
 <link rel="import" href="vaadin-grid/vaadin-grid-column-group.html">
+<link rel="import" href="paper-toggle-button/paper-toggle-button.html">
 <dom-module id="optinomic-template">
     <template>
         <style include="shared-styles">
@@ -50,10 +51,15 @@
             margin-bottom: 0px !important;
             padding-bottom: 0px !important;
         }
+
+        #download {
+            margin-bottom: 24px;
+            margin-top: 24px;
+        }
         </style>
         <div id="top" class="layout horizontal flex">
             <div class="flex">
-                <optinomic-title h1="[[_d.title]]" h2="[[_d.subtitle]]" h3="[[_d.small]]"></optinomic-title>
+                <optinomic-title h1="[[_d.title]]" h2="[[_d.subtitle]] | [[_kantonsstatistik.headers.length]] Felder von [[_kantonsstatistik.rows.length]] Einträgen." h3="[[_d.small]]"></optinomic-title>
             </div>
             <div>
                 <template is="dom-if" if="[[_pdf_ready]]">
@@ -64,9 +70,139 @@
         <template is="dom-if" if="[[_d.init_done]]">
             <div id="main_content">
                 <div id="datenblatt">
-                    
-                    <p>:-)</p>
-
+                    <vaadin-grid class="full_grid" aria-label="Kantonsstatistik" items="[[_kantonsstatistik.rows]]" column-reordering-allowed="true">
+                        <vaadin-grid-column-group>
+                            <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">ID</span></template>
+                            <vaadin-grid-column width="73px" flex-grow="0">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="ID_PID">
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">PID</span>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <span draggable="true" class="body-1">[[item.ID_PID]]</span>
+                                </template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column width="50px" flex-grow="0">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="ID_FID">
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">FID</span>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <span draggable="true" class="body-1">[[item.ID_FID]]</span>
+                                </template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column width="80px" flex-grow="0">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="CIS_FID">
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">CIS_FID</span>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <span draggable="true" class="body-1">[[item.CIS_FID]]</span>
+                                </template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column width="73px" flex-grow="0">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="ORG_CURRENT">
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">ORG</span>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <span draggable="true" class="body-1">[[item.ORG_CURRENT]]</span>
+                                </template>
+                            </vaadin-grid-column>
+                        </vaadin-grid-column-group>
+                        <vaadin-grid-column-group>
+                            <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">Austrittsart</span></template>
+                            <vaadin-grid-column width="73px" flex-grow="0">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="AUSTRITT_TYP">
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">Typ</span>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <span draggable="true" class="body-1">[[item.AUSTRITT_TYP]]</span>
+                                </template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column flex-grow="1">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="STATISTIK_KANTON_AUSTRITTSART">
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">Bezeichnung</span>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <span draggable="true" class="body-1">[[item.STATISTIK_KANTON_AUSTRITTSART]]</span>
+                                </template>
+                            </vaadin-grid-column>
+                        </vaadin-grid-column-group>
+                        <vaadin-grid-column-group>
+                            <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">Weiterbehandlung</span></template>
+                            <vaadin-grid-column width="73px" flex-grow="0">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="WEITERBEHANDLUNG_TYP">
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">Typ</span>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <span draggable="true" class="body-1">[[item.WEITERBEHANDLUNG_TYP]]</span>
+                                </template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column flex-grow="1">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="STATISTIK_KANTON_WEITERBEH">
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">Bezeichnung</span>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <span draggable="true" class="body-1">[[item.STATISTIK_KANTON_WEITERBEH]]</span>
+                                </template>
+                            </vaadin-grid-column>
+                        </vaadin-grid-column-group>
+                        <vaadin-grid-column-group>
+                            <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">Wohnsituation</span></template>
+                            <vaadin-grid-column width="73px" flex-grow="0">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="WOHNSITUATION_TYP">
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">Typ</span>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <span draggable="true" class="body-1">[[item.WOHNSITUATION_TYP]]</span>
+                                </template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column flex-grow="1">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="STATISTIK_KANTON_WOHNSITUATION">
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">Bezeichnung</span>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <span draggable="true" class="body-1">[[item.STATISTIK_KANTON_WOHNSITUATION]]</span>
+                                </template>
+                            </vaadin-grid-column>
+                        </vaadin-grid-column-group>
+                    </vaadin-grid>
+                </div>
+                <div id="download" class="layout horizontal flex">
+                    <div class="flex">
+                        <paper-toggle-button checked="{{_download}}">
+                            <template is="dom-if" if="[[_download]]">
+                                Herunterladen (CSV)
+                            </template>
+                            <template is="dom-if" if="[[!_download]]">
+                                Herunterladen (anfordern)
+                            </template>
+                        </paper-toggle-button>
+                    </div>
+                    <div>
+                        <template is="dom-if" if="[[_download]]">
+                            <a href$="[[_csv_kantonsstatistik]]" tabindex="-1">
+                                <paper-button class="indigo">Speichern</paper-button>
+                            </a>
+                        </template>
+                    </div>
                 </div>
             </div>
         </template>
@@ -78,9 +214,20 @@
     Polymer({
         is: 'optinomic-template',
 
-        properties: {},
+        properties: {
+            _download: {
+                type: Object,
+                value: false,
+                observer: '_getDataSourceQuerys'
+            },
+            _data_source_queries: {
+                type: Object,
+                statePath: 'apps.current.data.data_source_queries',
+                observer: '_getDataSourceQuerys'
+            },
+        },
 
-        behaviors: [ReduxBehavior, AsyncActionsBehavior],
+        behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicApp],
 
 
         // -----------------------------
@@ -102,6 +249,72 @@
             console.log('INIT _d', this._d);
 
         },
+
+        _getDataSourceQueryData: function(dsq, direct) {
+
+            Polymer.RenderStatus.afterNextRender(this, function() {
+
+                // console.log('_getDataSourceQueryData', dsq);
+
+                if (direct !== true) {
+                    var parameters = {
+                        "format": "json",
+                        "direct": "True"
+                    };
+                } else {
+                    var parameters = {};
+                };
+
+                var api_url = '/modules/ch.suedhang.bot.poly_ks/data_source_queries/' + dsq.identifier;
+
+                helpers.callAPI('POST', api_url, parameters, {}, function(req) {
+                    if (req.status == 200) {
+
+                        var resp = JSON.parse(req.response);
+                        var dsq_name = '_' + dsq.identifier;
+                        this.set(dsq_name, resp);
+
+                        console.warn('1.) _getDataSourceQueryData => ', resp);
+                    };
+
+                    if (req.status == 201) {
+
+                        var resp = JSON.parse(req.response);
+                        var dsq_name = '_csv_' + dsq.identifier;
+                        this.set(dsq_name, resp.download_url);
+
+                        console.warn('2.) _getDataSourceQueryData Download => ', dsq_name, resp);
+                    };
+
+                }.bind(this));
+
+            });
+
+
+        },
+
+        _getDataSourceQuerys: function() {
+
+            this.debounce('_getDataSourceQuerys', function() {
+                if ((this._data_source_queries !== null) && (this._data_source_queries !== undefined)) {
+                    if (this._data_source_queries.length > 0) {
+                        Polymer.RenderStatus.afterNextRender(this, function() {
+
+                            this._data_source_queries.forEach(function(dsq) {
+                                this._getDataSourceQueryData(dsq, this._download);
+
+                            }.bind(this));
+
+
+                        });
+                    };
+                };
+
+            }, 250);
+
+        },
+
+
 
 
         // -----------------------------
