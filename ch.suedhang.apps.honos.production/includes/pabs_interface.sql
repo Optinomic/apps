@@ -47,7 +47,7 @@ FROM "survey_response_view"
 LEFT JOIN patient ON(survey_response_view.patient_id = patient.id)
 LEFT JOIN stay ON(survey_response_view.stay_id = stay.id)
 WHERE module = 'ch.suedhang.apps.honos.production'
-AND date_trunc('day', (((cast(response AS json))->>'q402V00')::timestamp) = date_trunc('day', now())
+AND date_trunc('day', (cast(response AS json)->>'q402V00')::timestamp) = date_trunc('day', now())
 AND ((cast(response AS json))->>'q401V04') != ''
 AND stay.cis_fid is not null
 AND survey_response_view.patient_id != '1169'
