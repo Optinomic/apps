@@ -11,9 +11,7 @@ function add_leading_zero(x) {
 function format_date(d) {
   return d.getUTCFullYear().toString() +
     add_leading_zero(d.getUTCMonth() + 1) +
-    add_leading_zero(d.getUTCDate()) +
-    add_leading_zero(d.getUTCHours()) +
-    add_leading_zero(d.getUTCMinutes());
+    add_leading_zero(d.getUTCDate());
 }
 
 function main(token) {
