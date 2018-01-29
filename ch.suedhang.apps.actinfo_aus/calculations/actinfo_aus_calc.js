@@ -2,7 +2,6 @@ function main(responses) {
 
     var calc = {};
 
-
     // ------------------------------------------
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
@@ -30,7 +29,18 @@ function main(responses) {
     };
 
 
-    calc.FAGERSTROEM_Score = function(d) {
+    calc.FAGERSTROEM_Score = function(d, patient) {
+
+        // Init Patient
+        var patient_name = patient.last_name;
+
+        if (patient.gender === 'male') {
+            patient_name = 'Herr ' + patient_name;
+            var nichtraucher = 'Nichtraucher';
+        } else {
+            patient_name = 'Frau ' + patient_name;
+            var nichtraucher = 'Nichtraucherin';
+        };
 
         // Calculate AUDIT-Score
         var score = 0;
@@ -255,9 +265,10 @@ function main(responses) {
         responses_array.forEach(function(response, myindex) {
             var myResults = {};
             var result = response.data.response;
+            var patient = myResponses.patient.data;
 
             // Something
-            myResults.FAGERSTROEM = calc.FAGERSTROEM_Score(result);
+            myResults.FAGERSTROEM = calc.FAGERSTROEM_Score(result, patient);
 
 
             // Write Results for the Return
