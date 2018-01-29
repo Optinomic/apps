@@ -66,7 +66,7 @@ __opapp_include(emails/new_event.html)
 __opapp_include(emails/overdue.html)
 
 
-[calculation another_calculation javascript]
+[calculation another_calculation_new javascript]
 __opapp_include(calculations/actinfo_aus_calc.js)
 
 
