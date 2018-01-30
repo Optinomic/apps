@@ -556,7 +556,28 @@
 
                                         // Falltyp: C
                                         if (filter.typ === "C") {
-                                            if ((eintritt_in_range === false) && (austritt_in_range === false)) {
+                                            if ((eintritt_in_range === true) && (austritt_in_range === false)) {
+                                                file_responses.push(sr);
+                                            };
+                                        };
+
+                                        // Falltyp: S1
+                                        if (filter.typ === "S1") {
+                                            if (eintritt_in_range === true) {
+                                                file_responses.push(sr);
+                                            };
+                                        };
+
+                                        // Falltyp: S2
+                                        if (filter.typ === "S2") {
+                                            if (austritt_in_range === true) {
+                                                file_responses.push(sr);
+                                            };
+                                        };
+
+                                        // Falltyp: S3
+                                        if (filter.typ === "S3") {
+                                            if ((eintritt_in_range === true) || (austritt_in_range === true)) {
                                                 file_responses.push(sr);
                                             };
                                         };
