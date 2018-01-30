@@ -11,7 +11,8 @@ SELECT
   ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
 
-
+  stay.start as Klinikeintritt,
+  stay.stop as Klinikaustritt,
   NULL as VZAX100,
   ((cast(response AS json))->>'Institution') as institution,
   ((cast(response AS json))->>'VZAX005') as VZAX005,
