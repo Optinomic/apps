@@ -51,4 +51,6 @@ overdue = ignore
 description = actInfo - Austritt
 survey = actinfo_austritt
 
+[calculation another_calculation javascript]
+__opapp_include(../ch.suedhang.apps.actinfo_ein/calculations/actinfo_aus_calc.js)
 
