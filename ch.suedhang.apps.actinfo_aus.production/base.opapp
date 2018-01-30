@@ -52,5 +52,3 @@ description = actInfo - Austritt
 survey = actinfo_austritt
 
 
-[sql_init]
-__opapp_include(includes/create_view_production.sql)
