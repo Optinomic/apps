@@ -20,6 +20,7 @@
 <link rel="import" href="vaadin-split-layout/vaadin-split-layout.html">
 <link rel="import" href="vaadin-dialog/vaadin-dialog.html">
 <link rel="import" href="vaadin-combo-box/vaadin-combo-box.html">
+
 <dom-module id="tarmed-browser">
     <template>
         <style include="optinomic-styles">
@@ -35,29 +36,75 @@
         }
 
         .left_bar {
-            background: #E0E0E0;
+            background: #F5F5F5;
             min-width: 128px;
-            max-width: 256px;
-            padding: 12px;
+            max-width: 44%;
+            padding-top: 24px;
         }
 
+        .tree_container {}
+
+
         .right_bar {
+            width: 56%;
             background: #FFFFFF;
-            min-width: 128px;
-            max-width: 256px;
-            padding: 12px;
+            padding: 24px;
         }
 
         .page {
             padding: 12px;
         }
+
+        .tarmed_tree csak-tree-item {
+            --csak-tree-item-indent: 1em;
+            --iron-icon-width: 16px;
+            font-size: 14.5px;
+            margin-top: 7px;
+            color: #424242 !important;
+        }
+
+        csak-tree-item:hover {
+            color: #000000 !important;
+        }
+
+        .tarmed_tree csak-tree-item iron-icon {
+            color: #BDBDBD;
+            margin-right: 6px;
+        }
         </style>
         <vaadin-split-layout class="fullscreen">
             <div class="left_bar">
-                <h3>Browser</h3>
+                <template is="dom-if" if="[[!have_treedata]]" restamp="true">
+                    <p class="page">Loading...</p>
+                </template>
+                <div hidden$="[[!have_treedata]]">
+                    <div hidden$="[[!is_german]]">
+                        <div class="tree_container">
+                            <csak-tree id="tarmed_tree" class="tarmed_tree" branchicon="vaadin:chevron-right-small" branchiconopen="vaadin:chevron-down-small" data="" on-selected-item-changed="__changedSelectedTreeData"></csak-tree>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="right_bar">
-                <h3>Content</h3>
+                <template is="dom-if" if="[[tree_selected.is_typ_r]]" restamp="true">
+                    <h1>[[tree_selected.name]]</h1>
+                </template>
+                <template is="dom-if" if="[[tree_selected.is_typ_i]]" restamp="true">
+                    <h1>[[tree_selected.interpret_titel]]</h1>
+                    <p>[[tree_selected.interpret_text]]</p>
+                </template>
+                <template is="dom-if" if="[[tree_selected.is_typ_k]]" restamp="true">
+                    <h1>[[tree_selected.name]]</h1>
+                    <p>Kapitel-Nummer: [[tree_selected.knr]]</p>
+                </template>
+                <template is="dom-if" if="[[tree_selected.is_typ_l]]" restamp="true">
+                    <h1>[[tree_selected.name]]</h1>
+                    <p>Kapitel-Nummer: [[tree_selected.KNR]] | Leisungsnummer: [[tree_selected.LNR]]</p>
+                    <h3>[[tree_selected.SPARTE_TEXT]]</h3>
+                    <p>[[tree_selected.LEISTUNG_MED_INTERPRET]]</p>
+                    <h2>Regel</h2>
+                    <p>[[tree_selected.REGEL]]</p>
+                </template>
             </div>
         </vaadin-split-layout>
     </template>
@@ -78,6 +125,11 @@
         static get properties() {
             return {
 
+                language: {
+                    type: String,
+                    value: 'D',
+                    observer: '_init'
+                },
                 _app_state: {
                     type: String,
                     value: 'start'
@@ -88,8 +140,155 @@
 
         // --------------- Functions ---------------
 
-        _something() {
+        __setTreeData(tree_data) {
+            var tree = this.$$('#tarmed_tree');
+            tree.data = tree_data;
+        }
 
+        __enhanceTreeData(d) {
+            var tree_data = Object.assign({}, this.get("TARMED_" + this.language + "_I"));
+            var tree = this.$$('#tarmed_tree');
+
+            var kapitel_root = tree_data.children["0"].children[1].children;
+            var found = false;
+
+            // SET a name
+            // UGLY - do this in files!
+            d.children.forEach(function(leist) {
+                leist.children.forEach(function(l2) {
+                    l2.name = l2.LEISTUNG_TEXT;
+
+                    if ("children" in l2) {
+                        l2.children.forEach(function(l3) {
+                            l3.name = l3.LEISTUNG_TEXT;
+
+                        });
+                    };
+
+                    if ("LNR" in l2) {
+                        l2.name = l2.LNR + " | " + l2.name;
+                    };
+                });
+            });
+
+            kapitel_root.forEach(function(kap) {
+
+                if (kap.knr === d.knr) {
+
+
+                    kap.children = d.children;
+                    found = true
+                };
+            });
+
+            if (found) {
+                this.__setTreeData(JSON.stringify(tree_data));
+            };
+
+            console.log('__enhanceTreeData', d, kapitel_root);
+            // tree.data = tree_data;
+        }
+
+        __changedSelectedTreeData(e) {
+            var s = Object.assign({}, e.detail.value);
+            var tree_selected = {
+                "name": s.name,
+                "typ": "unknown",
+                "is_typ_i": false,
+                "is_typ_k": false,
+                "is_typ_l": false,
+                "is_typ_r": true
+            };
+
+            if ("interpret_text" in s) {
+                tree_selected.interpret_titel = s.interpret_titel;
+                tree_selected.interpret_text = s.interpret_text;
+                tree_selected.typ = "I";
+                tree_selected.is_typ_i = true;
+                tree_selected.is_typ_r = false;
+            };
+
+            if ("knr" in s) {
+                tree_selected.knr = s.knr;
+                tree_selected.array_id = s.array_id;
+
+                tree_selected.typ = "K";
+                tree_selected.is_typ_k = true;
+                tree_selected.is_typ_r = false;
+
+                // Load more Data
+                if (s.knr.split(".").length === 1) {
+                    this._grabTARMEDKapitel(s.knr);
+                };
+
+            };
+
+            if ("LNR" in s) {
+                tree_selected.LNR = s.LNR;
+                tree_selected.LNR = s.LNR;
+
+                tree_selected.array_id = s.array_id;
+                tree_selected.REGEL = s.REGEL;
+                tree_selected.SPARTE_TEXT = s.SPARTE_TEXT;
+                tree_selected.LEISTUNG_MED_INTERPRET = s.LEISTUNG_MED_INTERPRET;
+
+
+
+                tree_selected.typ = "L";
+                tree_selected.is_typ_l = true;
+                tree_selected.is_typ_r = false;
+
+
+            };
+
+            this.set('tree_selected', tree_selected);
+            console.log('__changedSelectedTreeData', tree_selected, s);
+        }
+
+
+
+        _grabTARMED(file) {
+
+            Polymer.RenderStatus.afterNextRender(this, function() {
+
+                if ((this.file !== null) && (this.file !== undefined)) {
+                    this.set(file, {});
+                };
+
+                var url = "https://cdn.rawgit.com/Optinomic/apps/08881c0a/org.optinomic.tarmed.browser/includes/" + file + ".json";
+
+                fetch(url)
+
+                    .then(res => res.json())
+                    .then(function(json) {
+
+                        var return_obj = {
+                            "error": false,
+                            "data": json,
+                            "file": file
+                        };
+
+                        // INIT-FILE
+                        if (file === "TARMED_" + this.language + "_I") {
+                            this.set(file, JSON.parse(JSON.stringify(json)));
+                            this.__setTreeData(JSON.stringify(json));
+                            this.set('have_treedata', true);
+                        };
+
+                        // Kapitel-File
+                        if (file.indexOf("_K_") !== -1) {
+                            this.__enhanceTreeData(json);
+                        };
+
+                        console.log('Data: _grabTARMED', file, json);
+
+                    }.bind(this));
+            });
+
+        }
+
+        _grabTARMEDKapitel(kapitel) {
+            this._grabTARMED("TARMED_" + this.language + "_K_" + kapitel);
         }
 
 
@@ -97,7 +296,31 @@
 
         _init() {
 
-            console.warn('_init :: TARMED-Browser');
+            this.debounce('_init', function() {
+
+                // Grab Treedata
+                this.set('have_treedata', false);
+                this._grabTARMED("TARMED_" + this.language + "_I");
+                this._grabTARMEDKapitel("02");
+
+                // Check current language
+                if ((this.language !== null) && (this.language !== undefined)) {
+                    if (this.language === "D") {
+                        this.set('is_german', true);
+                    };
+                    if (this.language === "F") {
+                        this.set('is_french', true);
+                    };
+                    if (this.language === "F") {
+                        this.set('is_italian', true);
+                    };
+                };
+
+                console.warn('_init :: TARMED-Browser');
+
+
+            }, 250);
+
         }
 
         constructor() {
