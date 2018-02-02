@@ -1,0 +1,159 @@
+[module]
+id = ch.suedhang.apps.honos.production
+name = HoNOS
+parent = ch.suedhang.apps.honos
+short_description = Health of the nation outcomes scales (HoNOS).
+version = 1.0
+type = patient
+
+[description]
+Gesundheit und soziale Funktionsfähigkeit, 12 Items.
+
+
+[developer]
+first_name = Nora
+last_name = Schönenberger
+github_user = schoenenb
+email = nora.schoenenberger@suedhang.ch
+company = Suedhang
+phone = +41 (0)31 828 14 92
+website = http://suedhang.ch/de/Forschung
+
+[readme]
+## HoNOS (Health of the Nations Outcome Scale)
+
+### Zusammenfassung
+Fremdeinschätzung von Gesundheit und sozialer Funktionsfähigkeit mittels 12 Items durch eine therapeutische Fachperson.
+
+[dependencies]
+
+
+[survey]
+id = HoNOS
+type = lime
+responsibility = lead_therapist
+name = HoNOS
+host = limesurvey_v2
+survey_id = 927351
+hash = X41X1274
+pid = X41X1275
+fid = X41X1276
+min_questions =
+min_lastpage = 5
+
+[event activation]
+type = on_activation
+due_after = 259200
+overdue = send_reminder_once
+description = HoNOS Eintritt
+survey = HoNOS
+
+[event before_exit]
+type = before_exit
+days = 3
+time = 00:00
+due_after = 345600
+overdue = send_reminder_once
+description = HoNOS Austritt
+survey = HoNOS
+
+[sql_init]
+CREATE OR REPLACE VIEW honos_interface_pabs AS
+
+
+SELECT
+
+-- START:  Optinoimc Default |  Needed for Export-Toolbox
+  survey_response_view.patient_id as optinomic_patient_id,
+  survey_response_view.stay_id as optinomic_stay_id,
+  survey_response_view.event_id as optinomic_event_id,
+  survey_response_view.survey_response_id as optinomic_survey_response_id,
+  survey_response_view.filled as optinomic_survey_filled,
+  ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
+  -- END:  Optinoimc Default |  Needed for Export-Toolbox
+
+  patient.cis_pid as cis_pid,
+  CONCAT(patient.cis_pid, '00', RIGHT((stay.cis_fid/100)::text,2)) as medstatfid,
+  stay.cis_fid/100 as fid,
+  ((cast(response AS json))->>'FID') as fid_survey,
+
+  'PH' as Rekordart,
+  71286515 as betriebsnummer_bur,
+
+
+  CASE WHEN ((cast(response AS json))->>'q401V04')~E'^\\d+$' THEN ((cast(response AS json))->>'q401V04')::integer ELSE 3 END as zeitpunkt_honos,
+  ((cast(response AS json))->>'q401V05') as dropoutcode_honos,
+  ((cast(response AS json))->>'q401V06') as spezifikation_dropout_honos_andere,
+
+  CASE (CASE WHEN ((cast(response AS json))->>'q401V04')~E'^\\d+$' THEN ((cast(response AS json))->>'q401V04')::integer ELSE 3 END)
+  WHEN 1 THEN to_char(stay.start, 'YYYYMMDD')
+  WHEN 2 THEN to_char(stay.stop, 'YYYYMMDD')
+  ELSE TO_CHAR(TO_DATE(((cast(response AS json))->>'q402V00'), 'YYYY-MM-DD'), 'YYYYMMDD')
+  END as datum_erhebung_honos,
+
+  ((cast(response AS json))->>'H1[402V01]') as honos_h1,
+  ((cast(response AS json))->>'H1[402V02]') as honos_h2,
+  ((cast(response AS json))->>'H1[402V03]') as honos_h3,
+  ((cast(response AS json))->>'H1[402V04]') as honos_h4,
+  ((cast(response AS json))->>'H1[402V05]') as honos_h5,
+  ((cast(response AS json))->>'H1[402V06]') as honos_h6,
+  ((cast(response AS json))->>'H1[402V07]') as honos_h7,
+  ((cast(response AS json))->>'H1[402V08]') as honos_h8,
+  ((cast(response AS json))->>'q402V09') as honos_h8a,
+  ((cast(response AS json))->>'q402V10') as honos_h8b,
+  ((cast(response AS json))->>'H2[402V11]') as honos_h9,
+  ((cast(response AS json))->>'H2[402V12]') as honos_h10,
+  ((cast(response AS json))->>'H2[402V13]') as honos_h11,
+  ((cast(response AS json))->>'H2[402V14]') as honos_h12
+FROM "survey_response_view"
+LEFT JOIN patient ON(survey_response_view.patient_id = patient.id)
+LEFT JOIN stay ON(survey_response_view.stay_id = stay.id)
+WHERE module = 'ch.suedhang.apps.honos.production'
+AND date_trunc('day', (cast(response AS json)->>'q402V00')::timestamp) = date_trunc('day', now())
+AND ((cast(response AS json))->>'q401V04') != ''
+AND stay.cis_fid is not null
+AND survey_response_view.patient_id != '1169'
+AND survey_response_view.patient_id != '387'
+AND survey_response_view.patient_id != '1'
+ORDER BY  patient.cis_pid, stay.cis_fid;
+
+
+
+
+[task hl7_export javascript]
+const fs = require("fs");
+
+function add_leading_zero(x) {
+  if(x < 10) {
+    return '0' + x.toString();
+  } else {
+    return x.toString();
+  }
+}
+
+function format_date(d) {
+  return d.getUTCFullYear().toString() +
+    add_leading_zero(d.getUTCMonth() + 1) +
+    add_leading_zero(d.getUTCDate());
+}
+
+function main(token) {
+  var path = "/modules/ch.suedhang.apps.honos.production/run_view/honos_interface_pabs";
+  var params = { direct: "True", format: "csv", delimiter: ",", crlf: "True" };
+  helpers.callAPI("POST", path, {}, params, function(req) {
+    if(req.status == 200) {
+      if(req.responseText.length > 1) {
+        var now = new Date();
+        var filepath = "/media/cis_files/honos_interface/" + format_date(now);
+        fs.writeFileSync(filepath, req.responseText);
+        console.log("Exported in " + filepath);
+      }
+    } else if (req.status == 204) {
+      console.log("204 No Content received => nothing to do.");
+    } else {
+      console.error(req.status, req.responseText);
+      throw "";
+    }
+  });
+}
+

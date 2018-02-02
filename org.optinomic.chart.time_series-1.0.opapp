@@ -1,0 +1,4371 @@
+[module]
+id = org.optinomic.chart.time_series
+name = Chart: Time-Series
+short_description = Time-Series analyses
+version = 1.0
+type = user
+
+[description]
+Easy Time-Series analyses.
+
+[developer]
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
+website = http://www.optinomic.com/
+
+[readme]
+
+# Optinomic Charts.
+
+Create charts with calculation values.
+
+
+# Anschrift
+
+![image](http://www.ottiger.org/optinomic_logo/optinomic_logo_small.png)     
+
+*Optinomic GmbH*   
+*Haldenstrasse 7*     
+*CH - 8942 Oberrieden*     
+*+41(0)44 508 26 76*    
+*info@optinomic.com*   
+*[www.optinomic.com](http://www.optinomic.com)*   
+
+
+
+[template main 6 7]
+<head>
+    <base href="https://cdn.rawgit.com/Optinomic/polymer-cdn/optinomic-0.1.31/lib/">
+    <link rel="shortcut icon" href="optinomic-images/favicon-indigo/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500">
+    <script src="webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script src="redux/dist/redux.min.js"></script>
+    <script src="redux-thunk/dist/redux-thunk.min.js"></script>
+    <script src="polymer-redux/polymer-redux.js"></script>
+    <link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+    <link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html"> <dom-module id="shared-styles">
+    <template>
+        <style>
+
+        body {
+            display: block;
+            margin: 0;
+            min-height: 100%;
+            background-color: #FFFFFF;
+            font-family: 'Roboto', 'Noto', sans-serif;
+            line-height: 1.5;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+
+
+        html, body {
+  font-family: 'Roboto', sans-serif !important;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.large {
+  font-size: 125%;
+}
+
+.small {
+  font-size: 75%;
+}
+
+a {
+  text-decoration: none;
+  color: #37474F;
+}
+
+
+/************
+ * Headings
+ ************/
+
+.display-4 {
+  font-size: 117.6px;
+  font-weight: 100;
+  letter-spacing: -0.010em;
+  line-height: 117.6px;
+  color: #757575;
+}
+
+.display-3 {
+  font-size: 58.8px;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 58.8px;
+  color: #757575;
+}
+
+.display-2 {
+  font-size: 47.25px;
+  font-weight: 400;
+  line-height: 67.2px;
+  color: #757575;
+}
+
+h1, .display-1 {
+  font-size: 35.7px;
+  font-weight: 300;
+  line-height: 42px;
+  color: #757575;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+h2, .headline {
+  font-size: 25.2px;
+  font-weight: 300;
+  line-height: 33.6px;
+  color: #616161;
+}
+
+h3, .title {
+  font-size: 21px;
+  font-weight: 300;
+  letter-spacing: 0.005em;
+  color: #424242;
+}
+
+h4, .subhead {
+  font-size: 16.8px;
+  font-weight: 300;
+  letter-spacing: 0.010em;
+  line-height: 25.2px;
+  color: #212121;
+}
+
+
+/************
+ * Body Copy
+ ************/
+
+p, .body-1 {
+  font-size: 14.7px;
+  font-weight: 400;
+  letter-spacing: 0.010em;
+  line-height: 21px;
+  color: #212121;
+}
+
+b, .body-2 {
+  font-size: 14.7px;
+  font-weight: 500;
+  letter-spacing: 0.010em;
+  line-height: 25.2px;
+  color: #212121;
+}
+
+.caption {
+  font-size: 12.6px;
+  letter-spacing: 0.020em;
+  color: #757575;
+}
+
+.button {
+  letter-spacing: 0.010em;
+}
+
+
+/************
+ * Defaults
+ ************/
+
+button, select, html, textarea, input {
+  font-family: 'Roboto', sans-serif !important;
+}
+
+select, button, textarea, input {
+  font-size: 100%;
+}
+
+        paper-button {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+paper-button.grey {
+  color: var(--paper-grey-500);
+  --paper-button-ink-color: var(--paper-grey-a200);
+}
+
+paper-button.grey:hover {
+  color: var(--paper-grey-900);
+  background-color: var(--paper-grey-100);
+}
+
+paper-button.pink {
+  color: var(--paper-pink-800);
+  background-color: var(--paper-pink-50);
+  --paper-button-ink-color: var(--paper-pink-500);
+}
+
+paper-button.pink:hover {
+  background-color: var(--paper-pink-500);
+  color: white;
+}
+
+paper-button.indigo {
+  background-color: var(--paper-indigo-50);
+  color: var(--paper-indigo-800);
+  --paper-button-ink-color: var(--paper-pink-500);
+}
+
+paper-button.indigo:hover {
+  background-color: var(--paper-indigo-500);
+  color: white;
+}
+
+paper-button.disabled {
+  color: white;
+}
+
+        paper-icon-button.grey {
+  color: var(--paper-grey-500);
+  transition: all 0.3s ease-in-out;
+  --paper-icon-button-ink-color: var(--paper-grey-500);
+}
+
+paper-icon-button.grey:hover {
+  color: var(--paper-grey-800);
+  transform: scale(1.1);
+}
+
+paper-icon-button.pink {
+  color: var(--paper-pink-500);
+  transition: all 0.3s ease-in-out;
+  --paper-icon-button-ink-color: var(--paper-pink-500);
+}
+
+paper-icon-button.pink:hover {
+  transform: scale(1.1);
+}
+
+paper-icon-button.indigo {
+  color: var(--paper-indigo-500);
+  transition: all 0.3s ease-in-out;
+  --paper-icon-button-ink-color: var(--paper-indigo-500);
+}
+
+paper-icon-button.indigo:hover {
+  transform: scale(1.1);
+}
+
+        paper-progress {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+}
+
+paper-progress.slow {
+  --paper-progress-indeterminate-cycle-duration: 5s;
+}
+
+paper-progress.indigo {
+  --paper-progress-active-color: var(--paper-indigo-500);
+  --paper-progress-secondary-color: var(--paper-indigo-100);
+  --paper-progress-indeterminate-cycle-duration: 3s;
+}
+
+paper-progress.pink {
+  --paper-progress-active-color: var(--paper-pink-500);
+  --paper-progress-secondary-color: var(--paper-pink-100);
+  --paper-progress-indeterminate-cycle-duration: 3s;
+}
+
+paper-tooltip {
+  --paper-tooltip-background: #424242;
+  --paper-tooltip-opacity: 0.85;
+  --paper-tooltip: {
+    font-size: 14px;
+    color: #FAFAFA;
+  }
+}
+
+                .horizontal {
+          @apply(--layout-horizontal);
+          @apply(--layout-center);
+          @apply(--layout-justified);
+        }
+
+        .flex {
+          @apply(--layout-flex);
+        }
+
+        .wrap {
+          @apply(--layout-wrap);
+        }
+
+        .circle {
+          display: inline-block;
+          width: 58px;
+          height: 58px;
+          text-align: center;
+          color: #424242;
+          border-radius: 50%;
+          background: #E0E0E0;
+          font-size: 28px;
+          font-weight: 100;
+          font-family: 'Roboto', sans-serif;
+          line-height: 60px;
+        }
+
+        .grid-border-top {
+          border-top-color: #E0E0E0;
+          border-top-style: solid;
+          border-top-width: 1px;
+        }
+
+        .indigo {
+          color: #3F51B5;
+        }
+
+        .pink {
+          color: #E91E63;
+        }
+
+
+        </style>
+    </template>
+</dom-module>
+
+    <style is="custom-style" include="shared-styles iron-flex iron-flex-alignment">
+    :host {
+        display: block;
+    }
+
+    html,
+    body {
+        padding-top: 8px;
+        padding-bottom: 24px;
+        padding-left: 2px;
+        padding-right: 2px;
+        max-width: 1024px;
+        margin-left: auto;
+        margin-right: auto;
+        font-family: 'Roboto', sans-serif !important;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        min-height: 100%;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    @media only screen and (min-width: 641px) and (max-width: 1023px) {
+        html,
+        body {
+            padding-top: 12px;
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+    }
+
+    @media only screen and (min-width: 1024px) {
+        html,
+        body {
+            padding-top: 24px;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+    }
+    </style>
+</head>
+<!--
+@license
+Copyright (c) 2017 Optionmic GmbH. All rights reserved.
+-->
+<link rel="import" href="polymer/polymer.html"> <!--
+ Copyright 2017 | optinomic-redux-store | Optinomic GmbH.
+ http://www.optinomic.com/
+-->
+<script>
+const initialState = {
+    "loading": false,
+    "options": {
+        "show_app_toolbar": false,
+        "sort_ascending": true
+    },
+    "apps": {
+        "all": null,
+        "current": {
+            "id": helpers.getAppID(),
+            "name": helpers.getAppName(),
+            "data": null,
+            "found": false
+        }
+    },
+    "clinic": {
+        "data": null
+    },
+    "patient": {
+        "id": helpers.getPatientID(),
+        "data": null
+    },
+    "stays": {
+        "all": null,
+        "current": {
+            "id": helpers.getStayID(),
+            "data": null,
+            "found": false
+        }
+    },
+    "survey_responses": {
+        "data": {}
+    },
+    "komed": {
+        "data": null,
+    },
+    "user": {
+        "id": helpers.getUserID(),
+        "data": null
+    },
+    "username": null
+};
+const reducer = (state, action) => {
+    if (!state) return initialState;
+    switch (action.type) {
+
+        case 'SET_PERSISTENT_STATE':
+            // console.log('(----->) SET_PERSISTENT_STATE', action);
+            return Object.assign({}, state, action.new_state);
+
+        case 'SET_SIGNIN_START':
+            var current_signin = Object.assign({}, state.signin);
+            current_signin.data = action.signin.data;
+            current_signin.isLoggedIn = action.signin.isLoggedIn;
+            current_signin.trust_computer = action.signin.trust_computer;
+            // console.log('(----->) SET_SIGNIN_START', action.signin, current_signin, store.getState());
+            return Object.assign({}, state, {
+                signin: current_signin
+            });
+
+
+        case 'GET_DATA_STARTED':
+            return Object.assign({}, state, {
+                loading: true
+            });
+
+        case 'GET_USERAPPCALCULATION_COMPLETE':
+            var _app_userapp_calculations = Object.assign({}, state._app_userapp_calculations);
+            _app_userapp_calculations[action.data.module_calc] = action.data; 
+            return Object.assign({}, state, {
+                _app_userapp_calculations: _app_userapp_calculations
+            });
+
+        case 'GET_CURRENT_USER_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                _app_user: action.data
+            });
+
+        case 'GET_CURRENT_PATIENT_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                patient: action.data
+            });
+
+        case 'GET_CURRENT_PATIENT_STAYS_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                stays: action.data
+            });
+
+
+        case 'SAVE_PARAMS_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                _app_params: action.data
+            });
+
+        case 'GET_MODULE_ANNOTATIONS_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                _app_annotations: action.data
+            });
+
+        case 'GET_CLINIC_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                clinic: action.data
+            });
+
+        case 'GET_APPS_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                apps: action.data
+            });
+
+        case 'GET_SURVEY_RESPONSES_COMPLETE':
+            var sr = Object.assign({}, state.survey_responses);
+            var app_id = action.data.app_id;
+            sr.data[app_id] = action.data;
+
+            //console.log('(!) GET_SURVEY_RESPONSES_COMPLETE', app_id, sr);
+            return Object.assign({}, state, {
+                loading: false,
+                survey_responses: sr
+            });
+
+        case 'SET_APP_TOOLBAR':
+            var options = Object.assign({}, state.options);
+            options.show_app_toolbar = action.show_app_toolbar;
+
+            return Object.assign({}, state, {
+                options: options
+            });
+
+        case 'SIGN_UP_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                username: action.username
+            });
+    }
+};
+
+
+const AsyncActionsBehavior = {
+    actions: {
+        actionGetClinic: function() {
+            return function(dispatch) {
+                dispatch({
+                    type: 'GET_DATA_STARTED'
+                });
+                const api_url = '/clinic';
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+                    if (req.status == 200) {
+                        var resp = JSON.parse(req.response);
+
+                        // All fields are coming as array: Make Object out of it:
+                        var json_data = {};
+                        resp.clinic.forEach(function(item, itemIndex) {
+                            json_data[item[0]] = item[1];
+                        });
+
+                        var response = {
+                            "date": new Date(),
+                            "data": json_data
+                        };
+                        response.data.array = resp.clinic;
+                        console.log('(✔) Data (' + api_url + '):', response);
+                    } else {
+                        var response = {
+                            "error": true,
+                            "error_message": "Failed with status code: " + req.status,
+                            "status_code": req.status
+                        };
+                        console.error('(!) Error: ', response);
+                    };
+                    dispatch({
+                        type: 'GET_CLINIC_COMPLETE',
+                        data: response
+                    });
+                });
+            }
+        },
+        actionGetCurrentUser: function() {
+            return function(dispatch) {
+                dispatch({
+                    type: 'GET_DATA_STARTED'
+                });
+                const api_url = '/users/' + helpers.getUserID();
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+                    if (req.status == 200) {
+                        var resp = JSON.parse(req.response);
+                        var data_return = resp.user.data;
+                        data_return.id = resp.user.id;
+                        data_return.uid = resp.user.id;
+                        data_return.isAdmin = false;
+                        if (resp.user.data.role === "Admin") {
+                            data_return.isAdmin = true;
+                        };
+
+                        var response = {
+                            "id": resp.user.id,
+                            "date": new Date(),
+                            "data": data_return
+                        };
+                        console.log('(✔) Data (' + api_url + '):', response);
+                    } else {
+                        var response = {
+                            "error": true,
+                            "error_message": "Failed with status code: " + req.status,
+                            "status_code": req.status
+                        };
+                        console.error('(!) Error: ', response);
+                    };
+                    dispatch({
+                        type: 'GET_CURRENT_USER_COMPLETE',
+                        data: response
+                    });
+                });
+            }
+        },
+        actionGetCurrentPatient: function() {
+            return function(dispatch) {
+                dispatch({
+                    type: 'GET_DATA_STARTED'
+                });
+                const api_url = '/patients/' + helpers.getPatientID();
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+                    if (req.status == 200) {
+                        var resp = JSON.parse(req.response);
+                        var data_return = resp.patient.data;
+                        data_return.id = resp.patient.id;
+                        data_return.pid = resp.patient.id;
+                        data_return = createPatientExtras(data_return);
+
+
+                        data_return.komed_base_url = "https://optinomic.komed-health.com/chat/";
+                        data_return.komed_url = data_return.komed_base_url + resp.patient.id;
+
+                        var response = {
+                            "date": new Date(),
+                            "data": data_return
+                        };
+                        console.log('(✔) Data (' + api_url + '):', response);
+                    } else {
+                        var response = {
+                            "error": true,
+                            "error_message": "Failed with status code: " + req.status,
+                            "status_code": req.status
+                        };
+                        console.error('(!) Error: ', response);
+                    };
+                    dispatch({
+                        type: 'GET_CURRENT_PATIENT_COMPLETE',
+                        data: response
+                    });
+                });
+            }
+        },
+        actionGetCurrentPatientStays: function() {
+            return function(dispatch) {
+                dispatch({
+                    type: 'GET_DATA_STARTED'
+                });
+                const api_url = '/patients/' + helpers.getPatientID() + '/stays/';
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+                    if (req.status == 200) {
+                        var resp = JSON.parse(req.response);
+                        var stays = resp.stays;
+
+                        var current_stay_id = helpers.getStayID();
+
+                        var response = {
+                            "all": stays,
+                            "current": {
+                                "id": current_stay_id,
+                                "data": null,
+                                "found": false
+                            }
+                        }
+
+                        stays.forEach(function(stay, stayID) {
+                            stay.data = createStayExtras(stay.data);
+                            stay.data.id = stay.id;
+                            stay.data.fid = stay.id;
+                            if (current_stay_id === stay.id) {
+                                response.current.data = stay.data;
+                                response.current.found = true;
+                            };
+                        });
+
+                        var response = {
+                            "date": new Date(),
+                            "data": stays
+                        };
+                        console.log('(✔) Data (' + api_url + '):', response);
+                    } else {
+                        var response = {
+                            "error": true,
+                            "error_message": "Failed with status code: " + req.status,
+                            "status_code": req.status
+                        };
+                        console.error('(!) Error: ', response);
+                    };
+                    dispatch({
+                        type: 'GET_CURRENT_PATIENT_STAYS_COMPLETE',
+                        data: response
+                    });
+                });
+            }
+        },
+        actionGetApps: function() {
+            return function(dispatch) {
+                dispatch({
+                    type: 'GET_DATA_STARTED'
+                });
+                const api_url = '/modules/';
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+                    if (req.status == 200) {
+                        var resp = JSON.parse(req.response);
+                        var patient_modules = resp.patient_modules;
+                        var user_modules = resp.user_modules;
+
+
+                        var response = {
+                            "date": new Date(),
+                            "all": {
+                                "patient_modules": patient_modules,
+                                "user_modules": user_modules
+                            },
+                            "current": {
+                                "id": helpers.getAppID(),
+                                "name": helpers.getAppName(),
+                                "data": null,
+                                "found": false
+                            }
+                        };
+
+                        patient_modules.forEach(function(pm, pmID) {
+                            if (pm.identifier === helpers.getAppID()) {
+                                response.current.data = pm;
+                                response.current.name = pm.name;
+                                response.current.found = true;
+                            }
+                        });
+
+                        if (!response.current.found) {
+                            user_modules.forEach(function(um, pmID) {
+                                if (um.identifier === helpers.getAppID()) {
+                                    response.current.data = um;
+                                    response.current.name = um.name;
+                                    response.current.found = true;
+                                }
+                            });
+                        };
+
+                        console.log('(✔) Data (' + api_url + '):', response);
+                    } else {
+                        var response = {
+                            "error": true,
+                            "error_message": "Failed with status code: " + req.status,
+                            "status_code": req.status
+                        };
+                        console.error('(!) Error: ', response);
+                    };
+                    dispatch({
+                        type: 'GET_APPS_COMPLETE',
+                        data: response
+                    });
+                });
+            }
+        },
+        actionGetSurveyResponses: function(requested_app_id) {
+
+            return function(dispatch) {
+
+                module_identifier = requested_app_id === undefined ? helpers.getAppID() : requested_app_id;
+                console.log('(?) actionGetSurveyResponses', module_identifier);
+
+
+                var current_stay_id = parseInt(helpers.getStayID());
+                var current_pid = parseInt(helpers.getPatientID());
+
+                var data_request = 'undefined';
+                var calculation_results_api_url = '/patients/' + current_pid + '/calculations/' + module_identifier;
+                if (current_stay_id) {
+                    var api_url = '/stays/' + current_stay_id + '/survey_responses/' + module_identifier + '/full';
+                    data_request = 'stay';
+                } else {
+                    var api_url = '/patients/' + current_pid + '/survey_responses/' + module_identifier + '/full';
+                    data_request = 'patient';
+                };
+
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+
+                    var app_id = requested_app_id === undefined ? helpers.getAppID() : requested_app_id;
+                    //console.log('(?) actionGetSurveyResponses | app_id', app_id);
+
+                    if (req.status == 200) {
+                        var resp = JSON.parse(req.response);
+
+
+                        helpers.callAPI('GET', calculation_results_api_url, {}, {}, function(inner_req) {
+
+                            if (req.status == 200) {
+                                var inner_resp = JSON.parse(inner_req.response);
+                                var calculation_results = inner_resp.calculation_results;
+
+                                // console.log('actionGetSurveyResponsesNew:: resp', resp, inner_resp);
+
+
+                                // Reformat req
+                                var return_array = [];
+                                resp.survey_responses.forEach(function(current_response, srID) {
+                                    var return_obj = {};
+
+                                    return_obj.all_found = false;
+
+                                    return_obj.app_id = null;
+                                    return_obj.date = current_response.data.filled;
+
+                                    return_obj.response_id = current_response.id;
+                                    return_obj.response = current_response.data.response;
+
+                                    return_obj.event = null;
+                                    return_obj.event_found = false;
+                                    return_obj.event_id = current_response.data.event_id;
+
+                                    return_obj.patient = null;
+                                    return_obj.patient_found = false;
+                                    return_obj.patient_id = null;
+
+                                    return_obj.stay = null;
+                                    return_obj.stay_found = false;
+                                    return_obj.stay_id = null;
+
+                                    return_obj.patient_uses_module = null;
+                                    return_obj.patient_uses_module_found = false;
+                                    return_obj.patient_uses_module_id = null;
+
+                                    return_obj.calculation = {};
+                                    return_obj.calculation_found = false;
+                                    return_obj.calculation_found_method = null;
+
+
+                                    resp.events.forEach(function(current_event, eventID) {
+                                        if (current_event.id === current_response.data.event_id) {
+                                            return_obj.event_found = true;
+
+                                            current_event.data.id = current_event.id;
+                                            return_obj.event = current_event.data;
+                                            return_obj.patient_uses_module_id = current_event.data.patient_uses_module_id;
+                                            return_obj.patient_id = current_event.data.patient_id;
+                                            return_obj.app_id = current_event.data.module;
+                                            app_id = return_obj.app_id;
+                                        };
+                                    });
+
+
+                                    if (return_obj.event_found) {
+                                        resp.patients.forEach(function(current_patient, patientID) {
+                                            if (current_patient.id === return_obj.patient_id) {
+                                                return_obj.patient_found = true;
+
+                                                current_patient.data.id = current_patient.id;
+                                                current_patient.data.pid = current_patient.id;
+
+                                                current_patient.data = createPatientExtras(current_patient.data);
+                                                return_obj.patient = current_patient.data;
+                                            };
+                                        });
+
+                                        resp.patient_uses_modules.forEach(function(current_pum, pumID) {
+                                            if (current_pum.id === return_obj.patient_uses_module_id) {
+                                                return_obj.patient_uses_module_found = true;
+                                                current_pum.data.id = current_pum.id;
+                                                return_obj.patient_uses_module = current_pum.data;
+                                                return_obj.stay_id = current_pum.data.stay_id;
+
+                                            };
+                                        });
+                                    };
+
+                                    if (return_obj.stay_id) {
+                                        resp.stays.forEach(function(current_stay, stayID) {
+                                            if (current_stay.id === return_obj.stay_id) {
+                                                return_obj.stay_found = true;
+
+                                                current_stay.data.id = current_stay.id;
+                                                current_stay.data.fid = current_stay.id;
+                                                current_stay.data = createStayExtras(current_stay.data);
+
+                                                return_obj.stay = current_stay.data;
+                                            };
+                                        });
+                                    };
+
+                                    // console.error('-> resp.calculations', resp.calculations);
+                                    calculation_results.forEach(function(current_calculation_top, calculationTopID) {
+                                        var calculation_name = current_calculation_top.name;
+
+                                        if (current_calculation_top.result.length > 0) {
+                                            current_calculation_top.result.forEach(function(current_calculation, calculationID) {
+
+                                                var response_id = null;
+                                                var variant_info = false;
+                                                if ("info" in current_calculation) {
+
+                                                    if ("response" in current_calculation.info) {
+                                                        variant_info = true;
+                                                    };
+                                                };
+
+                                                var variant_response = false;
+                                                if ("response" in current_calculation) {
+                                                    if ("data" in current_calculation.response) {
+                                                        if ("response" in current_calculation.response.data) {
+                                                            variant_response = true;
+                                                        };
+                                                    };
+                                                };
+
+
+
+
+
+                                                if (variant_info) {
+                                                    var calc_resp = current_calculation.info.response;
+
+                                                    // if ((response_id !== null) && (response_id !== undefined)) {
+                                                    // 
+                                                    //     if (parseInt(response_id) === parseInt(current_calculation.info.response_id)) {
+                                                    //         return_obj.calculation_found = true;
+                                                    //         return_obj.calculation_found_method = "variant_info__response_id_" + response_id;
+                                                    //         return_obj.calculation[calculation_name] = current_calculation;
+                                                    //     };
+                                                    // };
+
+                                                    if (return_obj.calculation_found !== true) {
+                                                        if (JSON.stringify(calc_resp) === JSON.stringify(return_obj.response)) {
+                                                            // console.log('(+) EQUAL: ', calc_resp);
+
+                                                            return_obj.calculation_found = true;
+                                                            return_obj.calculation_found_method = "variant_info";
+                                                            return_obj.calculation[calculation_name] = current_calculation;
+                                                        };
+                                                    };
+                                                };
+
+                                                if (variant_response) {
+                                                    var calc_resp = current_calculation.response.data.response;
+
+
+                                                    // if ((response_id !== null) && (response_id !== undefined)) {
+                                                    // 
+                                                    //     if (parseInt(response_id) === parseInt(current_calculation.response.id)) {
+                                                    //         return_obj.calculation_found = true;
+                                                    //         return_obj.calculation_found_method = "variant_response__response_id_" + response_id;
+                                                    //         return_obj.calculation[calculation_name] = current_calculation;
+                                                    //     };
+                                                    // };
+
+                                                    if (return_obj.calculation_found !== true) {
+                                                        if (JSON.stringify(calc_resp) === JSON.stringify(return_obj.response)) {
+                                                            // console.log('(+) EQUAL: ', calc_resp);
+
+                                                            return_obj.calculation_found = true;
+                                                            return_obj.calculation_found_method = "variant_response";
+                                                            return_obj.calculation[calculation_name] = current_calculation;
+
+                                                        } else {
+
+                                                            if ("TMTAError" in calc_resp) {
+                                                                // TMT - Special
+                                                                // console.error('DEBUG HERE ::', calc_resp, return_obj.response, current_calculation);
+
+                                                                if ((parseInt(calc_resp.TMTAError) === parseInt(return_obj.response.TMTAError)) &&
+                                                                    (parseInt(calc_resp.TMTATime) === parseInt(return_obj.response.TMTATime)) &&
+                                                                    (parseInt(calc_resp.TMTBError) === parseInt(return_obj.response.TMTBError)) &&
+                                                                    (parseInt(calc_resp.TMTBTime) === parseInt(return_obj.response.TMTBTime)) &&
+                                                                    (parseInt(calc_resp.Ausbildungsjahre) === parseInt(return_obj.response.Ausbildungsjahre)) &&
+                                                                    (parseInt(calc_resp.Messzeitpunkt) === parseInt(return_obj.response.Messzeitpunkt))
+                                                                ) {
+
+                                                                    return_obj.calculation_found = true;
+                                                                    return_obj.calculation_found_method = "variant_response_tmt";
+                                                                    return_obj.calculation[calculation_name] = current_calculation;
+                                                                };
+
+                                                            };
+
+                                                        };
+                                                    };
+
+                                                };
+                                            });
+                                        };
+                                    });
+
+
+
+                                    if (return_obj.calculation_found && return_obj.event_found && return_obj.patient_found && return_obj.stay_found && return_obj.patient_uses_module_found) {
+                                        return_obj.all_found = true;
+                                    };
+
+                                    return_array.push(return_obj);
+                                });
+
+
+                                if (return_array.length > 0) {
+                                    var have_data = true;
+
+                                    // Sort
+                                    return_array.sort(function(a, b) {
+                                        var nameA = a.date.toUpperCase(); // ignore upper and lowercase
+                                        var nameB = b.date.toUpperCase(); // ignore upper and lowercase
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                } else {
+                                    var have_data = false;
+                                };
+
+                                var response = {
+                                    "date": new Date(),
+                                    "data": return_array,
+                                    "calculations_all": calculation_results,
+                                    "have_data": have_data,
+                                    "possible_data": true,
+                                    "request": data_request,
+                                    "pid": current_pid,
+                                    "fid": current_stay_id,
+                                    "app_id": app_id
+                                };
+                                console.log('(✔) Data (' + api_url + '):', response);
+
+
+                                // console.warn(JSON.stringify(calculation_results, null, 2));
+
+
+                                dispatch({
+                                    type: 'GET_SURVEY_RESPONSES_COMPLETE',
+                                    data: response
+                                });
+
+
+                            } else {
+                                var response = {
+                                    "error": true,
+                                    "error_message": "Failed with status code: " + req.status,
+                                    "status_code": req.status,
+                                    "request": data_request,
+                                    "app_id": app_id
+                                };
+                                console.error('(!) Error: ', response);
+                            };
+                        });
+
+                    } else {
+                        var response = {
+                            "error": true,
+                            "error_message": "Failed with status code: " + req.status,
+                            "status_code": req.status,
+                            "request": data_request,
+                            "app_id": app_id
+                        };
+                        console.error('(!) Error: ', response);
+                    };
+
+                });
+            }
+        },
+        actionSaveParams: function(params) {
+            return function(dispatch) {
+                dispatch({
+                    type: 'SAVE_PARAMS_COMPLETE',
+                    data: params
+                });
+            }
+        },
+        getModuleAnnotations: function(module_identifier) {
+
+            var api_url = '/modules/' + module_identifier + '/annotations';
+
+            return function(dispatch) {
+
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+                    if (req.status == 200) {
+
+                        var annotations = JSON.parse(req.response);
+
+                        var response = {
+                            "module_identifier": module_identifier,
+                            "data": annotations
+                        };
+
+                        console.log('(✔) Data (' + api_url + '):', response);
+
+                        dispatch({
+                            "type": "GET_MODULE_ANNOTATIONS_COMPLETE",
+                            "data": response
+                        });
+
+                    } else {
+                        // Errorhandling
+                        // While what action with what params error happend
+                        console.error('(!) Error: ', req);
+                    };
+
+                });
+            };
+
+        },
+
+        actionGetUserAppCalculation: function(module_identifier, calculation_identifier) {
+            return function(dispatch) {
+
+                const api_url = '/calculations/' + module_identifier + '/' + calculation_identifier;
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+                    if (req.status == 200) {
+                        var resp = JSON.parse(req.response);
+
+                        var calculation_result = null;
+                        if ("calculation_result" in resp) {
+                            calculation_result = resp.calculation_result;
+                        } else {
+                            calculation_result = resp;
+                        };
+
+                        var _module_identifier = module_identifier.split('.').join('_');
+                        var _calculation_identifier = calculation_identifier;
+                        var module_calc = _module_identifier + "___" + _calculation_identifier;
+
+                        var response = {
+                            "date": new Date(),
+                            "module_calc": module_calc,
+                            "module_identifier": module_identifier,
+                            "calculation_identifier": calculation_identifier,
+                            "data": calculation_result
+                        };
+
+                        console.log('(✔) Data (' + api_url + '):', response);
+
+                        dispatch({
+                            type: 'GET_USERAPPCALCULATION_COMPLETE',
+                            data: response
+                        });
+
+                    } else {
+                        var response = {
+                            "error": true,
+                            "error_message": "Failed with status code: " + req.status,
+                            "status_code": req.status
+                        };
+                        console.error('(!) Error: ', response);
+                    };
+
+                });
+            }
+        },
+
+        // ----------------------------------
+        // Unneeded?
+        // ----------------------------------
+
+        actionShowAppToolbar: function(show) {
+            show = show === undefined ? false : show;
+
+            return {
+                type: 'SET_APP_TOOLBAR',
+                show_app_toolbar: show
+            };
+        },
+        actionSortSurveyResponses: function() {
+            return {
+                type: 'SORT_SURVEY_RESPONSES'
+            };
+        }
+    }
+};
+// ----------------------------
+// Helpers
+// ----------------------------
+
+formatDateCH = function(date_string) {
+    if (date_string !== undefined) {
+
+        // 1952-11-19T00:00:00.000000000000Z
+        var year = parseInt(date_string.substring(0, 4));
+        var month = parseInt(date_string.substring(5, 7));
+        var day = parseInt(date_string.substring(8, 10));
+        var date_string_return = day + "." + month + "." + year
+
+        return date_string_return;
+    } else {
+        return null;
+    }
+};
+
+createPatientExtras = function(patient) {
+
+    function getAge(dateString) {
+        var today = new Date();
+        var birthDate = new Date(dateString);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        return age;
+    }
+
+
+    // patient.age = $filter('dateToAge')(patient.birthdate);
+    // patient.birthday = $filter('date')(patient.birthdate);
+
+    patient.extras = {};
+    patient.extras.age = getAge(patient.birthdate);
+
+    patient.extras.birthday = formatDateCH(patient.birthdate);
+    patient.extras.birthday_age = patient.extras.birthday + ' | ' + patient.extras.age;
+
+
+    patient.assessment = {};
+    patient.assessment.login_pid = patient.cis_pid + "";
+    // Password = YYYYMMDD
+    var pw = "Fehler";
+    if ((patient.birthdate !== "") && (patient.birthdate !== null) && (patient.birthdate !== undefined)) {
+        pw = patient.birthdate;
+        pw = pw.substring(0, 10);
+        pw = pw.replace("-", "");
+        pw = pw.replace("-", "");
+    };
+    patient.assessment.login_pw = pw;
+
+
+    patient.extras.name = patient.last_name + ' ' + patient.first_name;
+
+    if (patient.gender === 'male') {
+        patient.extras.ansprache = 'Herr';
+        patient.extras.anrede = 'Herr ' + patient.last_name;
+    } else {
+        patient.extras.ansprache = 'Frau';
+        patient.extras.anrede = 'Frau ' + patient.last_name;
+    };
+    patient.extras.full_name = patient.extras.ansprache + ' ' + patient.extras.name + ' (' + patient.extras.birthday_age + ')';
+    patient.extras.secure = patient.extras.ansprache + ' ' + patient.last_name.charAt(0) + '. ' + patient.first_name.charAt(0) + '. (' + patient.birthdate.substring(0, 4) + ')';
+
+    patient.extras.full_address = patient.address1 + ', ' + patient.zip_code + ' ' + patient.city;
+
+    var myPhone = '';
+    if (patient.phone_home) {
+        myPhone = patient.phone_home;
+    }
+    if (patient.phone_mobile) {
+        if (myPhone != '') {
+            myPhone = myPhone + ', ' + patient.phone_mobile;
+        } else {
+            myPhone = patient.phone_mobile;
+        }
+    }
+    patient.extras.phone = myPhone;
+    patient.extras.infoline = patient.extras.full_address
+
+    if (myPhone != '') {
+        patient.extras.infoline + ' | ' + patient.extras.phone;
+    };
+
+
+    // -----------------------------------
+    // Female = Pink | Male = Blue
+    // -----------------------------------
+    var myColor = "#3F51B5";
+    var myColorAccent = "#E91E63";
+    if (patient.gender === "female") {
+        myColor = "#E91E63";
+        myColorAccent = "#3F51B5";
+    }
+    patient.extras.color_main = myColor;
+    patient.extras.color_accent = myColorAccent;
+
+    return patient;
+};
+
+createStayExtras = function(current_stay) {
+    current_stay.extras = {};
+
+    // Calculate - Duration of the stay
+    if (current_stay.stop) {
+        current_stay.extras.duration = Math.floor((Date.parse(current_stay.stop) - Date.parse(current_stay.start)) / 86400000);
+        current_stay.extras.duration = current_stay.extras.duration + 2; //incl. start & stop date
+    } else {
+        current_stay.extras.duration = Math.floor((new Date() - Date.parse(current_stay.start)) / 86400000);
+    };
+
+    // from_to
+    current_stay.extras.beginn = formatDateCH(current_stay.start);
+    current_stay.extras.from_to = formatDateCH(current_stay.start);
+    current_stay.extras.from_to = current_stay.extras.from_to + ' - ';
+    if (current_stay.stop) {
+        current_stay.extras.from_to = current_stay.extras.from_to + formatDateCH(current_stay.stop);
+        current_stay.extras.ende = formatDateCH(current_stay.stop);
+    } else {
+        current_stay.extras.from_to = current_stay.extras.from_to + "Unbekannt";
+    };
+
+    return current_stay;
+};
+var Session = (function() {
+
+  var storage = localStorage;
+
+  var isLoggedIn = function() {
+    var uid = storage.getItem("optinomic_user_id");
+    return !(uid === null);
+  };
+
+  var getUserID = function() {
+    return parseInt(storage.getItem("optinomic_user_id"));
+  };
+
+  var getTrustComputer = function() {
+    return JSON.parse(storage.getItem("optinomic_trust_computer"));
+  };
+
+  var setTrustComputer = function(trust) {
+    trust = trust || false;
+    storage.setItem("optinomic_trust_computer", trust);
+  };
+
+  var getToken = function() {
+    return storage.getItem("optinomic_token");
+  };
+
+  var login = function(uid, token) {
+    console.log('SESSION | login', uid, token);
+    storage.setItem("optinomic_user_id", uid);
+    storage.setItem("optinomic_token", token);
+
+    UserStore.start();
+  };
+
+  var logout = function() {
+
+    storage.removeItem("optinomic_user_id");
+    storage.removeItem("optinomic_token");
+
+    UserStore.stop();
+    storage.removeItem("optinomic_trust_computer");
+  };
+
+  return {
+    isLoggedIn: isLoggedIn,
+    getUserID: getUserID,
+    getToken: getToken,
+    getTrustComputer: getTrustComputer,
+    setTrustComputer: setTrustComputer,
+    login: login,
+    logout: logout
+  };
+
+})();
+
+const UserStore = (function() {
+
+    // ----------------------------------
+    //  Saving userStore to localStorage
+    //  only when trust_computer = true
+    //  logout => _enoded state.
+    // ----------------------------------
+
+    var storage = localStorage;
+
+    //  Should we save to localStorage?
+    //  Should we debug state to console?
+
+    var localStorageOptions = {
+        "name": "unknown",
+        "name_prefix": "optinomic_state_",
+        "name_suffix": "_encoded",
+        "started": false,
+        "using": false,
+        "console": false
+    };
+
+    var getOptions = function() {
+        return localStorageOptions;
+    };
+
+    var getConsole = function() {
+        return localStorageOptions.console;
+    };
+
+    var setConsole = function(console) {
+        localStorageOptions.console = console;
+    };
+
+    var clear = function() {
+        var storage_name = localStorageOptions.name_prefix + Session.getUserID();
+        //console.warn('clear', storage_name);
+        storage.removeItem(storage_name);
+    };
+
+    var clear_all = function() {
+        console.warn('(clear_all) localStorage is clear now!');
+        storage.clear();
+    };
+
+    var setSignin = function() {
+        store.dispatch(addSignin());
+    };
+
+    // -------------------------------
+    // Store - Actions
+    // -------------------------------
+    var addSignin = function() {
+
+        var login_data = {
+            "data": {
+                "user_id": Session.getUserID(),
+                "token": Session.getToken()
+            },
+            "isLoggedIn": Session.isLoggedIn(),
+            "trust_computer": Session.getTrustComputer()
+        };
+
+        return {
+            type: 'SET_SIGNIN_START',
+            signin: login_data
+        }
+    };
+
+    var replaceState = function(new_state) {
+        //console.log('---> replaceState', new_state);
+        return {
+            type: 'SET_PERSISTENT_STATE',
+            new_state: new_state
+        }
+    };
+
+
+    // -------------------------------
+    // Start / Stop
+    // -------------------------------
+
+    var start = function() {
+
+        var signin = {
+            "user_id": Session.getUserID(),
+            "token": Session.getToken()
+        };
+
+        console.warn('UserStore START', signin);
+        localStorageOptions.started = true;
+
+        var trust_computer = Session.getTrustComputer();
+        if (trust_computer) {
+
+            localStorageOptions.using = true;
+            var state = store.getState();
+
+            // Just to be sure
+            if ((signin.user_id !== null) && (signin.token !== null)) {
+                var user_id = signin.user_id;
+
+
+                var localStorageName = localStorageOptions.name_prefix + user_id;
+                localStorageOptions.name = localStorageName;
+
+
+                //  Check if localStorage has Data - if yes use this!
+                var persistedUserState = null;
+                persistedUserState = storage.getItem(localStorageName + localStorageOptions.name_suffix);
+                // console.log('(?) STORE HELPER', localStorageName, signin, persistedUserState);
+
+                if (persistedUserState !== null) {
+                    // Decode persistedUserState
+                    var persistedUserStateDecoded = JSON.parse(decodeURIComponent(escape(atob(persistedUserState))));
+
+                    // persistedUserState is available
+                    // Replace currentState with persistedUserState & add new signin credentials
+                    store.dispatch(replaceState(persistedUserStateDecoded));
+                    store.dispatch(addSignin(signin));
+
+                    // Remove _encoded persistedUserState
+                    storage.removeItem(localStorageName + localStorageOptions.name_suffix);
+                    //localStorageOptions.using = true;
+
+                    console.warn('(!) -----> User_Store - encoded & persisted');
+
+
+                } else {
+
+                    loggedInUserState = JSON.parse(storage.getItem(localStorageName));
+
+                    if (loggedInUserState !== null) {
+                        // Already Logged-In / Page-Refresh
+                        // Dispatch full state (replaceState) to current state
+                        store.dispatch(replaceState(loggedInUserState));
+                        store.dispatch(addSignin(signin));
+
+                        console.warn('(!) -----> User_Store - persisted');
+
+                    } else {
+                        // No persisted state is there
+                        // Dispatch only signin to current (initialState) state
+                        store.dispatch(addSignin(signin));
+                        console.warn('(!) -----> User_Store - initialState');
+
+                    };
+                };
+
+
+            } else {
+                // console.warn('(!) -----> User_Store - unknown');
+            };
+
+
+        } else {
+            localStorageOptions.using = false;
+
+            // No persisted state is there
+            // Dispatch only signin to current (initialState) state
+            store.dispatch(addSignin(signin));
+            console.warn('(!) -----> User_Store (untrusted computer) - initialState');
+        };
+
+    };
+
+
+    var stop = function() {
+
+        function isQuotaExceeded(e) {
+            var quotaExceeded = false;
+            if (e) {
+                if (e.code) {
+                    switch (e.code) {
+                        case 22:
+                            quotaExceeded = true;
+                            break;
+                        case 1014:
+                            // Firefox
+                            if (e.name === 'NS_ERROR_DOM_QUOTA_REACHED') {
+                                quotaExceeded = true;
+                            }
+                            break;
+                    }
+                } else if (e.number === -2147024882) {
+                    // Internet Explorer 8
+                    quotaExceeded = true;
+                }
+            }
+            return quotaExceeded;
+        }
+
+        console.warn('(✓) UserStore.stop: ', localStorageOptions.using);
+
+        if (Session.getTrustComputer()) {
+
+            // Make sure to persist latest state_encoded to localStorage & clear 'sigin'
+            var state = store.getState();
+
+            // Remove user_id / token
+            state.signin = {
+                "data": {
+                    "user_id": null,
+                    "token": null
+                },
+                "trust_computer": false,
+                "isLoggedIn": false
+            };
+
+            // Remove _decoded version.
+            storage.removeItem(localStorageOptions.name);
+
+            try {
+                var encoded = btoa(unescape(encodeURIComponent(JSON.stringify(state))));
+                storage.setItem(localStorageOptions.name + "_encoded", encoded);
+
+            } catch (e) {
+                if (isQuotaExceeded(e)) {
+                    console.error('(!!!)', 'Storage full: Nothing saved');
+                }
+            };
+
+            //console.warn('(✓) UserStore.stop:  STATE', state, encoded, localStorageOptions.name);
+
+        };
+
+        // GetBack to initialState
+        localStorageOptions.name = "unknown";
+        localStorageOptions.started = false;
+        store.dispatch(replaceState(initialState));
+
+    };
+
+
+    return {
+        start: start,
+        stop: stop,
+        clear: clear,
+        clear_all: clear_all,
+        setSignin: setSignin,
+        getOptions: getOptions,
+        getConsole: getConsole,
+        setConsole: setConsole
+    };
+
+})();
+
+
+const store = Redux.createStore(
+    reducer,
+    Redux.applyMiddleware(ReduxThunk.default)
+);
+
+const ReduxBehavior = PolymerRedux(store);
+
+UserStore.start();
+</script>
+
+<script>
+optinomicApp = {
+
+
+    behaviors: [ReduxBehavior, AsyncActionsBehavior],
+
+
+    properties: {
+        _clinic: {
+            type: Object,
+            statePath: 'clinic.data'
+        },
+        _app_params: {
+            type: Object,
+            statePath: '_app_params'
+        },
+        _current_app: {
+            type: Object,
+            statePath: 'apps.current.data'
+        },
+        _current_patient: {
+            type: Object,
+            statePath: function(state) {
+                var return_obj = null;
+                if ((state.patient !== null) && (state.patient !== undefined)) {
+                    if ((state.patient.data !== null) && (state.patient.data !== undefined)) {
+                        return_obj = state.patient.data;
+                        // console.log('(_B_) Patient:', return_obj);
+                    };
+                };
+                return return_obj;
+            }
+        },
+        _current_stay: {
+            type: Object,
+            statePath: function(state) {
+                var return_obj = null;
+                var stay_id = parseInt(helpers.getStayID());
+
+                if ((state.stays !== null) && (state.stays !== undefined)) {
+                    if ((state.stays.data !== null) && (state.stays.data !== undefined)) {
+
+                        state.stays.data.forEach(function(stay, stayID) {
+                            if (stay.id === stay_id) {
+                                return_obj = stay.data;
+                                // console.log('(_B_) Stay:', return_obj);
+                            };
+                        });
+
+                    };
+                };
+
+                return return_obj;
+            }
+        }
+    },
+
+
+
+    // --------------------------------
+    // Helpers
+    // --------------------------------
+    _formatDateCH: function(date_string) {
+        date_string = date_string || null
+        if (date_string !== null) {
+
+            // 1952-11-19T00:00:00.000000000000Z
+            var year = parseInt(date_string.substring(0, 4));
+            var month = parseInt(date_string.substring(5, 7));
+            var day = parseInt(date_string.substring(8, 10));
+            var date_string_return = day + "." + month + "." + year
+
+            return date_string_return;
+        } else {
+            return null;
+        }
+    },
+
+    _hrefAppTemplate: function(app, template) {
+        app = app || null
+        template = template || null
+        var url_string = "";
+
+        if ((app !== null) && (template !== null) && (this._app_params !== null) && (this._app_params !== undefined)) {
+
+            var _app_params = this.get('_app_params');
+
+            url_string = _app_params.apiURL + "modules/" + app + "/view/" + template + "#patient_id=" + _app_params.patientID + ",token=" + _app_params.token + ",app_name=" + _app_params.appName + ",app_id=" + app + ",api_url=" + _app_params.apiURL + ",user_id=" + _app_params.userID + ",stay_id=" + _app_params.stayID;
+
+            //  http://optinomic.cust.local/api/modules/ch.suedhang.apps.fallkonferenz.production/view/overview#patient_id=2096,token=6e4bf5b9-abd0-48e3-b0a3-ade05b480387,app_name=Test :: Fallkonferenz,app_id=ch.suedhang.apps.fallkonferenz.production,api_url=http://optinomic.cust.local/api/,user_id=2,stay_id=1569
+
+        };
+
+        return url_string;
+    },
+
+
+
+    // --------------------------------
+    // Liefecycle
+    // --------------------------------
+
+    created: function() {
+        console.log('optinomicAppBehavior enabled for ', this, helpers.getPatientID(), helpers.getStayID());
+    }
+};
+</script>
+<script>
+makepdfBehavior = {
+
+
+    behaviors: [ReduxBehavior, AsyncActionsBehavior],
+
+
+    properties: {},
+
+
+    // --------------------------------
+    // PDF - Template-Functions
+    // --------------------------------
+
+    _keepTogether: function(given_stack_array, id) {
+
+        id = id === undefined ? "keep_together" : id;
+
+
+        var isArray = function(obj) {
+            return (typeof obj !== 'undefined' &&
+                obj && obj.constructor === Array);
+        };
+
+        var stack_array = [];
+
+        if (isArray(given_stack_array)) {
+            // Array
+            stack_array = given_stack_array;
+        } else {
+            // Object
+            stack_array.push(given_stack_array);
+        };
+
+        var return_obj = {
+            "id": id,
+            "layout": "noBorders",
+            "table": {
+                "dontBreakRows": true,
+                "headerRows": 0,
+                "body": [
+                    [{
+                        "stack": stack_array
+                    }]
+                ]
+            }
+        };
+
+        return return_obj;
+    },
+
+    _spacer: function(space) {
+
+        space = space === undefined ? 10 : space;
+
+        return {
+            "id": "spacer_" + space,
+            "text": "",
+            "margin": [0, space, 0, space]
+        };
+    },
+
+    _title: function(title, subtitle) {
+
+        title = title === undefined ? "" : title;
+        subtitle = subtitle === undefined ? "" : subtitle;
+
+        return {
+            "id": "title",
+            "stack": [
+                // second column consists of paragraphs
+                {
+                    "text": " " + title,
+                    "style": "title",
+                    "alignment": "left"
+                }, {
+                    "text": " " + subtitle,
+                    "style": "caption",
+                    "color": "#616161",
+                    "margin": [1, 0, 0, 0],
+                    "alignment": "left"
+                }
+            ],
+            "margin": [0, 24, 0, 36]
+        };
+    },
+
+    _heading: function(text_left, text_left_sub, style) {
+
+        // Init
+        text_left = text_left === undefined ? "Optinomic" : text_left;
+        text_left_sub = text_left_sub === undefined ? null : text_left_sub;
+        style = style === undefined ? "h2" : style;
+
+        if ((style !== "h1") && (style !== "h2") && (style !== "h3")) {
+            style = "h2";
+        };
+
+        var id = "heading_" + style;
+
+
+        var left = {
+            "id": id,
+            "stack": [{
+                "text": text_left,
+                "style": style,
+                "margin": [0, 12, 0, 0],
+                "alignment": "left"
+            }],
+            "margin": [0, 0, 0, 12]
+        };
+
+
+        if (text_left_sub !== null) {
+            var sub = {
+                "text": text_left_sub,
+                "style": "caption",
+                "color": "#616161",
+                "margin": [1, 0, 0, 0],
+                "alignment": "left"
+            };
+            left.stack.push(sub);
+        };
+
+
+        var return_obj = left;
+
+        return return_obj;
+    },
+
+    _text: function(text) {
+
+        text = text === undefined ? "Optinomic" : text;
+
+        return {
+            "id": "text",
+            "text": " " + text,
+            "style": "p"
+        };
+    },
+
+    _caption: function(text) {
+
+        text = text === undefined ? "Optinomic" : text;
+
+        return {
+            "id": "caption",
+            "text": text,
+            "style": "caption"
+        };
+    },
+
+    _pageBreak: function(when) {
+        when = when === undefined ? "after" : when;
+        return {
+            "id": "peagebreak_" + when,
+            "fontSize": 0,
+            "text": "",
+            "pageOrientation": "portrait",
+            "pageBreak": when
+        };
+    },
+
+    _horizontalLine: function(width, color, space) {
+        width = width === undefined ? 100 : width;
+        color = color === undefined ? "#E0E0E0" : color;
+        space = space === undefined ? 6 : space;
+
+
+        var length = 514 / 100 * width;
+
+        var return_obj = {
+            "id": "horizontal_line",
+            "margin": [0, space, 0, 0],
+            "canvas": [{
+                "type": "line",
+                "x1": 0,
+                "y1": 0,
+                "x2": length,
+                "y2": 0,
+                "lineWidth": 1,
+                "lineColor": color
+            }]
+        };
+
+
+        return return_obj;
+    },
+
+    _noData: function(title, space) {
+        title = title === undefined ? null : title;
+        space = space === undefined ? 24 : space;
+
+        var date = new Date();
+        date = this._formatDateCH(date.toISOString());
+
+        var text = "Keine Daten vorhanden.";
+        if (title !== null) {
+            text = title + ": Keine Daten vorhanden.";
+        };
+
+        var no_data = {
+            "id": "no_data",
+            "table": {
+                "widths": [24, "*"],
+                "body": [
+                    [{
+                        "text": "!",
+                        "color": "#F44336",
+                        "fontSize": 36,
+                        "margin": [0, 0, 0, 0]
+                    }, {
+                        "stack": [
+                            { "text": date, "fontSize": 9, "color": "#BDBDBD", "margin": [0, 6, 0, 0] },
+                            { "text": text, "color": "#424242", "margin": [0, 6, 0, 0] }
+                        ],
+                        "margin": [0, 0, 0, 6]
+                    }],
+                ]
+            },
+            "layout": "noBorders",
+            "margin": [space, space, space, space]
+        };
+
+        var return_obj = {
+            "stack": [],
+        };
+
+        return_obj.stack.push(this._horizontalLine(100, "#F5F5F5"));
+        return_obj.stack.push(no_data);
+        return_obj.stack.push(this._horizontalLine(100, "#F5F5F5"));
+
+        return this._keepTogether(return_obj, "no_data");
+    },
+
+    _indication: function(sign, title, color) {
+
+        sign = sign === undefined ? "!" : sign;
+        title = title === undefined ? "Optinomic" : title;
+        color = color === undefined ? "#F44336" : color;
+
+        var space = 24;
+
+        var date = new Date();
+        date = this._formatDateCH(date.toISOString());
+
+        var indication = {
+            "id": "indication_" + sign,
+            "table": {
+                "widths": [24, "*"],
+                "body": [
+                    [{
+                        "text": sign,
+                        "color": color,
+                        "fontSize": 36,
+                        "margin": [0, 0, 0, 0]
+                    }, {
+                        "stack": [
+                            { "text": date, "fontSize": 9, "color": "#BDBDBD", "margin": [0, 6, 0, 0] },
+                            { "text": title, "color": "#424242", "margin": [0, 6, 0, 0] }
+                        ],
+                        "margin": [0, 0, 0, 6]
+                    }],
+                ]
+            },
+            "layout": "noBorders",
+            "margin": [space, space, space, space]
+        };
+
+        var return_obj = {
+            "stack": [],
+        };
+
+        return_obj.stack.push(this._horizontalLine(100, "#F5F5F5"));
+        return_obj.stack.push(indication);
+        return_obj.stack.push(this._horizontalLine(100, "#F5F5F5"));
+
+        return this._keepTogether(return_obj, sign + "_indication");
+    },
+
+    _suedhang_logo_anschrift: function(space) {
+        space = space === undefined ? 90 : space;
+
+        return {
+            "id": "suedhang_logo_anschrift",
+            "alignment": "left",
+            "margin": [0, space, 0, 0],
+            "columns": [{}, {
+                "width": 220,
+                "stack": [{
+                    "width": 220,
+                    "image": this._getImage("suedhang")
+                }, {
+                    "margin": [0, 6, 0, 0],
+                    "fontSize": 10,
+                    "color": "#69604d",
+                    "alignment": "left",
+                    "text": " Kompetenzzentrum für Mensch und Sucht"
+                }, {
+                    "margin": [0, 3, 0, 0],
+                    "fontSize": 10,
+                    "color": "#69604d",
+                    "alignment": "left",
+                    "text": " Südhang 1"
+                }, {
+                    "margin": [0, 3, 0, 0],
+                    "fontSize": 10,
+                    "color": "#69604d",
+                    "alignment": "left",
+                    "text": " CH - 3038 Kirchlindach"
+                }, {
+                    "margin": [0, 12, 0, 0],
+                    "fontSize": 10,
+                    "color": "#69604d",
+                    "alignment": "left",
+                    "text": " +41 31 828 14 14  |  Telefon"
+                }, {
+                    "margin": [0, 3, 0, 0],
+                    "fontSize": 10,
+                    "color": "#69604d",
+                    "alignment": "left",
+                    "text": " +41 31 828 14 24  |  Fax"
+                }]
+            }]
+        };
+    },
+
+    _stamp: function(documentTitle, space) {
+        documentTitle = documentTitle === undefined ? "Optinomic" : documentTitle;
+        space = space === undefined ? 36 : space;
+
+        var d = new Date();
+        var y = d.getFullYear();
+        var m = d.getMonth() + 1;
+        var t = d.getUTCDate();
+
+        var _date_time = t + "." + m + "." + y + ", " + d.getHours() + ":" + d.getMinutes();
+
+
+        var Optionmic = {
+            "margin": [0, space, 0, space],
+            "alignment": "left",
+            "columnGap": 12,
+            "columns": [{
+                "width": 48,
+                "margin": [0, 6, 0, 0],
+                "image": this._getImage("optinomic_trademark")
+            }, {
+                "width": "*",
+                "stack": [{
+                    "fontSize": 12,
+                    "bold": false,
+                    "color": "#3F51B5",
+                    "alignment": "left",
+                    "margin": [0, 2, 0, 0],
+                    "text": "«" + documentTitle + "»"
+                }, {
+                    "fontSize": 10,
+                    "bold": false,
+                    "color": "#616161",
+                    "margin": [0, 4, 0, 0],
+                    "alignment": "left",
+                    "text": "Datenstand: " + _date_time
+                }, {
+                    "fontSize": 10,
+                    "bold": false,
+                    "color": "#3F51B5",
+                    "alignment": "left",
+                    "margin": [0, 6, 0, 0],
+                    "text": "www.optinomic.com"
+                }, {
+                    "fontSize": 9,
+                    "bold": false,
+                    "color": "#616161",
+                    "alignment": "left",
+                    "text": "Erkenntnisgewinn für den Behandlungsalltag"
+                }]
+            }]
+        };
+
+        return Optionmic;
+    },
+
+    // --------------------------------
+    // Helpers
+    // --------------------------------
+
+    _getImage: function(image) {
+
+        image = image === undefined ? "optinomic_trademark" : image;
+
+        var images = {
+            "optinomic_trademark": "data:image/png;base64,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",
+            "suedhang": "data:image/png;base64,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"
+        };
+
+
+        if (image in images) {
+            return images[image];
+        } else {
+            return images.optinomic_trademark;
+        };
+    },
+
+    _formatDateCH: function(date_string) {
+        date_string = date_string || null
+        if (date_string !== null) {
+
+            // 1952-11-19T00:00:00.000000000000Z
+            var year = parseInt(date_string.substring(0, 4));
+            var month = parseInt(date_string.substring(5, 7));
+            var day = parseInt(date_string.substring(8, 10));
+            var date_string_return = day + "." + month + "." + year
+
+            return date_string_return;
+        } else {
+            return null;
+        }
+    },
+
+
+    // --------------------------------
+    // Liefecycle
+    // --------------------------------
+
+    created: function() {
+        // console.log('makepdfBehavior for ', this, 'enabled!');
+    }
+};
+</script>
+
+<link rel="import" href="iron-icons/iron-icons.html">
+<link rel="import" href="paper-icon-button/paper-icon-button.html">
+<link rel="import" href="paper-progress/paper-progress.html">
+<dom-module id="optinomic-app">
+    <template>
+        <style is="custom-style" include="shared-styles">
+         :host {
+            --app-primary-color: #FAFAFA;
+            --app-secondary-color: #424242;
+            --drawer-primary-color: #424242;
+            --drawer-secondary-color: #EEEEEE;
+            padding: 6px;
+        }
+
+        paper-progress {
+            display: block;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            --paper-progress-active-color: rgba(255, 255, 255, 0.5);
+            --paper-progress-container-color: #9E9E9E;
+        }
+        </style>
+        <template is="dom-if" if="[[_loading]]">
+            <paper-progress value="90" indeterminate bottom-item></paper-progress>
+        </template>
+        <optinomic-template name="template"></optinomic-template>
+        <template is="dom-if" if="[[_isAdmin]]">
+            <div style="margin-top: 64px;margin-bottom: 24px;">
+                <paper-icon-button class="pink" on-tap="_logState" icon="bug-report"></paper-icon-button>
+                <paper-icon-button class="indigo" on-tap="_loadData" icon="refresh"></paper-icon-button>
+            </div>
+        </template>
+    </template>
+    <script>
+    Polymer({
+        is: 'optinomic-app',
+
+        properties: {
+            page: {
+                type: String,
+                reflectToAttribute: true,
+                observer: '_pageChanged',
+            },
+            _loading: {
+                type: Boolean,
+                statePath: 'loading'
+            },
+            _isAdmin: {
+                type: Boolean,
+                statePath: '_app_user.data.isAdmin'
+            },
+        },
+
+        observers: [
+            '_viewPageChanged(page)',
+        ],
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior],
+
+
+        _init: function() {
+
+            var params = {
+                "userID": parseInt(helpers.getUserID()),
+                "patientID": parseInt(helpers.getPatientID()),
+                "stayID": parseInt(helpers.getStayID()),
+                "token": helpers.getToken(),
+                "appName": helpers.getAppName(),
+                "appID": helpers.getAppID(),
+                "apiURL": helpers.getApiURL(),
+            };
+
+            this.dispatch('actionSaveParams', params);
+        },
+
+        _viewPageChanged: function(page) {
+            this.page = page || 'template';
+        },
+
+        _pageChanged: function(page) {
+            //console.log('_pageChanged', page);
+        },
+
+        _showPage404: function() {
+            this.page = '404';
+        },
+
+        _logState: function() {
+            var state = this.getState();
+            console.log('(✔) state', state);
+        },
+
+        _loadData: function() {
+            Polymer.RenderStatus.afterNextRender(this, function() {
+                console.warn('(START) _loadData');
+
+                // loadData
+                this.dispatch('actionGetCurrentUser');
+                this.dispatch('actionGetApps');
+                // this.dispatch('actionGetCurrentPatient');
+                // this.dispatch('actionGetCurrentPatientStays');
+                this.dispatch('actionGetClinic');
+
+                this._logState();
+            });
+        },
+
+        ready: function() {
+            Polymer.RenderStatus.afterNextRender(this, function() {
+                this._init();
+                this._loadData();
+            });
+        },
+
+    });
+    </script>
+</dom-module>
+
+<optinomic-app name="main"></optinomic-app>
+
+
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-app-info.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
+<link rel="import" href="paper-button/paper-button.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="paper-spinner/paper-spinner.html">
+<dom-module id="element-export">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+        }
+
+        .full_grid {
+            height: 100%;
+            border-left-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+        }
+
+        .chart {
+            border-top-style: solid;
+            border-top-color: #F5F5F5;
+            border-top-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #F5F5F5;
+            border-bottom-width: 1px;
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+
+        .button_description {
+            font-size: 12px;
+            color: #9E9E9E;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .result_group {
+            border-left-style: solid;
+            border-left-color: #F5F5F5;
+            border-left-width: 1px;
+        }
+        </style>
+        <div id="element">
+            <template is="dom-if" if="[[_d.init_done]]" restamp="true">
+                <div class="horizontal">
+                    <div style="width:52px;">
+                        <paper-icon-button class="grey" on-tap="__onDownloadDebug" icon="bug-report"></paper-icon-button>
+                        <a href="#" id="fileLinkDebug" hidden download$="[[fileDefinitions.options.name]].json"></a>
+                    </div>
+                    <div class="flex">
+                        <p style="height:42px;"><b>[[fileDefinitions.options.name]]</b>
+                            <br><span class="caption">[[fileDefinitions.options.description]] &nbsp; ([[fileDefinitions.options.index]])</span></p>
+                    </div>
+                    <template is="dom-if" if="[[_filtered_sr]]" restamp="true">
+                        <div class="result_group">
+                            <p class="button_description">Gefiltert: <span style="color:#212121">[[_filtered_sr.length]]</span></p>
+                            <div class="horizontal">
+                                <paper-button class="grey" on-tap="__onDownloadJSONFiltered">JSON</paper-button>
+                                <a href="#" id="fileLinkJSONFiltered" hidden download$="[[_filename_filtered]].json"></a>
+                                <paper-button class="grey" on-tap="__onDownloadCSVFiltered">CSV</paper-button>
+                                <a href="#" id="fileLinkCSVFiltered" hidden download$="[[_filename_filtered]].csv"></a>
+                            </div>
+                        </div>
+                    </template>
+                    <div class="result_group">
+                        <p class="button_description">Ungefiltert: <span style="color:#212121">[[_sr.survey_responses.length]]</span></p>
+                        <div class="horizontal">
+                            <div>
+                                <template is="dom-if" if="[[_created_JSON]]" restamp="true">
+                                    <div style="width:52px;">
+                                        <paper-button class="grey" on-tap="__onDownloadJSON">JSON</paper-button>
+                                        <a href="#" id="fileLinkJSON" hidden download$="[[_filename_full]].json"></a>
+                                    </div>
+                                </template>
+                                <template is="dom-if" if="[[!_created_JSON]]" restamp="true">
+                                    <div style="width:52px;margin-left:18px;">
+                                        <paper-spinner active></paper-spinner>
+                                    </div>
+                                </template>
+                            </div>
+                            <div>
+                                <template is="dom-if" if="[[_created_CSV]]" restamp="true">
+                                    <paper-button class="grey" on-tap="__onDownloadCSV">CSV</paper-button>
+                                </template>
+                                <a href="#" id="fileLinkCSV" hidden download$="[[_filename_full]].csv"></a>
+                            </div>
+                            <div>
+                                <template is="dom-if" if="[[!_created_CSV]]" restamp="true">
+                                    <div style="width:52px;margin-left:18px;">
+                                        <paper-spinner active></paper-spinner>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <template is="dom-if" if="[[!_d.init_done]]" restamp="true">
+                <div class="horizontal">
+                    <div style="width:52px;">
+                        <paper-spinner active></paper-spinner>
+                    </div>
+                    <div class="flex">
+                        <p style="height:42px;"><b>[[fileDefinitions.options.name]] (laden...)</b>
+                            <br><span class="caption">[[fileDefinitions.options.description]] &nbsp; ([[fileDefinitions.options.index]])</span></p>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'element-export',
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior],
+
+        properties: {
+            fileDefinitions: {
+                type: Object,
+                observer: '_loadData'
+            },
+            filter: {
+                type: Object,
+                observer: '_filterChanged'
+            },
+            overrideSettings: {
+                type: Object,
+                observer: '_sr_ready'
+            },
+            _d: {
+                type: Object
+            },
+            _sr: {
+                type: Object,
+                statePath: function(state) {
+                    return_obj = null;
+                    if ((state._app_userapp_calculations !== null) && (state._app_userapp_calculations !== undefined)) {
+                        if ((this.fileDefinitions !== null) && (this.fileDefinitions !== undefined)) {
+
+                            var home_str = this.fileDefinitions.options.userapp_id.split('.').join("_");
+                            var path = home_str + "___" + this.fileDefinitions.options.userapp_calculation_id;
+                            if ((state._app_userapp_calculations[path] !== null) && (state._app_userapp_calculations[path] !== undefined)) {
+
+                                if ((this._d !== null) && (this._d !== undefined)) {
+                                    if (this._d.init_done === false) {
+                                        return_obj = state._app_userapp_calculations[path].data;
+                                    } else {
+                                        return_obj = this._sr;
+                                    };
+                                };
+
+                            };
+                        };
+                    };
+                    return return_obj;
+                },
+                observer: '_sr_ready'
+            }
+        },
+
+
+        // -----------------------------
+        // User-Click Functions
+        // -----------------------------
+
+        __onDownloadCSV(e) {
+            e.preventDefault();
+
+            // File Content
+            var content = this._csv_file;
+
+            var jsonLink = this.$$('#fileLinkCSV');
+            const link = this._createFile(content);
+
+            // console.log('File Content', content, jsonLink);
+
+            jsonLink.href = link;
+            jsonLink.click();
+        },
+
+        __onDownloadJSON(e) {
+            e.preventDefault();
+
+            // File Content
+            var content = JSON.stringify(this._json_file, null, 2);
+
+            var jsonLink = this.$$('#fileLinkJSON');
+            const link = this._createFile(content);
+
+            // console.log('File Content', content, jsonLink);
+
+            jsonLink.href = link;
+            jsonLink.click();
+        },
+
+        __onDownloadCSVFiltered(e) {
+            e.preventDefault();
+
+            // File Content
+            var content = this._csv_file_filtered;
+
+            var jsonLink = this.$$('#fileLinkCSVFiltered');
+            const link = this._createFile(content);
+
+            // console.log('File Content', content, jsonLink);
+
+            jsonLink.href = link;
+            jsonLink.click();
+        },
+
+        __onDownloadJSONFiltered(e) {
+            e.preventDefault();
+
+            // File Content
+            var content = JSON.stringify(this._json_file_filtered, null, 2);
+
+            var jsonLink = this.$$('#fileLinkJSONFiltered');
+            const link = this._createFile(content);
+
+            // console.log('File Content', content, jsonLink);
+
+            jsonLink.href = link;
+            jsonLink.click();
+        },
+
+        __onDownloadDebug(e) {
+            e.preventDefault();
+
+            // File Content
+            var content = JSON.stringify(this._sr, null, 2);
+
+            var jsonLink = this.$$('#fileLinkDebug');
+            const link = this._createFile(content);
+
+            // console.log('File Content', content, jsonLink);
+
+            jsonLink.href = link;
+            jsonLink.click();
+        },
+
+        _createFile(text) {
+            const textBlob = new Blob([text], { type: 'text/plain' });
+            return window.URL.createObjectURL(textBlob);
+        },
+
+
+        // -----------------------------
+        // Functions
+        // -----------------------------
+
+        _createFiles: function(filtered) {
+
+            filtered = filtered || false;
+
+            var d = Object.assign({}, this.get('_d'));
+
+            if ((d.overrideSettings !== undefined) && (d.overrideSettings !== null)) {
+                if (d.overrideSettings.override) {
+                    var options = Object.assign({}, d.overrideSettings);
+                    options.name = d.fileDefinitions.options.name;
+                    options.description = d.fileDefinitions.options.description;
+                    options.source = d.fileDefinitions.options.source;
+                    d.fileDefinitions.options = Object.assign({}, options);
+                };
+            };
+
+            console.log('_createFiles', d.fileDefinitions.options.name, d.fileDefinitions, filtered);
+
+            //this._createJSONFile(d.fileDefinitions, filtered);
+            //this._createCSVFile(d.fileDefinitions, filtered);
+
+            this._createCSVandJSONFile(d.fileDefinitions, filtered);
+        },
+
+        _createFileName: function(full) {
+
+            var d = new Date();
+            var y = d.getFullYear();
+            var m = d.getMonth() + 1;
+            var t = d.getUTCDate();
+
+            var _date_time = t + "." + m + "." + y + ", " + d.getHours() + ":" + d.getMinutes();
+            this.set('_date_time', _date_time);
+
+            if (m < 10) {
+                m = "0" + m;
+            };
+
+            if (t < 10) {
+                t = "0" + t;
+            };
+
+            var fn = ""
+            if (full) {
+                fn = y + "_" + m + "_" + t;
+                fn = fn + " - " + this.fileDefinitions.options.name;
+                fn = fn + " - Full";
+
+                this.set('_filename_full', fn);
+                // console.warn('_filename_full', this._filename_full);
+            } else {
+                var filter = this.filter;
+
+                fn = y + "_" + m + "_" + t;
+                fn = fn + " - " + this.fileDefinitions.options.name;
+                fn = fn + " - Filter";
+                fn = fn + " - Falltyp " + filter.falltyp + " im Zeitraum " + filter.erhebungszeitraum_von + " bis " + filter.erhebungszeitraum_bis;
+
+                if (filter.patient_group !== 9999) {
+                    fn = fn + " - PG " + filter.patient_group;
+                } else {
+                    fn = fn + " - PG Alle";
+                };
+
+
+                this.set('_filename_filtered', fn);
+                // console.warn('_filename_filtered', this._filename_filtered);
+            };
+        },
+
+        _init: function() {
+
+            var d = {};
+
+            d.default_optinomic_fields = [
+    { "name": "optinomic_patient_id", "path": "patient_id" },
+    { "name": "optinomic_cis_pid", "path": "stay.cis_pid" },
+    { "name": "optinomic_stay_id", "path": "stay_id" },
+    { "name": "optinomic_cis_fid", "path": "stay.cis_fid" },
+    { "name": "optinomic_event_id", "path": "event_id" },
+    { "name": "optinomic_pum_id", "path": "pum_id" },
+    { "name": "optinomic_survey_response_id", "path": "survey_response_id" }
+];
+            d.default_patient = [
+    { "name": "PID", "path": "patient.cis_pid" },
+    { "name": "optinomic_patient_gender", "path": "patient.gender" },
+];
+            d.default_stay = [{
+        "name": "Fall",
+        "path": "_function",
+        "function": "var cis_fid = source.stay.cis_fid + ''; cis_fid.slice(cis_fid.length - 4, cis_fid.length - 2); var fid = parseInt(cis_fid.slice(cis_fid.length - 4, cis_fid.length - 2)); if (fid > 0) { return fid; } else { return ''; };"
+    },
+    {
+        "name": "MedStatFid",
+        "path": "_function",
+        "function": "var cis_pid = source.patient.cis_pid + '00'; var cis_fid = source.stay.cis_fid + ''; var medstatfid = parseInt(cis_pid + cis_fid.slice(cis_fid.length - 4, cis_fid.length - 2)); return medstatfid;"
+    },
+    {
+        "name": "optinomic_patient_age_when_filled",
+        "path": "patient.extras.age_when_filled"
+    },
+    {
+        "name": "optinomic_filled",
+        "path": "survey_response.filled"
+    },
+    {
+        "name": "optinomic_start",
+        "path": "stay.start"
+    },
+    {
+        "name": "optinomic_stop",
+        "path": "stay.stop"
+    }
+];
+
+            d.fileDefinitions = Object.assign({}, this.fileDefinitions);
+            d.overrideSettings = Object.assign({}, this.overrideSettings);
+
+
+            // Check Options & Add _Default_Blocks if needed
+
+            if (d.overrideSettings.override) {
+                console.log('OVERRIDE', d.overrideSettings, d.fileDefinitions.fields.length);
+
+                if (d.overrideSettings.export_stay_details !== false) {
+                    d.fileDefinitions.fields = d.default_stay.concat(d.fileDefinitions.fields);
+                };
+
+                if (d.overrideSettings.export_patient_details !== false) {
+                    d.fileDefinitions.fields = d.default_patient.concat(d.fileDefinitions.fields);
+                };
+
+                if (d.overrideSettings.export_optinomic_ids !== false) {
+                    d.fileDefinitions.fields = d.default_optinomic_fields.concat(d.fileDefinitions.fields);
+                };
+
+            } else {
+                // console.log('NOT OVERRIDE', d.fileDefinitions.fields.length);
+
+                if (d.fileDefinitions.options.export_stay_details !== false) {
+                    d.fileDefinitions.fields = d.default_stay.concat(d.fileDefinitions.fields);
+                };
+
+                if (d.fileDefinitions.options.export_patient_details !== false) {
+                    d.fileDefinitions.fields = d.default_patient.concat(d.fileDefinitions.fields);
+                };
+
+                if (d.fileDefinitions.options.export_optinomic_ids !== false) {
+                    d.fileDefinitions.fields = d.default_optinomic_fields.concat(d.fileDefinitions.fields);
+                };
+            };
+
+            // Set & Log
+            d.init_done = true;
+            this.set('_d', d);
+            this._d = d;
+
+            this._createFileName(true);
+            this._createFiles();
+
+            console.log('(INIT) ' + d.fileDefinitions.options.name, d);
+        },
+
+        _filterSR: function() {
+            function dateCheck(from, to, check) {
+                var fDate, lDate, cDate;
+                fDate = Date.parse(from);
+                lDate = Date.parse(to);
+                cDate = Date.parse(check);
+
+                if ((cDate <= lDate && cDate >= fDate)) {
+                    return true;
+                }
+                return false;
+            };
+
+            function inGroup(a, id) {
+                for (var i = 0; i < a.length; i++) {
+                    if (a[i].id === id) {
+                        return true;
+                    }
+                }
+                return false;
+            };
+
+            this._createFileName(false);
+            var sr_filtered = [];
+            var survey_responses = this._sr.survey_responses;
+            var patient_groups = this._sr.patient_groups;
+            var filter = this.filter;
+
+            // console.warn('_filterSR', filter, survey_responses, patient_groups);
+
+            // Falltypen
+            survey_responses.forEach(function(sr, srID) {
+                var filled = sr.survey_response.filled;
+
+                var eintritt_in_range = dateCheck(filter.erhebungszeitraum_von, filter.erhebungszeitraum_bis, sr.stay.start);
+                var austritt_in_range = dateCheck(filter.erhebungszeitraum_von, filter.erhebungszeitraum_bis, sr.stay.stop);
+
+
+                // Falltyp: Alle
+                if (filter.falltyp === "Alle") {
+                    if (dateCheck(filter.erhebungszeitraum_von, filter.erhebungszeitraum_bis, filled)) {
+                        sr_filtered.push(sr);
+                    };
+                };
+
+                // Falltyp: A1
+                if (filter.falltyp === "A1") {
+                    if ((eintritt_in_range === true) && (austritt_in_range === true)) {
+                        sr_filtered.push(sr);
+                    };
+                };
+
+                // Falltyp: A2
+                if (filter.falltyp === "A2") {
+                    if ((eintritt_in_range === false) && (austritt_in_range === true)) {
+                        sr_filtered.push(sr);
+                    };
+                };
+
+                // Falltyp: B
+                if (filter.falltyp === "B") {
+                    if ((eintritt_in_range === true) && (austritt_in_range === false)) {
+                        sr_filtered.push(sr);
+                    };
+                };
+
+                // Falltyp: C
+                if (filter.falltyp === "C") {
+                    if ((eintritt_in_range === false) && (austritt_in_range === false)) {
+                        sr_filtered.push(sr);
+                    };
+                };
+
+            });
+
+            // Patientengruppe
+            if (filter.patient_group !== 9999) {
+                var pre_sr = sr_filtered.slice(0);
+                var filter_group = null;
+                sr_filtered = [];
+
+                // Gruppe finden
+                patient_groups.forEach(function(pg, pgID) {
+                    if (pg.entity.id === filter.patient_group) {
+                        filter_group = Object.assign({}, pg);
+                    };
+                });
+
+                // Gruppe finden
+                if (filter_group !== null) {
+
+                    pre_sr.forEach(function(sr, srID) {
+                        if (inGroup(filter_group.patients, sr.patient_id)) {
+                            sr_filtered.push(sr);
+                            // console.error('FOUND', filter_group.patients, sr.patient_id);
+                        };
+                    });
+                };
+
+            };
+
+            // Filter - Filename
+
+            this.set('_filtered_sr', sr_filtered);
+            this._createFiles(true);
+            // console.error('_filteredSR', sr_filtered.length, sr_filtered);
+        },
+
+        _dataDive: function(source, field) {
+
+            if (field.path === "_function") {
+
+                var ExportHelpers = (function() {
+
+                    var formatDateCH = function(date_string) {
+                        date_string = date_string || null
+                        if (date_string !== null) {
+
+                            // 1952-11-19T00:00:00.000000000000Z
+                            var year = parseInt(date_string.substring(0, 4));
+                            var month = parseInt(date_string.substring(5, 7));
+                            var day = parseInt(date_string.substring(8, 10));
+                            var date_string_return = day + "." + month + "." + year
+
+                            return date_string_return;
+                        } else {
+                            return null;
+                        }
+                    };
+
+                    var formatDateISONoTime = function(date_string) {
+                        date_string = date_string || null
+                        if (date_string !== null) {
+
+                            var date_string_return = date_string.substring(0, 10);
+
+                            return date_string_return;
+                        } else {
+                            return null;
+                        }
+                    };
+
+                    var formatDateYYYYMMDD = function(date_string) {
+                        date_string = date_string || null
+                        if (date_string !== null) {
+                            var date_string_return = date_string.substring(0, 10);
+                            date_string_return = date_string_return.split('-').join('');
+                            return date_string_return;
+                        } else {
+                            return null;
+                        }
+                    };
+
+                    var formatDateISO = function(date_string) {
+                        date_string = date_string || null
+                        if (date_string !== null) {
+
+                            var date = new Date(date_string);
+                            date_string_return = date.toISOString();
+
+                            return date_string_return;
+                        } else {
+                            return null;
+                        }
+                    };
+
+                    var stringToDate = function(_date, _format, _delimiter) {
+                        var formatLowerCase = _format.toLowerCase();
+                        var formatItems = formatLowerCase.split(_delimiter);
+                        var dateItems = _date.split(_delimiter);
+                        var monthIndex = formatItems.indexOf("mm");
+                        var dayIndex = formatItems.indexOf("dd");
+                        var yearIndex = formatItems.indexOf("yyyy");
+                        var month = parseInt(dateItems[monthIndex]);
+                        month -= 1;
+                        var formatedDate = new Date(dateItems[yearIndex], month, dateItems[dayIndex]);
+                        return formatedDate;
+                    }
+
+
+                    return {
+                        formatDateCH: formatDateCH,
+                        formatDateISO: formatDateISO,
+                        formatDateISONoTime: formatDateISONoTime,
+                        formatDateYYYYMMDD: formatDateYYYYMMDD,
+                        stringToDate: stringToDate
+                    };
+                })();
+
+
+                if ("function" in field) {
+                    // Call given Function
+                    if ((field.function !== null) && (field.function !== undefined)) {
+                        //console.warn('field.function', field.function);
+
+                        try {
+                            var fn = new Function('source', 'ExportHelpers', field.function);
+                            value = fn(source, ExportHelpers);
+                        } catch (err) {
+                            value = "Error: Undefined Function";
+                        };
+
+                    };
+                } else {
+                    value = "Undefined Function";
+                };
+
+            } else {
+
+
+                var getMyVal = function(path, origin) {
+                    return path.split('.').reduce(function(prev, curr) {
+                        return prev[curr];
+                    }, origin || this);
+                };
+
+                var value = getMyVal(field.path, source);
+
+
+            };
+
+            if ((value === undefined) || (value === null) || (value === NaN) || (value === "NaN")) {
+                value = "";
+            };
+
+            // console.log('(_dataDive) ', value, source, path_array);
+
+            return value;
+        },
+
+        _createCSVandJSONFile: function(def, filtered) {
+            this.debounce('_createCSVandJSONFile', function() {
+
+
+                function create_json(survey_responses, _dataDive) {
+                    // console.log('-> survey_responses', survey_responses);
+
+                    var header_array = [];
+                    var rows_array = [];
+                    var header_written = false;
+
+                    survey_responses.forEach(function(sr, srID) {
+
+                        var fields = def.fields;
+                        var fields_obj = {};
+
+                        if ((fields !== null) && (fields !== undefined)) {
+                            fields.forEach(function(field, fieldID) {
+
+                                // Header
+                                if ((header_written === false) && (sr.all_found)) {
+                                    header_array.push(field.name);
+                                };
+
+                                // Rows
+                                fields_obj[field.name] = _dataDive(sr, field);
+
+                            }.bind(this));
+
+                            rows_array.push(fields_obj);
+
+                            if (header_array.length > 0) {
+                                header_written = true;
+                            };
+                        };
+
+
+                    }.bind(this));
+
+                    var file = {
+                        "header": header_array,
+                        "rows": rows_array
+                    };
+                    // console.log('-> JSON file', file);
+
+                    return file;
+                };
+
+                function create_csv(json) {
+
+                    var f = "";
+                    var header_str = "";
+                    var header_written = false;
+                    var rows_str = "";
+                    var delimitter = def.options.delimter;
+                    var newline = "\n";
+
+
+
+                    json.rows.forEach(function(sr, srID) {
+
+                        if ((sr !== null) && (sr !== undefined)) {
+                            json.header.forEach(function(field, fieldID) {
+
+                                // Rows
+                                rows_str = rows_str + sr[field];
+                                if (fieldID === json.header.length - 1) {
+                                    // Last
+                                    if (srID !== json.rows.length - 1) {
+                                        // Not File-End
+                                        rows_str = rows_str + newline;
+                                    };
+                                } else {
+                                    // Not last
+                                    rows_str = rows_str + delimitter;
+                                };
+
+                            });
+
+                        };
+                    });
+
+                    // Header
+                    if (def.options.export_header !== false) {
+
+                        json.header.forEach(function(h, hID) {
+                            header_str = header_str + h;
+
+                            if (hID === json.header.length - 1) {
+                                // Last
+                                header_str = header_str + newline;
+                            } else {
+                                // Not last
+                                header_str = header_str + delimitter;
+                            };
+                        });
+
+                        var file = header_str + rows_str;
+                    } else {
+                        var file = rows_str;
+                    };
+
+                    return file;
+                };
+
+                Polymer.RenderStatus.afterNextRender(this, function() {
+
+                    // console.log('_createCSVandJSONFile', def, filtered);
+
+                    if (filtered === true) {
+
+                        if ((this._filtered_sr !== undefined) && (this._filtered_sr !== null)) {
+
+                            if (this._filtered_sr.length > 0) {
+
+                                this.set('_created_CSV_filtered', false);
+                                this.set('_created_JSON_filtered', false);
+
+                                // We have data -> Proceed.
+                                var _sr = this.get('_filtered_sr');
+
+                                this.set('_json_file_filtered', null);
+                                this.set('_json_file_filtered', create_json(_sr, this._dataDive));
+                                this.set('_created_JSON_filtered', true);
+                                this.fire('json_filtered', this._json_file_filtered);
+
+
+
+                                this.set('_csv_file_filtered', create_csv(this._json_file_filtered));
+                                this.set('_created_CSV_filtered', true);
+                                this.fire('csv_filtered', this._csv_file_filtered);
+
+
+                            };
+                        };
+
+
+                    } else {
+
+
+
+                        if ((this._sr !== undefined) && (this._sr !== null)) {
+                            if (this._sr.survey_responses.length > 0) {
+
+                                this.set('_created_JSON', false);
+                                this.set('_created_CSV', false);
+
+                                // We have data -> Proceed.
+                                var _sr = Object.assign({}, this.get('_sr'));
+                                if ("survey_responses" in _sr) {
+                                    this.set('_json_file', null);
+                                    this.set('_json_file', create_json(_sr.survey_responses, this._dataDive));
+                                    this.set('_created_JSON', true);
+                                    this.fire('json', this._json_file);
+
+
+                                    this.set('_csv_file', create_csv(this._json_file));
+                                    this.set('_created_CSV', true);
+                                    this.fire('csv', this._csv_file);
+
+                                };
+                            };
+                        };
+
+
+
+                    };
+
+                    // this.set('_created_JSON', true);
+                    //this.set('_created_CSV', true);
+                });
+
+
+            }, 250);
+        },
+
+
+        // -----------------------------
+        // Observer
+        // -----------------------------
+
+        _loadData: function() {
+            this.debounce('_loadData', function() {
+                if ((this.fileDefinitions !== null) && (this.fileDefinitions !== undefined)) {
+                    Polymer.RenderStatus.afterNextRender(this, function() {
+
+                        var _d = this.get('_d');
+                        _d.init_done = false;
+                        this._d = null;
+                        this.set('_d', _d);
+
+                        this.dispatch('actionGetUserAppCalculation', this.fileDefinitions.options.userapp_id, this.fileDefinitions.options.userapp_calculation_id);
+
+                    });
+                };
+
+            }, 250);
+        },
+
+        _filterChanged: function() {
+            this.debounce('_filterChanged', function() {
+                if ((this.filter !== null) && (this.filter !== undefined)) {
+                    Polymer.RenderStatus.afterNextRender(this, function() {
+
+
+                        if ((this._sr !== undefined) && (this._sr !== null)) {
+                            this._filterSR(this.filter, this._sr);
+                        } else {
+                            setTimeout(function() {
+                                this._filterChanged();
+                            }.bind(this), 800);
+                        };
+
+                    });
+                };
+
+            }, 250);
+        },
+
+        _sr_ready: function() {
+            this.debounce('_sr_ready', function() {
+                if ((this.overrideSettings !== null) && (this.overrideSettings !== undefined)) {
+                    if ((this._sr !== null) && (this._sr !== undefined)) {
+                        // Fire Event with patient-groups
+                        this.fire('patientgroups', this._sr.patient_groups);
+
+                        var fileDefinitions = this.get('fileDefinitions');
+                        if ((fileDefinitions !== null) && (fileDefinitions !== undefined)) {
+                            Polymer.RenderStatus.afterNextRender(this, function() {
+                                this._init();
+                            });
+                        };
+                    };
+
+                };
+
+            }, 250);
+        },
+
+
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
+
+        ready: function() {
+
+            var d = {};
+            d.init_done = false;
+            this.set('_d', d);
+            this.set('_created_CSV', false);
+            this.set('_created_JSON', false);
+        }
+
+    });
+    </script>
+</dom-module>
+
+<script>
+optinomicExportToolbox = {
+
+
+    behaviors: [],
+
+
+    properties: {
+        _calculation_data_source: {
+            type: Object
+        }
+    },
+
+
+    // --------------------------------
+    // INIT
+    // --------------------------------
+
+    __setSources: function() {
+        var _array_source = [];
+
+        // --------------------------------------------
+        // Datenquellen definieren!
+        // --------------------------------------------
+
+
+        // "userapp_calculation_id" muss mit .opapp übereinstimmen!   Bsp.: "tmt_full" bei:
+        // [calculation tmt_full javascript ch.suedhang.apps.tmt_V3 ch.suedhang.apps.tmt_V3:tmt_score]
+
+        // Index ist eine ID zur Quelle :: Nicht ändern, auch falls "userapp_calculation_id" ändert!
+
+        _array_source.push({
+            "name": "AASE-G",
+            "index": "aase",
+            "userapp_calculation_id": "aase"
+        });
+
+        _array_source.push({
+            "name": "ActInfo | Austritt",
+            "index": "actinfo_aus",
+            "userapp_calculation_id": "actinfo_aus"
+        });
+
+        _array_source.push({
+            "name": "ActInfo | Eintritt",
+            "index": "actinfo_ein",
+            "userapp_calculation_id": "actinfo_ein"
+        });
+
+        _array_source.push({
+            "name": "ASRS",
+            "index": "asrs",
+            "userapp_calculation_id": "asrs"
+        });
+
+        _array_source.push({
+            "name": "BDI-II",
+            "index": "bdi",
+            "userapp_calculation_id": "bdi"
+        });
+
+        _array_source.push({
+            "name": "BSCL (ANQ)",
+            "index": "bscl",
+            "userapp_calculation_id": "bscl"
+        });
+
+        _array_source.push({
+            "name": "CASE",
+            "index": "case",
+            "userapp_calculation_id": "case"
+        });
+
+        _array_source.push({
+            "name": "Einzelassessment",
+            "index": "einzelassessment",
+            "userapp_calculation_id": "einzelassessment"
+        });
+
+        _array_source.push({
+            "name": "HoNOS",
+            "index": "honos",
+            "userapp_calculation_id": "honos"
+        });        
+        
+        _array_source.push({
+            "name": "Soziale Kompetenzen (ISK)",
+            "index": "isk",
+            "userapp_calculation_id": "isk"
+        });
+
+        _array_source.push({
+            "name": "SCI",
+            "index": "sci",
+            "userapp_calculation_id": "sci"
+        });
+
+        _array_source.push({
+            "name": "Trail Making Test (TMT)",
+            "index": "tmt",
+            "userapp_calculation_id": "tmt"
+        });
+
+        _array_source.push({
+            "name": "WHOQOL-BREF",
+            "index": "whoqol",
+            "userapp_calculation_id": "whoqol"
+        });
+
+        _array_source.push({
+            "name": "ZuePaZ",
+            "index": "zuepaz",
+            "userapp_calculation_id": "zuepaz"
+        });
+
+
+
+        // Create Indexed Object & Default for all
+        var _object_source = {};
+
+        _array_source.forEach(function(d, dID) {
+            d.id = dID;
+            d.userapp_id = "org.optinomic.export.toolbox";
+
+            _object_source[d.index] = d;
+        });
+
+        var save_object = {
+            "array": _array_source,
+            "object": _object_source,
+            "init_done": true
+        };
+
+        // Save
+        this.set('_calculation_sources', save_object);
+        this._calculation_sources = {};
+        this._calculation_sources = save_object;
+
+        // console.log('optinomicExportToolbox (Behavior)', this._calculation_sources);
+    },
+
+    // --------------------------------
+    // Liefecycle
+    // --------------------------------
+
+    created: function() {
+        this.__setSources();
+    }
+};
+</script>
+<script>
+optinomicCharts = {
+
+
+    behaviors: [optinomicExportToolbox],
+
+
+    properties: {},
+
+
+    // --------------------------------
+    // Functions
+    // --------------------------------
+
+
+    __setSources: function() {
+        var _array_source = [];
+
+        // --------------------------------------------
+        // Datenquellen definieren!
+        // --------------------------------------------
+
+
+        // "userapp_calculation_id" muss mit .opapp übereinstimmen!   Bsp.: "tmt_full" bei:
+        // [calculation tmt_full javascript ch.suedhang.apps.tmt_V3 ch.suedhang.apps.tmt_V3:tmt_score]
+
+        // Index ist eine ID zur Quelle :: Nicht ändern, auch falls "userapp_calculation_id" ändert!
+
+		_array_source.push({
+            "name": "ActInfo | Eintritt",
+            "index": "actinfo_ein",
+            "userapp_calculation_id": "actinfo_ein"
+        });
+
+        _array_source.push({
+            "name": "AASE-G",
+            "index": "aase",
+            "userapp_calculation_id": "aase"
+        });
+
+        _array_source.push({
+            "name": "Soziale Kompetenzen (ISK)",
+            "index": "isk",
+            "userapp_calculation_id": "isk"
+        });
+
+        _array_source.push({
+            "name": "BSCL (ANQ)",
+            "index": "bscl",
+            "userapp_calculation_id": "bscl"
+        });
+
+        _array_source.push({
+            "name": "BDI-II",
+            "index": "bdi",
+            "userapp_calculation_id": "bdi"
+        });
+
+        _array_source.push({
+            "name": "CASE",
+            "index": "case",
+            "userapp_calculation_id": "case"
+        });
+
+        _array_source.push({
+            "name": "Trail Making Test (TMT)",
+            "index": "tmt",
+            "userapp_calculation_id": "tmt"
+        });
+
+
+        // Create Indexed Object & Default for all
+        var _object_source = {};
+
+        _array_source.forEach(function(d, dID) {
+            d.id = dID;
+            d.userapp_id = "org.optinomic.export.toolbox";
+
+            _object_source[d.index] = d;
+        });
+
+        var save_object = {
+            "array": _array_source,
+            "object": _object_source,
+            "init_done": true
+        };
+
+        // Save
+        this.set('_calculation_sources', save_object);
+        this._calculation_sources = {};
+        this._calculation_sources = save_object;
+
+        // console.log('optinomicExportToolbox (Behavior)', this._calculation_sources);
+    },
+
+    __setDataDefinitions: function() {
+        var _array_source = [];
+
+        // --------------------------------------------
+        // Datenquellen definieren!
+        // --------------------------------------------
+
+        var export_files = [];
+        export_files.push({
+    "options": {
+        "name": "BSCL",
+        "description": "Komplettexport",
+        "export_optinomic_ids": true,
+        "export_patient_details": true,
+        "export_stay_details": true,
+        "export_header": true,
+        "delimter": ";",
+        "source": "bscl"
+    },
+    "fields": [
+        { "name": "MedStatFid", "path": "_function", "function": "var cis_pid = source.patient.cis_pid + '00'; var cis_fid = source.stay.cis_fid + ''; var medstatfid = parseInt(cis_pid + cis_fid.slice(cis_fid.length - 4, cis_fid.length - 2)); return medstatfid;" }, 
+        { "name": "zeitpunkt_bscl", "path": "survey_response.response.q501V04" },
+        { "name": "Eintrittsort", "path": "survey_response.response.Eintrittsort" },
+        { "name": "Austrittsort", "path": "survey_response.response.Austrittsort" },
+        { "name": "dropoutcode_bscl", "path": "survey_response.response.q501V05" },
+        { "name": "spezifikation_dropout_bscl_andere", "path": "survey_response.response.q501V06" },
+        { "name": "datum_erhebung_bscl", "path": "_function", "function": "var mzp = source.survey_response.response.q501V04; if (mzp === '1') { return ExportHelpers.formatDateYYYYMMDD(source.stay.start); }; if (mzp === '2') { return ExportHelpers.formatDateYYYYMMDD(source.stay.stop); }; if ((mzp !== '1') && ((mzp !== '2'))) {return ExportHelpers.formatDateYYYYMMDD(source.survey_response.response.q504V00);}"},
+        { "name": "Datum_ausgefüllt", "path": "survey_response.response.q504V00" },
+        { "name": "bscl_b1", "path": "survey_response.response.BSCL[sq504V01]" },
+        { "name": "bscl_b2", "path": "survey_response.response.BSCL[sq504V02]" },
+        { "name": "bscl_b3", "path": "survey_response.response.BSCL[sq504V03]" },
+        { "name": "bscl_b4", "path": "survey_response.response.BSCL[sq504V04]" },
+        { "name": "bscl_b5", "path": "survey_response.response.BSCL[sq504V05]" },
+        { "name": "bscl_b6", "path": "survey_response.response.BSCL[sq504V06]" },
+        { "name": "bscl_b7", "path": "survey_response.response.BSCL[sq504V07]" },
+        { "name": "bscl_b8", "path": "survey_response.response.BSCL[sq504V08]" },
+        { "name": "bscl_b9", "path": "survey_response.response.BSCL[sq504V09]" },
+        { "name": "bscl_b10", "path": "survey_response.response.BSCL[sq504V10]" },
+        { "name": "bscl_b11", "path": "survey_response.response.BSCL[sq504V11]" },
+        { "name": "bscl_b12", "path": "survey_response.response.BSCL[sq504V12]" },
+        { "name": "bscl_b13", "path": "survey_response.response.BSCL[sq504V13]" },
+        { "name": "bscl_b14", "path": "survey_response.response.BSCL[sq504V14]" },
+        { "name": "bscl_b15", "path": "survey_response.response.BSCL[sq504V15]" },
+        { "name": "bscl_b16", "path": "survey_response.response.BSCL[sq504V16]" },
+        { "name": "bscl_b17", "path": "survey_response.response.BSCL[sq504V17]" },
+        { "name": "bscl_b18", "path": "survey_response.response.BSCL[sq504V18]" },
+        { "name": "bscl_b19", "path": "survey_response.response.BSCL[sq504V19]" },
+        { "name": "bscl_b20", "path": "survey_response.response.BSCL[sq504V20]" },
+        { "name": "bscl_b21", "path": "survey_response.response.BSCL[sq504V21]" },
+        { "name": "bscl_b22", "path": "survey_response.response.BSCL[sq504V22]" },
+        { "name": "bscl_b23", "path": "survey_response.response.BSCL[sq504V23]" },
+        { "name": "bscl_b24", "path": "survey_response.response.BSCL[sq504V24]" },
+        { "name": "bscl_b25", "path": "survey_response.response.BSCL[sq504V25]" },
+        { "name": "bscl_b26", "path": "survey_response.response.BSCL[sq504V26]" },
+        { "name": "bscl_b27", "path": "survey_response.response.BSCL[sq504V27]" },
+        { "name": "bscl_b28", "path": "survey_response.response.BSCL[sq504V28]" },
+        { "name": "bscl_b29", "path": "survey_response.response.BSCL[sq504V29]" },
+        { "name": "bscl_b30", "path": "survey_response.response.BSCL[sq504V30]" },
+        { "name": "bscl_b31", "path": "survey_response.response.BSCL[sq504V31]" },
+        { "name": "bscl_b32", "path": "survey_response.response.BSCL[sq504V32]" },
+        { "name": "bscl_b33", "path": "survey_response.response.BSCL[sq504V33]" },
+        { "name": "bscl_b34", "path": "survey_response.response.BSCL[sq504V34]" },
+        { "name": "bscl_b35", "path": "survey_response.response.BSCL[sq504V35]" },
+        { "name": "bscl_b36", "path": "survey_response.response.BSCL[sq504V36]" },
+        { "name": "bscl_b37", "path": "survey_response.response.BSCL[sq504V37]" },
+        { "name": "bscl_b38", "path": "survey_response.response.BSCL[sq504V38]" },
+        { "name": "bscl_b39", "path": "survey_response.response.BSCL[sq504V39]" },
+        { "name": "bscl_b40", "path": "survey_response.response.BSCL[sq504V40]" },
+        { "name": "bscl_b41", "path": "survey_response.response.BSCL[sq504V41]" },
+        { "name": "bscl_b42", "path": "survey_response.response.BSCL[sq504V42]" },
+        { "name": "bscl_b43", "path": "survey_response.response.BSCL[sq504V43]" },
+        { "name": "bscl_b44", "path": "survey_response.response.BSCL[sq504V44]" },
+        { "name": "bscl_b45", "path": "survey_response.response.BSCL[sq504V45]" },
+        { "name": "bscl_b46", "path": "survey_response.response.BSCL[sq504V46]" },
+        { "name": "bscl_b47", "path": "survey_response.response.BSCL[sq504V47]" },
+        { "name": "bscl_b48", "path": "survey_response.response.BSCL[sq504V48]" },
+        { "name": "bscl_b49", "path": "survey_response.response.BSCL[sq504V49]" },
+        { "name": "bscl_b50", "path": "survey_response.response.BSCL[sq504V50]" },
+        { "name": "bscl_b51", "path": "survey_response.response.BSCL[sq504V51]" },
+        { "name": "bscl_b52", "path": "survey_response.response.BSCL[sq504V52]" },
+        { "name": "bscl_b53", "path": "survey_response.response.BSCL[sq504V53]" },
+        { "name": "somatisierung_mean", "path": "calculation.all_results.somatisierung_scale_score" },
+        { "name": "somatisierung_sum", "path": "calculation.all_results.somatisierung_sum_score" },
+        { "name": "somatisierung_zscore", "path": "calculation.all_results.somatisierung_z_score" },
+        { "name": "zwang_mean", "path": "calculation.all_results.zwanghaftigkeit_scale_score" },
+        { "name": "zwang_sum", "path": "calculation.all_results.zwanghaftigkeit_sum_score" },
+        { "name": "zwang_zscore", "path": "calculation.all_results.zwanghaftigkeit_z_score" },
+        { "name": "unsicher_mean", "path": "calculation.all_results.unsicherheit_im_sozialkontakt_scale_score" },
+        { "name": "unsicher_sum", "path": "calculation.all_results.unsicherheit_im_sozialkontakt_sum_score" },
+        { "name": "unsicher_zscore", "path": "calculation.all_results.unsicherheit_im_sozialkontakt_z_score" },
+        { "name": "depressiv_mean", "path": "calculation.all_results.depressivit__t_scale_score" },
+        { "name": "depressiv_sum", "path": "calculation.all_results.depressivit__t_sum_score" },
+        { "name": "depressiv_zscore", "path": "calculation.all_results.depressivit__t_z_score" },
+        { "name": "angst_mean", "path": "calculation.all_results.__ngstlichkeit_scale_score" },
+        { "name": "angst_sum", "path": "calculation.all_results.__ngstlichkeit_sum_score" },
+        { "name": "angst_zscore", "path": "calculation.all_results.__ngstlichkeit_z_score" },
+        { "name": "agressiv_mean", "path": "calculation.all_results.aggressivit__t___feindseligkeit_scale_score" },
+        { "name": "agressiv_sum", "path": "calculation.all_results.aggressivit__t___feindseligkeit_sum_score" },
+        { "name": "agressiv_zscore", "path": "calculation.all_results.aggressivit__t___feindseligkeit_z_score" },
+        { "name": "phobie_mean", "path": "calculation.all_results.phobische_angst_scale_score" },
+        { "name": "phobie_sum", "path": "calculation.all_results.phobische_angst_sum_score" },
+        { "name": "phobie_zscore", "path": "calculation.all_results.phobische_angst_z_score" },
+        { "name": "paranoid_mean", "path": "calculation.all_results.paranoides_denken_scale_score" },
+        { "name": "paranoid_sum", "path": "calculation.all_results.paranoides_denken_sum_score" },
+        { "name": "paranoid_zscore", "path": "calculation.all_results.paranoides_denken_z_score" },
+        { "name": "psychotizismus_mean", "path": "calculation.all_results.psychotizismus_scale_score" },
+        { "name": "psychotizismus_sum", "path": "calculation.all_results.psychotizismus_sum_score" },
+        { "name": "psychotizismus_zscore", "path": "calculation.all_results.psychotizismus_z_score" },
+        { "name": "gsi_mean", "path": "calculation.all_results.gsi_global_severity_index_scale_score" },
+        { "name": "gsi_sum", "path": "calculation.all_results.gsi_global_severity_index_sum_score" },
+        { "name": "gsi_zscore", "path": "calculation.all_results.gsi_global_severity_index_z_score" }
+    ]
+});
+        export_files.push({
+    "options": {
+        "name": "BSCL (Export - ANQ)",
+        "description": "Exportsyntax für ANQ",
+        "export_optinomic_ids": false,
+        "export_patient_details": false,
+        "export_stay_details": false,
+        "export_header": true,
+        "delimter": ";",
+        "source": "bscl"
+    },
+    "fields": [
+        { "name": "rekordart", "path": "_function", "function": "return 'PB';" },
+        { "name": "betriebsnummer_bur", "path": "_function", "function": "return '71286515';" },
+        { "name":"FID", "path": "_function", "function": "return source.stay.cis_fid/100" },
+        { "name": "zeitpunkt_bscl", "path": "survey_response.response.q501V04" },
+        { "name": "dropoutcode_bscl", "path": "survey_response.response.q501V05" },
+        { "name": "spezifikation_dropout_bscl_andere", "path": "survey_response.response.q501V06" },
+        { "name": "datum_erhebung_bscl", "path": "_function", "function": "var mzp = source.survey_response.response.q501V04; if (mzp === '1') { return ExportHelpers.formatDateYYYYMMDD(source.stay.start); }; if (mzp === '2') { return ExportHelpers.formatDateYYYYMMDD(source.stay.stop); }; if ((mzp !== '1') && ((mzp !== '2'))) {return ExportHelpers.formatDateYYYYMMDD(source.survey_response.response.q504V00);}"},
+        { "name": "bscl_b1", "path": "survey_response.response.BSCL[sq504V01]" },
+        { "name": "bscl_b2", "path": "survey_response.response.BSCL[sq504V02]" },
+        { "name": "bscl_b3", "path": "survey_response.response.BSCL[sq504V03]" },
+        { "name": "bscl_b4", "path": "survey_response.response.BSCL[sq504V04]" },
+        { "name": "bscl_b5", "path": "survey_response.response.BSCL[sq504V05]" },
+        { "name": "bscl_b6", "path": "survey_response.response.BSCL[sq504V06]" },
+        { "name": "bscl_b7", "path": "survey_response.response.BSCL[sq504V07]" },
+        { "name": "bscl_b8", "path": "survey_response.response.BSCL[sq504V08]" },
+        { "name": "bscl_b9", "path": "survey_response.response.BSCL[sq504V09]" },
+        { "name": "bscl_b10", "path": "survey_response.response.BSCL[sq504V10]" },
+        { "name": "bscl_b11", "path": "survey_response.response.BSCL[sq504V11]" },
+        { "name": "bscl_b12", "path": "survey_response.response.BSCL[sq504V12]" },
+        { "name": "bscl_b13", "path": "survey_response.response.BSCL[sq504V13]" },
+        { "name": "bscl_b14", "path": "survey_response.response.BSCL[sq504V14]" },
+        { "name": "bscl_b15", "path": "survey_response.response.BSCL[sq504V15]" },
+        { "name": "bscl_b16", "path": "survey_response.response.BSCL[sq504V16]" },
+        { "name": "bscl_b17", "path": "survey_response.response.BSCL[sq504V17]" },
+        { "name": "bscl_b18", "path": "survey_response.response.BSCL[sq504V18]" },
+        { "name": "bscl_b19", "path": "survey_response.response.BSCL[sq504V19]" },
+        { "name": "bscl_b20", "path": "survey_response.response.BSCL[sq504V20]" },
+        { "name": "bscl_b21", "path": "survey_response.response.BSCL[sq504V21]" },
+        { "name": "bscl_b22", "path": "survey_response.response.BSCL[sq504V22]" },
+        { "name": "bscl_b23", "path": "survey_response.response.BSCL[sq504V23]" },
+        { "name": "bscl_b24", "path": "survey_response.response.BSCL[sq504V24]" },
+        { "name": "bscl_b25", "path": "survey_response.response.BSCL[sq504V25]" },
+        { "name": "bscl_b26", "path": "survey_response.response.BSCL[sq504V26]" },
+        { "name": "bscl_b27", "path": "survey_response.response.BSCL[sq504V27]" },
+        { "name": "bscl_b28", "path": "survey_response.response.BSCL[sq504V28]" },
+        { "name": "bscl_b29", "path": "survey_response.response.BSCL[sq504V29]" },
+        { "name": "bscl_b30", "path": "survey_response.response.BSCL[sq504V30]" },
+        { "name": "bscl_b31", "path": "survey_response.response.BSCL[sq504V31]" },
+        { "name": "bscl_b32", "path": "survey_response.response.BSCL[sq504V32]" },
+        { "name": "bscl_b33", "path": "survey_response.response.BSCL[sq504V33]" },
+        { "name": "bscl_b34", "path": "survey_response.response.BSCL[sq504V34]" },
+        { "name": "bscl_b35", "path": "survey_response.response.BSCL[sq504V35]" },
+        { "name": "bscl_b36", "path": "survey_response.response.BSCL[sq504V36]" },
+        { "name": "bscl_b37", "path": "survey_response.response.BSCL[sq504V37]" },
+        { "name": "bscl_b38", "path": "survey_response.response.BSCL[sq504V38]" },
+        { "name": "bscl_b39", "path": "survey_response.response.BSCL[sq504V39]" },
+        { "name": "bscl_b40", "path": "survey_response.response.BSCL[sq504V40]" },
+        { "name": "bscl_b41", "path": "survey_response.response.BSCL[sq504V41]" },
+        { "name": "bscl_b42", "path": "survey_response.response.BSCL[sq504V42]" },
+        { "name": "bscl_b43", "path": "survey_response.response.BSCL[sq504V43]" },
+        { "name": "bscl_b44", "path": "survey_response.response.BSCL[sq504V44]" },
+        { "name": "bscl_b45", "path": "survey_response.response.BSCL[sq504V45]" },
+        { "name": "bscl_b46", "path": "survey_response.response.BSCL[sq504V46]" },
+        { "name": "bscl_b47", "path": "survey_response.response.BSCL[sq504V47]" },
+        { "name": "bscl_b48", "path": "survey_response.response.BSCL[sq504V48]" },
+        { "name": "bscl_b49", "path": "survey_response.response.BSCL[sq504V49]" },
+        { "name": "bscl_b50", "path": "survey_response.response.BSCL[sq504V50]" },
+        { "name": "bscl_b51", "path": "survey_response.response.BSCL[sq504V51]" },
+        { "name": "bscl_b52", "path": "survey_response.response.BSCL[sq504V52]" },
+        { "name": "bscl_b53", "path": "survey_response.response.BSCL[sq504V53]" }
+    ]
+});
+        export_files.push({
+    "options": {
+        "name": "ISK",
+        "description": "Komplettexport",
+        "export_optinomic_ids": false,
+        "export_patient_details": false,
+        "export_stay_details": false,
+        "export_header": true,
+        "delimter": ";",
+        "source": "isk"
+    },
+    "fields": [
+        { "name":"FID", "path": "_function", "function": "return source.stay.cis_fid/100" },
+        { "name": "Erhebungszeitpunkt", "path": "survey_response.response.Erhebungszeitpunkt" },
+        { "name": "Datum", "path": "survey_response.response.Datum" },
+        { "name": "isk_01", "path": "survey_response.response.AISK[AISK1]" },
+        { "name": "isk_02", "path": "survey_response.response.AISK[AISK2]" },
+        { "name": "isk_03", "path": "survey_response.response.AISK[AISK3]" },
+        { "name": "isk_99", "path": "survey_response.response.AISK[AISK3]" },
+        { "name": "isk_04", "path": "survey_response.response.AISK[AISK4]" },
+        { "name": "isk_05", "path": "survey_response.response.AISK[AISK5]" },
+        { "name": "isk_06", "path": "survey_response.response.AISK[AISK6]" },
+        { "name": "isk_07", "path": "survey_response.response.AISK[AISK7]" },
+        { "name": "isk_08", "path": "survey_response.response.AISK[AISK8]" },
+        { "name": "isk_09", "path": "survey_response.response.AISK[AISK9]" },
+        { "name": "isk_10", "path": "survey_response.response.AISK[AIS10]" },
+        { "name": "isk_11", "path": "survey_response.response.AISK[AIS11]" },
+        { "name": "isk_12", "path": "survey_response.response.AISK[AIS12]" },
+        { "name": "isk_13", "path": "survey_response.response.AISK[AIS13]" },
+        { "name": "isk_14", "path": "survey_response.response.AISK[AIS14]" },
+        { "name": "isk_15", "path": "survey_response.response.AISK[AIS15]" },
+        { "name": "isk_16", "path": "survey_response.response.AISK[AIS16]" },
+        { "name": "isk_17", "path": "survey_response.response.AISK[AIS17]" },
+        { "name": "isk_18", "path": "survey_response.response.AISK[AIS18]" },
+        { "name": "isk_19", "path": "survey_response.response.AISK[AIS19]" },
+        { "name": "isk_20", "path": "survey_response.response.AISK[AIS20]" },
+        { "name": "isk_21", "path": "survey_response.response.AISK[AIS21]" },
+        { "name": "isk_22", "path": "survey_response.response.AISK[AIS22]" },
+        { "name": "isk_23", "path": "survey_response.response.AISK[AIS23]" },
+        { "name": "isk_24", "path": "survey_response.response.AISK[AIS24]" },
+        { "name": "isk_25", "path": "survey_response.response.AISK[AIS25]" },
+        { "name": "isk_26", "path": "survey_response.response.AISK[AIS26]" },
+        { "name": "isk_27", "path": "survey_response.response.AISK[AIS27]" },
+        { "name": "isk_28", "path": "survey_response.response.AISK[AIS28]" },
+        { "name": "isk_29", "path": "survey_response.response.AISK[AIS29]" },
+        { "name": "isk_30", "path": "survey_response.response.AISK[AIS30]" },
+        { "name": "isk_31", "path": "survey_response.response.AISK[AIS31]" },
+        { "name": "isk_32", "path": "survey_response.response.AISK[AIS32]" },
+        { "name": "isk_33", "path": "survey_response.response.AISK[AIS33]" },
+        { "name": "offensivitaet_scale_score", "path": "calculation.all_results.offensivit__t_scale_score" },
+        { "name": "offensivitaet_sum_score", "path": "calculation.all_results.offensivit__t_sum_score" },
+        { "name": "offensivitaet_z_score", "path": "calculation.all_results.offensivit__t_z_score" },
+        { "name": "soziale_orientierung_scale_score", "path": "calculation.all_results.soziale_orientierung_scale_score" },
+        { "name": "soziale_orientierung_sum_score", "path": "calculation.all_results.soziale_orientierung_sum_score" },
+        { "name": "soziale_orientierung_z_score", "path": "calculation.all_results.soziale_orientierung_z_score" },
+        { "name": "selbststeuerung_scale_score", "path": "calculation.all_results.selbststeuerung_scale_score" },
+        { "name": "selbststeuerung_sum_score", "path": "calculation.all_results.selbststeuerung_sum_score" },
+        { "name": "selbststeuerung_z_score", "path": "calculation.all_results.selbststeuerung_z_score" },
+        { "name": "reflexibilitaet_scale_score", "path": "calculation.all_results.reflexibilit__t_scale_score" },
+        { "name": "reflexibilitaet_sum_score", "path": "calculation.all_results.reflexibilit__t_sum_score" },
+        { "name": "reflexibilitaet_z_score", "path": "calculation.all_results.reflexibilit__t_z_score" }
+    ]
+});
+        export_files.push({
+    "options": {
+        "name": "TMT",
+        "description": "Komplettexport",
+        "export_optinomic_ids": false,
+        "export_patient_details": false,
+        "export_stay_details": false,
+        "export_header": true,
+        "delimter": ";",
+        "source": "tmt"
+    },
+
+  "fields": [
+    { "path": "_function", "function": "return source.stay.cis_fid/100", "name":"FID" },
+    { "path": "survey_response.response.Messzeitpunkt", "name": "Messzeitpunkt" },
+    { "path": "_function", "function": "var resp = source.survey_response.response; if ('Date' in resp) {return ExportHelpers.formatDateISONoTime(source.survey_response.response.Date)} else {return ExportHelpers.formatDateCH(source.survey_response.filled)};", "name": "Datum"},
+    { "path": "patient.gender", "name": "Geschlecht" },
+    { "path": "calculation.percentile.education", "name": "Bildungsgruppe" },
+    { "path": "survey_response.response.Ausbildungsjahre", "name": "Ausbildungsjahre" },
+    { "path": "calculation.percentile.age_perz.altersgruppe", "name": "Altersgruppe" },
+    { "path": "patient.extras.age_when_filled", "name": "Alter" },
+    { "path": "survey_response.response.TMTATime", "name": "TMTATime" },
+    { "path": "survey_response.response.TMTAError", "name": "TMTAError" },
+    { "path": "calculation.percentile.z_scores.tmtA_z_rounded", "name": "TMT_A_z" },
+    { "path": "survey_response.response.TMTBTime", "name": "TMTBTime" },
+    { "path": "survey_response.response.TMTBError", "name": "TMTBError" },
+    { "path": "calculation.percentile.z_scores.tmtB_z_rounded", "name": "TMT_B_z" },
+    { "path": "calculation.percentile.z_scores.quotient_rounded", "name": "BAquotient" }
+  ]
+});
+        export_files.push({
+  "options": {
+    "name": "AASE-G",
+    "description": "aase",
+    "export_optinomic_ids": false,
+    "export_patient_details": false,
+    "export_stay_details": false,
+    "export_header": true,
+    "delimter": ";",
+    "source": "aase"
+  },
+  "fields": [
+    { "name": "MedStatFid", "path": "_function", "function": "var cis_pid = source.patient.cis_pid + '00'; var cis_fid = source.stay.cis_fid + ''; var medstatfid = parseInt(cis_pid + cis_fid.slice(cis_fid.length - 4, cis_fid.length - 2)); return medstatfid;" },
+    { "path": "_function", "function": "return source.stay.cis_fid/100", "name":"FID" },
+    { "path": "survey_response.response.Erhebungszeitpunkt", "name": "Erhebungszeitpunkt" },
+    { "path": "survey_response.response.andererZeitpunkt", "name": "andererZeitpunkt" },
+    { "path": "_function", "function": "return ExportHelpers.formatDateISONoTime(source.survey_response.response.Datum);", "name": "Datum" },
+    { "path": "_function", "function": "var substanz = source.calculation.messzeitpunkt.substanz; if (substanz==='Alkohol') {return '1'} else {return '2'};", "name": "Substanz"},
+    { "path": "_function", "function": "var substanz = source.calculation.messzeitpunkt.substanz; if (substanz==='Alkohol') {return ''} else {return substanz};", "name": "andereSubstanz"},
+    { "path": "_function", "function": "var substanz = source.calculation.messzeitpunkt.substanz; if (substanz==='Alkohol') {return source.survey_response.response['AASE[AASE1]']} else { return source.survey_response.response['AASEandere[AASE1]'] };", "name": "AASE_01" },
+    { "path": "_function", "function": "var substanz = source.calculation.messzeitpunkt.substanz; if (substanz==='Alkohol') {return source.survey_response.response['AASE[AASE2]']} else { return source.survey_response.response['AASEandere[AASE2]'] };", "name": "AASE_02" },
+    { "path": "_function", "function": "var substanz = source.calculation.messzeitpunkt.substanz; if (substanz==='Alkohol') {return source.survey_response.response['AASE[AASE3]']} else { return source.survey_response.response['AASEandere[AASE3]'] };", "name": "AASE_03" },
+    { "path": "_function", "function": "var substanz = source.calculation.messzeitpunkt.substanz; if (substanz==='Alkohol') {return source.survey_response.response['AASE[AASE4]']} else { return source.survey_response.response['AASEandere[AASE4]'] };", "name": "AASE_04" },
+    { "path": "_function", "function": "var substanz = source.calculation.messzeitpunkt.substanz; if (substanz==='Alkohol') {return source.survey_response.response['AASE[AASE5]']} else { return source.survey_response.response['AASEandere[AASE5]'] };", "name": "AASE_05" },
+    { "path": "_function", "function": "var substanz = source.calculation.messzeitpunkt.substanz; if (substanz==='Alkohol') {return source.survey_response.response['AASE[AASE6]']} else { return source.survey_response.response['AASEandere[AASE6]'] };", "name": "AASE_06" },
+    { "path": "_function", "function": "var substanz = source.calculation.messzeitpunkt.substanz; if (substanz==='Alkohol') {return source.survey_response.response['AASE[AASE7]']} else { return source.survey_response.response['AASEandere[AASE7]'] };", "name": "AASE_07" },
+    { "path": "_function", "function": "var substanz = source.calculation.messzeitpunkt.substanz; if (substanz==='Alkohol') {return source.survey_response.response['AASE[AASE8]']} else { return source.survey_response.response['AASEandere[AASE8]'] };", "name": "AASE_08" },
+    { "path": "_function", "function": "var substanz = source.calculation.messzeitpunkt.substanz; if (substanz==='Alkohol') {return source.survey_response.response['AASE[AASE9]']} else { return source.survey_response.response['AASEandere[AASE9]'] };", "name": "AASE_09" },
+    { "path": "_function", "function": "var substanz = source.calculation.messzeitpunkt.substanz; if (substanz==='Alkohol') {return source.survey_response.response['AASE[AASE10]']} else { return source.survey_response.response['AASEandere[AASE10]'] };", "name": "AASE_10" },
+    { "path": "_function", "function": "var substanz = source.calculation.messzeitpunkt.substanz; if (substanz==='Alkohol') {return source.survey_response.response['AASE[AASE11]']} else { return source.survey_response.response['AASEandere[AASE11]'] };", "name": "AASE_11" },
+    { "path": "_function", "function": "var substanz = source.calculation.messzeitpunkt.substanz; if (substanz==='Alkohol') {return source.survey_response.response['AASE[AASE12]']} else { return source.survey_response.response['AASEandere[AASE12]'] };", "name": "AASE_12" },
+    { "path": "_function", "function": "var substanz = source.calculation.messzeitpunkt.substanz; if (substanz==='Alkohol') {return source.survey_response.response['AASE[AASE13]']} else { return source.survey_response.response['AASEandere[AASE13]'] };", "name": "AASE_13" },
+    { "path": "_function", "function": "var substanz = source.calculation.messzeitpunkt.substanz; if (substanz==='Alkohol') {return source.survey_response.response['AASE[AASE14]']} else { return source.survey_response.response['AASEandere[AASE14]'] };", "name": "AASE_14" },
+    { "path": "_function", "function": "var substanz = source.calculation.messzeitpunkt.substanz; if (substanz==='Alkohol') {return source.survey_response.response['AASE[AASE15]']} else { return source.survey_response.response['AASEandere[AASE15]'] };", "name": "AASE_15" },
+    { "path": "_function", "function": "var substanz = source.calculation.messzeitpunkt.substanz; if (substanz==='Alkohol') {return source.survey_response.response['AASE[AASE16]']} else { return source.survey_response.response['AASEandere[AASE16]'] };", "name": "AASE_16" },
+    { "path": "_function", "function": "var substanz = source.calculation.messzeitpunkt.substanz; if (substanz==='Alkohol') {return source.survey_response.response['AASE[AASE17]']} else { return source.survey_response.response['AASEandere[AASE17]'] };", "name": "AASE_17" },
+    { "path": "_function", "function": "var substanz = source.calculation.messzeitpunkt.substanz; if (substanz==='Alkohol') {return source.survey_response.response['AASE[AASE18]']} else { return source.survey_response.response['AASEandere[AASE18]'] };", "name": "AASE_18" },
+    { "path": "_function", "function": "var substanz = source.calculation.messzeitpunkt.substanz; if (substanz==='Alkohol') {return source.survey_response.response['AASE[AASE19]']} else { return source.survey_response.response['AASEandere[AASE19]'] };", "name": "AASE_19" },
+    { "path": "_function", "function": "var substanz = source.calculation.messzeitpunkt.substanz; if (substanz==='Alkohol') {return source.survey_response.response['AASE[AASE20]']} else { return source.survey_response.response['AASEandere[AASE20]'] };", "name": "AASE_20" },
+    {"path": "calculation.score_mean","name": "AASE_Mean"},
+    {"path": "calculation.mean_soziale_situationen","name": "AASE_SozSit_Mean"},
+    {"path": "calculation.mean_negativer_affekt","name": "AASE_NegAff_Mean"},
+    {"path": "calculation.mean_somatisches_unwohlsein","name": "AASE_SomatUnwohl_Mean"},
+    {"path": "calculation.mean_entzugserscheinungen","name": "AASE_Entzug_Mean"},
+    {"path": "calculation.score","name": "AASE_Sum"},
+    {"path": "calculation.score_soziale_situationen","name": "AASE_SozSit_Sum"},
+    {"path": "calculation.score_negativer_affekt","name": "AASE_NegAff_Sum"},
+    {"path": "calculation.score_somatisches_unwohlsein","name": "AASE_SomatUnwohl_Sum"},
+    {"path": "calculation.score_entzugserscheinungen","name": "AASE_Entzug_Sum"}
+  ]
+});
+        export_files.push({
+  "options": {
+    "name": "BDI-II",
+    "description": "bdi",
+    "export_optinomic_ids": false,
+    "export_patient_details": false,
+    "export_stay_details": false,
+    "export_header": true,
+    "delimter": ";",
+    "source": "bdi"
+  },
+  "fields": [
+    { "name": "MedStatFid", "path": "_function", "function": "var cis_pid = source.patient.cis_pid + '00'; var cis_fid = source.stay.cis_fid + ''; var medstatfid = parseInt(cis_pid + cis_fid.slice(cis_fid.length - 4, cis_fid.length - 2)); return medstatfid;" },
+    {"path": "_function", "function": "return source.stay.cis_fid/100","name":"FID"},
+    { "path": "survey_response.response.Erhebungszeitpunkt", "name": "Erhebungszeitpunkt" },
+    { "path": "survey_response.response.andererZeitpunkt", "name": "andererZeitpunkt" },
+    { "path": "_function", "function": "return ExportHelpers.formatDateISONoTime(source.survey_response.response.Datum);", "name": "Datum" },
+    { "path": "survey_response.response.BDI1", "name": "BDI01" },
+    { "path": "survey_response.response.BDI2", "name": "BDI02" },
+    { "path": "survey_response.response.BDI3", "name": "BDI03" },
+    { "path": "survey_response.response.BDI4", "name": "BDI04" },
+    { "path": "survey_response.response.BDI5", "name": "BDI05" },
+    { "path": "survey_response.response.BDI6", "name": "BDI06" },
+    { "path": "survey_response.response.BDI7", "name": "BDI07" },
+    { "path": "survey_response.response.BDI8", "name": "BDI08" },
+    { "path": "survey_response.response.BDI9", "name": "BDI09" },
+    { "path": "survey_response.response.BDI10", "name": "BDI10" },
+    { "path": "survey_response.response.BDI11", "name": "BDI11" },
+    { "path": "survey_response.response.BDI12", "name": "BDI12" },
+    { "path": "survey_response.response.BDI13", "name": "BDI13" },
+    { "path": "survey_response.response.BDI14", "name": "BDI14" },
+    { "path": "survey_response.response.BDI15", "name": "BDI15" },
+    { "path": "survey_response.response.BDI16", "name": "BDI16" },
+    { "path": "survey_response.response.BDI17", "name": "BDI17" },
+    { "path": "survey_response.response.BDI18", "name": "BDI18" },
+    { "path": "survey_response.response.BDI19", "name": "BDI19" },
+    { "path": "survey_response.response.BDI20", "name": "BDI20" },
+    { "path": "survey_response.response.BDI21", "name": "BDI21" },
+    { "path": "calculation.score.score", "name": "BDISumme"}
+  ]
+}
+);
+        export_files.push({
+  "options": {
+    "name": "CASE",
+    "description": "case",
+    "export_optinomic_ids": false,
+    "export_patient_details": false,
+    "export_stay_details": false,
+    "export_header": true,
+    "delimter": ";",
+    "source": "case"
+  },
+  "fields": [
+    { "name": "MedStatFid", "path": "_function", "function": "var cis_pid = source.patient.cis_pid + '00'; var cis_fid = source.stay.cis_fid + ''; var medstatfid = parseInt(cis_pid + cis_fid.slice(cis_fid.length - 4, cis_fid.length - 2)); return medstatfid;" }, 
+    { "path": "survey_response.response.FID", "name": "FID" },
+    { "path": "survey_response.response.PID", "name": "PID" },
+    { "path": "_function", "function": "return ExportHelpers.formatDateCH(source.survey_response.response.datestamp);", "name": "datestamp" },
+    { "path": "survey_response.response.DauerAbh", "name": "DauerAbh" },
+    { "path": "survey_response.response.statEnzug", "name": "statEnzug" },
+    { "path": "survey_response.response.ambEntzugMedi", "name": "ambEntzugMedi" },
+    { "path": "survey_response.response.Craving", "name": "Craving" },
+    { "path": "survey_response.response.statEntwoehnung", "name": "statEntwoehnung" },
+    { "path": "survey_response.response.ambEntwoehnung", "name": "ambEntwoehnung" },
+    { "path": "survey_response.response.Abbrueche", "name": "Abbrueche" },
+    { "path": "survey_response.response.Rueckfaelle", "name": "Rueckfaelle" },
+    { "path": "survey_response.response.Leber", "name": "Leber" },
+    { "path": "survey_response.response.Somat", "name": "Somat" },
+    { "path": "survey_response.response.Neurol", "name": "Neurol" },
+    { "path": "survey_response.response.Psych", "name": "Psych" },
+    { "path": "survey_response.response.Arbeitslos", "name": "Arbeitslos" },
+    { "path": "survey_response.response.Wohnen", "name": "Wohnen" },
+    { "path": "survey_response.response.Allein", "name": "Allein" },
+    { "path": "survey_response.response.Alter", "name": "Alter" },
+    { "path": "survey_response.response.Kontrollv", "name": "Kontrollv" },
+    { "path": "survey_response.response.MorgenTr", "name": "MorgenTr" },
+    { "path": "survey_response.response.posErw", "name": "posErw" },
+    { "path": "survey_response.response.AbstZuv", "name": "AbstZuv" },
+    { "path": "survey_response.response.AbstMot", "name": "AbstMot" },
+    { "path": "calculation.score", "name": "CASE_Summe"}
+  ]
+});
+
+
+        // Find Sources Index and enhance options!
+        var _calculation_sources = this.get('_calculation_sources');
+        export_files.forEach(function(f, fID) {
+            if ("options" in f) {
+                if ("source" in f.options) {
+                    var source_options = Object.assign({}, _calculation_sources.object[f.options.source]);
+                    source_options.index_name = source_options.name;
+                    f.options = Object.assign(f.options, source_options);
+                    f.id = fID;
+                }
+            };
+        });
+
+        this.set('_data_definitions', export_files);
+
+        console.log('optinomicCharts (Behavior)', this._data_definitions);
+    },
+
+    __setOverrideSettings: function() {
+    	var settings = {};
+        settings.export_optinomic_ids = true;
+        settings.export_patient_details = true;
+        settings.export_stay_details = true;
+        settings.export_header = true;
+        settings.delimter = ";";
+        settings.override = true;
+
+        this.set('_override_settings', settings);
+    },
+
+    // --------------------------------
+    // Liefecycle
+    // --------------------------------
+
+    attached: function() {
+        this.__setSources();
+        this.__setDataDefinitions();
+        this.__setOverrideSettings();
+    }
+};
+</script>
+
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="iron-collapse/iron-collapse.html">
+<link rel="import" href="plotly-plot/plotly-plot.html">
+<link rel="import" href="vaadin-combo-box/vaadin-combo-box.html">
+<dom-module id="element-chart">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+        }
+
+        .chart {
+            border-top-color: #EEEEEE;
+            border-top-style: solid;
+            border-top-width: 1px;
+        }
+
+        .title {
+            z-index: 10;
+            position: relative;
+            left: 6px;
+            top: 0;
+        }
+
+        .plot {
+            margin-top: -48px;
+            border-bottom-color: #EEEEEE;
+            border-bottom-style: solid;
+            border-bottom-width: 1px;
+        }
+        </style>
+        <div id="element">
+            <template is="dom-if" if="[[init_done]]" restamp="true">
+                <template is="dom-if" if="[[plotdata_ready]]" restamp="true">
+                    <div class="chart">
+                        <h2 class="title">[[name]]</h2>
+                        <div class="plot">
+                            <plotly-plot data$='[[plotdata]]' layout$='[[plotlayout]]'></plotly-plot>
+                        </div>
+                        <p class="caption" style="text-align:right;padding-right:6px;">Abbildung: [[name]]</p>
+                    </div>
+                </template>
+                <div>
+                    <h2>Datenquelle</h2>
+                    <vaadin-combo-box id="datasource" on-change="_setDataSource" label="Datenquelle" items="[[_data_definitions]]" item-value-path="id" item-label-path="options.name">
+                        <template>
+                            <paper-icon-item>
+                                <paper-item-body two-line>
+                                    <div><b>[[item.options.name]]:</b> [[item.fields.length]]</div>
+                                </paper-item-body>
+                            </paper-icon-item>
+                        </template>
+                    </vaadin-combo-box>
+                    <template is="dom-if" if="[[_selected_datasource]]" restamp="true">
+                        <element-export file-definitions="[[_selected_data_definition]]" filter="[[export_filter]]" override-settings="[[_override_settings]]" on-json="_set_data"></element-export>
+                    </template>
+                    <template is="dom-if" if="[[data_ready]]" restamp="true">
+                        <vaadin-combo-box id="datafield" on-change="_setFocusField" label="Feld" items="[[data.header]]">
+                            <template>
+                                <paper-icon-item>
+                                    <paper-item-body>
+                                        [[item]]
+                                    </paper-item-body>
+                                </paper-icon-item>
+                            </template>
+                        </vaadin-combo-box>
+                    </template>
+                </div>
+            </template>
+            <template is="dom-if" if="[[!init_done]]" restamp="true">
+                <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
+            </template>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'element-chart',
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicExportToolbox, optinomicCharts],
+
+        properties: {
+            name: {
+                type: String
+            }
+        },
+
+
+        // -----------------------------
+        // User-Click Functions
+        // -----------------------------
+
+        _setDataSource: function() {
+            this.set('_selected_datasource', false);
+            var datasource = this.$$('#datasource');
+
+            var selected_id = parseInt(datasource.value);
+            var _data_definitions = this.get('_data_definitions');
+            var _override_settings = this.get('_override_settings');
+
+            _data_definitions.forEach(function(d, dID) {
+                if (d.id === selected_id) {
+                    var _selected_data_definition = Object.assign({}, d);
+                    this.set('_selected_data_definition', _selected_data_definition);
+                    this.set('_selected_datasource', true);
+                    console.log('_setDataSource', this._selected_data_definition);
+                };
+            }.bind(this));
+        },
+
+
+        _setFocusField: function() {
+            var datafield = this.$$('#datafield');
+            console.warn('(_setFocusField)', datafield.value);
+
+            var rows = this.get('data.rows');
+
+            rows.sort(function(a, b) {
+                var a = a.optinomic_filled.toLowerCase(),
+                    b = b.optinomic_filled.toLowerCase()
+                if (a < b) //sort string ascending
+                    return -1
+                if (a > b)
+                    return 1
+                return 0 //default return value (no sorting)
+            })
+
+
+            this._createPlotdata(rows, datafield.value);
+        },
+
+
+
+        // -----------------------------
+        // Functions
+        // -----------------------------
+        _dataChanged: function() {
+            this.set('data_ready', true);
+
+
+            console.warn('(_dataChanged) data', this.data);
+
+        },
+
+
+        _createPlotdata: function(rows, focus_field) {
+
+
+            function unpack(rows, key) {
+                return rows.map(function(row) { return row[key]; });
+            };
+
+
+            var trace1 = {
+                type: "scatter",
+                mode: "lines",
+                name: "Erfassung",
+                x: unpack(rows, 'optinomic_filled'),
+                y: unpack(rows, focus_field),
+                line: { color: '#3F51B5' },
+                marker: { size: 12 },
+                hoverinfo: "x+y+name"
+            };
+
+            var transforms = [{
+                    "styles": [{
+                            "target": "male",
+                            "value": {
+                                "visible": true,
+                                "line": {
+                                    "color": "rgba(63, 81, 181, 0.8)",
+                                    "width": 3
+                                },
+                                "name": "Männer",
+                                "hoverinfo": "x+y+name"
+                            }
+                        },
+                        {
+                            "target": "female",
+                            "value": {
+                                "visible": true,
+                                "line": {
+                                    "color": "rgb(233, 30, 99, 0.8)",
+                                    "width": 3
+                                },
+                                "name": "Frauen",
+                                "hoverinfo": "x+y+name"
+                            }
+                        }
+                    ],
+                    "style": [],
+                    "enabled": true,
+                    "groups": unpack(rows, 'optinomic_patient_gender'),
+                    "groupbyId": "1e93e4",
+                    "groupssrc": "optinomic:6:7c847d",
+                    "type": "groupby"
+                }]
+
+
+            var trace_gender = {
+                type: "scatter",
+                mode: "markers",
+                name: "Gender",
+                x: unpack(rows, 'optinomic_filled'),
+                y: unpack(rows, 'optinomic_patient_gender'),
+                line: { color: '#17BECF' },
+                marker: { size: 12 }
+            };
+
+
+
+
+            var plotdata = [];
+            plotdata.push(trace1);
+            // plotdata.push(trace_gender);
+            this.set('plotdata', plotdata);
+
+
+
+
+            var layout = {
+                "autosize": true,
+                "yaxis": {
+                    "range": [-10.957755390597384,
+                        3.7377553905973846
+                    ],
+                    "type": "linear",
+                    "autorange": true,
+                    "title": focus_field
+                },
+                "title": this.name,
+                "showlegend": true,
+                "titlefont": {
+                    "family": "Roboto",
+                    "size": 32
+                },
+                "xaxis": {
+                    "title": "Erfassung",
+                    "range": [
+                        "2015-01-12 03:46:53.9538",
+                        "2017-05-25 14:51:39.3939"
+                    ],
+                    "showline": false,
+                    "rangeselector": {
+                        "buttons": [{
+                                "step": "all",
+                                "label": "reset"
+                            },
+                            {
+                                "label": "#1"
+                            }
+                        ]
+                    },
+                    "type": "date",
+                    "autorange": false,
+                    "rangeslider": {
+                        "bordercolor": "#444",
+                        "thickness": 0.15,
+                        "bgcolor": "white",
+                        "range": [
+                            "2015-01-12 03:46:53.9538",
+                            "2017-06-01 07:54:03.3675"
+                        ],
+                        "borderwidth": 0,
+                        "autorange": true
+                    }
+                },
+                "hovermode": "closest",
+                "font": {
+                    "family": "Roboto"
+                },
+                "legend": {
+                    "y": 1.1534810126582278,
+                    "x": 0.9339656783568188
+                }
+            };
+
+            this.set('plotlayout', layout);
+            this.set('plotdata_ready', true);
+
+            console.warn('_createPlotdata :: ', rows, focus_field, plotdata, layout);
+
+        },
+
+
+
+
+        // -----------------------------
+        // Observer
+        // -----------------------------
+
+
+        _set_data: function(e) {
+            this.set('data', e.detail);
+            //console.warn('(event) data', this.data);
+            this._dataChanged();
+        },
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
+
+        ready: function() {
+            this.set('init_done', true);
+            this.set('data_ready', false);
+            this.set('plotdata_ready', false);
+
+            this.set('_selected_datasource', false);
+
+        }
+    });
+    </script>
+</dom-module>
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-app-info.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
+<link rel="import" href="paper-icon-button/paper-icon-button.html">
+<dom-module id="optinomic-template">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+        }
+
+        .app_title {
+            margin-bottom: 24px;
+        }
+
+        .readme_container {
+            margin-bottom: 24px;
+        }
+
+        .content_block {
+            margin-top: 24px;
+            margin-bottom: 48px;
+        }
+
+        google-chart {
+            height: 300px;
+            width: 100%;
+        }
+
+        </style>
+        <div class="horizontal wrap">
+            <div class="flex app_title">
+                <optinomic-title small nomargin h1="[[_current_app.name]]" h2="[[_current_app.short_description]]" h3="[[_current_app.version]]"></optinomic-title>
+            </div>
+            <div>
+                <div hidden$="[[_d.show_help]]">
+                    <paper-icon-button class="grey" on-tap="_toggleHelp" icon="help-outline"></paper-icon-button>
+                </div>
+                <div hidden$="[[!_d.show_help]]">
+                    <paper-icon-button class="grey" on-tap="_toggleHelp" icon="close"></paper-icon-button>
+                </div>
+            </div>
+        </div>
+        <optinomic-app-info app-id="[[_current_app.identifier]]"></optinomic-app-info>
+        <div hidden$="[[_d.show_help]]">
+            <div id="content">
+                <div class="content_block">
+                    <element-chart name="Time-Series"></element-chart>
+                </div>
+            </div>
+        </div>
+        <div hidden$="[[!_d.show_help]]">
+            <div class="readme_container">
+                <h2 style="margin:0;color:#3F51B5">Beschreibung</h2>
+                <p>[[_current_app.description]]</p>
+            </div>
+            <div class="readme_container">
+                <h2 style="margin:0;color:#3F51B5">Hilfe (Readme)</h2>
+                <div id="readme"></div>
+            </div>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'optinomic-template',
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicCharts],
+
+        properties: {
+
+            _current_app: {
+                type: Object,
+                statePath: 'apps.current.data'
+            },
+
+            _clinic: {
+                type: String,
+                statePath: 'clinic.data'
+            },
+
+            _d: {
+                type: Object
+            }
+        },
+
+
+
+        _toggleHelp: function() {
+            var d = this.get('_d');
+            this._d = {};
+            d.show_help = !d.show_help;
+
+            var readme_box = this.$.readme;
+            readme_box.innerHTML = this._current_app.readme_html;
+
+            this.set('_d', d);
+            console.log('INIT _d', d);
+        },
+
+        // --------------------------- Data --------------------------- 
+
+        __loadData: function() {
+
+            Polymer.RenderStatus.afterNextRender(this, function() {
+
+                // loadData
+
+            });
+        },
+
+        __init: function() {
+
+            this._d = this._d === undefined ? {} : this._d;
+
+            var d = this.get('_d');
+
+            d.show_help = false;
+
+            d.some_data = {
+                "test": true
+            };
+
+            this.set('_d', d);
+            console.log('INIT _d', d);
+        },
+
+
+        // --------------------------- Lifecycle --------------------------- 
+
+        ready: function() {
+            Polymer.RenderStatus.afterNextRender(this, function() {
+
+                this.__loadData();
+                this.__init();
+
+            });
+        }
+    });
+    </script>
+</dom-module>
+
+
+[javascript]
+
+
+[css]
+
+
+[calculation bscl_full javascript ch.suedhang.apps.bscl_anq ch.suedhang.apps.bscl_anq:scores_calculation]
+function main(responses) {
+
+    // Return
+    return responses;
+}
+

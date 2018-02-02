@@ -1,0 +1,2880 @@
+[module]
+id = ch.suedhang.apps.isk.production
+name = ISK-K
+parent = ch.suedhang.apps.isk
+short_description = Persönliche Verhaltensweisen und Gewohnheiten zu den vier Bereichen: Soziale Orientierung, Offensivität, Selbststeuerung und Reflexibilität.
+version = 1.0
+type = patient
+
+[description]
+
+[developer]
+first_name = Nora
+last_name = Schönenberger
+github_user = schoenenb
+email = nora.schoenenberger@suedhang.ch
+company = Suedhang
+phone = +41 (0)31 828 14 92
+website = http://suedhang.ch/de/Forschung
+
+[template ISK-K 6 12]
+<head>
+    <base href="https://cdn.rawgit.com/Optinomic/polymer-cdn/optinomic-0.1.31/lib/">
+    <link rel="shortcut icon" href="optinomic-images/favicon-indigo/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500">
+    <script src="webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script src="redux/dist/redux.min.js"></script>
+    <script src="redux-thunk/dist/redux-thunk.min.js"></script>
+    <script src="polymer-redux/polymer-redux.js"></script>
+    <link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+    <link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html"> <dom-module id="shared-styles">
+    <template>
+        <style>
+
+        body {
+            display: block;
+            margin: 0;
+            min-height: 100%;
+            background-color: #FFFFFF;
+            font-family: 'Roboto', 'Noto', sans-serif;
+            line-height: 1.5;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+
+
+        html, body {
+  font-family: 'Roboto', sans-serif !important;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.large {
+  font-size: 125%;
+}
+
+.small {
+  font-size: 75%;
+}
+
+a {
+  text-decoration: none;
+  color: #37474F;
+}
+
+
+/************
+ * Headings
+ ************/
+
+.display-4 {
+  font-size: 117.6px;
+  font-weight: 100;
+  letter-spacing: -0.010em;
+  line-height: 117.6px;
+  color: #757575;
+}
+
+.display-3 {
+  font-size: 58.8px;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 58.8px;
+  color: #757575;
+}
+
+.display-2 {
+  font-size: 47.25px;
+  font-weight: 400;
+  line-height: 67.2px;
+  color: #757575;
+}
+
+h1, .display-1 {
+  font-size: 35.7px;
+  font-weight: 300;
+  line-height: 42px;
+  color: #757575;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+h2, .headline {
+  font-size: 25.2px;
+  font-weight: 300;
+  line-height: 33.6px;
+  color: #616161;
+}
+
+h3, .title {
+  font-size: 21px;
+  font-weight: 300;
+  letter-spacing: 0.005em;
+  color: #424242;
+}
+
+h4, .subhead {
+  font-size: 16.8px;
+  font-weight: 300;
+  letter-spacing: 0.010em;
+  line-height: 25.2px;
+  color: #212121;
+}
+
+
+/************
+ * Body Copy
+ ************/
+
+p, .body-1 {
+  font-size: 14.7px;
+  font-weight: 400;
+  letter-spacing: 0.010em;
+  line-height: 21px;
+  color: #212121;
+}
+
+b, .body-2 {
+  font-size: 14.7px;
+  font-weight: 500;
+  letter-spacing: 0.010em;
+  line-height: 25.2px;
+  color: #212121;
+}
+
+.caption {
+  font-size: 12.6px;
+  letter-spacing: 0.020em;
+  color: #757575;
+}
+
+.button {
+  letter-spacing: 0.010em;
+}
+
+
+/************
+ * Defaults
+ ************/
+
+button, select, html, textarea, input {
+  font-family: 'Roboto', sans-serif !important;
+}
+
+select, button, textarea, input {
+  font-size: 100%;
+}
+
+        paper-button {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+paper-button.grey {
+  color: var(--paper-grey-500);
+  --paper-button-ink-color: var(--paper-grey-a200);
+}
+
+paper-button.grey:hover {
+  color: var(--paper-grey-900);
+  background-color: var(--paper-grey-100);
+}
+
+paper-button.pink {
+  color: var(--paper-pink-800);
+  background-color: var(--paper-pink-50);
+  --paper-button-ink-color: var(--paper-pink-500);
+}
+
+paper-button.pink:hover {
+  background-color: var(--paper-pink-500);
+  color: white;
+}
+
+paper-button.indigo {
+  background-color: var(--paper-indigo-50);
+  color: var(--paper-indigo-800);
+  --paper-button-ink-color: var(--paper-pink-500);
+}
+
+paper-button.indigo:hover {
+  background-color: var(--paper-indigo-500);
+  color: white;
+}
+
+paper-button.disabled {
+  color: white;
+}
+
+        paper-icon-button.grey {
+  color: var(--paper-grey-500);
+  transition: all 0.3s ease-in-out;
+  --paper-icon-button-ink-color: var(--paper-grey-500);
+}
+
+paper-icon-button.grey:hover {
+  color: var(--paper-grey-800);
+  transform: scale(1.1);
+}
+
+paper-icon-button.pink {
+  color: var(--paper-pink-500);
+  transition: all 0.3s ease-in-out;
+  --paper-icon-button-ink-color: var(--paper-pink-500);
+}
+
+paper-icon-button.pink:hover {
+  transform: scale(1.1);
+}
+
+paper-icon-button.indigo {
+  color: var(--paper-indigo-500);
+  transition: all 0.3s ease-in-out;
+  --paper-icon-button-ink-color: var(--paper-indigo-500);
+}
+
+paper-icon-button.indigo:hover {
+  transform: scale(1.1);
+}
+
+        paper-progress {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+}
+
+paper-progress.slow {
+  --paper-progress-indeterminate-cycle-duration: 5s;
+}
+
+paper-progress.indigo {
+  --paper-progress-active-color: var(--paper-indigo-500);
+  --paper-progress-secondary-color: var(--paper-indigo-100);
+  --paper-progress-indeterminate-cycle-duration: 3s;
+}
+
+paper-progress.pink {
+  --paper-progress-active-color: var(--paper-pink-500);
+  --paper-progress-secondary-color: var(--paper-pink-100);
+  --paper-progress-indeterminate-cycle-duration: 3s;
+}
+
+paper-tooltip {
+  --paper-tooltip-background: #424242;
+  --paper-tooltip-opacity: 0.85;
+  --paper-tooltip: {
+    font-size: 14px;
+    color: #FAFAFA;
+  }
+}
+
+                .horizontal {
+          @apply(--layout-horizontal);
+          @apply(--layout-center);
+          @apply(--layout-justified);
+        }
+
+        .flex {
+          @apply(--layout-flex);
+        }
+
+        .wrap {
+          @apply(--layout-wrap);
+        }
+
+        .circle {
+          display: inline-block;
+          width: 58px;
+          height: 58px;
+          text-align: center;
+          color: #424242;
+          border-radius: 50%;
+          background: #E0E0E0;
+          font-size: 28px;
+          font-weight: 100;
+          font-family: 'Roboto', sans-serif;
+          line-height: 60px;
+        }
+
+        .grid-border-top {
+          border-top-color: #E0E0E0;
+          border-top-style: solid;
+          border-top-width: 1px;
+        }
+
+        .indigo {
+          color: #3F51B5;
+        }
+
+        .pink {
+          color: #E91E63;
+        }
+
+
+        </style>
+    </template>
+</dom-module>
+
+    <style is="custom-style" include="shared-styles iron-flex iron-flex-alignment">
+    :host {
+        display: block;
+    }
+
+    html,
+    body {
+        padding-top: 8px;
+        padding-bottom: 24px;
+        padding-left: 2px;
+        padding-right: 2px;
+        max-width: 1024px;
+        margin-left: auto;
+        margin-right: auto;
+        font-family: 'Roboto', sans-serif !important;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        min-height: 100%;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    @media only screen and (min-width: 641px) and (max-width: 1023px) {
+        html,
+        body {
+            padding-top: 12px;
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+    }
+
+    @media only screen and (min-width: 1024px) {
+        html,
+        body {
+            padding-top: 24px;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+    }
+    </style>
+</head>
+<!--
+@license
+Copyright (c) 2017 Optionmic GmbH. All rights reserved.
+-->
+<link rel="import" href="polymer/polymer.html"> <!--
+ Copyright 2017 | optinomic-redux-store | Optinomic GmbH.
+ http://www.optinomic.com/
+-->
+<script>
+const initialState = {
+    "loading": false,
+    "options": {
+        "show_app_toolbar": false,
+        "sort_ascending": true
+    },
+    "apps": {
+        "all": null,
+        "current": {
+            "id": helpers.getAppID(),
+            "name": helpers.getAppName(),
+            "data": null,
+            "found": false
+        }
+    },
+    "clinic": {
+        "data": null
+    },
+    "patient": {
+        "id": helpers.getPatientID(),
+        "data": null
+    },
+    "stays": {
+        "all": null,
+        "current": {
+            "id": helpers.getStayID(),
+            "data": null,
+            "found": false
+        }
+    },
+    "survey_responses": {
+        "data": {}
+    },
+    "komed": {
+        "data": null,
+    },
+    "user": {
+        "id": helpers.getUserID(),
+        "data": null
+    },
+    "username": null
+};
+const reducer = (state, action) => {
+    if (!state) return initialState;
+    switch (action.type) {
+
+        case 'SET_PERSISTENT_STATE':
+            // console.log('(----->) SET_PERSISTENT_STATE', action);
+            return Object.assign({}, state, action.new_state);
+
+        case 'SET_SIGNIN_START':
+            var current_signin = Object.assign({}, state.signin);
+            current_signin.data = action.signin.data;
+            current_signin.isLoggedIn = action.signin.isLoggedIn;
+            current_signin.trust_computer = action.signin.trust_computer;
+            // console.log('(----->) SET_SIGNIN_START', action.signin, current_signin, store.getState());
+            return Object.assign({}, state, {
+                signin: current_signin
+            });
+
+
+        case 'GET_DATA_STARTED':
+            return Object.assign({}, state, {
+                loading: true
+            });
+
+        case 'GET_USERAPPCALCULATION_COMPLETE':
+            var _app_userapp_calculations = Object.assign({}, state._app_userapp_calculations);
+            _app_userapp_calculations[action.data.module_calc] = action.data; 
+            return Object.assign({}, state, {
+                _app_userapp_calculations: _app_userapp_calculations
+            });
+
+        case 'GET_CURRENT_USER_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                _app_user: action.data
+            });
+
+        case 'GET_CURRENT_PATIENT_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                patient: action.data
+            });
+
+        case 'GET_CURRENT_PATIENT_STAYS_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                stays: action.data
+            });
+
+
+        case 'SAVE_PARAMS_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                _app_params: action.data
+            });
+
+        case 'GET_MODULE_ANNOTATIONS_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                _app_annotations: action.data
+            });
+
+        case 'GET_CLINIC_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                clinic: action.data
+            });
+
+        case 'GET_APPS_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                apps: action.data
+            });
+
+        case 'GET_SURVEY_RESPONSES_COMPLETE':
+            var sr = Object.assign({}, state.survey_responses);
+            var app_id = action.data.app_id;
+            sr.data[app_id] = action.data;
+
+            //console.log('(!) GET_SURVEY_RESPONSES_COMPLETE', app_id, sr);
+            return Object.assign({}, state, {
+                loading: false,
+                survey_responses: sr
+            });
+
+        case 'SET_APP_TOOLBAR':
+            var options = Object.assign({}, state.options);
+            options.show_app_toolbar = action.show_app_toolbar;
+
+            return Object.assign({}, state, {
+                options: options
+            });
+
+        case 'SIGN_UP_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                username: action.username
+            });
+    }
+};
+
+
+const AsyncActionsBehavior = {
+    actions: {
+        actionGetClinic: function() {
+            return function(dispatch) {
+                dispatch({
+                    type: 'GET_DATA_STARTED'
+                });
+                const api_url = '/clinic';
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+                    if (req.status == 200) {
+                        var resp = JSON.parse(req.response);
+
+                        // All fields are coming as array: Make Object out of it:
+                        var json_data = {};
+                        resp.clinic.forEach(function(item, itemIndex) {
+                            json_data[item[0]] = item[1];
+                        });
+
+                        var response = {
+                            "date": new Date(),
+                            "data": json_data
+                        };
+                        response.data.array = resp.clinic;
+                        console.log('(✔) Data (' + api_url + '):', response);
+                    } else {
+                        var response = {
+                            "error": true,
+                            "error_message": "Failed with status code: " + req.status,
+                            "status_code": req.status
+                        };
+                        console.error('(!) Error: ', response);
+                    };
+                    dispatch({
+                        type: 'GET_CLINIC_COMPLETE',
+                        data: response
+                    });
+                });
+            }
+        },
+        actionGetCurrentUser: function() {
+            return function(dispatch) {
+                dispatch({
+                    type: 'GET_DATA_STARTED'
+                });
+                const api_url = '/users/' + helpers.getUserID();
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+                    if (req.status == 200) {
+                        var resp = JSON.parse(req.response);
+                        var data_return = resp.user.data;
+                        data_return.id = resp.user.id;
+                        data_return.uid = resp.user.id;
+                        data_return.isAdmin = false;
+                        if (resp.user.data.role === "Admin") {
+                            data_return.isAdmin = true;
+                        };
+
+                        var response = {
+                            "id": resp.user.id,
+                            "date": new Date(),
+                            "data": data_return
+                        };
+                        console.log('(✔) Data (' + api_url + '):', response);
+                    } else {
+                        var response = {
+                            "error": true,
+                            "error_message": "Failed with status code: " + req.status,
+                            "status_code": req.status
+                        };
+                        console.error('(!) Error: ', response);
+                    };
+                    dispatch({
+                        type: 'GET_CURRENT_USER_COMPLETE',
+                        data: response
+                    });
+                });
+            }
+        },
+        actionGetCurrentPatient: function() {
+            return function(dispatch) {
+                dispatch({
+                    type: 'GET_DATA_STARTED'
+                });
+                const api_url = '/patients/' + helpers.getPatientID();
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+                    if (req.status == 200) {
+                        var resp = JSON.parse(req.response);
+                        var data_return = resp.patient.data;
+                        data_return.id = resp.patient.id;
+                        data_return.pid = resp.patient.id;
+                        data_return = createPatientExtras(data_return);
+
+
+                        data_return.komed_base_url = "https://optinomic.komed-health.com/chat/";
+                        data_return.komed_url = data_return.komed_base_url + resp.patient.id;
+
+                        var response = {
+                            "date": new Date(),
+                            "data": data_return
+                        };
+                        console.log('(✔) Data (' + api_url + '):', response);
+                    } else {
+                        var response = {
+                            "error": true,
+                            "error_message": "Failed with status code: " + req.status,
+                            "status_code": req.status
+                        };
+                        console.error('(!) Error: ', response);
+                    };
+                    dispatch({
+                        type: 'GET_CURRENT_PATIENT_COMPLETE',
+                        data: response
+                    });
+                });
+            }
+        },
+        actionGetCurrentPatientStays: function() {
+            return function(dispatch) {
+                dispatch({
+                    type: 'GET_DATA_STARTED'
+                });
+                const api_url = '/patients/' + helpers.getPatientID() + '/stays/';
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+                    if (req.status == 200) {
+                        var resp = JSON.parse(req.response);
+                        var stays = resp.stays;
+
+                        var current_stay_id = helpers.getStayID();
+
+                        var response = {
+                            "all": stays,
+                            "current": {
+                                "id": current_stay_id,
+                                "data": null,
+                                "found": false
+                            }
+                        }
+
+                        stays.forEach(function(stay, stayID) {
+                            stay.data = createStayExtras(stay.data);
+                            stay.data.id = stay.id;
+                            stay.data.fid = stay.id;
+                            if (current_stay_id === stay.id) {
+                                response.current.data = stay.data;
+                                response.current.found = true;
+                            };
+                        });
+
+                        var response = {
+                            "date": new Date(),
+                            "data": stays
+                        };
+                        console.log('(✔) Data (' + api_url + '):', response);
+                    } else {
+                        var response = {
+                            "error": true,
+                            "error_message": "Failed with status code: " + req.status,
+                            "status_code": req.status
+                        };
+                        console.error('(!) Error: ', response);
+                    };
+                    dispatch({
+                        type: 'GET_CURRENT_PATIENT_STAYS_COMPLETE',
+                        data: response
+                    });
+                });
+            }
+        },
+        actionGetApps: function() {
+            return function(dispatch) {
+                dispatch({
+                    type: 'GET_DATA_STARTED'
+                });
+                const api_url = '/modules/';
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+                    if (req.status == 200) {
+                        var resp = JSON.parse(req.response);
+                        var patient_modules = resp.patient_modules;
+                        var user_modules = resp.user_modules;
+
+
+                        var response = {
+                            "date": new Date(),
+                            "all": {
+                                "patient_modules": patient_modules,
+                                "user_modules": user_modules
+                            },
+                            "current": {
+                                "id": helpers.getAppID(),
+                                "name": helpers.getAppName(),
+                                "data": null,
+                                "found": false
+                            }
+                        };
+
+                        patient_modules.forEach(function(pm, pmID) {
+                            if (pm.identifier === helpers.getAppID()) {
+                                response.current.data = pm;
+                                response.current.name = pm.name;
+                                response.current.found = true;
+                            }
+                        });
+
+                        if (!response.current.found) {
+                            user_modules.forEach(function(um, pmID) {
+                                if (um.identifier === helpers.getAppID()) {
+                                    response.current.data = um;
+                                    response.current.name = um.name;
+                                    response.current.found = true;
+                                }
+                            });
+                        };
+
+                        console.log('(✔) Data (' + api_url + '):', response);
+                    } else {
+                        var response = {
+                            "error": true,
+                            "error_message": "Failed with status code: " + req.status,
+                            "status_code": req.status
+                        };
+                        console.error('(!) Error: ', response);
+                    };
+                    dispatch({
+                        type: 'GET_APPS_COMPLETE',
+                        data: response
+                    });
+                });
+            }
+        },
+        actionGetSurveyResponses: function(requested_app_id) {
+
+            return function(dispatch) {
+
+                module_identifier = requested_app_id === undefined ? helpers.getAppID() : requested_app_id;
+                console.log('(?) actionGetSurveyResponses', module_identifier);
+
+
+                var current_stay_id = parseInt(helpers.getStayID());
+                var current_pid = parseInt(helpers.getPatientID());
+
+                var data_request = 'undefined';
+                var calculation_results_api_url = '/patients/' + current_pid + '/calculations/' + module_identifier;
+                if (current_stay_id) {
+                    var api_url = '/stays/' + current_stay_id + '/survey_responses/' + module_identifier + '/full';
+                    data_request = 'stay';
+                } else {
+                    var api_url = '/patients/' + current_pid + '/survey_responses/' + module_identifier + '/full';
+                    data_request = 'patient';
+                };
+
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+
+                    var app_id = requested_app_id === undefined ? helpers.getAppID() : requested_app_id;
+                    //console.log('(?) actionGetSurveyResponses | app_id', app_id);
+
+                    if (req.status == 200) {
+                        var resp = JSON.parse(req.response);
+
+
+                        helpers.callAPI('GET', calculation_results_api_url, {}, {}, function(inner_req) {
+
+                            if (req.status == 200) {
+                                var inner_resp = JSON.parse(inner_req.response);
+                                var calculation_results = inner_resp.calculation_results;
+
+                                // console.log('actionGetSurveyResponsesNew:: resp', resp, inner_resp);
+
+
+                                // Reformat req
+                                var return_array = [];
+                                resp.survey_responses.forEach(function(current_response, srID) {
+                                    var return_obj = {};
+
+                                    return_obj.all_found = false;
+
+                                    return_obj.app_id = null;
+                                    return_obj.date = current_response.data.filled;
+
+                                    return_obj.response_id = current_response.id;
+                                    return_obj.response = current_response.data.response;
+
+                                    return_obj.event = null;
+                                    return_obj.event_found = false;
+                                    return_obj.event_id = current_response.data.event_id;
+
+                                    return_obj.patient = null;
+                                    return_obj.patient_found = false;
+                                    return_obj.patient_id = null;
+
+                                    return_obj.stay = null;
+                                    return_obj.stay_found = false;
+                                    return_obj.stay_id = null;
+
+                                    return_obj.patient_uses_module = null;
+                                    return_obj.patient_uses_module_found = false;
+                                    return_obj.patient_uses_module_id = null;
+
+                                    return_obj.calculation = {};
+                                    return_obj.calculation_found = false;
+                                    return_obj.calculation_found_method = null;
+
+
+                                    resp.events.forEach(function(current_event, eventID) {
+                                        if (current_event.id === current_response.data.event_id) {
+                                            return_obj.event_found = true;
+
+                                            current_event.data.id = current_event.id;
+                                            return_obj.event = current_event.data;
+                                            return_obj.patient_uses_module_id = current_event.data.patient_uses_module_id;
+                                            return_obj.patient_id = current_event.data.patient_id;
+                                            return_obj.app_id = current_event.data.module;
+                                            app_id = return_obj.app_id;
+                                        };
+                                    });
+
+
+                                    if (return_obj.event_found) {
+                                        resp.patients.forEach(function(current_patient, patientID) {
+                                            if (current_patient.id === return_obj.patient_id) {
+                                                return_obj.patient_found = true;
+
+                                                current_patient.data.id = current_patient.id;
+                                                current_patient.data.pid = current_patient.id;
+
+                                                current_patient.data = createPatientExtras(current_patient.data);
+                                                return_obj.patient = current_patient.data;
+                                            };
+                                        });
+
+                                        resp.patient_uses_modules.forEach(function(current_pum, pumID) {
+                                            if (current_pum.id === return_obj.patient_uses_module_id) {
+                                                return_obj.patient_uses_module_found = true;
+                                                current_pum.data.id = current_pum.id;
+                                                return_obj.patient_uses_module = current_pum.data;
+                                                return_obj.stay_id = current_pum.data.stay_id;
+
+                                            };
+                                        });
+                                    };
+
+                                    if (return_obj.stay_id) {
+                                        resp.stays.forEach(function(current_stay, stayID) {
+                                            if (current_stay.id === return_obj.stay_id) {
+                                                return_obj.stay_found = true;
+
+                                                current_stay.data.id = current_stay.id;
+                                                current_stay.data.fid = current_stay.id;
+                                                current_stay.data = createStayExtras(current_stay.data);
+
+                                                return_obj.stay = current_stay.data;
+                                            };
+                                        });
+                                    };
+
+                                    // console.error('-> resp.calculations', resp.calculations);
+                                    calculation_results.forEach(function(current_calculation_top, calculationTopID) {
+                                        var calculation_name = current_calculation_top.name;
+
+                                        if (current_calculation_top.result.length > 0) {
+                                            current_calculation_top.result.forEach(function(current_calculation, calculationID) {
+
+                                                var response_id = null;
+                                                var variant_info = false;
+                                                if ("info" in current_calculation) {
+
+                                                    if ("response" in current_calculation.info) {
+                                                        variant_info = true;
+                                                    };
+                                                };
+
+                                                var variant_response = false;
+                                                if ("response" in current_calculation) {
+                                                    if ("data" in current_calculation.response) {
+                                                        if ("response" in current_calculation.response.data) {
+                                                            variant_response = true;
+                                                        };
+                                                    };
+                                                };
+
+
+
+
+
+                                                if (variant_info) {
+                                                    var calc_resp = current_calculation.info.response;
+
+                                                    // if ((response_id !== null) && (response_id !== undefined)) {
+                                                    // 
+                                                    //     if (parseInt(response_id) === parseInt(current_calculation.info.response_id)) {
+                                                    //         return_obj.calculation_found = true;
+                                                    //         return_obj.calculation_found_method = "variant_info__response_id_" + response_id;
+                                                    //         return_obj.calculation[calculation_name] = current_calculation;
+                                                    //     };
+                                                    // };
+
+                                                    if (return_obj.calculation_found !== true) {
+                                                        if (JSON.stringify(calc_resp) === JSON.stringify(return_obj.response)) {
+                                                            // console.log('(+) EQUAL: ', calc_resp);
+
+                                                            return_obj.calculation_found = true;
+                                                            return_obj.calculation_found_method = "variant_info";
+                                                            return_obj.calculation[calculation_name] = current_calculation;
+                                                        };
+                                                    };
+                                                };
+
+                                                if (variant_response) {
+                                                    var calc_resp = current_calculation.response.data.response;
+
+
+                                                    // if ((response_id !== null) && (response_id !== undefined)) {
+                                                    // 
+                                                    //     if (parseInt(response_id) === parseInt(current_calculation.response.id)) {
+                                                    //         return_obj.calculation_found = true;
+                                                    //         return_obj.calculation_found_method = "variant_response__response_id_" + response_id;
+                                                    //         return_obj.calculation[calculation_name] = current_calculation;
+                                                    //     };
+                                                    // };
+
+                                                    if (return_obj.calculation_found !== true) {
+                                                        if (JSON.stringify(calc_resp) === JSON.stringify(return_obj.response)) {
+                                                            // console.log('(+) EQUAL: ', calc_resp);
+
+                                                            return_obj.calculation_found = true;
+                                                            return_obj.calculation_found_method = "variant_response";
+                                                            return_obj.calculation[calculation_name] = current_calculation;
+
+                                                        } else {
+
+                                                            if ("TMTAError" in calc_resp) {
+                                                                // TMT - Special
+                                                                // console.error('DEBUG HERE ::', calc_resp, return_obj.response, current_calculation);
+
+                                                                if ((parseInt(calc_resp.TMTAError) === parseInt(return_obj.response.TMTAError)) &&
+                                                                    (parseInt(calc_resp.TMTATime) === parseInt(return_obj.response.TMTATime)) &&
+                                                                    (parseInt(calc_resp.TMTBError) === parseInt(return_obj.response.TMTBError)) &&
+                                                                    (parseInt(calc_resp.TMTBTime) === parseInt(return_obj.response.TMTBTime)) &&
+                                                                    (parseInt(calc_resp.Ausbildungsjahre) === parseInt(return_obj.response.Ausbildungsjahre)) &&
+                                                                    (parseInt(calc_resp.Messzeitpunkt) === parseInt(return_obj.response.Messzeitpunkt))
+                                                                ) {
+
+                                                                    return_obj.calculation_found = true;
+                                                                    return_obj.calculation_found_method = "variant_response_tmt";
+                                                                    return_obj.calculation[calculation_name] = current_calculation;
+                                                                };
+
+                                                            };
+
+                                                        };
+                                                    };
+
+                                                };
+                                            });
+                                        };
+                                    });
+
+
+
+                                    if (return_obj.calculation_found && return_obj.event_found && return_obj.patient_found && return_obj.stay_found && return_obj.patient_uses_module_found) {
+                                        return_obj.all_found = true;
+                                    };
+
+                                    return_array.push(return_obj);
+                                });
+
+
+                                if (return_array.length > 0) {
+                                    var have_data = true;
+
+                                    // Sort
+                                    return_array.sort(function(a, b) {
+                                        var nameA = a.date.toUpperCase(); // ignore upper and lowercase
+                                        var nameB = b.date.toUpperCase(); // ignore upper and lowercase
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                } else {
+                                    var have_data = false;
+                                };
+
+                                var response = {
+                                    "date": new Date(),
+                                    "data": return_array,
+                                    "calculations_all": calculation_results,
+                                    "have_data": have_data,
+                                    "possible_data": true,
+                                    "request": data_request,
+                                    "pid": current_pid,
+                                    "fid": current_stay_id,
+                                    "app_id": app_id
+                                };
+                                console.log('(✔) Data (' + api_url + '):', response);
+
+
+                                // console.warn(JSON.stringify(calculation_results, null, 2));
+
+
+                                dispatch({
+                                    type: 'GET_SURVEY_RESPONSES_COMPLETE',
+                                    data: response
+                                });
+
+
+                            } else {
+                                var response = {
+                                    "error": true,
+                                    "error_message": "Failed with status code: " + req.status,
+                                    "status_code": req.status,
+                                    "request": data_request,
+                                    "app_id": app_id
+                                };
+                                console.error('(!) Error: ', response);
+                            };
+                        });
+
+                    } else {
+                        var response = {
+                            "error": true,
+                            "error_message": "Failed with status code: " + req.status,
+                            "status_code": req.status,
+                            "request": data_request,
+                            "app_id": app_id
+                        };
+                        console.error('(!) Error: ', response);
+                    };
+
+                });
+            }
+        },
+        actionSaveParams: function(params) {
+            return function(dispatch) {
+                dispatch({
+                    type: 'SAVE_PARAMS_COMPLETE',
+                    data: params
+                });
+            }
+        },
+        getModuleAnnotations: function(module_identifier) {
+
+            var api_url = '/modules/' + module_identifier + '/annotations';
+
+            return function(dispatch) {
+
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+                    if (req.status == 200) {
+
+                        var annotations = JSON.parse(req.response);
+
+                        var response = {
+                            "module_identifier": module_identifier,
+                            "data": annotations
+                        };
+
+                        console.log('(✔) Data (' + api_url + '):', response);
+
+                        dispatch({
+                            "type": "GET_MODULE_ANNOTATIONS_COMPLETE",
+                            "data": response
+                        });
+
+                    } else {
+                        // Errorhandling
+                        // While what action with what params error happend
+                        console.error('(!) Error: ', req);
+                    };
+
+                });
+            };
+
+        },
+
+        actionGetUserAppCalculation: function(module_identifier, calculation_identifier) {
+            return function(dispatch) {
+
+                const api_url = '/calculations/' + module_identifier + '/' + calculation_identifier;
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+                    if (req.status == 200) {
+                        var resp = JSON.parse(req.response);
+
+                        var calculation_result = null;
+                        if ("calculation_result" in resp) {
+                            calculation_result = resp.calculation_result;
+                        } else {
+                            calculation_result = resp;
+                        };
+
+                        var _module_identifier = module_identifier.split('.').join('_');
+                        var _calculation_identifier = calculation_identifier;
+                        var module_calc = _module_identifier + "___" + _calculation_identifier;
+
+                        var response = {
+                            "date": new Date(),
+                            "module_calc": module_calc,
+                            "module_identifier": module_identifier,
+                            "calculation_identifier": calculation_identifier,
+                            "data": calculation_result
+                        };
+
+                        console.log('(✔) Data (' + api_url + '):', response);
+
+                        dispatch({
+                            type: 'GET_USERAPPCALCULATION_COMPLETE',
+                            data: response
+                        });
+
+                    } else {
+                        var response = {
+                            "error": true,
+                            "error_message": "Failed with status code: " + req.status,
+                            "status_code": req.status
+                        };
+                        console.error('(!) Error: ', response);
+                    };
+
+                });
+            }
+        },
+
+        // ----------------------------------
+        // Unneeded?
+        // ----------------------------------
+
+        actionShowAppToolbar: function(show) {
+            show = show === undefined ? false : show;
+
+            return {
+                type: 'SET_APP_TOOLBAR',
+                show_app_toolbar: show
+            };
+        },
+        actionSortSurveyResponses: function() {
+            return {
+                type: 'SORT_SURVEY_RESPONSES'
+            };
+        }
+    }
+};
+// ----------------------------
+// Helpers
+// ----------------------------
+
+formatDateCH = function(date_string) {
+    if (date_string !== undefined) {
+
+        // 1952-11-19T00:00:00.000000000000Z
+        var year = parseInt(date_string.substring(0, 4));
+        var month = parseInt(date_string.substring(5, 7));
+        var day = parseInt(date_string.substring(8, 10));
+        var date_string_return = day + "." + month + "." + year
+
+        return date_string_return;
+    } else {
+        return null;
+    }
+};
+
+createPatientExtras = function(patient) {
+
+    function getAge(dateString) {
+        var today = new Date();
+        var birthDate = new Date(dateString);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        return age;
+    }
+
+
+    // patient.age = $filter('dateToAge')(patient.birthdate);
+    // patient.birthday = $filter('date')(patient.birthdate);
+
+    patient.extras = {};
+    patient.extras.age = getAge(patient.birthdate);
+
+    patient.extras.birthday = formatDateCH(patient.birthdate);
+    patient.extras.birthday_age = patient.extras.birthday + ' | ' + patient.extras.age;
+
+
+    patient.assessment = {};
+    patient.assessment.login_pid = patient.cis_pid + "";
+    // Password = YYYYMMDD
+    var pw = "Fehler";
+    if ((patient.birthdate !== "") && (patient.birthdate !== null) && (patient.birthdate !== undefined)) {
+        pw = patient.birthdate;
+        pw = pw.substring(0, 10);
+        pw = pw.replace("-", "");
+        pw = pw.replace("-", "");
+    };
+    patient.assessment.login_pw = pw;
+
+
+    patient.extras.name = patient.last_name + ' ' + patient.first_name;
+
+    if (patient.gender === 'male') {
+        patient.extras.ansprache = 'Herr';
+        patient.extras.anrede = 'Herr ' + patient.last_name;
+    } else {
+        patient.extras.ansprache = 'Frau';
+        patient.extras.anrede = 'Frau ' + patient.last_name;
+    };
+    patient.extras.full_name = patient.extras.ansprache + ' ' + patient.extras.name + ' (' + patient.extras.birthday_age + ')';
+    patient.extras.secure = patient.extras.ansprache + ' ' + patient.last_name.charAt(0) + '. ' + patient.first_name.charAt(0) + '. (' + patient.birthdate.substring(0, 4) + ')';
+
+    patient.extras.full_address = patient.address1 + ', ' + patient.zip_code + ' ' + patient.city;
+
+    var myPhone = '';
+    if (patient.phone_home) {
+        myPhone = patient.phone_home;
+    }
+    if (patient.phone_mobile) {
+        if (myPhone != '') {
+            myPhone = myPhone + ', ' + patient.phone_mobile;
+        } else {
+            myPhone = patient.phone_mobile;
+        }
+    }
+    patient.extras.phone = myPhone;
+    patient.extras.infoline = patient.extras.full_address
+
+    if (myPhone != '') {
+        patient.extras.infoline + ' | ' + patient.extras.phone;
+    };
+
+
+    // -----------------------------------
+    // Female = Pink | Male = Blue
+    // -----------------------------------
+    var myColor = "#3F51B5";
+    var myColorAccent = "#E91E63";
+    if (patient.gender === "female") {
+        myColor = "#E91E63";
+        myColorAccent = "#3F51B5";
+    }
+    patient.extras.color_main = myColor;
+    patient.extras.color_accent = myColorAccent;
+
+    return patient;
+};
+
+createStayExtras = function(current_stay) {
+    current_stay.extras = {};
+
+    // Calculate - Duration of the stay
+    if (current_stay.stop) {
+        current_stay.extras.duration = Math.floor((Date.parse(current_stay.stop) - Date.parse(current_stay.start)) / 86400000);
+        current_stay.extras.duration = current_stay.extras.duration + 2; //incl. start & stop date
+    } else {
+        current_stay.extras.duration = Math.floor((new Date() - Date.parse(current_stay.start)) / 86400000);
+    };
+
+    // from_to
+    current_stay.extras.beginn = formatDateCH(current_stay.start);
+    current_stay.extras.from_to = formatDateCH(current_stay.start);
+    current_stay.extras.from_to = current_stay.extras.from_to + ' - ';
+    if (current_stay.stop) {
+        current_stay.extras.from_to = current_stay.extras.from_to + formatDateCH(current_stay.stop);
+        current_stay.extras.ende = formatDateCH(current_stay.stop);
+    } else {
+        current_stay.extras.from_to = current_stay.extras.from_to + "Unbekannt";
+    };
+
+    return current_stay;
+};
+var Session = (function() {
+
+  var storage = localStorage;
+
+  var isLoggedIn = function() {
+    var uid = storage.getItem("optinomic_user_id");
+    return !(uid === null);
+  };
+
+  var getUserID = function() {
+    return parseInt(storage.getItem("optinomic_user_id"));
+  };
+
+  var getTrustComputer = function() {
+    return JSON.parse(storage.getItem("optinomic_trust_computer"));
+  };
+
+  var setTrustComputer = function(trust) {
+    trust = trust || false;
+    storage.setItem("optinomic_trust_computer", trust);
+  };
+
+  var getToken = function() {
+    return storage.getItem("optinomic_token");
+  };
+
+  var login = function(uid, token) {
+    console.log('SESSION | login', uid, token);
+    storage.setItem("optinomic_user_id", uid);
+    storage.setItem("optinomic_token", token);
+
+    UserStore.start();
+  };
+
+  var logout = function() {
+
+    storage.removeItem("optinomic_user_id");
+    storage.removeItem("optinomic_token");
+
+    UserStore.stop();
+    storage.removeItem("optinomic_trust_computer");
+  };
+
+  return {
+    isLoggedIn: isLoggedIn,
+    getUserID: getUserID,
+    getToken: getToken,
+    getTrustComputer: getTrustComputer,
+    setTrustComputer: setTrustComputer,
+    login: login,
+    logout: logout
+  };
+
+})();
+
+const UserStore = (function() {
+
+    // ----------------------------------
+    //  Saving userStore to localStorage
+    //  only when trust_computer = true
+    //  logout => _enoded state.
+    // ----------------------------------
+
+    var storage = localStorage;
+
+    //  Should we save to localStorage?
+    //  Should we debug state to console?
+
+    var localStorageOptions = {
+        "name": "unknown",
+        "name_prefix": "optinomic_state_",
+        "name_suffix": "_encoded",
+        "started": false,
+        "using": false,
+        "console": false
+    };
+
+    var getOptions = function() {
+        return localStorageOptions;
+    };
+
+    var getConsole = function() {
+        return localStorageOptions.console;
+    };
+
+    var setConsole = function(console) {
+        localStorageOptions.console = console;
+    };
+
+    var clear = function() {
+        var storage_name = localStorageOptions.name_prefix + Session.getUserID();
+        //console.warn('clear', storage_name);
+        storage.removeItem(storage_name);
+    };
+
+    var clear_all = function() {
+        console.warn('(clear_all) localStorage is clear now!');
+        storage.clear();
+    };
+
+    var setSignin = function() {
+        store.dispatch(addSignin());
+    };
+
+    // -------------------------------
+    // Store - Actions
+    // -------------------------------
+    var addSignin = function() {
+
+        var login_data = {
+            "data": {
+                "user_id": Session.getUserID(),
+                "token": Session.getToken()
+            },
+            "isLoggedIn": Session.isLoggedIn(),
+            "trust_computer": Session.getTrustComputer()
+        };
+
+        return {
+            type: 'SET_SIGNIN_START',
+            signin: login_data
+        }
+    };
+
+    var replaceState = function(new_state) {
+        //console.log('---> replaceState', new_state);
+        return {
+            type: 'SET_PERSISTENT_STATE',
+            new_state: new_state
+        }
+    };
+
+
+    // -------------------------------
+    // Start / Stop
+    // -------------------------------
+
+    var start = function() {
+
+        var signin = {
+            "user_id": Session.getUserID(),
+            "token": Session.getToken()
+        };
+
+        console.warn('UserStore START', signin);
+        localStorageOptions.started = true;
+
+        var trust_computer = Session.getTrustComputer();
+        if (trust_computer) {
+
+            localStorageOptions.using = true;
+            var state = store.getState();
+
+            // Just to be sure
+            if ((signin.user_id !== null) && (signin.token !== null)) {
+                var user_id = signin.user_id;
+
+
+                var localStorageName = localStorageOptions.name_prefix + user_id;
+                localStorageOptions.name = localStorageName;
+
+
+                //  Check if localStorage has Data - if yes use this!
+                var persistedUserState = null;
+                persistedUserState = storage.getItem(localStorageName + localStorageOptions.name_suffix);
+                // console.log('(?) STORE HELPER', localStorageName, signin, persistedUserState);
+
+                if (persistedUserState !== null) {
+                    // Decode persistedUserState
+                    var persistedUserStateDecoded = JSON.parse(decodeURIComponent(escape(atob(persistedUserState))));
+
+                    // persistedUserState is available
+                    // Replace currentState with persistedUserState & add new signin credentials
+                    store.dispatch(replaceState(persistedUserStateDecoded));
+                    store.dispatch(addSignin(signin));
+
+                    // Remove _encoded persistedUserState
+                    storage.removeItem(localStorageName + localStorageOptions.name_suffix);
+                    //localStorageOptions.using = true;
+
+                    console.warn('(!) -----> User_Store - encoded & persisted');
+
+
+                } else {
+
+                    loggedInUserState = JSON.parse(storage.getItem(localStorageName));
+
+                    if (loggedInUserState !== null) {
+                        // Already Logged-In / Page-Refresh
+                        // Dispatch full state (replaceState) to current state
+                        store.dispatch(replaceState(loggedInUserState));
+                        store.dispatch(addSignin(signin));
+
+                        console.warn('(!) -----> User_Store - persisted');
+
+                    } else {
+                        // No persisted state is there
+                        // Dispatch only signin to current (initialState) state
+                        store.dispatch(addSignin(signin));
+                        console.warn('(!) -----> User_Store - initialState');
+
+                    };
+                };
+
+
+            } else {
+                // console.warn('(!) -----> User_Store - unknown');
+            };
+
+
+        } else {
+            localStorageOptions.using = false;
+
+            // No persisted state is there
+            // Dispatch only signin to current (initialState) state
+            store.dispatch(addSignin(signin));
+            console.warn('(!) -----> User_Store (untrusted computer) - initialState');
+        };
+
+    };
+
+
+    var stop = function() {
+
+        function isQuotaExceeded(e) {
+            var quotaExceeded = false;
+            if (e) {
+                if (e.code) {
+                    switch (e.code) {
+                        case 22:
+                            quotaExceeded = true;
+                            break;
+                        case 1014:
+                            // Firefox
+                            if (e.name === 'NS_ERROR_DOM_QUOTA_REACHED') {
+                                quotaExceeded = true;
+                            }
+                            break;
+                    }
+                } else if (e.number === -2147024882) {
+                    // Internet Explorer 8
+                    quotaExceeded = true;
+                }
+            }
+            return quotaExceeded;
+        }
+
+        console.warn('(✓) UserStore.stop: ', localStorageOptions.using);
+
+        if (Session.getTrustComputer()) {
+
+            // Make sure to persist latest state_encoded to localStorage & clear 'sigin'
+            var state = store.getState();
+
+            // Remove user_id / token
+            state.signin = {
+                "data": {
+                    "user_id": null,
+                    "token": null
+                },
+                "trust_computer": false,
+                "isLoggedIn": false
+            };
+
+            // Remove _decoded version.
+            storage.removeItem(localStorageOptions.name);
+
+            try {
+                var encoded = btoa(unescape(encodeURIComponent(JSON.stringify(state))));
+                storage.setItem(localStorageOptions.name + "_encoded", encoded);
+
+            } catch (e) {
+                if (isQuotaExceeded(e)) {
+                    console.error('(!!!)', 'Storage full: Nothing saved');
+                }
+            };
+
+            //console.warn('(✓) UserStore.stop:  STATE', state, encoded, localStorageOptions.name);
+
+        };
+
+        // GetBack to initialState
+        localStorageOptions.name = "unknown";
+        localStorageOptions.started = false;
+        store.dispatch(replaceState(initialState));
+
+    };
+
+
+    return {
+        start: start,
+        stop: stop,
+        clear: clear,
+        clear_all: clear_all,
+        setSignin: setSignin,
+        getOptions: getOptions,
+        getConsole: getConsole,
+        setConsole: setConsole
+    };
+
+})();
+
+
+const store = Redux.createStore(
+    reducer,
+    Redux.applyMiddleware(ReduxThunk.default)
+);
+
+const ReduxBehavior = PolymerRedux(store);
+
+UserStore.start();
+</script>
+
+<script>
+optinomicApp = {
+
+
+    behaviors: [ReduxBehavior, AsyncActionsBehavior],
+
+
+    properties: {
+        _clinic: {
+            type: Object,
+            statePath: 'clinic.data'
+        },
+        _app_params: {
+            type: Object,
+            statePath: '_app_params'
+        },
+        _current_app: {
+            type: Object,
+            statePath: 'apps.current.data'
+        },
+        _current_patient: {
+            type: Object,
+            statePath: function(state) {
+                var return_obj = null;
+                if ((state.patient !== null) && (state.patient !== undefined)) {
+                    if ((state.patient.data !== null) && (state.patient.data !== undefined)) {
+                        return_obj = state.patient.data;
+                        // console.log('(_B_) Patient:', return_obj);
+                    };
+                };
+                return return_obj;
+            }
+        },
+        _current_stay: {
+            type: Object,
+            statePath: function(state) {
+                var return_obj = null;
+                var stay_id = parseInt(helpers.getStayID());
+
+                if ((state.stays !== null) && (state.stays !== undefined)) {
+                    if ((state.stays.data !== null) && (state.stays.data !== undefined)) {
+
+                        state.stays.data.forEach(function(stay, stayID) {
+                            if (stay.id === stay_id) {
+                                return_obj = stay.data;
+                                // console.log('(_B_) Stay:', return_obj);
+                            };
+                        });
+
+                    };
+                };
+
+                return return_obj;
+            }
+        }
+    },
+
+
+
+    // --------------------------------
+    // Helpers
+    // --------------------------------
+    _formatDateCH: function(date_string) {
+        date_string = date_string || null
+        if (date_string !== null) {
+
+            // 1952-11-19T00:00:00.000000000000Z
+            var year = parseInt(date_string.substring(0, 4));
+            var month = parseInt(date_string.substring(5, 7));
+            var day = parseInt(date_string.substring(8, 10));
+            var date_string_return = day + "." + month + "." + year
+
+            return date_string_return;
+        } else {
+            return null;
+        }
+    },
+
+    _hrefAppTemplate: function(app, template) {
+        app = app || null
+        template = template || null
+        var url_string = "";
+
+        if ((app !== null) && (template !== null) && (this._app_params !== null) && (this._app_params !== undefined)) {
+
+            var _app_params = this.get('_app_params');
+
+            url_string = _app_params.apiURL + "modules/" + app + "/view/" + template + "#patient_id=" + _app_params.patientID + ",token=" + _app_params.token + ",app_name=" + _app_params.appName + ",app_id=" + app + ",api_url=" + _app_params.apiURL + ",user_id=" + _app_params.userID + ",stay_id=" + _app_params.stayID;
+
+            //  http://optinomic.cust.local/api/modules/ch.suedhang.apps.fallkonferenz.production/view/overview#patient_id=2096,token=6e4bf5b9-abd0-48e3-b0a3-ade05b480387,app_name=Test :: Fallkonferenz,app_id=ch.suedhang.apps.fallkonferenz.production,api_url=http://optinomic.cust.local/api/,user_id=2,stay_id=1569
+
+        };
+
+        return url_string;
+    },
+
+
+
+    // --------------------------------
+    // Liefecycle
+    // --------------------------------
+
+    created: function() {
+        console.log('optinomicAppBehavior enabled for ', this, helpers.getPatientID(), helpers.getStayID());
+    }
+};
+</script>
+<script>
+makepdfBehavior = {
+
+
+    behaviors: [ReduxBehavior, AsyncActionsBehavior],
+
+
+    properties: {},
+
+
+    // --------------------------------
+    // PDF - Template-Functions
+    // --------------------------------
+
+    _keepTogether: function(given_stack_array, id) {
+
+        id = id === undefined ? "keep_together" : id;
+
+
+        var isArray = function(obj) {
+            return (typeof obj !== 'undefined' &&
+                obj && obj.constructor === Array);
+        };
+
+        var stack_array = [];
+
+        if (isArray(given_stack_array)) {
+            // Array
+            stack_array = given_stack_array;
+        } else {
+            // Object
+            stack_array.push(given_stack_array);
+        };
+
+        var return_obj = {
+            "id": id,
+            "layout": "noBorders",
+            "table": {
+                "dontBreakRows": true,
+                "headerRows": 0,
+                "body": [
+                    [{
+                        "stack": stack_array
+                    }]
+                ]
+            }
+        };
+
+        return return_obj;
+    },
+
+    _spacer: function(space) {
+
+        space = space === undefined ? 10 : space;
+
+        return {
+            "id": "spacer_" + space,
+            "text": "",
+            "margin": [0, space, 0, space]
+        };
+    },
+
+    _title: function(title, subtitle) {
+
+        title = title === undefined ? "" : title;
+        subtitle = subtitle === undefined ? "" : subtitle;
+
+        return {
+            "id": "title",
+            "stack": [
+                // second column consists of paragraphs
+                {
+                    "text": " " + title,
+                    "style": "title",
+                    "alignment": "left"
+                }, {
+                    "text": " " + subtitle,
+                    "style": "caption",
+                    "color": "#616161",
+                    "margin": [1, 0, 0, 0],
+                    "alignment": "left"
+                }
+            ],
+            "margin": [0, 24, 0, 36]
+        };
+    },
+
+    _heading: function(text_left, text_left_sub, style) {
+
+        // Init
+        text_left = text_left === undefined ? "Optinomic" : text_left;
+        text_left_sub = text_left_sub === undefined ? null : text_left_sub;
+        style = style === undefined ? "h2" : style;
+
+        if ((style !== "h1") && (style !== "h2") && (style !== "h3")) {
+            style = "h2";
+        };
+
+        var id = "heading_" + style;
+
+
+        var left = {
+            "id": id,
+            "stack": [{
+                "text": text_left,
+                "style": style,
+                "margin": [0, 12, 0, 0],
+                "alignment": "left"
+            }],
+            "margin": [0, 0, 0, 12]
+        };
+
+
+        if (text_left_sub !== null) {
+            var sub = {
+                "text": text_left_sub,
+                "style": "caption",
+                "color": "#616161",
+                "margin": [1, 0, 0, 0],
+                "alignment": "left"
+            };
+            left.stack.push(sub);
+        };
+
+
+        var return_obj = left;
+
+        return return_obj;
+    },
+
+    _text: function(text) {
+
+        text = text === undefined ? "Optinomic" : text;
+
+        return {
+            "id": "text",
+            "text": " " + text,
+            "style": "p"
+        };
+    },
+
+    _caption: function(text) {
+
+        text = text === undefined ? "Optinomic" : text;
+
+        return {
+            "id": "caption",
+            "text": text,
+            "style": "caption"
+        };
+    },
+
+    _pageBreak: function(when) {
+        when = when === undefined ? "after" : when;
+        return {
+            "id": "peagebreak_" + when,
+            "fontSize": 0,
+            "text": "",
+            "pageOrientation": "portrait",
+            "pageBreak": when
+        };
+    },
+
+    _horizontalLine: function(width, color, space) {
+        width = width === undefined ? 100 : width;
+        color = color === undefined ? "#E0E0E0" : color;
+        space = space === undefined ? 6 : space;
+
+
+        var length = 514 / 100 * width;
+
+        var return_obj = {
+            "id": "horizontal_line",
+            "margin": [0, space, 0, 0],
+            "canvas": [{
+                "type": "line",
+                "x1": 0,
+                "y1": 0,
+                "x2": length,
+                "y2": 0,
+                "lineWidth": 1,
+                "lineColor": color
+            }]
+        };
+
+
+        return return_obj;
+    },
+
+    _noData: function(title, space) {
+        title = title === undefined ? null : title;
+        space = space === undefined ? 24 : space;
+
+        var date = new Date();
+        date = this._formatDateCH(date.toISOString());
+
+        var text = "Keine Daten vorhanden.";
+        if (title !== null) {
+            text = title + ": Keine Daten vorhanden.";
+        };
+
+        var no_data = {
+            "id": "no_data",
+            "table": {
+                "widths": [24, "*"],
+                "body": [
+                    [{
+                        "text": "!",
+                        "color": "#F44336",
+                        "fontSize": 36,
+                        "margin": [0, 0, 0, 0]
+                    }, {
+                        "stack": [
+                            { "text": date, "fontSize": 9, "color": "#BDBDBD", "margin": [0, 6, 0, 0] },
+                            { "text": text, "color": "#424242", "margin": [0, 6, 0, 0] }
+                        ],
+                        "margin": [0, 0, 0, 6]
+                    }],
+                ]
+            },
+            "layout": "noBorders",
+            "margin": [space, space, space, space]
+        };
+
+        var return_obj = {
+            "stack": [],
+        };
+
+        return_obj.stack.push(this._horizontalLine(100, "#F5F5F5"));
+        return_obj.stack.push(no_data);
+        return_obj.stack.push(this._horizontalLine(100, "#F5F5F5"));
+
+        return this._keepTogether(return_obj, "no_data");
+    },
+
+    _indication: function(sign, title, color) {
+
+        sign = sign === undefined ? "!" : sign;
+        title = title === undefined ? "Optinomic" : title;
+        color = color === undefined ? "#F44336" : color;
+
+        var space = 24;
+
+        var date = new Date();
+        date = this._formatDateCH(date.toISOString());
+
+        var indication = {
+            "id": "indication_" + sign,
+            "table": {
+                "widths": [24, "*"],
+                "body": [
+                    [{
+                        "text": sign,
+                        "color": color,
+                        "fontSize": 36,
+                        "margin": [0, 0, 0, 0]
+                    }, {
+                        "stack": [
+                            { "text": date, "fontSize": 9, "color": "#BDBDBD", "margin": [0, 6, 0, 0] },
+                            { "text": title, "color": "#424242", "margin": [0, 6, 0, 0] }
+                        ],
+                        "margin": [0, 0, 0, 6]
+                    }],
+                ]
+            },
+            "layout": "noBorders",
+            "margin": [space, space, space, space]
+        };
+
+        var return_obj = {
+            "stack": [],
+        };
+
+        return_obj.stack.push(this._horizontalLine(100, "#F5F5F5"));
+        return_obj.stack.push(indication);
+        return_obj.stack.push(this._horizontalLine(100, "#F5F5F5"));
+
+        return this._keepTogether(return_obj, sign + "_indication");
+    },
+
+    _suedhang_logo_anschrift: function(space) {
+        space = space === undefined ? 90 : space;
+
+        return {
+            "id": "suedhang_logo_anschrift",
+            "alignment": "left",
+            "margin": [0, space, 0, 0],
+            "columns": [{}, {
+                "width": 220,
+                "stack": [{
+                    "width": 220,
+                    "image": this._getImage("suedhang")
+                }, {
+                    "margin": [0, 6, 0, 0],
+                    "fontSize": 10,
+                    "color": "#69604d",
+                    "alignment": "left",
+                    "text": " Kompetenzzentrum für Mensch und Sucht"
+                }, {
+                    "margin": [0, 3, 0, 0],
+                    "fontSize": 10,
+                    "color": "#69604d",
+                    "alignment": "left",
+                    "text": " Südhang 1"
+                }, {
+                    "margin": [0, 3, 0, 0],
+                    "fontSize": 10,
+                    "color": "#69604d",
+                    "alignment": "left",
+                    "text": " CH - 3038 Kirchlindach"
+                }, {
+                    "margin": [0, 12, 0, 0],
+                    "fontSize": 10,
+                    "color": "#69604d",
+                    "alignment": "left",
+                    "text": " +41 31 828 14 14  |  Telefon"
+                }, {
+                    "margin": [0, 3, 0, 0],
+                    "fontSize": 10,
+                    "color": "#69604d",
+                    "alignment": "left",
+                    "text": " +41 31 828 14 24  |  Fax"
+                }]
+            }]
+        };
+    },
+
+    _stamp: function(documentTitle, space) {
+        documentTitle = documentTitle === undefined ? "Optinomic" : documentTitle;
+        space = space === undefined ? 36 : space;
+
+        var d = new Date();
+        var y = d.getFullYear();
+        var m = d.getMonth() + 1;
+        var t = d.getUTCDate();
+
+        var _date_time = t + "." + m + "." + y + ", " + d.getHours() + ":" + d.getMinutes();
+
+
+        var Optionmic = {
+            "margin": [0, space, 0, space],
+            "alignment": "left",
+            "columnGap": 12,
+            "columns": [{
+                "width": 48,
+                "margin": [0, 6, 0, 0],
+                "image": this._getImage("optinomic_trademark")
+            }, {
+                "width": "*",
+                "stack": [{
+                    "fontSize": 12,
+                    "bold": false,
+                    "color": "#3F51B5",
+                    "alignment": "left",
+                    "margin": [0, 2, 0, 0],
+                    "text": "«" + documentTitle + "»"
+                }, {
+                    "fontSize": 10,
+                    "bold": false,
+                    "color": "#616161",
+                    "margin": [0, 4, 0, 0],
+                    "alignment": "left",
+                    "text": "Datenstand: " + _date_time
+                }, {
+                    "fontSize": 10,
+                    "bold": false,
+                    "color": "#3F51B5",
+                    "alignment": "left",
+                    "margin": [0, 6, 0, 0],
+                    "text": "www.optinomic.com"
+                }, {
+                    "fontSize": 9,
+                    "bold": false,
+                    "color": "#616161",
+                    "alignment": "left",
+                    "text": "Erkenntnisgewinn für den Behandlungsalltag"
+                }]
+            }]
+        };
+
+        return Optionmic;
+    },
+
+    // --------------------------------
+    // Helpers
+    // --------------------------------
+
+    _getImage: function(image) {
+
+        image = image === undefined ? "optinomic_trademark" : image;
+
+        var images = {
+            "optinomic_trademark": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHcAAAB3CAYAAAA5Od+KAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAB3RJTUUH4AYYCwEA1TPlUgAAAAZiS0dEAP8A/wD/oL2nkwAAHv9JREFUeNrtXQdYlFfWvgZQQowliRuNaetmXRPTs7vJn7iWIJoiimhAVBABQQSponRUBMSCYEEUEATBAlZQygxDGcoMDHUGhipNpINSBKn/OQOTZY1lkIEZJpzn+RykzHz3e+8p773nnEvIhEzIhEyIRMr92kekoalTJvhayZuBocWf7j2SsUTTOGGpuzdnh6d/nq3nea6NnWv6Om0z+mKv89xF3kEF7yazaqf19/dP6uvvn3iA4iSt7d3w7xpCZ9bMdPPiyO9xTLPU2510TW17LGeddkzNKvXoDgXViI6f1CJ7V26I7IfXfnh9vGJDZMdaLWq7sha1GMBnGNmmnAbQNX2DCxZyi5plUjPrJx6uKAS0jFwILcbXSS7Hs+eZOjB3bTVJSFTSpLQrqET0L1W+3b9Y6b/XkrVPv4b+/Md1dxD4PhVdWvU288TzNi6s1afPc6cuXHKN93kTMgbCym7gPWwwp59Z7E89CdpZtEI1so8P1rOAFOTig70MgP51c3T7FqN4mrNHlj6Y92lmDsyJhz9a0vzwMTG0TiGXb959w9Y1fY+qHu3uctDSxWtHBujzgF4Kr79sinoMmhxx7Axn2b377VIprLoJMIQpUbH34N/9xCsg/zstU3rUzxujupeMEqhPAxk1GXxz/a59qftCw0vfCL5eMgGKMOTa7TJSUtYiDb5Ve6N+bCk+6JGa35cFGSZVj55F0k3vCwULHY5kkAdgTSbkJeWwJ5tcvHFX2sSOYbR2K7V1rAF9GsDyv0X0a+yMZ0Jk/amhVTI55cedAGq4kpRaS/IKm2dYObOOQnDTImpgh15oPcCK5JwNzF9FyFySX/xgAjBBxSeogADPlNq1j2mpqB7dIwoz/KIL6dYmg7h8h8MZn++wTJ6gS4IIm9uED0ra2oVltFqD0iqOwA7VYHXDeOaZwPxPQZPFF+BHHT28RQE6s2YGBAxf2x9KVzrgnmUNZtHN0Dr5qJFtylHbg+lHdzum6ew9kqHoG1zwGSu7/nUcUF+fcAZVeb+d/LA6nLid4az+bRvtgTgDy7/k19/ph+cTGUG79yZaHPEygcEFJDapetphz5xlwCNdgLinQtjfCPyuR0Elog9v/sfBC4MJ+F4v+MCeddoxdZrGCXQg9/YnfHO/zy1olouOrxrRvRw7yyFBV4sXbDVJyBN3UIcGWT+pRfXZuLAOo8WhjPAZCEVuRVeQtKz6qYdO5azXtUiMXqNJaUPwnlyWe9Gy3XKYAAD0AyOblOsQ3S4Hki/l6T/8CPL8lSJS19AhbWLP8Fk+eB/jCWBl7ZhmoGvLwZ2Q+JRq0YDa3dPH8w1uXpzPIBC4BKB28tdiR0r0ga40GtsyjgeGFM8j5DMi6C5LIkTGm3bEkQPHshRXb6GMC3P8B/+rfKcfLFlUSFjpG/6Xi8YeWNzpqKppnww+U22jflwJmlphPkh8L1y41zaj53h45/6MZqqsslUg13DtTtnrYI6jlsJDGm/ADlnk6NrtmKq5QjWSt/U4ZnInppLkcJtkndyz9oOGtY02TdiwPbYJADZCgJkZ9c/d4YEZTyBYWw++vHM8au3Qa7NBXKLfpcI3jvvmjg2wEDCR8nttslbOaY5AL8bkAeJnrNeJaQWfzgMYKc7TBP1TQcnDaXrg93FSjGdgccwQiHaDe9kKbopUVLWNLrBAbVA7pJw9sh3WbKE8HkvNwM8CStMKs1gf7wUi6j/c31EvNjnll7dEWZvaMt61lm+1YKKG19Z1yNIS748esOk5DUT2A3/i5JG1Dkxxk6gW3NX0YyuB6C/R35P0P/cXAa6CkOPE1IF5YLxFyM8bL2aAnDyX99lxn1E0zeBfCXzIR+AHOKJeyQFg4ykJVW+Hhpf+fn8JjBqSwW6YDoFUsiQAy78wncfhcIaBshZ1dIBNZtWhOZ5ivpfpLWqt4BH9jVF9ew6kWeC9AZ/l3eO5S4Uk4ErRF7ggIgkmeSgtMrBKPg/P/xWYvMIFFiNQO9d0AmbhR1xgEIcHh/cAXLY8IKRooe/FQt596pjRievJHA0IQnolCVwci7phfFYis2ZWDF3Ifndw8X2ymQPzInJZcRm0gmpE/06bFAuMA5LSaslXy28Qi/2pB+QlxN8+wRTqvQLyPzl7IV+44OIGstd57kKIVKvFTSO2GMVnRdDuzUHejRsVhtbJvsvG6cLF88AFzt525DR7KVpQoZpkiIzJbsdUfXTs4jboVerRjyF6V9p7JIM87uqV3b4nKU6SgB2yWtV/wD1LE2Ie4YGbllWPAMuAQ78mjosCuMtkbMdwInKncfNCdsP2WIkDl++CAANNXH0TmlATqggt6f674NALxTVI0TGnR8MElD3llycLAZ9EgsvLtTKK11TRpQkP3EOncsjBE9mfKGlS6sUR3MGoueh6RNns3Y5pUxQ1KJIJLlgosEqaQuW6uHBxJjD/V0V18VyEx3uCmKDa/3LRx0FXiyf/tk0yNRd3x3R3JWpuNogTHrg2B1nE/SxHE7hjv3iCG440oetGRPmKtkfd0mC6JBJcDGaB5mnqWSQKD1yMzjBKw2hNXDV3zRZKF/jbFbiCY2idclsSo2VMRXL35qjYHRIiFdq1L5W4HM8Wa3DBD3UFXy9ZgZHkNvPEg1hhJ2ngKmpENzi6ZX6GlE94PtcjCzMbNsOb94kruLjPez2ifBFamf1umXtWqEZKHLgb9WMrwigV88IpFcIF96gX+5+rNSjNYqy5JR7euXPBfWBkLw8T8ZEkrS3jpWVCj8YEidvUSuGBixVocM1T1aOViyu4W00SMnPymt4Mh4EHXSuZC5ShUJLARY5ras9wIrKemAEjPHCv3ColhSUPZcGfRYprlr6BVbIfrivnDFYXAGUIlpT15cFg6hH4259NhV2wXV7ZRmTePUeMbVMcxW23BQulsSeFw+GM7WBZeAXV6obxBCJKDSyPlBTtBX+bdenG3b9gLrbQBSM08Lsr1mhS2sXpgQ3mVFUEXCn6mF/6ePo8Fwu/0I2USAK4qFDGtowjhMiRu+Utwgf3ekQZZhVO22IUHyVOmwdIefQskvwxYe/q7TLevcIM571u353kPN7zqHByKm2l3t93NPMrK6e00UmxwU4vwB8JmD8dcclywHtYvYXSBFZl8ZPNQ1xOZJPDnjmfAkWqHs/ai4kR+nuSfHBxxjd4FIvCMBGNmlA1W8ecThcH7ZUfGHhgclqtzJO1RPyyTSOblKO4JjuOsx6rj3iyv9cV5pLjszbtzfcxsfWA8lotapsoNQIDKaRmp/253+yDeOBpdazeQQVocf6+2TAud7zu35rvZbqi1kbQKsmoSwTtHtbdyoAZdMEyQ1HlLa/WoHQDqMa8JHlGzVPvlQPau3JDJBaD6YH57h5P5hlbGmmZ0nP8LhW+f8ovb+xqhPDDrt0pewu45BUMWBaPMbAAWPdOmxSPvILmqS+qXcWf5xc9mLrTOuWUgmpk/3gAeJABNLuf5SgS4jr21fUXrhaTGxHlCwytk9N5lX1jNOgVGyL7Da1TLp0JzH99v1umQPfqFZCPtbpzQROo4r6hwFuw2BTdbu3CssCYgVskgsYnOJv2HEjDnk5fgrOnYnX8aGoFT2PVIrshgDoXHV/1IXJZQcX7QgHx8MlFi/O5thm9SFyLwwaLvvrhuZ4Ip1TIYFslkQkCjFkBR06zZ4HZC1y1OXrU/BoWdENw4e7hnTtVUI0dKs285l26xP9y0cotRgll4gYwv1WCpVNaUCan8S2MbcRCsCNbUlrtdBsXlukGvdhK+fURQvFt/MLrTTviCoHEby0ua5HDCsOXlc7Hvbg7Tc5dLFypaZyQ/6OIOsc9Y+241/ZgehCMb9blm3fHFkDciWhsejzpNrVyztXbZYucPLKWgAYtgRv5ISSs9J3G5k5p7FHsFcD9GgItb6Wt1Hr5wcqE4TzA3/tiQKAGHK/KyDbFLSCkaMH8H0IJt7B5xONo4/VSJrgtuAAApiHdEDXASpqUNrBK9pnsxpl3aJVjF0B5QmRMTaia7Hoy5yfwd56gRbkQybUrqkd3YFPp9ToxbRu2xxbssEy+aOXMUgIg5FJYddIH3LO+BWCOw8/YMCs7lg/2LOYD+J814byL/2DxZ6ilQHHa4DNYpvaMgwdP5nxedq9NKjJWuCYKlynRZwMH/gDcyVlFjejHotBWtBxq+rF39x7J2JyV2zgZGMjY+dOBBYuc+dt2JfqBz2vhmzFMSPtvY+nwof2EH+mYJ0ZA8LL0lbl+vNIOiGrfdjmevQpmpp2BVXIITIwojZ3xnK0mCdVacG0yiMuECRAF1CZ4t2OqpdsZzvKLN+6+gZ9fUdU+qmOk0qtIMqv2NYfDGbobd8Tlg7UYdd7Of39Qji5QlhvwrL7GsTIyxqgtL78c8qRf3i/qhnFZuCshyKD5IKvo0soc3TI1wMdNBlPDmyh4dXT2SN+MLJfJyWt6Oz2n4SMIHPB6Kyr2nkx3T580//fGUuobO3mTEDjlPJh8J5S1qLWCjvdlQIWgqRstEzwfPYhTpuEq2piNGaNKzEOCoGOFumH8vZeNKjGnCcyNyhfyN0TXQ2mYphqCGWlwP98Y2zFOwwStXLkhsmdo+/uX7ZKO6wCgqe3As5nAX/XBJfyFkB+xWczYDhJ3U46d5cwFusAYKV1Q2x5bBtzye1thVqWNsqClqanrkIb7/shif6r29t1JEeBKyrErDgZ5y9bd+T1XeuiZB/z/4zND9wUTow9c2UNwOzkQP3hCtP/jjYjyGW5ebFJV80ga/OuMMErF52CWv7NyTvvW2pn1rdsZ9nfw/c8hbplxt7xVuvDuQ+ENLCOH1+v/FRjUIWHspOCMhYcTnJ3XNDkwtJiMJ+G7CDa3SdY3uHAeTHpFY1vGbhM7RiBYtDAYV4GGUXwxlrEA1y/SNqMXQ2zCggj8yq59zBMQP2xz9+YgWG91dfdKpWbWw4Thfgx0cYfe7qQLG/VjM4A21gGraIOJ04oXRs1gMepU9WgZ8F5BwEasAPyFyay6yeGUEW4c4DKdT1DBpxDgVAmLp2L3NvAvP8JDIeNZ+GDj1drWNfl+7aO345Kr59yKKp9zm1oxB+KIOY0POmei/x68CALCzKiXgYANt+z8wFXVoEbzm579Uftv/w97wN/FRidgzv1A8+XBbbwa87LdbODDCbzJzpVqkULdc8WVJXz/PCHw1PEgrYNc2u9S4XyzvUxvJU1q48t21uMHqWDiWw2tUwJ9LxZ+9X+/hhF+1olAwkjnNTORAr4aKOx2ekB7kopLW6axsiX/0KTBJAEpoH+/AuVjL/9NeKt1GMWDOS88eCJbraGxU0pgXoxZdfDwZeGG4oRLAcKxUcd9akLV37DrnCQLpsEwM+qk7A+l64HvbB4trgx07QFE9Nsz2A0yQOFefGMm9gzi5JEtCz4yTtj8Dm7m/rEznI88fHIlFtiQsFLS29snBYGUHgRGo97tB6hVq5kD06Kquv2VF27mgxnBqgJZCPuFDi5Ef/eDrpV8NOYL4mMkuOeKAdRhT/Y21KqxSjNS1KA8sHJm6aEbeC5toiRU8RqI6VkkRgobXODMXDAhc4TeHEsMpKbuEVHVpZGzgfn/2bgjrnKs16eBTjWAaVYAMw1xU/2zZx953YsY2aQ4CbOqAIMz4GxXcHZJouZ6BXCx3Ga6nkVSzDIRZHng8wXlSQAu/raH93PcnuWBNDTPP4O6C61CDmhVr6VT2rZV6tG8juqSJHjAIyF7CQRQxnhcnKiSBbHiHmImC7m/nifPzG0OhaAAItrpoGkxwspUAJOVceBY1hy7cbQEKajgqtvNyPL3txjFc0S94a+yjcY56sV+H5710282O7eJqOnH4jbfOiDerSM9owCbQO85kGbwtcINUizMdVIxkOS0WgI+FmuodEBrRV6UvmKgX4bZ/O9Dnn3TNyLLSXXto8kOhzPcX7ZshJ8eY2CVHBAWXTH1TEC+xGnt5Vt38cwBGS1Teqi45GNpGiXQ4pOrX3tubON3qZCEUyqmm9gxvLDJxnDTZPBgYSPbFMqtqIp5ZwIlD1gUzOQ4eyH/H+t1Yu6JSx7W2q3UBtz8f+HCBjbJTEmvmwEa7KqsHfPgRceQ8re7Vm+htIHGul+7XTYbojihnewlboKHKh88kb0OXY+4JLpD8NpnfyhDS2Nn/IsHgBqclForDSH2Cv09SdeBoDdjZIZAI5B44ddogmHWtG/fnZTkejJH5dqdsimSqrF8AT+LrX9tlotRkRluTgAl2/v+N5d4R+0JtNV1+nw+iaHfl/P05/7LypllAITZe8P2WD8g0H7Ai/2sXViW4FflKQlVMwmZJfGnRz5s6RrQXqvk48vEqIIBlQ2wuYaVClm5jcLZ3xRF7pMopaqmndfFFphAlLhVLQCNjcJ7w6P3hi3YJofNbZKDYGK5jQvLYbdj6iUYZLCta7r5cd/cLwuKH0hL+tZePIN39I7MDqtksQMX6FlUJrtRxt2bI/iAursxW38HroB8YGLPCFinHdOG/gY7xqBpwgj5t220WvO9TEefoILpR0RZ5zLKcq96QHNhYosduDrmdJ7mXo8oF3xAJ8/l4Z7vBxBYJT5rA3qw3qUHfscrglY5XSSHC46BPGh5zEuHNXVgilW7ffS5pvaM2whudp6APpeZUYfRl6z5PqY/auuLKBEufsCsNn/tr+d5fyuJAmMkxrYMa3GLlnfapLgQ4kha2roEGwg20z7uk/tPMMUNgiang+3nhISVvod1vJIoeBKZnWv6GjwlU4x4br+TR5YhMBnBw/5ZC4NwDXW3oM0yB6vWHgNFUrAcrfY6IpaAkCKsNfoC4ow6cVmhUtaitpwNzP9e4DYL/Mpu24PpfsPhdCs2RPY5uWfpovmSRMHOqZz85le1Teli05cLKxoY6XUzo+IELJy7W4EHEX+P7fZODOewKAC31/5QurqyVoxEgovJfv+3Kgy7yBv8pBbZu1jEwKJVBYwOEGIj+JpDd08vgRlBgNOqC9q9hp+MDpr73ctUwY8XwbwzD5/cOVghIGqTrKYfW3HuYuFCfovEYQ3iuG/uhyq6NK6g/gXMVXxk7L1pF6+XSCy42FXvmxU3MXN0J097lUS3l2vtzHJBejbszgOYtkmIM2rvrlXqz+97Mdi1vN3dm7MZW9JjsrskCz6bsOiK2dt2JSaLwvfiZ6rvjE8JuFI099hZzssNAjeAqQlVciZ2jEN4WMST7RB4W35rsX9STLvjsUxssyPDzpf88pH7Ne3YQBS7yS8Cy3Z/rHtyKWvH1Dkey/rFyJZB2CMpCcWjPdOzG16DgeiqG8angF99CCahcyVcSpqUpm3mibQTvrmqHZ09MgUlD8mfRTI5AwXmQBe3K22ljskx74NxTRcErZZojl9qo+BJwfJ+HEjQ1ZIZB45l/dtsL/NnU3vGSixavhlV8Rot8f5MrEXdtS9VZY9jmoJPUMHbv2yiSPyuERZStz/qloOJz7Nso92TC9xjF/jZQ0WlLXJCP093qDzmtQCyxR5Py/X3JCUpakR3KKhGdAPH7cQWAbYHWWtwdg09flwSJSGlhpRWtL4GGmy9RpNSP1rgwuTpwAyZtKx6uWFtELyMHDyRjcAu2GqSwOW3GRjqk8EP1xz1YisqqERIhAbz969hUr8C7ke2oqrtraqaduzp8QoEnSQnr3GSw5EMFezyI8yeXLjOoLY9thL4rBZo7KujHqwOfMB3mHLi+qxFdAR8h2VyzN2KVjnqaJqQURakdTciy6WPnGZ/u9sx1Qom8xVVXVq0thk9C4AMM7RKPmflzFLzCS54j5BJeIrafL3dSf6rNSgty9aNoD5XeaCnBljFkNP+3H+hFWxo6hz9AXtfyMccXlkIsGKeV8YJM64qOr5qgcBLY2Ik2NKITD9Ljp3hfKlnkcRroKbwRF8t/ikpWHkArogLjMEqMbVmVnxKzRTwjQo6ZvQQZS3qQ/7fPa2i/snqelQWJU3qQ6CUoTBR1oFbkxvT/iK4zxsZe092o/6zDyTmgasfWw+O/3M8i3c8SV4hr4JPysM7VxXGUCi//sVZoEiHft0c3Q+0MfSwZ87b6LYAZFmvAO4i0HhrHXP6jU0GccXglxuwFwZoNjZX6x/8umHjjrgi3V2JFLCG+494sn+4GVUuixx2zF0aRmpoJoxtGWeet/YMpispmVU7LSy6YtwAi824cekVwFEGs/vgZRLztU3pIZdv3p199DT7d18N7mkyWLH3QLs/djvDWXohtFgTL/za/lDGx6As75WUtcjye2uIVLA17ym/vEXwAKr5taNPnJDZZueavpFM8Rw3AdUgb8XSmoXgUnJHUqRl7cIKrG3okBuXiQvFZS28FkcQaKiDuSnk5zbjzMXTQbCGBQIvmeBrJe+7e3PUYIZqw+vfMKq8TRVPTWZm1pHHXb2ywOEvyK+/M9JKgDYYsyLwfsLJbxp/AGPDaqm557A6/2NLpzTD37bRzHfapBjBoL5C4AFMJWwAguUpwH/7VHRpRTutUzag6TkvhrlWx31zcUyLYXI+HCmVwYkOPvQy5hNLVF8Qn4ETQuZvMYrPH9oyb7BxR81+t8xFoNlid9/f/XoL2ySaC6PZ2uCZBeW+Fwv/flaSKjHAJGEOFm5o/+EcBAzAzPcx3fD3BjqZi4fgvaCW6VkkXhHGTg+/nBXijlVY4C4x8s+VN7FN/t6n5V/hg7NySkNzJSVO4KZl1eOZeTN0LRIzhLVGrKAa0Qc0aAu4JckBF49EBxqwBDS46cktQiD8vVbOLF5LBTBZM8BkyZ+/UrQmJKx0Np76OawuaUKUW9HlJC6legbECJnCA5eXmbjrk8VXJQfcgNBizF2WNrBK3gcgPuabOTTTYPZCrtwqnQl878utJgkxQJnagdh3wddMoFYK//ghVOjUCd8Po/uqmvYpoeGl83yDC5b7BBesDKdUfJyT1zSZmVFPyqvaSFd37zS4Z6awwAXL1QPjXQN8n0iUDEaer4KWqhtap9yEKDoGgqhdfpcKZwFhn6ljRo9f9nsX9gFzvdU4gREYUjxrOEfMvEjoAzU+aEm+MHVgXgReXgkWpVNpK7Vro37sfbivQA/v3G/glfd7AK63MKr4BvdeH0Ls8QMeES+RMrhCMwUuOfz64MBJmf+Bgbc+xWS3G9sxFmFnO6RLYKI/BNO92v9y0bfYuv5m5PC2unBDnRADXJhYqaYfW8JvtDn0Qj4LgBftO5r5C1gRbHK6BV3HSLUX/17dMD77TkzlrPG0QjciwfVS0OrleGbQU8DtAGAXE/I1AY3X2mQQV6CkSe1Zpx3zcIdl8pULV4sX8NsDYFXhver2yWBivzp5Lm8HvKf2cZ/cBazsBin+aR/wHrxDo7A38gubgOvHckGDP4OJNGejfly2MPwtWCwrIneaiOuijdAljFKBnetma5nSk7FZ1lAODH43Myr23lzsiwWAPhiqYViIttM6JZTNbZqK5Sqn/bmvQeDmpKpHa8DOMlirtF4nptLKiXWQzqx5AxPIB9a/U7wEaaCGvwNgnMJ7tHZmGcL7jSizAk90OeXH/fCwBFc+/kEwoQtAxMTurwBghqIGpRvTR7RMEtie/lxF0G2iY073fNLvDZ4r2wLA/gezMs33Mvfym3wNvYB29NkeTHciRAnPHpwF4LMFzbtGDY+Or3o3nFo51cSOEaKgMvxN98FM0If7j2auI8Set8P0pxLOYMbetTtl74DZXOvunbsmIKR4Dr/jOMz6S08uJPCO+takdl+8UaJ4Jaz0HxgYPaukVEWXVnrCN+8D8NH/VtlGa8HtRwHrbprBxH+JrgMCv7ngCm7hmvlwAIb3aHQ9mYMJbDJ/lkbiAsnAQVGumOGxf8UTR6MOVhEWBV0rmQtBj+Kz2inxEsk2R3cCuL9AIINFW02Cai5oXLN3UMGXQJN4ab3w9+9ADHASIuuWoZH90C6q/O/h/YLms+1c01fjAk0Gu3EC0CcFZj05E5D/HphuGn+FCx+sslZMywH3LOP5P4QQ4Mirfn3GAZGDpvkRUB/5O9TK1yFQYglqTnGTIzapejb/wEScbIz0uinweQq6FomXwSJUwXt3oTbjkXEYVa/WoDxQ3xmfbXco/fCF0OJ5ZNKJ389ompCnUCdCLLGh1/s2LiyXLUa8U0EC7A9l/MTmNk8+d7GQ+F8u/HCDXiz3WeACoGyfoIJ3CDlEdu1jugqyEYBggZY685YiM/+3vwdSsJy8pimg0fPBhayHgM/c0inNHMy3npN71r9vRZW/2dfXJ9UqaPHzBMg8fjypr69fCrcP+RkNtCRMtnNH070duPKjobtOg365A7TIkJAjBNvVel8o+ACsQCrPrD6jQTX+DLQ2GSzGh25enImHL0rBhLu0rPpX9xxI0wUtzQZAH8HVCQDlu5zINsvKbZwCES8prWwlv2yMwqK2r7TN6Ol8Mz9w/Ev476dqg3VIPnQq51865om8AusJEbFgJIqa7Rtc8BeIuJd6BXDlwXy+g9/jH6mKgjtPAB4JDS/9OyZ1oxZv1I+thUnRoGNGzwQLsA+79Tgey/pT9dWSKOnp7eOlBbGy62fcii5fcDOq/JMsTuOsnp7eSQ/EaOtxQiZkQiZkQiRK/h92wVXG3HNPGgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNi0wNi0yNFQxMTowMTowMC0wNDowMGM59ZsAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTYtMDYtMjRUMTE6MDE6MDAtMDQ6MDASZE0nAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAABJRU5ErkJggg==",
+            "suedhang": "data:image/png;base64,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"
+        };
+
+
+        if (image in images) {
+            return images[image];
+        } else {
+            return images.optinomic_trademark;
+        };
+    },
+
+    _formatDateCH: function(date_string) {
+        date_string = date_string || null
+        if (date_string !== null) {
+
+            // 1952-11-19T00:00:00.000000000000Z
+            var year = parseInt(date_string.substring(0, 4));
+            var month = parseInt(date_string.substring(5, 7));
+            var day = parseInt(date_string.substring(8, 10));
+            var date_string_return = day + "." + month + "." + year
+
+            return date_string_return;
+        } else {
+            return null;
+        }
+    },
+
+
+    // --------------------------------
+    // Liefecycle
+    // --------------------------------
+
+    created: function() {
+        // console.log('makepdfBehavior for ', this, 'enabled!');
+    }
+};
+</script>
+
+<link rel="import" href="iron-icons/iron-icons.html">
+<link rel="import" href="paper-icon-button/paper-icon-button.html">
+<link rel="import" href="paper-progress/paper-progress.html">
+<dom-module id="optinomic-app">
+    <template>
+        <style is="custom-style" include="shared-styles">
+         :host {
+            --app-primary-color: #FAFAFA;
+            --app-secondary-color: #424242;
+            --drawer-primary-color: #424242;
+            --drawer-secondary-color: #EEEEEE;
+            padding: 6px;
+        }
+
+        paper-progress {
+            display: block;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            --paper-progress-active-color: rgba(255, 255, 255, 0.5);
+            --paper-progress-container-color: #9E9E9E;
+        }
+        </style>
+        <template is="dom-if" if="[[_loading]]">
+            <paper-progress value="90" indeterminate bottom-item></paper-progress>
+        </template>
+        <optinomic-template name="template"></optinomic-template>
+        <template is="dom-if" if="[[_isAdmin]]">
+            <div style="margin-top: 64px;margin-bottom: 24px;">
+                <paper-icon-button class="pink" on-tap="_logState" icon="bug-report"></paper-icon-button>
+                <paper-icon-button class="indigo" on-tap="_loadData" icon="refresh"></paper-icon-button>
+            </div>
+        </template>
+    </template>
+    <script>
+    Polymer({
+        is: 'optinomic-app',
+
+        properties: {
+            page: {
+                type: String,
+                reflectToAttribute: true,
+                observer: '_pageChanged',
+            },
+            _loading: {
+                type: Boolean,
+                statePath: 'loading'
+            },
+            _isAdmin: {
+                type: Boolean,
+                statePath: '_app_user.data.isAdmin'
+            },
+        },
+
+        observers: [
+            '_viewPageChanged(page)',
+        ],
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior],
+
+
+        _init: function() {
+
+            var params = {
+                "userID": parseInt(helpers.getUserID()),
+                "patientID": parseInt(helpers.getPatientID()),
+                "stayID": parseInt(helpers.getStayID()),
+                "token": helpers.getToken(),
+                "appName": helpers.getAppName(),
+                "appID": helpers.getAppID(),
+                "apiURL": helpers.getApiURL(),
+            };
+
+            this.dispatch('actionSaveParams', params);
+        },
+
+        _viewPageChanged: function(page) {
+            this.page = page || 'template';
+        },
+
+        _pageChanged: function(page) {
+            //console.log('_pageChanged', page);
+        },
+
+        _showPage404: function() {
+            this.page = '404';
+        },
+
+        _logState: function() {
+            var state = this.getState();
+            console.log('(✔) state', state);
+        },
+
+        _loadData: function() {
+            Polymer.RenderStatus.afterNextRender(this, function() {
+                console.warn('(START) _loadData');
+
+                // loadData
+                this.dispatch('actionGetCurrentUser');
+                this.dispatch('actionGetApps');
+                // this.dispatch('actionGetCurrentPatient');
+                // this.dispatch('actionGetCurrentPatientStays');
+                this.dispatch('actionGetClinic');
+
+                this._logState();
+            });
+        },
+
+        ready: function() {
+            Polymer.RenderStatus.afterNextRender(this, function() {
+                this._init();
+                this._loadData();
+            });
+        },
+
+    });
+    </script>
+</dom-module>
+
+<optinomic-app name="main"></optinomic-app>
+
+
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-chart-profile/optinomic-chart-profile.html">
+<link rel="import" href="optinomic-pdf-chart-profile/optinomic-pdf-chart-profile.html">
+<link rel="import" href="optinomic-pdfmake/optinomic-pdfmake.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-app-info.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="iron-collapse/iron-collapse.html">
+<dom-module id="element-isk">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+        }
+
+        .full_grid {
+            height: 100%;
+            border-left-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+        }
+
+        .chart {
+            border-top-style: solid;
+            border-top-color: #F5F5F5;
+            border-top-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #F5F5F5;
+            border-bottom-width: 1px;
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+        </style>
+        <div id="isk_element">
+            <div id="title" class="layout horizontal flex">
+                <div class="flex">
+                    <optinomic-title small h1="[[_d.name]]" h2="[[_d.title]]"></optinomic-title>
+                </div>
+                <div>
+                    <template is="dom-if" if="[[_pdf_ready]]">
+                        <paper-icon-button class="grey" on-tap="__toggle_print" icon="print"></paper-icon-button>
+                    </template>
+                </div>
+            </div>
+            <template is="dom-if" if="[[_pdf_ready]]">
+                <iron-collapse id="collapse_print" horizontal>
+                    <optinomic-pdfmake header-left="[[_patient.extras.secure]]" footer-left="[[_d.title]]" header-right="[[_clinic.clinic_name]]" document-title="[[_d.name]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]" hide-logo></optinomic-pdfmake>
+                </iron-collapse>
+            </template>
+            <div id="app_info">
+                <optinomic-app-info app-id="[[appId]]" on-pdfready-app-info="_event_pdf_app_info"></optinomic-app-info>
+            </div>
+            <template is="dom-if" if="[[_sr.have_data]]">
+                <template is="dom-if" if="[[_d.init_done]]">
+                    <template is="dom-if" if="[[_d.clinic_sample_dive.defined]]" restamp="true">
+                        <div id="pdf_get_chart">
+                            <optinomic-pdf-chart-profile language="de" options="[[_d.isk.options_pdf]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.clinic_sample_dive.array]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
+                        </div>
+                        <div id="data_content">
+                            <div class="chart">
+                                <optinomic-chart-profile language="de" options="[[_d.isk.options]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.clinic_sample_dive.array]]"></optinomic-chart-profile>
+                            </div>
+                        </div>
+                    </template>
+                    <template is="dom-if" if="[[!_d.clinic_sample_dive.defined]]" restamp="true">
+                        <optinomic-indication sign=":" title="Erstelle Klinikstichprobe aus letzter Messung..." color="#3F51B5"></optinomic-indication>
+                    </template>
+                </template>
+                <template is="dom-if" if="[[!_d.init_done]]">
+                    <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
+                </template>
+            </template>
+            <template is="dom-if" if="[[!_sr.have_data]]">
+                <optinomic-indication sign="!" title="Keine Daten vorhanden." color="#F44336"></optinomic-indication>
+            </template>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'element-isk',
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior, makepdfBehavior],
+
+        properties: {
+            appId: {
+                type: String,
+                value: null,
+                observer: '_loadData'
+            },
+            _sr: {
+                type: Object,
+                statePath: function(state) {
+                    if ((this.appId !== null) && (this.appId !== undefined)) {
+                        if (this.appId in state.survey_responses.data) {
+                            // console.log('(bscl-element) _sr:', state.survey_responses.data[this.appId]);
+                            return state.survey_responses.data[this.appId]
+                        } else {
+                            return null
+                        };
+                    } else {
+                        return null
+                    };
+                },
+                observer: '_srChanged'
+            },
+            _patient: {
+                type: Object,
+                statePath: function(state) {
+                    if ((state.patient.data !== null) && (state.patient.data !== undefined)) {
+                        return state.patient.data;
+                    } else {
+                        return null
+                    };
+                }
+            },
+            _clinic: {
+                type: Object,
+                statePath: function(state) {
+                    if ((state.clinic.data !== null) && (state.clinic.data !== undefined)) {
+                        return state.clinic.data;
+                    } else {
+                        return null
+                    };
+                }
+            },
+            _pdf_chart: {
+                type: Object,
+                value: null,
+                observer: '_buildPDF'
+            },
+            _pdf_app_info: {
+                type: Object,
+                value: null,
+                observer: '_buildPDF'
+            }
+        },
+
+
+        // -----------------------------
+        // User-Click Functions
+        // -----------------------------
+
+        __toggle_print: function() {
+            var print_button = this.$$('#collapse_print');
+            print_button.toggle();
+        },
+
+
+        // -----------------------------
+        // Functions
+        // -----------------------------
+
+        _init: function() {
+
+            var d = {};
+
+            d.name = "ISK-K";
+            d.title = "Inventar Sozialer Kompetenzen - Kurzform";
+
+            d.isk = {
+                "options": {
+                    "min": -8,
+                    "max": 4,
+                    "item_height": 76,
+                    "item_text_left": 256,
+                    "item_text_right": 164,
+                    "color_grid": "#9E9E9E",
+                    "color_clinic_sample": "#888888",
+                    "color_skin": "grey_dark_to_light",
+                    "show_baseline": false,
+                    "show_ranges_overview": false,
+                    "show_scale_text": true,
+                    "show_score_vertical_line": false,
+                    "show_score_profile_line": true,
+                    "show_score_circles": true,
+                    "show_settings_block": false,
+                    "allow_toggle_settings_block": true,
+                    "topnumber_hide_first_last": false,
+                    "range_alpha": 0.09,
+                    "vertical_grid_every_x": 1,
+                    "norm_sample": "Z-Normierung aufgrund von Gesunden (N = 4'208)",
+                    "response_title_path": "calculation.scores_calculation.info.mz.mz_typ",
+                    "response_date_path": "date"
+                },
+                "scales": [{
+                    "left_title": "Soziale Orientierung",
+                    "left_text": "Auf den eigenen Vorteil bedacht sein, sich nicht für andere interessieren und deren Meinung ignorieren oder gering schätzen.",
+                    "right_title": "Soziale Orientierung",
+                    "right_text": "Überinvolviert, zu schnelle Kompromissbereitschaft",
+                    "m_norm": [0.23, 0.32],
+                    "sd_norm": [0.31, 0.33],
+                    "score_path": "calculation.scores_calculation.all_results.soziale_orientierung_z_score",
+                    "clinic_sample_var": "soziale_orientierung_z_score",
+                    "items": 10
+                }, {
+                    "id": 1,
+                    "left_title": "Offensivität",
+                    "left_text": "Sich sozial isolieren, Konflikten aus dem Weg gehen, sich unterordnen, Entscheidungen vor sich her schieben.",
+                    "right_title": "Offensivität",
+                    "right_text": "Streitlustig, unüberlegte Entscheidungen",
+                    "m_norm": [0.19, 0.19],
+                    "sd_norm": [0.28, 0.27],
+                    "score_path": "calculation.scores_calculation.all_results.offensivit__t_z_score",
+                    "clinic_sample_var": "offensivit__t_z_score",
+                    "items": 8
+                }, {
+                    "left_title": "Selbststeuerung",
+                    "left_text": "Sich treiben lassen, in seinem Handeln von ggf. stark schwankenden Emotionen bestimmt sein und die Verantwortung für das eigene Leben in der Umwelt ansiedeln.",
+                    "right_title": "Selbststeuerung",
+                    "right_text": "Zwanghafte Selbstkontrolle",
+                    "m_norm": [0.33, 0.34],
+                    "sd_norm": [0.40, 0.38],
+                    "score_path": "calculation.scores_calculation.all_results.selbststeuerung_z_score",
+                    "clinic_sample_var": "selbststeuerung_z_score",
+                    "items": 8
+                }, {
+                    "left_title": "Reflexibilität",
+                    "left_text": "Sich nicht mit seinem Verhalten auseinandersetzten, gleichgültig gegenüber dem Verhalten und Erleben anderer Menschen.",
+                    "right_title": "Reflexibilität",
+                    "right_text": "Zwanghafte Selbstdarstellung, Rigidität",
+                    "m_norm": [0.14, 0.16],
+                    "sd_norm": [0.23, 0.25],
+                    "score_path": "calculation.scores_calculation.all_results.reflexibilit__t_z_score",
+                    "clinic_sample_var": "reflexibilit__t_z_score",
+                    "items": 7
+                }],
+                "ranges": [{
+                    "range_start": -999,
+                    "range_stop": -2,
+                    "text": "starke Ausprägung",
+                    "color": "#F44336"
+                }, {
+                    "range_start": -1,
+                    "range_stop": 1,
+                    "text": "normale Ausprägung",
+                    "color": "#4CAF50"
+                }, {
+                    "range_start": 2,
+                    "range_stop": 999,
+                    "text": "starke Ausprägung",
+                    "color": "#F44336"
+                }]
+            };
+
+            // Clone options for pdf - nothing is overwritten
+            d.isk.options_pdf = JSON.parse(JSON.stringify(d.isk.options));
+            d.isk.options_pdf.item_height = d.isk.options_pdf.item_height - 12;
+
+
+            d.clinic_samples = {"date":"2017-10-06T11:25:00.840Z","n_scores":1116,"dimensions":[{"array":[{"text":"Eintritt","id":0},{"text":"Austritt","id":1},{"text":"Anderer Messzeitpunkt","id":2},{"text":"Alle Messzeitpunkte","id":3}],"name":"Messzeitpunkt","source":"app","id":2},{"array":[{"text":"Frauen","pg_id":2,"id":0},{"text":"Männer","pg_id":1,"id":1},{"text":"Alle Patienten","pg_id":null,"id":2}],"name":"Geschlecht","source":"pg","id":0}],"variables":["soziale_orientierung_sum_score","soziale_orientierung_scale_score","soziale_orientierung_z_score","offensivit__t_sum_score","offensivit__t_scale_score","offensivit__t_z_score","selbststeuerung_sum_score","selbststeuerung_scale_score","selbststeuerung_z_score","reflexibilit__t_sum_score","reflexibilit__t_scale_score","reflexibilit__t_z_score"],"data":[[{"statistics":{"reflexibilit__t_scale_score":{"n":173,"min":1.71,"max":4,"mean":2.7446242774566465,"variance":0.256047980219854,"standard_deviation":0.506011838023434,"mean_1sd_min":2.2386124394332123,"mean_1sd_plus":3.2506361154800807,"z_score_min":-2.044664175245505,"z_score_max":2.4809216469066393},"offensivit__t_sum_score":{"n":173,"min":10,"max":29,"mean":20.09248554913295,"variance":13.320926191987708,"standard_deviation":3.649784403493953,"mean_1sd_min":16.442701145638996,"mean_1sd_plus":23.742269952626902,"z_score_min":-2.7652278692054724,"z_score_max":2.440559075856605},"reflexibilit__t_z_score":{"n":173,"min":-2.81,"max":2.64,"mean":-0.35393063583815054,"variance":1.4600596946105797,"standard_deviation":1.2083292989125851,"mean_1sd_min":-1.5622599347507355,"mean_1sd_plus":0.8543986630744346,"z_score_min":-2.0326159155224874,"z_score_max":2.477743971392969},"selbststeuerung_sum_score":{"n":173,"min":8,"max":31,"mean":19.6878612716763,"variance":20.804303518326705,"standard_deviation":4.561173480402462,"mean_1sd_min":15.126687791273838,"mean_1sd_plus":24.249034752078764,"z_score_min":-2.56246804071241,"z_score_max":2.4800939444481633},"soziale_orientierung_z_score":{"n":173,"min":-4.06,"max":0.92,"mean":-1.335606936416184,"variance":0.6161807009923482,"standard_deviation":0.7849717835644465,"mean_1sd_min":-2.1205787199806307,"mean_1sd_plus":-0.5506351528517375,"z_score_min":-3.4706891644088524,"z_score_max":2.873487918474967},"soziale_orientierung_scale_score":{"n":173,"min":1.4,"max":3.3,"mean":2.439884393063583,"variance":0.08979651842694371,"standard_deviation":0.29966067213924436,"mean_1sd_min":2.1402237209243387,"mean_1sd_plus":2.7395450652028277,"z_score_min":-3.470206435966267,"z_score_max":2.870298597397338},"reflexibilit__t_sum_score":{"n":173,"min":12,"max":28,"mean":19.213872832369944,"variance":12.549634134117412,"standard_deviation":3.5425462783310837,"mean_1sd_min":15.67132655403886,"mean_1sd_plus":22.756419110701028,"z_score_min":-2.0363524610801824,"z_score_max":2.480172869264324},"soziale_orientierung_sum_score":{"n":173,"min":14,"max":33,"mean":24.398843930635838,"variance":8.979651842694377,"standard_deviation":2.9966067213924448,"mean_1sd_min":21.402237209243392,"mean_1sd_plus":27.395450652028284,"z_score_min":-3.4702064359662677,"z_score_max":2.870298597397335},"offensivit__t_z_score":{"n":173,"min":-3.19,"max":2.24,"mean":-0.3021387283236987,"variance":1.087726639713989,"standard_deviation":1.0429413404952308,"mean_1sd_min":-1.3450800688189295,"mean_1sd_plus":0.7408026121715321,"z_score_min":-2.7689584826554365,"z_score_max":2.437470478556913},"selbststeuerung_scale_score":{"n":173,"min":1,"max":3.88,"mean":2.4634104046242755,"variance":0.3249450165391424,"standard_deviation":0.5700394868245027,"mean_1sd_min":1.8933709177997728,"mean_1sd_plus":3.033449891448778,"z_score_min":-2.567208831052109,"z_score_max":2.4850727504283365},"offensivit__t_scale_score":{"n":173,"min":1.25,"max":3.63,"mean":2.514161849710981,"variance":0.20843238998964234,"standard_deviation":0.45654396282246723,"mean_1sd_min":2.0576178868885133,"mean_1sd_plus":2.9707058125334482,"z_score_min":-2.7689816373775282,"z_score_max":2.444097920801828},"selbststeuerung_z_score":{"n":173,"min":-3.39,"max":2.47,"mean":-0.4120231213872833,"variance":1.3530681613151125,"standard_deviation":1.1632145809415873,"mean_1sd_min":-1.5752377023288706,"mean_1sd_plus":0.7511914595543039,"z_score_min":-2.5601268479648303,"z_score_max":2.477636687681797}}},{"statistics":{"reflexibilit__t_scale_score":{"n":374,"min":1.43,"max":4,"mean":2.7224866310160434,"variance":0.22689515356458584,"standard_deviation":0.47633512736789196,"mean_1sd_min":2.2461515036481514,"mean_1sd_plus":3.1988217583839353,"z_score_min":-2.7133976831773867,"z_score_max":2.681963381628338},"offensivit__t_sum_score":{"n":374,"min":null,"max":32,"mean":21.11764705882353,"variance":15.954073608052836,"standard_deviation":3.9942550754868966,"mean_1sd_min":17.12339198333663,"mean_1sd_plus":25.111902134310427,"z_score_min":-5.287005126043259,"z_score_max":2.724501248796666},"reflexibilit__t_z_score":{"n":374,"min":-3.49,"max":2.64,"mean":-0.4066577540106965,"variance":1.2937431074666141,"standard_deviation":1.137428286735746,"mean_1sd_min":-1.5440860407464423,"mean_1sd_plus":0.7307705327250494,"z_score_min":-2.710801447393267,"z_score_max":2.678549311231007},"selbststeuerung_sum_score":{"n":374,"min":8,"max":32,"mean":21.101604278074866,"variance":17.98967657067688,"standard_deviation":4.241423884814731,"mean_1sd_min":16.860180393260137,"mean_1sd_plus":25.343028162889595,"z_score_min":-3.0889636673621825,"z_score_max":2.569513450646583},"soziale_orientierung_z_score":{"n":374,"min":-5.1,"max":1.96,"mean":-1.254679144385026,"variance":0.7831906724527438,"standard_deviation":0.884980605692997,"mean_1sd_min":-2.139659750078023,"mean_1sd_plus":-0.36969853869202907,"z_score_min":-4.345090537440466,"z_score_max":3.6324854168614515},"soziale_orientierung_scale_score":{"n":374,"min":1,"max":3.7,"mean":2.470855614973263,"variance":0.11420408075724199,"standard_deviation":0.33794094270632846,"mean_1sd_min":2.132914672266934,"mean_1sd_plus":2.8087965576795915,"z_score_min":-4.352404308262346,"z_score_max":3.6371573541323374},"reflexibilit__t_sum_score":{"n":374,"min":10,"max":28,"mean":19.058823529411764,"variance":11.119534444793969,"standard_deviation":3.334596594011631,"mean_1sd_min":15.724226935400134,"mean_1sd_plus":22.393420123423397,"z_score_min":-2.716617519996234,"z_score_max":2.6813367729832955},"soziale_orientierung_sum_score":{"n":374,"min":10,"max":37,"mean":24.70855614973262,"variance":11.420408075724223,"standard_deviation":3.3794094270632886,"mean_1sd_min":21.32914672266933,"mean_1sd_plus":28.08796557679591,"z_score_min":-4.352404308262338,"z_score_max":3.637157354132335},"offensivit__t_z_score":{"n":374,"min":-3.76,"max":3.1,"mean":0.0067379679144385606,"variance":1.2046011238525576,"standard_deviation":1.0975432218607875,"mean_1sd_min":-1.0908052539463489,"mean_1sd_plus":1.104281189775226,"z_score_min":-3.4319723295527873,"z_score_max":2.8183509956366084},"selbststeuerung_scale_score":{"n":374,"min":1,"max":4,"mean":2.6400267379679128,"variance":0.2811360955417653,"standard_deviation":0.5302226848615261,"mean_1sd_min":2.1098040531063864,"mean_1sd_plus":3.170249422829439,"z_score_min":-3.093090478383106,"z_score_max":2.5649096141317687},"offensivit__t_scale_score":{"n":374,"min":null,"max":4,"mean":2.6420855614973244,"variance":0.24948602476479115,"standard_deviation":0.4994857603223451,"mean_1sd_min":2.1425998011749794,"mean_1sd_plus":3.1415713218196695,"z_score_min":-5.2896113790956605,"z_score_max":2.7186249266172076},"selbststeuerung_z_score":{"n":374,"min":-3.39,"max":2.73,"mean":-0.05141711229946523,"variance":1.169700932969202,"standard_deviation":1.0815271300199556,"mean_1sd_min":-1.132944242319421,"mean_1sd_plus":1.0301100177204903,"z_score_min":-3.086915524383502,"z_score_max":2.571749737103816}}},{"statistics":{"reflexibilit__t_scale_score":{"n":547,"min":1.43,"max":4,"mean":2.72948811700183,"variance":0.2362213101878614,"standard_deviation":0.48602603859038396,"mean_1sd_min":2.243462078411446,"mean_1sd_plus":3.215514155592214,"z_score_min":-2.67370061235962,"z_score_max":2.6140819259046735},"offensivit__t_sum_score":{"n":547,"min":null,"max":32,"mean":20.793418647166362,"variance":15.348549007549876,"standard_deviation":3.917722426046781,"mean_1sd_min":16.875696221119583,"mean_1sd_plus":24.711141073213142,"z_score_min":-5.307527278839961,"z_score_max":2.8604837541136767},"reflexibilit__t_z_score":{"n":547,"min":-3.49,"max":2.64,"mean":-0.38998171846435303,"variance":1.3469453378741933,"standard_deviation":1.1605797421436381,"mean_1sd_min":-1.5505614606079912,"mean_1sd_plus":0.7705980236792851,"z_score_min":-2.6710945995057496,"z_score_max":2.6107484117100417},"selbststeuerung_sum_score":{"n":547,"min":8,"max":32,"mean":20.654478976234003,"variance":19.312059463452,"standard_deviation":4.394548835028688,"mean_1sd_min":16.259930141205317,"mean_1sd_plus":25.04902781126269,"z_score_min":-2.879585470837393,"z_score_max":2.581726008670451},"soziale_orientierung_z_score":{"n":547,"min":-5.1,"max":1.96,"mean":-1.2802742230347353,"variance":0.7317865792807026,"standard_deviation":0.8554452520650884,"mean_1sd_min":-2.1357194750998234,"mean_1sd_plus":-0.4248289709696469,"z_score_min":-4.465190224323827,"z_score_max":3.787821856761199},"soziale_orientierung_scale_score":{"n":547,"min":1,"max":3.7,"mean":2.4610603290676423,"variance":0.10669211153407852,"standard_deviation":0.32663758438685303,"mean_1sd_min":2.1344227446807893,"mean_1sd_plus":2.7876979134544952,"z_score_min":-4.473031882752465,"z_score_max":3.7930101438204993},"reflexibilit__t_sum_score":{"n":547,"min":10,"max":28,"mean":19.107861060329068,"variance":11.577031439562326,"standard_deviation":3.402503701623604,"mean_1sd_min":15.705357358705463,"mean_1sd_plus":22.510364761952673,"z_score_min":-2.6768115067686735,"z_score_max":2.6134105116264204},"soziale_orientierung_sum_score":{"n":547,"min":10,"max":37,"mean":24.610603290676416,"variance":10.669211153407856,"standard_deviation":3.2663758438685306,"mean_1sd_min":21.344227446807885,"mean_1sd_plus":27.876979134544946,"z_score_min":-4.473031882752462,"z_score_max":3.7930101438205006},"offensivit__t_z_score":{"n":547,"min":-3.76,"max":3.1,"mean":-0.09095063985374739,"variance":1.1882678348579077,"standard_deviation":1.090076985748212,"mean_1sd_min":-1.1810276256019594,"mean_1sd_plus":0.9991263458944646,"z_score_min":-3.365862602472865,"z_score_max":2.92727090065435},"selbststeuerung_scale_score":{"n":547,"min":1,"max":4,"mean":2.5841681901279854,"variance":0.301736922351935,"standard_deviation":0.5493058550133386,"mean_1sd_min":2.0348623351146466,"mean_1sd_plus":3.133474045141324,"z_score_min":-2.8839455754381453,"z_score_max":2.5774926608740305},"offensivit__t_scale_score":{"n":547,"min":null,"max":4,"mean":2.6016270566727746,"variance":0.24004067992607198,"standard_deviation":0.48993946557311746,"mean_1sd_min":2.111687591099657,"mean_1sd_plus":3.091566522245892,"z_score_min":-5.310098980553575,"z_score_max":2.854174937084213},"selbststeuerung_z_score":{"n":547,"min":-3.39,"max":2.73,"mean":-0.16546617915904918,"variance":1.255814179386315,"standard_deviation":1.1206311522469448,"mean_1sd_min":-1.286097331405994,"mean_1sd_plus":0.9551649730878956,"z_score_min":-2.877426541619455,"z_score_max":2.583781624625939}}}],[{"statistics":{"reflexibilit__t_scale_score":{"n":143,"min":1.57,"max":3.86,"mean":2.7521678321678325,"variance":0.17997781798620957,"standard_deviation":0.42423792615254186,"mean_1sd_min":2.3279299060152905,"mean_1sd_plus":3.1764057583203744,"z_score_min":-2.7865680065170886,"z_score_max":2.611346368485282},"offensivit__t_sum_score":{"n":143,"min":10,"max":29,"mean":21.545454545454547,"variance":12.80737444373809,"standard_deviation":3.5787392254449175,"mean_1sd_min":17.96671532000963,"mean_1sd_plus":25.124193770899463,"z_score_min":-3.226123452462281,"z_score_max":2.083008843322102},"reflexibilit__t_z_score":{"n":143,"min":-3.15,"max":2.3,"mean":-0.33636363636363653,"variance":1.0258636999364275,"standard_deviation":1.0128492977419827,"mean_1sd_min":-1.3492129341056192,"mean_1sd_plus":0.6764856613783462,"z_score_min":-2.777941762816052,"z_score_max":2.6029179683898382},"selbststeuerung_sum_score":{"n":143,"min":8,"max":31,"mean":21.223776223776223,"variance":20.341532593280874,"standard_deviation":4.510158821292314,"mean_1sd_min":16.71361740248391,"mean_1sd_plus":25.733935045068538,"z_score_min":-2.9319979068912616,"z_score_max":2.167600779393963},"soziale_orientierung_z_score":{"n":143,"min":-3.53,"max":0.92,"mean":-1.4125174825174818,"variance":0.5342635923517042,"standard_deviation":0.7309333706650041,"mean_1sd_min":-2.143450853182486,"mean_1sd_plus":-0.6815841118524777,"z_score_min":-2.8969569627885914,"z_score_max":3.191149256730958},"soziale_orientierung_scale_score":{"n":143,"min":1.6,"max":3.3,"mean":2.410489510489511,"variance":0.07786199814171836,"standard_deviation":0.27903762854088043,"mean_1sd_min":2.1314518819486308,"mean_1sd_plus":2.6895271390303916,"z_score_min":-2.904588584441651,"z_score_max":3.1877797061344033},"reflexibilit__t_sum_score":{"n":143,"min":11,"max":27,"mean":19.265734265734267,"variance":8.810504181133554,"standard_deviation":2.9682493461859893,"mean_1sd_min":16.29748491954828,"mean_1sd_plus":22.233983611920255,"z_score_min":-2.784716949859757,"z_score_max":2.6056657754186894},"soziale_orientierung_sum_score":{"n":143,"min":16,"max":33,"mean":24.104895104895103,"variance":7.786199814171837,"standard_deviation":2.7903762854088043,"mean_1sd_min":21.3145188194863,"mean_1sd_plus":26.895271390303908,"z_score_min":-2.904588584441648,"z_score_max":3.1877797061344073},"offensivit__t_z_score":{"n":143,"min":-3.19,"max":2.24,"mean":0.11286713286713297,"variance":1.0462022690596116,"standard_deviation":1.0228402949921418,"mean_1sd_min":-0.9099731621250088,"mean_1sd_plus":1.1357074278592747,"z_score_min":-3.229113234038661,"z_score_max":2.079633426202875},"selbststeuerung_scale_score":{"n":143,"min":1,"max":3.88,"mean":2.6553146853146834,"variance":0.3180612646095163,"standard_deviation":0.5639692053734107,"mean_1sd_min":2.091345479941273,"mean_1sd_plus":3.219283890688094,"z_score_min":-2.935115374284807,"z_score_max":2.171546430224746},"offensivit__t_scale_score":{"n":143,"min":1.25,"max":3.63,"mean":2.6960139860139845,"variance":0.1998575382659297,"standard_deviation":0.44705429006545694,"mean_1sd_min":2.2489596959485274,"mean_1sd_plus":3.1430682760794415,"z_score_min":-3.234537769008461,"z_score_max":2.089200427646635},"selbststeuerung_z_score":{"n":143,"min":-3.39,"max":2.47,"mean":-0.020279720279720338,"variance":1.3222684532250963,"standard_deviation":1.1498993230822847,"mean_1sd_min":-1.170179043362005,"mean_1sd_plus":1.1296196028025645,"z_score_min":-2.9304480940886237,"z_score_max":2.165650218494407}}},{"statistics":{"reflexibilit__t_scale_score":{"n":296,"min":1.14,"max":3.86,"mean":2.7166554054054046,"variance":0.2281438812545652,"standard_deviation":0.4776440947552531,"mean_1sd_min":2.2390113106501515,"mean_1sd_plus":3.194299500160658,"z_score_min":-3.3009000272750986,"z_score_max":2.3937165918076513},"offensivit__t_sum_score":{"n":296,"min":11,"max":31,"mean":22.222972972972972,"variance":12.01785062089115,"standard_deviation":3.466677172869021,"mean_1sd_min":18.75629580010395,"mean_1sd_plus":25.689650145841995,"z_score_min":-3.237386238559053,"z_score_max":2.5318270462903136},"reflexibilit__t_z_score":{"n":296,"min":-4.17,"max":2.3,"mean":-0.4211486486486497,"variance":1.2993959779035784,"standard_deviation":1.1399105131121383,"mean_1sd_min":-1.561059161760788,"mean_1sd_plus":0.7187618644634886,"z_score_min":-3.2887242535524877,"z_score_max":2.387159884348709},"selbststeuerung_sum_score":{"n":296,"min":10,"max":32,"mean":22.37162162162162,"variance":15.030816289262226,"standard_deviation":3.8769596708325746,"mean_1sd_min":18.494661950789045,"mean_1sd_plus":26.248581292454197,"z_score_min":-3.191062758453926,"z_score_max":2.4834868546132416},"soziale_orientierung_z_score":{"n":296,"min":-5.1,"max":1.44,"mean":-1.265608108108107,"variance":0.6405334139883131,"standard_deviation":0.800333314306179,"mean_1sd_min":-2.0659414224142862,"mean_1sd_plus":-0.46527479380192793,"z_score_min":-4.790993731425493,"z_score_max":3.380601631526034},"soziale_orientierung_scale_score":{"n":296,"min":1,"max":3.5,"mean":2.4665540540540527,"variance":0.09344217951059174,"standard_deviation":0.3056831357968439,"mean_1sd_min":2.160870918257209,"mean_1sd_plus":2.7722371898508964,"z_score_min":-4.797628270303796,"z_score_max":3.3807751391060457},"reflexibilit__t_sum_score":{"n":296,"min":8,"max":27,"mean":19.01689189189189,"variance":11.172011961285603,"standard_deviation":3.3424559774641165,"mean_1sd_min":15.674435914427775,"mean_1sd_plus":22.359347869356007,"z_score_min":-3.296046968507954,"z_score_max":2.3883958867170487},"soziale_orientierung_sum_score":{"n":296,"min":10,"max":35,"mean":24.66554054054054,"variance":9.344217951059154,"standard_deviation":3.056831357968436,"mean_1sd_min":21.608709182572106,"mean_1sd_plus":27.722371898508975,"z_score_min":-4.797628270303806,"z_score_max":3.3807751391060448},"offensivit__t_z_score":{"n":296,"min":-2.9,"max":2.81,"mean":0.306385135135135,"variance":0.9807717300493061,"standard_deviation":0.9903391994914197,"mean_1sd_min":-0.6839540643562847,"mean_1sd_plus":1.2967243346265547,"z_score_min":-3.237663556871976,"z_score_max":2.528037733082337},"selbststeuerung_scale_score":{"n":296,"min":1.25,"max":4,"mean":2.7987837837837817,"variance":0.23475595325054763,"standard_deviation":0.4845162053539052,"mean_1sd_min":2.3142675784298765,"mean_1sd_plus":3.283299989137687,"z_score_min":-3.196557239303283,"z_score_max":2.4792075124480384},"offensivit__t_scale_score":{"n":296,"min":1.38,"max":3.88,"mean":2.780304054054052,"variance":0.18771713728086178,"standard_deviation":0.43326335787931775,"mean_1sd_min":2.347040696174734,"mean_1sd_plus":3.21356741193337,"z_score_min":-3.2319928020409616,"z_score_max":2.5381697435218142},"selbststeuerung_z_score":{"n":296,"min":-2.88,"max":2.73,"mean":0.2724324324324328,"variance":0.9776028670562471,"standard_deviation":0.9887380174021059,"mean_1sd_min":-0.7163055849696731,"mean_1sd_plus":1.2611704498345386,"z_score_min":-3.1883394559009686,"z_score_max":2.485559899906336}}},{"statistics":{"reflexibilit__t_scale_score":{"n":439,"min":1.14,"max":3.86,"mean":2.728223234624144,"variance":0.2127312394601524,"standard_deviation":0.4612279690783641,"mean_1sd_min":2.2669952655457797,"mean_1sd_plus":3.1894512037025082,"z_score_min":-3.443466877773624,"z_score_max":2.453833768228317},"offensivit__t_sum_score":{"n":439,"min":10,"max":31,"mean":22.002277904328018,"variance":12.37584902527488,"standard_deviation":3.5179324929956914,"mean_1sd_min":18.484345411332328,"mean_1sd_plus":25.52021039732371,"z_score_min":-3.4117419615711535,"z_score_max":2.5576733247686576},"reflexibilit__t_z_score":{"n":439,"min":-4.17,"max":2.3,"mean":-0.39353075170843005,"variance":1.211874321947269,"standard_deviation":1.1008516348478885,"mean_1sd_min":-1.4943823865563186,"mean_1sd_plus":0.7073208831394584,"z_score_min":-3.430497924285127,"z_score_max":2.446769997376269},"selbststeuerung_sum_score":{"n":439,"min":8,"max":32,"mean":21.997722095671982,"variance":17.050108706368288,"standard_deviation":4.1291777276315305,"mean_1sd_min":17.868544368040453,"mean_1sd_plus":26.12689982330351,"z_score_min":-3.389953888882614,"z_score_max":2.422341338662906},"soziale_orientierung_z_score":{"n":439,"min":-5.1,"max":1.44,"mean":-1.3134624145785854,"variance":0.6106572599768579,"standard_deviation":0.7814456218937169,"mean_1sd_min":-2.0949080364723023,"mean_1sd_plus":-0.5320167926848685,"z_score_min":-4.845554801683201,"z_score_max":3.5235496078485666},"soziale_orientierung_scale_score":{"n":439,"min":1,"max":3.5,"mean":2.448291571753985,"variance":0.08905744573762078,"standard_deviation":0.29842494154748656,"mean_1sd_min":2.1498666302064984,"mean_1sd_plus":2.7467165133014713,"z_score_min":-4.853118389648833,"z_score_max":3.524197484273154},"reflexibilit__t_sum_score":{"n":439,"min":8,"max":27,"mean":19.097949886104782,"variance":10.416373929151474,"standard_deviation":3.227440770820043,"mean_1sd_min":15.87050911528474,"mean_1sd_plus":22.325390656924824,"z_score_min":-3.438622324673975,"z_score_max":2.4483950829831738},"soziale_orientierung_sum_score":{"n":439,"min":10,"max":35,"mean":24.482915717539864,"variance":8.905744573762071,"standard_deviation":2.9842494154748644,"mean_1sd_min":21.498666302065,"mean_1sd_plus":27.467165133014728,"z_score_min":-4.85311838964884,"z_score_max":3.52419748427315},"offensivit__t_z_score":{"n":439,"min":-3.19,"max":2.81,"mean":0.24334851936218646,"variance":1.010310199718765,"standard_deviation":1.0051418803923975,"mean_1sd_min":-0.761793361030211,"mean_1sd_plus":1.248490399754584,"z_score_min":-3.4157849616432663,"z_score_max":2.553521578103798},"selbststeuerung_scale_score":{"n":439,"min":1,"max":4,"mean":2.752050113895223,"variance":0.26641265352504334,"standard_deviation":0.5161517737304051,"mean_1sd_min":2.235898340164818,"mean_1sd_plus":3.2682018876256285,"z_score_min":-3.3944475308736397,"z_score_max":2.4177963723449345},"offensivit__t_scale_score":{"n":439,"min":1.25,"max":3.88,"mean":2.752847380410029,"variance":0.19323221133140614,"standard_deviation":0.43958185964778634,"mean_1sd_min":2.3132655207622426,"mean_1sd_plus":3.192429240057815,"z_score_min":-3.4188111893747863,"z_score_max":2.564147256879751},"selbststeuerung_z_score":{"n":439,"min":-3.39,"max":2.73,"mean":0.17708428246013708,"variance":1.1086926375433925,"standard_deviation":1.052944745721917,"mean_1sd_min":-0.8758604632617799,"mean_1sd_plus":1.230029028182054,"z_score_min":-3.387722192406671,"z_score_max":2.4245486079989313}}}],[{"statistics":{"reflexibilit__t_scale_score":{"n":46,"min":1.43,"max":3.71,"mean":2.57391304347826,"variance":0.21045425330812864,"standard_deviation":0.45875293275152873,"mean_1sd_min":2.1151601107267313,"mean_1sd_plus":3.032665976229789,"z_score_min":-2.4935274781073287,"z_score_max":2.476467997071249},"offensivit__t_sum_score":{"n":46,"min":11,"max":29,"mean":21.391304347826086,"variance":13.75992438563327,"standard_deviation":3.709437206050706,"mean_1sd_min":17.68186714177538,"mean_1sd_plus":25.10074155387679,"z_score_min":-2.801315609515144,"z_score_max":2.051172517427407},"reflexibilit__t_z_score":{"n":46,"min":-3.49,"max":1.96,"mean":-0.7604347826086955,"variance":1.1945128544423438,"standard_deviation":1.0929377175495152,"mean_1sd_min":-1.8533725001582106,"mean_1sd_plus":0.3325029349408197,"z_score_min":-2.497457241672733,"z_score_max":2.48910321139635},"selbststeuerung_sum_score":{"n":46,"min":14,"max":29,"mean":21.67391304347826,"variance":12.871928166351601,"standard_deviation":3.5877469484833515,"mean_1sd_min":18.08616609499491,"mean_1sd_plus":25.261659991961615,"z_score_min":-2.138922603424485,"z_score_max":2.041974270124791},"soziale_orientierung_z_score":{"n":46,"min":-3.27,"max":1.44,"mean":-1.6621739130434785,"variance":0.7690083175803406,"standard_deviation":0.8769311931846994,"mean_1sd_min":-2.539105106228178,"mean_1sd_plus":-0.7852427198587791,"z_score_min":-1.8334689191719526,"z_score_max":3.537534001701429},"soziale_orientierung_scale_score":{"n":46,"min":1.7,"max":3.5,"mean":2.3152173913043486,"variance":0.11215973534971649,"standard_deviation":0.3349025759078549,"mean_1sd_min":1.9803148153964938,"mean_1sd_plus":2.6501199672122033,"z_score_min":-1.8370040589763024,"z_score_max":3.5376933291239676},"reflexibilit__t_sum_score":{"n":46,"min":10,"max":26,"mean":18.02173913043478,"variance":10.282136105860124,"standard_deviation":3.2065770076298064,"mean_1sd_min":14.815162122804974,"mean_1sd_plus":21.22831613806459,"z_score_min":-2.5016517960889955,"z_score_max":2.4880927077633106},"soziale_orientierung_sum_score":{"n":46,"min":17,"max":35,"mean":23.152173913043477,"variance":11.215973534971647,"standard_deviation":3.3490257590785486,"mean_1sd_min":19.803148153964926,"mean_1sd_plus":26.501199672122027,"z_score_min":-1.8370040589762997,"z_score_max":3.5376933291239707},"offensivit__t_z_score":{"n":46,"min":-2.9,"max":2.24,"mean":0.06891304347826085,"variance":1.1199749054820416,"standard_deviation":1.0582886683141048,"mean_1sd_min":-0.989375624835844,"mean_1sd_plus":1.1272017117923656,"z_score_min":-2.805390563434696,"z_score_max":2.0515073264276427},"selbststeuerung_scale_score":{"n":46,"min":1.75,"max":3.63,"mean":2.711956521739129,"variance":0.20143312854442352,"standard_deviation":0.4488130218079947,"mean_1sd_min":2.263143499931134,"mean_1sd_plus":3.160769543547124,"z_score_min":-2.143334696181477,"z_score_max":2.045492072762577},"offensivit__t_scale_score":{"n":46,"min":1.38,"max":3.63,"mean":2.6767391304347816,"variance":0.215000236294896,"standard_deviation":0.4636811795780545,"mean_1sd_min":2.213057950856727,"mean_1sd_plus":3.140420310012836,"z_score_min":-2.7966179943184284,"z_score_max":2.0558541332919242},"selbststeuerung_z_score":{"n":46,"min":-1.86,"max":1.96,"mean":0.09413043478260862,"variance":0.8363851134215501,"standard_deviation":0.9145409304244125,"mean_1sd_min":-0.8204104956418039,"mean_1sd_plus":1.0086713652070212,"z_score_min":-2.1367337095298207,"z_score_max":2.0402253230497776}}},{"statistics":{"reflexibilit__t_scale_score":{"n":83,"min":1.71,"max":3.86,"mean":2.780240963855419,"variance":0.17725536362316752,"standard_deviation":0.42101705858927796,"mean_1sd_min":2.3592239052661412,"mean_1sd_plus":3.201258022444697,"z_score_min":-2.542037055319152,"z_score_max":2.5646443870055555},"offensivit__t_sum_score":{"n":83,"min":9,"max":30,"mean":21.566265060240966,"variance":14.414283640586456,"standard_deviation":3.7966147606237923,"mean_1sd_min":17.769650299617172,"mean_1sd_plus":25.36287982086476,"z_score_min":-3.3098604553115893,"z_score_max":2.2213828559138173},"reflexibilit__t_z_score":{"n":83,"min":-2.81,"max":2.3,"mean":-0.2659036144578309,"variance":1.0145808099869347,"standard_deviation":1.0072640219857625,"mean_1sd_min":-1.2731676364435933,"mean_1sd_plus":0.7413604075279316,"z_score_min":-2.5257492871895004,"z_score_max":2.5473992502971576},"selbststeuerung_sum_score":{"n":83,"min":12,"max":30,"mean":21.518072289156628,"variance":16.177384235738117,"standard_deviation":4.022111912383607,"mean_1sd_min":17.49596037677302,"mean_1sd_plus":25.540184201540235,"z_score_min":-2.3664364633543906,"z_score_max":2.108824392660115},"soziale_orientierung_z_score":{"n":83,"min":-3.01,"max":0.92,"mean":-1.2442168674698795,"variance":0.5106508927275369,"standard_deviation":0.7145984136055278,"mean_1sd_min":-1.9588152810754074,"mean_1sd_plus":-0.5296184538643517,"z_score_min":-2.471014627111763,"z_score_max":3.0285777665671807},"soziale_orientierung_scale_score":{"n":83,"min":1.8,"max":3.3,"mean":2.474698795180725,"variance":0.0744200899985484,"standard_deviation":0.27280045820809834,"mean_1sd_min":2.2018983369726266,"mean_1sd_plus":2.747499253388823,"z_score_min":-2.4732318985551314,"z_score_max":3.025292590196885},"reflexibilit__t_sum_score":{"n":83,"min":12,"max":27,"mean":19.46987951807229,"variance":8.706924081869644,"standard_deviation":2.9507497491094776,"mean_1sd_min":16.519129768962813,"mean_1sd_plus":22.420629267181766,"z_score_min":-2.5315191572333995,"z_score_max":2.551934634307862},"soziale_orientierung_sum_score":{"n":83,"min":18,"max":33,"mean":24.746987951807228,"variance":7.442008999854847,"standard_deviation":2.7280045820809846,"mean_1sd_min":22.018983369726243,"mean_1sd_plus":27.474992533888212,"z_score_min":-2.4732318985551225,"z_score_max":3.025292590196892},"offensivit__t_z_score":{"n":83,"min":-3.47,"max":2.53,"mean":0.11831325301204824,"variance":1.175136913920744,"standard_deviation":1.0840373212766912,"mean_1sd_min":-0.965724068264643,"mean_1sd_plus":1.2023505742887395,"z_score_min":-3.310138112944326,"z_score_max":2.224726676520383},"selbststeuerung_scale_score":{"n":83,"min":1.5,"max":3.75,"mean":2.691807228915662,"variance":0.2527232399477427,"standard_deviation":0.5027158640303115,"mean_1sd_min":2.1890913648853503,"mean_1sd_plus":3.1945230929459734,"z_score_min":-2.3707372577440706,"z_score_max":2.1049520152412255},"offensivit__t_scale_score":{"n":83,"min":1.13,"max":3.75,"mean":2.697710843373493,"variance":0.22474536217157778,"standard_deviation":0.47407316120149406,"mean_1sd_min":2.223637682171999,"mean_1sd_plus":3.171784004574987,"z_score_min":-3.306896427969634,"z_score_max":2.21967671394765},"selbststeuerung_z_score":{"n":83,"min":-2.37,"max":2.22,"mean":0.0550602409638554,"variance":1.052051502395123,"standard_deviation":1.0256956187851847,"mean_1sd_min":-0.9706353778213292,"mean_1sd_plus":1.08075585974904,"z_score_min":-2.3643078868134904,"z_score_max":2.1107039158461656}}},{"statistics":{"reflexibilit__t_scale_score":{"n":129,"min":1.43,"max":3.86,"mean":2.7066666666666648,"variance":0.1988609819121445,"standard_deviation":0.4459383162637457,"mean_1sd_min":2.260728350402919,"mean_1sd_plus":3.1526049829304106,"z_score_min":-2.8628772637505167,"z_score_max":2.5863068753464273},"offensivit__t_sum_score":{"n":129,"min":9,"max":30,"mean":21.503875968992247,"variance":14.187969472988408,"standard_deviation":3.766692112847612,"mean_1sd_min":17.737183856144636,"mean_1sd_plus":25.27056808183986,"z_score_min":-3.3195906632090884,"z_score_max":2.255592911889127},"reflexibilit__t_z_score":{"n":129,"min":-3.49,"max":2.3,"mean":-0.44224806201550393,"variance":1.134853085752058,"standard_deviation":1.0652948351287816,"mean_1sd_min":-1.5075428971442855,"mean_1sd_plus":0.6230467731132777,"z_score_min":-2.8609468829500697,"z_score_max":2.5741681754084524},"selbststeuerung_sum_score":{"n":129,"min":12,"max":30,"mean":21.573643410852714,"variance":15.00426657051858,"standard_deviation":3.873534118930486,"mean_1sd_min":17.700109291922228,"mean_1sd_plus":25.4471775297832,"z_score_min":-2.4715526227237863,"z_score_max":2.17536655943381},"soziale_orientierung_z_score":{"n":129,"min":-3.27,"max":1.44,"mean":-1.3932558139534883,"variance":0.6428576167297643,"standard_deviation":0.8017840212487177,"mean_1sd_min":-2.195039835202206,"mean_1sd_plus":-0.5914717927047706,"z_score_min":-2.340710386225489,"z_score_max":3.533689545896546},"soziale_orientierung_scale_score":{"n":129,"min":1.7,"max":3.5,"mean":2.417829457364338,"variance":0.0937131182020311,"standard_deviation":0.306125984199367,"mean_1sd_min":2.111703473164971,"mean_1sd_plus":2.7239554415637053,"z_score_min":-2.344882481118774,"z_score_max":3.5350496151639637},"reflexibilit__t_sum_score":{"n":129,"min":10,"max":27,"mean":18.953488372093023,"variance":9.749774652965574,"standard_deviation":3.1224629145861083,"mean_1sd_min":15.831025457506914,"mean_1sd_plus":22.075951286679132,"z_score_min":-2.8674442633948254,"z_score_max":2.5769758834665186},"soziale_orientierung_sum_score":{"n":129,"min":17,"max":35,"mean":24.17829457364341,"variance":9.371311820203095,"standard_deviation":3.061259841993668,"mean_1sd_min":21.117034731649742,"mean_1sd_plus":27.239554415637077,"z_score_min":-2.344882481118784,"z_score_max":3.5350496151639565},"offensivit__t_z_score":{"n":129,"min":-3.47,"max":2.53,"mean":0.10069767441860468,"variance":1.1560266450333523,"standard_deviation":1.0751867954143375,"mean_1sd_min":-0.9744891209957328,"mean_1sd_plus":1.1758844698329423,"z_score_min":-3.3210021641333394,"z_score_max":2.259423512214202},"selbststeuerung_scale_score":{"n":129,"min":1.5,"max":3.75,"mean":2.698992248062014,"variance":0.23452689141277538,"standard_deviation":0.48427976564458625,"mean_1sd_min":2.214712482417428,"mean_1sd_plus":3.1832720137066004,"z_score_min":-2.475825613870385,"z_score_max":2.170249154513142},"offensivit__t_scale_score":{"n":129,"min":1.13,"max":3.75,"mean":2.6902325581395337,"variance":0.22137126374616928,"standard_deviation":0.4705010773060666,"mean_1sd_min":2.219731480833467,"mean_1sd_plus":3.1607336354456,"z_score_min":-3.316108364879649,"z_score_max":2.2524229868470096},"selbststeuerung_z_score":{"n":129,"min":-2.37,"max":2.22,"mean":0.06899224806201541,"variance":0.9754974340484344,"standard_deviation":0.9876727363091655,"mean_1sd_min":-0.9186804882471501,"mean_1sd_plus":1.0566649843711808,"z_score_min":-2.469433607306289,"z_score_max":2.1778547416182468}}}],[{"statistics":{"reflexibilit__t_scale_score":{"n":362,"min":1.43,"max":4,"mean":2.725911602209945,"variance":0.22357997008638342,"standard_deviation":0.47284243685014504,"mean_1sd_min":2.2530691653598,"mean_1sd_plus":3.19875403906009,"z_score_min":-2.7406837906569925,"z_score_max":2.694530563452459},"offensivit__t_sum_score":{"n":362,"min":10,"max":29,"mean":20.831491712707184,"variance":13.67602484661639,"standard_deviation":3.69811098354503,"mean_1sd_min":17.133380729162155,"mean_1sd_plus":24.529602696252212,"z_score_min":-2.928925540878185,"z_score_max":2.208832650950469},"reflexibilit__t_z_score":{"n":362,"min":-3.49,"max":2.64,"mean":-0.39864640883977986,"variance":1.2739172285644504,"standard_deviation":1.1286794179768012,"mean_1sd_min":-1.527325826816581,"mean_1sd_plus":0.7300330091370213,"z_score_min":-2.738911990352038,"z_score_max":2.6922138921312695},"selbststeuerung_sum_score":{"n":362,"min":8,"max":31,"mean":20.54696132596685,"variance":20.308568114526434,"standard_deviation":4.506502869690247,"mean_1sd_min":16.040458456276603,"mean_1sd_plus":25.0534641956571,"z_score_min":-2.784190244358873,"z_score_max":2.3195455492412975},"soziale_orientierung_z_score":{"n":362,"min":-4.06,"max":1.44,"mean":-1.407486187845302,"variance":0.6139630177650254,"standard_deviation":0.7835579224058841,"mean_1sd_min":-2.191044110251186,"mean_1sd_plus":-0.6239282654394179,"z_score_min":-3.3852172715072006,"z_score_max":3.6340468348558157},"soziale_orientierung_scale_score":{"n":362,"min":1.4,"max":3.5,"mean":2.4124309392265184,"variance":0.08948635572784706,"standard_deviation":0.29914270127791365,"mean_1sd_min":2.1132882379486047,"mean_1sd_plus":2.711573640504432,"z_score_min":-3.3844413883457447,"z_score_max":3.6356195759664995},"reflexibilit__t_sum_score":{"n":362,"min":10,"max":28,"mean":19.082872928176794,"variance":10.948933182747767,"standard_deviation":3.30891722210571,"mean_1sd_min":15.773955706071085,"mean_1sd_plus":22.391790150282503,"z_score_min":-2.744968313953979,"z_score_max":2.694877651290586},"soziale_orientierung_sum_score":{"n":362,"min":14,"max":35,"mean":24.124309392265193,"variance":8.948635572784726,"standard_deviation":2.9914270127791394,"mean_1sd_min":21.132882379486055,"mean_1sd_plus":27.11573640504433,"z_score_min":-3.3844413883457443,"z_score_max":3.635619575966493},"offensivit__t_z_score":{"n":362,"min":-3.19,"max":2.24,"mean":-0.09104972375690597,"variance":1.1163933732181568,"standard_deviation":1.0565951794410937,"mean_1sd_min":-1.1476449031979996,"mean_1sd_plus":0.9655454556841877,"z_score_min":-2.932958938807901,"z_score_max":2.206190004567274},"selbststeuerung_scale_score":{"n":362,"min":1,"max":3.88,"mean":2.570801104972374,"variance":0.31739576707060224,"standard_deviation":0.5633788841184965,"mean_1sd_min":2.0074222208538774,"mean_1sd_plus":3.13417998909087,"z_score_min":-2.7881788779325007,"z_score_max":2.3238338033845443},"offensivit__t_scale_score":{"n":362,"min":1.25,"max":3.63,"mean":2.6066574585635336,"variance":0.21374656222337526,"standard_deviation":0.46232733233432705,"mean_1sd_min":2.1443301262292067,"mean_1sd_plus":3.0689847908978605,"z_score_min":-2.9344089429315448,"z_score_max":2.213458884789548},"selbststeuerung_z_score":{"n":362,"min":-3.39,"max":2.47,"mean":-0.19295580110497235,"variance":1.3204318709746354,"standard_deviation":1.149100461654522,"mean_1sd_min":-1.3420562627594943,"mean_1sd_plus":0.9561446605495496,"z_score_min":-2.782214702352301,"z_score_max":2.3174264478762283}}},{"statistics":{"reflexibilit__t_scale_score":{"n":754,"min":1.14,"max":4,"mean":2.72484084880637,"variance":0.22421065106347018,"standard_deviation":0.47350887115604307,"mean_1sd_min":2.251331977650327,"mean_1sd_plus":3.198349719962413,"z_score_min":-3.347014058970168,"z_score_max":2.692999495617488},"offensivit__t_sum_score":{"n":754,"min":null,"max":32,"mean":21.591511936339522,"variance":14.562580472669188,"standard_deviation":3.81609492448356,"mean_1sd_min":17.77541701185596,"mean_1sd_plus":25.407606860823083,"z_score_min":-5.658012277894672,"z_score_max":2.727523363447014},"reflexibilit__t_z_score":{"n":754,"min":-4.17,"max":2.64,"mean":-0.4009416445623355,"variance":1.2783557446052531,"standard_deviation":1.1306439512973363,"mean_1sd_min":-1.5315855958596718,"mean_1sd_plus":0.7297023067350008,"z_score_min":-3.333550187141521,"z_score_max":2.68956610175384},"selbststeuerung_sum_score":{"n":754,"min":8,"max":32,"mean":21.652519893899203,"variance":16.98535837162021,"standard_deviation":4.12132968489785,"mean_1sd_min":17.531190209001352,"mean_1sd_plus":25.773849578797055,"z_score_min":-3.312649299551873,"z_score_max":2.510713992141414},"soziale_orientierung_z_score":{"n":754,"min":-5.1,"max":1.96,"mean":-1.2629177718832902,"variance":0.715749311540926,"standard_deviation":0.8460196874428668,"mean_1sd_min":-2.108937459326157,"mean_1sd_plus":-0.4168980844404234,"z_score_min":-4.535452643796583,"z_score_max":3.8095068232096425},"soziale_orientierung_scale_score":{"n":754,"min":1,"max":3.7,"mean":2.4676392572944317,"variance":0.10439044811403744,"standard_deviation":0.32309510691751037,"mean_1sd_min":2.1445441503769214,"mean_1sd_plus":2.790734364211942,"z_score_min":-4.5424372758115945,"z_score_max":3.814235240090477},"reflexibilit__t_sum_score":{"n":754,"min":8,"max":28,"mean":19.075596816976127,"variance":10.987653821528344,"standard_deviation":3.3147630113672295,"mean_1sd_min":15.760833805608897,"mean_1sd_plus":22.390359828343357,"z_score_min":-3.341293715114738,"z_score_max":2.6923201304043918},"soziale_orientierung_sum_score":{"n":754,"min":10,"max":37,"mean":24.676392572944298,"variance":10.439044811403722,"standard_deviation":3.2309510691751,"mean_1sd_min":21.4454415037692,"mean_1sd_plus":27.907343642119397,"z_score_min":-4.542437275811594,"z_score_max":3.8142352400904866},"offensivit__t_z_score":{"n":754,"min":-3.76,"max":3.1,"mean":0.13393899204243975,"variance":1.1378854127236515,"standard_deviation":1.066717119354354,"mean_1sd_min":-0.9327781273119143,"mean_1sd_plus":1.200656111396794,"z_score_min":-3.650395143559056,"z_score_max":2.7805506765962575},"selbststeuerung_scale_score":{"n":754,"min":1,"max":4,"mean":2.7088594164456468,"variance":0.2653729696261844,"standard_deviation":0.5151436397997984,"mean_1sd_min":2.193715776645848,"mean_1sd_plus":3.2240030562454454,"z_score_min":-3.317248403008072,"z_score_max":2.5063700370175055},"offensivit__t_scale_score":{"n":754,"min":null,"max":4,"mean":2.7012864721485648,"variance":0.22757407443238212,"standard_deviation":0.4770472454929198,"mean_1sd_min":2.2242392266556448,"mean_1sd_plus":3.1783337176414848,"z_score_min":-5.662513509238272,"z_score_max":2.7224002237126643},"selbststeuerung_z_score":{"n":754,"min":-3.39,"max":2.73,"mean":0.0890981432360743,"variance":1.1045392397047802,"standard_deviation":1.050970617907456,"mean_1sd_min":-0.9618724746713817,"mean_1sd_plus":1.1400687611435303,"z_score_min":-3.310366706695533,"z_score_max":2.5128217780456277}}},{"statistics":{"reflexibilit__t_scale_score":{"n":1116,"min":1.14,"max":4,"mean":2.7251881720430116,"variance":0.2240063265984523,"standard_deviation":0.47329306629027673,"mean_1sd_min":2.2518951057527348,"mean_1sd_plus":3.1984812383332883,"z_score_min":-3.349274022685123,"z_score_max":2.693493564038671},"offensivit__t_sum_score":{"n":1116,"min":null,"max":32,"mean":21.344982078853047,"variance":14.401596684266709,"standard_deviation":3.7949435679950114,"mean_1sd_min":17.550038510858034,"mean_1sd_plus":25.13992564684806,"z_score_min":-5.624584844651662,"z_score_max":2.8076881066182326},"reflexibilit__t_z_score":{"n":1116,"min":-4.17,"max":2.64,"mean":-0.40019713261648854,"variance":1.2769171654398122,"standard_deviation":1.1300075953018245,"mean_1sd_min":-1.530204727918313,"mean_1sd_plus":0.7298104626853359,"z_score_min":-3.336086308673526,"z_score_max":2.690421856681816},"selbststeuerung_sum_score":{"n":1116,"min":8,"max":32,"mean":21.293906810035843,"variance":18.33118151102886,"standard_deviation":4.281492906805856,"mean_1sd_min":17.012413903229987,"mean_1sd_plus":25.575399716841698,"z_score_min":-3.1049699484270694,"z_score_max":2.5005514251689553},"soziale_orientierung_z_score":{"n":1116,"min":-5.1,"max":1.96,"mean":-1.309811827957003,"variance":0.6873129574228246,"standard_deviation":0.8290433989984026,"mean_1sd_min":-2.1388552269554055,"mean_1sd_plus":-0.4807684289586004,"z_score_min":-4.571760871170388,"z_score_max":3.944077996287506},"soziale_orientierung_scale_score":{"n":1116,"min":1,"max":3.7,"mean":2.4497311827957025,"variance":0.1002239420742286,"standard_deviation":0.31658165151225776,"mean_1sd_min":2.1331495312834448,"mean_1sd_plus":2.76631283430796,"z_score_min":-4.579327879144538,"z_score_max":3.949277575728006},"reflexibilit__t_sum_score":{"n":1116,"min":8,"max":28,"mean":19.077956989247312,"variance":10.97510550352642,"standard_deviation":3.3128696780172957,"mean_1sd_min":15.765087311230015,"mean_1sd_plus":22.39082666726461,"z_score_min":-3.3439157183742005,"z_score_max":2.6931463890521647},"soziale_orientierung_sum_score":{"n":1116,"min":10,"max":37,"mean":24.497311827956988,"variance":10.022394207422751,"standard_deviation":3.16581651512256,"mean_1sd_min":21.331495312834427,"mean_1sd_plus":27.66312834307955,"z_score_min":-4.579327879144551,"z_score_max":3.9492775757280385},"offensivit__t_z_score":{"n":1116,"min":-3.76,"max":3.1,"mean":0.060958781362007386,"variance":1.142007593283112,"standard_deviation":1.0686475533510158,"mean_1sd_min":-1.0076887719890084,"mean_1sd_plus":1.1296063347130232,"z_score_min":-3.5755088470285834,"z_score_max":2.8438199377412197},"selbststeuerung_scale_score":{"n":1116,"min":1,"max":4,"mean":2.6640770609319318,"variance":0.2864248650293542,"standard_deviation":0.5351867571505803,"mean_1sd_min":2.1288903037813514,"mean_1sd_plus":3.199263818082512,"z_score_min":-3.1093390086700645,"z_score_max":2.496180858772992},"offensivit__t_scale_score":{"n":1116,"min":null,"max":4,"mean":2.670591397849496,"variance":0.22505126315180968,"standard_deviation":0.4743956820543476,"mean_1sd_min":2.1961957157951484,"mean_1sd_plus":3.1449870799038435,"z_score_min":-5.62945975031777,"z_score_max":2.8023201990236593},"selbststeuerung_z_score":{"n":1116,"min":-3.39,"max":2.73,"mean":-0.0023924731182795866,"variance":1.1920036846745308,"standard_deviation":1.0917892125655624,"mean_1sd_min":-1.094181685683842,"mean_1sd_plus":1.0893967394472828,"z_score_min":-3.102803625363988,"z_score_max":2.502673997572767}}}]],"id":0};
+            d.clinic_sample_dive = {
+                "defined": false,
+                "array": null
+            };
+
+            // Set & Log
+            d.init_done = true;
+            console.log('(INIT) ' + d.name, d);
+            this.set('_d', d);
+            this._d = d;
+        },
+
+        _srChanged: function() {
+            this.debounce('_srChanged', function() {
+
+                if ((this._sr !== undefined) && (this._sr !== null)) {
+                    if ((this._sr.data !== undefined) && (this._sr.data !== null)) {
+                        if (this._sr.have_data === true) {
+
+                            // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
+                            var latest_sr = this._sr.data[this._sr.data.length - 1];
+
+                            var clinic_sample_dive = {
+                                "defined": false,
+                                "array": []
+                            };
+
+                            // ---- Gewünschte Klinikstichprobe schreiben ----
+
+
+                            // Messzeitpunkt
+                            var mz = latest_sr.calculation.scores_calculation.info.mz.mz_id - 1;
+                            if ((mz === 0) || (mz === 1) || (mz === 2)) {
+                                clinic_sample_dive.array.push(mz);
+                            } else {
+                                clinic_sample_dive.array.push(3);
+                            };
+
+                            // Geschlecht
+                            if (latest_sr.patient.gender === "female") {
+                                clinic_sample_dive.array.push(0);
+                            } else {
+                                clinic_sample_dive.array.push(1);
+                            };
+
+
+                            // ---- Set ----
+                            clinic_sample_dive.defined = true;
+                            this.set('_d.clinic_sample_dive', clinic_sample_dive);
+                            this._d.clinic_sample_dive = clinic_sample_dive;
+
+                            console.log('(Response | Ready) ' + this._d.name + ': ', latest_sr, this._d);
+
+
+                        } else {
+                            // Build PDF even with no Data.
+                            this._buildPDF();
+                        };
+                    };
+                };
+
+            }, 250);
+        },
+
+        _buildPDF: function() {
+            var jobs_count = 0;
+            var jobs_total = 2;
+            var jobs_done = {};
+            var build_full = true;
+            var loading_string = jobs_count + "/" + jobs_total;
+
+
+
+            this.set('_d.loading_string', loading_string);
+
+
+            // ------------------------------
+            // Create PDF
+            // ------------------------------
+
+            var do_build = function() {
+
+                this._pdf_content = null;
+                var _pdf_content = [];
+                var d = this.get('_d');
+
+
+                // --------------------------
+                // Build PDF
+                // --------------------------
+                if (build_full) {
+                    var titel_beschreibung = [];
+                    titel_beschreibung.push(this._horizontalLine(100, "#E0E0E0"));
+                    titel_beschreibung.push(this._heading(d.name, d.title, 'h1'));
+                    titel_beschreibung.push(this._pdf_app_info);
+                    _pdf_content.push(this._keepTogether(titel_beschreibung, "app_beschreibung_" + d.name));
+
+                    var chart = [];
+                    chart.push(this._horizontalLine(100, "#F5F5F5"));
+                    chart.push(this._pdf_chart);
+                    chart.push(this._horizontalLine(100, "#F5F5F5"));
+                    _pdf_content.push(this._keepTogether(chart, "chart_" + d.name));
+
+                } else {
+
+                    var titel_beschreibung = [];
+                    titel_beschreibung.push(this._horizontalLine(100, "#E0E0E0"));
+                    titel_beschreibung.push(this._heading(d.name, d.title, 'h1'));
+                    titel_beschreibung.push(this._pdf_app_info);
+                    _pdf_content.push(this._keepTogether(titel_beschreibung, "app_beschreibung_" + d.name));
+
+                    _pdf_content.push(this._noData(d.name, 24));
+
+                };
+
+
+                // --------------------------
+                // Store
+                // --------------------------
+                this.fire('pdfready', _pdf_content);
+                this._pdf_content = _pdf_content;
+                this.set('_pdf_ready', true);
+
+                console.log('(PDF | Ready) ' + d.name + ': ', this._pdf_content);
+
+            }.bind(this);
+
+
+            // ------------------------------
+            // Check if all content is ready
+            // ------------------------------
+
+            var countProperties = function(obj) {
+                var count = 0;
+
+                for (var prop in obj) {
+                    if (obj.hasOwnProperty(prop))
+                        ++count;
+                }
+
+                return count;
+            }
+
+            var check = function() {
+                if (this._pdf_ready !== true) {
+                    jobs_count = countProperties(jobs_done);
+                    loading_string = jobs_count + "/" + jobs_total;
+                    this.set('_d.loading_string', loading_string);
+
+                    if (jobs_count >= jobs_total) {
+                        do_build();
+                    };
+                };
+            }.bind(this);
+
+
+            //  Jobs Done?
+            //  Check incoming Data
+
+            if ((this._pdf_chart !== undefined) && (this._pdf_chart !== null)) {
+                jobs_done._pdf_chart = true;
+                check();
+            };
+
+            if ((this._pdf_app_info !== undefined) && (this._pdf_app_info !== null)) {
+                jobs_done._pdf_app_info = true;
+                check();
+            };
+
+            //  Check "No Data"
+
+            if ((this._sr !== undefined) && (this._sr !== null)) {
+                if ((this._sr.data !== undefined) && (this._sr.data !== null)) {
+                    if (this._sr.have_data === false) {
+                        // Confirm all "jobs" with "false"
+                        jobs_done._pdf_chart = false;
+
+                        build_full = false;
+                        check();
+                    };
+                };
+            };
+        },
+
+
+        // -----------------------------
+        // Event Handler
+        // -----------------------------
+
+        _event_pdf_app_info: function(e) {
+            this.set('_pdf_app_info', e.detail);
+            // console.log('(event) _pdf_app_info ==> ', e.detail);
+        },
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
+
+        _loadData: function() {
+            if ((this.appId !== null) && (this.appId !== undefined)) {
+                this.dispatch('actionGetSurveyResponses', this.appId);
+            };
+        },
+
+        ready: function() {
+            this._init();
+        }
+    });
+    </script>
+</dom-module>
+
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-chart-profile/optinomic-chart-profile.html">
+<link rel="import" href="optinomic-pdfmake/optinomic-pdfmake.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-app-info.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="iron-collapse/iron-collapse.html">
+<dom-module id="optinomic-template">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+            padding: 6px;
+        }
+
+        vaadin-grid {
+            height: auto;
+        }
+
+        .full_grid {
+            height: 100%;
+            border-left-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+        }
+
+        .readme_container {
+            background-color: #FAFAFA;
+            border-style: solid;
+            border-color: #EEEEEE;
+            border-width: 1px;
+            border-radius: 3px;
+            padding: 24px;
+        }
+
+        .content_block {
+            margin-bottom: 48px;
+        }
+
+        .scroll_top {
+            text-align: right;
+            cursor: pointer;
+            margin-top: 24px;
+            margin-bottom: 0px !important;
+            padding-bottom: 0px !important;
+        }
+        </style>
+        <template is="dom-if" if="[[_d.init_done]]">
+            <div id="main_content">
+                <div id="content_bdi" class="content_block">
+                    <element-isk app-id="[[_d.app_id]]"></element-isk>
+                </div>
+            </div>
+        </template>
+        <template is="dom-if" if="[[!_d.init_done]]">
+            <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
+        </template>
+    </template>
+    <script>
+    Polymer({
+        is: 'optinomic-template',
+
+        properties: {},
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicApp],
+
+
+        // -----------------------------
+        // Functions
+        // -----------------------------
+
+        _init: function() {
+
+            var d = {};
+
+            d.app_id = "ch.suedhang.apps.isk.production";
+
+            d.init_done = true;
+            this.set('_d', d);
+            this._d = d;
+            console.log('INIT _d', this._d);
+        },
+
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
+
+        _loadData: function() {
+            this.dispatch('actionGetCurrentPatient');
+            this.dispatch('actionGetCurrentPatientStays');
+        },
+
+        ready: function() {
+            this._loadData();
+            this._init();
+        }
+    });
+    </script>
+</dom-module>
+
+[readme]
+## ISK-K (Inventar Sozialer Kompetenzen - Kurzversion)
+
+### Zusammenfassung
+Das Inventar Sozialer Kompetenzen (Kurzversion) erfasst in 33 Aussagen persönliche Verhaltensweisen und Gewohnheiten zu den vier Bereichen: Soziale Orientierung, Offensivität, Selbststeuerung und Reflexibilität. Soziale Kompetenzen sind für unser Funktionieren in der Gesellschaft notwendig. Sind sie zu sehr auf einen selber oder zu sehr auf die Gesellschaft ausgerichtet, dann funktioniert das Zusammenspiel nicht. Mittlere Ausprägungen, welche beide Aspekte berücksichtigen sind daher am günstigsten.
+
+#### Auswertung / Interpretation
+Ausgabe der Subskalen in z-Werten auf der Normstichprobe von Kanning (2009) beruhend. Als Vergleich dient die bisherige Patientengruppe mit den gleichen Merkmalen in Bezug auf das Geschlecht.
+
+[dependencies]
+
+[survey]
+id = isk
+type = lime
+responsibility = patient_via_assessment
+name = ISK-K
+host = limesurvey_v2
+survey_id = 824558
+hash = X45X1292
+pid = X45X1293
+fid = X45X1294
+min_questions =
+min_lastpage = 2
+
+
+[event activation]
+type = on_activation
+time = 08:00
+due_after = 259200
+overdue = ignore
+description = Eintritt: Inventar Sozialer Kompetenzen (ISK)
+survey = isk
+
+[event exit]
+type = before_exit
+days = 10
+time = 08:00
+due_after = 259200
+overdue = ignore
+description = Austritt: Inventar Sozialer Kompetenzen (ISK)
+survey = isk
