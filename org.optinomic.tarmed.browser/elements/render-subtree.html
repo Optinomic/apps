@@ -1,0 +1,226 @@
+<dom-module id="render-subtree">
+    <template>
+        <style include="optinomic-styles">
+         :host {
+            display: block;
+            --right-top-height: 100%;
+            --right-bottom-height: 0;
+        }
+
+        .knr {
+            color: #757575;
+            white-space: nowrap;
+        }
+
+
+        .titel_selected {
+            color: #E91E63;
+        }
+
+        .titel_unselected {
+            color: #212121;
+        }
+
+        .submenu {
+            padding-left: 12px;
+        }
+
+        ;
+
+        .topborder {
+            border-top: 1px solid #E0E0E0;
+        }
+        </style>
+
+        <app-submenu id="submenu" opened="{{opened}}" class="topborder submenu">
+            <div on-click="__selectItem" class="app-menu-item" slot="submenu-trigger">
+                <app-menu-item class="horizontal">
+                    <template is="dom-if" if="{{opened}}" restamp="true">
+                        <p class="knr titel_selected">└ <span class="titel_unselected">[[data.knr]]</span>&nbsp;</p>
+                        <p class="titel_selected">[[data.name]]</p>
+                    </template>
+                    <template is="dom-if" if="{{!opened}}" restamp="true">
+                        <p class="knr">└ [[data.knr]]&nbsp;</p>
+                        <p class="titel_unselected">[[data.name]]</p>
+                    </template>
+                </app-menu-item>
+                <div stlye="width:52px !important;">
+                    <template is="dom-if" if="{{opened}}" restamp="true">
+                        <iron-icon class="titel_selected" icon="expand-more" class="expand-icon"></iron-icon>
+                    </template>
+                    <template is="dom-if" if="{{!opened}}" restamp="true">
+                        <iron-icon class="titel_unselected" icon="chevron-right" class="expand-icon"></iron-icon>
+                    </template>
+                </div>
+            </div>
+            <app-menu slot="submenu-content">
+                <template is="dom-repeat" items="{{__getChildren(data)}}">
+                    <template is="dom-if" if="{{__haveChildren(item)}}" restamp="true">
+                        <template is="dom-if" if="{{opened}}" restamp="true">
+                            <render-subtree knr="[[knr]]" lnr="[[lnr]]" on-selectedlnr="__fireClick" data="{{item}}"></render-subtree>
+                        </template>
+                    </template>
+                    <template is="dom-if" if="{{!__haveChildren(item)}}" restamp="true">
+                        <a on-click="__selectItem" class="app-menu-item topborder" style="margin-left:12px;">
+                            <p class="flex" style="text-indent:-16px;margin-left: 16px;"><span class="knr caption">└ [[item.lnr]]&nbsp;</span>
+                                <iron-icon style="width:18px;margin-right:4px;color:#BDBDBD" class="titel_unselected" icon="event"></iron-icon>[[item.name]]</p>
+                        </a>
+                    </template>
+                </template>
+            </app-menu>
+        </app-submenu>
+    </template>
+    <script>
+    class renderSubtree extends Polymer.mixinBehaviors([], ReduxBehavior(Polymer.Element)) {
+
+        static get is() {
+            return 'render-subtree';
+        }
+
+        static get actions() {
+            return AsyncActionsBehavior.actions;
+        }
+
+        // Properties
+        static get properties() {
+            return {
+
+                data: {
+                    type: Object
+                },
+
+                opened: {
+                    type: Boolean,
+                    notify: true
+                },
+
+                knr: {
+                    type: String
+                },
+
+                lnr: {
+                    type: String
+                },
+
+            };
+        }
+
+        // --------------- Functions ---------------
+
+        __checkSelected(d) {
+            
+            // Open Tree @ knr = this.selected 
+            
+            var selected_nr = this.knr.split(".");
+            var items = [];
+            selected_nr.forEach(function (element, elementID) {
+              items.push(element);
+            });
+            
+            
+            if ("children" in d) {
+                d.children.forEach(function(child) {
+                    
+                    var dive_selected = ""; 
+                    items.forEach(function(item, itemID) {
+                        dive_selected = dive_selected + item;
+                        
+                        if ((child.knr === dive_selected) || (child.lnr === this.lnr)) {
+                      
+                            var submenu = this.$.submenu;          
+                            submenu.opened = true;
+
+                            // Select LNR
+                            if (child.lnr === this.lnr) {
+                                this.__selectItem(child);
+                            };
+                        }
+                        dive_selected = dive_selected + ".";
+                        
+                    }.bind(this));
+                }.bind(this));
+            };
+        }
+
+        __getChildren(e) {
+            //console.log('__getChildren', e); 
+            this.__checkSelected(e);
+            return e.children;
+        }
+
+        __haveChildren(e) {
+            var rt = false;
+            if ("children" in e) {
+                if ((e.children !== null) && (e.children !== null)) {
+                    if (e.children.length > 0) {
+                        rt = true;
+                    };
+                };
+            };
+            return rt;
+        }
+
+        // --------------- Events ---------------
+
+        __fireClick(e, data) {
+
+            this._debouncer = Polymer.Debouncer.debounce(this._debouncer, Polymer.Async.timeOut.after(250), () => {
+
+                this.dispatchEvent(new CustomEvent('selectedlnr', {
+                    detail: data
+                }));
+                //console.warn('(✔) :: __fireClick', e, data);
+
+            });
+        }
+
+        __selectItem(e) {
+
+            e = e || {};
+            // console.log('__appmenu_lnr', e);
+
+            if ("model" in e) {
+                this.set('lnr_selected', e.model.data);
+
+                if ("item" in e.model) {
+                    this.set('lnr_selected', e.model.item);
+                };
+            } else {
+                if ("knr" in e) {
+                    this.set('lnr_selected', e);    
+                } else {
+                    this.set('lnr_selected', this.data);    
+                };
+                
+            };
+
+
+            if ((this.lnr_selected !== null) && (this.lnr_selected !== undefined)) {
+                this.__fireClick(e, this.lnr_selected)
+            };
+        }
+
+
+        // --------------- Lifecycle ---------------
+
+        _init() {
+            //this.set('focused', false);
+            console.warn('_init :: SubTree', this.data);
+        }
+
+        constructor() {
+            super();
+        }
+
+        ready() {
+            super.ready();
+
+            Polymer.RenderStatus.afterNextRender(this, function() {
+                // this._init();
+            });
+        }
+    }
+
+    window.customElements.define(renderSubtree.is, renderSubtree);
+    </script>
+</dom-module>

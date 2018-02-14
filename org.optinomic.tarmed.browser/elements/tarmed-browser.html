@@ -1,116 +1,304 @@
-<link rel="import" href="polymer/polymer-element.html">
-<link rel="import" href="iron-pages/iron-pages.html">
-<link rel="import" href="optinomic-elements/optinomic-title/optinomic-title.html">
-<link rel="import" href="optinomic-elements/optinomic-clipboard/optinomic-clipboard.html">
-<link rel="import" href="juicy-jsoneditor/juicy-jsoneditor.html">
-<link rel="import" href="vaadin-valo-theme/vaadin-button.html">
-<link rel="import" href="vaadin-valo-theme/vaadin-checkbox.html">
-<link rel="import" href="vaadin-valo-theme/vaadin-combo-box.html">
-<link rel="import" href="vaadin-valo-theme/vaadin-date-picker.html">
-<link rel="import" href="vaadin-valo-theme/vaadin-form-item.html">
-<link rel="import" href="vaadin-valo-theme/vaadin-form-layout.html">
-<link rel="import" href="vaadin-valo-theme/vaadin-grid.html">
-<link rel="import" href="vaadin-valo-theme/vaadin-overlay.html">
-<link rel="import" href="vaadin-valo-theme/vaadin-text-field.html">
-<link rel="import" href="vaadin-checkbox/vaadin-checkbox.html">
-<link rel="import" href="vaadin-grid/vaadin-grid.html">
-<link rel="import" href="vaadin-form-layout/vaadin-form-layout.html">
-<link rel="import" href="vaadin-text-field/vaadin-text-field.html">
-<link rel="import" href="vaadin-date-picker/vaadin-date-picker.html">
-<link rel="import" href="vaadin-split-layout/vaadin-split-layout.html">
-<link rel="import" href="vaadin-dialog/vaadin-dialog.html">
-<link rel="import" href="vaadin-combo-box/vaadin-combo-box.html">
 
 <dom-module id="tarmed-browser">
     <template>
         <style include="optinomic-styles">
          :host {
             display: block;
-            --right-top-height: 100%;
-            --right-bottom-height: 0;
         }
 
         .fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: 0;
+            box-sizing: border-box;
+            width: 100%;
             height: calc(100vh);
-            min-height: calc(100vh);
+            object-fit: contain;
+
+            -webkit-transition: opacity 1s ease-in;
+            -moz-transition: opacity 1s ease-in;
+            -o-transition: opacity 1s ease-in;
+            -ms-transition: opacity 1s ease-in;
+            transition: opacity 1s ease-in;
         }
+
+
 
         .left_bar {
             background: #F5F5F5;
-            min-width: 128px;
-            max-width: 44%;
-            padding-top: 24px;
+            min-width: 256px;
         }
 
-        .tree_container {}
-
-
         .right_bar {
-            width: 56%;
             background: #FFFFFF;
             padding: 24px;
+            width: 56%;
+            min-width: 512px;
+        }
+
+        .tree_container {
+            padding-left: 12px;
+            padding-right: 12px;
         }
 
         .page {
             padding: 12px;
         }
 
-        .tarmed_tree csak-tree-item {
-            --csak-tree-item-indent: 1em;
-            --iron-icon-width: 16px;
-            font-size: 14.5px;
-            margin-top: 7px;
-            color: #424242 !important;
+
+
+        app-menu {
+            --app-menu-color: #424242;
+            --app-menu-background-color: #F5F5F5;
+            --app-menu-selected-bg-color: #E0E0E0;
+            --primary-color: #F62A5A;
         }
 
-        csak-tree-item:hover {
-            color: #000000 !important;
+        .app-menu-item-left {
+            padding-left: 28px !important;
         }
 
-        .tarmed_tree csak-tree-item iron-icon {
-            color: #BDBDBD;
-            margin-right: 6px;
+        .icon {
+            width: 36px !important;
+            height: 36px !important;
+            min-width: 36px !important;
+            min-height: 36px !important;
         }
         </style>
-        <vaadin-split-layout class="fullscreen">
-            <div class="left_bar">
-                <template is="dom-if" if="[[!have_treedata]]" restamp="true">
-                    <p class="page">Loading...</p>
-                </template>
-                <div hidden$="[[!have_treedata]]">
-                    <div hidden$="[[!is_german]]">
-                        <div class="tree_container">
-                            <csak-tree id="tarmed_tree" class="tarmed_tree" branchicon="vaadin:chevron-right-small" branchiconopen="vaadin:chevron-down-small" data="" on-selected-item-changed="__changedSelectedTreeData"></csak-tree>
+        <template is="dom-if" if="[[!opened]]" restamp="true">
+            <template is="dom-if" if="{{!__haveLNR(l)}}" restamp="true">
+                <div class="horizontal">
+                    <paper-input label="TARMED" class="flex" style="margin-right:6px;" value="{{lnr}}"></paper-input>
+                    <paper-icon-button class="indigo icon" on-click="__openApp" icon="vaadin:pencil"></paper-icon-button>
+                </div>
+            </template>
+            <template is="dom-if" if="{{__haveLNR(l)}}" restamp="true">
+                <div class="horizontal" on-click="__openApp" style="cursor:pointer; border-bottom: 1px solid #616161;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                    <p style="margin-top:2px;margin-bottom:1px;padding:0;"><span style="color:#757575;">{{lnr}} &nbsp;&nbsp;&nbsp; ({{l.REGEL}})</span>
+                        <br>{{l.LEISTUNG_TEXT}}</p>
+                    <paper-icon-button class="grey icon" icon="vaadin:pencil"></paper-icon-button>
+                </div>
+            </template>
+        </template>
+        <template is="dom-if" if="[[opened]]" restamp="true">
+            <vaadin-split-layout id="tarmed" class="fullscreen">
+                <div class="left_bar">
+                    <div class="horizontal page">
+                        <vaadin-combo-box style="width:100%" id="select_language" value="{{language}}"></vaadin-combo-box>
+                    </div>
+                    <div class="horizontal page">
+                        <h3 class="flex" on-click="__changedSelectedTreeData">TARMED</h3>
+                        <iron-icon icon="book" on-click="__closeApp" style="margin-right:12px;color:#757575"></iron-icon>
+                    </div>
+                    <template is="dom-if" if="[[!have_treedata]]" restamp="true">
+                        <p class="page">{{t.loading}}</p>
+                    </template>
+                    <div hidden$="[[!have_treedata]]">
+                        <div style="margin-left:-12px;margin-top:-12px;">
+                            <app-menu selected="[[knr]]">
+                                <template is="dom-repeat" items="[[treedata.children]]">
+                                    <render-subtree on-selectedlnr="__appmenu_changed" data="[[item]]" knr="[[knr]]" lnr="[[lnr]]"></render-subtree>
+                                </template>
+                            </app-menu>
+                        </div>
+                        <div class="horizontal page" style="margin-left:24px;">
+                            <paper-input label="{{t.search}}" class="flex" style="margin-right:6px;" value="{{search}}">
+                                <iron-icon icon="search" slot="prefix"></iron-icon>
+                            </paper-input>
+                            <paper-button class="grey" on-click="__filterTreeData">{{t.search}}</paper-button>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="right_bar">
-                <template is="dom-if" if="[[tree_selected.is_typ_r]]" restamp="true">
-                    <h1>[[tree_selected.name]]</h1>
-                </template>
-                <template is="dom-if" if="[[tree_selected.is_typ_i]]" restamp="true">
-                    <h1>[[tree_selected.interpret_titel]]</h1>
-                    <p>[[tree_selected.interpret_text]]</p>
-                </template>
-                <template is="dom-if" if="[[tree_selected.is_typ_k]]" restamp="true">
-                    <h1>[[tree_selected.name]]</h1>
-                    <p>Kapitel-Nummer: [[tree_selected.knr]]</p>
-                </template>
-                <template is="dom-if" if="[[tree_selected.is_typ_l]]" restamp="true">
-                    <h1>[[tree_selected.name]]</h1>
-                    <p>Kapitel-Nummer: [[tree_selected.KNR]] | Leisungsnummer: [[tree_selected.LNR]]</p>
-                    <h3>[[tree_selected.SPARTE_TEXT]]</h3>
-                    <p>[[tree_selected.LEISTUNG_MED_INTERPRET]]</p>
-                    <h2>Regel</h2>
-                    <p>[[tree_selected.REGEL]]</p>
-                </template>
-            </div>
-        </vaadin-split-layout>
+                <div class="right_bar">
+                    <template is="dom-if" if="[[tree_selected.is_root]]" restamp="true">
+                        <div class="horizontal">
+                            <paper-icon-button icon="book" class="grey" on-click="__changedSelectedTreeData"></paper-icon-button>
+                            <div class="flex">
+                                <h1>TARMED</h1>
+                            </div>
+                        </div>
+                        <p>[[treedata.name]]</p>
+                        <div class="horizontal page">
+                            <paper-input label="{{t.search}}" class="flex" style="margin-right:6px;" value="{{search}}">
+                                <iron-icon icon="search" slot="prefix"></iron-icon>
+                            </paper-input>
+                            <paper-button class="grey" on-click="__filterTreeData">{{t.search}}</paper-button>
+                        </div>
+                        <template is="dom-if" if="[[_search.results]]" restamp="true">
+                            <h2>[[t.search]]: [[search]]</h2>
+                            <template is="dom-if" if="[[_search.knr]]" restamp="true">
+                                <h3>[[t.chapter]]</h3>
+                                <vaadin-grid style="height:auto;" aria-label="[[t.chapter]]" items="[[_search.knr_data]]">
+                                    <vaadin-grid-column width="100px" flex-grow="0">
+                                        <template class="header">
+                                            <vaadin-grid-sorter path="knr">#</vaadin-grid-sorter>
+                                        </template>
+                                        <template>
+                                            <div on-click="__search_clicked">[[item.knr]]</div>
+                                        </template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column flex-grow="1">
+                                        <template class="header">
+                                            <vaadin-grid-sorter path="name">Name</vaadin-grid-sorter>
+                                        </template>
+                                        <template>
+                                            <div on-click="__search_clicked">[[item.name]]</div>
+                                        </template>
+                                    </vaadin-grid-column>
+                                </vaadin-grid>
+                            </template>
+                            <template is="dom-if" if="[[_search.lnr]]" restamp="true">
+                                <h3>[[t.lnr]]</h3>
+                                <vaadin-grid style="height:auto;" aria-label="[[t.lnr]]" items="[[_search.lnr_data]]">
+                                    <vaadin-grid-column width="100px" flex-grow="0">
+                                        <template class="header">
+                                            <vaadin-grid-sorter path="lnr">#</vaadin-grid-sorter>
+                                        </template>
+                                        <template>
+                                            <div on-click="__search_clicked">[[item.lnr]]</div>
+                                        </template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column flex-grow="1">
+                                        <template class="header">
+                                            <vaadin-grid-sorter path="name">Name (Leistung)</vaadin-grid-sorter>
+                                        </template>
+                                        <template>
+                                            <div on-click="__search_clicked">[[item.name]]</div>
+                                        </template>
+                                    </vaadin-grid-column>
+                                </vaadin-grid>
+                            </template>
+                        </template>
+                    </template>
+                    <template is="dom-if" if="[[tree_selected.is_typ_i]]" restamp="true">
+                        <div class="horizontal">
+                            <paper-icon-button icon="home" class="indigo" on-click="__changedSelectedTreeData"></paper-icon-button>
+                            <div class="flex">
+                                <h1>[[tree_selected.interpret_titel]]</h1>
+                            </div>
+                        </div>
+                        <p>[[tree_selected.interpret_text]]</p>
+                    </template>
+                    <template is="dom-if" if="[[tree_selected.is_typ_k]]" restamp="true">
+                        <div class="horizontal">
+                            <paper-icon-button icon="home" class="indigo" on-click="__changedSelectedTreeData"></paper-icon-button>
+                            <div class="flex">
+                                <h1>[[tree_selected.name]]</h1>
+                            </div>
+                        </div>
+                        <p>#: [[tree_selected.knr]]</p>
+                        <vaadin-grid style="height:auto;" aria-label="[[t.chapter]]" items="[[tree_selected.children]]">
+                            <vaadin-grid-column width="110px" flex-grow="0">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="knr">[[t.chapter]]</vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <div on-click="__search_clicked">[[item.knr]]</div>
+                                </template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column flex-grow="1">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="name">[[t.lnr]]</vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <div on-click="__search_clicked">
+                                        <template is="dom-if" if="{{!__isStringEmpty(item.lnr)}}">
+                                            <span style="color:#757575">[[item.lnr]] </br></span>
+                                        </template>
+                                        [[item.name]]</div>
+                                </template>
+                            </vaadin-grid-column>
+                        </vaadin-grid>
+                    </template>
+                    <template is="dom-if" if="[[tree_selected.is_typ_l]]" restamp="true">
+                        <div class="horizontal">
+                            <paper-icon-button icon="home" class="indigo" on-click="__changedSelectedTreeData"></paper-icon-button>
+                            <h1 style="margin-right: 24px;">[[tree_selected.LNR]]</h1>
+                            <p class="flex">[[tree_selected.SPARTE_TEXT]]
+                                <br>[[t.chapter]]: [[tree_selected.KNR]]</p>
+                        </div>
+                        <h2 style="margin-top:0;">[[tree_selected.LEISTUNG_TEXT]]</h2>
+                        <template is="dom-if" if="{{selectable}}" restamp="true">
+                            <template is="dom-if" if="{{tree_selected.is_selected_lnr}}" restamp="true">
+                                <div class="horizontal">
+                                    <paper-button class="pink" on-click="__unselectLNR">[[t.unselect]]</paper-button>
+                                </div>
+                            </template>
+                            <template is="dom-if" if="{{!tree_selected.is_selected_lnr}}" restamp="true">
+                                <div class="horizontal">
+                                    <paper-button class="indigo" on-click="__selectLNR">[[t.select]]</paper-button>
+                                </div>
+                            </template>
+                        </template>
+                        <hr>
+                        <h4>[[tree_selected.SPARTE_TEXT]]</h4>
+                        <vaadin-grid style="height:auto;" aria-label="Qualitative - Dignität" items="[[tree_selected.QL_DIGNITAET]]">
+                            <vaadin-grid-column width="100px" flex-grow="0">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="QL_DIGNITAET">#</vaadin-grid-sorter>
+                                </template>
+                                </vaadin-grid-sorter>
+                                <template>[[item.QL_DIGNITAET]]</template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column flex-grow="1">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="TEXT">
+                                        <h4 style="margin:0;padding:0;">[[tree_selected.SPARTE_TEXT]]</h4>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>[[item.TEXT]]</template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column width="110px" flex-grow="0">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="FMH">[[tree_selected.QT_DIGNITAET]]</vaadin-grid-sorter>
+                                </template>
+                                <template>[[item.FMH]]</template>
+                            </vaadin-grid-column>
+                        </vaadin-grid>
+                        <h4>[[tree_selected.LEISTUNG_TYP_TEXT]]</h4>
+                        <vaadin-grid style="height:auto;" aria-label="Qualitative - Dignität" items="[[tree_selected.werte]]">
+                            <vaadin-grid-column width="100px" flex-grow="0">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="value">#</vaadin-grid-sorter>
+                                </template>
+                                <template>[[item.value]]</template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column flex-grow="1">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="name">
+                                        <h4 style="margin:0;padding:0;">[[tree_selected.LEISTUNG_TYP_TEXT]]</h4>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>[[item.name]]</template>
+                            </vaadin-grid-column>
+                        </vaadin-grid>
+                        <template is="dom-if" if="{{!__isStringEmpty(tree_selected.ANAESTHESIE_TEXT)}}" restamp="true">
+                            <h2>[[t.anesthesie]]</h2>
+                            <p>[[tree_selected.ANAESTHESIE_TEXT]]</p>
+                        </template>
+                        <template is="dom-if" if="{{!__isStringEmpty(tree_selected.LEISTUNG_MED_INTERPRET)}}" restamp="true">
+                            <h2>[[t.mid]]</h2>
+                            <p>[[tree_selected.LEISTUNG_MED_INTERPRET]]</p>
+                        </template>
+                        <template is="dom-if" if="{{!__isStringEmpty(tree_selected.LEISTUNG_TECH_INTERPRET)}}" restamp="true">
+                            <h2>[[t.tid]]</h2>
+                            <p>[[tree_selected.LEISTUNG_TECH_INTERPRET]]</p>
+                        </template>
+                        <div>
+                            <h2>[[t.rule]]</h2>
+                            <p>[[tree_selected.REGEL]]</p>
+                        </div>
+                    </template>
+                </div>
+            </vaadin-split-layout>
+        </template>
     </template>
     <script>
     class tarmedBrowser extends Polymer.mixinBehaviors([
-        opappBehavior
+        opappBehavior, optinomicTARMED
     ], ReduxBehavior(Polymer.Element)) {
 
         static get is() {
@@ -128,199 +316,497 @@
                 language: {
                     type: String,
                     value: 'D',
-                    observer: '_init'
+                    observer: '_setLanguage'
                 },
-                _app_state: {
+                knr: {
                     type: String,
-                    value: 'start'
+                    notify: true,
+                    reflectToAttribute: true
+                },
+                lnr: {
+                    type: String,
+                    observer: '__getLNR',
+                    notify: true,
+                    reflectToAttribute: true
+                },
+                l: {
+                    type: Object,
+                    notify: true,
+                    reflectToAttribute: true,
+                    value: null
+                },
+                selectable: {
+                    type: Boolean,
+                    value: false
+                },
+                opened: {
+                    type: Boolean,
+                    value: false
                 }
 
             };
         }
 
+        // --------------- User Functions ---------------
+
+
+
+        __openApp() {
+            this.opened = true;
+        }
+
+        __closeApp() {
+            this.opened = false;
+        }
+
+        __selectLNR() {
+            this.lnr = this.tree_selected.LNR;
+            this.knr = this.tree_selected.KNR;
+            this.l = this.tree_selected;
+            this.__fireSelectLNR(this.tree_selected);
+
+            if (this.selectable) {
+                this.__closeApp();
+            };
+
+        }
+
+        __unselectLNR() {
+            this.lnr = "";
+            this.knr = "";
+            this.l = null;
+            this.__fireSelectLNR(null);
+
+            if (this.selectable) {
+                this.__closeApp();
+            };
+        }
+
+        __fireSelectLNR(data) {
+            console.log('Event: lnr', data);
+            this.dispatchEvent(new CustomEvent('lnr', {
+                detail: data
+            }));
+        }
+
+        // --------------- Events ---------------
+
+        __appmenu_changed(e) {
+            // Event Listener from render-subtree
+            this.set('tree_selected', null);
+
+            // console.log('OUTSIDE :: __appmenu_changed', e);
+
+            if ("lnr" in e.detail) {
+                if ((e.detail.lnr !== null) && (e.detail.lnr !== undefined)) {
+                    this._getTARMEDchapter(this.language, e.detail.lnr);
+                };
+            } else {
+                this.__setChapterData(e.detail);
+            };
+        }
+
+        __search_clicked(e) {
+            this.set('tree_selected', null);
+
+            var selected_data = e.model.item;
+
+            if ("lnr" in selected_data) {
+                if ((selected_data.lnr !== null) && (selected_data.lnr !== undefined)) {
+                    this._getTARMEDchapter(this.language, selected_data.lnr);
+                };
+            } else {
+                this.__setChapterData(selected_data);
+            };
+        }
+
+
+        __isStringEmpty(e) {
+            if ((e !== null) && (e !== undefined) && (e !== "")) {
+                return false;
+            } else {
+                return true;
+            };
+        }
+
+        __haveLNR(d) {
+            var ret = false;
+            if ((d !== null) && (d !== undefined)) {
+                if ("KNR" in d) {
+                    if ((d.KNR !== null) && (d.KNR !== undefined) && (d.KNR !== "")) {
+                        ret = true;
+                    } else {
+                        ret = false;
+                    };
+                } else {
+                    ret = false;
+                };
+            } else {
+                ret = false;
+            };
+
+            //console.log('__haveLNR', ret, d);    
+            return ret;
+        }
+
+        __getLNR() {
+
+            this._debouncer = Polymer.Debouncer.debounce(this._debouncer, Polymer.Async.timeOut.after(350), () => {
+
+                if ((this.opened === false) &&
+                    (this.lnr !== null) &&
+                    (this.lnr !== undefined) &&
+                    (this.lnr !== "")) {
+                    this._getTARMEDchapter(this.language, this.lnr);
+                };
+
+            });
+
+
+        }
+
         // --------------- Functions ---------------
 
-        __setTreeData(tree_data) {
-            var tree = this.$$('#tarmed_tree');
-            tree.data = tree_data;
-        }
+        __filterTreeData() {
 
-        __enhanceTreeData(d) {
-            var tree_data = Object.assign({}, this.get("TARMED_" + this.language + "_I"));
-            var tree = this.$$('#tarmed_tree');
+            function filterData(data, text) {
+                var searchtext = text.toLowerCase();
+                //console.log('fD', data, text);
+                var r = data.filter(function(o) {
+                    if (o.children) o.children = filterData(o.children, text);
+                    var current = o.name.toLowerCase() + " ";
 
-            var kapitel_root = tree_data.children["0"].children[1].children;
-            var found = false;
+                    if (current.indexOf(searchtext) !== -1) {
+                        if ("lnr" in o) {
+                            o.leistung = true;
+                            _search.lnr_data.push(o);
+                        } else {
+                            o.leistung = false;
+                            _search.knr_data.push(o);
+                        };
 
-            // SET a name
-            // UGLY - do this in files!
-            d.children.forEach(function(leist) {
-                leist.children.forEach(function(l2) {
-                    l2.name = l2.LEISTUNG_TEXT;
-
-                    if ("children" in l2) {
-                        l2.children.forEach(function(l3) {
-                            l3.name = l3.LEISTUNG_TEXT;
-
-                        });
+                        // console.log('Found:', current);
                     };
+                    return o;
+                })
 
-                    if ("LNR" in l2) {
-                        l2.name = l2.LNR + " | " + l2.name;
-                    };
-                });
-            });
+                return r;
+            }
 
-            kapitel_root.forEach(function(kap) {
+            function sortKNR(a, b) {
+                if (a.knr < b.knr)
+                    return -1;
+                if (a.knr > b.knr)
+                    return 1;
+                return 0;
+            }
 
-                if (kap.knr === d.knr) {
+            function sortLNR(a, b) {
+                if (a.lnr < b.lnr)
+                    return -1;
+                if (a.lnr > b.lnr)
+                    return 1;
+                return 0;
+            }
 
+            var searchtext = this.search || "";
+            searchtext = searchtext.toLowerCase();
 
-                    kap.children = d.children;
-                    found = true
+            if ((this.treedata !== undefined) && (this.treedata !== null) && (searchtext.length >= 3)) {
+
+                var search_all = Object.assign({}, this.treedata);
+                var _search = {
+                    "knr_data": [],
+                    "lnr_data": [],
+                    "results": false,
+                    "knr": false,
+                    "lnr": false
                 };
-            });
 
-            if (found) {
-                this.__setTreeData(JSON.stringify(tree_data));
+                filterData(search_all.children, searchtext);
+
+                if ((_search.lnr_data.length > 0) || (_search.knr_data.length > 0)) {
+
+                    _search.results = true;
+
+                    if (_search.lnr_data.length > 0) {
+                        _search.lnr_data = _search.lnr_data.sort(sortLNR);
+                        _search.lnr = true;
+                    };
+
+                    if (_search.knr_data.length > 0) {
+                        _search.knr_data = _search.knr_data.sort(sortKNR);
+                        _search.knr = true;
+                    };
+
+                    console.warn('Found', _search);
+                };
+
+
+                this.__changedSelectedTreeData({});
+                this.set('_search', _search);
+
+                // this.set('treedata', clone_data.children["0"]);
+                // this.set('have_treedata', true);
             };
-
-            console.log('__enhanceTreeData', d, kapitel_root);
-            // tree.data = tree_data;
         }
 
-        __changedSelectedTreeData(e) {
-            var s = Object.assign({}, e.detail.value);
+        __setTreeData(tree_data) {
+            if ((tree_data !== undefined) && (tree_data !== null)) {
+
+                var clone_data = Object.assign({}, tree_data);
+
+                this.set('treedata', clone_data.children["0"]);
+                this.set('have_treedata', true);
+            };
+        }
+
+        __setChapterData(tree_data) {
+            if ((tree_data !== undefined) && (tree_data !== null)) {
+
+                var clone_data = Object.assign({}, tree_data);
+                this.__changedSelectedTreeData(clone_data);
+            };
+        }
+
+        __changedSelectedTreeData(s) {
+
             var tree_selected = {
-                "name": s.name,
-                "typ": "unknown",
                 "is_typ_i": false,
                 "is_typ_k": false,
-                "is_typ_l": false,
-                "is_typ_r": true
+                "is_typ_l": false
             };
+            tree_selected = Object.assign(tree_selected, s);
 
             if ("interpret_text" in s) {
                 tree_selected.interpret_titel = s.interpret_titel;
                 tree_selected.interpret_text = s.interpret_text;
-                tree_selected.typ = "I";
                 tree_selected.is_typ_i = true;
-                tree_selected.is_typ_r = false;
             };
 
-            if ("knr" in s) {
-                tree_selected.knr = s.knr;
-                tree_selected.array_id = s.array_id;
+            if (("KNR" in s) || ("knr" in s) || ("language" in s)) {
 
-                tree_selected.typ = "K";
-                tree_selected.is_typ_k = true;
-                tree_selected.is_typ_r = false;
+                if (("lnr" in s) || ("LNR" in s)) {
+                    tree_selected.typ = "L";
+                    tree_selected.is_typ_l = true;
 
-                // Load more Data
-                if (s.knr.split(".").length === 1) {
-                    this._grabTARMEDKapitel(s.knr);
+                    var werte = [];
+
+                    werte.push({
+                        "name": "AL [TP]",
+                        "value": tree_selected.TP_AL
+                    });
+                    werte.push({
+                        "name": "Assistenz [TP]",
+                        "value": tree_selected.TP_ASSI
+                    });
+                    werte.push({
+                        "name": "Assistenz [Anz]",
+                        "value": tree_selected.ANZ_ASSI
+                    });
+                    werte.push({
+                        "name": "Leistung im engeren Sinne [Min.]",
+                        "value": tree_selected.LSTGIMES_MIN
+                    });
+                    werte.push({
+                        "name": "Vor- und Nachbereitung [Min.]",
+                        "value": tree_selected.VBNB_MIN
+                    });
+                    werte.push({
+                        "name": "Bericht [Min.]",
+                        "value": tree_selected.BEFUND_MIN
+                    });
+                    werte.push({
+                        "name": "TL [TP]",
+                        "value": tree_selected.TP_TL
+                    });
+                    werte.push({
+                        "name": "Raumbelegung [Min]",
+                        "value": tree_selected.RAUM_MIN
+                    });
+                    werte.push({
+                        "name": "Wechselzeit [Min.]",
+                        "value": tree_selected.WECHSEL_MIN
+                    });
+
+
+                    tree_selected.werte = werte;
+
+                    if (this.lnr === s.LNR) {
+                        tree_selected.is_selected_lnr = true;
+                    } else {
+                        tree_selected.is_selected_lnr = false;
+                    };
+
+
+
+                } else {
+                    tree_selected.typ = "K";
+                    tree_selected.is_typ_k = true;
                 };
-
             };
 
-            if ("LNR" in s) {
-                tree_selected.LNR = s.LNR;
-                tree_selected.LNR = s.LNR;
-
-                tree_selected.array_id = s.array_id;
-                tree_selected.REGEL = s.REGEL;
-                tree_selected.SPARTE_TEXT = s.SPARTE_TEXT;
-                tree_selected.LEISTUNG_MED_INTERPRET = s.LEISTUNG_MED_INTERPRET;
-
-
-
-                tree_selected.typ = "L";
-                tree_selected.is_typ_l = true;
-                tree_selected.is_typ_r = false;
-
-
+            if ((tree_selected.is_typ_i !== true) && (tree_selected.is_typ_k !== true) && (tree_selected.is_typ_l !== true)) {
+                tree_selected.is_root = true
             };
 
             this.set('tree_selected', tree_selected);
-            console.log('__changedSelectedTreeData', tree_selected, s);
+            console.log('(!) tree_selected', tree_selected);
+
+
+            // Return LNR
+            if (this.opened === false) {
+                this.__selectLNR()
+            };
         }
 
+        _getTARMEDtree(language) {
+
+            if (language === "D") {
+
+                this.__setTreeData(Object.assign({}, this.TREE_D));
 
 
-        _grabTARMED(file) {
+            } else {
 
-            Polymer.RenderStatus.afterNextRender(this, function() {
+                var treeRef = this.db.collection("TARMED").doc("TREE_" + language);
 
-                if ((this.file !== null) && (this.file !== undefined)) {
-                    this.set(file, {});
-                };
+                treeRef.get().then(function(doc) {
+                    if (doc.exists) {
 
-                var url = "https://cdn.rawgit.com/Optinomic/apps/08881c0a/org.optinomic.tarmed.browser/includes/" + file + ".json";
+                        this.__setTreeData(doc.data());
+                        // console.log('__setTreeData runned!');
 
-                fetch(url)
-
-                    .then(res => res.json())
-                    .then(function(json) {
-
-                        var return_obj = {
-                            "error": false,
-                            "data": json,
-                            "file": file
-                        };
-
-                        // INIT-FILE
-                        if (file === "TARMED_" + this.language + "_I") {
-                            this.set(file, JSON.parse(JSON.stringify(json)));
-                            this.__setTreeData(JSON.stringify(json));
-                            this.set('have_treedata', true);
-                        };
-
-                        // Kapitel-File
-                        if (file.indexOf("_K_") !== -1) {
-                            this.__enhanceTreeData(json);
-                        };
-
-                        console.log('Data: _grabTARMED', file, json);
-
-                    }.bind(this));
-            });
-
+                    } else {
+                        // doc.data() will be undefined in this case
+                        console.log("_getTARMEDtree :: No such document: TARMED|TREE_" + language);
+                    }
+                }.bind(this)).catch(function(error) {
+                    console.log("_getTARMEDtree :: Error getting document: TARMED|TREE_" + language);
+                }.bind(this));
+            };
         }
 
-        _grabTARMEDKapitel(kapitel) {
-            this._grabTARMED("TARMED_" + this.language + "_K_" + kapitel);
-        }
+        _getTARMEDchapter(language, chapter) {
 
+            var chapterRef = this.db.collection("TARMED_LNR_" + language).doc(chapter);
+
+            chapterRef.get().then(function(doc) {
+                if (doc.exists) {
+
+                    this.__setChapterData(doc.data());
+                    console.log('__setChapterData runned!');
+
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("_getTARMEDchapter :: No such document: TARMED|TREE_" + language);
+                }
+            }.bind(this)).catch(function(error) {
+                console.log("_getTARMEDchapter :: Error getting document: TARMED|TREE_" + language);
+            }.bind(this));
+        }
 
         // --------------- Lifecycle ---------------
+        _setLanguage() {
+            this.debounce('_setLanguage', function() {
+
+
+                // Grab Treedata
+                this.set('have_treedata', false);
+                this._getTARMEDtree(this.language);
+
+                // Default
+                this.__changedSelectedTreeData({});
+
+
+                if (this.opened) {
+                    var combobox = this.$$('#select_language');
+                    combobox.items = [
+                        { label: 'Deutsch', value: "D" },
+                        { label: 'Français', value: "F" },
+                        { label: 'Italiano', value: "I" }
+                    ];
+
+
+
+
+                    // Check current language
+                    if ((this.language !== null) && (this.language !== undefined) && (this.language !== "")) {
+                        if (this.language === "D") {
+                            this.set('is_german', true);
+                            var t = {
+                                "loading": "Laden...",
+                                "search": "Suchen",
+                                "chapter": "Kapitel",
+                                "lnr": "Leistungen",
+                                "select": "Leistung selektieren",
+                                "unselect": "Selektion aufheben",
+                                "anesthesie": "Anesthesie",
+                                "mid": "Medizinische Interpretation",
+                                "tid": "Technische Interpretation",
+                                "rule": "Regeln"
+                            };
+                        };
+                        if (this.language === "F") {
+                            this.set('is_french', true);
+                            var t = {
+                                "loading": "Charge...",
+                                "search": "Recherche",
+                                "chapter": "Chapitre",
+                                "lnr": "Services",
+                                "select": "Sélectionnez la performance",
+                                "unselect": "Annuler la sélection",
+                                "anesthesie": "Anesthésie",
+                                "mid": "Interprétation médicale",
+                                "tid": "Interprétation technique",
+                                "rule": "Règles"
+                            };
+                        };
+                        if (this.language === "I") {
+                            this.set('is_italian', true);
+                            var t = {
+                                "loading": "Carico...",
+                                "search": "Ricerca",
+                                "chapter": "Capitolo",
+                                "lnr": "Servizi",
+                                "select": "Seleziona le prestazioni",
+                                "unselect": "Annulla selezione",
+                                "anesthesie": "Anestesia",
+                                "mid": "Interpretazione medica",
+                                "tid": "Interpretazione tecnica",
+                                "rule": "Regole"
+                            };
+                        };
+                        this.set('t', t);
+                    } else {
+                        this.language = "D";
+                    };
+                };
+
+                console.warn('_init :: TARMED-Browser', this.language);
+            }, 250);
+        }
 
         _init() {
 
             this.debounce('_init', function() {
 
-                // Grab Treedata
-                this.set('have_treedata', false);
-                this._grabTARMED("TARMED_" + this.language + "_I");
-                this._grabTARMEDKapitel("02");
-
-                // Check current language
-                if ((this.language !== null) && (this.language !== undefined)) {
-                    if (this.language === "D") {
-                        this.set('is_german', true);
-                    };
-                    if (this.language === "F") {
-                        this.set('is_french', true);
-                    };
-                    if (this.language === "F") {
-                        this.set('is_italian', true);
-                    };
+                // Initialize Firebase
+                var config = {
+                    apiKey: "AIzaSyCPVVMOo95MY0-nS2FaifKKsRckxlFfhDE",
+                    authDomain: "tarmed-2018.firebaseapp.com",
+                    databaseURL: "https://tarmed-2018.firebaseio.com",
+                    projectId: "tarmed-2018",
+                    storageBucket: "",
+                    messagingSenderId: "638329991887"
                 };
+                firebase.initializeApp(config);
 
-                console.warn('_init :: TARMED-Browser');
+                // Initialize Cloud Firestore through Firebase
+                this.db = firebase.firestore();
 
 
             }, 250);
-
         }
 
         constructor() {

@@ -20,12 +20,9 @@ website = http://www.optinomic.com/
 [readme]
 __opapp_include(readme.md)
 
-[template export 6 7]
+[template tarmed 6 7]
 __opapp_include(../lib/polymer2/index_fullscreen.m4)
-__opapp_include(elements/csak-tree.html)
-__opapp_include(elements/csak-tree-item.html)
-__opapp_include(elements/file-download.html)
-__opapp_include(elements/tarmed-browser.html)
+__opapp_include(elements/tarmed.html)
 __opapp_include(elements/app.html)
 
 
