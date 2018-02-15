@@ -35,7 +35,7 @@ Verlaufseintrag mit TARMED-Browser
 *[www.optinomic.com](http://www.optinomic.com)*   
 
 
-[template tarmed 6 7]
+[template entry 6 7]
 <head>
   <base href="https://cdn.rawgit.com/Optinomic/polymer2-cdn/optinomic-0.0.15/lib/">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500">
@@ -3985,6 +3985,87 @@ window.customElements.define(optinomicApp.is, optinomicApp);
 <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-firestore.js"></script>
 
 
+<script>
+    optinomicHISTORY = {
+
+        behaviors: [],
+
+
+        properties: {
+            _clinic_info: {
+                type: Object,
+                statePath: 'clinic.info.data.clinic_obj',
+                observer: '__clinicInfoChanged'
+            }
+        },
+
+
+        // --------------------------------
+        // INIT
+        // --------------------------------
+        __clinicInfoChanged() {
+            this.__clinicInfoChanged = Polymer.Debouncer.debounce(
+                this.__clinicInfoChanged, Polymer.Async.timeOut.after(250), () => {
+
+                    if ((this._clinic_info !== undefined) && (this._clinic_info !== null)) {
+                        this.__init_FB(this._clinic_info.clinic_name);
+                    };
+
+                });
+        },
+
+        __firebase_login(clinic) {
+            firebase.auth().signInWithEmailAndPassword(atob('aW5mb0BvcHRpbm9taWMuY29t'), atob('Z280b3B0aW5vbWlj'))
+
+                .then(function (resp) {
+                    console.log(clinic + ' FB-Login-Success: ', resp.email);
+                })
+
+                .catch(function (error) {
+                    console.error(clinic + ' FB ERROR:', error);
+                });
+        },
+
+        __init_FB: function (clinic) {
+
+            // Initialize Firebase
+            var config_demo = {
+                apiKey: "AIzaSyB-B3QtBDPg-wIgFaWNhUNOk9XWRunv4Kk",
+                authDomain: "verlauf-demo.firebaseapp.com",
+                databaseURL: "https://verlauf-demo.firebaseio.com",
+                projectId: "verlauf-demo",
+                storageBucket: "verlauf-demo.appspot.com",
+                messagingSenderId: "944644480179"
+            };
+
+            // Default = Demoserver
+            var config = config_demo;
+
+            // Manually add more clinics here:
+            if (clinic === 'Optinomic | Demo') {
+                var config = config_demo;
+            };
+
+
+            firebase.initializeApp(config);
+
+        },
+
+        // --------------------------------
+        // Liefecycle
+        // --------------------------------
+
+        created: function () {
+
+            Polymer.RenderStatus.afterNextRender(this, function () {
+                this.__init_FB();
+                console.log('optinomicHISTORY - Behaviour: ');
+            });
+
+        }
+    };
+</script>
+
 <dom-module id="history-app">
     <template>
         <style include="optinomic-styles">
@@ -4062,75 +4143,6 @@ window.customElements.define(optinomicApp.is, optinomicApp);
     window.customElements.define(historyApp.is, historyApp);
     </script>
 </dom-module>
-<script>
-    optinomicHISTORY = {
-
-
-        behaviors: [],
-
-
-        properties: {
-            _clinic_info: {
-                type: Object,
-                statePath: 'clinic.info.data.clinic_obj',
-                observer: '__clinicInfoChanged'
-            }
-        },
-
-
-        // --------------------------------
-        // INIT
-        // --------------------------------
-        __clinicInfoChanged() {
-            this.__clinicInfoChanged = Polymer.Debouncer.debounce(
-                this.__clinicInfoChanged, Polymer.Async.timeOut.after(250), () => {
-
-                    console.log('__clinicInfoChanged', this._clinic_info);
-
-                });
-        },
-
-        __firebase_login() {
-            firebase.auth().signInWithEmailAndPassword(atob('aW5mb0BvcHRpbm9taWMuY29t'), atob('Z280b3B0aW5vbWlj'))
-
-                .then(function (resp) {
-                    console.log('FB-Login-Success: ', resp.email);
-                })
-
-                .catch(function (error) {
-                    console.error('FB ERROR:', error);
-                });
-        },
-
-        __init_FB: function () {
-
-            // Initialize Firebase
-            var config = {
-                apiKey: "AIzaSyB-B3QtBDPg-wIgFaWNhUNOk9XWRunv4Kk",
-                authDomain: "verlauf-demo.firebaseapp.com",
-                databaseURL: "https://verlauf-demo.firebaseio.com",
-                projectId: "verlauf-demo",
-                storageBucket: "verlauf-demo.appspot.com",
-                messagingSenderId: "944644480179"
-            };
-            firebase.initializeApp(config);
-
-        },
-
-        // --------------------------------
-        // Liefecycle
-        // --------------------------------
-
-        created: function () {
-
-            Polymer.RenderStatus.afterNextRender(this, function () {
-                this.__init_FB();
-                console.log('optinomicHISTORY - Behaviour: ');
-            });
-
-        }
-    };
-</script>
 
 <link rel="import" href="polymer/polymer-element.html">
 <link rel="import" href="iron-pages/iron-pages.html">

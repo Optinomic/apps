@@ -23,78 +23,125 @@
 <dom-module id="optinomic-template">
     <template>
         <style include="optinomic-styles">
-         :host {
-            display: block;
-            --right-top-height: 100%;
-            --right-bottom-height: 0;
-        }
+            :host {
+                display: block;
+                --right-top-height: 100%;
+                --right-bottom-height: 0;
+            }
 
-        .fullscreen {
-            height: calc(100vh);
-            min-height: calc(100vh);
-        }
+            .fullscreen {
+                height: calc(100vh);
+                min-height: calc(100vh);
+            }
 
-        .page {
-            padding: 12px;
-        }
+            .page {
+                padding: 12px;
+            }
+
+            .left_bar {
+                background: #F5F5F5;
+                min-width: 256px;
+            }
+
+            .right_bar {
+                background: #FFFFFF;
+                padding: 24px;
+                width: 56%;
+                min-width: 512px;
+            }
         </style>
         <div class="fullscreen">
-          <p>Hallo</p>
-          <history-app></history-app>
+
+            <vaadin-split-layout id="tarmed" class="fullscreen">
+                <div class="left_bar">
+                    <template is="dom-if" if="{{_isAppState('start')}}" restamp="true">
+                        <paper-button on-click="__openEditmode">Edit</paper-button>
+                    </template>
+                    <template is="dom-if" if="{{_isAppState('edit')}}" restamp="true">
+                        <paper-button on-click="__openEditmode">Start</paper-button>
+                    </template>
+                </div>
+                <div class="right_bar">
+                    <template is="dom-if" if="{{_isAppState('start')}}" restamp="true">
+                        <history-list></history-list>
+                    </template>
+                    <template is="dom-if" if="{{_isAppState('edit')}}" restamp="true">
+                        <history-entry></history-entry>
+                    </template>
+
+                </div>
+            </vaadin-split-layout>
+            <p>Hallo</p>
+            <history-app></history-app>
         </div>
     </template>
     <script>
-    class optinomicTemplate extends Polymer.mixinBehaviors([
-        opappBehavior
-    ], ReduxBehavior(Polymer.Element)) {
+        class optinomicTemplate extends Polymer.mixinBehaviors([
+            opappBehavior
+        ], ReduxBehavior(Polymer.Element)) {
 
-        static get is() {
-            return 'optinomic-template';
+            static get is() {
+                return 'optinomic-template';
+            }
+
+            static get actions() {
+                return AsyncActionsBehavior.actions;
+            }
+
+            // Properties
+            static get properties() {
+                return {
+
+                    _app_state: {
+                        type: String,
+                        value: 'start'
+                    }
+
+                };
+            }
+
+            // --------------- User ClickFunctions ---------------
+
+            __openEditmode() {
+                this.set('_app_state', 'edit');
+            }
+
+            __closeEditmode() {
+                this.set('_app_state', 'start');
+            }
+
+            // --------------- Functions ---------------
+
+            _isAppState(state) {
+                var ret = false;
+                if (state === this._app_state) {
+                    ret = true;
+                };
+                return ret;
+            }
+
+
+
+            // --------------- Lifecycle ---------------
+
+            _init() {
+
+                // console.warn('_init :: APP TARMED');
+            }
+
+            constructor() {
+                super();
+            }
+
+            ready() {
+                super.ready();
+
+                Polymer.RenderStatus.afterNextRender(this, function () {
+                    this._init();
+                });
+            }
         }
 
-        static get actions() {
-            return AsyncActionsBehavior.actions;
-        }
-
-        // Properties
-        static get properties() {
-            return {
-
-                _app_state: {
-                    type: String,
-                    value: 'start'
-                }
-
-            };
-        }
-
-        // --------------- Functions ---------------
-
-        _something() {
-
-        }
-
-
-        // --------------- Lifecycle ---------------
-
-        _init() {
-
-            console.warn('_init :: APP TARMED');
-        }
-
-        constructor() {
-            super();
-        }
-
-        ready() {
-            super.ready();
-
-            Polymer.RenderStatus.afterNextRender(this, function() {
-                this._init();
-            });
-        }
-    }
-
-    window.customElements.define(optinomicTemplate.is, optinomicTemplate);
+        window.customElements.define(optinomicTemplate.is, optinomicTemplate);
     </script>
 </dom-module>

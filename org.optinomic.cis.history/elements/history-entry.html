@@ -1,0 +1,84 @@
+<dom-module id="history-entry">
+    <template>
+        <style include="optinomic-styles">
+            :host {
+                display: block;
+                --right-top-height: 100%;
+                --right-bottom-height: 0;
+            }
+
+            .fullscreen {
+                height: calc(100vh);
+                min-height: calc(100vh);
+            }
+
+            .page {
+                padding: 12px;
+            }
+        </style>
+        <div class="fullscreen">
+            <template is="dom-if" if="[[fb_login]]">
+                <p>history-entry</p>
+            </template>
+
+            <template is="dom-if" if="[[!fb_login]]">
+                <p>Connecting Database...</p>
+            </template>
+
+        </div>
+    </template>
+    <script>
+        class historyEntry extends Polymer.mixinBehaviors([
+            opappBehavior, optinomicHISTORY
+        ], ReduxBehavior(Polymer.Element)) {
+
+            static get is() {
+                return 'history-entry';
+            }
+
+            static get actions() {
+                return AsyncActionsBehavior.actions;
+            }
+
+            // Properties
+            static get properties() {
+                return {
+
+                    _app_state: {
+                        type: String,
+                        value: 'start'
+                    }
+
+                };
+            }
+
+            // --------------- Functions ---------------
+
+            _something() {
+
+            }
+
+
+            // --------------- Lifecycle ---------------
+
+            _init() {
+
+                console.warn('_init :: <history-entry>');
+            }
+
+            constructor() {
+                super();
+            }
+
+            ready() {
+                super.ready();
+
+                Polymer.RenderStatus.afterNextRender(this, function () {
+                    this._init();
+                });
+            }
+        }
+
+        window.customElements.define(historyEntry.is, historyEntry);
+    </script>
+</dom-module>
