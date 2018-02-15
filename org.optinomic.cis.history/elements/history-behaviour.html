@@ -1,0 +1,69 @@
+<script>
+    optinomicHISTORY = {
+
+
+        behaviors: [],
+
+
+        properties: {
+            _clinic_info: {
+                type: Object,
+                statePath: 'clinic.info.data.clinic_obj',
+                observer: '__clinicInfoChanged'
+            }
+        },
+
+
+        // --------------------------------
+        // INIT
+        // --------------------------------
+        __clinicInfoChanged() {
+            this.__clinicInfoChanged = Polymer.Debouncer.debounce(
+                this.__clinicInfoChanged, Polymer.Async.timeOut.after(250), () => {
+
+                    console.log('__clinicInfoChanged', this._clinic_info);
+
+                });
+        },
+
+        __firebase_login() {
+            firebase.auth().signInWithEmailAndPassword(atob('aW5mb0BvcHRpbm9taWMuY29t'), atob('Z280b3B0aW5vbWlj'))
+
+                .then(function (resp) {
+                    console.log('FB-Login-Success: ', resp.email);
+                })
+
+                .catch(function (error) {
+                    console.error('FB ERROR:', error);
+                });
+        },
+
+        __init_FB: function () {
+
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyB-B3QtBDPg-wIgFaWNhUNOk9XWRunv4Kk",
+                authDomain: "verlauf-demo.firebaseapp.com",
+                databaseURL: "https://verlauf-demo.firebaseio.com",
+                projectId: "verlauf-demo",
+                storageBucket: "verlauf-demo.appspot.com",
+                messagingSenderId: "944644480179"
+            };
+            firebase.initializeApp(config);
+
+        },
+
+        // --------------------------------
+        // Liefecycle
+        // --------------------------------
+
+        created: function () {
+
+            Polymer.RenderStatus.afterNextRender(this, function () {
+                this.__init_FB();
+                console.log('optinomicHISTORY - Behaviour: ');
+            });
+
+        }
+    };
+</script>

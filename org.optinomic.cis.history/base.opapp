@@ -1,0 +1,35 @@
+[module]
+id = __opapp_identifier()
+name = TARMED - Browser
+short_description = TARMED - Tarifstruktur - V35 | 01.09
+version = __opapp_version()
+type = user
+
+[description]
+TARMED Tarifstruktur Browser. Die Änderungen der Tarifstruktur folgen den Vorgaben der Verordnung des Bunderates über die Anpassung von Tarifstrukturen in der Krankenversicherung vom 18.
+
+[developer]
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
+website = http://www.optinomic.com/
+
+[readme]
+__opapp_include(readme.md)
+
+[template tarmed 6 7]
+__opapp_include(../lib/polymer2/index_fullscreen.m4)
+__opapp_include(elements/tarmed.html)
+__opapp_include(elements/app.html)
+
+
+
+[javascript]
+
+
+[css]
+
+
