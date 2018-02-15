@@ -3,7 +3,7 @@ id = __opapp_identifier()
 name = Verlaufseintrag
 short_description = Verlaufseintrag mit TARMED
 version = __opapp_version()
-type = user
+type = patient
 
 [description]
 Verlaufseintrag mit TARMED Tarifstruktur Browser. 
