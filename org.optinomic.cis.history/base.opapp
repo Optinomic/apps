@@ -1,12 +1,12 @@
 [module]
 id = __opapp_identifier()
-name = TARMED - Browser
-short_description = TARMED - Tarifstruktur - V35 | 01.09
+name = Verlaufseintrag
+short_description = Verlaufseintrag mit TARMED
 version = __opapp_version()
 type = user
 
 [description]
-TARMED Tarifstruktur Browser. Die Änderungen der Tarifstruktur folgen den Vorgaben der Verordnung des Bunderates über die Anpassung von Tarifstrukturen in der Krankenversicherung vom 18.
+Verlaufseintrag mit TARMED Tarifstruktur Browser. 
 
 [developer]
 first_name = Beat
@@ -22,7 +22,7 @@ __opapp_include(readme.md)
 
 [template tarmed 6 7]
 __opapp_include(../lib/polymer2/index_fullscreen.m4)
-__opapp_include(elements/tarmed.html)
+__opapp_include(elements/history.html)
 __opapp_include(elements/app.html)
 
 
