@@ -54,30 +54,37 @@
 
             <vaadin-split-layout id="tarmed" class="fullscreen">
                 <div class="left_bar">
-                    <template is="dom-if" if="{{_isAppState('start')}}" restamp="true">
-                        <paper-button on-click="__openEditmode">Edit</paper-button>
-                    </template>
-                    <template is="dom-if" if="{{_isAppState('edit')}}" restamp="true">
-                        <paper-button on-click="__openEditmode">Start</paper-button>
-                    </template>
+
+                        <template is="dom-if" if="[[!fb_login]]">
+                                <p>Connecting Database...</p>
+                            </template>
+                
+                    <p>[[_app_state]]</p>
+                    <paper-button on-click="__openEditmode">Edit</paper-button>
+                    <paper-button on-click="__openEditmode">Start</paper-button>
                 </div>
                 <div class="right_bar">
-                    <template is="dom-if" if="{{_isAppState('start')}}" restamp="true">
-                        <history-list></history-list>
-                    </template>
-                    <template is="dom-if" if="{{_isAppState('edit')}}" restamp="true">
-                        <history-entry></history-entry>
-                    </template>
+
+                    <iron-pages selected="[[_app_state]]" attr-for-selected="name" fallback-selection="start" role="main">
+                        <div name="start">
+                            <h2>LIST</h2>
+                            <history-list></history-list>
+                        </div>
+                        <div name="edit">
+                            <h2>EDIT</h2>
+                            <history-entry></history-entry>
+                        </div>
+                    </iron-pages>
+
 
                 </div>
             </vaadin-split-layout>
-            <p>Hallo</p>
-            <history-app></history-app>
+
         </div>
     </template>
     <script>
         class optinomicTemplate extends Polymer.mixinBehaviors([
-            opappBehavior
+            opappBehavior, optinomicHISTORY
         ], ReduxBehavior(Polymer.Element)) {
 
             static get is() {

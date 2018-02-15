@@ -61,9 +61,11 @@
                 var config = config_demo;
             };
 
+            if (!firebase.apps.length) {
+                firebase.initializeApp(config);
+                this.__firebase_login(clinic);
+            };
 
-            firebase.initializeApp(config);
-            this.__firebase_login(clinic);
 
         },
 
