@@ -702,7 +702,7 @@
         }
 
         // --------------- Lifecycle ---------------
-        
+
         _setLanguage() {
             this.debounce('_setLanguage', function() {
 
@@ -782,10 +782,25 @@
                         };
                     };
 
-                    console.warn('_init :: TARMED-Browser');
+                    // console.warn('_init :: TARMED-Browser');
 
                 });
             }, 250);
+        }
+
+        _firebase_login() {
+            firebase.auth().signInWithEmailAndPassword(atob('aW5mb0BvcHRpbm9taWMuY29t'), atob('Z280b3B0aW5vbWlj'))
+
+                .then(function(resp) {
+                    console.log('FB-Login-Success: ', resp.email);
+                })
+
+                .catch(function(error) {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    console.log('FB ERROR:', error);
+                });
         }
 
         _init() {
@@ -802,6 +817,9 @@
                     messagingSenderId: "638329991887"
                 };
                 firebase.initializeApp(config);
+
+                // Authenticate
+                this._firebase_login();
 
                 // Initialize Cloud Firestore through Firebase
                 this.db = firebase.firestore();
