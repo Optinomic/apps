@@ -1,4 +1,3 @@
-
 <dom-module id="tarmed-browser">
     <template>
         <style include="optinomic-styles">
@@ -368,7 +367,6 @@
             if (this.selectable) {
                 this.__closeApp();
             };
-
         }
 
         __unselectLNR() {
@@ -420,7 +418,6 @@
             };
         }
 
-
         __isStringEmpty(e) {
             if ((e !== null) && (e !== undefined) && (e !== "")) {
                 return false;
@@ -461,8 +458,6 @@
                 };
 
             });
-
-
         }
 
         // --------------- Functions ---------------
@@ -707,83 +702,89 @@
         }
 
         // --------------- Lifecycle ---------------
+        
         _setLanguage() {
             this.debounce('_setLanguage', function() {
 
-
-                // Grab Treedata
-                this.set('have_treedata', false);
-                this._getTARMEDtree(this.language);
-
-                // Default
-                this.__changedSelectedTreeData({});
-
-
-                if (this.opened) {
-                    var combobox = this.$$('#select_language');
-                    combobox.items = [
-                        { label: 'Deutsch', value: "D" },
-                        { label: 'Français', value: "F" },
-                        { label: 'Italiano', value: "I" }
-                    ];
+                Polymer.RenderStatus.afterNextRender(this, function() {
 
 
 
+                    // Grab Treedata
+                    this.set('have_treedata', false);
+                    this._getTARMEDtree(this.language);
 
-                    // Check current language
-                    if ((this.language !== null) && (this.language !== undefined) && (this.language !== "")) {
-                        if (this.language === "D") {
-                            this.set('is_german', true);
-                            var t = {
-                                "loading": "Laden...",
-                                "search": "Suchen",
-                                "chapter": "Kapitel",
-                                "lnr": "Leistungen",
-                                "select": "Leistung selektieren",
-                                "unselect": "Selektion aufheben",
-                                "anesthesie": "Anesthesie",
-                                "mid": "Medizinische Interpretation",
-                                "tid": "Technische Interpretation",
-                                "rule": "Regeln"
+                    // Default
+                    this.__changedSelectedTreeData({});
+
+
+                    if (this.opened) {
+                        var combobox = this.$$('#select_language');
+                        combobox.items = [
+                            { label: 'Deutsch', value: "D" },
+                            { label: 'Français', value: "F" },
+                            { label: 'Italiano', value: "I" }
+                        ];
+
+
+
+
+                        // Check current language
+                        if ((this.language !== null) && (this.language !== undefined) && (this.language !== "")) {
+                            if (this.language === "D") {
+                                this.set('is_german', true);
+                                var t = {
+                                    "loading": "Laden...",
+                                    "search": "Suchen",
+                                    "chapter": "Kapitel",
+                                    "lnr": "Leistungen",
+                                    "select": "Leistung selektieren",
+                                    "unselect": "Selektion aufheben",
+                                    "anesthesie": "Anesthesie",
+                                    "mid": "Medizinische Interpretation",
+                                    "tid": "Technische Interpretation",
+                                    "rule": "Regeln"
+                                };
                             };
-                        };
-                        if (this.language === "F") {
-                            this.set('is_french', true);
-                            var t = {
-                                "loading": "Charge...",
-                                "search": "Recherche",
-                                "chapter": "Chapitre",
-                                "lnr": "Services",
-                                "select": "Sélectionnez la performance",
-                                "unselect": "Annuler la sélection",
-                                "anesthesie": "Anesthésie",
-                                "mid": "Interprétation médicale",
-                                "tid": "Interprétation technique",
-                                "rule": "Règles"
+                            if (this.language === "F") {
+                                this.set('is_french', true);
+                                var t = {
+                                    "loading": "Charge...",
+                                    "search": "Recherche",
+                                    "chapter": "Chapitre",
+                                    "lnr": "Services",
+                                    "select": "Sélectionnez la performance",
+                                    "unselect": "Annuler la sélection",
+                                    "anesthesie": "Anesthésie",
+                                    "mid": "Interprétation médicale",
+                                    "tid": "Interprétation technique",
+                                    "rule": "Règles"
+                                };
                             };
-                        };
-                        if (this.language === "I") {
-                            this.set('is_italian', true);
-                            var t = {
-                                "loading": "Carico...",
-                                "search": "Ricerca",
-                                "chapter": "Capitolo",
-                                "lnr": "Servizi",
-                                "select": "Seleziona le prestazioni",
-                                "unselect": "Annulla selezione",
-                                "anesthesie": "Anestesia",
-                                "mid": "Interpretazione medica",
-                                "tid": "Interpretazione tecnica",
-                                "rule": "Regole"
+                            if (this.language === "I") {
+                                this.set('is_italian', true);
+                                var t = {
+                                    "loading": "Carico...",
+                                    "search": "Ricerca",
+                                    "chapter": "Capitolo",
+                                    "lnr": "Servizi",
+                                    "select": "Seleziona le prestazioni",
+                                    "unselect": "Annulla selezione",
+                                    "anesthesie": "Anestesia",
+                                    "mid": "Interpretazione medica",
+                                    "tid": "Interpretazione tecnica",
+                                    "rule": "Regole"
+                                };
                             };
+                            this.set('t', t);
+                        } else {
+                            this.language = "D";
                         };
-                        this.set('t', t);
-                    } else {
-                        this.language = "D";
                     };
-                };
 
-                console.warn('_init :: TARMED-Browser', this.language);
+                    console.warn('_init :: TARMED-Browser');
+
+                });
             }, 250);
         }
 

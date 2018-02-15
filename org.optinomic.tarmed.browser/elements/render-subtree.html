@@ -25,13 +25,10 @@
             padding-left: 12px;
         }
 
-        ;
-
         .topborder {
             border-top: 1px solid #E0E0E0;
         }
         </style>
-
         <app-submenu id="submenu" opened="{{opened}}" class="topborder submenu">
             <div on-click="__selectItem" class="app-menu-item" slot="submenu-trigger">
                 <app-menu-item class="horizontal">
@@ -95,11 +92,13 @@
                 },
 
                 knr: {
-                    type: String
+                    type: String,
+                    value: ""
                 },
 
                 lnr: {
-                    type: String
+                    type: String,
+                    value: ""
                 },
 
             };
@@ -108,26 +107,26 @@
         // --------------- Functions ---------------
 
         __checkSelected(d) {
-            
+
             // Open Tree @ knr = this.selected 
-            
+
             var selected_nr = this.knr.split(".");
             var items = [];
-            selected_nr.forEach(function (element, elementID) {
-              items.push(element);
+            selected_nr.forEach(function(element, elementID) {
+                items.push(element);
             });
-            
-            
+
+
             if ("children" in d) {
                 d.children.forEach(function(child) {
-                    
-                    var dive_selected = ""; 
+
+                    var dive_selected = "";
                     items.forEach(function(item, itemID) {
                         dive_selected = dive_selected + item;
-                        
+
                         if ((child.knr === dive_selected) || (child.lnr === this.lnr)) {
-                      
-                            var submenu = this.$.submenu;          
+
+                            var submenu = this.$.submenu;
                             submenu.opened = true;
 
                             // Select LNR
@@ -136,7 +135,7 @@
                             };
                         }
                         dive_selected = dive_selected + ".";
-                        
+
                     }.bind(this));
                 }.bind(this));
             };
@@ -187,11 +186,11 @@
                 };
             } else {
                 if ("knr" in e) {
-                    this.set('lnr_selected', e);    
+                    this.set('lnr_selected', e);
                 } else {
-                    this.set('lnr_selected', this.data);    
+                    this.set('lnr_selected', this.data);
                 };
-                
+
             };
 
 
