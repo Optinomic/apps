@@ -31,8 +31,8 @@
             firebase.auth().signInWithEmailAndPassword(atob('aW5mb0BvcHRpbm9taWMuY29t'), atob('Z280b3B0aW5vbWlj'))
 
                 .then(function (resp) {
-                    console.log(clinic + ' :: FB-Login-Success: ', resp.email);
                     this.set('fb_login', true);
+                    console.log(clinic + ' :: FB-Login-Success: ', resp.email);
                 }.bind(this))
 
                 .catch(function (error) {
@@ -67,6 +67,46 @@
             };
 
 
+        },
+        
+        
+        __addEvent: function (event) {
+            
+            event = event || null;
+            
+            var params = {
+              "userID": parseInt(helpers.getUserID()),
+              "patientID": parseInt(helpers.getPatientID()),
+              "stayID": parseInt(helpers.getStayID()),
+              "appName": helpers.getAppName(),
+              "appID": helpers.getAppID(),
+              "apiURL": helpers.getApiURL()
+            };
+                
+            event = Object.assign(params, event);
+
+            
+            if (event !== null) {
+                var db = firebase.firestore();
+                    
+                // Add a new document (UNIX Timestamp) in entries "PID"
+                var PID = helpers.getPatientID() + "";
+                var ms = new Date().valueOf() + "";
+                
+                db.collection(PID).doc(ms).set(event)
+                .then(function() {
+                    console.log("__addEvent :: Entry successfully written!", PID, event);
+                })
+                .catch(function(error) {
+                    console.error("__addEvent :: Error writing document: ", error);
+                });
+            
+                
+            } else {
+                console.warn('__addEvent :: Event = Null');
+            };
+            
+            
         },
 
         // --------------------------------

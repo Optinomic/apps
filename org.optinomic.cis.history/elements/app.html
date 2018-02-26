@@ -55,13 +55,18 @@
             <vaadin-split-layout id="tarmed" class="fullscreen">
                 <div class="left_bar">
 
-                        <template is="dom-if" if="[[!fb_login]]">
-                                <p>Connecting Database...</p>
-                            </template>
-                
+                    
                     <p>[[_app_state]]</p>
-                    <paper-button on-click="__openEditmode">Edit</paper-button>
-                    <paper-button on-click="__openEditmode">Start</paper-button>
+                    
+                    <iron-pages selected="[[_app_state]]" attr-for-selected="name" fallback-selection="start" role="main">
+                        <div name="start">
+                            <paper-button on-click="__openEditmode">Edit</paper-button>
+                        </div>
+                        <div name="edit">
+                            <paper-button on-click="__closeEditmode">Start</paper-button>
+                        </div>
+                    </iron-pages>
+
                 </div>
                 <div class="right_bar">
 

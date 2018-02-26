@@ -12,12 +12,21 @@
                 min-height: calc(100vh);
             }
 
-            .page {
-                padding: 12px;
-            }
+            .form {}
         </style>
         <div class="fullscreen">
-            <p>history-entry</p>
+            <div class="form">
+                <p>history-entry</p>
+                <template is="dom-if" if="[[init_done]]" restamp="true">
+
+                    <div class="horizontal">
+                        <vaadin-date-picker id="" label="Datum" placeholder="Selektieren Sie ein Datum" i18n="[[i18n]]"></vaadin-date-picker>
+                        <paper-input value="{{d.date}}" label="Date"></paper-input>
+                    </div>
+                    <paper-button on-click="__addEntry">Speichern</paper-button>
+                </template>
+
+            </div>
         </div>
     </template>
     <script>
@@ -37,18 +46,34 @@
             static get properties() {
                 return {
 
-                    _app_state: {
+                    language: {
                         type: String,
-                        value: 'start'
+                        value: 'de'
+                    },
+
+                    _action: {
+                        type: String,
+                        value: 'create'
                     }
+
+
 
                 };
             }
 
             // --------------- Functions ---------------
 
-            _something() {
+            __addEntry(e) {
 
+                var data = {
+                    "datum": "Irgendwas",
+                    "tarmed_knr": "02.00",
+                    "tarmed_lnr": "02.0020",
+                    "text": "Ein längerer Eintrag."
+                };
+
+                this.__addEvent(data);
+                console.log('__addEntry', this._action);
             }
 
 
@@ -56,7 +81,153 @@
 
             _init() {
 
-                console.warn('_init :: <history-entry>');
+                var i18n_e = {
+                    // An array with the full names of months starting
+                    // with January.
+                    monthNames: [
+                        'January', 'February', 'March', 'April', 'May',
+                        'June', 'July', 'August', 'September',
+                        'October', 'November', 'December'
+                    ],
+
+                    // An array of weekday names starting with Sunday. Used
+                    // in screen reader announcements.
+                    weekdays: [
+                        'Sunday', 'Monday', 'Tuesday', 'Wednesday',
+                        'Thursday', 'Friday', 'Saturday'
+                    ],
+
+                    // An array of short weekday names starting with Sunday.
+                    // Displayed in the calendar.
+                    weekdaysShort: [
+                        'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
+                    ],
+
+                    // An integer indicating the first day of the week
+                    // (0 = Sunday, 1 = Monday, etc.).
+                    firstDayOfWeek: 0,
+
+                    // Used in screen reader announcements along with week
+                    // numbers, if they are displayed.
+                    week: 'Week',
+
+                    // Translation of the Calendar icon button title.
+                    calendar: 'Calendar',
+
+                    // Translation of the Clear icon button title.
+                    clear: 'Clear',
+
+                    // Translation of the Today shortcut button text.
+                    today: 'Today',
+
+                    // Translation of the Cancel button text.
+                    cancel: 'Cancel',
+
+                    // A function to format given `Object` as
+                    // date string. Object is in the format `{ day: ..., month: ..., year: ... }`
+                    formatDate: d => {
+                        // returns a string representation of the given
+                        // object in 'MM/DD/YYYY' -format
+                    },
+
+                    // A function to parse the given text to an `Object` in the format `{ day: ..., month: ..., year: ... }`.
+                    // Must properly parse (at least) text
+                    // formatted by `formatDate`.
+                    // Setting the property to null will disable
+                    // keyboard input feature.
+                    parseDate: text => {
+                        // Parses a string in 'MM/DD/YY', 'MM/DD' or 'DD' -format to
+                        // an `Object` in the format `{ day: ..., month: ..., year: ... }`.
+                    },
+
+                    // A function to format given `monthName` and
+                    // `fullYear` integer as calendar title string.
+                    formatTitle: (monthName, fullYear) => {
+                        return monthName + ' ' + fullYear;
+                    }
+                };
+
+                var i18n_de = {
+                    // An array with the full names of months starting
+                    // with January.
+                    monthNames: [
+                        'Januar', 'Februar', 'März', 'April', 'Mai',
+                        'Juni', 'Juli', 'August', 'September',
+                        'Oktober', 'November', 'Dezember'
+                    ],
+
+                    // An array of weekday names starting with Sunday. Used
+                    // in screen reader announcements.
+                    weekdays: [
+                        'Sonntag', 'Montag', 'Dienstag', 'Mittwoch',
+                        'Donnerstag', 'Freitag', 'Samstag'
+                    ],
+
+                    // An array of short weekday names starting with Sunday.
+                    // Displayed in the calendar.
+                    weekdaysShort: [
+                        'So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'
+                    ],
+
+                    // An integer indicating the first day of the week
+                    // (0 = Sunday, 1 = Monday, etc.).
+                    firstDayOfWeek: 1,
+
+                    // Used in screen reader announcements along with week
+                    // numbers, if they are displayed.
+                    week: 'Woche',
+
+                    // Translation of the Calendar icon button title.
+                    calendar: 'Kalender',
+
+                    // Translation of the Clear icon button title.
+                    clear: 'Löschen',
+
+                    // Translation of the Today shortcut button text.
+                    today: 'Heute',
+
+                    // Translation of the Cancel button text.
+                    cancel: 'Abbrechen',
+
+                    // A function to format given `Object` as
+                    // date string. Object is in the format `{ day: ..., month: ..., year: ... }`
+                    formatDate: d => {
+                        // returns a string representation of the given
+                        // object in 'MM/DD/YYYY' -format
+                    },
+
+                    // A function to parse the given text to an `Object` in the format `{ day: ..., month: ..., year: ... }`.
+                    // Must properly parse (at least) text
+                    // formatted by `formatDate`.
+                    // Setting the property to null will disable
+                    // keyboard input feature.
+                    parseDate: text => {
+                        // Parses a string in 'MM/DD/YY', 'MM/DD' or 'DD' -format to
+                        // an `Object` in the format `{ day: ..., month: ..., year: ... }`.
+                    },
+
+                    // A function to format given `monthName` and
+                    // `fullYear` integer as calendar title string.
+                    formatTitle: (monthName, fullYear) => {
+                        return monthName + ' ' + fullYear;
+                    }
+                }
+
+                var d = {
+                    "date": new Date()
+                };
+
+
+                if (this.language === 'de') {
+                    this.set('i18n', i18n_de);
+                } else {
+                    this.set('i18n', i18n_e);
+                };
+
+                this.set('d', d);
+                
+                this.set('init_done', true);
+                console.warn('_init :: <history-entry>', d, i18n);
             }
 
             constructor() {

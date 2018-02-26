@@ -86,24 +86,31 @@
                     </template>
                 </div>
                 <div>
-                    <template is="dom-if" if="[[_data_ready]]" restamp="true">
-                        <template is="dom-if" if="[[_created_CSV]]" restamp="true">
-                            <div class="horizontal">
-                                <file-download file="[[_csv_file]]" stringify="false" extension="csv" name="[[definition.options.name]]" tooltip="left" button-color="indigo"></file-download>
-                                <file-download icon="file-download" button-color="indigo" file="[[_json_file]]" extension="json" name="[[definition.options.name]]" tooltip="left"></file-download>
-                            </div>
-                        </template>
-                        <template is="dom-if" if="[[!_created_CSV]]" restamp="true">
-                            <paper-spinner active></paper-spinner>
-                        </template>
+                    <template is="dom-if" if="[[_error]]" restamp="true">
+                        <p class="red" style="margin-right:24px;">&nbsp; Error &nbsp;</p>
                     </template>
-                    <template is="dom-if" if="[[!_data_ready]]" restamp="true">
-                        <template is="dom-if" if="[[!_loading]]" restamp="true">
-                            <paper-button class="grey" on-click="_loadData">Anfordern</paper-button>
-                        </template>
+                    <template is="dom-if" if="[[!_error]]" restamp="true">
+                        <div class="horizontal">
+                            <template is="dom-if" if="[[_data_ready]]" restamp="true">
+                                <template is="dom-if" if="[[_created_CSV]]" restamp="true">
+                                    <div class="horizontal">
+                                        <file-download file="[[_csv_file]]" stringify="false" extension="csv" name="[[definition.options.name]]" tooltip="left" button-color="indigo"></file-download>
+                                        <file-download icon="file-download" button-color="indigo" file="[[_json_file]]" extension="json" name="[[definition.options.name]]" tooltip="left"></file-download>
+                                    </div>
+                                </template>
+                                <template is="dom-if" if="[[!_created_CSV]]" restamp="true">
+                                    <paper-spinner active></paper-spinner>
+                                </template>
+                            </template>
+                            <template is="dom-if" if="[[!_data_ready]]" restamp="true">
+                                <template is="dom-if" if="[[!_loading]]" restamp="true">
+                                    <paper-button class="grey" on-click="_loadData">Anfordern</paper-button>
+                                </template>
+                            </template>
+                            <paper-icon-button icon="more-vert" on-click="_showMore" class="grey"></paper-icon-button>
+                        </div>
                     </template>
                 </div>
-                <paper-icon-button icon="more-vert" on-click="_showMore" class="grey"></paper-icon-button>
             </div>
             <iron-collapse id="collapse">
                 <div class="horizontal">
@@ -451,163 +458,169 @@
             Polymer.RenderStatus.afterNextRender(this, function() {
 
                 if ((this._sr !== undefined) && (this._sr !== null)) {
-                    if (this._sr.survey_responses.length > 0) {
 
-                        // We have data -> Proceed.
-                        var _sr = Object.assign({}, this.get('_sr'));
-                        if ("survey_responses" in _sr) {
+                    if ("survey_responses" in this._sr) {
+                        if (this._sr.survey_responses.length > 0) {
 
-                            var file_responses = [];
-                            if (filtered) {
-                                // filter responses
+                            // We have data -> Proceed.
+                            var _sr = Object.assign({}, this.get('_sr'));
+                            if ("survey_responses" in _sr) {
 
-                                var date_rules = false;
-                                var pg_rules = false;
+                                var file_responses = [];
+                                if (filtered) {
+                                    // filter responses
 
-                                if ((this.filter !== null) && (this.filter !== undefined)) {
-                                    if (this.filter.erhungszeitraum.active) {
-                                        date_rules = true;
-                                        // console.log('date_rules', date_rules, this.filter.erhungszeitraum);
+                                    var date_rules = false;
+                                    var pg_rules = false;
+
+                                    if ((this.filter !== null) && (this.filter !== undefined)) {
+                                        if (this.filter.erhungszeitraum.active) {
+                                            date_rules = true;
+                                            // console.log('date_rules', date_rules, this.filter.erhungszeitraum);
+                                        };
+                                        if ((this.filter.pg.active) && (this.filter.pg.rules.length > 0)) {
+                                            pg_rules = true;
+                                            // console.log('pg_rules', pg_rules, this.filter.pg.rules);
+                                        };
                                     };
-                                    if ((this.filter.pg.active) && (this.filter.pg.rules.length > 0)) {
-                                        pg_rules = true;
-                                        // console.log('pg_rules', pg_rules, this.filter.pg.rules);
-                                    };
-                                };
 
-                                _sr.survey_responses.forEach(function(sr, srID) {
+                                    _sr.survey_responses.forEach(function(sr, srID) {
 
-                                    // Patientengruppen Regeln
-                                    if (pg_rules) {
-                                        var to_add = null;
-                                        this.filter.pg.rules.forEach(function(r, rID) {
-                                            if (r.operator === "IN") {
-                                                if ((r.criterion === "AND") || (r.criterion === null)) {
-                                                    if ((to_add === true) || (to_add === null)) {
-                                                        to_add = check_pg_group(sr.patient_groups.patient_in_group.yes, r.pg);
+                                        // Patientengruppen Regeln
+                                        if (pg_rules) {
+                                            var to_add = null;
+                                            this.filter.pg.rules.forEach(function(r, rID) {
+                                                if (r.operator === "IN") {
+                                                    if ((r.criterion === "AND") || (r.criterion === null)) {
+                                                        if ((to_add === true) || (to_add === null)) {
+                                                            to_add = check_pg_group(sr.patient_groups.patient_in_group.yes, r.pg);
+                                                        };
+                                                    } else {
+                                                        if ((to_add === false)) {
+                                                            to_add = check_pg_group(sr.patient_groups.patient_in_group.yes, r.pg);
+                                                        };
                                                     };
+
                                                 } else {
-                                                    if ((to_add === false)) {
-                                                        to_add = check_pg_group(sr.patient_groups.patient_in_group.yes, r.pg);
+                                                    if ((r.criterion === "AND") || (r.criterion === null)) {
+                                                        if ((to_add === true) || (to_add === null)) {
+                                                            to_add = check_pg_group(sr.patient_groups.patient_in_group.no, r.pg);
+                                                        };
+                                                    } else {
+                                                        if ((to_add === false)) {
+                                                            to_add = check_pg_group(sr.patient_groups.patient_in_group.no, r.pg);
+                                                        };
                                                     };
                                                 };
+                                            });
 
-                                            } else {
-                                                if ((r.criterion === "AND") || (r.criterion === null)) {
-                                                    if ((to_add === true) || (to_add === null)) {
-                                                        to_add = check_pg_group(sr.patient_groups.patient_in_group.no, r.pg);
-                                                    };
-                                                } else {
-                                                    if ((to_add === false)) {
-                                                        to_add = check_pg_group(sr.patient_groups.patient_in_group.no, r.pg);
-                                                    };
-                                                };
-                                            };
-                                        });
-
-                                        if (to_add) {
-                                            file_responses.push(sr);
-                                        };
-                                    } else {
-                                        // all responses
-                                        file_responses = _sr.survey_responses;
-                                    };
-                                }.bind(this));
-
-                                // Erhebungszeitraum Regeln
-                                if (date_rules) {
-                                    var stored_responses = file_responses.slice(0);
-                                    file_responses = [];
-                                    stored_responses.forEach(function(sr, rID) {
-
-                                        var filled = sr.survey_response.filled;
-                                        var filter = this.filter.erhungszeitraum;
-
-                                        var eintritt_in_range = dateCheck(filter.from, filter.to, sr.stay.start);
-                                        var austritt_in_range = dateCheck(filter.from, filter.to, sr.stay.stop);
-
-                                        // Falltyp: Alle
-                                        if (filter.typ === "Alle") {
-                                            if (dateCheck(filter.from, filter.to, filled)) {
+                                            if (to_add) {
                                                 file_responses.push(sr);
                                             };
+                                        } else {
+                                            // all responses
+                                            file_responses = _sr.survey_responses;
                                         };
-
-                                        // Falltyp: A1
-                                        if (filter.typ === "A1") {
-                                            if ((eintritt_in_range === true) && (austritt_in_range === true)) {
-                                                file_responses.push(sr);
-                                            };
-                                        };
-
-                                        // Falltyp: A2
-                                        if (filter.typ === "A2") {
-                                            if ((eintritt_in_range === false) && (austritt_in_range === true)) {
-                                                file_responses.push(sr);
-                                            };
-                                        };
-
-                                        // Falltyp: B
-                                        if (filter.falltyp === "B") {
-                                            if ((eintritt_in_range === true) && (austritt_in_range === false)) {
-                                                file_responses.push(sr);
-                                            };
-                                        };
-
-                                        // Falltyp: C
-                                        if (filter.typ === "C") {
-                                            if ((eintritt_in_range === true) && (austritt_in_range === false)) {
-                                                file_responses.push(sr);
-                                            };
-                                        };
-
-                                        // Falltyp: S1
-                                        if (filter.typ === "S1") {
-                                            if (eintritt_in_range === true) {
-                                                file_responses.push(sr);
-                                            };
-                                        };
-
-                                        // Falltyp: S2
-                                        if (filter.typ === "S2") {
-                                            if (austritt_in_range === true) {
-                                                file_responses.push(sr);
-                                            };
-                                        };
-
-                                        // Falltyp: S3
-                                        if (filter.typ === "S3") {
-                                            if ((eintritt_in_range === true) || (austritt_in_range === true)) {
-                                                file_responses.push(sr);
-                                            };
-                                        };
-
-                                        // console.log('Erhebungszeitraum', filled, eintritt_in_range, austritt_in_range);
-
                                     }.bind(this));
+
+                                    // Erhebungszeitraum Regeln
+                                    if (date_rules) {
+                                        var stored_responses = file_responses.slice(0);
+                                        file_responses = [];
+                                        stored_responses.forEach(function(sr, rID) {
+
+                                            var filled = sr.survey_response.filled;
+                                            var filter = this.filter.erhungszeitraum;
+
+                                            var eintritt_in_range = dateCheck(filter.from, filter.to, sr.stay.start);
+                                            var austritt_in_range = dateCheck(filter.from, filter.to, sr.stay.stop);
+
+                                            // Falltyp: Alle
+                                            if (filter.typ === "Alle") {
+                                                if (dateCheck(filter.from, filter.to, filled)) {
+                                                    file_responses.push(sr);
+                                                };
+                                            };
+
+                                            // Falltyp: A1
+                                            if (filter.typ === "A1") {
+                                                if ((eintritt_in_range === true) && (austritt_in_range === true)) {
+                                                    file_responses.push(sr);
+                                                };
+                                            };
+
+                                            // Falltyp: A2
+                                            if (filter.typ === "A2") {
+                                                if ((eintritt_in_range === false) && (austritt_in_range === true)) {
+                                                    file_responses.push(sr);
+                                                };
+                                            };
+
+                                            // Falltyp: B
+                                            if (filter.falltyp === "B") {
+                                                if ((eintritt_in_range === true) && (austritt_in_range === false)) {
+                                                    file_responses.push(sr);
+                                                };
+                                            };
+
+                                            // Falltyp: C
+                                            if (filter.typ === "C") {
+                                                if ((eintritt_in_range === true) && (austritt_in_range === false)) {
+                                                    file_responses.push(sr);
+                                                };
+                                            };
+
+                                            // Falltyp: S1
+                                            if (filter.typ === "S1") {
+                                                if (eintritt_in_range === true) {
+                                                    file_responses.push(sr);
+                                                };
+                                            };
+
+                                            // Falltyp: S2
+                                            if (filter.typ === "S2") {
+                                                if (austritt_in_range === true) {
+                                                    file_responses.push(sr);
+                                                };
+                                            };
+
+                                            // Falltyp: S3
+                                            if (filter.typ === "S3") {
+                                                if ((eintritt_in_range === true) || (austritt_in_range === true)) {
+                                                    file_responses.push(sr);
+                                                };
+                                            };
+
+                                            // console.log('Erhebungszeitraum', filled, eintritt_in_range, austritt_in_range);
+
+                                        }.bind(this));
+                                    };
+
+
+                                } else {
+                                    // all responses
+                                    file_responses = _sr.survey_responses;
                                 };
 
+                                this.set('_json_file', null);
+                                this.set('_json_file', create_json(file_responses, this._dataDive));
+                                this.set('_created_JSON', true);
 
-                            } else {
-                                // all responses
-                                file_responses = _sr.survey_responses;
+                                this.set('_csv_file', null);
+                                this.set('_csv_file', create_csv(this._json_file));
+                                this.set('_created_CSV', true);
+
+                                // console.log('_createCSVandJSONFile', this._csv_file, this._json_file);
+
+                                this.dispatchEvent(new CustomEvent('json', { detail: this._json_file }));
+
+                                this.dispatchEvent(new CustomEvent('csv', { detail: this._csv_file }));
+
                             };
-
-                            this.set('_json_file', null);
-                            this.set('_json_file', create_json(file_responses, this._dataDive));
-                            this.set('_created_JSON', true);
-
-                            this.set('_csv_file', null);
-                            this.set('_csv_file', create_csv(this._json_file));
-                            this.set('_created_CSV', true);
-
-                            // console.log('_createCSVandJSONFile', this._csv_file, this._json_file);
-
-                            this.dispatchEvent(new CustomEvent('json', { detail: this._json_file }));
-
-                            this.dispatchEvent(new CustomEvent('csv', { detail: this._csv_file }));
-
                         };
+                    } else {
+                        console.warn('ERROR:', this._sr);
+                        this.set('_error', true);
                     };
                 };
             });
@@ -728,6 +741,8 @@
         _init() {
             this.set('_loading', false);
             this.set('_data_ready', false);
+            this.set('_error', false);
+
             // console.warn('_init :: Export-Toolbox', this.definition);
         }
 

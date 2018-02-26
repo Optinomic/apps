@@ -3985,6 +3985,9 @@ window.customElements.define(optinomicApp.is, optinomicApp);
 <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-firestore.js"></script>
 
 
+<link rel="import" href="vaadin-date-picker/vaadin-date-picker.html">
+
+
 <script>
     optinomicHISTORY = {
 
@@ -4018,8 +4021,8 @@ window.customElements.define(optinomicApp.is, optinomicApp);
             firebase.auth().signInWithEmailAndPassword(atob('aW5mb0BvcHRpbm9taWMuY29t'), atob('Z280b3B0aW5vbWlj'))
 
                 .then(function (resp) {
-                    console.log(clinic + ' :: FB-Login-Success: ', resp.email);
                     this.set('fb_login', true);
+                    console.log(clinic + ' :: FB-Login-Success: ', resp.email);
                 }.bind(this))
 
                 .catch(function (error) {
@@ -4048,9 +4051,51 @@ window.customElements.define(optinomicApp.is, optinomicApp);
                 var config = config_demo;
             };
 
+            if (!firebase.apps.length) {
+                firebase.initializeApp(config);
+                this.__firebase_login(clinic);
+            };
 
-            firebase.initializeApp(config);
-            this.__firebase_login(clinic);
+
+        },
+
+
+        __addEvent: function (event) {
+
+            event = event || null;
+
+            var params = {
+                "userID": parseInt(helpers.getUserID()),
+                "patientID": parseInt(helpers.getPatientID()),
+                "stayID": parseInt(helpers.getStayID()),
+                "appName": helpers.getAppName(),
+                "appID": helpers.getAppID(),
+                "apiURL": helpers.getApiURL()
+            };
+
+            event = Object.assign(params, event);
+
+
+            if (event !== null) {
+                var db = firebase.firestore();
+
+                // Add a new document (UNIX Timestamp) in entries "PID"
+                var PID = helpers.getPatientID() + "";
+                var ms = new Date().valueOf() + "";
+
+                db.collection(PID).doc(ms).set(event)
+                    .then(function () {
+                        console.log("__addEvent :: Entry successfully written!", PID, event);
+                    })
+                    .catch(function (error) {
+                        console.error("__addEvent :: Error writing document: ", error);
+                    });
+
+
+            } else {
+                console.warn('__addEvent :: Event = Null');
+            };
+
 
         },
 
@@ -4069,6 +4114,9 @@ window.customElements.define(optinomicApp.is, optinomicApp);
         }
     };
 </script>
+
+
+
 <dom-module id="history-list">
     <template>
         <style include="optinomic-styles">
@@ -4088,14 +4136,8 @@ window.customElements.define(optinomicApp.is, optinomicApp);
             }
         </style>
         <div class="fullscreen">
-            <template is="dom-if" if="[[fb_login]]">
                 <p>history-list</p>
-            </template>
-
-            <template is="dom-if" if="[[!fb_login]]">
-                <p>Connecting Database...</p>
-            </template>
-
+            
         </div>
     </template>
     <script>
@@ -4153,6 +4195,9 @@ window.customElements.define(optinomicApp.is, optinomicApp);
         window.customElements.define(historyList.is, historyList);
     </script>
 </dom-module>
+
+
+
 <dom-module id="history-entry">
     <template>
         <style include="optinomic-styles">
@@ -4167,19 +4212,21 @@ window.customElements.define(optinomicApp.is, optinomicApp);
                 min-height: calc(100vh);
             }
 
-            .page {
-                padding: 12px;
-            }
+            .form {}
         </style>
         <div class="fullscreen">
-            <template is="dom-if" if="[[fb_login]]">
+            <div class="form">
                 <p>history-entry</p>
-            </template>
+                <template is="dom-if" if="[[init_done]]" restamp="true">
 
-            <template is="dom-if" if="[[!fb_login]]">
-                <p>Connecting Database...</p>
-            </template>
+                    <div class="horizontal">
+                        <vaadin-date-picker id="" label="Datum" placeholder="Selektieren Sie ein Datum" i18n="[[i18n]]"></vaadin-date-picker>
+                        <paper-input value="{{d.date}}" label="Date"></paper-input>
+                    </div>
+                    <paper-button on-click="__addEntry">Speichern</paper-button>
+                </template>
 
+            </div>
         </div>
     </template>
     <script>
@@ -4199,18 +4246,34 @@ window.customElements.define(optinomicApp.is, optinomicApp);
             static get properties() {
                 return {
 
-                    _app_state: {
+                    language: {
                         type: String,
-                        value: 'start'
+                        value: 'de'
+                    },
+
+                    _action: {
+                        type: String,
+                        value: 'create'
                     }
+
+
 
                 };
             }
 
             // --------------- Functions ---------------
 
-            _something() {
+            __addEntry(e) {
 
+                var data = {
+                    "datum": "Irgendwas",
+                    "tarmed_knr": "02.00",
+                    "tarmed_lnr": "02.0020",
+                    "text": "Ein längerer Eintrag."
+                };
+
+                this.__addEvent(data);
+                console.log('__addEntry', this._action);
             }
 
 
@@ -4218,7 +4281,165 @@ window.customElements.define(optinomicApp.is, optinomicApp);
 
             _init() {
 
-                console.warn('_init :: <history-entry>');
+                var i18n_e = {
+                    // An array with the full names of months starting
+                    // with January.
+                    monthNames: [
+                        'January', 'February', 'March', 'April', 'May',
+                        'June', 'July', 'August', 'September',
+                        'October', 'November', 'December'
+                    ],
+
+                    // An array of weekday names starting with Sunday. Used
+                    // in screen reader announcements.
+                    weekdays: [
+                        'Sunday', 'Monday', 'Tuesday', 'Wednesday',
+                        'Thursday', 'Friday', 'Saturday'
+                    ],
+
+                    // An array of short weekday names starting with Sunday.
+                    // Displayed in the calendar.
+                    weekdaysShort: [
+                        'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
+                    ],
+
+                    // An integer indicating the first day of the week
+                    // (0 = Sunday, 1 = Monday, etc.).
+                    firstDayOfWeek: 0,
+
+                    // Used in screen reader announcements along with week
+                    // numbers, if they are displayed.
+                    week: 'Week',
+
+                    // Translation of the Calendar icon button title.
+                    calendar: 'Calendar',
+
+                    // Translation of the Clear icon button title.
+                    clear: 'Clear',
+
+                    // Translation of the Today shortcut button text.
+                    today: 'Today',
+
+                    // Translation of the Cancel button text.
+                    cancel: 'Cancel',
+
+                    // A function to format given `Object` as
+                    // date string. Object is in the format `{ day: ..., month: ..., year: ... }`
+                    formatDate: d => {
+                        // returns a string representation of the given
+                        // object in 'MM/DD/YYYY' -format
+                    },
+
+                    // A function to parse the given text to an `Object` in the format `{ day: ..., month: ..., year: ... }`.
+                    // Must properly parse (at least) text
+                    // formatted by `formatDate`.
+                    // Setting the property to null will disable
+                    // keyboard input feature.
+                    parseDate: text => {
+                        // Parses a string in 'MM/DD/YY', 'MM/DD' or 'DD' -format to
+                        // an `Object` in the format `{ day: ..., month: ..., year: ... }`.
+                    },
+
+                    // A function to format given `monthName` and
+                    // `fullYear` integer as calendar title string.
+                    formatTitle: (monthName, fullYear) => {
+                        return monthName + ' ' + fullYear;
+                    }
+                };
+
+                var i18n_de = {
+                    // An array with the full names of months starting
+                    // with January.
+                    monthNames: [
+                        'Januar', 'Februar', 'März', 'April', 'Mai',
+                        'Juni', 'Juli', 'August', 'September',
+                        'Oktober', 'November', 'Dezember'
+                    ],
+
+                    // An array of weekday names starting with Sunday. Used
+                    // in screen reader announcements.
+                    weekdays: [
+                        'Sonntag', 'Montag', 'Dienstag', 'Mittwoch',
+                        'Donnerstag', 'Freitag', 'Samstag'
+                    ],
+
+                    // An array of short weekday names starting with Sunday.
+                    // Displayed in the calendar.
+                    weekdaysShort: [
+                        'So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'
+                    ],
+
+                    // An integer indicating the first day of the week
+                    // (0 = Sunday, 1 = Monday, etc.).
+                    firstDayOfWeek: 1,
+
+                    // Used in screen reader announcements along with week
+                    // numbers, if they are displayed.
+                    week: 'Woche',
+
+                    // Translation of the Calendar icon button title.
+                    calendar: 'Kalender',
+
+                    // Translation of the Clear icon button title.
+                    clear: 'Löschen',
+
+                    // Translation of the Today shortcut button text.
+                    today: 'Heute',
+
+                    // Translation of the Cancel button text.
+                    cancel: 'Abbrechen',
+
+                    // A function to format given `Object` as
+                    // date string. Object is in the format `{ day: ..., month: ..., year: ... }`
+                    formatDate: d => {
+                        
+                        
+                        // returns a string representation of the given
+                        // object in 'MM/DD/YYYY' -format
+                        //console.error('????? formatDate', d.toISOString());
+                        
+                        return d;
+                        
+                    },
+
+                    // A function to parse the given text to an `Object` in the format `{ day: ..., month: ..., year: ... }`.
+                    // Must properly parse (at least) text
+                    // formatted by `formatDate`.
+                    // Setting the property to null will disable
+                    // keyboard input feature.
+                    parseDate: text => {
+                        // Parses a string in 'MM/DD/YY', 'MM/DD' or 'DD' -format to
+                        // an `Object` in the format `{ day: ..., month: ..., year: ... }`.
+                        
+                        // console.error('????? parseDate', text);
+                        // 
+                        return new Date(text);
+                        
+                        
+                    },
+
+                    // A function to format given `monthName` and
+                    // `fullYear` integer as calendar title string.
+                    formatTitle: (monthName, fullYear) => {
+                        return monthName + ' ' + fullYear;
+                    }
+                }
+
+                var d = {
+                    "date": new Date()
+                };
+this.set('d', d);
+                
+
+                if (this.language === 'de') {
+                    this.set('i18n', i18n_de);
+                } else {
+                    this.set('i18n', i18n_e);
+                };
+
+                
+                this.set('init_done', true);
+                console.warn('_init :: <history-entry>', this.d, this.i18n);
             }
 
             constructor() {
@@ -4237,6 +4458,7 @@ window.customElements.define(optinomicApp.is, optinomicApp);
         window.customElements.define(historyEntry.is, historyEntry);
     </script>
 </dom-module>
+
 
 <link rel="import" href="polymer/polymer-element.html">
 <link rel="import" href="iron-pages/iron-pages.html">
@@ -4260,6 +4482,8 @@ window.customElements.define(optinomicApp.is, optinomicApp);
 <link rel="import" href="vaadin-split-layout/vaadin-split-layout.html">
 <link rel="import" href="vaadin-dialog/vaadin-dialog.html">
 <link rel="import" href="vaadin-combo-box/vaadin-combo-box.html">
+
+
 <dom-module id="optinomic-template">
     <template>
         <style include="optinomic-styles">
@@ -4294,30 +4518,42 @@ window.customElements.define(optinomicApp.is, optinomicApp);
 
             <vaadin-split-layout id="tarmed" class="fullscreen">
                 <div class="left_bar">
-                    <template is="dom-if" if="{{_isAppState('start')}}" restamp="true">
-                        <paper-button on-click="__openEditmode">Edit</paper-button>
-                    </template>
-                    <template is="dom-if" if="{{_isAppState('edit')}}" restamp="true">
-                        <paper-button on-click="__openEditmode">Start</paper-button>
-                    </template>
+
+                    
+                    <p>[[_app_state]]</p>
+                    
+                    <iron-pages selected="[[_app_state]]" attr-for-selected="name" fallback-selection="start" role="main">
+                        <div name="start">
+                            <paper-button on-click="__openEditmode">Edit</paper-button>
+                        </div>
+                        <div name="edit">
+                            <paper-button on-click="__closeEditmode">Start</paper-button>
+                        </div>
+                    </iron-pages>
+
                 </div>
                 <div class="right_bar">
-                    <template is="dom-if" if="{{_isAppState('start')}}" restamp="true">
-                        <history-list></history-list>
-                    </template>
-                    <template is="dom-if" if="{{_isAppState('edit')}}" restamp="true">
-                        <history-entry></history-entry>
-                    </template>
+
+                    <iron-pages selected="[[_app_state]]" attr-for-selected="name" fallback-selection="start" role="main">
+                        <div name="start">
+                            <h2>LIST</h2>
+                            <history-list></history-list>
+                        </div>
+                        <div name="edit">
+                            <h2>EDIT</h2>
+                            <history-entry></history-entry>
+                        </div>
+                    </iron-pages>
+
 
                 </div>
             </vaadin-split-layout>
-            <p>Hallo</p>
-            <history-app></history-app>
+
         </div>
     </template>
     <script>
         class optinomicTemplate extends Polymer.mixinBehaviors([
-            opappBehavior
+            opappBehavior, optinomicHISTORY
         ], ReduxBehavior(Polymer.Element)) {
 
             static get is() {
