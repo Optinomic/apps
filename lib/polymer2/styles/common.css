@@ -1,0 +1,53 @@
+
+        paper-progress {
+            display: block;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            --paper-progress-active-color: rgba(255, 255, 255, 0.5);
+            --paper-progress-container-color: #9E9E9E;
+        }
+
+        .app_actions {
+            display: block;
+            position: absolute;
+            top: 1px;
+            right: 52px;
+            z-index: 10;
+        }
+
+        .readme_container {
+            background-color: #FAFAFA;
+            padding: 24px 48px;
+            border-radius: 24px;
+        }
+
+        
+        .page {
+            position: relative;
+            left: 0;
+            top: 0;
+            display: box;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.2)
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 550ms
+        }
+
+        .zoom-in {
+            animation: zoomIn 2s -1s
+        }
