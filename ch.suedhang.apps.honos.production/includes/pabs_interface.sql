@@ -25,9 +25,14 @@ SELECT
 
   CASE (CASE WHEN ((cast(response AS json))->>'q401V04')~E'^\\d+$' THEN ((cast(response AS json))->>'q401V04')::integer ELSE 3 END)
   WHEN 1 THEN to_char(stay.start, 'YYYYMMDD')
-  WHEN 2 THEN to_char(stay.stop, 'YYYYMMDD')
+  WHEN 2 THEN 
+    CASE (CASE WHEN (to_char(stay.stop, 'YYYYMMDD') IS NULL OR to_char(stay.stop, 'YYYYMMDD') = '') THEN 1 ELSE 2 END)
+    WHEN 1 THEN TO_CHAR(TO_DATE(((cast(response AS json))->>'q402V00'), 'YYYY-MM-DD'), 'YYYYMMDD')
+    WHEN 2 THEN to_char(stay.stop, 'YYYYMMDD')
+    END
   ELSE TO_CHAR(TO_DATE(((cast(response AS json))->>'q402V00'), 'YYYY-MM-DD'), 'YYYYMMDD')
   END as datum_erhebung_honos,
+ 
 
   ((cast(response AS json))->>'H1[402V01]') as honos_h1,
   ((cast(response AS json))->>'H1[402V02]') as honos_h2,
