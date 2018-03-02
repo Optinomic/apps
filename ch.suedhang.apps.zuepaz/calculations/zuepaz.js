@@ -98,7 +98,10 @@ function main(responses) {
             full_score = full_score + parseInt(d.Q00017);
             anz_anworten_behandlung = anz_anworten_behandlung + 1;
         };
-
+        if (d.Q00017b !== "999"){
+            full_score = full_score + parseInt(d.Q00017b);
+            anz_anworten_behandlung = anz_anworten_behandlung + 1;
+        };
         if (d.Q00018 !== "kA" && d.Q00018 !== "999") {
             full_score = full_score + parseInt(d.Q00018);
             anz_anworten_behandlung = anz_anworten_behandlung + 1;
