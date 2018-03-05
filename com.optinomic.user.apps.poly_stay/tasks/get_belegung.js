@@ -136,7 +136,7 @@ function writeBelegung(annot_obj) {
         // console.log('writeBelegung:', patient_id, body.value);
 
         helpers.callAPI("PUT", apiStr, null, body, function(resp_write) {
-            console.log(' -> write ', patient_id);
+            // console.log('-> write ', patient_id);
             resolve(JSON.stringify(annot_obj));
         });
 
@@ -203,7 +203,7 @@ function get_belegung_task(filters) {
 
                                     writeBelegung(write_obj).then(function(write_done) {
 
-                                        console.log('===>  write_obj', bel_array[0].pid, patients_count, patients_current);
+                                        // console.log('-->  write_obj', bel_array[0].pid, patients_count, patients_current);
 
 
                                         if (patients_count === patients_current) {
