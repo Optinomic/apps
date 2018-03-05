@@ -24,16 +24,16 @@ function get_belegung() {
             "description": "Unbekannt / Nicht festgelegt"
         }, {
             "bel_id": 1,
-            "name": "QuEA",
-            "description": "Qualitfizierter Entzug und Abklaerung"
+            "name": "EAS",
+            "description": "Entzugs- und Abklaerungsstation"
         }, {
             "bel_id": 2,
-            "name": "PTS",
-            "description": "Stationäre Psychotherapie"
+            "name": "EP",
+            "description": "Entwoehnungsprogramm"
         }, {
             "bel_id": 3,
-            "name": "QuEA & PTS",
-            "description": "Qualitfizierter Entzug und Abklaerung sowie Stationäre Psychotherapie"
+            "name": "EAS & EP",
+            "description": "Entzugs- & Abklaerungsstation sowie Entwoehnungsprogramm"
         }, {
             "bel_id": 4,
             "name": "TK",
@@ -350,16 +350,16 @@ function process_stay(stay) {
                     var bel_response = JSON.parse(resp_bel.responseText);
 
                     bel_response.rows.forEach(function(bel, my_bel_index) {
-                        if (((bel.ORG === "EAS") || (bel.ORG === "QuEA")) && (belegung.current.bel_id === 0)) {
+                        if ((bel.ORG === "EAS") && (belegung.current.bel_id === 0)) {
                             belegung.current = belegung.art[1];
                         };
-                        if (((bel.ORG === "EAS") || (bel.ORG === "QuEA"))  && (belegung.current.bel_id === 2)) {
+                        if ((bel.ORG === "EAS") && (belegung.current.bel_id === 2)) {
                             belegung.current = belegung.art[3];
                         };
-                        if (((bel.ORG === "EP") || (bel.ORG === "PTS")) && (belegung.current.bel_id === 0)) {
+                        if ((bel.ORG === "EP") && (belegung.current.bel_id === 0)) {
                             belegung.current = belegung.art[2];
                         };
-                        if (((bel.ORG === "EP") || (bel.ORG === "PTS")) && (belegung.current.bel_id === 1)) {
+                        if ((bel.ORG === "EP") && (belegung.current.bel_id === 1)) {
                             belegung.current = belegung.art[3];
                         };
                         if ((bel.ORG === "TK") && (belegung.current.bel_id === 0)) {
