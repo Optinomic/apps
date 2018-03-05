@@ -29,11 +29,11 @@ function get_belegung() {
         }, {
             "bel_id": 2,
             "name": "PTS",
-            "description": "Stationäre Psychotherapie"
+            "description": "Stationaere Psychotherapie"
         }, {
             "bel_id": 3,
             "name": "QuEA & PTS",
-            "description": "Qualitfizierter Entzug und Abklaerung sowie Stationäre Psychotherapie"
+            "description": "Qualitfizierter Entzug und Abklaerung sowie Stationaere Psychotherapie"
         }, {
             "bel_id": 4,
             "name": "TK",

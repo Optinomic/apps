@@ -58,6 +58,7 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
         $scope.d.app = app;
 
 
+
         $scope.d.belegung = {
             "art": [{
                 "bel_id": 0,
@@ -65,16 +66,16 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
                 "description": "Unbekannt / Nicht festgelegt"
             }, {
                 "bel_id": 1,
-                "name": "EAS",
-                "description": "Entzugs- und Abklärungsstation"
+                "name": "QuEA",
+                "description": "Qualitfizierter Entzug und Abklaerung"
             }, {
                 "bel_id": 2,
-                "name": "EP",
-                "description": "Entwöhnungsprogramm"
+                "name": "PTS",
+                "description": "Stationaere Psychotherapie"
             }, {
                 "bel_id": 3,
-                "name": "EAS & EP",
-                "description": "Entzugs- & Abklärungsstation sowie Entwöhnungsprogramm"
+                "name": "QuEA & PTS",
+                "description": "Qualitfizierter Entzug und Abklaerung sowie Stationaere Psychotherapie"
             }, {
                 "bel_id": 4,
                 "name": "TK",
@@ -214,7 +215,7 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
 
 
-                var sql = __opapp_include_as_js_string(includes/belegung_history_from_fid.sql);
+                var sql = __opapp_include_as_js_string(includes / belegung_history_from_fid.sql);
                 sql = sql.replace("%poly_pid%", stay.poly_pid);
                 sql = sql.replace("%poly_fid%", stay.poly_fid);
 
@@ -246,16 +247,16 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
                     if (data) {
                         data.rows.forEach(function(bel, my_bel_index) {
-                            if ((bel.ORG === "EAS") && (stay.belegung.current.bel_id === 0)) {
+                            if (((bel.ORG === "EAS") || (bel.ORG === "QuEA")) && (stay.belegung.current.bel_id === 0)) {
                                 stay.belegung.current = stay.belegung.art[1];
                             };
-                            if ((bel.ORG === "EAS") && (stay.belegung.current.bel_id === 2)) {
+                            if (((bel.ORG === "EAS") || (bel.ORG === "QuEA")) && (stay.belegung.current.bel_id === 2)) {
                                 stay.belegung.current = stay.belegung.art[3];
                             };
-                            if ((bel.ORG === "EP") && (stay.belegung.current.bel_id === 0)) {
+                            if (((bel.ORG === "EP") || (bel.ORG === "PTS")) && (stay.belegung.current.bel_id === 0)) {
                                 stay.belegung.current = stay.belegung.art[2];
                             };
-                            if ((bel.ORG === "EP") && (stay.belegung.current.bel_id === 1)) {
+                            if (((bel.ORG === "EP") || (bel.ORG === "PTS")) && (stay.belegung.current.bel_id === 1)) {
                                 stay.belegung.current = stay.belegung.art[3];
                             };
                             if ((bel.ORG === "TK") && (stay.belegung.current.bel_id === 0)) {
@@ -408,9 +409,6 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
         dataService.saveData(data, fileName);
     };
-
-
-
 
 
 
