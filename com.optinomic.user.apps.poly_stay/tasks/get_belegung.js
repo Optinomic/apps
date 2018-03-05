@@ -114,7 +114,7 @@ function writeLog(log) {
 
 function job_finised() {
     writeLog(log).then(function(log_json) {
-        console.log('(✓) FINISHED! ');
+        console.log('(Success) FINISHED! ');
     }).then(null, function(error) {
         console.log('(!) ANNOTATION-ERROR, ', error);
     });
@@ -208,7 +208,6 @@ function get_belegung_task(filters) {
 
                                         if (patients_count === patients_current) {
 
-                                            console.log('DONE!!!');
                                             job_finised();
 
                                         } else {
