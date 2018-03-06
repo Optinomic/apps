@@ -15,6 +15,7 @@
             box-sizing: border-box;
             width: 100%;
             height: calc(100vh);
+            z-index: 900;
             object-fit: contain;
 
             -webkit-transition: opacity 1s ease-in;
@@ -684,7 +685,8 @@
 
         _getTARMEDchapter(language, chapter) {
 
-            var chapterRef = this.db.collection("TARMED_LNR_" + language).doc(chapter);
+            var db = this.get('db');
+            var chapterRef = db.collection("TARMED_LNR_" + language).doc(chapter);
 
             chapterRef.get().then(function(doc) {
                 if (doc.exists) {
@@ -788,11 +790,11 @@
             }, 250);
         }
 
-        _firebase_login() {
-            firebase.auth().signInWithEmailAndPassword(atob('aW5mb0BvcHRpbm9taWMuY29t'), atob('Z280b3B0aW5vbWlj'))
+        _firebase_login(tamed_app) {
+            tamed_app.auth().signInWithEmailAndPassword(atob('aW5mb0BvcHRpbm9taWMuY29t'), atob('Z280b3B0aW5vbWlj'))
 
                 .then(function(resp) {
-                    console.log('FB-Login-Success: ', resp.email);
+                    console.log('tamed_app FB-Login-Success: ', resp.email);
                 })
 
                 .catch(function(error) {
@@ -813,14 +815,17 @@
                     storageBucket: "",
                     messagingSenderId: "638329991887"
                 };
-                firebase.initializeApp(config);
-
+                
+                
+                var tamed_app = firebase.initializeApp(config, "tarmed");
+                
+                
                 // Authenticate
-                this._firebase_login();
+                this._firebase_login(tamed_app);
 
                 // Initialize Cloud Firestore through Firebase
-                this.db = firebase.firestore();
-
+                this.db = tamed_app.firestore();
+                
 
             }, 250);
         }
