@@ -15,13 +15,15 @@
         .form {}
         </style>
         <div class="fullscreen">
-                <template is="dom-if" if="[[init_done]]" restamp="true">
-            <div class="form">
-                    
+            <template is="dom-if" if="[[init_done]]" restamp="true">
+                <div class="form">
                     <paper-card style="width:100%">
                         <div class="card-content" style="">
                             <div class="horizontal">
-                                <vaadin-date-picker class="flex" value="{{d.date}}" label="Datum" placeholder      ="Selektieren Sie ein Datum" i18n="[[i18n]]"></vaadin-date-picker>
+                                <vaadin-date-picker class="flex" value="{{d.date}}" label="Datum" placeholder="YES :: Selektieren Sie ein Datum" i18n="[[i18n]]"></vaadin-date-picker>
+                            </div>
+                            <div class="horizontal">
+                                <tarmed-browser class="flex" selectable l="{{d.tarmed}}" knr="{{d.knr}}" lnr="{{d.lnr}}"></tarmed-browser>
                             </div>
                         </div>
                         <div class="card-content" style="border-top: 1px solid #EEEEEE; background-color:#FAFAFA">
@@ -30,19 +32,14 @@
                         <div class="card-actions">
                             <div class="horizontal justified">
                                 <div class="flex">
-                                <paper-icon-button class="grey" icon="icons:event"></paper-icon-button>
-                                <paper-button class="grey" on-click="__cancelEntry">Abbrechen</paper-button>
+                                    <paper-icon-button class="grey" icon="icons:event"></paper-icon-button>
+                                    <paper-button class="grey" on-click="__cancelEntry">Abbrechen</paper-button>
                                 </div>
                                 <paper-button class="indigo" on-click="__addEntry">Speichern</paper-button>
                             </div>
                         </div>
                     </paper-card>
-                
-                    
-                    
-            </div>
-            
-            
+                </div>
             </template>
         </div>
     </template>
@@ -83,15 +80,16 @@
         __cancelEntry(e) {
             console.log('__cancelEntry', e);
         }
-        
+
         __addEntry(e) {
-            
+
             var d = this.get('d');
 
             var data = {
                 "datum": d.date,
-                "tarmed_knr": "02.00",
-                "tarmed_lnr": "02.0020",
+                "tarmed_knr": d.knr,
+                "tarmed_lnr": d.lnr,
+                "tarmed_text": d.tarmed.LEISTUNG_TEXT,
                 "text": d.entry
             };
 
