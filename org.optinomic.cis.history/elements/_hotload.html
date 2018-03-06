@@ -37,7 +37,7 @@ Verlaufseintrag mit TARMED-Browser
 
 [template entry 6 7]
 <head>
-  <base href="https://cdn.rawgit.com/Optinomic/polymer2-cdn/optinomic-0.0.15/lib/">
+  <base href="https://cdn.rawgit.com/Optinomic/polymer2-cdn/optinomic-0.0.17/lib/">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500">
   <link rel="shortcut icon" href="optinomic-images/favicon.ico" type="image/x-icon"/>
   <script src="webcomponentsjs/webcomponents-loader.js"></script>
@@ -3971,14 +3971,20 @@ window.customElements.define(optinomicApp.is, optinomicApp);
 <link rel="import" href="vaadin-combo-box/vaadin-combo-box.html">
 <link rel="import" href="vaadin-grid/vaadin-grid.html">
 <link rel="import" href="vaadin-grid/vaadin-grid-sorter.html">
+
+
+
 <link rel="import" href="iron-icon/iron-icon.html">
 <link rel="import" href="iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="paper-styles/color.html">
 <link rel="import" href="paper-styles/default-theme.html">
+<link rel="import" href="paper-card/paper-card.html">
 <link rel="import" href="paper-input/paper-input.html">
+<link rel="import" href="paper-input/paper-textarea.html">
 <link rel="import" href="iron-menu-behavior/iron-menu-behavior.html">
 <link rel="import" href="iron-behaviors/iron-control-state.html">
 <link rel="import" href="iron-collapse/iron-collapse.html">
+<link rel="import" href="iron-list/iron-list.html">
 <link rel="import" href="iron-a11y-keys-behavior/iron-a11y-keys-behavior.html">
 
 <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
@@ -3989,473 +3995,551 @@ window.customElements.define(optinomicApp.is, optinomicApp);
 
 
 <script>
-    optinomicHISTORY = {
+optinomicHISTORY = {
 
-        behaviors: [],
-
-
-        properties: {
-            _clinic_info: {
-                type: Object,
-                statePath: 'clinic.info.data.clinic_obj',
-                observer: '__clinicInfoChanged'
-            }
-        },
+    behaviors: [],
 
 
-        // --------------------------------
-        // INIT
-        // --------------------------------
-        __clinicInfoChanged() {
-            this.__clinicInfoChanged = Polymer.Debouncer.debounce(
-                this.__clinicInfoChanged, Polymer.Async.timeOut.after(250), () => {
-
-                    if ((this._clinic_info !== undefined) && (this._clinic_info !== null)) {
-                        this.__init_FB(this._clinic_info.clinic_name);
-                    };
-
-                });
-        },
-
-        __firebase_login(clinic) {
-            firebase.auth().signInWithEmailAndPassword(atob('aW5mb0BvcHRpbm9taWMuY29t'), atob('Z280b3B0aW5vbWlj'))
-
-                .then(function (resp) {
-                    this.set('fb_login', true);
-                    console.log(clinic + ' :: FB-Login-Success: ', resp.email);
-                }.bind(this))
-
-                .catch(function (error) {
-                    console.error(clinic + ' :: FB ERROR:', error);
-                    this.set('fb_login', false);
-                }.bind(this));
-        },
-
-        __init_FB: function (clinic) {
-
-            // Initialize Firebase
-            var config_demo = {
-                apiKey: "AIzaSyB-B3QtBDPg-wIgFaWNhUNOk9XWRunv4Kk",
-                authDomain: "verlauf-demo.firebaseapp.com",
-                databaseURL: "https://verlauf-demo.firebaseio.com",
-                projectId: "verlauf-demo",
-                storageBucket: "verlauf-demo.appspot.com",
-                messagingSenderId: "944644480179"
-            };
-
-            // Default = Demoserver
-            var config = config_demo;
-
-            // Manually add more clinics here:
-            if (clinic === 'Optinomic | Demo') {
-                var config = config_demo;
-            };
-
-            if (!firebase.apps.length) {
-                firebase.initializeApp(config);
-                this.__firebase_login(clinic);
-            };
+    properties: {
+        _clinic_info: {
+            type: Object,
+            statePath: 'clinic.info.data.clinic_obj',
+            observer: '__clinicInfoChanged'
+        }
+    },
 
 
-        },
+    // --------------------------------
+    // INIT
+    // --------------------------------
+    __clinicInfoChanged() {
+        this.__clinicInfoChanged = Polymer.Debouncer.debounce(
+            this.__clinicInfoChanged, Polymer.Async.timeOut.after(250), () => {
 
+                if ((this._clinic_info !== undefined) && (this._clinic_info !== null)) {
+                    this.__init_FB(this._clinic_info.clinic_name);
+                };
 
-        __addEvent: function (event) {
+            });
+    },
 
-            event = event || null;
+    __firebase_login(clinic) {
+        firebase.auth().signInWithEmailAndPassword(atob('aW5mb0BvcHRpbm9taWMuY29t'), atob('Z280b3B0aW5vbWlj'))
 
-            var params = {
-                "userID": parseInt(helpers.getUserID()),
-                "patientID": parseInt(helpers.getPatientID()),
-                "stayID": parseInt(helpers.getStayID()),
-                "appName": helpers.getAppName(),
-                "appID": helpers.getAppID(),
-                "apiURL": helpers.getApiURL()
-            };
+            .then(function(resp) {
+                this.set('fb_login', true);
+                this.__getEvents();
+                console.log(clinic + ' :: FB-Login-Success: ', resp.email);
+            }.bind(this))
 
-            event = Object.assign(params, event);
-
-
-            if (event !== null) {
-                var db = firebase.firestore();
-
-                // Add a new document (UNIX Timestamp) in entries "PID"
-                var PID = helpers.getPatientID() + "";
-                var ms = new Date().valueOf() + "";
-
-                db.collection(PID).doc(ms).set(event)
-                    .then(function () {
-                        console.log("__addEvent :: Entry successfully written!", PID, event);
-                    })
-                    .catch(function (error) {
-                        console.error("__addEvent :: Error writing document: ", error);
-                    });
-
-
-            } else {
-                console.warn('__addEvent :: Event = Null');
-            };
-
-
-        },
-
-        // --------------------------------
-        // Liefecycle
-        // --------------------------------
-
-        created: function () {
-
-            Polymer.RenderStatus.afterNextRender(this, function () {
-                this.set('db', null);
+            .catch(function(error) {
+                console.error(clinic + ' :: FB ERROR:', error);
                 this.set('fb_login', false);
-                console.log('optinomicHISTORY - Behaviour: ');
+            }.bind(this));
+    },
+
+    __init_FB: function(clinic) {
+
+        // Initialize Firebase
+        var config_demo = {
+            apiKey: "AIzaSyB-B3QtBDPg-wIgFaWNhUNOk9XWRunv4Kk",
+            authDomain: "verlauf-demo.firebaseapp.com",
+            databaseURL: "https://verlauf-demo.firebaseio.com",
+            projectId: "verlauf-demo",
+            storageBucket: "verlauf-demo.appspot.com",
+            messagingSenderId: "944644480179"
+        };
+
+        // Default = Demoserver
+        var config = config_demo;
+
+        // Manually add more clinics here:
+        if (clinic === 'Optinomic | Demo') {
+            var config = config_demo;
+        };
+
+        if (!firebase.apps.length) {
+            firebase.initializeApp(config);
+            this.__firebase_login(clinic);
+        };
+
+
+    },
+
+    __getEvents: function() {
+
+        var db = firebase.firestore();
+
+
+        var PID = helpers.getPatientID() + "";
+        var FID = helpers.getStayID() + "";
+        
+        var docRef = db.collection(PID).doc(FID).collection("entries");
+        
+        docRef.onSnapshot(function(snapshot) {
+            var events = [];
+            snapshot.forEach(function(doc) {
+                var event = {
+                    "id": doc.id,
+                    "data": doc.data()
+                };
+                // console.log(event);
+                events.push(event);
             });
 
-        }
-    };
-</script>
+            this.set('events', events);
+            console.warn('events', this.events);
 
+        }.bind(this), function(error) {
+            this.set('events', []);
+            console.error('error', error);
+        }.bind(this));
+
+
+
+
+    },
+
+    __addEvent: function(event) {
+
+        event = event || null;
+
+        var params = {
+            "user_id": parseInt(helpers.getUserID()),
+            "patient_id": parseInt(helpers.getPatientID()),
+            "stay_id": parseInt(helpers.getStayID()),
+            "app_name": helpers.getAppName(),
+            "app_id": helpers.getAppID(),
+            "api_url": helpers.getApiURL()
+        };
+
+        event = Object.assign(params, event);
+
+
+        if (event !== null) {
+            var db = firebase.firestore();
+
+            // Add a new document in entries "PID" / "FID"
+            var PID = helpers.getPatientID() + "";
+            var FID = helpers.getStayID() + "";
+            
+            var docRef = db.collection(PID).doc(FID).collection("entries").doc();
+
+
+            docRef.set(event)
+                .then(function() {
+                    console.log("__addEvent :: Entry successfully written!", PID, event);
+                })
+                .catch(function(error) {
+                    console.error("__addEvent :: Error writing document: ", error);
+                });
+
+
+        } else {
+            console.warn('__addEvent :: Event = Null');
+        };
+
+
+    },
+
+    // --------------------------------
+    // Liefecycle
+    // --------------------------------
+
+    created: function() {
+
+        Polymer.RenderStatus.afterNextRender(this, function() {
+            this.set('db', null);
+            this.set('fb_login', false);
+            console.log('optinomicHISTORY - Behaviour: ');
+        });
+
+    }
+};
+</script>
 
 
 <dom-module id="history-list">
     <template>
         <style include="optinomic-styles">
-            :host {
-                display: block;
-                --right-top-height: 100%;
-                --right-bottom-height: 0;
-            }
+         :host {
+            display: block;
+            --right-top-height: 100%;
+            --right-bottom-height: 0;
+        }
 
-            .fullscreen {
-                height: calc(100vh);
-                min-height: calc(100vh);
-            }
+        .fullscreen {
+            height: calc(100vh);
+            min-height: calc(100vh);
+        }
 
-            .page {
-                padding: 12px;
-            }
+        .page {
+            padding: 12px;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-header {
+            @apply --paper-font-headline;
+        }
+
+        .card-light {
+            color: var(--paper-grey-600);
+        }
+
+        .card-location {
+            float: right;
+            font-size: 9px;
+            vertical-align: middle;
+        }
+
+        iron-icon.star {
+            --iron-icon-width: 16px;
+            --iron-icon-height: 16px;
+            color: var(--paper-amber-500);
+        }
+
+        iron-icon.star:last-of-type {
+            color: var(--paper-grey-500);
+        }
         </style>
         <div class="fullscreen">
-                <p>history-list</p>
-            
+            <p>history-list: [[events.length]]</p>
+            <iron-list items="[[events]]" as="item" scroll-target="document">
+                <template>
+                    <div style="width:100%;padding-bottom:12px;" tabindex$="[[tabIndex]]">
+                    <paper-card style="width:100%">
+                        <div class="card-content">
+                            <div class="card-header">Cafe Basilico
+                                <div class="card-location card-light">
+                                    <iron-icon icon="communication:location-on"></iron-icon>
+                                    <span>[[item.id]]</span>
+                                </div>
+                            </div>
+                            <p>Title・Italian, Cafe</p>
+                            <p class="card-light">[[item.data.text]]</p>
+                        </div>
+                        <div class="card-actions">
+                            <div class="horizontal justified">
+                                <div class="flex">
+                                <paper-icon-button icon="icons:event"></paper-icon-button>
+                                <paper-button class="grey">Löschen</paper-button>
+                                </div>
+                                <paper-button class="indigo">Bearbeiten</paper-button>
+                            </div>
+                        </div>
+                    </paper-card>
+                    </div>
+                </template>
+            </iron-list>
         </div>
     </template>
     <script>
-        class historyList extends Polymer.mixinBehaviors([
-            opappBehavior, optinomicHISTORY
-        ], ReduxBehavior(Polymer.Element)) {
+    class historyList extends Polymer.mixinBehaviors([
+        opappBehavior, optinomicHISTORY
+    ], ReduxBehavior(Polymer.Element)) {
 
-            static get is() {
-                return 'history-list';
-            }
-
-            static get actions() {
-                return AsyncActionsBehavior.actions;
-            }
-
-            // Properties
-            static get properties() {
-                return {
-
-                    _app_state: {
-                        type: String,
-                        value: 'start'
-                    }
-
-                };
-            }
-
-            // --------------- Functions ---------------
-
-            _something() {
-
-            }
-
-
-            // --------------- Lifecycle ---------------
-
-            _init() {
-
-                console.warn('_init :: <history-list>');
-            }
-
-            constructor() {
-                super();
-            }
-
-            ready() {
-                super.ready();
-
-                Polymer.RenderStatus.afterNextRender(this, function () {
-                    this._init();
-                });
-            }
+        static get is() {
+            return 'history-list';
         }
 
-        window.customElements.define(historyList.is, historyList);
+        static get actions() {
+            return AsyncActionsBehavior.actions;
+        }
+
+        // Properties
+        static get properties() {
+            return {
+
+                _app_state: {
+                    type: String,
+                    value: 'start'
+                }
+
+            };
+        }
+
+        // --------------- Functions ---------------
+
+        _something() {}
+
+
+        // --------------- Lifecycle ---------------
+
+        _init() {
+            console.warn('_init :: <history-list>');
+        }
+
+        constructor() {
+            super();
+        }
+
+        ready() {
+            super.ready();
+
+            Polymer.RenderStatus.afterNextRender(this, function() {
+                this._init();
+            });
+        }
+    }
+
+    window.customElements.define(historyList.is, historyList);
     </script>
 </dom-module>
 
 
+<link rel="import" href="vaadin-themable-mixin/vaadin-themable-mixin.html">
+<link rel="import" href="vaadin-form-layout/vaadin-form-layout.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-text-field.html">
+<link rel="import" href="vaadin-text-field/vaadin-text-area.html">
+<link rel="import" href="vaadin-text-field/vaadin-text-field.html">
 
 <dom-module id="history-entry">
     <template>
         <style include="optinomic-styles">
-            :host {
-                display: block;
-                --right-top-height: 100%;
-                --right-bottom-height: 0;
-            }
+         :host {
+            display: block;
+            --right-top-height: 100%;
+            --right-bottom-height: 0;
+        }
 
-            .fullscreen {
-                height: calc(100vh);
-                min-height: calc(100vh);
-            }
+        .fullscreen {
+            height: calc(100vh);
+            min-height: calc(100vh);
+        }
 
-            .form {}
+        .form {}
         </style>
         <div class="fullscreen">
-            <div class="form">
-                <p>history-entry</p>
                 <template is="dom-if" if="[[init_done]]" restamp="true">
-
-                    <div class="horizontal">
-                        <vaadin-date-picker id="" label="Datum" placeholder="Selektieren Sie ein Datum" i18n="[[i18n]]"></vaadin-date-picker>
-                        <paper-input value="{{d.date}}" label="Date"></paper-input>
-                    </div>
-                    <paper-button on-click="__addEntry">Speichern</paper-button>
-                </template>
-
+            <div class="form">
+                    
+                    <paper-card style="width:100%">
+                        <div class="card-content" style="">
+                            <div class="horizontal">
+                                <vaadin-date-picker class="flex" value="{{d.date}}" label="Datum" placeholder      ="Selektieren Sie ein Datum" i18n="[[i18n]]"></vaadin-date-picker>
+                            </div>
+                        </div>
+                        <div class="card-content" style="border-top: 1px solid #EEEEEE; background-color:#FAFAFA">
+                            <paper-textarea value="{{d.entry}}" label="Eintrag" placeholder="Dokumentieren Sie hier ihren Eintrag."></paper-textarea>
+                        </div>
+                        <div class="card-actions">
+                            <div class="horizontal justified">
+                                <div class="flex">
+                                <paper-icon-button class="grey" icon="icons:event"></paper-icon-button>
+                                <paper-button class="grey" on-click="__cancelEntry">Abbrechen</paper-button>
+                                </div>
+                                <paper-button class="indigo" on-click="__addEntry">Speichern</paper-button>
+                            </div>
+                        </div>
+                    </paper-card>
+                
+                    
+                    
             </div>
+            
+            
+            </template>
         </div>
     </template>
     <script>
-        class historyEntry extends Polymer.mixinBehaviors([
-            opappBehavior, optinomicHISTORY
-        ], ReduxBehavior(Polymer.Element)) {
+    class historyEntry extends Polymer.mixinBehaviors([
+        opappBehavior, optinomicHISTORY
+    ], ReduxBehavior(Polymer.Element)) {
 
-            static get is() {
-                return 'history-entry';
-            }
-
-            static get actions() {
-                return AsyncActionsBehavior.actions;
-            }
-
-            // Properties
-            static get properties() {
-                return {
-
-                    language: {
-                        type: String,
-                        value: 'de'
-                    },
-
-                    _action: {
-                        type: String,
-                        value: 'create'
-                    }
-
-
-
-                };
-            }
-
-            // --------------- Functions ---------------
-
-            __addEntry(e) {
-
-                var data = {
-                    "datum": "Irgendwas",
-                    "tarmed_knr": "02.00",
-                    "tarmed_lnr": "02.0020",
-                    "text": "Ein längerer Eintrag."
-                };
-
-                this.__addEvent(data);
-                console.log('__addEntry', this._action);
-            }
-
-
-            // --------------- Lifecycle ---------------
-
-            _init() {
-
-                var i18n_e = {
-                    // An array with the full names of months starting
-                    // with January.
-                    monthNames: [
-                        'January', 'February', 'March', 'April', 'May',
-                        'June', 'July', 'August', 'September',
-                        'October', 'November', 'December'
-                    ],
-
-                    // An array of weekday names starting with Sunday. Used
-                    // in screen reader announcements.
-                    weekdays: [
-                        'Sunday', 'Monday', 'Tuesday', 'Wednesday',
-                        'Thursday', 'Friday', 'Saturday'
-                    ],
-
-                    // An array of short weekday names starting with Sunday.
-                    // Displayed in the calendar.
-                    weekdaysShort: [
-                        'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
-                    ],
-
-                    // An integer indicating the first day of the week
-                    // (0 = Sunday, 1 = Monday, etc.).
-                    firstDayOfWeek: 0,
-
-                    // Used in screen reader announcements along with week
-                    // numbers, if they are displayed.
-                    week: 'Week',
-
-                    // Translation of the Calendar icon button title.
-                    calendar: 'Calendar',
-
-                    // Translation of the Clear icon button title.
-                    clear: 'Clear',
-
-                    // Translation of the Today shortcut button text.
-                    today: 'Today',
-
-                    // Translation of the Cancel button text.
-                    cancel: 'Cancel',
-
-                    // A function to format given `Object` as
-                    // date string. Object is in the format `{ day: ..., month: ..., year: ... }`
-                    formatDate: d => {
-                        // returns a string representation of the given
-                        // object in 'MM/DD/YYYY' -format
-                    },
-
-                    // A function to parse the given text to an `Object` in the format `{ day: ..., month: ..., year: ... }`.
-                    // Must properly parse (at least) text
-                    // formatted by `formatDate`.
-                    // Setting the property to null will disable
-                    // keyboard input feature.
-                    parseDate: text => {
-                        // Parses a string in 'MM/DD/YY', 'MM/DD' or 'DD' -format to
-                        // an `Object` in the format `{ day: ..., month: ..., year: ... }`.
-                    },
-
-                    // A function to format given `monthName` and
-                    // `fullYear` integer as calendar title string.
-                    formatTitle: (monthName, fullYear) => {
-                        return monthName + ' ' + fullYear;
-                    }
-                };
-
-                var i18n_de = {
-                    // An array with the full names of months starting
-                    // with January.
-                    monthNames: [
-                        'Januar', 'Februar', 'März', 'April', 'Mai',
-                        'Juni', 'Juli', 'August', 'September',
-                        'Oktober', 'November', 'Dezember'
-                    ],
-
-                    // An array of weekday names starting with Sunday. Used
-                    // in screen reader announcements.
-                    weekdays: [
-                        'Sonntag', 'Montag', 'Dienstag', 'Mittwoch',
-                        'Donnerstag', 'Freitag', 'Samstag'
-                    ],
-
-                    // An array of short weekday names starting with Sunday.
-                    // Displayed in the calendar.
-                    weekdaysShort: [
-                        'So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'
-                    ],
-
-                    // An integer indicating the first day of the week
-                    // (0 = Sunday, 1 = Monday, etc.).
-                    firstDayOfWeek: 1,
-
-                    // Used in screen reader announcements along with week
-                    // numbers, if they are displayed.
-                    week: 'Woche',
-
-                    // Translation of the Calendar icon button title.
-                    calendar: 'Kalender',
-
-                    // Translation of the Clear icon button title.
-                    clear: 'Löschen',
-
-                    // Translation of the Today shortcut button text.
-                    today: 'Heute',
-
-                    // Translation of the Cancel button text.
-                    cancel: 'Abbrechen',
-
-                    // A function to format given `Object` as
-                    // date string. Object is in the format `{ day: ..., month: ..., year: ... }`
-                    formatDate: d => {
-                        
-                        
-                        // returns a string representation of the given
-                        // object in 'MM/DD/YYYY' -format
-                        //console.error('????? formatDate', d.toISOString());
-                        
-                        return d;
-                        
-                    },
-
-                    // A function to parse the given text to an `Object` in the format `{ day: ..., month: ..., year: ... }`.
-                    // Must properly parse (at least) text
-                    // formatted by `formatDate`.
-                    // Setting the property to null will disable
-                    // keyboard input feature.
-                    parseDate: text => {
-                        // Parses a string in 'MM/DD/YY', 'MM/DD' or 'DD' -format to
-                        // an `Object` in the format `{ day: ..., month: ..., year: ... }`.
-                        
-                        // console.error('????? parseDate', text);
-                        // 
-                        return new Date(text);
-                        
-                        
-                    },
-
-                    // A function to format given `monthName` and
-                    // `fullYear` integer as calendar title string.
-                    formatTitle: (monthName, fullYear) => {
-                        return monthName + ' ' + fullYear;
-                    }
-                }
-
-                var d = {
-                    "date": new Date()
-                };
-this.set('d', d);
-                
-
-                if (this.language === 'de') {
-                    this.set('i18n', i18n_de);
-                } else {
-                    this.set('i18n', i18n_e);
-                };
-
-                
-                this.set('init_done', true);
-                console.warn('_init :: <history-entry>', this.d, this.i18n);
-            }
-
-            constructor() {
-                super();
-            }
-
-            ready() {
-                super.ready();
-
-                Polymer.RenderStatus.afterNextRender(this, function () {
-                    this._init();
-                });
-            }
+        static get is() {
+            return 'history-entry';
         }
 
-        window.customElements.define(historyEntry.is, historyEntry);
+        static get actions() {
+            return AsyncActionsBehavior.actions;
+        }
+
+        // Properties
+        static get properties() {
+            return {
+
+                language: {
+                    type: String,
+                    value: 'de'
+                },
+
+                _action: {
+                    type: String,
+                    value: 'create'
+                }
+
+
+
+            };
+        }
+
+        // --------------- Functions ---------------
+
+        __cancelEntry(e) {
+            console.log('__cancelEntry', e);
+        }
+        
+        __addEntry(e) {
+            
+            var d = this.get('d');
+
+            var data = {
+                "datum": d.date,
+                "tarmed_knr": "02.00",
+                "tarmed_lnr": "02.0020",
+                "text": d.entry
+            };
+
+            this.__addEvent(data);
+            console.log('__addEntry', this._action);
+        }
+
+
+        // --------------- Lifecycle ---------------
+
+        _init() {
+
+            var i18n_de = {
+                // An array with the full names of months starting
+                // with January.
+                monthNames: [
+                    'Januar', 'Februar', 'März', 'April', 'Mai',
+                    'Juni', 'Juli', 'August', 'September',
+                    'Oktober', 'November', 'Dezember'
+                ],
+
+                // An array of weekday names starting with Sunday. Used
+                // in screen reader announcements.
+                weekdays: [
+                    'Sonntag', 'Montag', 'Dienstag', 'Mittwoch',
+                    'Donnerstag', 'Freitag', 'Samstag'
+                ],
+
+                // An array of short weekday names starting with Sunday.
+                // Displayed in the calendar.
+                weekdaysShort: [
+                    'So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'
+                ],
+
+                // An integer indicating the first day of the week
+                // (0 = Sunday, 1 = Monday, etc.).
+                firstDayOfWeek: 1,
+
+                // Used in screen reader announcements along with week
+                // numbers, if they are displayed.
+                week: 'Woche',
+
+                // Translation of the Calendar icon button title.
+                calendar: 'Kalender',
+
+                // Translation of the Clear icon button title.
+                clear: 'Löschen',
+
+                // Translation of the Today shortcut button text.
+                today: 'Heute',
+
+                // Translation of the Cancel button text.
+                cancel: 'Abbrechen',
+
+                // A function to format given `Object` as
+                // date string. Object is in the format `{ day: ..., month: ..., year: ... }`
+                formatDate: d => {
+                    // returns a string representation of the given
+                    // object in 'MM/DD/YYYY' -format
+                    var day = d.getDate();
+                    var month = d.getMonth();
+                    var year = d.getFullYear();
+                    // console.log('formatDate', year, month, day);
+
+                    return day + '.' + (month + 1) + '.' + year;
+                },
+
+                // A function to parse the given text to an `Object` in the format `{ day: ..., month: ..., year: ... }`.
+                // Must properly parse (at least) text
+                // formatted by `formatDate`.
+                // Setting the property to null will disable
+                // keyboard input feature.
+                parseDate: text => {
+                    // Parses a string in 'MM/DD/YY', 'MM/DD' or 'DD' -format to
+                    // an `Object` in the format `{ day: ..., month: ..., year: ... }`.
+
+                    var res = text.split(".");
+                    var day = null;
+                    var month = null;
+                    var year = null;
+                    res.forEach(function(element, id) {
+                        //console.log('- ::: parseDate', element, id);
+                        if (id === 0) {
+                            day = parseInt(element);
+                        };
+                        if (id === 1) {
+                            month = parseInt(element) - 1;
+                        };
+                        if (id === 2) {
+                            year = parseInt(element);
+                        };
+                    });
+
+                    // console.log('parseDate', text, res, year, month, day, new Date(year, month, day));
+                    return new Date(year, month, day);
+                    // d.toISOString();
+                },
+
+                // A function to format given `monthName` and
+                // `fullYear` integer as calendar title string.
+                formatTitle: (monthName, fullYear) => {
+                    return monthName + ' ' + fullYear;
+                }
+            }
+
+            var date = new Date();
+            var day = date.getDate();
+            var month = date.getMonth();
+            var year = date.getFullYear();
+
+            var today = date.getFullYear() + '-' +
+                ('0' + (date.getMonth() + 1)).slice(-2) + '-' +
+                ('0' + date.getDate()).slice(-2);
+
+            // var now = i18n_de.formatDate(date);
+
+            var d = {
+                "date": today
+            };
+
+
+            if (this.language === 'de') {
+                this.set('i18n', i18n_de);
+            } else {
+                // To Do:  Add different Locales
+                this.set('i18n', i18n_de);
+            };
+
+            this.set('d', d);
+
+            this.set('init_done', true);
+            console.warn('_init :: <history-entry>', d);
+        }
+
+        constructor() {
+            super();
+        }
+
+        ready() {
+            super.ready();
+
+            Polymer.RenderStatus.afterNextRender(this, function() {
+                this._init();
+            });
+        }
+    }
+
+    window.customElements.define(historyEntry.is, historyEntry);
     </script>
 </dom-module>
 
@@ -4473,11 +4557,10 @@ this.set('d', d);
 <link rel="import" href="vaadin-valo-theme/vaadin-form-layout.html">
 <link rel="import" href="vaadin-valo-theme/vaadin-grid.html">
 <link rel="import" href="vaadin-valo-theme/vaadin-overlay.html">
-<link rel="import" href="vaadin-valo-theme/vaadin-text-field.html">
 <link rel="import" href="vaadin-checkbox/vaadin-checkbox.html">
 <link rel="import" href="vaadin-grid/vaadin-grid.html">
 <link rel="import" href="vaadin-form-layout/vaadin-form-layout.html">
-<link rel="import" href="vaadin-text-field/vaadin-text-field.html">
+
 <link rel="import" href="vaadin-date-picker/vaadin-date-picker.html">
 <link rel="import" href="vaadin-split-layout/vaadin-split-layout.html">
 <link rel="import" href="vaadin-dialog/vaadin-dialog.html">
@@ -4530,6 +4613,9 @@ this.set('d', d);
                             <paper-button on-click="__closeEditmode">Start</paper-button>
                         </div>
                     </iron-pages>
+                    
+                    <paper-button on-click="__getEvents">Aktualisieren</paper-button>
+                    
 
                 </div>
                 <div class="right_bar">

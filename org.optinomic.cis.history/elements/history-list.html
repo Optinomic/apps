@@ -1,77 +1,131 @@
 <dom-module id="history-list">
     <template>
         <style include="optinomic-styles">
-            :host {
-                display: block;
-                --right-top-height: 100%;
-                --right-bottom-height: 0;
-            }
+         :host {
+            display: block;
+            --right-top-height: 100%;
+            --right-bottom-height: 0;
+        }
 
-            .fullscreen {
-                height: calc(100vh);
-                min-height: calc(100vh);
-            }
+        .fullscreen {
+            height: calc(100vh);
+            min-height: calc(100vh);
+        }
 
-            .page {
-                padding: 12px;
-            }
+        .page {
+            padding: 12px;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-header {
+            @apply --paper-font-headline;
+        }
+
+        .card-light {
+            color: var(--paper-grey-600);
+        }
+
+        .card-location {
+            float: right;
+            font-size: 9px;
+            vertical-align: middle;
+        }
+
+        iron-icon.star {
+            --iron-icon-width: 16px;
+            --iron-icon-height: 16px;
+            color: var(--paper-amber-500);
+        }
+
+        iron-icon.star:last-of-type {
+            color: var(--paper-grey-500);
+        }
         </style>
         <div class="fullscreen">
-            <p>history-list</p>
+            <p>history-list: [[events.length]]</p>
+            <iron-list items="[[events]]" as="item" scroll-target="document">
+                <template>
+                    <div style="width:100%;padding-bottom:12px;" tabindex$="[[tabIndex]]">
+                    <paper-card style="width:100%">
+                        <div class="card-content">
+                            <div class="card-header">Cafe Basilico
+                                <div class="card-location card-light">
+                                    <iron-icon icon="communication:location-on"></iron-icon>
+                                    <span>[[item.id]]</span>
+                                </div>
+                            </div>
+                            <p>Title・Italian, Cafe</p>
+                            <p class="card-light">[[item.data.text]]</p>
+                        </div>
+                        <div class="card-actions">
+                            <div class="horizontal justified">
+                                <div class="flex">
+                                <paper-icon-button icon="icons:event"></paper-icon-button>
+                                <paper-button class="grey">Löschen</paper-button>
+                                </div>
+                                <paper-button class="indigo">Bearbeiten</paper-button>
+                            </div>
+                        </div>
+                    </paper-card>
+                    </div>
+                </template>
+            </iron-list>
         </div>
     </template>
     <script>
-        class historyList extends Polymer.mixinBehaviors([
-            opappBehavior, optinomicHISTORY
-        ], ReduxBehavior(Polymer.Element)) {
+    class historyList extends Polymer.mixinBehaviors([
+        opappBehavior, optinomicHISTORY
+    ], ReduxBehavior(Polymer.Element)) {
 
-            static get is() {
-                return 'history-list';
-            }
-
-            static get actions() {
-                return AsyncActionsBehavior.actions;
-            }
-
-            // Properties
-            static get properties() {
-                return {
-
-                    _app_state: {
-                        type: String,
-                        value: 'start'
-                    }
-
-                };
-            }
-
-            // --------------- Functions ---------------
-
-            _something() {
-
-            }
-
-
-            // --------------- Lifecycle ---------------
-
-            _init() {
-
-                console.warn('_init :: <history-list>');
-            }
-
-            constructor() {
-                super();
-            }
-
-            ready() {
-                super.ready();
-
-                Polymer.RenderStatus.afterNextRender(this, function () {
-                    this._init();
-                });
-            }
+        static get is() {
+            return 'history-list';
         }
 
-        window.customElements.define(historyList.is, historyList);
+        static get actions() {
+            return AsyncActionsBehavior.actions;
+        }
+
+        // Properties
+        static get properties() {
+            return {
+
+                _app_state: {
+                    type: String,
+                    value: 'start'
+                }
+
+            };
+        }
+
+        // --------------- Functions ---------------
+
+        _something() {}
+
+
+        // --------------- Lifecycle ---------------
+
+        _init() {
+            console.warn('_init :: <history-list>');
+        }
+
+        constructor() {
+            super();
+        }
+
+        ready() {
+            super.ready();
+
+            Polymer.RenderStatus.afterNextRender(this, function() {
+                this._init();
+            });
+        }
+    }
+
+    window.customElements.define(historyList.is, historyList);
     </script>
 </dom-module>

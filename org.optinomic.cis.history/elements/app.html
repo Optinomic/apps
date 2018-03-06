@@ -2,7 +2,7 @@
 <link rel="import" href="iron-pages/iron-pages.html">
 <link rel="import" href="optinomic-elements/optinomic-title/optinomic-title.html">
 <link rel="import" href="optinomic-elements/optinomic-clipboard/optinomic-clipboard.html">
-<link rel="import" href="juicy-jsoneditor/juicy-jsoneditor.html">
+<link rel="import" href="paper-card/paper-card.html">
 <link rel="import" href="vaadin-valo-theme/vaadin-button.html">
 <link rel="import" href="vaadin-valo-theme/vaadin-checkbox.html">
 <link rel="import" href="vaadin-valo-theme/vaadin-combo-box.html">
@@ -53,30 +53,35 @@
         <div class="fullscreen">
 
             <vaadin-split-layout id="tarmed" class="fullscreen">
-                <div class="left_bar">
+                <div class="left_bar page">
 
-                    
-                    <p>[[_app_state]]</p>
                     
                     <iron-pages selected="[[_app_state]]" attr-for-selected="name" fallback-selection="start" role="main">
                         <div name="start">
-                            <paper-button on-click="__openEditmode">Edit</paper-button>
+                            <h2>Einträge</h2>
+                            <div>
+                            <paper-button on-click="__openEditmode">Hinzufügen</paper-button>
+                            </div>
+                            <div>
+                            <paper-button on-click="__getEvents">Aktualisieren</paper-button>
+                            </div>
                         </div>
                         <div name="edit">
-                            <paper-button on-click="__closeEditmode">Start</paper-button>
+                            <paper-button on-click="__closeEditmode">Liste</paper-button>
                         </div>
                     </iron-pages>
+                    
+                    
+                    
 
                 </div>
                 <div class="right_bar">
 
                     <iron-pages selected="[[_app_state]]" attr-for-selected="name" fallback-selection="start" role="main">
                         <div name="start">
-                            <h2>LIST</h2>
                             <history-list></history-list>
                         </div>
                         <div name="edit">
-                            <h2>EDIT</h2>
                             <history-entry></history-entry>
                         </div>
                     </iron-pages>

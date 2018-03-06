@@ -1,126 +1,163 @@
 <script>
-    optinomicHISTORY = {
+optinomicHISTORY = {
 
-        behaviors: [],
-
-
-        properties: {
-            _clinic_info: {
-                type: Object,
-                statePath: 'clinic.info.data.clinic_obj',
-                observer: '__clinicInfoChanged'
-            }
-        },
+    behaviors: [],
 
 
-        // --------------------------------
-        // INIT
-        // --------------------------------
-        __clinicInfoChanged() {
-            this.__clinicInfoChanged = Polymer.Debouncer.debounce(
-                this.__clinicInfoChanged, Polymer.Async.timeOut.after(250), () => {
+    properties: {
+        _clinic_info: {
+            type: Object,
+            statePath: 'clinic.info.data.clinic_obj',
+            observer: '__clinicInfoChanged'
+        }
+    },
 
-                    if ((this._clinic_info !== undefined) && (this._clinic_info !== null)) {
-                        this.__init_FB(this._clinic_info.clinic_name);
-                    };
 
-                });
-        },
+    // --------------------------------
+    // INIT
+    // --------------------------------
+    __clinicInfoChanged() {
+        this.__clinicInfoChanged = Polymer.Debouncer.debounce(
+            this.__clinicInfoChanged, Polymer.Async.timeOut.after(250), () => {
 
-        __firebase_login(clinic) {
-            firebase.auth().signInWithEmailAndPassword(atob('aW5mb0BvcHRpbm9taWMuY29t'), atob('Z280b3B0aW5vbWlj'))
+                if ((this._clinic_info !== undefined) && (this._clinic_info !== null)) {
+                    this.__init_FB(this._clinic_info.clinic_name);
+                };
 
-                .then(function (resp) {
-                    this.set('fb_login', true);
-                    console.log(clinic + ' :: FB-Login-Success: ', resp.email);
-                }.bind(this))
+            });
+    },
 
-                .catch(function (error) {
-                    console.error(clinic + ' :: FB ERROR:', error);
-                    this.set('fb_login', false);
-                }.bind(this));
-        },
+    __firebase_login(clinic) {
+        firebase.auth().signInWithEmailAndPassword(atob('aW5mb0BvcHRpbm9taWMuY29t'), atob('Z280b3B0aW5vbWlj'))
 
-        __init_FB: function (clinic) {
+            .then(function(resp) {
+                this.set('fb_login', true);
+                this.__getEvents();
+                console.log(clinic + ' :: FB-Login-Success: ', resp.email);
+            }.bind(this))
 
-            // Initialize Firebase
-            var config_demo = {
-                apiKey: "AIzaSyB-B3QtBDPg-wIgFaWNhUNOk9XWRunv4Kk",
-                authDomain: "verlauf-demo.firebaseapp.com",
-                databaseURL: "https://verlauf-demo.firebaseio.com",
-                projectId: "verlauf-demo",
-                storageBucket: "verlauf-demo.appspot.com",
-                messagingSenderId: "944644480179"
-            };
+            .catch(function(error) {
+                console.error(clinic + ' :: FB ERROR:', error);
+                this.set('fb_login', false);
+            }.bind(this));
+    },
 
-            // Default = Demoserver
+    __init_FB: function(clinic) {
+
+        // Initialize Firebase
+        var config_demo = {
+            apiKey: "AIzaSyB-B3QtBDPg-wIgFaWNhUNOk9XWRunv4Kk",
+            authDomain: "verlauf-demo.firebaseapp.com",
+            databaseURL: "https://verlauf-demo.firebaseio.com",
+            projectId: "verlauf-demo",
+            storageBucket: "verlauf-demo.appspot.com",
+            messagingSenderId: "944644480179"
+        };
+
+        // Default = Demoserver
+        var config = config_demo;
+
+        // Manually add more clinics here:
+        if (clinic === 'Optinomic | Demo') {
             var config = config_demo;
+        };
 
-            // Manually add more clinics here:
-            if (clinic === 'Optinomic | Demo') {
-                var config = config_demo;
-            };
-
-            if (!firebase.apps.length) {
-                firebase.initializeApp(config);
-                this.__firebase_login(clinic);
-            };
+        if (!firebase.apps.length) {
+            firebase.initializeApp(config);
+            this.__firebase_login(clinic);
+        };
 
 
-        },
+    },
+
+    __getEvents: function() {
+
+        var db = firebase.firestore();
+
+
+        var PID = helpers.getPatientID() + "";
+        var FID = helpers.getStayID() + "";
         
+        var docRef = db.collection(PID).doc(FID).collection("entries").orderBy("datum", "asc");
         
-        __addEvent: function (event) {
-            
-            event = event || null;
-            
-            var params = {
-              "userID": parseInt(helpers.getUserID()),
-              "patientID": parseInt(helpers.getPatientID()),
-              "stayID": parseInt(helpers.getStayID()),
-              "appName": helpers.getAppName(),
-              "appID": helpers.getAppID(),
-              "apiURL": helpers.getApiURL()
-            };
-                
-            event = Object.assign(params, event);
+        docRef.onSnapshot(function(snapshot) {
+            var events = [];
+            snapshot.forEach(function(doc) {
+                var event = {
+                    "id": doc.id,
+                    "data": doc.data()
+                };
+                // console.log(event);
+                events.push(event);
+            });
 
+            this.set('events', events);
+            console.warn('events', this.events);
+
+        }.bind(this), function(error) {
+            this.set('events', []);
+            console.error('error', error);
+        }.bind(this));
+
+
+
+
+    },
+
+    __addEvent: function(event) {
+
+        event = event || null;
+
+        var params = {
+            "user_id": parseInt(helpers.getUserID()),
+            "patient_id": parseInt(helpers.getPatientID()),
+            "stay_id": parseInt(helpers.getStayID()),
+            "app_name": helpers.getAppName(),
+            "app_id": helpers.getAppID(),
+            "api_url": helpers.getApiURL()
+        };
+
+        event = Object.assign(params, event);
+
+
+        if (event !== null) {
+            var db = firebase.firestore();
+
+            // Add a new document in entries "PID" / "FID"
+            var PID = helpers.getPatientID() + "";
+            var FID = helpers.getStayID() + "";
             
-            if (event !== null) {
-                var db = firebase.firestore();
-                    
-                // Add a new document (UNIX Timestamp) in entries "PID"
-                var PID = helpers.getPatientID() + "";
-                var ms = new Date().valueOf() + "";
-                
-                db.collection(PID).doc(ms).set(event)
+            var docRef = db.collection(PID).doc(FID).collection("entries").doc();
+
+
+            docRef.set(event)
                 .then(function() {
                     console.log("__addEvent :: Entry successfully written!", PID, event);
                 })
                 .catch(function(error) {
                     console.error("__addEvent :: Error writing document: ", error);
                 });
-            
-                
-            } else {
-                console.warn('__addEvent :: Event = Null');
-            };
-            
-            
-        },
 
-        // --------------------------------
-        // Liefecycle
-        // --------------------------------
 
-        created: function () {
+        } else {
+            console.warn('__addEvent :: Event = Null');
+        };
 
-            Polymer.RenderStatus.afterNextRender(this, function () {
-                this.set('db', null);
-                this.set('fb_login', false);
-                console.log('optinomicHISTORY - Behaviour: ');
-            });
 
-        }
-    };
+    },
+
+    // --------------------------------
+    // Liefecycle
+    // --------------------------------
+
+    created: function() {
+
+        Polymer.RenderStatus.afterNextRender(this, function() {
+            this.set('db', null);
+            this.set('fb_login', false);
+            console.log('optinomicHISTORY - Behaviour: ');
+        });
+
+    }
+};
 </script>
