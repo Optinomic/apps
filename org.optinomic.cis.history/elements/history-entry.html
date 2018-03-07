@@ -12,7 +12,11 @@
             min-height: calc(100vh);
         }
 
-        .form {}
+        .boxed {
+            padding: 3px 3px 3px 12px;
+            border-radius: 3px;
+            background: var(--valo-contrast-5pct);
+        }
         </style>
         <div class="fullscreen">
             <template is="dom-if" if="[[init_done]]" restamp="true">
@@ -20,9 +24,12 @@
                     <paper-card style="width:100%">
                         <div class="card-content" style="">
                             <div class="horizontal">
-                                <vaadin-date-picker class="flex" value="{{d.date}}" label="Datum" placeholder="YES :: Selektieren Sie ein Datum" i18n="[[i18n]]"></vaadin-date-picker>
+                                <vaadin-date-picker class="flex" value="{{d.date}}" label="Eintrag" placeholder="Selektieren Sie ein Datum" i18n="[[i18n]]"></vaadin-date-picker>
                             </div>
-                            <div class="horizontal">
+                            <div class="horizontal boxed">
+                                <vaadin-text-field style="margin-right:12px;" placeholder="TARMED" value="{{d.count}}">
+                                    <div slot="suffix">x</div>
+                                </vaadin-text-field>
                                 <tarmed-browser class="flex" selectable l="{{d.tarmed}}" knr="{{d.knr}}" lnr="{{d.lnr}}"></tarmed-browser>
                             </div>
                         </div>
@@ -86,10 +93,11 @@
             var d = this.get('d');
 
             var data = {
-                "datum": d.date,
+                "date": d.date,
                 "tarmed_knr": d.knr,
                 "tarmed_lnr": d.lnr,
                 "tarmed_text": d.tarmed.LEISTUNG_TEXT,
+                "tarmed_count": d.count,
                 "text": d.entry
             };
 
@@ -207,7 +215,10 @@
             // var now = i18n_de.formatDate(date);
 
             var d = {
-                "date": today
+                "date": today,
+                "knr": "02.03",
+                //"lnr": "02.0210",
+                "count": 14
             };
 
 

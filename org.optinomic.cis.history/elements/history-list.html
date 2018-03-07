@@ -27,7 +27,13 @@
         }
 
         .card-light {
-            color: var(--paper-grey-600);
+            color: var(--paper-grey-800);
+            text-overflow: ellipsis;
+
+            overflow: hidden;
+            width: 100%;
+            height: 42px;
+            max-height: 42px;
         }
 
         .card-location {
@@ -36,42 +42,36 @@
             vertical-align: middle;
         }
 
-        iron-icon.star {
-            --iron-icon-width: 16px;
-            --iron-icon-height: 16px;
-            color: var(--paper-amber-500);
-        }
 
-        iron-icon.star:last-of-type {
-            color: var(--paper-grey-500);
+        .template-container {
+            padding-top: 6px;
+            padding-bottom: 6px;
         }
         </style>
         <div class="fullscreen">
-            <p>history-list: [[events.length]]</p>
+            <h2>Einträge: [[events.length]]</h2>
             <iron-list items="[[events]]" as="item" scroll-target="document">
                 <template>
-                    <div style="width:100%;padding-bottom:12px;" tabindex$="[[tabIndex]]">
-                    <paper-card style="width:100%">
-                        <div class="card-content">
-                            <div class="card-header">[[item.data.tarmed_text]]
-                                <div class="card-location card-light">
-                                    <iron-icon icon="communication:location-on"></iron-icon>
-                                    <span>[[item.id]]</span>
+                    <div class="template-container" tabindex$="[[tabIndex]]">
+                        <paper-card style="width:100%">
+                            <div class="card-content">
+                                <div class="horizontal">
+                                    <h3 class="flex"><span class="card-header">[[item.data.date]]</span><br><b>[[item.data.tarmed_count]]x</b>・[[item.data.tarmed_text]] ([[item.data.tarmed_lnr]])</h3>
+                                </div>
+                                <p class="card-location">[[item.id]]</p>
+                                <p>[[item.data.date]]・[[item.data.user_id]]</p>
+                                <p class="card-light">[[item.data.text]]</p>
+                            </div>
+                            <div class="card-actions">
+                                <div class="horizontal justified">
+                                    <div class="flex">
+                                        <paper-icon-button icon="icons:event"></paper-icon-button>
+                                        <paper-button class="grey">Löschen</paper-button>
+                                    </div>
+                                    <paper-button class="indigo">Bearbeiten</paper-button>
                                 </div>
                             </div>
-                            <p>[[item.data.datum]]・[[item.data.user_id]]</p>
-                            <p class="card-light">[[item.data.text]]</p>
-                        </div>
-                        <div class="card-actions">
-                            <div class="horizontal justified">
-                                <div class="flex">
-                                <paper-icon-button icon="icons:event"></paper-icon-button>
-                                <paper-button class="grey">Löschen</paper-button>
-                                </div>
-                                <paper-button class="indigo">Bearbeiten</paper-button>
-                            </div>
-                        </div>
-                    </paper-card>
+                        </paper-card>
                     </div>
                 </template>
             </iron-list>
