@@ -47,6 +47,50 @@
             padding-top: 6px;
             padding-bottom: 6px;
         }
+
+
+        .block-with-text {
+            /* hide text if it more than N lines  */
+            overflow: hidden;
+            /* for set '...' in absolute position */
+            position: relative;
+            /* use this value to count block height */
+            line-height: 1.2em;
+            /* max-height = line-height (1.2) * lines max number (3) */
+            max-height: 5.9em;
+            /* fix problem when last visible word doesn't adjoin right side  */
+            text-align: justify;
+            /* place for '...' */
+            margin-right: -0.5em;
+            padding-right: 1em;
+        }
+        /* create the ... */
+
+        .block-with-text:before {
+            /* points in the end */
+            content: '...';
+            /* absolute position */
+            position: absolute;
+            /* set position to right bottom corner of block */
+            right: 0;
+            bottom: 0;
+        }
+        /* hide ... if we have text, which is less than or equal to max lines */
+
+        .block-with-text:after {
+            /* points in the end */
+            content: '';
+            /* absolute position */
+            position: absolute;
+            /* set position to right bottom corner of text */
+            right: 0;
+            /* set width and height */
+            width: 1em;
+            height: 1em;
+            margin-top: 0.2em;
+            /* bg color = bg color under block */
+            background: white;
+        }
         </style>
         <div class="fullscreen">
             <h2>Einträge: [[events.length]]</h2>
@@ -54,13 +98,20 @@
                 <template>
                     <div class="template-container" tabindex$="[[tabIndex]]">
                         <paper-card style="width:100%">
-                            <div class="card-content">
-                                <div class="horizontal">
+                            <div class="card-content" style="background-color:#FAFAFA">
+                                <div class="horizontal" >
                                     <h3 class="flex"><span class="card-header">[[item.data.date]]</span><br><b>[[item.data.tarmed_count]]x</b>・[[item.data.tarmed_text]] ([[item.data.tarmed_lnr]])</h3>
                                 </div>
-                                <p class="card-location">[[item.id]]</p>
-                                <p>[[item.data.date]]・[[item.data.user_id]]</p>
-                                <p class="card-light">[[item.data.text]]</p>
+                            </div>
+                            <div class="card-content" style="border-top: 1px solid #EEEEEE;">
+                                <div class="horizontal">
+                                    <p class="caption">[[item.data.date]]・[[item.data.user_id]]</p>
+                                    <p class="caption">[[item.id]]</p>
+                                </div>
+                                
+                                <div style="margin-right:6px;min-height: 5.9em;">
+                                    <p class="block-with-text">[[item.data.text]]</p>
+                                </div>
                             </div>
                             <div class="card-actions">
                                 <div class="horizontal justified">
