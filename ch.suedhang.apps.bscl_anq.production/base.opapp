@@ -64,7 +64,7 @@ survey = bscl_anq
 
 [event exit]
 type = before_exit
-days = 9
+days = 10
 time = 08:00
 due_after = 259200
 overdue = ignore
