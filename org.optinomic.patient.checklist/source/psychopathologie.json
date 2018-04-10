@@ -1,0 +1,173 @@
+{
+  "Psychopathologie": {
+    "01 - Symptomatik, Leitsymptome, Syndromalogie": [
+      {
+        "knr": "01.01",
+        "syndrome": "Störungen des Bewusstseins und der Orientierung",
+        "symptome": [
+          {
+            "snr": "01.01.01",
+            "name": "(Quantitative) Bewusstseinsstörung",
+            "definition": "Beeinträchtigung der Wachheit (Vigilität, Vigilanz).",
+            "phenomenology": "Beeinträchtigungen der Bewusstseinsklarheit. Zu unterscheiden sind folgende Grade: Benommenheit, Somnolenz, Sopor, Koma, Wachkoma, Hypervigilität.\n\nQualitative Bewusstseinsstörungen sind zusätzlich durch Verschiebungen oder Verzerrungen der Bewusstseinsinhalte gekennzeichnet (z.B. Verkennungen, Wahnideen, Denkstörungen).",
+            "occurrence": "",
+            "note": "Nicht zu verwechseln mit der psychotisch bedingten Verworrenheit bzw. Desorganisiertheit!",
+            "phenomena": [
+              {
+                "name": "Benommenheit",
+                "description": "Dösigkeit, Reaktionsverlangsamung.",
+                "occurrence": "k.A."
+              },
+              {
+                "name": "Somnolenz",
+                "description": "Stärkere Benommenheit und Schläfrigkeit mit allgemeiner Verlangsamung, imperative Einschlafneigung.",
+                "occurrence": "Bei starker körperlicher Erschöpfung, leichterer Intoxikation, endokriner und metabolischer Funktionsstörung, Fieber, beginnendem Hirndruck und Trancezuständen."
+              },
+              {
+                "name": "Sopor",
+                "description": "Deutliche Schläfrigkeit mit ungezielten Abwehrreaktionen auf Aussenreize (noch erweckbar, kurzzeitiges Augenöffnen).",
+                "occurrence": "Bei gesteigertem Hirndruck, Enzephalitis, Hirnblutung und Intoxikation sowie nach epileptischem Anfall."
+              },
+              {
+                "name": "Koma",
+                "description": "Bewusstlosigkeit ohne Erweckbarkeit (Augen stets geschlossen). Abhängig von der Komatiefe (Grad I - IV) Erlöschen der Reflextätigkeit sowie Regulationsstörungen der Vitalfunktionen.",
+                "occurrence": "Koma: Bei schwerer Intoxikation, massiver endokriner und metabolischer Ent gleisung, schwerster Infektion, akuter Hirnschädigung und Hirnblutung, zerebralem Gefässverschluss (Territorialinfarkt), kreislaufbedingter Anoxie, im Schock und im grossen epileptischen Anfall (Grand mal). Stets Notfall!"
+              },
+              {
+                "name": "Wachkoma (Coma vigile, persistant vegetative state)",
+                "description": "Tiefe Bewusstlosigkeit trotz evtl. geöffneter Augen, Spontanbewegungen und unbeeinträchtigter Vitalfunktionen.",
+                "occurrence": "Bei Funktionsausfall der Grosshirnrinde (z.B. nach Trauma, Blutung, Hypoxie). Synonym: Apallisches Syndrom."
+              },
+              {
+                "name": "Hypervigilität",
+                "description": "Zustand von Überwachheit mit gehobener Bewusstseinsklarheit, vermehrter Aufmerksamkeit und geschärfter Wahrnehmung.",
+                "occurrence": "Unter Einfluss von Stimulanzien oder anderen Aufputschmitteln, während epileptischer Aura; durch aussergewöhnliche psychische Anspannung und Konzentration (z. B. Meditation, Ekstase), während traumatisierender Erleb nisse (selten bei beginnender Psychose)."
+              }
+            ],
+            "differential_etiology": [
+              {
+                "suspected": "Intoxikation",
+                "investigation": "Klin. Status, Fremdanamnese, Klinik, Labordiagnostik "
+              },
+              {
+                "suspected": "Endokrine, metabolische Störung ",
+                "investigation": "Klin. Status, Anamnese, Labordiagnostik "
+              },
+              {
+                "suspected": "Infektion (Meningoenzephalitis)",
+                "investigation": "Klin. Status, (Meningismus!), Liquorpunktion"
+              },
+              {
+                "suspected": "Hirndruck",
+                "investigation": "Klin. Status, bildgebende Verfahren"
+              },
+              {
+                "suspected": "Epilepsie (postiktual, Aura)",
+                "investigation": "Klin. Status, Anamnese, EEG"
+              },
+              {
+                "suspected": "Rauschzustände, Drogeneinwirkung",
+                "investigation": "Klin. Status, (Fremd-)Anamnese, Drogenscreening"
+              },
+              {
+                "suspected": "(Psycho-)Trauma",
+                "investigation": "adäquates Ereignis, Fremdanamnese"
+              },
+              {
+                "suspected": "(schizophrene Episode)",
+                "investigation": "(Anamnese, psychopathologischer Befund)"
+              },
+              {
+                "suspected": "(manische Episode)",
+                "investigation": "(Anamnese, psychopathologischer Befund)"
+              }
+            ]
+          },
+          {
+            "snr": "01.01.02",
+            "name": "Verwirrtheit, Desorientiertheit",
+            "definition": "Orientierungsstörung, Verwirrtheit",
+            "phenomenology": "Zeitliche, örtliche, situative und/oder persönliche Falschinformiertheit.",
+            "occurrence": "Vor allem bei organisch begründbarer Psychose und organischem Psychosyn drom bzw. Demenz als Bestandteil des Korsakow-Syndroms.\n\nWährend bzw. nach massiver psychischer Traumatisierung, z.B. Katastrophenreaktion, posttraumatische Belastungsstörung.\n\nGelegentlich auch als Begleiterscheinung einer akuten Psychose.",
+            "note": "Nicht zu verwechseln mit der psychotisch bedingten Verworrenheit bzw. Desorganisiertheit!",
+            "phenomena": [
+              {
+                "name": "Zeitliche Orientierungsstörung",
+                "description": "Fehlende oder mangelhafte Fähigkeit, sich zeitlich zurechtzufinden (Tageszeit, Wochentag, Monat, Jahr).",
+                "occurrence": ""
+              },
+              {
+                "name": "Örtliche Orientierungsstörung",
+                "description": "Verlust des (Wieder-)Ererkennens der örtlichen Gegebenheiten (z.B. momentaner Aufenthaltsort, nähere und weitere Umgebung).",
+                "occurrence": ""
+              },
+              {
+                "name": "Situative Orientierungsstörung",
+                "description": "Falsche oder mangelhafte Einschätzung der aktuellen Situation, möglicherweise wahninduzierend.",
+                "occurrence": ""
+              },
+              {
+                "name": "Orientierungsstörung zur Person",
+                "description": "Beeinträchtigungen bezüglich der persönlichen Daten (z.B. Name, Geburtstag, Beruf, Lebensgeschichte).",
+                "occurrence": ""
+              },
+              {
+                "name": "Allgemein",
+                "description": "Fast stets hiermit einhergehend: Rat- und Hilflosigkeit, Unruhe, Ängstlichkeit, Verstörtheit, Aggressivität.",
+                "occurrence": ""
+              }
+            ],
+            "differential_etiology": [
+              {
+                "suspected": "Demenz,hirnorganisches Psycho-syndrom",
+                "investigation": "Psychostatus, Anamnese (vaskuläre Risikofaktoren), Neurostatus, Bildgebung, Psychometrie"
+              },
+              {
+                "suspected": "Korsakow-Syndrom",
+                "investigation": "Psychostatus, Alkoholanamnese, Klinik, Neurostatus, Bildgebung"
+              },
+              {
+                "suspected": "Psychotrauma, Belastungsstörung ",
+                "investigation": "Psychostatus, Anamnese"
+              },
+              {
+                "suspected": "(akute Psychose)",
+                "investigation": "(Psychostatus)"
+              }
+            ]
+          },
+          {
+            "snr": "01.01.03",
+            "name": "xxxx",
+            "definition": "Dämmerzustand",
+            "phenomenology": "xxxx",
+            "occurrence": "xxxx",
+            "note": "xxxx",
+            "phenomena": [],
+            "differential_etiology": []
+          },
+          {
+            "snr": "01.01.04",
+            "name": "xxxx",
+            "definition": "Delir",
+            "phenomenology": "xxxx",
+            "occurrence": "xxxx",
+            "note": "xxxx",
+            "phenomena": [],
+            "differential_etiology": []
+          },
+          {
+            "snr": "01.01.05",
+            "name": "xxxx",
+            "definition": "Traumhafte Verworrenheit, sog. Oneiroid",
+            "phenomenology": "xxxx",
+            "occurrence": "xxxx",
+            "note": "xxxx",
+            "phenomena": [],
+            "differential_etiology": []
+          }
+        ]
+      }
+    ]
+  }
+}
