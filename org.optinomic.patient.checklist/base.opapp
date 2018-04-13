@@ -1,0 +1,31 @@
+[module]
+id = __opapp_identifier()
+name = Checklist
+short_description = Checklist (Beta-Channel)
+version = __opapp_version()
+type = user
+
+[description]
+Checklist :: Coming soon.
+
+[developer]
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
+website = http://www.optinomic.com/
+
+[readme]
+__opapp_include(readme.md)
+
+[template export 6 7]
+
+
+[javascript]
+
+
+[css]
+
+
