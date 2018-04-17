@@ -1,11 +1,11 @@
-// Make sure to import ChatEngine first!
+// ChatEngine | Südhang
+// https://admin.pubnub.com/#/user/442897/account/442861/app/35197778/
+
 ChatEngine = ChatEngineCore.create({
     publishKey: 'pub-c-231082a7-7ad8-4a41-a6cd-eed5540629a4',
     subscribeKey: 'sub-c-ab15b472-4214-11e8-b20a-be401e5b340a'
 });
 
-// use a helper function to generate a new profile
-let newPerson = generatePerson(true);
 
 // create a bucket to store our ChatEngine Chat object
 let myChat;
@@ -18,14 +18,19 @@ let peopleTemplate = Handlebars.compile($("#person-template").html());
 let meTemplate = Handlebars.compile($("#message-template").html());
 let userTemplate = Handlebars.compile($("#message-response-template").html());
 
-const source_language = "en";
-const target_language = "es";
 
 // this is our main function that starts our chat app
 const init = () => {
 
-    // connect to ChatEngine with our generated user
-    ChatEngine.connect(newPerson.uuid, newPerson);
+    // Build Chatname by current patient  |  ToDo:  API-Current Patient PID
+    let chat_name = "optinomic_patient_" + 4321 + ".*";
+
+    // connect to ChatEngine with our user |  ToDo:  API-Current User
+    ChatEngine.connect(123456, {
+        team: 'admin',
+        name: "Test Admin",
+        uuid: 123456
+    });
 
     // when ChatEngine is booted, it returns your new User as `data.me`
     ChatEngine.on('$.ready', function(data) {
@@ -34,7 +39,7 @@ const init = () => {
         me = data.me;
 
         // create a new ChatEngine Chat
-        myChat = new ChatEngine.Chat('Optinomic');
+        myChat = new ChatEngine.Chat(chat_name);
 
         // when we recieve messages in this chat, render them
         myChat.on('message', (message) => {
@@ -60,8 +65,6 @@ const init = () => {
                 limit: 50
             }).on('message', (data) => {
 
-                console.log(data)
-
                 // when messages are returned, render them like normal messages
                 renderMessage(data, true);
 
@@ -86,13 +89,14 @@ const sendMessage = () => {
     if (message.length) {
 
         // emit the `message` event to everyone in the Chat
+        var d = new Date();
+        var n = d.toISOString();
+
         myChat.emit('message', {
             text: message,
-            translate: {
-                text: message,
-                source: source_language,
-                target: target_language
-            }
+            date_iso: n,
+            date: getCurrentDate(),
+            time: getCurrentTime()
         });
 
         // clear out the text input
@@ -117,7 +121,8 @@ const renderMessage = (message, isHistory = false) => {
 
     let el = template({
         messageOutput: message.data.text,
-        time: getCurrentTime(),
+        time: message.data.date,
+        date: message.data.time,
         user: message.sender.state
     });
 
@@ -143,5 +148,12 @@ const getCurrentTime = () => {
     return new Date().toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
 };
 
+// get the current date in a nice format
+const getCurrentDate = () => {
+    return new Date().toLocaleDateString();
+};
+
+
 // boot the app
 init();
+

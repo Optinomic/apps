@@ -1,6 +1,6 @@
 [module]
 id = __opapp_identifier()
-name = Checklist
+name = _Chat (DEVELOPMENT)
 short_description = Chat (Beta-Channel)
 version = __opapp_version()
 type = patient
