@@ -25,7 +25,7 @@ __opapp_include(readme.md)
 __opapp_include(chat.html)
 
 [javascript]
-__opapp_include(chat.js)
+
 
 [css]
 __opapp_include(chat.css)
