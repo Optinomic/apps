@@ -1,0 +1,32 @@
+[module]
+id = __opapp_identifier()
+name = Checklist
+short_description = Chat (Beta-Channel)
+version = __opapp_version()
+type = patient
+
+[description]
+Chat-Engine
+
+[developer]
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
+website = http://www.optinomic.com/
+
+[readme]
+__opapp_include(readme.md)
+
+
+[template chat 6 7]
+__opapp_include(chat.html)
+
+[javascript]
+__opapp_include(chat.js)
+
+[css]
+__opapp_include(chat.css)
+
