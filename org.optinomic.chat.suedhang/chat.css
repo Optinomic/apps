@@ -6,7 +6,7 @@
 }
 
 body {
-    background: #263238;
+    background: #E0E0E0;
     font: 14px/20px "Lato", Arial, sans-serif;
     padding: 0;
     margin: 0;
@@ -103,13 +103,13 @@ body {
 }
 
 .chat .chat-header .chat-with {
-    font-weight: 300;
-    font-size: 24px;
+    font-weight: 400;
+    font-size: 28px;
 }
 
 .chat .chat-header .chat-with-sub {
     margin-top: 8px;
-    font-weight: 300;
+    font-weight: 700;
     font-size: 14px;
 }
 
@@ -255,4 +255,8 @@ body {
     content: " ";
     clear: both;
     height: 0;
+}
+
+ul {
+  list-style-type: none;
 }

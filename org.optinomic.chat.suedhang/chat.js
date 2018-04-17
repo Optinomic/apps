@@ -1,4 +1,4 @@
-// ChatEngine | Südhang
+// ChatEngine | Südhang
 // https://admin.pubnub.com/#/user/442897/account/442861/app/35197778/
 
 ChatEngine = ChatEngineCore.create({
@@ -17,19 +17,26 @@ let me;
 let peopleTemplate = Handlebars.compile($("#person-template").html());
 let meTemplate = Handlebars.compile($("#message-template").html());
 let userTemplate = Handlebars.compile($("#message-response-template").html());
+let titleTemplate = Handlebars.compile($("#title-template").html());
 
 
 // this is our main function that starts our chat app
-const init = () => {
+const init = (user) => {
+
+    console.log('INNER', user);
 
     // Build Chatname by current patient  |  ToDo:  API-Current Patient PID
-    let chat_name = "optinomic_patient_" + 4321 + ".*";
+    let chat_name = "optinomic_patient_" + helpers.getPatientID();
 
     // connect to ChatEngine with our user |  ToDo:  API-Current User
-    ChatEngine.connect(123456, {
-        team: 'admin',
-        name: "Test Admin",
-        uuid: 123456
+    ChatEngine.connect(user.id, {
+        email: user.data.email,
+        name: user.data.first_name + " " + user.data.last_name,
+        first_name: user.data.first_name,
+        last_name: user.data.last_name,
+        initials: user.data.initials,
+        description: user.data.description,
+        uuid: user.id
     });
 
     // when ChatEngine is booted, it returns your new User as `data.me`
@@ -105,7 +112,6 @@ const sendMessage = () => {
 
     // stop form submit from bubbling
     return false;
-
 };
 
 // render messages in the list
@@ -135,7 +141,40 @@ const renderMessage = (message, isHistory = false) => {
 
     // scroll to the bottom of the chat
     scrollToBottom();
+};
 
+
+// render messages in the list
+const renderPatient = (patient) => {
+
+    formatDateCH = function(date_string) {
+        date_string = date_string || null
+        if (date_string !== null) {
+
+            // 1952-11-19T00:00:00.000000000000Z
+            var year = parseInt(date_string.substring(0, 4));
+            var month = parseInt(date_string.substring(5, 7));
+            var day = parseInt(date_string.substring(8, 10));
+            var date_string_return = day + "." + month + "." + year
+
+            return date_string_return;
+        } else {
+            return null;
+        }
+    };
+
+    // use the generic user template by default
+    let template = titleTemplate;
+
+    console.log('INNNER', patient);
+
+    let el = template({
+        title: patient.data.last_name + " " + patient.data.first_name,
+        subtitle: formatDateCH(patient.data.birthdate)
+    });
+
+    // render the title
+    $('.chat-header .chat-about').append(el);
 };
 
 // scroll to the bottom of the window
@@ -154,6 +193,43 @@ const getCurrentDate = () => {
 };
 
 
-// boot the app
-init();
+var getCurrentUser = function() {
 
+    api_url_user = '/users/' + helpers.getUserID();
+
+    helpers.callAPI('GET', api_url_user, {}, {}, function(req_user) {
+        if (req_user.status == 200) {
+            var user = JSON.parse(req_user.response);
+            // console.log('SUCCESS: getCurrentUserAndPatient', user);
+
+            // Boot the app
+            init(user.user);
+
+        } else {
+            console.error('ERROR: getCurrentUser', req_user);
+        };
+
+    });
+};
+
+var getCurrentPatient = function() {
+
+    api_url_patient = '/patients/' + helpers.getPatientID();
+
+    helpers.callAPI('GET', api_url_patient, {}, {}, function(req_patient) {
+        if (req_patient.status == 200) {
+            var patient = JSON.parse(req_patient.response);
+            //console.log('SUCCESS: getCurrentUserAndPatient', user);
+
+            // Render Title with Name / Birthdate
+            renderPatient(patient.patient);
+
+        } else {
+            console.error('ERROR: getCurrentPatient', req_patient);
+        };
+    });
+};
+
+// Start & Boot
+getCurrentUser();
+getCurrentPatient();

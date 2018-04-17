@@ -1,5 +1,5 @@
 <html>
-<title>Südhang @ Optinomic ChatEngine</title>
+<title>Südhang @ Optinomic ChatEngine</title>
 
 <head>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -17,13 +17,7 @@
         </div>
         <div class="chat">
             <div class="chat-header clearfix">
-                <div class="chat-about">
-                    <div class="chat-with">
-                        Optinomic
-                    </div>
-                    <div class="chat-with-sub">
-                        Demo Chat
-                    </div>
+                <div id="titleTemp" class="chat-about">
                 </div>
             </div>
             <div class="chat-history">
@@ -66,11 +60,22 @@
             <div class="about">
                 <div class="name">{{state.name}}</div>
                 <div class="status">
-                    <i class="fa fa-circle online"></i> online
+                    <i class="fa fa-circle online"></i> {{#if state.initials }} {{state.initials}} | {{/if}} online
                 </div>
             </div>
         </li>
         {{/if}}
+    </script>
+    <script id="title-template" type="text/x-handlebars-template">
+        <div class="chat-with">
+            {{title}}
+        </div>
+        <div class="chat-with-sub">
+            {{subtitle}}
+        </div>
+    </script>
+    <script>
+    __opapp_include(chat.js)
     </script>
 </body>
 
