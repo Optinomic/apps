@@ -1,3 +1,4 @@
+
 // ChatEngine | Südhang
 // https://admin.pubnub.com/#/user/442897/account/442861/app/35197778/
 
@@ -18,17 +19,19 @@ let peopleTemplate = Handlebars.compile($("#person-template").html());
 let meTemplate = Handlebars.compile($("#message-template").html());
 let userTemplate = Handlebars.compile($("#message-response-template").html());
 let titleTemplate = Handlebars.compile($("#title-template").html());
+let typingTemplate = Handlebars.compile($("#typing-template").html());
 
 
-// typing indicator
 let config = { timeout: 1000 };
 
+// get some references to functions
+let keypress = function() {};
 
 
 // this is our main function that starts our chat app
 const init = (user) => {
 
-    console.log('INNER', user);
+    // console.log('INNER', user);
 
     // Build Chatname by current patient  |  ToDo:  API-Current Patient PID
     let chat_name = "optinomic_patient_" + helpers.getPatientID();
@@ -61,8 +64,11 @@ const init = (user) => {
             // use e.which
 
             if (e.which !== 13) {
+
+
                 //console.log('e',e);
                 ChatEngine.global.typingIndicator.startTyping();
+
             }
 
         });
@@ -102,11 +108,26 @@ const init = (user) => {
 
 
         ChatEngine.global.on('$typingIndicator.startTyping', (payload) => {
-            console.log(payload.sender.uuid, "is typing...");
+            // console.log(payload.sender.uuid, "is typing...", payload);
+
+            // use the generic user template by default
+            let template = typingTemplate;
+
+            // console.log('INNNER', patient);
+
+            let el = template({
+                mode: payload.sender.state.initials,
+                uuid: payload.sender.uuid
+            });
+
+            $('#typing').append(el);
         });
 
         ChatEngine.global.on('$typingIndicator.stopTyping', (payload) => {
-            console.log(payload.sender.uuid, "is not typing.");
+            // console.log(payload.sender.uuid, "is not typing.");
+
+            $('#typing').find('#typing-' + payload.sender.uuid).remove();
+
         });
 
 
@@ -199,7 +220,7 @@ const renderPatient = (patient) => {
     // use the generic user template by default
     let template = titleTemplate;
 
-    console.log('INNNER', patient);
+    // console.log('INNNER', patient);
 
     let el = template({
         title: patient.data.last_name + " " + patient.data.first_name,

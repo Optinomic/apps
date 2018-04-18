@@ -20,6 +20,8 @@
             <div class="chat-header clearfix">
                 <div id="titleTemp" class="chat-about">
                 </div>
+                <div id="typing" class="typing">
+                </div>
             </div>
             <div class="chat-history">
                 <ul></ul>
@@ -73,6 +75,16 @@
         </div>
         <div class="chat-with-sub">
             {{subtitle}}
+        </div>
+    </script>
+    <script id="typing-template" type="text/x-handlebars-template">
+        <div id="typing-{{uuid}}">
+            <div id="wave">
+                {{mode}}
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
         </div>
     </script>
     <script>

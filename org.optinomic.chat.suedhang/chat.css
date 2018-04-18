@@ -117,6 +117,13 @@ body {
     color: #4CAF50;
 }
 
+.chat .chat-header .typing {
+    float: right;
+    color: #4CAF50;
+    font-size: 14px;
+    margin-top: 12px;
+}
+
 .chat .chat-header .fa-star {
     float: right;
     color: #d8dadf;
@@ -258,5 +265,38 @@ body {
 }
 
 ul {
-  list-style-type: none;
+    list-style-type: none;
+}
+
+div#wave {
+    text-align: center;
+}
+
+div#wave .dot {
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    margin-right: 3px;
+    background: #4CAF50;
+    animation: wave 1.3s linear infinite;
+}
+
+div#wave .dot:nth-child(2) {
+    animation-delay: -1.1s;
+}
+
+div#wave .dot:nth-child(3) {
+    animation-delay: -0.9s;
+}
+
+@keyframes wave {
+    0%,
+    60%,
+    100% {
+        transform: initial;
+    }
+    30% {
+        transform: translateY(-6px);
+    }
 }
