@@ -20,6 +20,11 @@ let userTemplate = Handlebars.compile($("#message-response-template").html());
 let titleTemplate = Handlebars.compile($("#title-template").html());
 
 
+// typing indicator
+let config = { timeout: 1000 };
+
+
+
 // this is our main function that starts our chat app
 const init = (user) => {
 
@@ -42,11 +47,27 @@ const init = (user) => {
     // when ChatEngine is booted, it returns your new User as `data.me`
     ChatEngine.on('$.ready', function(data) {
 
+        // attach the typing-indicator plugin to the global channel
+        ChatEngine.global.plugin(ChatEngineCore.plugin['chat-engine-typing-indicator'](config));
+
         // store my new user as `me`
         me = data.me;
 
         // create a new ChatEngine Chat
         myChat = new ChatEngine.Chat(chat_name);
+
+
+        $(document).on("keypress", function(e) {
+            // use e.which
+
+            if (e.which !== 13) {
+                //console.log('e',e);
+                ChatEngine.global.typingIndicator.startTyping();
+            }
+
+        });
+
+
 
         // when we recieve messages in this chat, render them
         myChat.on('message', (message) => {
@@ -79,8 +100,20 @@ const init = (user) => {
 
         });
 
+
+        ChatEngine.global.on('$typingIndicator.startTyping', (payload) => {
+            console.log(payload.sender.uuid, "is typing...");
+        });
+
+        ChatEngine.global.on('$typingIndicator.stopTyping', (payload) => {
+            console.log(payload.sender.uuid, "is not typing.");
+        });
+
+
         // bind our "send" button and return key to send message
         $('#sendMessage').on('submit', sendMessage)
+
+
 
     });
 

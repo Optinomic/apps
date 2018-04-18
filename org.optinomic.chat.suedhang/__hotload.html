@@ -48,6 +48,7 @@ Don't forget anything.
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chat-engine@0.9.5/dist/chat-engine.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chat-engine-typing-indicator@0.0.9/dist/chat-engine-typing-indicator.js"></script>
 </head>
 
 <body>
@@ -59,7 +60,6 @@ Don't forget anything.
         <div class="chat">
             <div class="chat-header clearfix">
                 <div id="titleTemp" class="chat-about">
-                    
                 </div>
             </div>
             <div class="chat-history">
@@ -102,33 +102,22 @@ Don't forget anything.
             <div class="about">
                 <div class="name">{{state.name}}</div>
                 <div class="status">
-                    
-                    <i class="fa fa-circle online"></i>
-                    {{#if state.initials }}
-                     {{state.initials}} |
-                    {{/if}}
-                    online
-                    
+                    <i class="fa fa-circle online"></i> {{#if state.initials }} {{state.initials}} | {{/if}} online
                 </div>
             </div>
         </li>
         {{/if}}
     </script>
-    
     <script id="title-template" type="text/x-handlebars-template">
         <div class="chat-with">
             {{title}}
         </div>
         <div class="chat-with-sub">
-           {{subtitle}}
+            {{subtitle}}
         </div>
     </script>
-    
-    
-
-
-<script>
-// ChatEngine | Südhang
+    <script>
+    // ChatEngine | Südhang
 // https://admin.pubnub.com/#/user/442897/account/442861/app/35197778/
 
 ChatEngine = ChatEngineCore.create({
@@ -150,13 +139,19 @@ let userTemplate = Handlebars.compile($("#message-response-template").html());
 let titleTemplate = Handlebars.compile($("#title-template").html());
 
 
+let config = { timeout: 1000 };
+
+// get some references to functions
+let keypress = function () {};
+
+
 // this is our main function that starts our chat app
 const init = (user) => {
 
     console.log('INNER', user);
 
     // Build Chatname by current patient  |  ToDo:  API-Current Patient PID
-    let chat_name = "optinomic_patient_test_" + helpers.getPatientID();
+    let chat_name = "optinomic_patient_" + helpers.getPatientID();
 
     // connect to ChatEngine with our user |  ToDo:  API-Current User
     ChatEngine.connect(user.id, {
@@ -171,12 +166,33 @@ const init = (user) => {
 
     // when ChatEngine is booted, it returns your new User as `data.me`
     ChatEngine.on('$.ready', function(data) {
+        
+        // attach the typing-indicator plugin to the global channel
+    ChatEngine.global.plugin(ChatEngineCore.plugin['chat-engine-typing-indicator'](config));
 
         // store my new user as `me`
         me = data.me;
 
         // create a new ChatEngine Chat
         myChat = new ChatEngine.Chat(chat_name);
+
+
+$(document).on("keypress", function (e) {
+    // use e.which
+
+    if (e.which === 13) {
+
+            sendMessage();
+
+        } else {
+            //console.log('e',e);
+            ChatEngine.global.typingIndicator.startTyping();
+
+        }
+    
+});
+
+
 
         // when we recieve messages in this chat, render them
         myChat.on('message', (message) => {
@@ -209,8 +225,20 @@ const init = (user) => {
 
         });
 
+
+ChatEngine.global.on('$typingIndicator.startTyping', (payload) => {
+    console.log(payload.sender.uuid, "is typing...");
+});
+ 
+ChatEngine.global.on('$typingIndicator.stopTyping', (payload) => {
+    console.log(payload.sender.uuid, "is not typing.");
+});
+
+
         // bind our "send" button and return key to send message
         $('#sendMessage').on('submit', sendMessage)
+
+
 
     });
 
@@ -242,7 +270,6 @@ const sendMessage = () => {
 
     // stop form submit from bubbling
     return false;
-
 };
 
 // render messages in the list
@@ -272,34 +299,33 @@ const renderMessage = (message, isHistory = false) => {
 
     // scroll to the bottom of the chat
     scrollToBottom();
-
 };
 
 
 // render messages in the list
 const renderPatient = (patient) => {
 
-formatDateCH = function(date_string) {
-  date_string = date_string || null
-  if (date_string !== null) {
+    formatDateCH = function(date_string) {
+        date_string = date_string || null
+        if (date_string !== null) {
 
-    // 1952-11-19T00:00:00.000000000000Z
-    var year = parseInt(date_string.substring(0, 4));
-    var month = parseInt(date_string.substring(5, 7));
-    var day = parseInt(date_string.substring(8, 10));
-    var date_string_return = day + "." + month + "." + year
+            // 1952-11-19T00:00:00.000000000000Z
+            var year = parseInt(date_string.substring(0, 4));
+            var month = parseInt(date_string.substring(5, 7));
+            var day = parseInt(date_string.substring(8, 10));
+            var date_string_return = day + "." + month + "." + year
 
-    return date_string_return;
-  } else {
-    return null;
-  }
-};
+            return date_string_return;
+        } else {
+            return null;
+        }
+    };
 
     // use the generic user template by default
     let template = titleTemplate;
 
     console.log('INNNER', patient);
-    
+
     let el = template({
         title: patient.data.last_name + " " + patient.data.first_name,
         subtitle: formatDateCH(patient.data.birthdate)
@@ -307,7 +333,6 @@ formatDateCH = function(date_string) {
 
     // render the title
     $('.chat-header .chat-about').append(el);
-
 };
 
 // scroll to the bottom of the window
@@ -326,114 +351,56 @@ const getCurrentDate = () => {
 };
 
 
-
-
 var getCurrentUser = function() {
 
     api_url_user = '/users/' + helpers.getUserID();
-    
+
     helpers.callAPI('GET', api_url_user, {}, {}, function(req_user) {
-    if (req_user.status == 200) {
-        var user = JSON.parse(req_user.response);
-        // console.log('SUCCESS: getCurrentUserAndPatient', user);
-        
-        // Boot the app
-        init(user.user);
-        
-    } else {
-        console.error('ERROR (1): getCurrentUserAndPatient', req_user);
-    };
-    
+        if (req_user.status == 200) {
+            var user = JSON.parse(req_user.response);
+            // console.log('SUCCESS: getCurrentUserAndPatient', user);
+
+            // Boot the app
+            init(user.user);
+
+        } else {
+            console.error('ERROR: getCurrentUser', req_user);
+        };
+
     });
 };
-
 
 var getCurrentPatient = function() {
 
     api_url_patient = '/patients/' + helpers.getPatientID();
 
-         helpers.callAPI('GET', api_url_patient, {}, {}, function(req_patient) {
-            if (req_patient.status == 200) {
-                var patient = JSON.parse(req_patient.response);
-                //console.log('SUCCESS: getCurrentUserAndPatient', user);
-            
-                // Render Title with Name / Birthdate
-                renderPatient(patient.patient);
-        
-            } else {
-             console.error('ERROR (2): getCurrentUserAndPatient', req_patient);
-            };
-        });
-    
+    helpers.callAPI('GET', api_url_patient, {}, {}, function(req_patient) {
+        if (req_patient.status == 200) {
+            var patient = JSON.parse(req_patient.response);
+            //console.log('SUCCESS: getCurrentUserAndPatient', user);
+
+            // Render Title with Name / Birthdate
+            renderPatient(patient.patient);
+
+        } else {
+            console.error('ERROR: getCurrentPatient', req_patient);
+        };
+    });
 };
 
 // Start & Boot
 getCurrentUser();
 getCurrentPatient();
-
-</script>
+    </script>
 </body>
 
 </html>
 
-
-
 [javascript]
 
 
-
 [css]
-
-
-/* latin-ext */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Lato Light'), local('Lato-Light'), url(https://fonts.gstatic.com/s/lato/v14/S6u9w4BMUTPHh7USSwaPGR_p.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Lato Light'), local('Lato-Light'), url(https://fonts.gstatic.com/s/lato/v14/S6u9w4BMUTPHh7USSwiPGQ.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v14/S6uyw4BMUTPHjxAwXjeu.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v14/S6uyw4BMUTPHjx4wXg.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v14/S6u9w4BMUTPHh6UVSwaPGR_p.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v14/S6u9w4BMUTPHh6UVSwiPGQ.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
 *,
 *:before,
 *:after {
@@ -695,3 +662,4 @@ body {
 ul {
   list-style-type: none;
 }
+
