@@ -92,7 +92,7 @@ body {
     border-bottom: 2px solid #CFD8DC;
 }
 
-.chat .chat-header img {
+.chat .chat-header .unread {
     float: left;
 }
 
@@ -299,4 +299,27 @@ div#wave .dot:nth-child(3) {
     30% {
         transform: translateY(-6px);
     }
+}
+
+.chat .chat-header .unread {
+    float: left;
+}
+
+.numberCircle {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 14px;
+
+    width: 2em;
+    height: 2em;
+
+    background: #C8E6C9;
+    color: #388E3C;
+    
+    border: 0.1em solid #A5D6A7;
+    text-align: center;
+    border-radius: 50%;    
+
+    line-height: 2em;
+    box-sizing: content-box;   
 }

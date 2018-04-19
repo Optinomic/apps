@@ -1,11 +1,24 @@
 
-# Optinomic Checklist.
+# Optinomic Chat-Engine.
 
-Don't forget anything.
+Core messaging features.
 
 
+## Implemented Features
+- User Online/Offline Status
+- Typing Indicators
+- Unread Message Counts
 
-# Anschrift
+## Enterprise-Grade Security
+- TLS and AES256 Encryption
+- SOC 2 Type II Compliant
+- HIPAA Compliant
+- EU GDPR Compliant
+- EU-US Privacy Shield Certiﬁed
+- EU Data Storage
+
+
+# Contact
 
 ![image](http://www.ottiger.org/optinomic_logo/optinomic_logo_small.png)     
 

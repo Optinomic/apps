@@ -7,12 +7,12 @@ ChatEngine = ChatEngineCore.create({
     subscribeKey: 'sub-c-ab15b472-4214-11e8-b20a-be401e5b340a'
 });
 
-
 // create a bucket to store our ChatEngine Chat object
 let myChat;
 
 // create a bucket to store 
 let me;
+let uuid;
 
 // compile handlebars templates and store them for use later
 let peopleTemplate = Handlebars.compile($("#person-template").html());
@@ -20,6 +20,7 @@ let meTemplate = Handlebars.compile($("#message-template").html());
 let userTemplate = Handlebars.compile($("#message-response-template").html());
 let titleTemplate = Handlebars.compile($("#title-template").html());
 let typingTemplate = Handlebars.compile($("#typing-template").html());
+let unreadTemplate = Handlebars.compile($("#unread-template").html());
 
 
 let config = { timeout: 1000 };
@@ -59,12 +60,14 @@ const init = (user) => {
         // create a new ChatEngine Chat
         myChat = new ChatEngine.Chat(chat_name);
 
+        myChat.plugin(ChatEngineCore.plugin['chat-engine-unread-messages']());
+        myChat.unreadMessages.inactive();
+
 
         $(document).on("keypress", function(e) {
             // use e.which
 
             if (e.which !== 13) {
-
 
                 //console.log('e',e);
                 ChatEngine.global.typingIndicator.startTyping();
@@ -72,8 +75,6 @@ const init = (user) => {
             }
 
         });
-
-
 
         // when we recieve messages in this chat, render them
         myChat.on('message', (message) => {
@@ -106,6 +107,15 @@ const init = (user) => {
 
         });
 
+        myChat.on('$unread', (payload) => {
+            console.log(payload.sender.state.name, " sent a message you havn't seen in ", payload.chat.channel, ": ", payload.event.data.text);
+
+            if (uuid !== payload.sender.uuid) {
+                renderUnread(myChat.unreadCount);
+                console.log('$unread', uuid, payload, myChat.unreadCount);
+            };
+        });
+
 
         ChatEngine.global.on('$typingIndicator.startTyping', (payload) => {
             // console.log(payload.sender.uuid, "is typing...", payload);
@@ -121,12 +131,27 @@ const init = (user) => {
             });
 
             $('#typing').append(el);
+
+
+            // Unread Messages
+            if (uuid === payload.sender.uuid) {
+                console.log('START :: Active', uuid, myChat.unreadCount);
+                myChat.unreadMessages.active();
+                renderUnread();
+            };
         });
 
         ChatEngine.global.on('$typingIndicator.stopTyping', (payload) => {
             // console.log(payload.sender.uuid, "is not typing.");
 
             $('#typing').find('#typing-' + payload.sender.uuid).remove();
+
+
+            // Unread Messages
+            if (uuid === payload.sender.uuid) {
+                console.log('START :: Active', uuid, myChat.unreadCount);
+                myChat.unreadMessages.inactive();
+            };
 
         });
 
@@ -198,7 +223,7 @@ const renderMessage = (message, isHistory = false) => {
 };
 
 
-// render messages in the list
+// render patient in header
 const renderPatient = (patient) => {
 
     formatDateCH = function(date_string) {
@@ -217,11 +242,7 @@ const renderPatient = (patient) => {
         }
     };
 
-    // use the generic user template by default
     let template = titleTemplate;
-
-    // console.log('INNNER', patient);
-
     let el = template({
         title: patient.data.last_name + " " + patient.data.first_name,
         subtitle: formatDateCH(patient.data.birthdate)
@@ -229,6 +250,25 @@ const renderPatient = (patient) => {
 
     // render the title
     $('.chat-header .chat-about').append(el);
+};
+
+// render unread_count
+const renderUnread = (count) => {
+
+    count = count || 0;
+
+    if (count !== 0) {
+        let template = unreadTemplate;
+
+        let el = template({
+            count: count || null
+        });
+    
+        // render the title
+        $('#unreadTemp').html(el);
+    } else {
+        $('#unreadTemp').empty();    
+    };
 };
 
 // scroll to the bottom of the window
@@ -255,6 +295,8 @@ var getCurrentUser = function() {
         if (req_user.status == 200) {
             var user = JSON.parse(req_user.response);
             // console.log('SUCCESS: getCurrentUserAndPatient', user);
+
+            uuid = user.user.id;
 
             // Boot the app
             init(user.user);
@@ -287,3 +329,4 @@ var getCurrentPatient = function() {
 // Start & Boot
 getCurrentUser();
 getCurrentPatient();
+
