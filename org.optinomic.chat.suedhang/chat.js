@@ -108,11 +108,13 @@ const init = (user) => {
         });
 
         myChat.on('$unread', (payload) => {
-            console.log(payload.sender.state.name, " sent a message you havn't seen in ", payload.chat.channel, ": ", payload.event.data.text);
 
             if (uuid !== payload.sender.uuid) {
                 renderUnread(myChat.unreadCount);
-                console.log('$unread', uuid, payload, myChat.unreadCount);
+                
+                console.log(payload.sender.state.name, " sent a message you havn't seen in ", payload.chat.channel, ": ", payload.event.data.text);
+
+                // console.log('$unread', uuid, payload, myChat.unreadCount);
             };
         });
 
@@ -135,7 +137,7 @@ const init = (user) => {
 
             // Unread Messages
             if (uuid === payload.sender.uuid) {
-                console.log('START :: Active', uuid, myChat.unreadCount);
+                //console.log('START :: Active', uuid, myChat.unreadCount);
                 myChat.unreadMessages.active();
                 renderUnread();
             };
@@ -149,7 +151,7 @@ const init = (user) => {
 
             // Unread Messages
             if (uuid === payload.sender.uuid) {
-                console.log('START :: Active', uuid, myChat.unreadCount);
+                //console.log('STOP :: Inactive', uuid, myChat.unreadCount);
                 myChat.unreadMessages.inactive();
             };
 
