@@ -4,6 +4,9 @@
 Core messaging features.
 
 
+## ToDo
+- Desktop-Notifications not working - until HTTPS!!!
+
 ## Implemented Features
 - User Online/Offline Status
 - Typing Indicators
@@ -16,6 +19,7 @@ Core messaging features.
 - EU GDPR Compliant
 - EU-US Privacy Shield Certiﬁed
 - EU Data Storage
+
 
 
 # Contact
