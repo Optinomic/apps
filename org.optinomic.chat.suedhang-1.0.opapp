@@ -1,0 +1,873 @@
+[module]
+id = org.optinomic.chat.suedhang
+name = _Chat (DEVELOPMENT)
+short_description = Chat (Beta-Channel)
+version = 1.0
+type = patient
+
+[description]
+Chat-Engine
+
+[developer]
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
+website = http://www.optinomic.com/
+
+[readme]
+
+# Optinomic Chat-Engine.
+
+Core messaging features.
+
+
+## ToDo
+- Desktop-Notifications not working - until HTTPS!!!
+- FIX: History-Messages - Emoji not rendered.
+
+## Implemented Features
+- User Online/Offline Status
+- Typing Indicators
+- Unread Message Counts
+- Emoji-Support: Just type `:pizza:`  or check the supported emoticons here: [EMOJI CHEAT SHEET](https://www.webpagefx.com/tools/emoji-cheat-sheet/) 
+
+## Enterprise-Grade Security
+- TLS and AES256 Encryption
+- SOC 2 Type II Compliant
+- HIPAA Compliant
+- EU GDPR Compliant
+- EU-US Privacy Shield Certiﬁed
+- EU Data Storage
+
+
+## RAW Source
+https://raw.githubusercontent.com/Optinomic/apps/master/org.optinomic.chat.suedhang-1.0.opapp
+
+
+# Contact
+
+![image](http://www.ottiger.org/optinomic_logo/optinomic_logo_small.png)     
+
+*Optinomic GmbH*   
+*Haldenstrasse 7*     
+*CH - 8942 Oberrieden*     
+*+41(0)44 508 26 76*    
+*info@optinomic.com*   
+*[www.optinomic.com](http://www.optinomic.com)*   
+
+
+
+[template chat 6 7]
+<html>
+<title>Südhang @ Optinomic ChatEngine</title>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chat-engine@0.9.5/dist/chat-engine.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chat-engine-typing-indicator@0.0.9/dist/chat-engine-typing-indicator.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chat-engine-unread-messages@0.0.8/dist/chat-engine-unread-messages.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chat-engine-emoji@0.0.7/dist/chat-engine-emoji.js"></script>
+</head>
+
+<body>
+    <div class="container clearfix">
+        <div class="people-list" id="people-list">
+            <ul class="list">
+            </ul>
+        </div>
+        <div class="chat">
+            <div class="chat-header clearfix">
+                <div id="unreadTemp" class="unread"></div>
+                <div id="titleTemp" class="chat-about">
+                </div>
+                <div id="typing" class="typing">
+                </div>
+            </div>
+            <div class="chat-history">
+                <div id="loadAll" style="text-align: center"><button class="btn" onclick="loadMore()">Load all</button></div>
+                <ul></ul>
+            </div>
+            <form id="sendMessage" class="chat-message clearfix">
+                <input type="text" name="message-to-send" id="message-to-send" placeholder="Schreib eine Nachricht" rows="1">
+                <input type="submit" value="►">
+            </form>
+            <!-- end chat-message -->
+        </div>
+        <!-- end chat -->
+    </div>
+    <!-- end container -->
+    <script id="message-template" type="text/x-handlebars-template">
+        <li class="clearfix">
+            <div class="message-data align-right">
+                <span class="message-data-time">{{time}}, {{date}}</span> &nbsp; &nbsp;
+                <span class="message-data-name">{{user.name}}</span> <i class="fa fa-circle me"></i>
+            </div>
+            <div class="message other-message float-right">
+                {{{messageOutput}}}
+            </div>
+        </li>
+    </script>
+    <script id="message-response-template" type="text/x-handlebars-template">
+        <li>
+            <div class="message-data">
+                <span class="message-data-name"><i class="fa fa-circle online"></i> {{user.name}}</span>
+                <span class="message-data-time">{{time}}, {{date}}</span>
+            </div>
+            <div class="message my-message">
+                {{{messageOutput}}}
+            </div>
+        </li>
+    </script>
+    <script id="person-template" type="text/x-handlebars-template">
+        {{#if state.name }}
+        <li class="clearfix" id="{{uuid}}">
+            <div class="about">
+                <div class="name">{{state.name}}</div>
+                <div class="status">
+                    <i class="fa fa-circle online"></i> {{#if state.initials }} {{state.initials}} | {{/if}} online
+                </div>
+            </div>
+        </li>
+        {{/if}}
+    </script>
+    <script id="title-template" type="text/x-handlebars-template">
+        <div class="chat-with">
+            {{title}}
+        </div>
+        <div class="chat-with-sub">
+            {{subtitle}}
+        </div>
+    </script>
+    <script id="typing-template" type="text/x-handlebars-template">
+        <div id="typing-{{uuid}}">
+            <div id="wave">
+                {{mode}}
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </script>
+    <script id="unread-template" type="text/x-handlebars-template">
+        <div class="numberCircle">
+            {{count}}
+        </div>
+    </script>
+
+    <script>
+    // ChatEngine | Südhang
+// https://admin.pubnub.com/#/user/442897/account/442861/app/35197778/
+
+ChatEngine = ChatEngineCore.create({
+    publishKey: 'pub-c-231082a7-7ad8-4a41-a6cd-eed5540629a4',
+    subscribeKey: 'sub-c-ab15b472-4214-11e8-b20a-be401e5b340a'
+});
+
+// create a bucket to store our ChatEngine Chat object
+let myChat;
+
+// create a bucket to store 
+let me;
+let uuid;
+
+// compile handlebars templates and store them for use later
+let peopleTemplate = Handlebars.compile($("#person-template").html());
+let meTemplate = Handlebars.compile($("#message-template").html());
+let userTemplate = Handlebars.compile($("#message-response-template").html());
+let titleTemplate = Handlebars.compile($("#title-template").html());
+let typingTemplate = Handlebars.compile($("#typing-template").html());
+let unreadTemplate = Handlebars.compile($("#unread-template").html());
+
+
+let config = { timeout: 1000 };
+
+
+// get some references to functions
+let keypress = function() {};
+
+
+// this is our main function that starts our chat app
+const init = (user) => {
+
+    // console.log('INNER', user);
+
+    // Build Chatname by current patient  |  ToDo:  API-Current Patient PID
+    let chat_name = "optinomic_patient_" + helpers.getPatientID();
+
+    // connect to ChatEngine with our user |  ToDo:  API-Current User
+    ChatEngine.connect(user.id, {
+        email: user.data.email,
+        name: user.data.first_name + " " + user.data.last_name,
+        first_name: user.data.first_name,
+        last_name: user.data.last_name,
+        initials: user.data.initials,
+        description: user.data.description,
+        uuid: user.id
+    });
+
+    // when ChatEngine is booted, it returns your new User as `data.me`
+    ChatEngine.on('$.ready', function(data) {
+
+        // attach the typing-indicator plugin to the global channel
+        ChatEngine.global.plugin(ChatEngineCore.plugin['chat-engine-typing-indicator'](config));
+
+        // store my new user as `me`
+        me = data.me;
+
+        // create a new ChatEngine Chat
+        myChat = new ChatEngine.Chat(chat_name);
+
+
+
+        myChat.plugin(ChatEngineCore.plugin['chat-engine-unread-messages']());
+        myChat.plugin(ChatEngineCore.plugin['chat-engine-emoji']());
+        myChat.unreadMessages.inactive();
+
+
+        $(document).on("keypress", function(e) {
+            // use e.which
+
+            if (e.which !== 13) {
+
+                //console.log('e',e);
+                ChatEngine.global.typingIndicator.startTyping();
+
+            }
+
+        });
+
+        // when we recieve messages in this chat, render them
+        myChat.on('message', (message) => {
+            //console.log('current message', message);
+            renderMessage(message);
+        });
+
+        // when a user comes online, render them in the online list
+        myChat.on('$.online.*', (data) => {
+            $('#people-list ul').append(peopleTemplate(data.user));
+        });
+
+        // when a user goes offline, remove them from the online list
+        myChat.on('$.offline.*', (data) => {
+            $('#people-list ul').find('#' + data.user.uuid).remove();
+        });
+
+        // wait for our chat to be connected to the internet
+        myChat.on('$.connected', () => {
+
+
+            searchRender();
+
+
+        });
+
+        myChat.on('$unread', (payload) => {
+
+            if (uuid !== payload.sender.uuid) {
+                renderUnread(myChat.unreadCount);
+
+                console.log(payload.sender.state.name, " sent a message you havn't seen in ", payload.chat.channel, ": ", payload.event.data.text);
+
+                // console.log('$unread', uuid, payload, myChat.unreadCount);
+            };
+        });
+
+
+        ChatEngine.global.on('$typingIndicator.startTyping', (payload) => {
+            // console.log(payload.sender.uuid, "is typing...", payload);
+
+            // use the generic user template by default
+            let template = typingTemplate;
+
+            // console.log('INNNER', patient);
+
+            let el = template({
+                mode: payload.sender.state.initials,
+                uuid: payload.sender.uuid
+            });
+
+            $('#typing').append(el);
+
+
+            // Unread Messages
+            if (uuid === payload.sender.uuid) {
+                //console.log('START :: Active', uuid, myChat.unreadCount);
+                myChat.unreadMessages.active();
+                renderUnread();
+            };
+        });
+
+        ChatEngine.global.on('$typingIndicator.stopTyping', (payload) => {
+            // console.log(payload.sender.uuid, "is not typing.");
+
+            $('#typing').find('#typing-' + payload.sender.uuid).remove();
+
+
+            // Unread Messages
+            if (uuid === payload.sender.uuid) {
+                //console.log('STOP :: Inactive', uuid, myChat.unreadCount);
+                myChat.unreadMessages.inactive();
+            };
+
+        });
+
+
+        // bind our "send" button and return key to send message
+        $('#sendMessage').on('submit', sendMessage)
+
+
+
+    });
+
+};
+
+const loadMore = () => {
+    $('#loadAll').remove();
+    $('.chat-history ul').empty();
+    searchRender(999999999);
+};
+
+
+// send a message to the Chat
+const searchRender = (limit) => {
+    limit = limit || 50;
+    // search for 50 old `message` events
+    myChat.search({
+        event: 'message',
+        limit: limit
+
+    }).on('message', (data) => {
+
+        // when messages are returned, render them like normal messages
+        renderMessage(data, true);
+
+    });
+};
+
+// send a message to the Chat
+const sendMessage = () => {
+
+    // get the message text from the text input
+    let message = $('#message-to-send').val().trim();
+
+    // if the message isn't empty
+    if (message.length) {
+
+        // emit the `message` event to everyone in the Chat
+        var d = new Date();
+        var n = d.toISOString();
+
+        myChat.emit('message', {
+            text: message,
+            date_iso: n,
+            date: getCurrentDate(),
+            time: getCurrentTime()
+        });
+
+        // clear out the text input
+        $('#message-to-send').val('');
+    }
+
+    // stop form submit from bubbling
+    return false;
+};
+
+// render messages in the list
+const renderMessage = (message, isHistory = false) => {
+
+    // use the generic user template by default
+    let template = userTemplate;
+
+    // if I happened to send the message, use the special template for myself
+    if (message.sender.uuid == me.uuid) {
+        template = meTemplate;
+    }
+
+    let el = template({
+        messageOutput: message.data.text,
+        time: message.data.date,
+        date: message.data.time,
+        user: message.sender.state
+    });
+
+    // render the message
+    if (isHistory) {
+
+        $('.chat-history ul').prepend(el);
+    } else {
+        $('.chat-history ul').append(el);
+    }
+
+    // scroll to the bottom of the chat
+    scrollToBottom();
+};
+
+
+// render patient in header
+const renderPatient = (patient) => {
+
+    formatDateCH = function(date_string) {
+        date_string = date_string || null
+        if (date_string !== null) {
+
+            // 1952-11-19T00:00:00.000000000000Z
+            var year = parseInt(date_string.substring(0, 4));
+            var month = parseInt(date_string.substring(5, 7));
+            var day = parseInt(date_string.substring(8, 10));
+            var date_string_return = day + "." + month + "." + year
+
+            return date_string_return;
+        } else {
+            return null;
+        }
+    };
+
+    let template = titleTemplate;
+    let el = template({
+        title: patient.data.last_name + " " + patient.data.first_name,
+        subtitle: formatDateCH(patient.data.birthdate)
+    });
+
+    // render the title
+    $('.chat-header .chat-about').append(el);
+};
+
+// render unread_count
+const renderUnread = (count) => {
+
+    count = count || 0;
+
+    if (count !== 0) {
+        let template = unreadTemplate;
+
+        let el = template({
+            count: count || null
+        });
+
+        // render the title
+        $('#unreadTemp').html(el);
+    } else {
+        $('#unreadTemp').empty();
+    };
+};
+
+// scroll to the bottom of the window
+const scrollToBottom = () => {
+    $('.chat-history').scrollTop($('.chat-history')[0].scrollHeight);
+};
+
+// get the current time in a nice format
+const getCurrentTime = () => {
+    return new Date().toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
+};
+
+// get the current date in a nice format
+const getCurrentDate = () => {
+    return new Date().toLocaleDateString();
+};
+
+
+var getCurrentUser = function() {
+
+    api_url_user = '/users/' + helpers.getUserID();
+
+    helpers.callAPI('GET', api_url_user, {}, {}, function(req_user) {
+        if (req_user.status == 200) {
+            var user = JSON.parse(req_user.response);
+            // console.log('SUCCESS: getCurrentUserAndPatient', user);
+
+            uuid = user.user.id;
+
+            // Boot the app
+            init(user.user);
+
+        } else {
+            console.error('ERROR: getCurrentUser', req_user);
+        };
+
+    });
+};
+
+var getCurrentPatient = function() {
+
+    api_url_patient = '/patients/' + helpers.getPatientID();
+
+    helpers.callAPI('GET', api_url_patient, {}, {}, function(req_patient) {
+        if (req_patient.status == 200) {
+            var patient = JSON.parse(req_patient.response);
+            //console.log('SUCCESS: getCurrentUserAndPatient', user);
+
+            // Render Title with Name / Birthdate
+            renderPatient(patient.patient);
+
+        } else {
+            console.error('ERROR: getCurrentPatient', req_patient);
+        };
+    });
+};
+
+// Start & Boot
+getCurrentUser();
+getCurrentPatient();
+    </script>
+</body>
+
+</html>
+
+[javascript]
+
+
+[css]
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+body {
+    background: #E0E0E0;
+    font: 14px/20px "Lato", Arial, sans-serif;
+    padding: 0;
+    margin: 0;
+    color: #ECEFF1;
+}
+
+.container {
+    margin: 25px;
+    width: calc(100vw - 50px);
+    height: calc(100vh - 50px);
+    background: #37474F;
+    border-radius: 5px;
+}
+
+.people-list {
+    width: 220px;
+    float: left;
+    overflow-y: auto;
+    max-height: calc(100vh - 50px);
+}
+
+.people-list .search {
+    padding: 20px;
+}
+
+.people-list input {
+    border-radius: 3px;
+    border: none;
+    padding: 14px;
+    color: white;
+    background: #6a6c75;
+    width: 90%;
+    font-size: 14px;
+}
+
+.people-list .fa-search {
+    position: relative;
+    left: -25px;
+}
+
+.people-list ul {
+    padding: 20px;
+    height: 500px;
+}
+
+.people-list ul li {
+    padding-bottom: 20px;
+}
+
+.people-list img {
+    float: left;
+}
+
+.people-list .about {
+    float: left;
+    margin-top: 8px;
+}
+
+.people-list .about {
+    padding-left: 8px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+}
+
+.people-list .status {
+    color: #C8E6C9;
+    font-weight: 300
+}
+
+.chat {
+    width: calc(100vw - 50px - 220px);
+    float: left;
+    background: #ECEFF1;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: #37474F;
+}
+
+.chat .chat-header {
+    padding: 20px;
+    height: 96px;
+    overflow: hidden;
+    border-bottom: 2px solid #CFD8DC;
+}
+
+.chat .chat-header .unread {
+    float: left;
+}
+
+.chat .chat-header .chat-about {
+    float: left;
+    padding-left: 10px;
+    margin-top: 6px;
+}
+
+.chat .chat-header .chat-with {
+    font-weight: 400;
+    font-size: 28px;
+}
+
+.chat .chat-header .chat-with-sub {
+    margin-top: 8px;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.chat .chat-header .chat-num-messages {
+    color: #4CAF50;
+}
+
+.chat .chat-header .typing {
+    float: right;
+    color: #4CAF50;
+    font-size: 14px;
+    margin-top: 12px;
+}
+
+.chat .chat-header .fa-star {
+    float: right;
+    color: #d8dadf;
+    font-size: 20px;
+    margin-top: 12px;
+}
+
+.chat .chat-history {
+    padding: 30px 30px 20px;
+    border-bottom: 2px solid #CFD8DC;
+    overflow-y: scroll;
+    height: calc(100vh - 96px - 96px - 50px);
+}
+
+.chat .chat-history .message-data {
+    margin-bottom: 15px;
+}
+
+.chat .chat-history .message-data-time {
+    color: #607D8B;
+    padding-left: 6px;
+}
+
+.chat .chat-history .message {
+    color: white;
+    padding: 8px 10px;
+    line-height: 26px;
+    font-size: 16px;
+    border-radius: 7px;
+    margin-bottom: 15px;
+    width: 90%;
+    position: relative;
+}
+
+.chat .chat-history .message:after {
+    bottom: 100%;
+    left: 7%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-bottom-color: #FFFFFF;
+    border-width: 10px;
+    margin-left: -10px;
+}
+
+.chat .chat-history .my-message {
+    background: #FFFFFF;
+    color: #000
+}
+
+.chat .chat-history .other-message {
+    background: #C8E6C9;
+    color: #000
+}
+
+.chat .chat-history .other-message:after {
+    border-bottom-color: #C8E6C9;
+    left: 93%;
+}
+
+.chat .chat-message {
+    padding: 30px;
+    height: 96px;
+    overflow: hidden;
+}
+
+.chat .chat-message input[type="text"] {
+    width: calc(100% - 48px);
+    border: none;
+    padding: 10px 20px;
+    font: 14px/22px "Lato", Arial, sans-serif;
+    margin-top: -4px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    resize: none;
+}
+
+.chat .chat-message .fa-file-o,
+.chat .chat-message .fa-file-image-o {
+    font-size: 16px;
+    color: gray;
+    cursor: pointer;
+}
+
+.chat .chat-message input[type="submit"] {
+    float: right;
+    color: #607D8B;
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+    background: #f2f5f8;
+}
+
+.chat .chat-message input[type="submit"]:hover {
+    color: #37474F;
+}
+
+.online,
+.offline,
+.me {
+    margin-right: 3px;
+    font-size: 10px;
+}
+
+.online {
+    color: #4CAF50;
+}
+
+.offline {
+    color: #FF9800;
+}
+
+.me {
+    color: #607D8B;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.float-right {
+    float: right;
+}
+
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+ul {
+    list-style-type: none;
+}
+
+div#wave {
+    text-align: center;
+}
+
+div#wave .dot {
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    margin-right: 3px;
+    background: #4CAF50;
+    animation: wave 1.3s linear infinite;
+}
+
+div#wave .dot:nth-child(2) {
+    animation-delay: -1.1s;
+}
+
+div#wave .dot:nth-child(3) {
+    animation-delay: -0.9s;
+}
+
+@keyframes wave {
+    0%,
+    60%,
+    100% {
+        transform: initial;
+    }
+    30% {
+        transform: translateY(-6px);
+    }
+}
+
+.chat .chat-header .unread {
+    float: left;
+}
+
+.numberCircle {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 14px;
+
+    width: 2em;
+    height: 2em;
+
+    background: #C8E6C9;
+    color: #388E3C;
+    
+    border: 0.1em solid #A5D6A7;
+    text-align: center;
+    border-radius: 50%;    
+
+    line-height: 2em;
+    box-sizing: content-box;   
+}
+
+.btn {
+  -webkit-border-radius: 19;
+  -moz-border-radius: 19;
+  border-radius: 19px;
+  -webkit-box-shadow: 0px 1px 6px #666666;
+  -moz-box-shadow: 0px 1px 6px #666666;
+  box-shadow: 0px 1px 6px #666666;
+  font-family: Arial;
+  color: #263238;
+  font-size: 14px;
+  background: #cfd8dc;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #607d8b;
+  text-decoration: none;
+  color: #FFFFFF;
+}
+

@@ -1,0 +1,679 @@
+[module]
+id = org.optinomic.apps.komed_health
+name = Komed-Health <-> Optinomic
+short_description = Intelligent communication in healthcare
+version = 1.0
+type = patient
+
+[description]
+Intelligent communication in healthcare | Optinomic-Integration into Komed-Health
+
+[developer]
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
+website = http://www.optinomic.com/
+
+[readme]
+
+
+[template main 6 7]
+<head>
+    <meta charset="utf-8">
+    <meta name="generator" content="Optinomic GmbH | www.optinomic.com">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,user-scalable=yes">
+    <meta name="theme-color" content="#3F51B5">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Optinomic">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Optinomic">
+    
+    <meta name="msapplication-TileColor" content="#3F51B5">
+    <link rel="shortcut icon" href="http://www.optinomic.com/_logo/favicon-indigo/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="57x57" href="http://www.optinomic.com/_logo/favicon-indigo/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="http://www.optinomic.com/_logo/favicon-indigo/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://www.optinomic.com/_logo/favicon-indigo/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="http://www.optinomic.com/_logo/favicon-indigo/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://www.optinomic.com/_logo/favicon-indigo/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="http://www.optinomic.com/_logo/favicon-indigo/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="http://www.optinomic.com/_logo/favicon-indigo/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="http://www.optinomic.com/_logo/favicon-indigo/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="http://www.optinomic.com/_logo/favicon-indigo/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="http://www.optinomic.com/_logo/favicon-indigo/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="http://www.optinomic.com/_logo/favicon-indigo/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="http://www.optinomic.com/_logo/favicon-indigo/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="http://www.optinomic.com/_logo/favicon-indigo/android-chrome-192x192.png" sizes="192x192">
+    <meta name="msapplication-square70x70logo" content="http://www.optinomic.com/_logo/favicon-indigo/smalltile.png" />
+    <meta name="msapplication-square150x150logo" content="http://www.optinomic.com/_logo/favicon-indigo/mediumtile.png" />
+    <meta name="msapplication-wide310x150logo" content="http://www.optinomic.com/_logo/favicon-indigo/widetile.png" />
+    <meta name="msapplication-square310x310logo" content="http://www.optinomic.com/_logo/favicon-indigo/largetile.png" />
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.3/iframeResizer.contentWindow.min.js"></script>
+
+    <script src="https://cdn.rawgit.com/Download/polymer-cdn/upgrade-to-1.8.0/lib/webcomponentsjs/webcomponents.min.js"></script>
+    <script src="https://rawgit.com/Optinomic/apps/master/lib/polymer/node_modules/redux/3.6.0/redux.min.js"></script>
+    <script src="https://rawgit.com/Optinomic/apps/master/lib/polymer/node_modules/redux-thunk/2.2.0/redux-thunk.min.js"></script>
+    <script src="https://cdn.rawgit.com/Optinomic/apps/bd4934d6/lib/polymer/bower_components/polymer-redux/polymer-redux.js"></script>
+    <base href="https://cdn.rawgit.com/download/polymer-cdn/upgrade-to-1.8.0/lib/">
+</head>
+
+<head>
+	<dom-module id="shared-styles">
+    <template>
+        <style>
+
+        body {
+            display: block;
+            margin: 0;
+            min-height: 100%;
+            background-color: #FFFFFF;
+            font-family: 'Roboto', 'Noto', sans-serif;
+            line-height: 1.5;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+
+
+        html, body {
+  font-family: 'Roboto', sans-serif !important;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.large {
+  font-size: 125%;
+}
+
+.small {
+  font-size: 75%;
+}
+
+a {
+  text-decoration: none;
+  color: #37474F;
+}
+
+
+/************
+ * Headings
+ ************/
+
+.display-4 {
+  font-size: 117.6px;
+  font-weight: 100;
+  letter-spacing: -0.010em;
+  line-height: 117.6px;
+  color: #757575;
+}
+
+.display-3 {
+  font-size: 58.8px;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 58.8px;
+  color: #757575;
+}
+
+.display-2 {
+  font-size: 47.25px;
+  font-weight: 400;
+  line-height: 67.2px;
+  color: #757575;
+}
+
+h1, .display-1 {
+  font-size: 35.7px;
+  font-weight: 300;
+  line-height: 42px;
+  color: #757575;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+h2, .headline {
+  font-size: 25.2px;
+  font-weight: 300;
+  line-height: 33.6px;
+  color: #616161;
+}
+
+h3, .title {
+  font-size: 21px;
+  font-weight: 300;
+  letter-spacing: 0.005em;
+  color: #424242;
+}
+
+h4, .subhead {
+  font-size: 16.8px;
+  font-weight: 300;
+  letter-spacing: 0.010em;
+  line-height: 25.2px;
+  color: #212121;
+}
+
+
+/************
+ * Body Copy
+ ************/
+
+p, .body-1 {
+  font-size: 14.7px;
+  font-weight: 400;
+  letter-spacing: 0.010em;
+  line-height: 21px;
+  color: #212121;
+}
+
+b, .body-2 {
+  font-size: 14.7px;
+  font-weight: 500;
+  letter-spacing: 0.010em;
+  line-height: 25.2px;
+  color: #212121;
+}
+
+.caption {
+  font-size: 12.6px;
+  letter-spacing: 0.020em;
+  color: #757575;
+}
+
+.button {
+  letter-spacing: 0.010em;
+}
+
+
+/************
+ * Defaults
+ ************/
+
+button, select, html, textarea, input {
+  font-family: 'Roboto', sans-serif !important;
+}
+
+select, button, textarea, input {
+  font-size: 100%;
+}
+
+        paper-button {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+paper-button.grey {
+  color: var(--paper-grey-500);
+  --paper-button-ink-color: var(--paper-grey-a200);
+}
+
+paper-button.grey:hover {
+  color: var(--paper-grey-900);
+  background-color: var(--paper-grey-100);
+}
+
+paper-button.pink {
+  color: var(--paper-pink-800);
+  background-color: var(--paper-pink-50);
+  --paper-button-ink-color: var(--paper-pink-500);
+}
+
+paper-button.pink:hover {
+  background-color: var(--paper-pink-500);
+  color: white;
+}
+
+paper-button.indigo {
+  background-color: var(--paper-indigo-50);
+  color: var(--paper-indigo-800);
+  --paper-button-ink-color: var(--paper-pink-500);
+}
+
+paper-button.indigo:hover {
+  background-color: var(--paper-indigo-500);
+  color: white;
+}
+
+paper-button.disabled {
+  color: white;
+}
+
+        paper-icon-button.grey {
+  color: var(--paper-grey-500);
+  transition: all 0.3s ease-in-out;
+  --paper-icon-button-ink-color: var(--paper-grey-500);
+}
+
+paper-icon-button.grey:hover {
+  color: var(--paper-grey-800);
+  transform: scale(1.1);
+}
+
+paper-icon-button.pink {
+  color: var(--paper-pink-500);
+  transition: all 0.3s ease-in-out;
+  --paper-icon-button-ink-color: var(--paper-pink-500);
+}
+
+paper-icon-button.pink:hover {
+  transform: scale(1.1);
+}
+
+paper-icon-button.indigo {
+  color: var(--paper-indigo-500);
+  transition: all 0.3s ease-in-out;
+  --paper-icon-button-ink-color: var(--paper-indigo-500);
+}
+
+paper-icon-button.indigo:hover {
+  transform: scale(1.1);
+}
+
+        paper-progress {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+}
+
+paper-progress.slow {
+  --paper-progress-indeterminate-cycle-duration: 5s;
+}
+
+paper-progress.indigo {
+  --paper-progress-active-color: var(--paper-indigo-500);
+  --paper-progress-secondary-color: var(--paper-indigo-100);
+  --paper-progress-indeterminate-cycle-duration: 3s;
+}
+
+paper-progress.pink {
+  --paper-progress-active-color: var(--paper-pink-500);
+  --paper-progress-secondary-color: var(--paper-pink-100);
+  --paper-progress-indeterminate-cycle-duration: 3s;
+}
+
+paper-tooltip {
+  --paper-tooltip-background: #424242;
+  --paper-tooltip-opacity: 0.85;
+  --paper-tooltip: {
+    font-size: 14px;
+    color: #FAFAFA;
+  }
+}
+
+                .horizontal {
+          @apply(--layout-horizontal);
+          @apply(--layout-center);
+          @apply(--layout-justified);
+        }
+
+        .flex {
+          @apply(--layout-flex);
+        }
+
+        .wrap {
+          @apply(--layout-wrap);
+        }
+
+        .circle {
+          display: inline-block;
+          width: 58px;
+          height: 58px;
+          text-align: center;
+          color: #424242;
+          border-radius: 50%;
+          background: #E0E0E0;
+          font-size: 28px;
+          font-weight: 100;
+          font-family: 'Roboto', sans-serif;
+          line-height: 60px;
+        }
+
+        .grid-border-top {
+          border-top-color: #E0E0E0;
+          border-top-style: solid;
+          border-top-width: 1px;
+        }
+
+        .indigo {
+          color: #3F51B5;
+        }
+
+        .pink {
+          color: #E91E63;
+        }
+
+
+        </style>
+    </template>
+</dom-module>
+
+    <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/upgrade-to-1.8.0/lib/polymer/polymer.html">
+<link rel="import" href="https://cdn.rawgit.com/Optinomic/apps/5423e93a/lib/polymer/elements/optinomic-loading.html">
+
+
+</head>
+
+
+<optinomic-loading></optinomic-loading>
+
+<link rel="import" href="polymer/polymer.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+<dom-module id="komed-iframe">
+    <template>
+        <style include="shared-styles iron-flex iron-flex-alignment">
+        :host {
+            display: block;
+        }
+        </style>
+        <p class="grid-border-top">&nbsp;</p>
+        <div class="layout horizontal center top-bar">
+            <h1>Welcome: komed-iframe</h1>
+            <p>[[currentPatient.data.extras.full_name]]</p>
+        </div>
+        <p class="grid-border-top">&nbsp;</p>
+    </template>
+    <script>
+
+    Polymer({
+
+        is: 'komed-iframe',
+
+        behaviors: [ReduxBehavior],
+
+        properties: {
+            currentPatient: {
+                type: Object,
+                statePath: 'currentPatient'
+            }
+        },
+
+        ready: function() {
+            //console.log('HELLO: READY - properties!', properties);
+        }
+    });
+    </script>
+</dom-module>
+
+<head>
+    <link rel="import" href="iron-icons/iron-icons.html">
+    <link rel="import" href="paper-button/paper-button.html">
+</head>
+<dom-module id="optinomic-app">
+    <template>
+        <style include="shared-styles">
+        :host {
+            display: block;
+            margin-left: -5px;
+            padding-bottom: 12px;
+        }
+        </style>
+        <div>
+            <template is="dom-if" if="[[loading]]">
+                <p>Loading...</p>
+            </template>
+            <template is="dom-if" if="[[currentPatient.data]]">
+                <komed-iframe ></komed-iframe>
+                <h1>Index</h1>
+                <p style$="color:[[currentPatient.data.extras.color_main]]">[[currentPatient.data.extras.full_name]]</p>
+                <div>
+                    <a href$="[[currentPatient.data.komed_url]]" target="_blank" tabindex="-1">
+                        <paper-button class="indigo">Chat: [[currentPatient.data.extras.full_name]]</paper-button>
+                    </a>
+                </div>
+            </template>
+            <iframe src$="[[currentPatient.data.komed_url]]" width="639" height="520" frameborder="0">
+                <p>Your browser does not support iframes.</p>
+            </iframe>
+        </div>
+    </template>
+</dom-module>
+
+<optinomic-app name="main"></optinomic-app>
+<div data-iframe-height>&nbsp;</div>
+
+
+
+
+[javascript]
+Polymer({
+    is: 'optinomic-app',
+
+    debugdoc: function() {
+        console.log('___________________________________');
+        console.log('- clinic:', this.clinic);
+        console.log('- user:', this.user);
+        console.log('- patient:', this.patient);
+        console.log('- stays:', this.stays);
+        console.log('- apps:', this.apps);
+        console.log('- survey_responses:', this.survey_responses);
+        console.log('___________________________________');
+    },
+
+    refresh_data: function() {
+        // loadData
+this.dispatch('actionGetCurrentPatient');
+//this.dispatch('actionGetCurrentPatientStays');
+this.dispatch('actionGetClinic');
+this.dispatch('actionLoginKomed');
+
+    },
+
+
+    created: function() {
+        // loadData
+this.dispatch('actionGetCurrentPatient');
+//this.dispatch('actionGetCurrentPatientStays');
+this.dispatch('actionGetClinic');
+this.dispatch('actionLoginKomed');
+
+    },
+
+    ready: function() {
+        // console.log(this.localName + ' initialized.');
+        this.params = {
+            "userID": helpers.getUserID(),
+            "patientID": helpers.getPatientID(),
+            "stayID": helpers.getStayID(),
+            "token": helpers.getToken(),
+            "appName": helpers.getAppName(),
+            "appID": helpers.getAppID(),
+            "apiURL": helpers.getApiURL(),
+        };
+
+        console.warn('params', this.params);
+
+    },
+
+
+
+    behaviors: [ReduxBehavior, AsyncActionsBehavior],
+
+    properties: {
+        loading: {
+            type: Boolean,
+            statePath: 'loading'
+        },
+        clinic: {
+            type: Object,
+            statePath: 'clinic'
+        },
+        user: {
+            type: Object,
+            statePath: 'user'
+        },
+        patient: {
+            type: Object,
+            statePath: 'patient'
+        },
+        gender: {
+            type: Object,
+            statePath: 'patient.data.gender'
+        },
+        stays: {
+            type: Object,
+            statePath: 'stays'
+        },
+        apps: {
+            type: Object,
+            statePath: 'apps'
+        },
+        app: {
+            type: Object,
+            statePath: 'apps.current'
+        },
+        survey_responses: {
+            type: Object,
+            statePath: 'survey_responses'
+        },
+        komed: {
+            type: Object,
+            statePath: 'komed'
+        }
+    }
+});
+
+
+(function() {
+    if ('registerElement' in document && 'import' in document.createElement('link') && 'content' in document.createElement('template')) {
+        console.log('(!) platform is good!')
+    } else {
+        // polyfill the platform!
+        console.log('(!) polyfill the platform!')
+        var e = document.createElement('script');
+        e.src = 'https://cdn.rawgit.com/Download/polymer-cdn/upgrade-to-1.8.0/lib/webcomponentsjs/webcomponents-lite.min.js';
+        document.body.appendChild(e);
+    }
+})();
+
+formatDateCH = function(date_string) {
+    if (date_string !== undefined) {
+
+        // 1952-11-19T00:00:00.000000000000Z
+        var year = parseInt(date_string.substring(0, 4));
+        var month = parseInt(date_string.substring(5, 7));
+        var day = parseInt(date_string.substring(8, 10));
+        var date_string_return = day + "." + month + "." + year
+
+        return date_string_return;
+    } else {
+        return null;
+    }
+};
+
+
+createPatientExtras = function(patient) {
+
+    function getAge(dateString) {
+        var today = new Date();
+        var birthDate = new Date(dateString);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        return age;
+    }
+
+
+    // patient.age = $filter('dateToAge')(patient.birthdate);
+    // patient.birthday = $filter('date')(patient.birthdate);
+
+    patient.extras = {};
+    patient.extras.age = getAge(patient.birthdate);
+
+    patient.extras.birthday = formatDateCH(patient.birthdate);
+    patient.extras.birthday_age = patient.extras.birthday + ' | ' + patient.extras.age;
+
+
+    patient.extras.name = patient.last_name + ' ' + patient.first_name;
+
+    if (patient.gender === 'male') {
+        patient.extras.ansprache = 'Herr';
+        patient.extras.anrede = 'Herr ' + patient.last_name;
+    } else {
+        patient.extras.ansprache = 'Frau';
+        patient.extras.anrede = 'Frau ' + patient.last_name;
+    };
+    patient.extras.full_name = patient.extras.ansprache + ' ' + patient.extras.name + ' (' + patient.extras.birthday_age + ')';
+
+    patient.extras.full_address = patient.address1 + ', ' + patient.zip_code + ' ' + patient.city;
+
+    var myPhone = '';
+    if (patient.phone_home) {
+        myPhone = patient.phone_home;
+    }
+    if (patient.phone_mobile) {
+        if (myPhone != '') {
+            myPhone = myPhone + ', ' + patient.phone_mobile;
+        } else {
+            myPhone = patient.phone_mobile;
+        }
+    }
+    patient.extras.phone = myPhone;
+    patient.extras.infoline = patient.extras.full_address
+
+    if (myPhone != '') {
+        patient.extras.infoline + ' | ' + patient.extras.phone;
+    };
+
+
+    // -----------------------------------
+    // Female = Pink | Male = Blue
+    // -----------------------------------
+    var myColor = "#3F51B5";
+    var myColorAccent = "#E91E63";
+    if (patient.gender === "female") {
+        myColor = "#E91E63";
+        myColorAccent = "#3F51B5";
+    }
+    patient.extras.color_main = myColor;
+    patient.extras.color_accent = myColorAccent;
+
+    return patient;
+};
+
+
+createStayExtras = function(current_stay) {
+    current_stay.extras = {};
+
+    // Calculate - Duration of the stay
+    if (current_stay.stop) {
+        current_stay.extras.duration = Math.floor((Date.parse(current_stay.stop) - Date.parse(current_stay.start)) / 86400000);
+        current_stay.extras.duration = current_stay.extras.duration + 2; //incl. start & stop date
+    } else {
+        current_stay.extras.duration = Math.floor((new Date() - Date.parse(current_stay.start)) / 86400000);
+    };
+
+    // from_to
+    current_stay.extras.beginn = formatDateCH(current_stay.start);
+    current_stay.extras.from_to = formatDateCH(current_stay.start);
+    current_stay.extras.from_to = current_stay.extras.from_to + ' - ';
+    if (current_stay.stop) {
+        current_stay.extras.from_to = current_stay.extras.from_to + formatDateCH(current_stay.stop);
+        current_stay.extras.ende = formatDateCH(current_stay.stop);
+    } else {
+        current_stay.extras.from_to = current_stay.extras.from_to + "Unbekannt";
+    };
+
+    return current_stay;
+};
+
+
+
+
+[css]

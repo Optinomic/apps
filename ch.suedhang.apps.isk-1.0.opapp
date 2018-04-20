@@ -1,0 +1,3198 @@
+[module]
+id = ch.suedhang.apps.isk
+name = ISK-K
+short_description = Persönliche Verhaltensweisen und Gewohnheiten zu den vier Bereichen: Soziale Orientierung, Offensivität, Selbststeuerung und Reflexibilität.
+version = 1.0
+type = patient
+
+[description]
+
+[developer]
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
+website = http://www.optinomic.com/
+
+[template ISK-K 6 12]
+<head>
+    <base href="https://cdn.rawgit.com/Optinomic/polymer-cdn/optinomic-0.1.33/lib/">
+    <link rel="shortcut icon" href="optinomic-images/favicon-indigo/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500">
+    <script src="webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script src="redux/dist/redux.min.js"></script>
+    <script src="redux-thunk/dist/redux-thunk.min.js"></script>
+    <script src="polymer-redux/polymer-redux.js"></script>
+    <link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+    <link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html"> <dom-module id="shared-styles">
+    <template>
+        <style>
+
+        body {
+            display: block;
+            margin: 0;
+            min-height: 100%;
+            background-color: #FFFFFF;
+            font-family: 'Roboto', 'Noto', sans-serif;
+            line-height: 1.5;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+
+
+        html, body {
+  font-family: 'Roboto', sans-serif !important;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.large {
+  font-size: 125%;
+}
+
+.small {
+  font-size: 75%;
+}
+
+a {
+  text-decoration: none;
+  color: #37474F;
+}
+
+
+/************
+ * Headings
+ ************/
+
+.display-4 {
+  font-size: 117.6px;
+  font-weight: 100;
+  letter-spacing: -0.010em;
+  line-height: 117.6px;
+  color: #757575;
+}
+
+.display-3 {
+  font-size: 58.8px;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 58.8px;
+  color: #757575;
+}
+
+.display-2 {
+  font-size: 47.25px;
+  font-weight: 400;
+  line-height: 67.2px;
+  color: #757575;
+}
+
+h1, .display-1 {
+  font-size: 35.7px;
+  font-weight: 300;
+  line-height: 42px;
+  color: #757575;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+h2, .headline {
+  font-size: 25.2px;
+  font-weight: 300;
+  line-height: 33.6px;
+  color: #616161;
+}
+
+h3, .title {
+  font-size: 21px;
+  font-weight: 300;
+  letter-spacing: 0.005em;
+  color: #424242;
+}
+
+h4, .subhead {
+  font-size: 16.8px;
+  font-weight: 300;
+  letter-spacing: 0.010em;
+  line-height: 25.2px;
+  color: #212121;
+}
+
+
+/************
+ * Body Copy
+ ************/
+
+p, .body-1 {
+  font-size: 14.7px;
+  font-weight: 400;
+  letter-spacing: 0.010em;
+  line-height: 21px;
+  color: #212121;
+}
+
+b, .body-2 {
+  font-size: 14.7px;
+  font-weight: 500;
+  letter-spacing: 0.010em;
+  line-height: 25.2px;
+  color: #212121;
+}
+
+.caption {
+  font-size: 12.6px;
+  letter-spacing: 0.020em;
+  color: #757575;
+}
+
+.button {
+  letter-spacing: 0.010em;
+}
+
+
+/************
+ * Defaults
+ ************/
+
+button, select, html, textarea, input {
+  font-family: 'Roboto', sans-serif !important;
+}
+
+select, button, textarea, input {
+  font-size: 100%;
+}
+
+        paper-button {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+paper-button.grey {
+  color: var(--paper-grey-500);
+  --paper-button-ink-color: var(--paper-grey-a200);
+}
+
+paper-button.grey:hover {
+  color: var(--paper-grey-900);
+  background-color: var(--paper-grey-100);
+}
+
+paper-button.pink {
+  color: var(--paper-pink-800);
+  background-color: var(--paper-pink-50);
+  --paper-button-ink-color: var(--paper-pink-500);
+}
+
+paper-button.pink:hover {
+  background-color: var(--paper-pink-500);
+  color: white;
+}
+
+paper-button.indigo {
+  background-color: var(--paper-indigo-50);
+  color: var(--paper-indigo-800);
+  --paper-button-ink-color: var(--paper-pink-500);
+}
+
+paper-button.indigo:hover {
+  background-color: var(--paper-indigo-500);
+  color: white;
+}
+
+paper-button.disabled {
+  color: white;
+}
+
+        paper-icon-button.grey {
+  color: var(--paper-grey-500);
+  transition: all 0.3s ease-in-out;
+  --paper-icon-button-ink-color: var(--paper-grey-500);
+}
+
+paper-icon-button.grey:hover {
+  color: var(--paper-grey-800);
+  transform: scale(1.1);
+}
+
+paper-icon-button.pink {
+  color: var(--paper-pink-500);
+  transition: all 0.3s ease-in-out;
+  --paper-icon-button-ink-color: var(--paper-pink-500);
+}
+
+paper-icon-button.pink:hover {
+  transform: scale(1.1);
+}
+
+paper-icon-button.indigo {
+  color: var(--paper-indigo-500);
+  transition: all 0.3s ease-in-out;
+  --paper-icon-button-ink-color: var(--paper-indigo-500);
+}
+
+paper-icon-button.indigo:hover {
+  transform: scale(1.1);
+}
+
+        paper-progress {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+}
+
+paper-progress.slow {
+  --paper-progress-indeterminate-cycle-duration: 5s;
+}
+
+paper-progress.indigo {
+  --paper-progress-active-color: var(--paper-indigo-500);
+  --paper-progress-secondary-color: var(--paper-indigo-100);
+  --paper-progress-indeterminate-cycle-duration: 3s;
+}
+
+paper-progress.pink {
+  --paper-progress-active-color: var(--paper-pink-500);
+  --paper-progress-secondary-color: var(--paper-pink-100);
+  --paper-progress-indeterminate-cycle-duration: 3s;
+}
+
+paper-tooltip {
+  --paper-tooltip-background: #424242;
+  --paper-tooltip-opacity: 0.85;
+  --paper-tooltip: {
+    font-size: 14px;
+    color: #FAFAFA;
+  }
+}
+
+                .horizontal {
+          @apply(--layout-horizontal);
+          @apply(--layout-center);
+          @apply(--layout-justified);
+        }
+
+        .flex {
+          @apply(--layout-flex);
+        }
+
+        .wrap {
+          @apply(--layout-wrap);
+        }
+
+        .circle {
+          display: inline-block;
+          width: 58px;
+          height: 58px;
+          text-align: center;
+          color: #424242;
+          border-radius: 50%;
+          background: #E0E0E0;
+          font-size: 28px;
+          font-weight: 100;
+          font-family: 'Roboto', sans-serif;
+          line-height: 60px;
+        }
+
+        .grid-border-top {
+          border-top-color: #E0E0E0;
+          border-top-style: solid;
+          border-top-width: 1px;
+        }
+
+        .indigo {
+          color: #3F51B5;
+        }
+
+        .pink {
+          color: #E91E63;
+        }
+
+
+        </style>
+    </template>
+</dom-module>
+
+    <style is="custom-style" include="shared-styles iron-flex iron-flex-alignment">
+    :host {
+        display: block;
+    }
+
+    html,
+    body {
+        padding-top: 8px;
+        padding-bottom: 24px;
+        padding-left: 2px;
+        padding-right: 2px;
+        max-width: 1024px;
+        margin-left: auto;
+        margin-right: auto;
+        font-family: 'Roboto', sans-serif !important;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        min-height: 100%;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    @media only screen and (min-width: 641px) and (max-width: 1023px) {
+        html,
+        body {
+            padding-top: 12px;
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+    }
+
+    @media only screen and (min-width: 1024px) {
+        html,
+        body {
+            padding-top: 24px;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+    }
+    </style>
+</head>
+<!--
+@license
+Copyright (c) 2017 Optionmic GmbH. All rights reserved.
+-->
+<link rel="import" href="polymer/polymer.html"> <!--
+ Copyright 2017 | optinomic-redux-store | Optinomic GmbH.
+ http://www.optinomic.com/
+-->
+<script>
+const initialState = {
+    "loading": false,
+    "options": {
+        "show_app_toolbar": false,
+        "sort_ascending": true
+    },
+    "apps": {
+        "all": null,
+        "current": {
+            "id": helpers.getAppID(),
+            "name": helpers.getAppName(),
+            "data": null,
+            "found": false
+        }
+    },
+    "clinic": {
+        "data": null
+    },
+    "patient": {
+        "id": helpers.getPatientID(),
+        "data": null
+    },
+    "stays": {
+        "all": null,
+        "current": {
+            "id": helpers.getStayID(),
+            "data": null,
+            "found": false
+        }
+    },
+    "survey_responses": {
+        "data": {}
+    },
+    "komed": {
+        "data": null,
+    },
+    "user": {
+        "id": helpers.getUserID(),
+        "data": null
+    },
+    "username": null
+};
+const reducer = (state, action) => {
+    if (!state) return initialState;
+    switch (action.type) {
+
+        case 'SET_PERSISTENT_STATE':
+            // console.log('(----->) SET_PERSISTENT_STATE', action);
+            return Object.assign({}, state, action.new_state);
+
+        case 'SET_SIGNIN_START':
+            var current_signin = Object.assign({}, state.signin);
+            current_signin.data = action.signin.data;
+            current_signin.isLoggedIn = action.signin.isLoggedIn;
+            current_signin.trust_computer = action.signin.trust_computer;
+            // console.log('(----->) SET_SIGNIN_START', action.signin, current_signin, store.getState());
+            return Object.assign({}, state, {
+                signin: current_signin
+            });
+
+
+        case 'GET_DATA_STARTED':
+            return Object.assign({}, state, {
+                loading: true
+            });
+
+        case 'GET_USERAPPCALCULATION_COMPLETE':
+            var _app_userapp_calculations = Object.assign({}, state._app_userapp_calculations);
+            _app_userapp_calculations[action.data.module_calc] = action.data; 
+            return Object.assign({}, state, {
+                _app_userapp_calculations: _app_userapp_calculations
+            });
+
+        case 'GET_CURRENT_USER_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                _app_user: action.data
+            });
+
+        case 'GET_CURRENT_PATIENT_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                patient: action.data
+            });
+
+        case 'GET_CURRENT_PATIENT_STAYS_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                stays: action.data
+            });
+
+
+        case 'SAVE_PARAMS_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                _app_params: action.data
+            });
+
+        case 'GET_MODULE_ANNOTATIONS_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                _app_annotations: action.data
+            });
+
+        case 'GET_CLINIC_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                clinic: action.data
+            });
+
+        case 'GET_APPS_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                apps: action.data
+            });
+
+        case 'GET_SURVEY_RESPONSES_COMPLETE':
+            var sr = Object.assign({}, state.survey_responses);
+            var app_id = action.data.app_id;
+            sr.data[app_id] = action.data;
+
+            //console.log('(!) GET_SURVEY_RESPONSES_COMPLETE', app_id, sr);
+            return Object.assign({}, state, {
+                loading: false,
+                survey_responses: sr
+            });
+
+        case 'SET_APP_TOOLBAR':
+            var options = Object.assign({}, state.options);
+            options.show_app_toolbar = action.show_app_toolbar;
+
+            return Object.assign({}, state, {
+                options: options
+            });
+
+        case 'SIGN_UP_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                username: action.username
+            });
+    }
+};
+
+
+const AsyncActionsBehavior = {
+    actions: {
+        actionGetClinic: function() {
+            return function(dispatch) {
+                dispatch({
+                    type: 'GET_DATA_STARTED'
+                });
+                const api_url = '/clinic';
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+                    if (req.status == 200) {
+                        var resp = JSON.parse(req.response);
+
+                        // All fields are coming as array: Make Object out of it:
+                        var json_data = {};
+                        resp.clinic.forEach(function(item, itemIndex) {
+                            json_data[item[0]] = item[1];
+                        });
+
+                        var response = {
+                            "date": new Date(),
+                            "data": json_data
+                        };
+                        response.data.array = resp.clinic;
+                        console.log('(✔) Data (' + api_url + '):', response);
+                    } else {
+                        var response = {
+                            "error": true,
+                            "error_message": "Failed with status code: " + req.status,
+                            "status_code": req.status
+                        };
+                        console.error('(!) Error: ', response);
+                    };
+                    dispatch({
+                        type: 'GET_CLINIC_COMPLETE',
+                        data: response
+                    });
+                });
+            }
+        },
+        actionGetCurrentUser: function() {
+            return function(dispatch) {
+                dispatch({
+                    type: 'GET_DATA_STARTED'
+                });
+                const api_url = '/users/' + helpers.getUserID();
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+                    if (req.status == 200) {
+                        var resp = JSON.parse(req.response);
+                        var data_return = resp.user.data;
+                        data_return.id = resp.user.id;
+                        data_return.uid = resp.user.id;
+                        data_return.isAdmin = false;
+                        if (resp.user.data.role === "Admin") {
+                            data_return.isAdmin = true;
+                        };
+
+                        var response = {
+                            "id": resp.user.id,
+                            "date": new Date(),
+                            "data": data_return
+                        };
+                        console.log('(✔) Data (' + api_url + '):', response);
+                    } else {
+                        var response = {
+                            "error": true,
+                            "error_message": "Failed with status code: " + req.status,
+                            "status_code": req.status
+                        };
+                        console.error('(!) Error: ', response);
+                    };
+                    dispatch({
+                        type: 'GET_CURRENT_USER_COMPLETE',
+                        data: response
+                    });
+                });
+            }
+        },
+        actionGetCurrentPatient: function() {
+            return function(dispatch) {
+                dispatch({
+                    type: 'GET_DATA_STARTED'
+                });
+                const api_url = '/patients/' + helpers.getPatientID();
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+                    if (req.status == 200) {
+                        var resp = JSON.parse(req.response);
+                        var data_return = resp.patient.data;
+                        data_return.id = resp.patient.id;
+                        data_return.pid = resp.patient.id;
+                        data_return = createPatientExtras(data_return);
+
+
+                        data_return.komed_base_url = "https://optinomic.komed-health.com/chat/";
+                        data_return.komed_url = data_return.komed_base_url + resp.patient.id;
+
+                        var response = {
+                            "date": new Date(),
+                            "data": data_return
+                        };
+                        console.log('(✔) Data (' + api_url + '):', response);
+                    } else {
+                        var response = {
+                            "error": true,
+                            "error_message": "Failed with status code: " + req.status,
+                            "status_code": req.status
+                        };
+                        console.error('(!) Error: ', response);
+                    };
+                    dispatch({
+                        type: 'GET_CURRENT_PATIENT_COMPLETE',
+                        data: response
+                    });
+                });
+            }
+        },
+        actionGetCurrentPatientStays: function() {
+            return function(dispatch) {
+                dispatch({
+                    type: 'GET_DATA_STARTED'
+                });
+                const api_url = '/patients/' + helpers.getPatientID() + '/stays/';
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+                    if (req.status == 200) {
+                        var resp = JSON.parse(req.response);
+                        var stays = resp.stays;
+
+                        var current_stay_id = helpers.getStayID();
+
+                        var response = {
+                            "all": stays,
+                            "current": {
+                                "id": current_stay_id,
+                                "data": null,
+                                "found": false
+                            }
+                        }
+
+                        stays.forEach(function(stay, stayID) {
+                            stay.data = createStayExtras(stay.data);
+                            stay.data.id = stay.id;
+                            stay.data.fid = stay.id;
+                            if (current_stay_id === stay.id) {
+                                response.current.data = stay.data;
+                                response.current.found = true;
+                            };
+                        });
+
+                        var response = {
+                            "date": new Date(),
+                            "data": stays
+                        };
+                        console.log('(✔) Data (' + api_url + '):', response);
+                    } else {
+                        var response = {
+                            "error": true,
+                            "error_message": "Failed with status code: " + req.status,
+                            "status_code": req.status
+                        };
+                        console.error('(!) Error: ', response);
+                    };
+                    dispatch({
+                        type: 'GET_CURRENT_PATIENT_STAYS_COMPLETE',
+                        data: response
+                    });
+                });
+            }
+        },
+        actionGetApps: function() {
+            return function(dispatch) {
+                dispatch({
+                    type: 'GET_DATA_STARTED'
+                });
+                const api_url = '/modules/';
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+                    if (req.status == 200) {
+                        var resp = JSON.parse(req.response);
+                        var patient_modules = resp.patient_modules;
+                        var user_modules = resp.user_modules;
+
+
+                        var response = {
+                            "date": new Date(),
+                            "all": {
+                                "patient_modules": patient_modules,
+                                "user_modules": user_modules
+                            },
+                            "current": {
+                                "id": helpers.getAppID(),
+                                "name": helpers.getAppName(),
+                                "data": null,
+                                "found": false
+                            }
+                        };
+
+                        patient_modules.forEach(function(pm, pmID) {
+                            if (pm.identifier === helpers.getAppID()) {
+                                response.current.data = pm;
+                                response.current.name = pm.name;
+                                response.current.found = true;
+                            }
+                        });
+
+                        if (!response.current.found) {
+                            user_modules.forEach(function(um, pmID) {
+                                if (um.identifier === helpers.getAppID()) {
+                                    response.current.data = um;
+                                    response.current.name = um.name;
+                                    response.current.found = true;
+                                }
+                            });
+                        };
+
+                        console.log('(✔) Data (' + api_url + '):', response);
+                    } else {
+                        var response = {
+                            "error": true,
+                            "error_message": "Failed with status code: " + req.status,
+                            "status_code": req.status
+                        };
+                        console.error('(!) Error: ', response);
+                    };
+                    dispatch({
+                        type: 'GET_APPS_COMPLETE',
+                        data: response
+                    });
+                });
+            }
+        },
+        actionGetSurveyResponses: function(requested_app_id) {
+
+            return function(dispatch) {
+
+                module_identifier = requested_app_id === undefined ? helpers.getAppID() : requested_app_id;
+                console.log('(?) actionGetSurveyResponses', module_identifier);
+
+
+                var current_stay_id = parseInt(helpers.getStayID());
+                var current_pid = parseInt(helpers.getPatientID());
+
+                var data_request = 'undefined';
+                var calculation_results_api_url = '/patients/' + current_pid + '/calculations/' + module_identifier;
+                if (current_stay_id) {
+                    var api_url = '/stays/' + current_stay_id + '/survey_responses/' + module_identifier + '/full';
+                    data_request = 'stay';
+                } else {
+                    var api_url = '/patients/' + current_pid + '/survey_responses/' + module_identifier + '/full';
+                    data_request = 'patient';
+                };
+
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+
+                    var app_id = requested_app_id === undefined ? helpers.getAppID() : requested_app_id;
+                    //console.log('(?) actionGetSurveyResponses | app_id', app_id);
+
+                    if (req.status == 200) {
+                        var resp = JSON.parse(req.response);
+
+
+                        helpers.callAPI('GET', calculation_results_api_url, {}, {}, function(inner_req) {
+
+                            if (req.status == 200) {
+                                var inner_resp = JSON.parse(inner_req.response);
+                                var calculation_results = inner_resp.calculation_results;
+
+                                // console.log('actionGetSurveyResponsesNew:: resp', resp, inner_resp);
+
+
+                                // Reformat req
+                                var return_array = [];
+                                resp.survey_responses.forEach(function(current_response, srID) {
+                                    var return_obj = {};
+
+                                    return_obj.all_found = false;
+
+                                    return_obj.app_id = null;
+                                    return_obj.date = current_response.data.filled;
+
+                                    return_obj.response_id = current_response.id;
+                                    return_obj.response = current_response.data.response;
+
+                                    return_obj.event = null;
+                                    return_obj.event_found = false;
+                                    return_obj.event_id = current_response.data.event_id;
+
+                                    return_obj.patient = null;
+                                    return_obj.patient_found = false;
+                                    return_obj.patient_id = null;
+
+                                    return_obj.stay = null;
+                                    return_obj.stay_found = false;
+                                    return_obj.stay_id = null;
+
+                                    return_obj.patient_uses_module = null;
+                                    return_obj.patient_uses_module_found = false;
+                                    return_obj.patient_uses_module_id = null;
+
+                                    return_obj.calculation = {};
+                                    return_obj.calculation_found = false;
+                                    return_obj.calculation_found_method = null;
+
+
+                                    resp.events.forEach(function(current_event, eventID) {
+                                        if (current_event.id === current_response.data.event_id) {
+                                            return_obj.event_found = true;
+
+                                            current_event.data.id = current_event.id;
+                                            return_obj.event = current_event.data;
+                                            return_obj.patient_uses_module_id = current_event.data.patient_uses_module_id;
+                                            return_obj.patient_id = current_event.data.patient_id;
+                                            return_obj.app_id = current_event.data.module;
+                                            app_id = return_obj.app_id;
+                                        };
+                                    });
+
+
+                                    if (return_obj.event_found) {
+                                        resp.patients.forEach(function(current_patient, patientID) {
+                                            if (current_patient.id === return_obj.patient_id) {
+                                                return_obj.patient_found = true;
+
+                                                current_patient.data.id = current_patient.id;
+                                                current_patient.data.pid = current_patient.id;
+
+                                                current_patient.data = createPatientExtras(current_patient.data);
+                                                return_obj.patient = current_patient.data;
+                                            };
+                                        });
+
+                                        resp.patient_uses_modules.forEach(function(current_pum, pumID) {
+                                            if (current_pum.id === return_obj.patient_uses_module_id) {
+                                                return_obj.patient_uses_module_found = true;
+                                                current_pum.data.id = current_pum.id;
+                                                return_obj.patient_uses_module = current_pum.data;
+                                                return_obj.stay_id = current_pum.data.stay_id;
+
+                                            };
+                                        });
+                                    };
+
+                                    if (return_obj.stay_id) {
+                                        resp.stays.forEach(function(current_stay, stayID) {
+                                            if (current_stay.id === return_obj.stay_id) {
+                                                return_obj.stay_found = true;
+
+                                                current_stay.data.id = current_stay.id;
+                                                current_stay.data.fid = current_stay.id;
+                                                current_stay.data = createStayExtras(current_stay.data);
+
+                                                return_obj.stay = current_stay.data;
+                                            };
+                                        });
+                                    };
+
+                                    // console.error('-> resp.calculations', resp.calculations);
+                                    calculation_results.forEach(function(current_calculation_top, calculationTopID) {
+                                        var calculation_name = current_calculation_top.name;
+
+                                        if (current_calculation_top.result.length > 0) {
+                                            current_calculation_top.result.forEach(function(current_calculation, calculationID) {
+
+                                                var response_id = null;
+                                                var variant_info = false;
+                                                if ("info" in current_calculation) {
+
+                                                    if ("response" in current_calculation.info) {
+                                                        variant_info = true;
+                                                    };
+                                                };
+
+                                                var variant_response = false;
+                                                if ("response" in current_calculation) {
+                                                    if ("data" in current_calculation.response) {
+                                                        if ("response" in current_calculation.response.data) {
+                                                            variant_response = true;
+                                                        };
+                                                    };
+                                                };
+
+
+
+
+                                                if (variant_info) {
+                                                    var calc_resp = current_calculation.info.response;
+
+                                                    // if ((response_id !== null) && (response_id !== undefined)) {
+                                                    // 
+                                                    //     if (parseInt(response_id) === parseInt(current_calculation.info.response_id)) {
+                                                    //         return_obj.calculation_found = true;
+                                                    //         return_obj.calculation_found_method = "variant_info__response_id_" + response_id;
+                                                    //         return_obj.calculation[calculation_name] = current_calculation;
+                                                    //     };
+                                                    // };
+
+                                                    if (return_obj.calculation_found !== true) {
+                                                        if (JSON.stringify(calc_resp) === JSON.stringify(return_obj.response)) {
+                                                            // console.log('(+) EQUAL: ', calc_resp);
+
+                                                            return_obj.calculation_found = true;
+                                                            return_obj.calculation_found_method = "variant_info";
+                                                            return_obj.calculation[calculation_name] = current_calculation;
+                                                        };
+                                                    };
+                                                };
+
+                                                if (variant_response) {
+                                                    var calc_resp = current_calculation.response.data.response;
+
+
+                                                    // if ((response_id !== null) && (response_id !== undefined)) {
+                                                    // 
+                                                    //     if (parseInt(response_id) === parseInt(current_calculation.response.id)) {
+                                                    //         return_obj.calculation_found = true;
+                                                    //         return_obj.calculation_found_method = "variant_response__response_id_" + response_id;
+                                                    //         return_obj.calculation[calculation_name] = current_calculation;
+                                                    //     };
+                                                    // };
+
+                                                    if (return_obj.calculation_found !== true) {
+                                                        if (JSON.stringify(calc_resp) === JSON.stringify(return_obj.response)) {
+                                                            // console.log('(+) EQUAL: ', calc_resp);
+
+                                                            return_obj.calculation_found = true;
+                                                            return_obj.calculation_found_method = "variant_response";
+                                                            return_obj.calculation[calculation_name] = current_calculation;
+
+                                                        } else {
+
+                                                            if ("TMTAError" in calc_resp) {
+                                                                // TMT - Special
+                                                                // console.error('DEBUG HERE ::', calc_resp, return_obj.response, current_calculation);
+
+                                                                if ((parseInt(calc_resp.TMTAError) === parseInt(return_obj.response.TMTAError)) &&
+                                                                    (parseInt(calc_resp.TMTATime) === parseInt(return_obj.response.TMTATime)) &&
+                                                                    (parseInt(calc_resp.TMTBError) === parseInt(return_obj.response.TMTBError)) &&
+                                                                    (parseInt(calc_resp.TMTBTime) === parseInt(return_obj.response.TMTBTime)) &&
+                                                                    (parseInt(calc_resp.Ausbildungsjahre) === parseInt(return_obj.response.Ausbildungsjahre)) &&
+                                                                    (parseInt(calc_resp.Messzeitpunkt) === parseInt(return_obj.response.Messzeitpunkt))
+                                                                ) {
+
+                                                                    return_obj.calculation_found = true;
+                                                                    return_obj.calculation_found_method = "variant_response_tmt";
+                                                                    return_obj.calculation[calculation_name] = current_calculation;
+                                                                };
+
+                                                            };
+
+                                                        };
+                                                    };
+
+                                                };
+                                            });
+                                        };
+                                    });
+
+
+
+                                    if (return_obj.calculation_found && return_obj.event_found && return_obj.patient_found && return_obj.stay_found && return_obj.patient_uses_module_found) {
+                                        return_obj.all_found = true;
+                                    };
+
+                                    return_array.push(return_obj);
+                                });
+
+
+                                if (return_array.length > 0) {
+                                    var have_data = true;
+
+                                    // Sort
+                                    return_array.sort(function(a, b) {
+                                        var nameA = a.date.toUpperCase(); // ignore upper and lowercase
+                                        var nameB = b.date.toUpperCase(); // ignore upper and lowercase
+                                        if (nameA < nameB) {
+                                            return -1;
+                                        }
+                                        if (nameA > nameB) {
+                                            return 1;
+                                        }
+                                        return 0;
+                                    });
+                                } else {
+                                    var have_data = false;
+                                };
+
+                                var response = {
+                                    "date": new Date(),
+                                    "data": return_array,
+                                    "calculations_all": calculation_results,
+                                    "have_data": have_data,
+                                    "possible_data": true,
+                                    "request": data_request,
+                                    "pid": current_pid,
+                                    "fid": current_stay_id,
+                                    "app_id": app_id
+                                };
+                                console.log('(✔) Data (' + api_url + '):', response);
+
+
+                                // console.warn(JSON.stringify(calculation_results, null, 2));
+
+
+                                dispatch({
+                                    type: 'GET_SURVEY_RESPONSES_COMPLETE',
+                                    data: response
+                                });
+
+
+                            } else {
+                                var response = {
+                                    "error": true,
+                                    "error_message": "Failed with status code: " + req.status,
+                                    "status_code": req.status,
+                                    "request": data_request,
+                                    "app_id": app_id
+                                };
+                                console.error('(!) Error: ', response);
+                            };
+                        });
+
+                    } else {
+                        var response = {
+                            "error": true,
+                            "error_message": "Failed with status code: " + req.status,
+                            "status_code": req.status,
+                            "request": data_request,
+                            "app_id": app_id
+                        };
+                        console.error('(!) Error: ', response);
+                    };
+
+                });
+            }
+        },
+        actionSaveParams: function(params) {
+            return function(dispatch) {
+                dispatch({
+                    type: 'SAVE_PARAMS_COMPLETE',
+                    data: params
+                });
+            }
+        },
+        getModuleAnnotations: function(module_identifier) {
+
+            var api_url = '/modules/' + module_identifier + '/annotations';
+
+            return function(dispatch) {
+
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+                    if (req.status == 200) {
+
+                        var annotations = JSON.parse(req.response);
+
+                        var response = {
+                            "module_identifier": module_identifier,
+                            "data": annotations
+                        };
+
+                        console.log('(✔) Data (' + api_url + '):', response);
+
+                        dispatch({
+                            "type": "GET_MODULE_ANNOTATIONS_COMPLETE",
+                            "data": response
+                        });
+
+                    } else {
+                        // Errorhandling
+                        // While what action with what params error happend
+                        console.error('(!) Error: ', req);
+                    };
+
+                });
+            };
+
+        },
+
+        actionGetUserAppCalculation: function(module_identifier, calculation_identifier) {
+            return function(dispatch) {
+
+                const api_url = '/calculations/' + module_identifier + '/' + calculation_identifier;
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+                    if (req.status == 200) {
+                        var resp = JSON.parse(req.response);
+
+                        var calculation_result = null;
+                        if ("calculation_result" in resp) {
+                            calculation_result = resp.calculation_result;
+                        } else {
+                            calculation_result = resp;
+                        };
+
+                        var _module_identifier = module_identifier.split('.').join('_');
+                        var _calculation_identifier = calculation_identifier;
+                        var module_calc = _module_identifier + "___" + _calculation_identifier;
+
+                        var response = {
+                            "date": new Date(),
+                            "module_calc": module_calc,
+                            "module_identifier": module_identifier,
+                            "calculation_identifier": calculation_identifier,
+                            "data": calculation_result
+                        };
+
+                        console.log('(✔) Data (' + api_url + '):', response);
+
+                        dispatch({
+                            type: 'GET_USERAPPCALCULATION_COMPLETE',
+                            data: response
+                        });
+
+                    } else {
+                        var response = {
+                            "error": true,
+                            "error_message": "Failed with status code: " + req.status,
+                            "status_code": req.status
+                        };
+                        console.error('(!) Error: ', response);
+                    };
+
+                });
+            }
+        },
+
+        // ----------------------------------
+        // Unneeded?
+        // ----------------------------------
+
+        actionShowAppToolbar: function(show) {
+            show = show === undefined ? false : show;
+
+            return {
+                type: 'SET_APP_TOOLBAR',
+                show_app_toolbar: show
+            };
+        },
+        actionSortSurveyResponses: function() {
+            return {
+                type: 'SORT_SURVEY_RESPONSES'
+            };
+        }
+    }
+};
+// ----------------------------
+// Helpers
+// ----------------------------
+
+formatDateCH = function(date_string) {
+    if (date_string !== undefined) {
+
+        // 1952-11-19T00:00:00.000000000000Z
+        var year = parseInt(date_string.substring(0, 4));
+        var month = parseInt(date_string.substring(5, 7));
+        var day = parseInt(date_string.substring(8, 10));
+        var date_string_return = day + "." + month + "." + year
+
+        return date_string_return;
+    } else {
+        return null;
+    }
+};
+
+createPatientExtras = function(patient) {
+
+    function getAge(dateString) {
+        var today = new Date();
+        var birthDate = new Date(dateString);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        return age;
+    }
+
+
+    // patient.age = $filter('dateToAge')(patient.birthdate);
+    // patient.birthday = $filter('date')(patient.birthdate);
+
+    patient.extras = {};
+    patient.extras.age = getAge(patient.birthdate);
+
+    patient.extras.birthday = formatDateCH(patient.birthdate);
+    patient.extras.birthday_age = patient.extras.birthday + ' | ' + patient.extras.age;
+
+
+    patient.assessment = {};
+    patient.assessment.login_pid = patient.cis_pid + "";
+    // Password = YYYYMMDD
+    var pw = "Fehler";
+    if ((patient.birthdate !== "") && (patient.birthdate !== null) && (patient.birthdate !== undefined)) {
+        pw = patient.birthdate;
+        pw = pw.substring(0, 10);
+        pw = pw.replace("-", "");
+        pw = pw.replace("-", "");
+    };
+    patient.assessment.login_pw = pw;
+
+
+    patient.extras.name = patient.last_name + ' ' + patient.first_name;
+
+    if (patient.gender === 'male') {
+        patient.extras.ansprache = 'Herr';
+        patient.extras.anrede = 'Herr ' + patient.last_name;
+    } else {
+        patient.extras.ansprache = 'Frau';
+        patient.extras.anrede = 'Frau ' + patient.last_name;
+    };
+    patient.extras.full_name = patient.extras.ansprache + ' ' + patient.extras.name + ' (' + patient.extras.birthday_age + ')';
+    patient.extras.secure = patient.extras.ansprache + ' ' + patient.last_name.charAt(0) + '. ' + patient.first_name.charAt(0) + '. (' + patient.birthdate.substring(0, 4) + ')';
+
+    patient.extras.full_address = patient.address1 + ', ' + patient.zip_code + ' ' + patient.city;
+
+    var myPhone = '';
+    if (patient.phone_home) {
+        myPhone = patient.phone_home;
+    }
+    if (patient.phone_mobile) {
+        if (myPhone != '') {
+            myPhone = myPhone + ', ' + patient.phone_mobile;
+        } else {
+            myPhone = patient.phone_mobile;
+        }
+    }
+    patient.extras.phone = myPhone;
+    patient.extras.infoline = patient.extras.full_address
+
+    if (myPhone != '') {
+        patient.extras.infoline + ' | ' + patient.extras.phone;
+    };
+
+
+    // -----------------------------------
+    // Female = Pink | Male = Blue
+    // -----------------------------------
+    var myColor = "#3F51B5";
+    var myColorAccent = "#E91E63";
+    if (patient.gender === "female") {
+        myColor = "#E91E63";
+        myColorAccent = "#3F51B5";
+    }
+    patient.extras.color_main = myColor;
+    patient.extras.color_accent = myColorAccent;
+
+    return patient;
+};
+
+createStayExtras = function(current_stay) {
+    current_stay.extras = {};
+
+    // Calculate - Duration of the stay
+    if (current_stay.stop) {
+        current_stay.extras.duration = Math.floor((Date.parse(current_stay.stop) - Date.parse(current_stay.start)) / 86400000);
+        current_stay.extras.duration = current_stay.extras.duration + 2; //incl. start & stop date
+    } else {
+        current_stay.extras.duration = Math.floor((new Date() - Date.parse(current_stay.start)) / 86400000);
+    };
+
+    // from_to
+    current_stay.extras.beginn = formatDateCH(current_stay.start);
+    current_stay.extras.from_to = formatDateCH(current_stay.start);
+    current_stay.extras.from_to = current_stay.extras.from_to + ' - ';
+    if (current_stay.stop) {
+        current_stay.extras.from_to = current_stay.extras.from_to + formatDateCH(current_stay.stop);
+        current_stay.extras.ende = formatDateCH(current_stay.stop);
+    } else {
+        current_stay.extras.from_to = current_stay.extras.from_to + "Unbekannt";
+    };
+
+    return current_stay;
+};
+var Session = (function() {
+
+  var storage = localStorage;
+
+  var isLoggedIn = function() {
+    var uid = storage.getItem("optinomic_user_id");
+    return !(uid === null);
+  };
+
+  var getUserID = function() {
+    return parseInt(storage.getItem("optinomic_user_id"));
+  };
+
+  var getTrustComputer = function() {
+    return JSON.parse(storage.getItem("optinomic_trust_computer"));
+  };
+
+  var setTrustComputer = function(trust) {
+    trust = trust || false;
+    storage.setItem("optinomic_trust_computer", trust);
+  };
+
+  var getToken = function() {
+    return storage.getItem("optinomic_token");
+  };
+
+  var login = function(uid, token) {
+    console.log('SESSION | login', uid, token);
+    storage.setItem("optinomic_user_id", uid);
+    storage.setItem("optinomic_token", token);
+
+    UserStore.start();
+  };
+
+  var logout = function() {
+
+    storage.removeItem("optinomic_user_id");
+    storage.removeItem("optinomic_token");
+
+    UserStore.stop();
+    storage.removeItem("optinomic_trust_computer");
+  };
+
+  return {
+    isLoggedIn: isLoggedIn,
+    getUserID: getUserID,
+    getToken: getToken,
+    getTrustComputer: getTrustComputer,
+    setTrustComputer: setTrustComputer,
+    login: login,
+    logout: logout
+  };
+
+})();
+
+const UserStore = (function() {
+
+    // ----------------------------------
+    //  Saving userStore to localStorage
+    //  only when trust_computer = true
+    //  logout => _enoded state.
+    // ----------------------------------
+
+    var storage = localStorage;
+
+    //  Should we save to localStorage?
+    //  Should we debug state to console?
+
+    var localStorageOptions = {
+        "name": "unknown",
+        "name_prefix": "optinomic_state_",
+        "name_suffix": "_encoded",
+        "started": false,
+        "using": false,
+        "console": false
+    };
+
+    var getOptions = function() {
+        return localStorageOptions;
+    };
+
+    var getConsole = function() {
+        return localStorageOptions.console;
+    };
+
+    var setConsole = function(console) {
+        localStorageOptions.console = console;
+    };
+
+    var clear = function() {
+        var storage_name = localStorageOptions.name_prefix + Session.getUserID();
+        //console.warn('clear', storage_name);
+        storage.removeItem(storage_name);
+    };
+
+    var clear_all = function() {
+        console.warn('(clear_all) localStorage is clear now!');
+        storage.clear();
+    };
+
+    var setSignin = function() {
+        store.dispatch(addSignin());
+    };
+
+    // -------------------------------
+    // Store - Actions
+    // -------------------------------
+    var addSignin = function() {
+
+        var login_data = {
+            "data": {
+                "user_id": Session.getUserID(),
+                "token": Session.getToken()
+            },
+            "isLoggedIn": Session.isLoggedIn(),
+            "trust_computer": Session.getTrustComputer()
+        };
+
+        return {
+            type: 'SET_SIGNIN_START',
+            signin: login_data
+        }
+    };
+
+    var replaceState = function(new_state) {
+        //console.log('---> replaceState', new_state);
+        return {
+            type: 'SET_PERSISTENT_STATE',
+            new_state: new_state
+        }
+    };
+
+
+    // -------------------------------
+    // Start / Stop
+    // -------------------------------
+
+    var start = function() {
+
+        var signin = {
+            "user_id": Session.getUserID(),
+            "token": Session.getToken()
+        };
+
+        console.warn('UserStore START', signin);
+        localStorageOptions.started = true;
+
+        var trust_computer = Session.getTrustComputer();
+        if (trust_computer) {
+
+            localStorageOptions.using = true;
+            var state = store.getState();
+
+            // Just to be sure
+            if ((signin.user_id !== null) && (signin.token !== null)) {
+                var user_id = signin.user_id;
+
+
+                var localStorageName = localStorageOptions.name_prefix + user_id;
+                localStorageOptions.name = localStorageName;
+
+
+                //  Check if localStorage has Data - if yes use this!
+                var persistedUserState = null;
+                persistedUserState = storage.getItem(localStorageName + localStorageOptions.name_suffix);
+                // console.log('(?) STORE HELPER', localStorageName, signin, persistedUserState);
+
+                if (persistedUserState !== null) {
+                    // Decode persistedUserState
+                    var persistedUserStateDecoded = JSON.parse(decodeURIComponent(escape(atob(persistedUserState))));
+
+                    // persistedUserState is available
+                    // Replace currentState with persistedUserState & add new signin credentials
+                    store.dispatch(replaceState(persistedUserStateDecoded));
+                    store.dispatch(addSignin(signin));
+
+                    // Remove _encoded persistedUserState
+                    storage.removeItem(localStorageName + localStorageOptions.name_suffix);
+                    //localStorageOptions.using = true;
+
+                    console.warn('(!) -----> User_Store - encoded & persisted');
+
+
+                } else {
+
+                    loggedInUserState = JSON.parse(storage.getItem(localStorageName));
+
+                    if (loggedInUserState !== null) {
+                        // Already Logged-In / Page-Refresh
+                        // Dispatch full state (replaceState) to current state
+                        store.dispatch(replaceState(loggedInUserState));
+                        store.dispatch(addSignin(signin));
+
+                        console.warn('(!) -----> User_Store - persisted');
+
+                    } else {
+                        // No persisted state is there
+                        // Dispatch only signin to current (initialState) state
+                        store.dispatch(addSignin(signin));
+                        console.warn('(!) -----> User_Store - initialState');
+
+                    };
+                };
+
+
+            } else {
+                // console.warn('(!) -----> User_Store - unknown');
+            };
+
+
+        } else {
+            localStorageOptions.using = false;
+
+            // No persisted state is there
+            // Dispatch only signin to current (initialState) state
+            store.dispatch(addSignin(signin));
+            console.warn('(!) -----> User_Store (untrusted computer) - initialState');
+        };
+
+    };
+
+
+    var stop = function() {
+
+        function isQuotaExceeded(e) {
+            var quotaExceeded = false;
+            if (e) {
+                if (e.code) {
+                    switch (e.code) {
+                        case 22:
+                            quotaExceeded = true;
+                            break;
+                        case 1014:
+                            // Firefox
+                            if (e.name === 'NS_ERROR_DOM_QUOTA_REACHED') {
+                                quotaExceeded = true;
+                            }
+                            break;
+                    }
+                } else if (e.number === -2147024882) {
+                    // Internet Explorer 8
+                    quotaExceeded = true;
+                }
+            }
+            return quotaExceeded;
+        }
+
+        console.warn('(✓) UserStore.stop: ', localStorageOptions.using);
+
+        if (Session.getTrustComputer()) {
+
+            // Make sure to persist latest state_encoded to localStorage & clear 'sigin'
+            var state = store.getState();
+
+            // Remove user_id / token
+            state.signin = {
+                "data": {
+                    "user_id": null,
+                    "token": null
+                },
+                "trust_computer": false,
+                "isLoggedIn": false
+            };
+
+            // Remove _decoded version.
+            storage.removeItem(localStorageOptions.name);
+
+            try {
+                var encoded = btoa(unescape(encodeURIComponent(JSON.stringify(state))));
+                storage.setItem(localStorageOptions.name + "_encoded", encoded);
+
+            } catch (e) {
+                if (isQuotaExceeded(e)) {
+                    console.error('(!!!)', 'Storage full: Nothing saved');
+                }
+            };
+
+            //console.warn('(✓) UserStore.stop:  STATE', state, encoded, localStorageOptions.name);
+
+        };
+
+        // GetBack to initialState
+        localStorageOptions.name = "unknown";
+        localStorageOptions.started = false;
+        store.dispatch(replaceState(initialState));
+
+    };
+
+
+    return {
+        start: start,
+        stop: stop,
+        clear: clear,
+        clear_all: clear_all,
+        setSignin: setSignin,
+        getOptions: getOptions,
+        getConsole: getConsole,
+        setConsole: setConsole
+    };
+
+})();
+
+
+const store = Redux.createStore(
+    reducer,
+    Redux.applyMiddleware(ReduxThunk.default)
+);
+
+const ReduxBehavior = PolymerRedux(store);
+
+UserStore.start();
+</script>
+
+<script>
+optinomicApp = {
+
+
+    behaviors: [ReduxBehavior, AsyncActionsBehavior],
+
+
+    properties: {
+        _clinic: {
+            type: Object,
+            statePath: 'clinic.data'
+        },
+        _app_params: {
+            type: Object,
+            statePath: '_app_params'
+        },
+        _current_app: {
+            type: Object,
+            statePath: 'apps.current.data'
+        },
+        _current_patient: {
+            type: Object,
+            statePath: function(state) {
+                var return_obj = null;
+                if ((state.patient !== null) && (state.patient !== undefined)) {
+                    if ((state.patient.data !== null) && (state.patient.data !== undefined)) {
+                        return_obj = state.patient.data;
+                        // console.log('(_B_) Patient:', return_obj);
+                    };
+                };
+                return return_obj;
+            }
+        },
+        _current_stay: {
+            type: Object,
+            statePath: function(state) {
+                var return_obj = null;
+                var stay_id = parseInt(helpers.getStayID());
+
+                if ((state.stays !== null) && (state.stays !== undefined)) {
+                    if ((state.stays.data !== null) && (state.stays.data !== undefined)) {
+
+                        state.stays.data.forEach(function(stay, stayID) {
+                            if (stay.id === stay_id) {
+                                return_obj = stay.data;
+                                // console.log('(_B_) Stay:', return_obj);
+                            };
+                        });
+
+                    };
+                };
+
+                return return_obj;
+            }
+        }
+    },
+
+
+
+    // --------------------------------
+    // Helpers
+    // --------------------------------
+    _formatDateCH: function(date_string) {
+        date_string = date_string || null
+        if (date_string !== null) {
+
+            // 1952-11-19T00:00:00.000000000000Z
+            var year = parseInt(date_string.substring(0, 4));
+            var month = parseInt(date_string.substring(5, 7));
+            var day = parseInt(date_string.substring(8, 10));
+            var date_string_return = day + "." + month + "." + year
+
+            return date_string_return;
+        } else {
+            return null;
+        }
+    },
+
+    _hrefAppTemplate: function(app, template) {
+        app = app || null
+        template = template || null
+        var url_string = "";
+
+        if ((app !== null) && (template !== null) && (this._app_params !== null) && (this._app_params !== undefined)) {
+
+            var _app_params = this.get('_app_params');
+
+            url_string = _app_params.apiURL + "modules/" + app + "/view/" + template + "#patient_id=" + _app_params.patientID + ",token=" + _app_params.token + ",app_name=" + _app_params.appName + ",app_id=" + app + ",api_url=" + _app_params.apiURL + ",user_id=" + _app_params.userID + ",stay_id=" + _app_params.stayID;
+
+            //  http://optinomic.cust.local/api/modules/ch.suedhang.apps.fallkonferenz.production/view/overview#patient_id=2096,token=6e4bf5b9-abd0-48e3-b0a3-ade05b480387,app_name=Test :: Fallkonferenz,app_id=ch.suedhang.apps.fallkonferenz.production,api_url=http://optinomic.cust.local/api/,user_id=2,stay_id=1569
+
+        };
+
+        return url_string;
+    },
+
+
+
+    // --------------------------------
+    // Liefecycle
+    // --------------------------------
+
+    created: function() {
+        console.log('optinomicAppBehavior enabled for ', this, helpers.getPatientID(), helpers.getStayID());
+    }
+};
+</script>
+<script>
+makepdfBehavior = {
+
+
+    behaviors: [ReduxBehavior, AsyncActionsBehavior],
+
+
+    properties: {},
+
+
+    // --------------------------------
+    // PDF - Template-Functions
+    // --------------------------------
+
+    _keepTogether: function(given_stack_array, id) {
+
+        id = id === undefined ? "keep_together" : id;
+
+
+        var isArray = function(obj) {
+            return (typeof obj !== 'undefined' &&
+                obj && obj.constructor === Array);
+        };
+
+        var stack_array = [];
+
+        if (isArray(given_stack_array)) {
+            // Array
+            stack_array = given_stack_array;
+        } else {
+            // Object
+            stack_array.push(given_stack_array);
+        };
+
+        var return_obj = {
+            "id": id,
+            "layout": "noBorders",
+            "table": {
+                "dontBreakRows": true,
+                "headerRows": 0,
+                "body": [
+                    [{
+                        "stack": stack_array
+                    }]
+                ]
+            }
+        };
+
+        return return_obj;
+    },
+
+    _spacer: function(space) {
+
+        space = space === undefined ? 10 : space;
+
+        return {
+            "id": "spacer_" + space,
+            "text": "",
+            "margin": [0, space, 0, space]
+        };
+    },
+
+    _title: function(title, subtitle) {
+
+        title = title === undefined ? "" : title;
+        subtitle = subtitle === undefined ? "" : subtitle;
+
+        return {
+            "id": "title",
+            "stack": [
+                // second column consists of paragraphs
+                {
+                    "text": " " + title,
+                    "style": "title",
+                    "alignment": "left"
+                }, {
+                    "text": " " + subtitle,
+                    "style": "caption",
+                    "color": "#616161",
+                    "margin": [1, 0, 0, 0],
+                    "alignment": "left"
+                }
+            ],
+            "margin": [0, 24, 0, 36]
+        };
+    },
+
+    _heading: function(text_left, text_left_sub, style) {
+
+        // Init
+        text_left = text_left === undefined ? "Optinomic" : text_left;
+        text_left_sub = text_left_sub === undefined ? null : text_left_sub;
+        style = style === undefined ? "h2" : style;
+
+        if ((style !== "h1") && (style !== "h2") && (style !== "h3")) {
+            style = "h2";
+        };
+
+        var id = "heading_" + style;
+
+
+        var left = {
+            "id": id,
+            "stack": [{
+                "text": text_left,
+                "style": style,
+                "margin": [0, 12, 0, 0],
+                "alignment": "left"
+            }],
+            "margin": [0, 0, 0, 12]
+        };
+
+
+        if (text_left_sub !== null) {
+            var sub = {
+                "text": text_left_sub,
+                "style": "caption",
+                "color": "#616161",
+                "margin": [1, 0, 0, 0],
+                "alignment": "left"
+            };
+            left.stack.push(sub);
+        };
+
+
+        var return_obj = left;
+
+        return return_obj;
+    },
+
+    _text: function(text) {
+
+        text = text === undefined ? "Optinomic" : text;
+
+        return {
+            "id": "text",
+            "text": " " + text,
+            "style": "p"
+        };
+    },
+
+    _caption: function(text) {
+
+        text = text === undefined ? "Optinomic" : text;
+
+        return {
+            "id": "caption",
+            "text": text,
+            "style": "caption"
+        };
+    },
+
+    _pageBreak: function(when) {
+        when = when === undefined ? "after" : when;
+        return {
+            "id": "peagebreak_" + when,
+            "fontSize": 0,
+            "text": "",
+            "pageOrientation": "portrait",
+            "pageBreak": when
+        };
+    },
+
+    _horizontalLine: function(width, color, space) {
+        width = width === undefined ? 100 : width;
+        color = color === undefined ? "#E0E0E0" : color;
+        space = space === undefined ? 6 : space;
+
+
+        var length = 514 / 100 * width;
+
+        var return_obj = {
+            "id": "horizontal_line",
+            "margin": [0, space, 0, 0],
+            "canvas": [{
+                "type": "line",
+                "x1": 0,
+                "y1": 0,
+                "x2": length,
+                "y2": 0,
+                "lineWidth": 1,
+                "lineColor": color
+            }]
+        };
+
+
+        return return_obj;
+    },
+
+    _noData: function(title, space) {
+        title = title === undefined ? null : title;
+        space = space === undefined ? 24 : space;
+
+        var date = new Date();
+        date = this._formatDateCH(date.toISOString());
+
+        var text = "Keine Daten vorhanden.";
+        if (title !== null) {
+            text = title + ": Keine Daten vorhanden.";
+        };
+
+        var no_data = {
+            "id": "no_data",
+            "table": {
+                "widths": [24, "*"],
+                "body": [
+                    [{
+                        "text": "!",
+                        "color": "#F44336",
+                        "fontSize": 36,
+                        "margin": [0, 0, 0, 0]
+                    }, {
+                        "stack": [
+                            { "text": date, "fontSize": 9, "color": "#BDBDBD", "margin": [0, 6, 0, 0] },
+                            { "text": text, "color": "#424242", "margin": [0, 6, 0, 0] }
+                        ],
+                        "margin": [0, 0, 0, 6]
+                    }],
+                ]
+            },
+            "layout": "noBorders",
+            "margin": [space, space, space, space]
+        };
+
+        var return_obj = {
+            "stack": [],
+        };
+
+        return_obj.stack.push(this._horizontalLine(100, "#F5F5F5"));
+        return_obj.stack.push(no_data);
+        return_obj.stack.push(this._horizontalLine(100, "#F5F5F5"));
+
+        return this._keepTogether(return_obj, "no_data");
+    },
+
+    _indication: function(sign, title, color) {
+
+        sign = sign === undefined ? "!" : sign;
+        title = title === undefined ? "Optinomic" : title;
+        color = color === undefined ? "#F44336" : color;
+
+        var space = 24;
+
+        var date = new Date();
+        date = this._formatDateCH(date.toISOString());
+
+        var indication = {
+            "id": "indication_" + sign,
+            "table": {
+                "widths": [24, "*"],
+                "body": [
+                    [{
+                        "text": sign,
+                        "color": color,
+                        "fontSize": 36,
+                        "margin": [0, 0, 0, 0]
+                    }, {
+                        "stack": [
+                            { "text": date, "fontSize": 9, "color": "#BDBDBD", "margin": [0, 6, 0, 0] },
+                            { "text": title, "color": "#424242", "margin": [0, 6, 0, 0] }
+                        ],
+                        "margin": [0, 0, 0, 6]
+                    }],
+                ]
+            },
+            "layout": "noBorders",
+            "margin": [space, space, space, space]
+        };
+
+        var return_obj = {
+            "stack": [],
+        };
+
+        return_obj.stack.push(this._horizontalLine(100, "#F5F5F5"));
+        return_obj.stack.push(indication);
+        return_obj.stack.push(this._horizontalLine(100, "#F5F5F5"));
+
+        return this._keepTogether(return_obj, sign + "_indication");
+    },
+
+    _suedhang_logo_anschrift: function(space) {
+        space = space === undefined ? 90 : space;
+
+        return {
+            "id": "suedhang_logo_anschrift",
+            "alignment": "left",
+            "margin": [0, space, 0, 0],
+            "columns": [{}, {
+                "width": 220,
+                "stack": [{
+                    "width": 220,
+                    "image": this._getImage("suedhang")
+                }, {
+                    "margin": [0, 6, 0, 0],
+                    "fontSize": 10,
+                    "color": "#69604d",
+                    "alignment": "left",
+                    "text": " Kompetenzzentrum für Mensch und Sucht"
+                }, {
+                    "margin": [0, 3, 0, 0],
+                    "fontSize": 10,
+                    "color": "#69604d",
+                    "alignment": "left",
+                    "text": " Südhang 1"
+                }, {
+                    "margin": [0, 3, 0, 0],
+                    "fontSize": 10,
+                    "color": "#69604d",
+                    "alignment": "left",
+                    "text": " CH - 3038 Kirchlindach"
+                }, {
+                    "margin": [0, 12, 0, 0],
+                    "fontSize": 10,
+                    "color": "#69604d",
+                    "alignment": "left",
+                    "text": " +41 31 828 14 14  |  Telefon"
+                }, {
+                    "margin": [0, 3, 0, 0],
+                    "fontSize": 10,
+                    "color": "#69604d",
+                    "alignment": "left",
+                    "text": " +41 31 828 14 24  |  Fax"
+                }]
+            }]
+        };
+    },
+
+    _stamp: function(documentTitle, space) {
+        documentTitle = documentTitle === undefined ? "Optinomic" : documentTitle;
+        space = space === undefined ? 36 : space;
+
+        var d = new Date();
+        var y = d.getFullYear();
+        var m = d.getMonth() + 1;
+        var t = d.getUTCDate();
+
+        var _date_time = t + "." + m + "." + y + ", " + d.getHours() + ":" + d.getMinutes();
+
+
+        var Optionmic = {
+            "margin": [0, space, 0, space],
+            "alignment": "left",
+            "columnGap": 12,
+            "columns": [{
+                "width": 48,
+                "margin": [0, 6, 0, 0],
+                "image": this._getImage("optinomic_trademark")
+            }, {
+                "width": "*",
+                "stack": [{
+                    "fontSize": 12,
+                    "bold": false,
+                    "color": "#3F51B5",
+                    "alignment": "left",
+                    "margin": [0, 2, 0, 0],
+                    "text": "«" + documentTitle + "»"
+                }, {
+                    "fontSize": 10,
+                    "bold": false,
+                    "color": "#616161",
+                    "margin": [0, 4, 0, 0],
+                    "alignment": "left",
+                    "text": "Datenstand: " + _date_time
+                }, {
+                    "fontSize": 10,
+                    "bold": false,
+                    "color": "#3F51B5",
+                    "alignment": "left",
+                    "margin": [0, 6, 0, 0],
+                    "text": "www.optinomic.com"
+                }, {
+                    "fontSize": 9,
+                    "bold": false,
+                    "color": "#616161",
+                    "alignment": "left",
+                    "text": "Erkenntnisgewinn für den Behandlungsalltag"
+                }]
+            }]
+        };
+
+        return Optionmic;
+    },
+
+    // --------------------------------
+    // Helpers
+    // --------------------------------
+
+    _getImage: function(image) {
+
+        image = image === undefined ? "optinomic_trademark" : image;
+
+        var images = {
+            "optinomic_trademark": "data:image/png;base64,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",
+            "suedhang": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAwgAAACWCAYAAAB6ga+5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAKRdJREFUeNrsnXt0ZEd95+uK2U3OLrtus2EdMDAth2R5JEwrDuHNtIxtsPEgySEEFvB0AwaGl9RAeDkgdYKXLMRIIgQTCKiFDcYmQRoMhCwJapEACQSmJ5hXeEx7j5NNdjlB3rNnz/7lu/Xrrtb0aLqlW7dv3Vd/PubS0uj27dtVdat+3/r9flWeAkiIE5VjW/qlHPFlmzc37pwOcS9L+mXRwdec1vfTpLYBAAAgKxyiCAAAAAAA8s3/u+d/lTzPK3R+8Tzle/pF/9f9vftvP3XRhU0EAgAAAABABvi/37+n7GsjfqJr1Je0gV8Qo17/7wL5vfOz8pSx+Tvnesbwt8BDIATkROVYUb8Uza+tmxt37jj4jLL5cUdfvzUmRbuuj+0hf5vpNPb4aO7zt6Mq+lAoAAAAGHP+z11nxMjv2Due55X9jnnuHRa70/M6xv7ZWf8Y8aiafY32iurGpRf3/EkM+Lo25DcjEAXz+pjd8ycRIKv6WHEhRjJU/kvKPi8gVA5CwLraCvFWchAAAADGlP996ofa0PfFjpQZ/oKnvCOdmX+xLT2v2D/D75mwn555bgRC99X8c58HoXtuz0ugzM9nPQhqkAfh7LWGhhh5CIThxqBU3IY6eNa4oY2/6gjiY+2A09r6mBsjj8KgcvqJfrFRzk4EgrkXqa8KAgEAAAB63PvV74kHoCAeAG1kXyCz/j0B0DXg/XMMeL/foE+pQCDEaDBBxIFQ0UajshUJAcWBUl3PxZY+f3KMPQktlZ7wnvUQAgEAAABywM6Xv13WBnZRG9Zinx3thP6Y8KC8gUAYbLzbGKQiEtaDzhIb78SyxfV751fHtEq2UyQQWjwhAAAA+eYnX/xm0Rj+EhZ0xPM6r8VxKgMEwvnMh3xPM+C5FWUXMtMTIbVxzkdIA1L+4jECAACAfPAvX2iJ8S+JwEdUd2WgMqWCQBhEGFfRrMW5R0e4rybVkzg7IQQeAAAAJMyPP/+NUscboLQY6HoIEAMIhIM5UTkWRxxZWOOyjEBIBWnKiQAAAIBBYuBzXyt0xuuud+Co3xUETPAhEEKxw70BAAAAZIv/+Zm/KYogEDGwmz8ACIQouLlxZ/tE5ViYEJK2o3P7IUEWAAAAQATBnV/phAh5SgSBKvnn71kFCIRIkc3PKiHeE5STIa7fZi19AAAAGFf+efNLIgAkZGjG64b6Ei6EQIiVuqUB39v1OBCy+/KJyjHxBti4vlapFgAAABgX/ulP/lIEwKznKQkZEkFQpFQQCIlhwoxkz4G1gG+R5Ufblh8j198KqH5lt+YVagYAAADyzP+4oykeAskjmFHkECAQUigSGma9++V9jHjxHFTFIxDi+i19/WkjQvZ7AFb0uTVqBAAAAHInCD6+1fES+BI25BE2hEDIjkhoqm64kexdUDaiQMKDJI+gMcrGZSIS9MuU2bm5p5SLqruUaVsf9RCeCQAAAIDU8o+3/nmp4yWY8I4rvARR0rNR+38/fcA5e2kjEIIZ8VJQS66FiIgNShsAAAByKQrWP182XgLZWLZIidgZ/L7vtzzPu9f8e7PvnNa/ueRBTpbBRyAAAAAAQKT8w9qfzapuLoGIAkKHzqdn6G/3jH0jCtr3f+TD2knfHAIBAAAAAEbmng99TsTAjBYGiIKzHgAx9u/uCYD7H7mkmYWbRyAAAAAAQCj++wc+O9tZdcgbW09BTwSc7omAf3/pzzez/qUQCAAAAAAQXBS8/zOyFOlxf5xEge+3leeJENjuiYILHveIVl6/LgIBAADgAE5UjpVVd8WVnjHUZId7GCfuft+dJREFSo1FonFLC4KWFgQdr4Dvq9aFT370zjjVNwIBAABgsCioqO4y1LMD/ryo/y4GQ82sRgeQO9rv/ZQI4ornqTwvSdoWwe/7/mktgFoPOPoYhD8CAQAAYKAwWFQHz5KK8bQmG2siEiBXFvPq5qya2PUW5A0RANvGQ9B8wGWlHWocgQAAADCqMNiLiIQmm1tCljmz/Mmi53nzqrtBbF7yCuSZlDyBbc/3m//hyktb1HSMAkF3jNKQejsBD+tYO5ndYWI29fU7cZ9Jxnvqe5DvNavvYSVFg1lq7snE5w6r/95SX61Rdp8eM0OlbDro0j6dXjsvZWq+r1Lnxnjv973beTHGRu3fDnj2ctVWTJ9XPKCdNG3bxwjCoB+ZaV1RABnjRzf9ScXkFpRzIgikD9j2fdV84FWPRbTHLRB0hyqd4VHToEoW7+uvwNNm0Gru8xnzfY3WS8BQOdr3czOJASCl91QwA+Kw+Nxh72uZe15ltu18sWfKs2z53l6ZrusybWXgu5bNdzzSN7EQ5jo9Y1BWlNjM0HdXfd+/JwTr6tzdMQ9qKxXTVko5bysl81wctXguFve0D/mevTXI+yma60a1CssMAgGywg/f9Ymut8DzKirb3oId85yfFA/BA695PHZFEgLBGIULxmgfpUH1Bri9oqG/YkMrWX29ZYuBs2Bx7k6e7mkEYTBKGyiZY0Fc8mIYjfNKIMZgnFejxXn2l2nLlOlmCr/ncRX9jpo9sSEJo23z3RuOv0vFfBeb+ilEVIaLarRZvtQ/f319zHE1+kopZRXfrGhRAaScH73zjk7/5WfbW9ARBOo+v/kfZ55IyFCSAiFCYXBQ5xpVB1tyNCicztk9hTGMliNsA53BW19XjNnqOIUfmWdquV8oR9j2N4zxV03aSxNR6IZNHyKx4PJ5NYciqRij0dnzGKw5+MxUPX/mmVg0Y02S9EIibcckBAKkkh++4/ai8vRY0w0jymI7lXFM+qnti2aftEmNxsNEgE5bDI5TpuMuHNCpNmSg0ce0Pi7UA45nfpajZiqYGPQMGrP6WDNGiguBKLPKZ/rCL/JenvI9zzgQB3uNv1Pm+U3iO5b0ccq0maADkhhlK319yKT0I319yIo618u4n6G2Ydps1ttKxfS/Lp+N3vNXSvB7LphnYsGirdR7bcOMNZPm93rAdrLXAJH3Telrydgl15myHK+YyYRU8YMbbyv/4L98fM1X/hkV30RNVDSN3Th50bVPmbxo7sk1xEG8HAowOB00yEoHuiqD96AZqD73ddMM8HHPKkZJa9zuyczqbSn36x93Pkd/XjXPywUGfKaiLtPpOOPNLb9jr/9o7OPt6O9DasaYXA5w7YpZfrKa0bay5lhEpqGtFExbCRpiJwZCbVBbMf/WNu1kycLjKW2wujfUSsYzfY2GpWgBSJzvv/1j0vazlnS8Y57vTk7Zzz77qUwmJ4w34iAvHeJc2DAGM9Af5Jno77BHTlI2s2RrIQ3eaRfxun1Jh4tpuacIxIE86KfVuYmXvdyKIwcYBLsiQd/DkmW5NM3snyuDZsuy092tnwOeqaY6u317f8fYX15hvTdyvck4QkgsxUHblE87xOeUTdsMQiMukWCe5WVln1MiuQBLAcXBoGer11Z6ybxh24rUxVRMbcW2f7GePDD9/VbA8jjv+qY+zyTdFwMcKArqtxZ8z5MNzSTxuNgx8PQvqnOc/dkzVpTf+dn8ffdc89r9B6Um+v+uzPvP/l1+9nd/Pf/9vff0/u7v/pv5+4TXFQWed/JBz53GO5AyDg3pVGcDioPpUQYSWZ7TxL9uqJh26JPZMZklM51+KjL3jYEkM16HVXwzhkEII6SGzvD1/b1/FaRBniSJI2/nabAd8kzt633rEw7y/lqfiLRttwXzjE07/o5lZecdqYWdXJC2oT9PPJJBZnfFk3AyjsRt833m9OedUeFXZxokDoK2lZURc8aKpg7nsi4O9vT3QUSC9DtH9Htq/fVpvAgH9ctNxAEkwd8v3ZKpvQt8pdpe1w5Yf9DzLsPrlmImBnTcRRUsrCiSpDYzoE6rGN2z5r7TqFZPpsigXVL2s6Bi8AXyKEkdmAFf4nwHLQ24YYyIPIiD0oBnStq7zNQuBXmOTHmtmPIK86yUY8jxsA2dGrV+Vy3OXY652jdDtpVBietieE5atpWlEdrKbAxtxWZSaGWUsEMTMlUPePqC8YKd068dUI5N14IKYC/fe9t68e8XPyJ9bi93J83jZduM81MXv/DyyQe/4PLag5//NMRB1gSCChazuRplnKoZ9GIVCSrc6j9tx/eUipg7Y9DahjvVw2zYZowZGYCrA4zHtZw8Z3uTu3vet3aI8hpFUC86bDMiJotx3o8pi2bA04sDDL9UiX1zf3s9IhIeFcpT29dWwvRb844nH4IKkB0L436/slixKIc10577+6gp00dtmjbXNAbPdNj6AQglDH6rUf7eW9c3lPuFLqKwZxrK96cvrlw5+eDjV9Quvu5yREFWBYKZNQoyaxz5ZjCmg40zmbAV4h6dCoQwLmpHbm3b2dZmf/x0yO/eGFD/vQ2SsowYwaUB4mAngWelbDyELghTT1EY7dtpMHojEPuHBzx3zVFzJ0ZoK7Mu2kqIyYfVCI1vG6GxtteDKX2U8ZD2REGNsCKIi+/e0CjrQ0LlttRo++Y4xfd9GcvnHvKip194cfXpVX3wjORBIAQcQDddzZZYuoLBAcZgK1u+rRpR/TcGiM9yxot07/1HFZonz0ojjOHn6HuGzSE6PuLn2oj2kkOBNKh+bJDnrrBHYMxFdC/NFLUV28mHRoSfbRP2VVDxh6UBnMd33vzh8nffsralLW/bBTLipNmxA3x14UNfclX1IS9+BgnHeRIIZuAMMiBsu7whMxPdjuG74+oajG3YRyNiz0o9pvpPgnrES0iGEdMzKRdQLgVClgRnPeKJmDBtJVLvnfEe2JR/K8q+JUTuWWVc9maB9PHdN32orI+exyCN7VCezbrnq8mHvfTq6Ydef1VDH4Ta5VEgWDTAOAxr514EYkYHDuAVZR9HvuqgXvLoRZLvtRJxWUkH3bR8W2nMm3kxA/fYDpPPE6CttBJuK7YhXk0HZWs7wXVcAcTIt97wwfJ33vhHW35KPQYmhGj6YS9/5uRDX3b1kj7a1Fr+BUKaZhbZcTkZbAfDtotNlUyoUd46nYYjUWqbDFtwtDpUVuorCzktq46ua9tWohZTtiFLpx2UgXXoV1xhaTDefPv1HyzrI60eA+nfZTGRCw+/4lj1YSeuaVJj4yUQUtMJpngZ0txiBkHbTsllHa3nrIhdGX1hBJoLL8I2T9F5hBWEDUf30wzZL0TRv0ibsxWmkYvOkEnFszRlcMW3XvuH5W+97gNp9Rh0ViEqvupZk4df+awVLQ6YuB1TgRDUaIhrrd2TVE+szKasjho5KtuWqxWwUrSKSlivX9wTAcU46z1MeTgMf2wnWF7lmMrPhXDL+kpqkELuqr2/pI/UeQy0UJF+ouMtKL56pqqPJrWFQEhVZxnHrqdwDsdD1FHTYf23VX4SyXPfwY6QOxJ3vkkx5UW57fiZSoojIdtUGoRbWQFExDdf877iXQs3r2lL/FTK2paMU3OTtWsniwtzK8X5WbwFY84h+T/LmORZoy7joKGykVSYaUz924adxGH0nlT5SKp1HX7TTMNAI4m1ui2JIVgJ+JaqixwWxGQqyXI/XqBZwqjc9ao/kHa06J+/GWKS9MK565OvvbZNLcF5AsG2o5edMEfdGCugwVGlimIhTHhRHJ2JGEuLOSjf5rg0JHlmdf9w2tRbYZ+2U8NLOLD8WjG0xSTEpK2R7XL20rrvkuVO2RQNwvLNV753yff9ec/z0iI25RmQvLjGJa/7NTwFMFwgiCtXd4A271vU57fNajOQfY6EeM/dMdxXHmaX2+O2pK7xJDSM8JS2Veqrz22EQa7b+zBKKSqLu2lqEAd/d+L3K1oUyGRJMSW3JCJ3/ZI3PAfbDYIJhJB0tqKPer1uyMTg3etoXBuaIlzbKtvhCe1xbFBGFDEI0VYAxk8YvPw9ZdX1opZTcUO+2lSeWv25Nz6nSe1AGIEgA7qt+2tZG3Cyf0Id92umKaf43rIuEIixh6Ccpgh2Ie4fsvcAX79SVBMdj0ElJbfUEPvs4W95bpvagVEEQiukoSjvKZuZXolp20x4tQywYIR1zuMyfMO2y7RwL60MoPMc23gqXS5OcNj2DUyAwYEN/CXLS6q7W3jS4nZH+f6m8rz6w294HrYYRCIQtkc0xMTQXFZdr4I0yk1zzRaCIdWEEggxxtVjYMM4GdF5JU15OEWaGkTFqRe/u+x53loK2pU8Y6u+r1Z+4W3PJ/EYIhUIYtBHtWKMPCgL5lBGMLT6BEOTok8NaV9GNOsdHSFGllguu1vK0VfP86CeZU8g4xWcLwxedJPYOWspaNc7vu+vapGCMAA3AkGW19MDs60b2EYwyDFrDIBepyuCoYlgSJQw7tA4O6GsG9h02PuLgaIZYHurHZUplVxyOkTbKDla9jVNKypBBvlG9aYl31fznpdoOFHHY6B8f+UX6tcxzoA7gWBYNYo4DsrmkCVTe5t1nGQJxEzAgAmjigKZLDiu8uUBgOE0Q7ynGHVfY7xTtkbdNtUHwteve1d5wvPW/GTDibS95GtbzUMYQHwCQfY10B3ocRX/LJ502BU5TDjSuj5Wxm39+IQ4ShFATMKgYkRBmdIYLyQPTdd/07LuRTxGPWFkK0h3mLSCb7zwnWKjiDCYTfA2dnMMHvH2CrYRxCsQDHP6OKOSy8QXZS65EPN6QKmzzwJALoSB7WZBMlEgBqVsatVSZ0O1in3XOWwMPrwQ2aBuKRBkCe2liO9hxvJ8xMGY8/UX/Ffpv5YTtImU7/sNz/Pqj7ix0qZGIDGBYDanmtY/bqlkl+uSz+7tszCHNwEgc8KgZAbWoEZhb3O19aCx5/ozyqavgpQjuWaWXoSShKNFvAqe7QxwnZobU2Hw/N+ViYikk5ClP6w/8h0vQhhA7EwM6chlcJ5S6Yg1l4fzjDE2ACAb4mBJv5yyGFxlIJzUfU/NUWIqpIOa5fmVCNuktMWijThgie7x5G+f944l5Vv1X5Fyn++LkJ5+xO++uIo4gKQ4NOwPpmOcMgN90pt/yGdv6XuZxJMAkGphIM/qhrLzGlSJ8x4PzGp5VRV8MQwJNY0qH81mGW8Z/whvHTO+9pwbS6q7p0FSE5Jtz1fVR73r+ia1AUkzEaBDF4Ewqbqu1iSN845IoMoAUi0OtizFwTTiYOxEQkN1PUZB+/3lCNrmrGW7JKx1/MSB2DqnEhEHvt+ZKHnU710/iTiAzAgE06HLSg5L+rhQdZOYGwmJBYlJXaDaIqVNEUCE4iDo4NoTB4QTjadIEC9C0Bn6ikl0D9s2pU2u0S5hEF999ttLX/31G0UYLCbw8dLeZPJ18tE3vbRBbUDmBMKejn1TOncjFiRPQWJKN2M0NBeNMQLRcDdFABFgIw4Ecg0QCTJ2VFWwyaY13e9bexL6ktiDjBmIgzHjb679nSWVlNegazdNPfrdL1vSB94qSB2HRuzgpSOVY8V0xgV1djfUI+Y1amNerifuYtR2chRy+lkQAmO42QywTRNmAoiEhlnZKMhqMQsmVEhmXDf3CwEym/HJjHAlaJtU3VyYNrUyBsJg7reLyvM2EhIGLf8+v/ZL73lFk5qA3AqEAZ39julom3s6aun4jxrDPgqDbwaBEF1nFeI9cXaqrF6VbnEgz7Zt2F+VkoO+cUOM8mlj/IvYLO5zetGIiTUjLKT/urfv77Z7Y3RCPNhvZ3z469n6ghGPcU8+ddqaFga0NRg/gbBP598wR9UMAvNqtOXDZqm6SDstgLDYxu1uMksLQ8YKCbnYNPkG8wGM/PII44i0wXV9rJCMPCbCYGbJdoW16PC1/eOp2i++95W0NUAgBBgE5CG1DU3YRRLP8hYrasok7vqQzYvSXCxHeExT3V5t2+w6JQf7tKmg4iAMPQ/3OitnjRdfObY4q430NW2kx+01EBul9kvve1WTWgAEgoVhqrr7LIi7uBLiEsSmR0db2W0gpBzscDqMItWTWo6HnCAAGCQ21yJ+3tvm2FbdvBeMtDHjy9e8VewE8XLGvfphJ5zoMTe/mnAiQCCMIBSqZgbbViTIgJK3Dj+pePtWiIG5qOJZuYochPRiG+qHgQaDxMGSChaqtqPOzZmS/ufuQX9HDMBXnvlbJeX7a77nxT2GyCRI7THvf02bWoBcCATTSe92vDGvMlIzBn9xzOvjcEKfux3C2HPuwTHrl0M6jbpyiDawTclBQHEgRtZpIypb5AmADV+6+oYkEpFFENSO/OE8XlLIl0DY00lLpxybQJDOXw8UsnTdWpoLK4a8h6QM4mbIe3XdEZZ5RFNLmLbapthgj8jcKw6kf50jkR3C8OWrbhBBsObHv5CJhBLVj3xwASELuWEiRYZqFlS369mIRAxiI3psO7Y4vB1HeURz9Sxg9EE/gyaEEAcQii9d+ZaSf58vm57FKQ6krU6X/qhW0wfiAHLFsByEQoxJqD0jVbwILQtxkqtBxCz/miQi0CoW58chIss8ohDzc7ik9sxq677Jo2Sc9HfFPf/cRBxAKHFwxZslpGg55o+tT334dUuUPoybQOgZZ42Y78dGgScxkIhR3HR07ZmE28LJNAkEY0CwUhVAPhnU3/G8gxV/dfmbCkYYVGL82Jby/eovN17fogYgz0yk2GA9+CGNV5AILsNqEvUgmOUnrcrD8b4NMzyeALll0ARDSTzXFA0E4S+f9saS7/tbMYuD+tT666cQBzDuAmFWd9ZpndGJalUL24fciUFsNgdKQ1mvpsGIN0ZChcczdxQzck1IRiAIGykedyAt4mD6DRXlqy0VX75kWx9Tl37kN5cofUAgdFlI6X2fTGpQczR4LaakXBuW57vyeizyaKaeMDNoLox5EtnzJxzOyAaaEmaIWIC9fLH8mxJSJAnucbWNFd/3p375ljfgNYCx4qCN0uZ1B70S4xrUZUeG7DC2lb1XYDbCz+95D4ppaAySIKjvR75bJajBJ4N4lLvj4j3ItUAQj9NShG2loNyH5uVtZZIs7C1SMH1AxdSzvLTV6Hln8v67+9rvDhuqZUgYHH29tIsNFdPiFb7ydzzlzV166xtpI4BAGNJRy2xuzfWNWMSzb0a40kWY68xHJRCMgbM84jWiXm2qbmmgS3lEuUTtxpB6KvK4DhdqCYlJ23opRdxeF1T0s4gXRCCE+vvPNBrfaWDH8l6KLtq5ER9Sx2IEbkc52QHRsf3U15XM2BBXX7epFUL10o+9iaVLYWyZCHDOguNk1B7HA54XpVgJM/iXzKx/VMZwYcR7irTDNMZb3eIt5aiWaJWwAnX+DGfdUsiNY0hCUuKpGeI9lYjaSsGI06gppfRaeSNN4RolIzYl/+EnJryJCYm0iIMnv1b6jK2Y+jkRBNVfue3Nc/pAHAACIYghK7sIu7oJi7CSlShny80GYWGutzxqbKwxhsvnzVokl19xTjlblsvIA6p+/6Cl6trmXtJklJUdnx/GUFYJ3dNqiPfMR2R8bTgSg3vLZjsvQi9kubu6pzT0c8MmGKQfkjyIDYRCsjSfVFtSMeUb+H5HtE499va3NCh5gOACQR7OLYciIUiYjaxc5CLUKYxLuVce1p2WvEcfg5Zm68xcpGEANzknc5blEWowNeUhA8CghPi5MPkvrtppSGPc9Y7TYYz9CyIU2M0Qz85IK9UMEdcjG8pDPIOtKD/jAI44biulNPQvhoZKf36HeEZP6bpcUBArW09YKGhxIM95XAtWrPzqJ26YeuwdN7QpfQA7gdBvFEeaFGhmjg+6pq3BasNqyPf1VtuoWHxXOffMEONmLmQyuJNVXIzxV7Usj1MhyuOUGuw9qpp7CDuwu6AS5l4cr8RyPOHyqYYw9EphBLYY3frY2152QhjxlSHib5Ax0sxRWwkTkjXjqH/ZGaHvjZNOnpgRpRCHOHj8fMfWUPEsViHtcFqLgxolD3AuXt8A6Vu8T2bda6OG+5hOtxLkAR7BWAwqUkaZJZJyWDfGxO4eDWYWsWSMeDHKisOMLP2ehnnPUohZE6mLFUdlE6SOBpXHqimLZt+1SqYMDiqPhn5fte99W8puxnjHCK5mhOUgZbCswrm6m6aO2xHeT8G02bAzbOeUcQRlE8aAknqSgXlzP3Hc913nB5T/nGlHtsn+NVMGO2bSY1GdP8Mu9zUXY3n0+tZqlCvH9S2GENbgWnHkvVVG8GUlVyOyZwaGiIPHzZe0VbKlPK/gTXTNE8/Tr/rnzmv3H7o/d47u38/5XZ/rd97SPd/v/H3CnNP3fumXPW/ucZ98K7kGABEKhN7gLoNZ3dbwMUnPywEGhpYx9NouC8EMoHFuujJQHIwgEHr10dpHQLRGKJ8wIiGyQTiEQLAuE2PUDZuNL6loYmBbavBs+3p/Gxjw3fdSiLCtDhNRQ+/JQRvZMfdxWp1dzrLYJybL+z075vk9o6KPU54eJDIPaCvliD47S20ldP+ScN8bBmeTMePOF351vqItkmVtuxc6RrxbgVB/3Mbblih1gOEcGuG9u2tV605+d5k41Z01bg8RBSUzsAYZDFaM+HCu7s0s4rTqhrsUYyr7HWPgRLWsXmEf46QwYvlUdfmcViMuyZrA4GtTJkXlfn3tYe1+v0RY1/dUDnFPw9rI3SHFbW8/A5vQp11hbZ5fEZUbEZbL5j4eKNpKRP2L6d+nIvDixsWivtdN15NWYycOHvsasSXiCOPqeJe1OGhS6gD7MxHRdXaXiVPduHx/76G6s0RBvQYyc1eLcYO23YFKhY85tkE+YypLa24bw11ElIuBsW3qnJm5DKPrb0l1Q35cPre9ttLY89mbyn7Fq/36IEJJ4m07NdN20r5bbUGx03uk/MWvvHotDnHgq/s6qxQ9fnMRcQAQgCAeBNsNbUYxmq3CGhyJhGkTQiCDQNGBcVOLSBi0LYz1nYjKp6nLZkoNjwe3pZeoeNBu3S6Mhp0B5ZnUwNE+4LlI2z3t10Y2dRtpRthGArcVMTKNF2MUT1eQHADaSgT9S99O2OJVLkd4P9JfuAxZEq95HS/CiMLg0leNmhtjQ+MJn/ptRD+ABYNyENpmIN4cEirUSzSV1yPmNawh3QtNWk1jZ2uSF2fMIBbW0OnlaqwHSZo1oVjFniEQZaJtxGXTCzELGjJ2nhhUBySnQrbpMwB7z1DoiQObtmIWB1i0NDykL6qzk25s7cJWQLbMcXdPCNn0jaZNFI0QOaJGX8mLXIQR+POpV0oScjf35LycAqUizEHY8T2v9sRP/06DUgcILxDkYT0ZptMzHX5JnU3mPDxENGz3DfqtLBmHewYYZQaZwhBB0Eu2bLlcfSllZdMTNoPKRcrg3izWO0TaTsp9fcSw5Xm3zTPUGlUcm36p3DeZURjwWfKcNpkNjrUNrKlgk0pSJ0MnqyKa4FhUIVcm0/c0TY3a8/nSK4raoN/QhnxpsMEfjUCQ9qNFwtwTPvP2FqUOMIJAAAAAcCgOKipYrHln+ds4wk1HWQJW3x/jp7046OyB4vUtY+pIIMjkwtyTPnsjk1EACAQAAMi4OOgtUrET8/2FWaZ3ahw8xJGJg8ecKKluWFHB6xMADgRC44l/eiP5BgAjMkERAACAQ+O7FFActJMQB4LZe6Vp+bYCtRuM//aLL5ecjy3nZearKuIAIBoOUQQAAOCQoEtYVhPOTxLD8ozF+UWqNoA4ePTLKsr9MqY7yvenn/T5d+DRAYgIPAgAAOAEE1oUZJWzZtIrtplEaJtVrBAI6RAHnf0NEAcACAQAAMgG8wHPW0/J/Z6kyqLhzx710jjEgYhK8Ry0KXGAaCHECAAAIscsfxx0j5S07D/RcnTuWPG5R16/pJzvOO03nvIX7yTfAMAReBAAAMAFQcXBTlr2RrFclYglNAeJg//0kjX34kDVnvIFxAEAAgEAAPIqELI6E9+migeKg4rDjxBRVn3K1jvZxRrAMYQYAQAAWIoDdt8+lz/9+Rc7FQe+7+94njf91Oa7CO0CiAE8CAAAAHY0KYI+cfDwF7n2HIgYm37q9u8hDgBiAg8CAAAkSSktN2ISq4PAakeGz/5cxbU46OyuffSLN5HzARAjeBAAAMCVYReEgjbM07IrcTnAORJetEn1anFwCeIAAIEAAAAQnKbFubMpuefjAc6pU7VaHEwedy0OGh1x8FfvRhwAIBAAACAPmKVLg4qE40nf74nKMREp5YNEj/5ejXGv288Ur3MuDspfWq7qA3EAgEAAAICcEXSH5LI20MtJ3aTJPTho19/OEpuIg+sWXIuD6a+ssMcBAAIBAADyiJltbwY8fS2JXATzmRv6OOiz58Z9adNPH35hxff9ZWcf4Kv69F+vIg4AEAgAAJBzxOALEipS1MdWnCJBf5asoHRKHbySUlWLg+Y4V+KnH/KCijbg11y2k8u+urrE4wKQDjyKAAAAYjDEt9TBs/RC27VBbkSIhMosHnCqCJu5cRcHd178gornaXEw4XWsBk//Iofyer9PdH72JoxJMeGdPadjaZi/mb97/ed2z6te9rX3NHhSABAIAACASNgPMRjrUYb19AmD+QD30VKEFYk4kOTtjY6t70YgVJ/2t7+POABAIAAAwJiKBDHKJUzFZllTMdQl2VlWEGqF+Myi6q5ONBPwc3eMMFkZ9/q688HP74o6zys4EgjVp339vYgDAAQCAAAgFDorFolQKIZ4e9MY8af3/Jsy1+td8+ie34MIg1V9rJglWseaT/3sfy5pQ16LA1XohgFFLBDEc/ANxAEAAgEAAOB8oSDhPklulNY2wqCBMOhy8qLnFbQBf0YfhY6VEL1AqF5+6g8QBwAIBAAAgKFCoWBEgoQBiWhwvZKRhCo19bEeJmwp7+JAv2xpI77kGQEQsUCoXtF6H+IAAIEAAABgJRgk9l2OouqGChXUwUuR7icG2qobktQRBngK9hEID3zuKW3Il86KgAgFgoiDv7sZcQCAQAAAAIhUPBRVgLyCcV+aNKQ4kLyQyjkGflQCwfOqV3wTcQCAQAAAAIBMsPkzv7GsjfiF8wz8aARC9cq73o84AMgQ7KQMAAAwzuLgAc+pqO7+EC5AHABkkEMUAQAAwNiKA0kOX3Nxbd/3a0//9gcQBwAZBA8CAADAGLJx4a+XtBG/5ujyDS0OVihlAAQCAAAAZIBPFp4tK0NtKDdLyoo4qFLKAAgEAAAAyA5bKtxO1geKg2d854OIA4CMQw4CAADAGPHJf/drElZUivq6/n1+66rvfwhxAJAD8CAAAACMjziQ1YoqDi4tm9BNU8IACAQAAADICH98/2tn7/P9ZSfiwPenr/r+h9ihGgCBAAAAAJkQB/92TkKKXKxYJKKgetUPPow4AEAgAAAAQBb4xE/PFIw4iHjFIl9EwbQWBy1KGSBfkKQMAACQb5wkJStf1a7+UQNxAJBD8CAAAADklE/89IwkJc86uHT16jPrDUoYAIEAAAAAGeGOn3pW2XeTlNxAHAAgEAAAACBL4uBfH+vtlBw1m89sf4S9DgAQCAAAAJAxZKfkqJOSJd8AcQAwBpCkDAAAkCNu/1fXSFhR1EnJO+o+NXfNPbewnCnAGIAHAQAAID/iQBKSF6K+ru+r6WvuubVNCQMgEAAAACAz4uCZRW3Ku9gMrXrsH25lOVMABAIAAABkDElKjjjvQK1ocdCgaAEQCAAAAJAhPn7o6iUVcd6Br/zmsX/8aI3SBUAgAAAAQIa47dBVZf2yGPFl21ohzFG6AAgEAAAAyJY4cLHfgaxUNPesf/oYKxYBIBAAAAAgY0hSctR5BzUtDkhKBkAgAAAAQJa47X7PkOVMZyO+bGPmn29rULoA441HEQAAAGSLj93v6UVPeaeU5xW6g7n+z/N2h/bOz+Z3+dm738Tu7xPyer+z53deJzo/t2Z/fPsUpQsAeBAAAACyR9RLmnbyDihWAEAgAAAAZIyPTly5pCJe0lRTnf3x7W1KFwAEQowAAACyIw5EGJzqhA2pvjCi0UKMVmb/5Q72OwCAXfAgAAAAZIe1iK/XQhwAAAIBAAAgg3x04oolFWFoke/75B0AwEAIMQIAAEg5t3iXlyY871Rv2I4ixEjEwbU7f7xJ6QLAXvAgAAAApJ/liK+3gjgAAAQCAABABrlFXSbLmZYjvKTsklynZAFgGP9fgAEAh1VYZbJLtxMAAAAASUVORK5CYII="
+        };
+
+
+        if (image in images) {
+            return images[image];
+        } else {
+            return images.optinomic_trademark;
+        };
+    },
+
+    _formatDateCH: function(date_string) {
+        date_string = date_string || null
+        if (date_string !== null) {
+
+            // 1952-11-19T00:00:00.000000000000Z
+            var year = parseInt(date_string.substring(0, 4));
+            var month = parseInt(date_string.substring(5, 7));
+            var day = parseInt(date_string.substring(8, 10));
+            var date_string_return = day + "." + month + "." + year
+
+            return date_string_return;
+        } else {
+            return null;
+        }
+    },
+
+
+    // --------------------------------
+    // Liefecycle
+    // --------------------------------
+
+    created: function() {
+        // console.log('makepdfBehavior for ', this, 'enabled!');
+    }
+};
+</script>
+
+<link rel="import" href="iron-icons/iron-icons.html">
+<link rel="import" href="paper-icon-button/paper-icon-button.html">
+<link rel="import" href="paper-progress/paper-progress.html">
+<dom-module id="optinomic-app">
+    <template>
+        <style is="custom-style" include="shared-styles">
+         :host {
+            --app-primary-color: #FAFAFA;
+            --app-secondary-color: #424242;
+            --drawer-primary-color: #424242;
+            --drawer-secondary-color: #EEEEEE;
+            padding: 6px;
+        }
+
+        paper-progress {
+            display: block;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            --paper-progress-active-color: rgba(255, 255, 255, 0.5);
+            --paper-progress-container-color: #9E9E9E;
+        }
+        </style>
+        <template is="dom-if" if="[[_loading]]">
+            <paper-progress value="90" indeterminate bottom-item></paper-progress>
+        </template>
+        <optinomic-template name="template"></optinomic-template>
+        <template is="dom-if" if="[[_isAdmin]]">
+            <div style="margin-top: 64px;margin-bottom: 24px;">
+                <paper-icon-button class="pink" on-tap="_logState" icon="bug-report"></paper-icon-button>
+                <paper-icon-button class="indigo" on-tap="_loadData" icon="refresh"></paper-icon-button>
+            </div>
+        </template>
+    </template>
+    <script>
+    Polymer({
+        is: 'optinomic-app',
+
+        properties: {
+            page: {
+                type: String,
+                reflectToAttribute: true,
+                observer: '_pageChanged',
+            },
+            _loading: {
+                type: Boolean,
+                statePath: 'loading'
+            },
+            _isAdmin: {
+                type: Boolean,
+                statePath: '_app_user.data.isAdmin'
+            },
+        },
+
+        observers: [
+            '_viewPageChanged(page)',
+        ],
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior],
+
+
+        _init: function() {
+
+            var params = {
+                "userID": parseInt(helpers.getUserID()),
+                "patientID": parseInt(helpers.getPatientID()),
+                "stayID": parseInt(helpers.getStayID()),
+                "token": helpers.getToken(),
+                "appName": helpers.getAppName(),
+                "appID": helpers.getAppID(),
+                "apiURL": helpers.getApiURL(),
+            };
+
+            this.dispatch('actionSaveParams', params);
+        },
+
+        _viewPageChanged: function(page) {
+            this.page = page || 'template';
+        },
+
+        _pageChanged: function(page) {
+            //console.log('_pageChanged', page);
+        },
+
+        _showPage404: function() {
+            this.page = '404';
+        },
+
+        _logState: function() {
+            var state = this.getState();
+            console.log('(✔) state', state);
+        },
+
+        _loadData: function() {
+            Polymer.RenderStatus.afterNextRender(this, function() {
+                console.warn('(START) _loadData');
+
+                // loadData
+                this.dispatch('actionGetCurrentUser');
+                this.dispatch('actionGetApps');
+                // this.dispatch('actionGetCurrentPatient');
+                // this.dispatch('actionGetCurrentPatientStays');
+                this.dispatch('actionGetClinic');
+
+                this._logState();
+            });
+        },
+
+        ready: function() {
+            Polymer.RenderStatus.afterNextRender(this, function() {
+                this._init();
+                this._loadData();
+            });
+        },
+
+    });
+    </script>
+</dom-module>
+
+<optinomic-app name="main"></optinomic-app>
+
+
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-chart-profile/optinomic-chart-profile.html">
+<link rel="import" href="optinomic-pdf-chart-profile/optinomic-pdf-chart-profile.html">
+<link rel="import" href="optinomic-pdfmake/optinomic-pdfmake.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-app-info.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="iron-collapse/iron-collapse.html">
+<dom-module id="element-isk">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+        }
+
+        .full_grid {
+            height: 100%;
+            border-left-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+        }
+
+        .chart {
+            border-top-style: solid;
+            border-top-color: #F5F5F5;
+            border-top-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #F5F5F5;
+            border-bottom-width: 1px;
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+        </style>
+        <div id="isk_element">
+            <div id="title" class="layout horizontal flex">
+                <div class="flex">
+                    <optinomic-title small h1="[[_d.name]]" h2="[[_d.title]]"></optinomic-title>
+                </div>
+                <div>
+                    <template is="dom-if" if="[[_pdf_ready]]">
+                        <paper-icon-button class="grey" on-tap="__toggle_print" icon="print"></paper-icon-button>
+                    </template>
+                </div>
+            </div>
+            <template is="dom-if" if="[[_pdf_ready]]">
+                <iron-collapse id="collapse_print" horizontal>
+                    <optinomic-pdfmake header-left="[[_patient.extras.secure]]" footer-left="[[_d.title]]" header-right="[[_clinic.clinic_name]]" document-title="[[_d.name]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]" hide-logo></optinomic-pdfmake>
+                </iron-collapse>
+            </template>
+            <div id="app_info">
+                <optinomic-app-info app-id="[[appId]]" on-pdfready-app-info="_event_pdf_app_info"></optinomic-app-info>
+            </div>
+            <template is="dom-if" if="[[_sr.have_data]]">
+                <template is="dom-if" if="[[_d.init_done]]">
+                    <template is="dom-if" if="[[_d.clinic_sample_dive.defined]]" restamp="true">
+                        <div id="pdf_get_chart">
+                            <optinomic-pdf-chart-profile language="de" options="[[_d.isk.options_pdf]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.clinic_sample_dive.array]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
+                        </div>
+                        <div id="data_content">
+                            <div class="chart">
+                                <optinomic-chart-profile language="de" options="[[_d.isk.options]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.clinic_sample_dive.array]]"></optinomic-chart-profile>
+                            </div>
+                        </div>
+                    </template>
+                    <template is="dom-if" if="[[!_d.clinic_sample_dive.defined]]" restamp="true">
+                        <optinomic-indication sign=":" title="Erstelle Klinikstichprobe aus letzter Messung..." color="#3F51B5"></optinomic-indication>
+                    </template>
+                </template>
+                <template is="dom-if" if="[[!_d.init_done]]">
+                    <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
+                </template>
+            </template>
+            <template is="dom-if" if="[[!_sr.have_data]]">
+                <optinomic-indication sign="!" title="Keine Daten vorhanden." color="#F44336"></optinomic-indication>
+            </template>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'element-isk',
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior, makepdfBehavior],
+
+        properties: {
+            appId: {
+                type: String,
+                value: null,
+                observer: '_loadData'
+            },
+            _sr: {
+                type: Object,
+                statePath: function(state) {
+                    if ((this.appId !== null) && (this.appId !== undefined)) {
+                        if (this.appId in state.survey_responses.data) {
+                            // console.log('(bscl-element) _sr:', state.survey_responses.data[this.appId]);
+                            return state.survey_responses.data[this.appId]
+                        } else {
+                            return null
+                        };
+                    } else {
+                        return null
+                    };
+                },
+                observer: '_srChanged'
+            },
+            _patient: {
+                type: Object,
+                statePath: function(state) {
+                    if ((state.patient.data !== null) && (state.patient.data !== undefined)) {
+                        return state.patient.data;
+                    } else {
+                        return null
+                    };
+                }
+            },
+            _clinic: {
+                type: Object,
+                statePath: function(state) {
+                    if ((state.clinic.data !== null) && (state.clinic.data !== undefined)) {
+                        return state.clinic.data;
+                    } else {
+                        return null
+                    };
+                }
+            },
+            _pdf_chart: {
+                type: Object,
+                value: null,
+                observer: '_buildPDF'
+            },
+            _pdf_app_info: {
+                type: Object,
+                value: null,
+                observer: '_buildPDF'
+            }
+        },
+
+
+        // -----------------------------
+        // User-Click Functions
+        // -----------------------------
+
+        __toggle_print: function() {
+            var print_button = this.$$('#collapse_print');
+            print_button.toggle();
+        },
+
+
+        // -----------------------------
+        // Functions
+        // -----------------------------
+
+        _init: function() {
+
+            var d = {};
+
+            d.name = "ISK-K";
+            d.title = "Inventar Sozialer Kompetenzen - Kurzform";
+
+            d.isk = {
+                "options": {
+                    "min": -8,
+                    "max": 4,
+                    "item_height": 76,
+                    "item_text_left": 256,
+                    "item_text_right": 164,
+                    "color_grid": "#9E9E9E",
+                    "color_clinic_sample": "#888888",
+                    "color_skin": "grey_dark_to_light",
+                    "show_baseline": false,
+                    "show_ranges_overview": false,
+                    "show_scale_text": true,
+                    "show_score_vertical_line": false,
+                    "show_score_profile_line": true,
+                    "show_score_circles": true,
+                    "show_settings_block": false,
+                    "allow_toggle_settings_block": true,
+                    "topnumber_hide_first_last": false,
+                    "range_alpha": 0.09,
+                    "vertical_grid_every_x": 1,
+                    "norm_sample": "Z-Normierung aufgrund von Gesunden (N = 4'208)",
+                    "response_title_path": "calculation.scores_calculation.info.mz.mz_typ",
+                    "response_date_path": "date"
+                },
+                "scales": [{
+                    "left_title": "Soziale Orientierung",
+                    "left_text": "Auf den eigenen Vorteil bedacht sein, sich nicht für andere interessieren und deren Meinung ignorieren oder gering schätzen.",
+                    "right_title": "Soziale Orientierung",
+                    "right_text": "Überinvolviert, zu schnelle Kompromissbereitschaft",
+                    "m_norm": [0.23, 0.32],
+                    "sd_norm": [0.31, 0.33],
+                    "score_path": "calculation.scores_calculation.all_results.soziale_orientierung_z_score",
+                    "clinic_sample_var": "soziale_orientierung_z_score",
+                    "items": 10
+                }, {
+                    "id": 1,
+                    "left_title": "Offensivität",
+                    "left_text": "Sich sozial isolieren, Konflikten aus dem Weg gehen, sich unterordnen, Entscheidungen vor sich her schieben.",
+                    "right_title": "Offensivität",
+                    "right_text": "Streitlustig, unüberlegte Entscheidungen",
+                    "m_norm": [0.19, 0.19],
+                    "sd_norm": [0.28, 0.27],
+                    "score_path": "calculation.scores_calculation.all_results.offensivit__t_z_score",
+                    "clinic_sample_var": "offensivit__t_z_score",
+                    "items": 8
+                }, {
+                    "left_title": "Selbststeuerung",
+                    "left_text": "Sich treiben lassen, in seinem Handeln von ggf. stark schwankenden Emotionen bestimmt sein und die Verantwortung für das eigene Leben in der Umwelt ansiedeln.",
+                    "right_title": "Selbststeuerung",
+                    "right_text": "Zwanghafte Selbstkontrolle",
+                    "m_norm": [0.33, 0.34],
+                    "sd_norm": [0.40, 0.38],
+                    "score_path": "calculation.scores_calculation.all_results.selbststeuerung_z_score",
+                    "clinic_sample_var": "selbststeuerung_z_score",
+                    "items": 8
+                }, {
+                    "left_title": "Reflexibilität",
+                    "left_text": "Sich nicht mit seinem Verhalten auseinandersetzten, gleichgültig gegenüber dem Verhalten und Erleben anderer Menschen.",
+                    "right_title": "Reflexibilität",
+                    "right_text": "Zwanghafte Selbstdarstellung, Rigidität",
+                    "m_norm": [0.14, 0.16],
+                    "sd_norm": [0.23, 0.25],
+                    "score_path": "calculation.scores_calculation.all_results.reflexibilit__t_z_score",
+                    "clinic_sample_var": "reflexibilit__t_z_score",
+                    "items": 7
+                }],
+                "ranges": [{
+                    "range_start": -999,
+                    "range_stop": -2,
+                    "text": "starke Ausprägung",
+                    "color": "#F44336"
+                }, {
+                    "range_start": -1,
+                    "range_stop": 1,
+                    "text": "normale Ausprägung",
+                    "color": "#4CAF50"
+                }, {
+                    "range_start": 2,
+                    "range_stop": 999,
+                    "text": "starke Ausprägung",
+                    "color": "#F44336"
+                }]
+            };
+
+            // Clone options for pdf - nothing is overwritten
+            d.isk.options_pdf = JSON.parse(JSON.stringify(d.isk.options));
+            d.isk.options_pdf.item_height = d.isk.options_pdf.item_height - 12;
+
+
+            d.clinic_samples = {"date":"2018-04-13T09:37:58.965Z","n_scores":1323,"dimensions":[{"array":[{"text":"Eintritt","id":0},{"text":"Austritt","id":1},{"text":"Anderer Messzeitpunkt","id":2},{"text":"Alle Messzeitpunkte","id":3}],"name":"Messzeitpunkt","source":"app","id":2},{"array":[{"text":"Frauen","pg_id":2,"id":0},{"text":"Männer","pg_id":1,"id":1},{"text":"Alle Patienten","pg_id":null,"id":2}],"name":"Geschlecht","source":"pg","id":0}],"variables":["soziale_orientierung_sum_score","soziale_orientierung_scale_score","soziale_orientierung_z_score","offensivit__t_sum_score","offensivit__t_scale_score","offensivit__t_z_score","selbststeuerung_sum_score","selbststeuerung_scale_score","selbststeuerung_z_score","reflexibilit__t_sum_score","reflexibilit__t_scale_score","reflexibilit__t_z_score"],"data":[[{"statistics":{"reflexibilit__t_scale_score":{"n":207,"min":1.71,"max":4,"mean":2.737536231884059,"variance":0.243684268010922,"standard_deviation":0.49364386759173057,"mean_1sd_min":2.2438923642923285,"mean_1sd_plus":3.2311800994757895,"z_score_min":-2.08153346844346,"z_score_max":2.5574383700438568},"offensivit__t_sum_score":{"n":207,"min":10,"max":29,"mean":20.053140096618357,"variance":13.64451912530048,"standard_deviation":3.693848822745793,"mean_1sd_min":16.359291273872564,"mean_1sd_plus":23.74698891936415,"z_score_min":-2.7215894799791607,"z_score_max":2.4220969326868844},"reflexibilit__t_z_score":{"n":207,"min":-2.81,"max":2.64,"mean":-0.3708695652173917,"variance":1.3897151858853185,"standard_deviation":1.1788618179775434,"mean_1sd_min":-1.549731383194935,"mean_1sd_plus":0.8079922527601517,"z_score_min":-2.0690554207338594,"z_score_max":2.5540479124032047},"selbststeuerung_sum_score":{"n":207,"min":8,"max":31,"mean":19.864734299516908,"variance":19.624215267567497,"standard_deviation":4.429922715755603,"mean_1sd_min":15.434811583761306,"mean_1sd_plus":24.29465701527251,"z_score_min":-2.6783163185484975,"z_score_max":2.5136478478234068},"soziale_orientierung_z_score":{"n":207,"min":-4.06,"max":0.92,"mean":-1.314830917874395,"variance":0.6616346332469837,"standard_deviation":0.8134092655281127,"mean_1sd_min":-2.1282401834025078,"mean_1sd_plus":-0.5014216523462824,"z_score_min":-3.374892810377911,"z_score_max":2.747486428524284},"soziale_orientierung_scale_score":{"n":207,"min":1.4,"max":3.3,"mean":2.447826086956521,"variance":0.09640831758034014,"standard_deviation":0.31049688819751503,"mean_1sd_min":2.137329198759006,"mean_1sd_plus":2.7583229751540363,"z_score_min":-3.374675002507504,"z_score_max":2.744548964694902},"reflexibilit__t_sum_score":{"n":207,"min":12,"max":28,"mean":19.164251207729468,"variance":11.944036033513035,"standard_deviation":3.4560144724108195,"mean_1sd_min":15.708236735318648,"mean_1sd_plus":22.620265680140285,"z_score_min":-2.0729806732354,"z_score_max":2.5566295693510104},"soziale_orientierung_sum_score":{"n":207,"min":14,"max":33,"mean":24.47826086956522,"variance":9.640831758034038,"standard_deviation":3.104968881975154,"mean_1sd_min":21.373291987590065,"mean_1sd_plus":27.583229751540372,"z_score_min":-3.3746750025075016,"z_score_max":2.744548964694897},"offensivit__t_z_score":{"n":207,"min":-3.19,"max":2.24,"mean":-0.3134299516908206,"variance":1.113961665383088,"standard_deviation":1.0554438238878885,"mean_1sd_min":-1.368873775578709,"mean_1sd_plus":0.7420138721970679,"z_score_min":-2.7254601175388893,"z_score_max":2.419294986525073},"selbststeuerung_scale_score":{"n":207,"min":1,"max":3.88,"mean":2.4855555555555537,"variance":0.306633387010198,"standard_deviation":0.5537448753805294,"mean_1sd_min":1.9318106801750243,"mean_1sd_plus":3.039300430936083,"z_score_min":-2.682743663378719,"z_score_max":2.518207402797532},"offensivit__t_scale_score":{"n":207,"min":1.25,"max":3.63,"mean":2.5090821256038627,"variance":0.21339287731335618,"standard_deviation":0.4619446691037317,"mean_1sd_min":2.047137456500131,"mean_1sd_plus":2.9710267947075946,"z_score_min":-2.725612415977746,"z_score_max":2.426519774697151},"selbststeuerung_z_score":{"n":207,"min":-3.39,"max":2.47,"mean":-0.36695652173913046,"variance":1.2760733459357265,"standard_deviation":1.1296341646461152,"mean_1sd_min":-1.4965906863852456,"mean_1sd_plus":0.7626776429069848,"z_score_min":-2.6761261060193853,"z_score_max":2.511394051744066}}},{"statistics":{"reflexibilit__t_scale_score":{"n":451,"min":1.43,"max":4,"mean":2.72738359201774,"variance":0.2178818462052788,"standard_deviation":0.46677815523573807,"mean_1sd_min":2.2606054367820017,"mean_1sd_plus":3.194161747253478,"z_score_min":-2.7794436767558652,"z_score_max":2.7263838157540765},"offensivit__t_sum_score":{"n":451,"min":null,"max":32,"mean":21.07760532150776,"variance":16.14253617238853,"standard_deviation":4.017777516536789,"mean_1sd_min":17.059827804970972,"mean_1sd_plus":25.09538283804455,"z_score_min":-5.246085736393901,"z_score_max":2.7185165513861094},"reflexibilit__t_z_score":{"n":451,"min":-3.49,"max":2.64,"mean":-0.39501108647450295,"variance":1.2426360863515884,"standard_deviation":1.114735881880362,"mean_1sd_min":-1.509746968354865,"mean_1sd_plus":0.7197247954058592,"z_score_min":-2.7764324839932475,"z_score_max":2.7226279657877135},"selbststeuerung_sum_score":{"n":451,"min":8,"max":32,"mean":20.902439024390244,"variance":17.861878751825223,"standard_deviation":4.226331595110022,"mean_1sd_min":16.676107429280222,"mean_1sd_plus":25.128770619500266,"z_score_min":-3.0528695475098804,"z_score_max":2.6258140720548124},"soziale_orientierung_z_score":{"n":451,"min":-5.1,"max":1.96,"mean":-1.2474057649667398,"variance":0.7487908309202016,"standard_deviation":0.8653270080843436,"mean_1sd_min":-2.1127327730510834,"mean_1sd_plus":-0.38207875688239623,"z_score_min":-4.4521830464555965,"z_score_max":3.706582292013834},"soziale_orientierung_scale_score":{"n":451,"min":1,"max":3.7,"mean":2.473614190687362,"variance":0.1091707513729036,"standard_deviation":0.3304099746873626,"mean_1sd_min":2.143204215999999,"mean_1sd_plus":2.8040241653747247,"z_score_min":-4.459956731275171,"z_score_max":3.7117094012463077},"reflexibilit__t_sum_score":{"n":451,"min":10,"max":28,"mean":19.093126385809313,"variance":10.678688895334831,"standard_deviation":3.2678263257607236,"mean_1sd_min":15.82530006004859,"mean_1sd_plus":22.360952711570036,"z_score_min":-2.7826222936411735,"z_score_max":2.7256263724839287},"soziale_orientierung_sum_score":{"n":451,"min":10,"max":37,"mean":24.736141906873613,"variance":10.917075137290386,"standard_deviation":3.30409974687363,"mean_1sd_min":21.432042159999984,"mean_1sd_plus":28.04024165374724,"z_score_min":-4.459956731275164,"z_score_max":3.7117094012463046},"offensivit__t_z_score":{"n":451,"min":-3.76,"max":3.1,"mean":-0.007405764966740521,"variance":1.2371735360199814,"standard_deviation":1.1122830287386307,"mean_1sd_min":-1.1196887937053712,"mean_1sd_plus":1.1048772637718902,"z_score_min":-3.3737764022964885,"z_score_max":2.793718581223568},"selbststeuerung_scale_score":{"n":451,"min":1,"max":4,"mean":2.615099778270516,"variance":0.2791540366074898,"standard_deviation":0.528350297253148,"mean_1sd_min":2.086749481017368,"mean_1sd_plus":3.143450075523664,"z_score_min":-3.0568730379585167,"z_score_max":2.621178087585968},"offensivit__t_scale_score":{"n":451,"min":null,"max":4,"mean":2.6371840354767264,"variance":0.2523182344236263,"standard_deviation":0.5023128849866647,"mean_1sd_min":2.1348711504900617,"mean_1sd_plus":3.139496920463391,"z_score_min":-5.250082397441861,"z_score_max":2.71308183655184},"selbststeuerung_z_score":{"n":451,"min":-3.39,"max":2.73,"mean":-0.10217294900221735,"variance":1.1613606884921923,"standard_deviation":1.0776644600673218,"mean_1sd_min":-1.1798374090695392,"mean_1sd_plus":0.9754915110651043,"z_score_min":-3.0508819515050094,"z_score_max":2.62806564932585}}},{"statistics":{"reflexibilit__t_scale_score":{"n":658,"min":1.43,"max":4,"mean":2.730577507598783,"variance":0.22602124703208545,"standard_deviation":0.47541691916893897,"mean_1sd_min":2.255160588429844,"mean_1sd_plus":3.2059944267677216,"z_score_min":-2.7356567575934836,"z_score_max":2.670124770948947},"offensivit__t_sum_score":{"n":658,"min":null,"max":32,"mean":20.75531914893617,"variance":15.582988423979822,"standard_deviation":3.9475294076143146,"mean_1sd_min":16.807789741321855,"mean_1sd_plus":24.702848556550485,"z_score_min":-5.257799754170705,"z_score_max":2.848536309666035},"reflexibilit__t_z_score":{"n":658,"min":-3.49,"max":2.64,"mean":-0.38741641337386235,"variance":1.2890313190011171,"standard_deviation":1.1353551510435478,"mean_1sd_min":-1.5227715644174102,"mean_1sd_plus":0.7479387376696854,"z_score_min":-2.7326987364037025,"z_score_max":2.6664928684132447},"selbststeuerung_sum_score":{"n":658,"min":8,"max":32,"mean":20.575987841945288,"variance":18.648481167025412,"standard_deviation":4.3183887234737695,"mean_1sd_min":16.257599118471518,"mean_1sd_plus":24.89437656541906,"z_score_min":-2.912194489019737,"z_score_max":2.6454339545572645},"soziale_orientierung_z_score":{"n":658,"min":-5.1,"max":1.96,"mean":-1.2686170212765953,"variance":0.7223526466403677,"standard_deviation":0.8499133171332048,"mean_1sd_min":-2.1185303384098,"mean_1sd_plus":-0.4187037041433904,"z_score_min":-4.507969108716672,"z_score_max":3.798760363194288},"soziale_orientierung_scale_score":{"n":658,"min":1,"max":3.7,"mean":2.465501519756841,"variance":0.1052992165630394,"standard_deviation":0.32449840764330323,"mean_1sd_min":2.1410031121135376,"mean_1sd_plus":2.789999927400144,"z_score_min":-4.516205581408451,"z_score_max":3.8043283146096387},"reflexibilit__t_sum_score":{"n":658,"min":10,"max":28,"mean":19.11550151975684,"variance":11.07784480926821,"standard_deviation":3.3283396475222013,"mean_1sd_min":15.78716187223464,"mean_1sd_plus":22.443841167279043,"z_score_min":-2.73875339812237,"z_score_max":2.669348510407364},"soziale_orientierung_sum_score":{"n":658,"min":10,"max":37,"mean":24.65501519756839,"variance":10.52992165630399,"standard_deviation":3.24498407643304,"mean_1sd_min":21.410031121135347,"mean_1sd_plus":27.89999927400143,"z_score_min":-4.5162055814084345,"z_score_max":3.804328314609635},"offensivit__t_z_score":{"n":658,"min":-3.76,"max":3.1,"mean":-0.10367781155015178,"variance":1.21860562263837,"standard_deviation":1.1039047162859528,"mean_1sd_min":-1.2075825278361045,"mean_1sd_plus":1.000226904735801,"z_score_min":-3.3121719062415194,"z_score_max":2.902132552099976},"selbststeuerung_scale_score":{"n":658,"min":1,"max":4,"mean":2.574346504559289,"variance":0.2914172781108822,"standard_deviation":0.5398307865534182,"mean_1sd_min":2.0345157180058706,"mean_1sd_plus":3.114177291112707,"z_score_min":-2.916370358591065,"z_score_max":2.6409266217343417},"offensivit__t_scale_score":{"n":658,"min":null,"max":4,"mean":2.596884498480264,"variance":0.24361111431897345,"standard_deviation":0.493569766415016,"mean_1sd_min":2.103314732065248,"mean_1sd_plus":3.0904542648952797,"z_score_min":-5.261433489620766,"z_score_max":2.8427906184592606},"selbststeuerung_z_score":{"n":658,"min":-3.39,"max":2.73,"mean":-0.18547112462006057,"variance":1.2125655075248754,"standard_deviation":1.1011655223102816,"mean_1sd_min":-1.2866366469303423,"mean_1sd_plus":0.9156943976902211,"z_score_min":-2.9101246002115397,"z_score_max":2.64762296453244}}}],[{"statistics":{"reflexibilit__t_scale_score":{"n":176,"min":1.57,"max":3.86,"mean":2.7573863636363645,"variance":0.1778147598140494,"standard_deviation":0.42168087437545637,"mean_1sd_min":2.335705489260908,"mean_1sd_plus":3.179067238011821,"z_score_min":-2.8158411628105733,"z_score_max":2.61480589556426},"offensivit__t_sum_score":{"n":176,"min":10,"max":29,"mean":21.261363636363637,"variance":13.431689049586781,"standard_deviation":3.6649268818882024,"mean_1sd_min":17.596436754475434,"mean_1sd_plus":24.92629051825184,"z_score_min":-3.072738965684817,"z_score_max":2.1115390874181235},"reflexibilit__t_z_score":{"n":176,"min":-3.15,"max":2.3,"mean":-0.32426136363636393,"variance":1.0131028635072292,"standard_deviation":1.0065301105815112,"mean_1sd_min":-1.3307914742178752,"mean_1sd_plus":0.6822687469451473,"z_score_min":-2.807405964965219,"z_score_max":2.6072358253845254},"selbststeuerung_sum_score":{"n":176,"min":8,"max":31,"mean":21.210227272727273,"variance":18.50694085743802,"standard_deviation":4.301969416143962,"mean_1sd_min":16.90825785658331,"mean_1sd_plus":25.512196688871235,"z_score_min":-3.0707394671736563,"z_score_max":2.2756490761033157},"soziale_orientierung_z_score":{"n":176,"min":-3.53,"max":0.92,"mean":-1.4071590909090899,"variance":0.5160635201446278,"standard_deviation":0.7183756121588676,"mean_1sd_min":-2.1255347030679577,"mean_1sd_plus":-0.6887834787502223,"z_score_min":-2.955057038630993,"z_score_max":3.2394739625354134},"soziale_orientierung_scale_score":{"n":176,"min":1.6,"max":3.3,"mean":2.4125000000000014,"variance":0.07518465909090913,"standard_deviation":0.274198211319675,"mean_1sd_min":2.1383017886803266,"mean_1sd_plus":2.6866982113196762,"z_score_min":-2.963184902226606,"z_score_max":3.2367096624321277},"reflexibilit__t_sum_score":{"n":176,"min":11,"max":27,"mean":19.301136363636363,"variance":8.699089617768601,"standard_deviation":2.9494219124717644,"mean_1sd_min":16.3517144511646,"mean_1sd_plus":22.250558276108126,"z_score_min":-2.8144960639692242,"z_score_max":2.6102958019700884},"soziale_orientierung_sum_score":{"n":176,"min":16,"max":33,"mean":24.125,"variance":7.518465909090909,"standard_deviation":2.741982113196749,"mean_1sd_min":21.383017886803252,"mean_1sd_plus":26.866982113196748,"z_score_min":-2.963184902226602,"z_score_max":3.2367096624321343},"offensivit__t_z_score":{"n":176,"min":-3.19,"max":2.24,"mean":0.03187500000000005,"variance":1.0967709161931836,"standard_deviation":1.0472683114623413,"mean_1sd_min":-1.0153933114623412,"mean_1sd_plus":1.0791433114623414,"z_score_min":-3.076456114194051,"z_score_max":2.1084615812701424},"selbststeuerung_scale_score":{"n":176,"min":1,"max":3.88,"mean":2.653636363636362,"variance":0.2892947314049584,"standard_deviation":0.5378612566498524,"mean_1sd_min":2.1157751069865096,"mean_1sd_plus":3.1914976202862144,"z_score_min":-3.074466404098853,"z_score_max":2.2800743150793634},"offensivit__t_scale_score":{"n":176,"min":1.25,"max":3.63,"mean":2.6603977272727253,"variance":0.20966972817665283,"standard_deviation":0.45789707159650284,"mean_1sd_min":2.2025006556762223,"mean_1sd_plus":3.1182947988692282,"z_score_min":-3.080163239208401,"z_score_max":2.1175114078512483},"selbststeuerung_z_score":{"n":176,"min":-3.39,"max":2.47,"mean":-0.02375000000000008,"variance":1.203180255681819,"standard_deviation":1.0968957360122333,"mean_1sd_min":-1.1206457360122335,"mean_1sd_plus":1.0731457360122332,"z_score_min":-3.068887852767127,"z_score_max":2.2734612945675527}}},{"statistics":{"reflexibilit__t_scale_score":{"n":359,"min":1.14,"max":3.86,"mean":2.723732590529248,"variance":0.2161509702749054,"standard_deviation":0.46492039133050017,"mean_1sd_min":2.258812199198748,"mean_1sd_plus":3.1886529818597484,"z_score_min":-3.4064597295828496,"z_score_max":2.44400424386421},"offensivit__t_sum_score":{"n":359,"min":11,"max":31,"mean":22.128133704735376,"variance":12.211994009978197,"standard_deviation":3.494566355068708,"mean_1sd_min":18.633567349666667,"mean_1sd_plus":25.622700059804085,"z_score_min":-3.1844104744482897,"z_score_max":2.538760290642754},"reflexibilit__t_z_score":{"n":359,"min":-4.17,"max":2.3,"mean":-0.40403899721448605,"variance":1.231560009621282,"standard_deviation":1.1097567344338497,"mean_1sd_min":-1.5137957316483357,"mean_1sd_plus":0.7057177372193637,"z_score_min":-3.3935013737102895,"z_score_max":2.4366051705863003},"selbststeuerung_sum_score":{"n":359,"min":10,"max":32,"mean":22.303621169916436,"variance":15.141797472086658,"standard_deviation":3.891246262071659,"mean_1sd_min":18.41237490784478,"mean_1sd_plus":26.194867431988094,"z_score_min":-3.1618716321917177,"z_score_max":2.4918440461080746},"soziale_orientierung_z_score":{"n":359,"min":-5.1,"max":1.44,"mean":-1.2669637883008342,"variance":0.6374512271009689,"standard_deviation":0.798405427775243,"mean_1sd_min":-2.0653692160760775,"mean_1sd_plus":-0.4685583605255912,"z_score_min":-4.800864420949544,"z_score_max":3.390462657354159},"soziale_orientierung_scale_score":{"n":359,"min":1,"max":3.5,"mean":2.4660167130919213,"variance":0.09299555403822128,"standard_deviation":0.30495172411091775,"mean_1sd_min":2.1610649889810034,"mean_1sd_plus":2.770968437202839,"z_score_min":-4.807373092793855,"z_score_max":3.390645814260082},"reflexibilit__t_sum_score":{"n":359,"min":8,"max":27,"mean":19.06685236768802,"variance":10.586060008845378,"standard_deviation":3.2536225977893283,"mean_1sd_min":15.813229769898694,"mean_1sd_plus":22.32047496547735,"z_score_min":-3.401393995482877,"z_score_max":2.4382507171243986},"soziale_orientierung_sum_score":{"n":359,"min":10,"max":35,"mean":24.66016713091922,"variance":9.29955540382212,"standard_deviation":3.049517241109176,"mean_1sd_min":21.610649889810045,"mean_1sd_plus":27.709684372028395,"z_score_min":-4.807373092793861,"z_score_max":3.3906458142600817},"offensivit__t_z_score":{"n":359,"min":-2.9,"max":2.81,"mean":0.2792479108635096,"variance":0.9969105764232111,"standard_deviation":0.9984540932978396,"mean_1sd_min":-0.7192061824343301,"mean_1sd_plus":1.2777020041613492,"z_score_min":-3.18417034113469,"z_score_max":2.5346704531778257},"selbststeuerung_scale_score":{"n":359,"min":1.25,"max":4,"mean":2.7903621169916417,"variance":0.23652883823061577,"standard_deviation":0.4863423056146933,"mean_1sd_min":2.3040198113769486,"mean_1sd_plus":3.276704422606335,"z_score_min":-3.167238587325364,"z_score_max":2.4872150109982387},"offensivit__t_scale_score":{"n":359,"min":1.38,"max":3.88,"mean":2.7684401114206105,"variance":0.1907479845749183,"standard_deviation":0.4367470487306334,"mean_1sd_min":2.3316930626899772,"mean_1sd_plus":3.205187160151244,"z_score_min":-3.179048640296457,"z_score_max":2.545088494152484},"selbststeuerung_z_score":{"n":359,"min":-2.88,"max":2.73,"mean":0.2550139275766021,"variance":0.9847403201402848,"standard_deviation":0.9923408286170053,"mean_1sd_min":-0.7373269010404033,"mean_1sd_plus":1.2473547561936074,"z_score_min":-3.1592108650268615,"z_score_max":2.494088725415752}}},{"statistics":{"reflexibilit__t_scale_score":{"n":535,"min":1.14,"max":3.86,"mean":2.734803738317757,"variance":0.20378944746265998,"standard_deviation":0.4514304458747327,"mean_1sd_min":2.2833732924430246,"mean_1sd_plus":3.1862341841924895,"z_score_min":-3.53277842221634,"z_score_max":2.492513014938459},"offensivit__t_sum_score":{"n":535,"min":10,"max":31,"mean":21.842990654205607,"variance":12.779086383090227,"standard_deviation":3.5747848023468807,"mean_1sd_min":18.268205851858728,"mean_1sd_plus":25.417775456552487,"z_score_min":-3.312924080473479,"z_score_max":2.561555408813064},"reflexibilit__t_z_score":{"n":535,"min":-4.17,"max":2.3,"mean":-0.3777943925233666,"variance":1.1610986866975301,"standard_deviation":1.0775428932054307,"mean_1sd_min":-1.4553372857287974,"mean_1sd_plus":0.6997485006820641,"z_score_min":-3.5193082627047305,"z_score_max":2.485093084840059},"selbststeuerung_sum_score":{"n":535,"min":8,"max":32,"mean":21.94392523364486,"variance":16.512743471045507,"standard_deviation":4.063587512413816,"mean_1sd_min":17.880337721231044,"mean_1sd_plus":26.007512746058673,"z_score_min":-3.431432248240671,"z_score_max":2.474679020849171},"soziale_orientierung_z_score":{"n":535,"min":-5.1,"max":1.44,"mean":-1.3130841121495325,"variance":0.6018568433924373,"standard_deviation":0.7757943306008606,"mean_1sd_min":-2.088878442750393,"mean_1sd_plus":-0.5372897815486719,"z_score_min":-4.88133998725856,"z_score_max":3.5487293520400454},"soziale_orientierung_scale_score":{"n":535,"min":1,"max":3.5,"mean":2.44841121495327,"variance":0.08776850379945836,"standard_deviation":0.2962574957692351,"mean_1sd_min":2.1521537191840348,"mean_1sd_plus":2.744668710722505,"z_score_min":-4.889028077390778,"z_score_max":3.5495769729514213},"reflexibilit__t_sum_score":{"n":535,"min":8,"max":27,"mean":19.14392523364486,"variance":9.977416368241768,"standard_deviation":3.1587048561462288,"mean_1sd_min":15.985220377498631,"mean_1sd_plus":22.30263008979109,"z_score_min":-3.5280045908565776,"z_score_max":2.4871189693676943},"soziale_orientierung_sum_score":{"n":535,"min":10,"max":35,"mean":24.48411214953271,"variance":8.77685037994584,"standard_deviation":2.9625749576923517,"mean_1sd_min":21.52153719184036,"mean_1sd_plus":27.44668710722506,"z_score_min":-4.88902807739078,"z_score_max":3.5495769729514173},"offensivit__t_z_score":{"n":535,"min":-3.19,"max":2.81,"mean":0.19786915887850434,"variance":1.0432702258712578,"standard_deviation":1.0214060044229512,"mean_1sd_min":-0.8235368455444468,"mean_1sd_plus":1.2192751633014556,"z_score_min":-3.3168682621877665,"z_score_max":2.5573873952280444},"selbststeuerung_scale_score":{"n":535,"min":1,"max":4,"mean":2.745383177570109,"variance":0.25801401205345426,"standard_deviation":0.5079507968823892,"mean_1sd_min":2.23743238068772,"mean_1sd_plus":3.2533339744524983,"z_score_min":-3.4361264679229055,"z_score_max":2.469957385892997},"offensivit__t_scale_score":{"n":535,"min":1.25,"max":3.88,"mean":2.7328971962616957,"variance":0.19954955017905493,"standard_deviation":0.4467096934017158,"mean_1sd_min":2.28618750285998,"mean_1sd_plus":3.1796068896634115,"z_score_min":-3.3195993240472625,"z_score_max":2.567893244050876},"selbststeuerung_z_score":{"n":535,"min":-3.39,"max":2.73,"mean":0.16330841121495399,"variance":1.0737552226395308,"standard_deviation":1.0362216088460667,"mean_1sd_min":-0.8729131976311127,"mean_1sd_plus":1.1995300200610206,"z_score_min":-3.4291008611294136,"z_score_max":2.4769716891382974}}}],[{"statistics":{"reflexibilit__t_scale_score":{"n":46,"min":1.43,"max":3.71,"mean":2.57391304347826,"variance":0.21045425330812864,"standard_deviation":0.45875293275152873,"mean_1sd_min":2.1151601107267313,"mean_1sd_plus":3.032665976229789,"z_score_min":-2.4935274781073287,"z_score_max":2.476467997071249},"offensivit__t_sum_score":{"n":46,"min":11,"max":29,"mean":21.391304347826086,"variance":13.75992438563327,"standard_deviation":3.709437206050706,"mean_1sd_min":17.68186714177538,"mean_1sd_plus":25.10074155387679,"z_score_min":-2.801315609515144,"z_score_max":2.051172517427407},"reflexibilit__t_z_score":{"n":46,"min":-3.49,"max":1.96,"mean":-0.7604347826086955,"variance":1.1945128544423438,"standard_deviation":1.0929377175495152,"mean_1sd_min":-1.8533725001582106,"mean_1sd_plus":0.3325029349408197,"z_score_min":-2.497457241672733,"z_score_max":2.48910321139635},"selbststeuerung_sum_score":{"n":46,"min":14,"max":29,"mean":21.67391304347826,"variance":12.871928166351598,"standard_deviation":3.587746948483351,"mean_1sd_min":18.086166094994912,"mean_1sd_plus":25.26165999196161,"z_score_min":-2.138922603424485,"z_score_max":2.0419742701247916},"soziale_orientierung_z_score":{"n":46,"min":-3.27,"max":1.44,"mean":-1.6621739130434785,"variance":0.7690083175803406,"standard_deviation":0.8769311931846994,"mean_1sd_min":-2.539105106228178,"mean_1sd_plus":-0.7852427198587791,"z_score_min":-1.8334689191719526,"z_score_max":3.537534001701429},"soziale_orientierung_scale_score":{"n":46,"min":1.7,"max":3.5,"mean":2.3152173913043486,"variance":0.11215973534971646,"standard_deviation":0.3349025759078548,"mean_1sd_min":1.9803148153964938,"mean_1sd_plus":2.6501199672122033,"z_score_min":-1.8370040589763026,"z_score_max":3.5376933291239685},"reflexibilit__t_sum_score":{"n":46,"min":10,"max":26,"mean":18.02173913043478,"variance":10.282136105860124,"standard_deviation":3.2065770076298064,"mean_1sd_min":14.815162122804974,"mean_1sd_plus":21.22831613806459,"z_score_min":-2.5016517960889955,"z_score_max":2.4880927077633106},"soziale_orientierung_sum_score":{"n":46,"min":17,"max":35,"mean":23.152173913043477,"variance":11.215973534971647,"standard_deviation":3.3490257590785486,"mean_1sd_min":19.803148153964926,"mean_1sd_plus":26.501199672122027,"z_score_min":-1.8370040589762997,"z_score_max":3.5376933291239707},"offensivit__t_z_score":{"n":46,"min":-2.9,"max":2.24,"mean":0.0689130434782609,"variance":1.1199749054820416,"standard_deviation":1.0582886683141048,"mean_1sd_min":-0.989375624835844,"mean_1sd_plus":1.1272017117923658,"z_score_min":-2.805390563434696,"z_score_max":2.0515073264276427},"selbststeuerung_scale_score":{"n":46,"min":1.75,"max":3.63,"mean":2.711956521739129,"variance":0.20143312854442352,"standard_deviation":0.4488130218079947,"mean_1sd_min":2.263143499931134,"mean_1sd_plus":3.160769543547124,"z_score_min":-2.143334696181477,"z_score_max":2.045492072762577},"offensivit__t_scale_score":{"n":46,"min":1.38,"max":3.63,"mean":2.676739130434782,"variance":0.21500023629489604,"standard_deviation":0.4636811795780545,"mean_1sd_min":2.2130579508567276,"mean_1sd_plus":3.1404203100128365,"z_score_min":-2.7966179943184293,"z_score_max":2.0558541332919233},"selbststeuerung_z_score":{"n":46,"min":-1.86,"max":1.96,"mean":0.09413043478260866,"variance":0.8363851134215502,"standard_deviation":0.9145409304244125,"mean_1sd_min":-0.8204104956418039,"mean_1sd_plus":1.0086713652070212,"z_score_min":-2.1367337095298207,"z_score_max":2.0402253230497776}}},{"statistics":{"reflexibilit__t_scale_score":{"n":83,"min":1.71,"max":3.86,"mean":2.780240963855419,"variance":0.17725536362316752,"standard_deviation":0.42101705858927796,"mean_1sd_min":2.3592239052661412,"mean_1sd_plus":3.201258022444697,"z_score_min":-2.542037055319152,"z_score_max":2.5646443870055555},"offensivit__t_sum_score":{"n":83,"min":9,"max":30,"mean":21.566265060240966,"variance":14.414283640586456,"standard_deviation":3.7966147606237923,"mean_1sd_min":17.769650299617172,"mean_1sd_plus":25.36287982086476,"z_score_min":-3.3098604553115893,"z_score_max":2.2213828559138173},"reflexibilit__t_z_score":{"n":83,"min":-2.81,"max":2.3,"mean":-0.26590361445783095,"variance":1.0145808099869345,"standard_deviation":1.0072640219857625,"mean_1sd_min":-1.2731676364435933,"mean_1sd_plus":0.7413604075279315,"z_score_min":-2.5257492871895004,"z_score_max":2.5473992502971576},"selbststeuerung_sum_score":{"n":83,"min":12,"max":30,"mean":21.518072289156628,"variance":16.177384235738117,"standard_deviation":4.022111912383607,"mean_1sd_min":17.49596037677302,"mean_1sd_plus":25.540184201540235,"z_score_min":-2.3664364633543906,"z_score_max":2.108824392660115},"soziale_orientierung_z_score":{"n":83,"min":-3.01,"max":0.92,"mean":-1.2442168674698797,"variance":0.510650892727537,"standard_deviation":0.7145984136055279,"mean_1sd_min":-1.9588152810754076,"mean_1sd_plus":-0.5296184538643518,"z_score_min":-2.471014627111762,"z_score_max":3.0285777665671803},"soziale_orientierung_scale_score":{"n":83,"min":1.8,"max":3.3,"mean":2.4746987951807244,"variance":0.07442008999854843,"standard_deviation":0.2728004582080984,"mean_1sd_min":2.201898336972626,"mean_1sd_plus":2.7474992533888227,"z_score_min":-2.473231898555129,"z_score_max":3.0252925901968863},"reflexibilit__t_sum_score":{"n":83,"min":12,"max":27,"mean":19.46987951807229,"variance":8.706924081869643,"standard_deviation":2.950749749109477,"mean_1sd_min":16.519129768962813,"mean_1sd_plus":22.420629267181766,"z_score_min":-2.5315191572334,"z_score_max":2.5519346343078624},"soziale_orientierung_sum_score":{"n":83,"min":18,"max":33,"mean":24.746987951807228,"variance":7.442008999854849,"standard_deviation":2.728004582080985,"mean_1sd_min":22.018983369726243,"mean_1sd_plus":27.474992533888212,"z_score_min":-2.473231898555122,"z_score_max":3.0252925901968917},"offensivit__t_z_score":{"n":83,"min":-3.47,"max":2.53,"mean":0.11831325301204824,"variance":1.175136913920744,"standard_deviation":1.0840373212766912,"mean_1sd_min":-0.965724068264643,"mean_1sd_plus":1.2023505742887395,"z_score_min":-3.310138112944326,"z_score_max":2.224726676520383},"selbststeuerung_scale_score":{"n":83,"min":1.5,"max":3.75,"mean":2.691807228915662,"variance":0.2527232399477427,"standard_deviation":0.5027158640303115,"mean_1sd_min":2.1890913648853503,"mean_1sd_plus":3.1945230929459734,"z_score_min":-2.3707372577440706,"z_score_max":2.1049520152412255},"offensivit__t_scale_score":{"n":83,"min":1.13,"max":3.75,"mean":2.697710843373493,"variance":0.22474536217157784,"standard_deviation":0.4740731612014941,"mean_1sd_min":2.223637682171999,"mean_1sd_plus":3.171784004574987,"z_score_min":-3.3068964279696336,"z_score_max":2.2196767139476496},"selbststeuerung_z_score":{"n":83,"min":-2.37,"max":2.22,"mean":0.0550602409638554,"variance":1.052051502395123,"standard_deviation":1.0256956187851847,"mean_1sd_min":-0.9706353778213292,"mean_1sd_plus":1.08075585974904,"z_score_min":-2.3643078868134904,"z_score_max":2.1107039158461656}}},{"statistics":{"reflexibilit__t_scale_score":{"n":129,"min":1.43,"max":3.86,"mean":2.7066666666666648,"variance":0.1988609819121445,"standard_deviation":0.4459383162637457,"mean_1sd_min":2.260728350402919,"mean_1sd_plus":3.1526049829304106,"z_score_min":-2.8628772637505167,"z_score_max":2.5863068753464273},"offensivit__t_sum_score":{"n":129,"min":9,"max":30,"mean":21.503875968992247,"variance":14.187969472988408,"standard_deviation":3.766692112847612,"mean_1sd_min":17.737183856144636,"mean_1sd_plus":25.27056808183986,"z_score_min":-3.3195906632090884,"z_score_max":2.255592911889127},"reflexibilit__t_z_score":{"n":129,"min":-3.49,"max":2.3,"mean":-0.4422480620155038,"variance":1.134853085752058,"standard_deviation":1.0652948351287816,"mean_1sd_min":-1.5075428971442855,"mean_1sd_plus":0.6230467731132778,"z_score_min":-2.8609468829500697,"z_score_max":2.5741681754084524},"selbststeuerung_sum_score":{"n":129,"min":12,"max":30,"mean":21.573643410852714,"variance":15.004266570518581,"standard_deviation":3.8735341189304866,"mean_1sd_min":17.700109291922228,"mean_1sd_plus":25.4471775297832,"z_score_min":-2.4715526227237863,"z_score_max":2.1753665594338094},"soziale_orientierung_z_score":{"n":129,"min":-3.27,"max":1.44,"mean":-1.3932558139534883,"variance":0.6428576167297644,"standard_deviation":0.8017840212487178,"mean_1sd_min":-2.195039835202206,"mean_1sd_plus":-0.5914717927047705,"z_score_min":-2.3407103862254885,"z_score_max":3.5336895458965456},"soziale_orientierung_scale_score":{"n":129,"min":1.7,"max":3.5,"mean":2.4178294573643377,"variance":0.09371311820203114,"standard_deviation":0.3061259841993671,"mean_1sd_min":2.1117034731649706,"mean_1sd_plus":2.723955441563705,"z_score_min":-2.3448824811187716,"z_score_max":3.5350496151639637},"reflexibilit__t_sum_score":{"n":129,"min":10,"max":27,"mean":18.953488372093023,"variance":9.749774652965574,"standard_deviation":3.1224629145861083,"mean_1sd_min":15.831025457506914,"mean_1sd_plus":22.075951286679132,"z_score_min":-2.8674442633948254,"z_score_max":2.5769758834665186},"soziale_orientierung_sum_score":{"n":129,"min":17,"max":35,"mean":24.17829457364341,"variance":9.371311820203095,"standard_deviation":3.061259841993668,"mean_1sd_min":21.117034731649742,"mean_1sd_plus":27.239554415637077,"z_score_min":-2.344882481118784,"z_score_max":3.5350496151639565},"offensivit__t_z_score":{"n":129,"min":-3.47,"max":2.53,"mean":0.10069767441860468,"variance":1.1560266450333523,"standard_deviation":1.0751867954143375,"mean_1sd_min":-0.9744891209957328,"mean_1sd_plus":1.1758844698329423,"z_score_min":-3.3210021641333394,"z_score_max":2.259423512214202},"selbststeuerung_scale_score":{"n":129,"min":1.5,"max":3.75,"mean":2.698992248062014,"variance":0.23452689141277538,"standard_deviation":0.48427976564458625,"mean_1sd_min":2.214712482417428,"mean_1sd_plus":3.1832720137066004,"z_score_min":-2.475825613870385,"z_score_max":2.170249154513142},"offensivit__t_scale_score":{"n":129,"min":1.13,"max":3.75,"mean":2.6902325581395337,"variance":0.22137126374616928,"standard_deviation":0.4705010773060666,"mean_1sd_min":2.219731480833467,"mean_1sd_plus":3.1607336354456,"z_score_min":-3.316108364879649,"z_score_max":2.2524229868470096},"selbststeuerung_z_score":{"n":129,"min":-2.37,"max":2.22,"mean":0.06899224806201543,"variance":0.9754974340484345,"standard_deviation":0.9876727363091655,"mean_1sd_min":-0.9186804882471501,"mean_1sd_plus":1.056664984371181,"z_score_min":-2.469433607306289,"z_score_max":2.1778547416182468}}}],[{"statistics":{"reflexibilit__t_scale_score":{"n":429,"min":1.43,"max":4,"mean":2.7281351981351962,"variance":0.2160417439592268,"standard_deviation":0.46480290872500657,"mean_1sd_min":2.2633322894101897,"mean_1sd_plus":3.1929381068602027,"z_score_min":-2.7928723632476617,"z_score_max":2.736352931511629},"offensivit__t_sum_score":{"n":429,"min":10,"max":29,"mean":20.692307692307693,"variance":13.951945490407011,"standard_deviation":3.735230312899997,"mean_1sd_min":16.957077379407696,"mean_1sd_plus":24.42753800520769,"z_score_min":-2.8625564681729863,"z_score_max":2.2241445939761326},"reflexibilit__t_z_score":{"n":429,"min":-3.49,"max":2.64,"mean":-0.39351981351981474,"variance":1.2309277041528779,"standard_deviation":1.1094718131403238,"mean_1sd_min":-1.5029916266601386,"mean_1sd_plus":0.715951999620509,"z_score_min":-2.790949846409977,"z_score_max":2.7342017864640793},"selbststeuerung_sum_score":{"n":429,"min":8,"max":31,"mean":20.61072261072261,"variance":18.97899924473348,"standard_deviation":4.356489325676522,"mean_1sd_min":16.25423328504609,"mean_1sd_plus":24.96721193639913,"z_score_min":-2.894698383948016,"z_score_max":2.3847820142802787},"soziale_orientierung_z_score":{"n":429,"min":-4.06,"max":1.44,"mean":-1.3899533799533796,"variance":0.6242167810433564,"standard_deviation":0.7900739085954911,"mean_1sd_min":-2.180027288548871,"mean_1sd_plus":-0.5998794713578885,"z_score_min":-3.3794896793809373,"z_score_max":3.5818843644440403},"soziale_orientierung_scale_score":{"n":429,"min":1.4,"max":3.5,"mean":2.419114219114218,"variance":0.09096331795632498,"standard_deviation":0.3016012565562766,"mean_1sd_min":2.1175129625579414,"mean_1sd_plus":2.7207154756704943,"z_score_min":-3.379011847465757,"z_score_max":3.5838238647526874},"reflexibilit__t_sum_score":{"n":429,"min":10,"max":28,"mean":19.097902097902097,"variance":10.577827766638977,"standard_deviation":3.2523572630692,"mean_1sd_min":15.845544834832896,"mean_1sd_plus":22.350259360971297,"z_score_min":-2.7973255586677293,"z_score_max":2.7371217803105456},"soziale_orientierung_sum_score":{"n":429,"min":14,"max":35,"mean":24.19114219114219,"variance":9.096331795632475,"standard_deviation":3.0160125655627623,"mean_1sd_min":21.17512962557943,"mean_1sd_plus":27.207154756704952,"z_score_min":-3.379011847465765,"z_score_max":3.583823864752688},"offensivit__t_z_score":{"n":429,"min":-3.19,"max":2.24,"mean":-0.1307692307692302,"variance":1.1387809933656128,"standard_deviation":1.0671368203588576,"mean_1sd_min":-1.1979060511280877,"mean_1sd_plus":0.9363675895896274,"z_score_min":-2.8667652646471415,"z_score_max":2.221616933779856},"selbststeuerung_scale_score":{"n":429,"min":1,"max":3.88,"mean":2.5787878787878804,"variance":0.29663396199759845,"standard_deviation":0.5446411313861619,"mean_1sd_min":2.0341467474017185,"mean_1sd_plus":3.1234290101740423,"z_score_min":-2.8987672575696215,"z_score_max":2.3891183500967226},"offensivit__t_scale_score":{"n":429,"min":1.25,"max":3.63,"mean":2.5891375291375303,"variance":0.21803631908107385,"standard_deviation":0.4669435930399665,"mean_1sd_min":2.1221939360975637,"mean_1sd_plus":3.056081122177497,"z_score_min":-2.8678785812634784,"z_score_max":2.2290968039331904},"selbststeuerung_z_score":{"n":429,"min":-3.39,"max":2.47,"mean":-0.17671328671328673,"variance":1.2339507359773119,"standard_deviation":1.110833352027797,"mean_1sd_min":-1.2875466387410839,"mean_1sd_plus":0.9341200653145103,"z_score_min":-2.892681163579526,"z_score_max":2.3826375773483766}}},{"statistics":{"reflexibilit__t_scale_score":{"n":894,"min":1.14,"max":4,"mean":2.729373601789708,"variance":0.2153148201532459,"standard_deviation":0.46402027989436617,"mean_1sd_min":2.265353321895342,"mean_1sd_plus":3.193393881684074,"z_score_min":-3.425224436637829,"z_score_max":2.7382992797201644},"offensivit__t_sum_score":{"n":894,"min":null,"max":32,"mean":21.536912751677853,"variance":14.696064741828266,"standard_deviation":3.833544670644685,"mean_1sd_min":17.70336808103317,"mean_1sd_plus":25.370457422322538,"z_score_min":-5.618015336196931,"z_score_max":2.729350548186667},"reflexibilit__t_z_score":{"n":894,"min":-4.17,"max":2.64,"mean":-0.39011185682326754,"variance":1.2278964080697092,"standard_deviation":1.1081048723246862,"mean_1sd_min":-1.4982167291479538,"mean_1sd_plus":0.7179930155014187,"z_score_min":-3.4111285290596447,"z_score_max":2.734499172868372},"selbststeuerung_sum_score":{"n":894,"min":8,"max":32,"mean":21.527964205816556,"variance":17.05458713070982,"standard_deviation":4.129719982118621,"mean_1sd_min":17.398244223697937,"mean_1sd_plus":25.657684187935175,"z_score_min":-3.2757582268026963,"z_score_max":2.5357738150592724},"soziale_orientierung_z_score":{"n":894,"min":-5.1,"max":1.96,"mean":-1.2592729306487735,"variance":0.6977499187974525,"standard_deviation":0.835314263494556,"mean_1sd_min":-2.0945871941433296,"mean_1sd_plus":-0.4239586671542176,"z_score_min":-4.597942639316918,"z_score_max":3.853966191336028},"soziale_orientierung_scale_score":{"n":894,"min":1,"max":3.7,"mean":2.4690156599552595,"variance":0.10175809147736091,"standard_deviation":0.31899544115451073,"mean_1sd_min":2.1500202188007487,"mean_1sd_plus":2.7880111011097704,"z_score_min":-4.605130576909146,"z_score_max":3.858940226824411},"reflexibilit__t_sum_score":{"n":894,"min":8,"max":28,"mean":19.107382550335572,"variance":10.552227377145172,"standard_deviation":3.2484192120391686,"mean_1sd_min":15.858963338296403,"mean_1sd_plus":22.35580176237474,"z_score_min":-3.4193193135817603,"z_score_max":2.7375215048313177},"soziale_orientierung_sum_score":{"n":894,"min":10,"max":37,"mean":24.690156599552573,"variance":10.175809147736096,"standard_deviation":3.189954411545108,"mean_1sd_min":21.500202188007464,"mean_1sd_plus":27.880111011097682,"z_score_min":-4.605130576909138,"z_score_max":3.8589402268244166},"offensivit__t_z_score":{"n":894,"min":-3.76,"max":3.1,"mean":0.11710290827740452,"variance":1.1571317634591025,"standard_deviation":1.0757005919209595,"mean_1sd_min":-0.9585976836435549,"mean_1sd_plus":1.192803500198364,"z_score_min":-3.6042584129788104,"z_score_max":2.7729808035113304},"selbststeuerung_scale_score":{"n":894,"min":1,"max":4,"mean":2.6933109619687077,"variance":0.2664861292534366,"standard_deviation":0.516222945299254,"mean_1sd_min":2.1770880166694537,"mean_1sd_plus":3.2095339072679616,"z_score_min":-3.280193136295204,"z_score_max":2.531249433854215},"offensivit__t_scale_score":{"n":894,"min":null,"max":4,"mean":2.6945190156599836,"variance":0.22960306843035092,"standard_deviation":0.4791691438629484,"mean_1sd_min":2.2153498717970352,"mean_1sd_plus":3.173688159522932,"z_score_min":-5.623314961262756,"z_score_max":2.7244679693177596},"selbststeuerung_z_score":{"n":894,"min":-3.39,"max":2.73,"mean":0.05731543624161055,"variance":1.1089766857348817,"standard_deviation":1.0530796198459458,"mean_1sd_min":-0.9957641836043353,"mean_1sd_plus":1.1103950560875564,"z_score_min":-3.2735563116736754,"z_score_max":2.537970076896346}}},{"statistics":{"reflexibilit__t_scale_score":{"n":1323,"min":1.14,"max":4,"mean":2.7289720332577496,"variance":0.2155508707220181,"standard_deviation":0.4642745639403672,"mean_1sd_min":2.2646974693173823,"mean_1sd_plus":3.193246597198117,"z_score_min":-3.4224834972045595,"z_score_max":2.737664445699646},"offensivit__t_sum_score":{"n":1323,"min":null,"max":32,"mean":21.263038548752835,"variance":14.611082830713542,"standard_deviation":3.822444614472987,"mean_1sd_min":17.440593934279846,"mean_1sd_plus":25.085483163225824,"z_score_min":-5.562680612361061,"z_score_max":2.808925317215487},"reflexibilit__t_z_score":{"n":1323,"min":-4.17,"max":2.64,"mean":-0.39121693121693213,"variance":1.2288818902046441,"standard_deviation":1.1085494532065965,"mean_1sd_min":-1.4997663844235287,"mean_1sd_plus":0.7173325219896644,"z_score_min":-3.4087636395945515,"z_score_max":2.7343993742893624},"selbststeuerung_sum_score":{"n":1323,"min":8,"max":32,"mean":21.230536659108086,"variance":17.862952622050173,"standard_deviation":4.226458638393398,"mean_1sd_min":17.004078020714687,"mean_1sd_plus":25.456995297501486,"z_score_min":-3.1304072253117816,"z_score_max":2.5481056984827624},"soziale_orientierung_z_score":{"n":1323,"min":-5.1,"max":1.96,"mean":-1.3016477702192177,"variance":0.677647776160933,"standard_deviation":0.8231936443880826,"mean_1sd_min":-2.1248414146073005,"mean_1sd_plus":-0.4784541258311351,"z_score_min":-4.614166126858609,"z_score_max":3.9621877458052404},"soziale_orientierung_scale_score":{"n":1323,"min":1,"max":3.7,"mean":2.4528344671201836,"variance":0.09880337925041545,"standard_deviation":0.31433004827794536,"mean_1sd_min":2.1385044188422384,"mean_1sd_plus":2.767164515398129,"z_score_min":-4.622003130402344,"z_score_max":3.9676942745766843},"reflexibilit__t_sum_score":{"n":1323,"min":8,"max":28,"mean":19.104308390022677,"variance":10.560548331199447,"standard_deviation":3.249699729390309,"mean_1sd_min":15.854608660632367,"mean_1sd_plus":22.354008119412985,"z_score_min":-3.417025976152574,"z_score_max":2.7373887899625373},"soziale_orientierung_sum_score":{"n":1323,"min":10,"max":37,"mean":24.528344671201815,"variance":9.880337925041527,"standard_deviation":3.1433004827794506,"mean_1sd_min":21.385044188422363,"mean_1sd_plus":27.671645153981267,"z_score_min":-4.622003130402343,"z_score_max":3.967694274576694},"offensivit__t_z_score":{"n":1323,"min":-3.76,"max":3.1,"mean":0.03672713529856483,"variance":1.164643936882726,"standard_deviation":1.0791867015872305,"mean_1sd_min":-1.0424595662886658,"mean_1sd_plus":1.1159138368857953,"z_score_min":-3.5181374360103486,"z_score_max":2.8385013086207227},"selbststeuerung_scale_score":{"n":1323,"min":1,"max":4,"mean":2.656175359032537,"variance":0.2791357878433152,"standard_deviation":0.5283330274015767,"mean_1sd_min":2.1278423316309603,"mean_1sd_plus":3.184508386434114,"z_score_min":-3.134718583045741,"z_score_max":2.5435181434266934},"offensivit__t_scale_score":{"n":1323,"min":null,"max":4,"mean":2.660347694633446,"variance":0.2282857445657353,"standard_deviation":0.4777925748331961,"mean_1sd_min":2.18255511980025,"mean_1sd_plus":3.1381402694666423,"z_score_min":-5.567997149311518,"z_score_max":2.803836593388344},"selbststeuerung_z_score":{"n":1323,"min":-3.39,"max":2.73,"mean":-0.018571428571428593,"variance":1.1615020408163197,"standard_deviation":1.0777300407877288,"mean_1sd_min":-1.0963014693591575,"mean_1sd_plus":1.0591586122163001,"z_score_min":-3.128268159774357,"z_score_max":2.550333872629603}}}]],"id":0};
+            d.clinic_sample_dive = {
+                "defined": false,
+                "array": null
+            };
+
+            // Set & Log
+            d.init_done = true;
+            console.log('(INIT) ' + d.name, d);
+            this.set('_d', d);
+            this._d = d;
+        },
+
+        _srChanged: function() {
+            this.debounce('_srChanged', function() {
+
+                if ((this._sr !== undefined) && (this._sr !== null)) {
+                    if ((this._sr.data !== undefined) && (this._sr.data !== null)) {
+                        if (this._sr.have_data === true) {
+
+                            // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
+                            var latest_sr = this._sr.data[this._sr.data.length - 1];
+
+                            var clinic_sample_dive = {
+                                "defined": false,
+                                "array": []
+                            };
+
+                            // ---- Gewünschte Klinikstichprobe schreiben ----
+
+
+                            // Messzeitpunkt
+                            var mz = latest_sr.calculation.scores_calculation.info.mz.mz_id - 1;
+                            if ((mz === 0) || (mz === 1) || (mz === 2)) {
+                                clinic_sample_dive.array.push(mz);
+                            } else {
+                                clinic_sample_dive.array.push(3);
+                            };
+
+                            // Geschlecht
+                            if (latest_sr.patient.gender === "female") {
+                                clinic_sample_dive.array.push(0);
+                            } else {
+                                clinic_sample_dive.array.push(1);
+                            };
+
+
+                            // ---- Set ----
+                            clinic_sample_dive.defined = true;
+                            this.set('_d.clinic_sample_dive', clinic_sample_dive);
+                            this._d.clinic_sample_dive = clinic_sample_dive;
+
+                            console.log('(Response | Ready) ' + this._d.name + ': ', latest_sr, this._d);
+
+
+                        } else {
+                            // Build PDF even with no Data.
+                            this._buildPDF();
+                        };
+                    };
+                };
+
+            }, 250);
+        },
+
+        _buildPDF: function() {
+            var jobs_count = 0;
+            var jobs_total = 2;
+            var jobs_done = {};
+            var build_full = true;
+            var loading_string = jobs_count + "/" + jobs_total;
+
+
+
+            this.set('_d.loading_string', loading_string);
+
+
+            // ------------------------------
+            // Create PDF
+            // ------------------------------
+
+            var do_build = function() {
+
+                this._pdf_content = null;
+                var _pdf_content = [];
+                var d = this.get('_d');
+
+
+                // --------------------------
+                // Build PDF
+                // --------------------------
+                if (build_full) {
+                    var titel_beschreibung = [];
+                    titel_beschreibung.push(this._horizontalLine(100, "#E0E0E0"));
+                    titel_beschreibung.push(this._heading(d.name, d.title, 'h1'));
+                    titel_beschreibung.push(this._pdf_app_info);
+                    _pdf_content.push(this._keepTogether(titel_beschreibung, "app_beschreibung_" + d.name));
+
+                    var chart = [];
+                    chart.push(this._horizontalLine(100, "#F5F5F5"));
+                    chart.push(this._pdf_chart);
+                    chart.push(this._horizontalLine(100, "#F5F5F5"));
+                    _pdf_content.push(this._keepTogether(chart, "chart_" + d.name));
+
+                } else {
+
+                    var titel_beschreibung = [];
+                    titel_beschreibung.push(this._horizontalLine(100, "#E0E0E0"));
+                    titel_beschreibung.push(this._heading(d.name, d.title, 'h1'));
+                    titel_beschreibung.push(this._pdf_app_info);
+                    _pdf_content.push(this._keepTogether(titel_beschreibung, "app_beschreibung_" + d.name));
+
+                    _pdf_content.push(this._noData(d.name, 24));
+
+                };
+
+
+                // --------------------------
+                // Store
+                // --------------------------
+                this.fire('pdfready', _pdf_content);
+                this._pdf_content = _pdf_content;
+                this.set('_pdf_ready', true);
+
+                console.log('(PDF | Ready) ' + d.name + ': ', this._pdf_content);
+
+            }.bind(this);
+
+
+            // ------------------------------
+            // Check if all content is ready
+            // ------------------------------
+
+            var countProperties = function(obj) {
+                var count = 0;
+
+                for (var prop in obj) {
+                    if (obj.hasOwnProperty(prop))
+                        ++count;
+                }
+
+                return count;
+            }
+
+            var check = function() {
+                if (this._pdf_ready !== true) {
+                    jobs_count = countProperties(jobs_done);
+                    loading_string = jobs_count + "/" + jobs_total;
+                    this.set('_d.loading_string', loading_string);
+
+                    if (jobs_count >= jobs_total) {
+                        do_build();
+                    };
+                };
+            }.bind(this);
+
+
+            //  Jobs Done?
+            //  Check incoming Data
+
+            if ((this._pdf_chart !== undefined) && (this._pdf_chart !== null)) {
+                jobs_done._pdf_chart = true;
+                check();
+            };
+
+            if ((this._pdf_app_info !== undefined) && (this._pdf_app_info !== null)) {
+                jobs_done._pdf_app_info = true;
+                check();
+            };
+
+            //  Check "No Data"
+
+            if ((this._sr !== undefined) && (this._sr !== null)) {
+                if ((this._sr.data !== undefined) && (this._sr.data !== null)) {
+                    if (this._sr.have_data === false) {
+                        // Confirm all "jobs" with "false"
+                        jobs_done._pdf_chart = false;
+
+                        build_full = false;
+                        check();
+                    };
+                };
+            };
+        },
+
+
+        // -----------------------------
+        // Event Handler
+        // -----------------------------
+
+        _event_pdf_app_info: function(e) {
+            this.set('_pdf_app_info', e.detail);
+            // console.log('(event) _pdf_app_info ==> ', e.detail);
+        },
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
+
+        _loadData: function() {
+            if ((this.appId !== null) && (this.appId !== undefined)) {
+                this.dispatch('actionGetSurveyResponses', this.appId);
+            };
+        },
+
+        ready: function() {
+            this._init();
+        }
+    });
+    </script>
+</dom-module>
+
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-chart-profile/optinomic-chart-profile.html">
+<link rel="import" href="optinomic-pdfmake/optinomic-pdfmake.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-app-info.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="iron-collapse/iron-collapse.html">
+<dom-module id="optinomic-template">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+            padding: 6px;
+        }
+
+        vaadin-grid {
+            height: auto;
+        }
+
+        .full_grid {
+            height: 100%;
+            border-left-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+        }
+
+        .readme_container {
+            background-color: #FAFAFA;
+            border-style: solid;
+            border-color: #EEEEEE;
+            border-width: 1px;
+            border-radius: 3px;
+            padding: 24px;
+        }
+
+        .content_block {
+            margin-bottom: 48px;
+        }
+
+        .scroll_top {
+            text-align: right;
+            cursor: pointer;
+            margin-top: 24px;
+            margin-bottom: 0px !important;
+            padding-bottom: 0px !important;
+        }
+        </style>
+        <template is="dom-if" if="[[_d.init_done]]">
+            <div id="main_content">
+                <div id="content_bdi" class="content_block">
+                    <element-isk app-id="[[_d.app_id]]"></element-isk>
+                </div>
+            </div>
+        </template>
+        <template is="dom-if" if="[[!_d.init_done]]">
+            <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
+        </template>
+    </template>
+    <script>
+    Polymer({
+        is: 'optinomic-template',
+
+        properties: {},
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicApp],
+
+
+        // -----------------------------
+        // Functions
+        // -----------------------------
+
+        _init: function() {
+
+            var d = {};
+
+            d.app_id = "ch.suedhang.apps.isk";
+
+            d.init_done = true;
+            this.set('_d', d);
+            this._d = d;
+            console.log('INIT _d', this._d);
+        },
+
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
+
+        _loadData: function() {
+            this.dispatch('actionGetCurrentPatient');
+            this.dispatch('actionGetCurrentPatientStays');
+        },
+
+        ready: function() {
+            this._loadData();
+            this._init();
+        }
+    });
+    </script>
+</dom-module>
+
+
+[readme]
+## ISK-K (Inventar Sozialer Kompetenzen - Kurzversion)
+
+### Zusammenfassung
+Das Inventar Sozialer Kompetenzen (Kurzversion) erfasst in 33 Aussagen persönliche Verhaltensweisen und Gewohnheiten zu den vier Bereichen: Soziale Orientierung, Offensivität, Selbststeuerung und Reflexibilität. Soziale Kompetenzen sind für unser Funktionieren in der Gesellschaft notwendig. Sind sie zu sehr auf einen selber oder zu sehr auf die Gesellschaft ausgerichtet, dann funktioniert das Zusammenspiel nicht. Mittlere Ausprägungen, welche beide Aspekte berücksichtigen sind daher am günstigsten.
+
+#### Auswertung / Interpretation
+Ausgabe der Subskalen in z-Werten auf der Normstichprobe von Kanning (2009) beruhend. Als Vergleich dient die bisherige Patientengruppe mit den gleichen Merkmalen in Bezug auf das Geschlecht.
+
+[dependencies]
+
+
+[survey]
+id = isk
+type = lime
+responsibility = patient_via_assessment
+name = Inventar Sozialer Kompetenzen
+host = limesurvey_v2
+survey_id = 824558
+hash = X28X343
+pid = X28X344
+fid = X28X345
+min_questions =
+min_lastpage = 2
+
+
+[event activation]
+type = on_activation
+time = 08:00
+due_after = 86400
+overdue = ignore
+description = Schätzen Sie Ihre persönlichen Verhaltensweisen und Gewohnheiten im Umgang mit anderen Personen ein.
+survey = isk
+
+[event exit]
+type = before_exit
+days = 7
+time = 08:00
+due_after = 86400
+overdue = ignore
+description = Schätzen Sie Ihre persönlichen Verhaltensweisen und Gewohnheiten im Umgang mit anderen Personen ein.
+survey = isk
+
+
+[calculation scores_calculation javascript]
+function main(responses) {
+
+
+    var calc = {};
+
+
+    // ------------------------------------------
+    // D e f i n i t i o n s
+    // ------------------------------------------
+
+
+    calc.result_types = ["sum_score", "scale_score", "z_score"];
+
+    calc.result_array = [{
+        "id": 0,
+        "description": "Soziale Orientierung",
+        "full": "Sich für andere Menschen einsetzen, aufmerksam und hilfsbereit sein, andere Meinungen tolerieren und Kompromisse anstreben.",
+        "sub_left": "Auf den eigenen Vorteil bedacht sein, sich nicht für andere interessieren und deren Meinung ignorieren oder gering schätzen",
+        "sub_right": "Überinvolviert, zu schnelle Kompromissbereitschaft",
+        "m_norm": 29.50,
+        "sd_norm": 3.82,
+        "items": 10
+    }, {
+        "id": 1,
+        "description": "Offensivität",
+        "full": "Auf andere Menschen zugehen und dabei Konflikte nicht scheuen, Entscheidungen treffen, eigene Interessen tatkräftig verwirklichen.",
+        "sub_left": "Sich sozial isolieren, Konflikten aus dem Weg gehen, sich unterordnen, Entscheidungen vor sich her schieben",
+        "sub_right": "Streitlustig, unüberlegte Entscheidungen",
+        "m_norm": 21.15,
+        "sd_norm": 3.50,
+        "items": 8
+    }, {
+        "id": 2,
+        "description": "Selbststeuerung",
+        "full": "Rational handeln, sich nicht von Emotionen bestimmen lassen, die Verantwortung für das Leben bei sich selbst sehen.",
+        "sub_left": "Sich treiben lassen, in seinem Handeln von ggf. stark schwankenden Emotionen bestimmt sein und die Verantwortung für das eigene Leben in der Umwelt ansiedeln",
+        "sub_right": "Zwanghafte Selbstkontrolle",
+        "m_norm": 21.30,
+        "sd_norm": 3.92,
+        "items": 8
+    }, {
+        "id": 3,
+        "description": "Reflexibilität",
+        "full": "Das eigene Verhalten und die Wirkung auf andere reflektieren und gegebenenfalls gezielt steuern, sich für andere Menschen interessieren.",
+        "sub_left": "Sich nicht mit seinem Verhalten auseinandersetzten, gleichgültig gegenüber dem Verhalten und Erleben anderer Menschen",
+        "sub_right": "Zwanghafte Selbstdarstellung, Rigidität",
+        "m_norm": 20.25,
+        "sd_norm": 2.94,
+        "items": 7
+    }];
+
+
+    // ------------------------------------------
+    // H e l p e r   -   F U N C T I O N S
+    // ------------------------------------------
+
+    calc.set_result_array = function(result_array) {
+
+        function deUmlaut(value) {
+            value = value.toLowerCase();
+            value = value.replace(/ä/g, 'ae');
+            value = value.replace(/ö/g, 'oe');
+            value = value.replace(/ü/g, 'ue');
+            value = value.replace(/ß/g, 'ss');
+            value = value.replace(/ /g, '-');
+            value = value.replace(/\./g, '');
+            value = value.replace(/,/g, '');
+            value = value.replace(/\(/g, '');
+            value = value.replace(/\)/g, '');
+            return value;
+        };
+
+        result_array.forEach(function(d, myResultID) {
+            d.short_description = deUmlaut(d.description);
+            d.short_description = d.short_description.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+
+            d.result = {};
+            var name = "";
+            calc.result_types.forEach(function(typ, myTypID) {
+                name = d.short_description + "_" + typ;
+                d.result[typ] = null;
+            });
+
+        });
+
+
+        return result_array;
+    };
+
+
+    calc.create_all_results = function(result_array) {
+
+        var variables = [];
+        var variables_inner = [];
+        var results = {};
+
+
+        result_array.forEach(function(d, myResID) {
+
+            calc.result_types.forEach(function(typ, myTypID) {
+                name = d.short_description + "_" + typ;
+                results[name] = d.result[typ];
+                variables.push(name);
+            });
+
+        });
+
+        calc.result_types.forEach(function(typ, myTypID) {
+            variables_inner.push(typ);
+        });
+
+
+        var return_obj = {
+            "all_variables": variables,
+            "variables": variables_inner,
+            "all_results": results
+        };
+
+
+        return return_obj;
+    };
+
+    // ------------------------------------------
+    // F U N C T I O N  -  Main
+    // ------------------------------------------
+    calc.getResults = function(myResponses) {
+
+
+        var result_array = calc.set_result_array(calc.result_array);
+
+
+        var allResults = [];
+        var currentPatient = myResponses.patient;
+
+
+        var responses_array = myResponses.survey_responses;
+        responses_array.forEach(function(response, myindex) {
+            var d = {};
+            d.result_array = calc.cloneObj(result_array);
+            var result = response.data.response;
+
+
+            // -----------------------------------------------
+            // Calculate 'sum_score'
+            // -----------------------------------------------
+
+            // Soziale Orientierung
+            var soz_orient = 0;
+            soz_orient = soz_orient + parseInt(result['AISK[AISK1]']);
+            soz_orient = soz_orient + parseInt(result['AISK[AISK5]']);
+            soz_orient = soz_orient + parseInt(result['AISK[AISK9]']);
+            soz_orient = soz_orient + parseInt(result['AISK[AIS11]']);
+            soz_orient = soz_orient + parseInt(result['AISK[AIS14]']);
+            soz_orient = soz_orient + parseInt(result['AISK[AIS18]']);
+            soz_orient = soz_orient + parseInt(result['AISK[AIS21]']);
+            soz_orient = soz_orient + parseInt(result['AISK[AIS23]']);
+            soz_orient = soz_orient + parseInt(result['AISK[AIS27]']);
+            soz_orient = soz_orient + parseInt(result['AISK[AIS31]']);
+
+            d.result_array[0].result.sum_score = soz_orient;
+
+
+            // Offensivitaet
+            var offensiv = 0;
+            offensiv = offensiv + parseInt(result['AISK[AISK2]']);
+            offensiv = offensiv + parseInt(result['AISK[AISK6]']);
+            offensiv = offensiv + parseInt(5 - result['AISK[AIS10]']);
+            offensiv = offensiv + parseInt(result['AISK[AIS15]']);
+            offensiv = offensiv + parseInt(result['AISK[AIS19]']);
+            offensiv = offensiv + parseInt(result['AISK[AIS24]']);
+            offensiv = offensiv + parseInt(result['AISK[AIS28]']);
+            offensiv = offensiv + parseInt(5 - result['AISK[AIS32]']);
+
+            d.result_array[1].result.sum_score = offensiv;
+
+
+            // Selbststeuerung
+            var selbststeuerung = 0;
+            selbststeuerung = selbststeuerung + parseInt(5 - result['AISK[AISK3]']);
+            selbststeuerung = selbststeuerung + parseInt(5 - result['AISK[AISK7]']);
+            selbststeuerung = selbststeuerung + parseInt(5 - result['AISK[AIS12]']);
+            selbststeuerung = selbststeuerung + parseInt(5 - result['AISK[AIS16]']);
+            selbststeuerung = selbststeuerung + parseInt(result['AISK[AIS20]']);
+            selbststeuerung = selbststeuerung + parseInt(5 - result['AISK[AIS25]']);
+            selbststeuerung = selbststeuerung + parseInt(result['AISK[AIS29]']);
+            selbststeuerung = selbststeuerung + parseInt(5 - result['AISK[AIS33]']);
+
+            d.result_array[2].result.sum_score = selbststeuerung;
+
+
+            // Reflexibilitaet
+            var reflex = 0;
+            reflex = reflex + parseInt(result['AISK[AISK4]']);
+            reflex = reflex + parseInt(result['AISK[AISK8]']);
+            reflex = reflex + parseInt(result['AISK[AIS13]']);
+            reflex = reflex + parseInt(5 - result['AISK[AIS17]']);
+            reflex = reflex + parseInt(result['AISK[AIS22]']);
+            reflex = reflex + parseInt(result['AISK[AIS26]']);
+            reflex = reflex + parseInt(result['AISK[AIS30]']);
+
+            d.result_array[3].result.sum_score = reflex;
+
+
+            // -----------------------------------------------
+            // Calculate 'scale_score'  |  'z_score'
+            // -----------------------------------------------
+
+            d.result_array.forEach(function(res, myResID) {
+                res.result.scale_score = calc.roundToTwo(res.result.sum_score / res.items);
+                res.result.z_score = calc.roundToTwo((res.result.sum_score - res.m_norm) / res.sd_norm);
+            });
+
+
+            // -----------------------------------------------
+            // Messzeitpunkt
+            // -----------------------------------------------
+            var mz = {
+                "mz_id": 99,
+                "mz_typ": 'Undefined',
+                "mz_text": 'Undefined'
+            };
+
+            if ("Erhebungszeitpunkt" in result) {
+                mz.mz_id = parseInt(result['Erhebungszeitpunkt']);
+
+                if (mz.mz_id === 1) {
+                    mz.mz_typ = 'Eintritt';
+                    mz.mz_text = 'Eintritt - Entwöhnungstherapie';
+                };
+
+                if (mz.mz_id === 2) {
+                    mz.mz_typ = 'Austritt';
+                    mz.mz_text = 'Austritt - Entwöhnungstherapie';
+                };
+
+                if (mz.mz_id === 3) {
+                    mz.mz_typ = 'Anderer';
+                    mz.mz_text = 'Anderer Messzeitpunkt: ' + result['andererZeitpunkt'];
+                };
+            };
+
+
+            // -----------------------------------------------
+            // Create 'all_results' Object
+            // -----------------------------------------------
+
+            var all_results_obj = calc.create_all_results(d.result_array);
+            d.all_results = all_results_obj.all_results;
+
+            // -----------------------------------------------
+            // Store Definitions & write results back
+            // -----------------------------------------------
+
+            d.definitions = {};
+            d.definitions.all_results_variables = all_results_obj.all_variables;
+            d.definitions.result_array = result_array;
+            d.definitions.variables = all_results_obj.variables;
+
+            response.data.response_id = response.id;
+            d.info = response.data;
+            d.info.mz = mz;
+            d.info.hash = result['optinomixHASH'];
+            allResults.push(d);
+        });
+
+        return allResults;
+    };
+
+
+    // ------------------------------------------
+    // Helpers
+    // ------------------------------------------
+
+    calc.cloneObj = function(my_obj) {
+        // Clone Obj. and Return
+        return JSON.parse(JSON.stringify(my_obj));
+    };
+
+    calc.getObjProp = function(my_obj) {
+        // Create 'all propertys array'
+        var allFullPropertys = [];
+
+        for (var property in my_obj) {
+            if (my_obj.hasOwnProperty(property)) {
+                allFullPropertys.push(property);
+            }
+        }
+
+        return allFullPropertys;
+    };
+
+    calc.roundToTwo = function(num) {
+        // Round a Number to 0.X 
+        return +(Math.round(num + "e+2") + "e-2");
+    };
+
+    calc.isArray = function(obj) {
+        return (typeof obj !== 'undefined' &&
+            obj && obj.constructor === Array);
+    };
+
+    calc.merge_obj = function(obj1, obj2) {
+        var obj3 = {};
+        for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
+        for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
+        return obj3;
+    }
+
+
+    // Return
+    return calc.getResults(responses);
+
+
+}
+

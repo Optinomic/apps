@@ -1,0 +1,280 @@
+[module]
+id = com.optinomic.apps.example.vaadin_chart
+name = Example Vaadin Chart Example
+short_description = Example Vaadin Chart Example
+version = 1.0
+type = patient
+
+[description]
+Just a silly module doing a example Vaadin Chart Example. This is just an example - to show how Optinomic-Apps can be built.
+
+[developer]
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
+website = http://www.optinomic.com/
+
+[readme]
+
+
+[template show_token 6 25]
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents-lite.min.js" type="text/javascript">
+    </script>
+    <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
+    </script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js">
+    </script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js">
+    </script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js">
+    </script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js">
+    </script>
+    <script type="text/html" id="tmpl-pie-with-legend">
+        <vaadin-pie-chart>
+            <title>Revenue by industry</title>
+            <subtitle>2015</subtitle>
+            <tooltip point-format="<b>{point.percentage:.1f}%</b>"></tooltip>
+            <plot-options>
+                <pie allow-point-select="true" show-in-legend="true" cursor="pointer">
+                    <data-labels enabled="true" format="{point.name}: {point.y:.1f} M€">
+                    </data-labels>
+                </pie>
+            </plot-options>
+            <data-series name="Revenue share"></data-series>
+        </vaadin-pie-chart>
+    </script>
+    <script type="text/html" id="tmpl-area-spline">
+        <vaadin-areaspline-chart>
+            <title>Monthly supply and demand</title>
+            <subtitle>Last six months</subtitle>
+            <legend layout="vertical" align="left" vertical-align="top" x="150" y="100" floating="true"></legend>
+            <tooltip shared="true" value-suffix="t"></tooltip>
+            <x-axis>
+                <categories>January, February, March, April, May, June</categories>
+            </x-axis>
+            <y-axis>
+                <title>Metric tons</title>
+            </y-axis>
+            <data-series name="Supply"></data-series>
+            <data-series name="Demand"></data-series>
+        </vaadin-areaspline-chart>
+    </script>
+</head>
+<div ng-controller="ChartCtrl">
+    <p>1 POLYMER</p>
+    <div id="chart">
+        <p>Spline:</p>
+        <area-spline supply="supplyData" demand="demandData"></area-spline>
+        <p>Pie:</p>
+        <pie-with-legend data="chartData"></pie-with-legend>
+    </div>
+    <p>2 POLYMER</p>
+    <dom-module id="date-axis-and-click-event-example">
+        <template>
+            <vaadin-spline-chart id="dateAxisAndClickEvent" on-chart-click="chartClickListener" on-point-click="pointClickListener">
+                <title>Date axis and click events</title>
+                <x-axis type="datetime"></x-axis>
+                <legend enabled="false"></legend>
+                <data-series>
+                    <data>
+                        <point>
+                            <date>2013-02-10T12:00</date>
+                            <y>71.5</y>
+                        </point>
+                        <point>
+                            <date>2013-02-11T12:05</date>
+                            <y>29.9</y>
+                        </point>
+                        <point>
+                            <date>2013-02-11T12:10</date>
+                            <y>106.4</y>
+                        </point>
+                        <point>
+                            <date>2013-02-12T12:10</date>
+                            <y>106.4</y>
+                        </point>
+                        <point>
+                            <date>2013-02-13T12:10</date>
+                            <y>36.4</y>
+                        </point>
+                        <point>
+                            <date>2013-03-11T12:10</date>
+                            <y>156.4</y>
+                        </point>
+                        <point>
+                            <date>2014-02-10T12:00</date>
+                            <y>71.5</y>
+                        </point>
+                        <point>
+                            <date>2014-02-11T12:05</date>
+                            <y>29.9</y>
+                        </point>
+                        <point>
+                            <date>2014-02-11T12:10</date>
+                            <y>106.4</y>
+                        </point>
+                        <point>
+                            <date>2014-02-12T12:10</date>
+                            <y>106.4</y>
+                        </point>
+                        <point>
+                            <date>2014-02-13T12:10</date>
+                            <y>36.4</y>
+                        </point>
+                        <point>
+                            <date>2014-03-11T12:10</date>
+                            <y>156.4</y>
+                        </point>
+                    </data>
+                </data-series>
+            </vaadin-spline-chart>
+        </template>
+        <script>
+        Polymer({
+            is: 'date-axis-and-click-event-example',
+
+            chartClickListener: function(e) {
+                //get the Highcharts event with chart specific details
+                var originalEvent = e.detail.originalEvent;
+
+                var xValue = originalEvent.xAxis[0].value,
+                    yValue = originalEvent.yAxis[0].value,
+                    xPixels = originalEvent.xAxis[0].axis.toPixels(xValue),
+                    yPixels = originalEvent.yAxis[0].axis.toPixels(yValue),
+                    dateFormatted = Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', xValue),
+                    yFormatted = Highcharts.numberFormat(yValue, 2);
+                this.showLabel('Chart click: x: ' + dateFormatted + ', y: ' + yFormatted, xPixels, yPixels);
+            },
+
+            pointClickListener: function(e) {
+                //get the Highcharts event with chart specific details
+                var originalEvent = e.detail.originalEvent;
+                var point = e.detail.point;
+
+                var xPixels = originalEvent.chartX,
+                    yPixels = originalEvent.chartY,
+                    dateFormatted = Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', point.x);
+                this.showLabel('Point click: x: ' + dateFormatted + ', y: ' + point.y, xPixels, yPixels);
+
+            },
+
+            showLabel: function(message, xPixels, yPixels) {
+                var label = this.$.dateAxisAndClickEvent.chart.renderer.label(message, xPixels, yPixels)
+                    .attr({
+                        fill: Highcharts.getOptions().colors[2],
+                        padding: 10,
+                        r: 5,
+                        zIndex: 8
+                    })
+                    .css({
+                        color: '#FFFFFF'
+                    })
+                    .add();
+                this.async(function() {
+                    label.fadeOut();
+                }, 1000);
+            }
+        });
+        </script>
+    </dom-module>
+    <date-axis-and-click-event-example></date-axis-and-click-event-example>
+</div>
+
+
+
+[javascript]
+var app = angular.module('app', []);
+
+angular.module('app', [])
+    .directive('pieWithLegend', function() {
+        return {
+            scope: {
+                data: '='
+            },
+
+            link: function($scope, $element, $attrs) {
+                var chartNode = $element.children()[0];
+                chartNode.reloadConfiguration();
+                $scope.$watch('data', function(newData, oldData) {
+                    // Update the series data
+                    chartNode.chart.series[0].setData(newData);
+                }, true);
+            },
+
+            template: function() {
+                // The directive template HTML is placed inside script tag in the
+                // document body for convenience. As usual with Angular Directive
+                // templates, you can also use plain template string instead of
+                // this function, or place your directive template in a separate
+                // file and load it with the templateUrl option.
+                return document.getElementById('tmpl-pie-with-legend').innerHTML;
+            }
+        };
+    });
+
+
+angular.module('app', [])
+    .directive('areaSpline', function() {
+        return {
+            scope: {
+                supply: '=',
+                demand: '='
+            },
+
+            link: function($scope, $element, $attrs) {
+                var chartNode = $element.children()[0];
+                chartNode.reloadConfiguration();
+                // Watch and update the series data
+                $scope.$watch('supply', function(newData, oldData) {
+                    chartNode.chart.series[0].setData(newData);
+                }, true);
+                $scope.$watch('demand', function(newData, oldData) {
+                    chartNode.chart.series[1].setData(newData);
+                }, true);
+            },
+
+            template: function() {
+                return document.getElementById('tmpl-area-spline').innerHTML;
+            }
+        };
+    })
+
+angular.module('app', [])
+    .controller('ChartCtrl', function($scope) {
+
+        console.log('ChartCtrl - ChartCtrl - ChartCtrl - ChartCtrl');
+
+        $scope.chartData = [
+            ["Aerospace", 90.0],
+            ["Medical", 453.6],
+            ["Agriculture ", 25.6],
+            ["Automotive", 17.0],
+            ["Consumers", 12.4],
+            ["Subsidies", 1.4]
+        ];
+
+        $scope.supplyData = [35, 28, 45, 60, 80, 74];
+        $scope.demandData = [29, 11, 50, 63, 65, 61];
+
+
+    });
+
+// Wait until Web Components are loaded and registered
+// before bootstrapping your app
+document.addEventListener('WebComponentsReady', function() {
+    angular.element(document).ready(function() {
+        angular.bootstrap(document, ['app']);
+        console.log('angular.element(document).ready', document);
+    });
+});
+
+
+[css]
+</style> <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents-lite.min.js"></script> <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html"> <style type="text/css">
+

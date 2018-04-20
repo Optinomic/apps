@@ -1,0 +1,167 @@
+[module]
+
+id = com.optinomic.apps.example
+name = Example with Makefile
+short_description = An example app
+version = 1.0
+type = patient
+
+[description]
+
+Just a silly module doing nothing. This is just an example - to show how Optinomic-Apps can be built.
+
+[developer]
+
+first_name = Tom
+last_name = Feron
+github_user = thoferon
+email = tho.feron@gmail.com
+company = Optinomic
+phone = +44 207 568789
+website = http://www.optinomic.com
+
+[readme]
+# Manual
+The app's "manual" in Markdown
+
+[dependencies]
+
+[template show_token]
+
+<div style="margin-left:-9px;">
+  <p class="flow-text">Hello, the token is: <em id="token"></em>.</p>
+</div>
+
+
+[pdf_template show_items for_pdf_template]
+
+{% in calculations.for_pdf_template %}
+Here is the list of items from the calculation for\_pdf\_template:
+
+\begin{itemize}
+{% forall .items %}
+\item {%= .name %} {% if .value %} ({%= .value %}){% end %}
+{% end %}
+\end{itemize}
+{% end %}
+
+
+[javascript]
+
+(function() {
+    var em = document.getElementById("token");
+    em.innerHTML = helpers.getToken();
+})();
+
+
+[css]
+
+html, body {
+    background-color: #ffffff !important;
+}
+
+
+
+[survey]
+
+id = my_survey
+type = lime
+responsibility = lead_therapist
+name = Craving - Test
+host = default
+survey_id = 368847
+hash = X1X1
+pid = X1X2
+fid = X1X3
+min_questions =
+min_lastpage = 2
+
+
+[survey]
+
+id = my_ng_survey
+type = ng
+responsibility = lead_therapist
+name = Second example survey
+host = default
+
+[survey_markup my_ng_survey]
+
+<div ng-controller="SurveyController">
+  <div ng-hide="thankyou">
+    <div>
+      <label>How are you feeling today from a scale of 1 to 5?</label>
+      <select ng-model="result.score">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+
+    <button ng-click="saveresult()">Send</button>
+  </div>
+
+  <div ng-show="thankyou">
+    Thank you for your response. You can now close the window.
+  </div>
+</div>
+
+
+[event daily]
+
+type = daily
+time = 13:00
+due_after = 86400
+overdue = ignore
+description = A daily reminder to disable this example module
+survey = my_survey
+
+[email new_event plain]
+
+Hello $patient$,
+
+A new task has been created here: $survey_link$
+
+Thank you
+
+
+[email overdue html]
+
+Hello $patient$,
+
+A task is overdue <a href="$survey_link$">here</a>.
+
+Thank you
+
+
+[calculation for_pdf_template javascript]
+
+function main(responses) {
+  return {
+    "items": [
+      { "name": "Item 1", "value": 11.99 },
+      { "name": "Item 2" }
+    ]
+  };
+}
+
+
+[calculation my_calculation lua]
+
+local json = dkjson()
+
+function main(respjson)
+  local responses = json.decode(respjson)
+  -- Do something
+  return json.encode(responses)
+end
+
+
+[calculation another_calculation javascript]
+
+function main(responses) {
+  return { "a": 66.9 };
+}
+
