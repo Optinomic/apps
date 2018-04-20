@@ -11,6 +11,7 @@ Core messaging features.
 - User Online/Offline Status
 - Typing Indicators
 - Unread Message Counts
+- Emoji-Support: Just type `:pizza:`  or check the supported emoticons here: [EMOJI CHEAT SHEET](https://www.webpagefx.com/tools/emoji-cheat-sheet/) 
 
 ## Enterprise-Grade Security
 - TLS and AES256 Encryption
@@ -20,6 +21,9 @@ Core messaging features.
 - EU-US Privacy Shield Certiﬁed
 - EU Data Storage
 
+
+## RAW Source
+https://raw.githubusercontent.com/Optinomic/apps/master/org.optinomic.chat.suedhang-1.0.opapp
 
 
 # Contact

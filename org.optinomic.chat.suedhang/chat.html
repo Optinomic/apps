@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chat-engine@0.9.5/dist/chat-engine.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chat-engine-typing-indicator@0.0.9/dist/chat-engine-typing-indicator.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chat-engine-unread-messages@0.0.8/dist/chat-engine-unread-messages.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chat-engine-emoji@0.0.7/dist/chat-engine-emoji.js"></script>
 </head>
 
 <body>
@@ -44,7 +45,7 @@
                 <span class="message-data-name">{{user.name}}</span> <i class="fa fa-circle me"></i>
             </div>
             <div class="message other-message float-right">
-                {{messageOutput}}
+                {{{messageOutput}}}
             </div>
         </li>
     </script>
@@ -55,7 +56,7 @@
                 <span class="message-data-time">{{time}}, {{date}}</span>
             </div>
             <div class="message my-message">
-                {{messageOutput}}
+                {{{messageOutput}}}
             </div>
         </li>
     </script>
@@ -93,14 +94,11 @@
         <div class="numberCircle">
             {{count}}
         </div>
-        
     </script>
-
 
     <script>
-
-__opapp_include(chat.js)
-
+    __opapp_include(chat.js)
     </script>
 </body>
+
 </html>

@@ -60,6 +60,8 @@ const init = (user) => {
         // create a new ChatEngine Chat
         myChat = new ChatEngine.Chat(chat_name);
 
+        myChat.plugin(ChatEngineCore.plugin['chat-engine-emoji']());
+
         myChat.plugin(ChatEngineCore.plugin['chat-engine-unread-messages']());
         myChat.unreadMessages.inactive();
 
@@ -97,7 +99,7 @@ const init = (user) => {
             // search for 50 old `message` events
             myChat.search({
                 event: 'message',
-                limit: 50
+                limit: 150
             }).on('message', (data) => {
 
                 // when messages are returned, render them like normal messages
