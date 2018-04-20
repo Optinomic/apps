@@ -6,6 +6,7 @@ Core messaging features.
 
 ## ToDo
 - Desktop-Notifications not working - until HTTPS!!!
+- FIX: History-Messages - Emoji not rendered.
 
 ## Implemented Features
 - User Online/Offline Status

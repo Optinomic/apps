@@ -1,4 +1,3 @@
-
 // ChatEngine | Südhang
 // https://admin.pubnub.com/#/user/442897/account/442861/app/35197778/
 
@@ -24,6 +23,7 @@ let unreadTemplate = Handlebars.compile($("#unread-template").html());
 
 
 let config = { timeout: 1000 };
+
 
 // get some references to functions
 let keypress = function() {};
@@ -60,9 +60,10 @@ const init = (user) => {
         // create a new ChatEngine Chat
         myChat = new ChatEngine.Chat(chat_name);
 
-        myChat.plugin(ChatEngineCore.plugin['chat-engine-emoji']());
+
 
         myChat.plugin(ChatEngineCore.plugin['chat-engine-unread-messages']());
+        myChat.plugin(ChatEngineCore.plugin['chat-engine-emoji']());
         myChat.unreadMessages.inactive();
 
 
@@ -96,16 +97,9 @@ const init = (user) => {
         // wait for our chat to be connected to the internet
         myChat.on('$.connected', () => {
 
-            // search for 50 old `message` events
-            myChat.search({
-                event: 'message',
-                limit: 150
-            }).on('message', (data) => {
 
-                // when messages are returned, render them like normal messages
-                renderMessage(data, true);
+            searchRender();
 
-            });
 
         });
 
@@ -113,7 +107,7 @@ const init = (user) => {
 
             if (uuid !== payload.sender.uuid) {
                 renderUnread(myChat.unreadCount);
-                
+
                 console.log(payload.sender.state.name, " sent a message you havn't seen in ", payload.chat.channel, ": ", payload.event.data.text);
 
                 // console.log('$unread', uuid, payload, myChat.unreadCount);
@@ -169,6 +163,29 @@ const init = (user) => {
 
 };
 
+const loadMore = () => {
+    $('#loadAll').remove();
+    $('.chat-history ul').empty();
+    searchRender(999999999);
+};
+
+
+// send a message to the Chat
+const searchRender = (limit) => {
+    limit = limit || 50;
+    // search for 50 old `message` events
+    myChat.search({
+        event: 'message',
+        limit: limit
+
+    }).on('message', (data) => {
+
+        // when messages are returned, render them like normal messages
+        renderMessage(data, true);
+
+    });
+};
+
 // send a message to the Chat
 const sendMessage = () => {
 
@@ -217,6 +234,7 @@ const renderMessage = (message, isHistory = false) => {
 
     // render the message
     if (isHistory) {
+
         $('.chat-history ul').prepend(el);
     } else {
         $('.chat-history ul').append(el);
@@ -267,11 +285,11 @@ const renderUnread = (count) => {
         let el = template({
             count: count || null
         });
-    
+
         // render the title
         $('#unreadTemp').html(el);
     } else {
-        $('#unreadTemp').empty();    
+        $('#unreadTemp').empty();
     };
 };
 
@@ -333,4 +351,3 @@ var getCurrentPatient = function() {
 // Start & Boot
 getCurrentUser();
 getCurrentPatient();
-
