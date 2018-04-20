@@ -1,0 +1,4488 @@
+[module]
+id = org.optinomic.api.runner
+name = API-Runner
+short_description = Run API-Commands
+version = 1.0
+type = user
+
+[description]
+Run API-Commands.
+
+[developer]
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
+website = http://www.optinomic.com/
+
+[readme]
+
+# Optinomic API-Runner.
+
+Run [API-Commands](https://doc.optinomic.org/V2/Developers/api.html)
+
+# Anschrift
+
+![image](http://www.ottiger.org/optinomic_logo/optinomic_logo_small.png)     
+
+*Optinomic GmbH*   
+*Haldenstrasse 7*     
+*CH - 8942 Oberrieden*     
+*+41(0)44 508 26 76*    
+*info@optinomic.com*   
+*[www.optinomic.com](http://www.optinomic.com)*   
+
+
+[template export 6 7]
+<head>
+  <base href="https://cdn.rawgit.com/Optinomic/polymer2-cdn/optinomic-0.0.17/lib/">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500">
+  <link rel="shortcut icon" href="optinomic-images/favicon.ico" type="image/x-icon"/>
+  <script src="webcomponentsjs/webcomponents-loader.js"></script>
+  <script src="redux/dist/redux.min.js"></script>
+  <script src="redux-thunk/dist/redux-thunk.min.js"></script>
+  <link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+  <link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+  <style>
+
+  body,
+  html {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif !important;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+</style>
+
+<dom-module id="optinomic-styles">
+  <template>
+    <style>
+      paper-progress {
+    display: block;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    --paper-progress-active-color: rgba(255, 255, 255, 0.5);
+    --paper-progress-container-color: #9E9E9E;
+}
+
+.app_actions {
+    display: block;
+    position: absolute;
+    top: 1px;
+    right: 52px;
+    z-index: 10;
+}
+
+.readme_container {
+    background-color: #FAFAFA;
+    padding: 24px 48px;
+    border-radius: 24px;
+}
+
+
+.app_page {
+    position: relative;
+    left: 0;
+    top: 0;
+    display: box;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.2)
+    }
+}
+
+.fade-in {
+    animation: fadeIn 550ms
+}
+
+.zoom-in {
+    animation: zoomIn 2s -1s
+}
+html, body {
+  font-family: 'Roboto', sans-serif !important;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.large {
+  font-size: 125%;
+}
+
+.small {
+  font-size: 75%;
+}
+
+a {
+  text-decoration: none;
+  color: #37474F;
+}
+
+
+/************
+ * Headings
+ ************/
+
+.display-4 {
+  font-size: 117.6px;
+  font-weight: 100;
+  letter-spacing: -0.010em;
+  line-height: 117.6px;
+  color: #757575;
+}
+
+.display-3 {
+  font-size: 58.8px;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 58.8px;
+  color: #757575;
+}
+
+.display-2 {
+  font-size: 47.25px;
+  font-weight: 400;
+  line-height: 67.2px;
+  color: #757575;
+}
+
+h1, .display-1 {
+  font-size: 35.7px;
+  font-weight: 300;
+  line-height: 42px;
+  color: #757575;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+h2, .headline {
+  font-size: 25.2px;
+  font-weight: 300;
+  line-height: 33.6px;
+  color: #616161;
+}
+
+h3, .title {
+  font-size: 21px;
+  font-weight: 300;
+  letter-spacing: 0.005em;
+  color: #424242;
+}
+
+h4, .subhead {
+  font-size: 16.8px;
+  font-weight: 300;
+  letter-spacing: 0.010em;
+  line-height: 25.2px;
+  color: #212121;
+}
+
+
+/************
+ * Body Copy
+ ************/
+
+p, .body-1 {
+  font-size: 14.7px;
+  font-weight: 400;
+  letter-spacing: 0.010em;
+  line-height: 21px;
+  color: #212121;
+}
+
+b, .body-2 {
+  font-size: 14.7px;
+  font-weight: 500;
+  letter-spacing: 0.010em;
+  line-height: 25.2px;
+  color: #212121;
+}
+
+.caption {
+  font-size: 12.6px;
+  letter-spacing: 0.020em;
+  color: #757575;
+}
+
+.button {
+  letter-spacing: 0.010em;
+}
+
+
+/************
+ * Defaults
+ ************/
+
+button, select, html, textarea, input {
+  font-family: 'Roboto', sans-serif !important;
+}
+
+select, button, textarea, input {
+  font-size: 100%;
+}
+
+paper-button {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+paper-button.grey {
+  color: var(--paper-grey-500);
+  --paper-button-ink-color: var(--paper-grey-a200);
+}
+
+paper-button.grey:hover {
+  color: var(--paper-grey-900);
+  background-color: var(--paper-grey-100);
+}
+
+paper-button.pink {
+  color: var(--paper-pink-800);
+  background-color: var(--paper-pink-50);
+  --paper-button-ink-color: var(--paper-pink-500);
+}
+
+paper-button.pink:hover {
+  background-color: var(--paper-pink-500);
+  color: white;
+}
+
+paper-button.indigo {
+  background-color: var(--paper-indigo-50);
+  color: var(--paper-indigo-800);
+  --paper-button-ink-color: var(--paper-pink-500);
+}
+
+paper-button.indigo:hover {
+  background-color: var(--paper-indigo-500);
+  color: white;
+}
+
+paper-button.disabled {
+  color: white;
+}
+
+paper-icon-button.grey {
+  color: var(--paper-grey-500);
+  transition: all 0.3s ease-in-out;
+  --paper-icon-button-ink-color: var(--paper-grey-500);
+}
+
+paper-icon-button.grey:hover {
+  color: var(--paper-grey-800);
+  transform: scale(1.1);
+}
+
+paper-icon-button.pink {
+  color: var(--paper-pink-500);
+  transition: all 0.3s ease-in-out;
+  --paper-icon-button-ink-color: var(--paper-pink-500);
+}
+
+paper-icon-button.pink:hover {
+  transform: scale(1.1);
+}
+
+paper-icon-button.indigo {
+  color: var(--paper-indigo-500);
+  transition: all 0.3s ease-in-out;
+  --paper-icon-button-ink-color: var(--paper-indigo-500);
+}
+
+paper-icon-button.indigo:hover {
+  transform: scale(1.1);
+}
+
+paper-progress {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+}
+
+paper-progress.slow {
+  --paper-progress-indeterminate-cycle-duration: 5s;
+}
+
+paper-progress.indigo {
+  --paper-progress-active-color: var(--paper-indigo-500);
+  --paper-progress-secondary-color: var(--paper-indigo-100);
+  --paper-progress-indeterminate-cycle-duration: 3s;
+}
+
+paper-progress.pink {
+  --paper-progress-active-color: var(--paper-pink-500);
+  --paper-progress-secondary-color: var(--paper-pink-100);
+  --paper-progress-indeterminate-cycle-duration: 3s;
+}
+
+paper-tooltip {
+  --paper-tooltip-background: #424242;
+  --paper-tooltip-opacity: 0.85;
+  --paper-tooltip: {
+    font-size: 14px;
+    color: #FAFAFA;
+  }
+}
+
+        .horizontal {
+          @apply(--layout-horizontal);
+          @apply(--layout-center);
+          @apply(--layout-justified);
+        }
+
+        .flex {
+          @apply(--layout-flex);
+        }
+
+        .wrap {
+          @apply(--layout-wrap);
+        }
+
+        .circle {
+          display: inline-block;
+          width: 58px;
+          height: 58px;
+          text-align: center;
+          color: #424242;
+          border-radius: 50%;
+          background: #E0E0E0;
+          font-size: 28px;
+          font-weight: 100;
+          font-family: 'Roboto', sans-serif;
+          line-height: 60px;
+        }
+
+        .grid-border-top {
+          border-top-color: #E0E0E0;
+          border-top-style: solid;
+          border-top-width: 1px;
+        }
+
+        .indigo {
+          color: #3F51B5;
+        }
+
+        .pink {
+          color: #E91E63;
+        }
+
+
+    </style>
+  </template>
+</dom-module>
+
+</head>
+<!--
+@license
+Copyright (c) 2018 Optionmic GmbH. All rights reserved.
+-->
+<link rel="import" href="polymer/polymer-element.html">
+<link rel="import" href="polymer-redux/polymer-redux.html">
+<!--
+ Copyright 2017 | optinomic-redux-store | Optinomic GmbH.
+ http://www.optinomic.com/
+-->
+<script>
+  const initialState = {
+  "loading": false,
+  "current_patient": {
+    "pid": 0
+  },
+  "signin": {
+    "data": {
+      "user_id": null,
+      "token": null
+    },
+    "trust_computer": false,
+    "isLoggedIn": false
+  },
+  "apps": {},
+  "device": {
+    "sizes": {
+      "small": null,
+      "medium": null,
+      "large": null,
+      "xlarge": null
+    },
+    "current": {}
+  },
+  "user": {
+    "info": null,
+    "annotations": null
+  },
+  "patients": {
+    "0": {
+      "access": {
+        "access": true
+      },
+      "info": {},
+      "stays": {
+        "data": []
+      },
+      "events": {
+        "data": {
+          "aborted": [],
+          "done": [],
+          "irrelevant": [],
+          "to_be_done": []
+        }
+      }
+    }
+  },
+  "errors": [],
+  "opapp": {},
+  "events": {},
+  "stays": {},
+  "logs": {},
+  "patient_groups": {
+    "data": {}
+  },
+  "stay_groups": {
+    "data": {}
+  },
+  "patients_list": {
+    "all": {},
+    "watchlist": {},
+    "patient_groups": {}
+  }
+};
+
+
+// Set "Current-Defaults"
+//initialState.sidebar.current = initialState.sidebar.all[0];
+
+  var reducer = function(state, action) {
+  //console.log('REDUCER :: -----> ', state, action);
+  if (!state)
+    return initialState;
+
+  switch (action.type) {
+    case 'GET_DATA_STARTED':
+      return Object.assign({}, state, {
+        loading: true
+      });
+
+    case 'SET_PERSISTENT_STATE':
+      // console.log('(----->) SET_PERSISTENT_STATE', action);
+      return Object.assign({}, state, action.new_state);
+
+    case 'SET_SIGNIN_START':
+      var current_signin = Object.assign({}, state.signin);
+      current_signin.data = action.signin.data;
+      current_signin.isLoggedIn = action.signin.isLoggedIn;
+      current_signin.trust_computer = action.signin.trust_computer;
+      // console.log('(----->) SET_SIGNIN_START', action.signin, current_signin, store.getState());
+      return Object.assign({}, state, {
+        signin: current_signin
+      });
+
+    case 'SET_TRUST_COMPUTER':
+      var current_signin = Object.assign({}, state.signin);
+      current_signin.trust_computer = action.trust_computer;
+      console.log('(----->) SET_TRUST_COMPUTER', action.trust_computer, current_signin, store.getState());
+      return Object.assign({}, state, {
+        signin: current_signin
+      });
+
+    case 'SAVE_DEVICE_SIZE_COMPLETE':
+      return Object.assign({}, state, {
+        device: action.data
+      });
+
+    case 'GET_USERAPPCALCULATION_COMPLETE':
+      var _app_userapp_calculations = Object.assign({}, state._app_userapp_calculations);
+      _app_userapp_calculations[action.data.module_calc] = action.data;
+      return Object.assign({}, state, {
+        _app_userapp_calculations: _app_userapp_calculations
+      });
+
+    case 'SET_OBJECT':
+      {
+        var current_object = {};
+        var statePathArray = action.statePath.split('.');
+        var name = statePathArray[0];
+        statePathArray.shift();
+
+        // Build Object to store
+        if (statePathArray.length === 0) {
+          current_object[action.statePath] = action.data;
+        } else {
+          state[name] = state[name] || {};
+          var right_obj = JSON.parse(JSON.stringify(state[name]));
+          setValue(right_obj, statePathArray, action.data);
+          current_object[name] = right_obj;
+        };
+
+        // Save only if not equal
+        var write = true;
+        if (name in state) {
+          if (JSON.stringify(state[name]) === JSON.stringify(current_object[name])) {
+            // console.error('(Same) No need to write to state.');
+            write = false;
+          };
+        };
+
+        // Write if needed
+        if (write) {
+          return Object.assign({}, state, current_object);
+        } else {
+          return state;
+        };
+
+      };
+
+    case 'ERROR':
+      {
+        var errors = state.errors.slice(0);
+        errors.push(action.error);
+        console.log('(!) Reducer Error', errors);
+        return Object.assign({}, state, {
+          errors: errors
+        });
+      };
+
+    case 'SET_CURRENT_SIDEBAR_COMPLETE':
+      {
+        var sb = Object.assign({}, state.sidebar);
+        sb.current = action.data;
+        return Object.assign({}, state, {
+          loading: false,
+          sidebar: sb
+        });
+      };
+
+    case 'GET_PATIENTS_LIST_COMPLETE':
+      {
+        var sb = Object.assign({}, state.patients_list);
+        sb[action.data.path] = action.data;
+        return Object.assign({}, state, {
+          loading: false,
+          patients_list: sb
+        });
+      };
+
+    case 'GET_CURRENT_USER_COMPLETE':
+      return Object.assign({}, state, {
+        loading: false,
+        user: action.data
+      });
+
+    default:
+      return state;
+  }
+};
+
+  var Session = (function() {
+
+  var storage = localStorage;
+
+  var isLoggedIn = function() {
+    var uid = storage.getItem("optinomic_user_id");
+    return !(uid === null);
+  };
+
+  var getUserID = function() {
+    return parseInt(storage.getItem("optinomic_user_id"));
+  };
+
+  var getTrustComputer = function() {
+    return JSON.parse(storage.getItem("optinomic_trust_computer"));
+  };
+
+  var setTrustComputer = function(trust) {
+    trust = trust || false;
+    storage.setItem("optinomic_trust_computer", trust);
+  };
+
+  var getToken = function() {
+    return storage.getItem("optinomic_token");
+  };
+
+  var login = function(uid, token) {
+    console.log('SESSION | login', uid, token);
+    storage.setItem("optinomic_user_id", uid);
+    storage.setItem("optinomic_token", token);
+
+    UserStore.start();
+  };
+
+  var logout = function() {
+
+    storage.removeItem("optinomic_user_id");
+    storage.removeItem("optinomic_token");
+
+    UserStore.stop();
+    storage.removeItem("optinomic_trust_computer");
+  };
+
+  return {
+    isLoggedIn: isLoggedIn,
+    getUserID: getUserID,
+    getToken: getToken,
+    getTrustComputer: getTrustComputer,
+    setTrustComputer: setTrustComputer,
+    login: login,
+    logout: logout
+  };
+
+})();
+
+  const UserStore = (function() {
+
+  // ----------------------------------
+  //  Saving userStore to localStorage
+  //  only when trust_computer = true
+  //  logout => _enoded state.
+  // ----------------------------------
+
+  var storage = localStorage;
+
+  //  Should we save to localStorage?
+  //  Should we debug state to console?
+
+  var localStorageOptions = {
+    "name": "unknown",
+    "name_prefix": "optinomic_state_",
+    "name_suffix": "_encoded",
+    "started": false,
+    "using": false,
+    "console": false
+  };
+
+  var getOptions = function() {
+    return localStorageOptions;
+  };
+
+  var getStarted = function() {
+    return localStorageOptions.started;
+  };
+
+  var getConsole = function() {
+    return localStorageOptions.console;
+  };
+
+  var setConsole = function(console) {
+    localStorageOptions.console = console;
+  };
+
+  var clear = function() {
+    var storage_name = localStorageOptions.name_prefix + Session.getUserID();
+    //console.warn('clear', storage_name);
+    storage.removeItem(storage_name);
+  };
+
+  var clear_all = function() {
+    console.warn('(clear_all) localStorage is clear now!');
+    storage.clear();
+  };
+
+  var setSignin = function() {
+    store.dispatch(addSignin());
+  };
+
+  // -------------------------------
+  // Store - Actions
+  // -------------------------------
+  var addSignin = function() {
+
+    var login_data = {
+      "data": {
+        "user_id": Session.getUserID(),
+        "token": Session.getToken()
+      },
+      "isLoggedIn": Session.isLoggedIn(),
+      "trust_computer": Session.getTrustComputer()
+    };
+
+    return {
+      type: 'SET_SIGNIN_START',
+      signin: login_data
+    }
+  };
+
+  var replaceState = function(new_state) {
+    //console.log('---> replaceState', new_state);
+    return {
+      type: 'SET_PERSISTENT_STATE',
+      new_state: Object.assign({}, new_state)
+    }
+  };
+
+
+  // -------------------------------
+  // Start / Stop
+  // -------------------------------
+
+  var start = function() {
+
+    var signin = {
+      "user_id": Session.getUserID(),
+      "token": Session.getToken()
+    };
+
+
+    var trust_computer = Session.getTrustComputer();
+    if (trust_computer) {
+
+      localStorageOptions.using = true;
+      var state = store.getState();
+
+      // Just to be sure
+      if ((signin.user_id !== null) && (signin.token !== null)) {
+        var user_id = signin.user_id;
+
+
+        var localStorageName = localStorageOptions.name_prefix + user_id;
+        localStorageOptions.name = localStorageName;
+
+
+        //  Check if localStorage has Data - if yes use this!
+        var persistedUserState = null;
+        persistedUserState = storage.getItem(localStorageName + localStorageOptions.name_suffix);
+        // console.log('(?) STORE HELPER', localStorageName, signin, persistedUserState);
+
+        if (persistedUserState !== null) {
+          // Decode persistedUserState
+          var persistedUserStateDecoded = JSON.parse(decodeURIComponent(escape(atob(persistedUserState))));
+
+          // persistedUserState is available
+          // Replace currentState with persistedUserState & add new signin credentials
+          store.dispatch(replaceState(persistedUserStateDecoded));
+          store.dispatch(addSignin(signin));
+
+          // Remove _encoded persistedUserState
+          storage.removeItem(localStorageName + localStorageOptions.name_suffix);
+          //localStorageOptions.using = true;
+
+          console.warn('(!) -----> User_Store - encoded & persisted');
+
+
+        } else {
+
+          loggedInUserState = JSON.parse(storage.getItem(localStorageName));
+
+          if (loggedInUserState !== null) {
+            // Already Logged-In / Page-Refresh
+            // Dispatch full state (replaceState) to current state
+            store.dispatch(replaceState(loggedInUserState));
+            store.dispatch(addSignin(signin));
+
+            console.warn('(!) -----> User_Store - persisted');
+
+          } else {
+            // No persisted state is there
+            // Dispatch only signin to current (initialState) state
+            store.dispatch(addSignin(signin));
+            console.warn('(!) -----> User_Store - initialState');
+
+          };
+        };
+
+
+      } else {
+        // console.warn('(!) -----> User_Store - unknown');
+      };
+
+
+    } else {
+      localStorageOptions.using = false;
+
+      // No persisted state is there
+      // Dispatch only signin to current (initialState) state
+      store.dispatch(addSignin(signin));
+      console.warn('(!) -----> User_Store (untrusted computer) - initialState');
+    };
+
+    localStorageOptions.started = true;
+
+  };
+
+
+  var stop = function() {
+
+    function isQuotaExceeded(e) {
+      var quotaExceeded = false;
+      if (e) {
+        if (e.code) {
+          switch (e.code) {
+            case 22:
+              quotaExceeded = true;
+              break;
+            case 1014:
+              // Firefox
+              if (e.name === 'NS_ERROR_DOM_QUOTA_REACHED') {
+                quotaExceeded = true;
+              }
+              break;
+          }
+        } else if (e.number === -2147024882) {
+          // Internet Explorer 8
+          quotaExceeded = true;
+        }
+      }
+      return quotaExceeded;
+    }
+
+    console.warn('(✓) UserStore.stop: ', localStorageOptions.using);
+
+    if (Session.getTrustComputer()) {
+
+      // Make sure to persist latest state_encoded to localStorage & clear 'sigin'
+      var state = store.getState();
+
+      // Remove user_id / token
+      state.signin = {
+        "data": {
+          "user_id": null,
+          "token": null
+        },
+        "trust_computer": false,
+        "isLoggedIn": false
+      };
+
+      // Remove _decoded version.
+      storage.removeItem(localStorageOptions.name);
+
+      try {
+        var encoded = btoa(unescape(encodeURIComponent(JSON.stringify(state))));
+        storage.setItem(localStorageOptions.name + "_encoded", encoded);
+
+      } catch (e) {
+        if (isQuotaExceeded(e)) {
+          console.error('(!!!)', 'Storage full: Nothing saved');
+        }
+      };
+
+      //console.warn('(✓) UserStore.stop:  STATE', state, encoded, localStorageOptions.name);
+
+    };
+
+    // GetBack to initialState
+    store.dispatch(replaceState(initialState));
+    localStorageOptions.name = "unknown";
+    localStorageOptions.started = false;
+
+  };
+
+
+  return {
+    start: start,
+    stop: stop,
+    clear: clear,
+    clear_all: clear_all,
+    setSignin: setSignin,
+    getOptions: getOptions,
+    getConsole: getConsole,
+    getStarted: getStarted,
+    setConsole: setConsole
+  };
+
+})();
+
+  const AsyncActionsBehavior = {
+  actions: {
+
+    // ----------------------------------
+    // User
+    // ----------------------------------
+
+    getCurrentUser: function(user_id) {
+
+      user_id = user_id || helpers.getUserID();
+
+      var api_url = '/users/' + user_id;
+      var state_path = 'user.info';
+
+      if (ApiHelpers.shouldCallNow(api_url)) {
+
+        return function(dispatch) {
+
+          // Do async task
+          helpers.callAPI('GET', api_url, {}, {}, function(req) {
+            if (req.status == 200) {
+
+              var resp = JSON.parse(req.response);
+
+              var user = resp.user.data;
+              user.user_id = user_id;
+              user.is_admin = false;
+              if (user.role === 'Admin') {
+                user.is_admin = true;
+              };
+
+              var response = {
+                "user_id": user_id,
+                "data": user
+              };
+
+              response = addOptinomicExtras(response, api_url);
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": response,
+                "statePath": state_path
+              });
+
+              console.log('(✔) Data (' + api_url + '):', response);
+            } else {
+              // Errorhandling
+              // While what action with what params error happend
+              var error_action = {
+                "name": "getCurrentUser",
+                "params": []
+              }
+              error_action.params.push(user_id);
+
+              dispatch({
+                "type": "ERROR",
+                "error": handleError(req, error_action)
+              });
+            };
+
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+    setAnnotations: function(node, object, always) {
+      node = node || 'undefined';
+      object = object || {};
+      always = always || false;
+
+      var api_url = '/annotations';
+      var state_path = 'annotations';
+
+      if ((ApiHelpers.shouldCallNow(api_url)) || always) {
+
+        return function(dispatch) {
+
+          // Do async task
+          helpers.callAPI('GET', api_url, {}, {}, function(req) {
+            if (req.status == 200) {
+
+              var annotations = JSON.parse(req.response);
+              annotations[node] = object;
+              var response = {
+                "user_id": user_id,
+                "data": annotations
+              };
+              console.log('(✔) Data (' + api_url + '):', response);
+              response = addOptinomicExtras(response, api_url);
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": response,
+                "statePath": state_path
+              });
+
+              setTimeout(function() {
+                var put_parameters = {
+                  "value": JSON.stringify(annotations),
+                  "benign_change": "True",
+                };
+                // Do async task
+                helpers.callAPI('PUT', api_url, {}, put_parameters, function(req) {
+                  if (req.status == 204) {
+                    console.log('(✔) Saved ', node);
+                  } else {
+                    var response = {
+                      "error": true,
+                      "error_message": "Failed with status code: " + req.status,
+                      "status_code": req.status
+                    };
+                    console.error('(!) Error: ', response);
+                  };
+                });
+              }, 250);
+
+
+
+            } else {
+              // Errorhandling
+              // While what action with what params error happend
+              var error_action = {
+                "name": "setAnnotations",
+                "params": []
+              }
+              error_action.params.push(node);
+              error_action.params.push(object);
+              error_action.params.push(always);
+
+              dispatch({
+                "type": "ERROR",
+                "error": handleError(req, error_action)
+              });
+            };
+
+
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+    getCurrentUserAnnotations: function(user_id) {
+
+      var api_url = '/users/' + user_id + '/annotations';
+      var state_path = 'user.annotations';
+
+      if (ApiHelpers.shouldCallNow(api_url)) {
+
+        return function(dispatch) {
+
+          // Do async task
+          helpers.callAPI('GET', api_url, {}, {}, function(req) {
+            if (req.status == 200) {
+
+              var annotations = JSON.parse(req.response);
+
+              var response = {
+                "user_id": user_id,
+                "data": annotations
+              };
+
+              response = addOptinomicExtras(response, api_url);
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": response,
+                "statePath": state_path
+
+              });
+              console.log('(✔) Data (' + api_url + '):', response);
+            } else {
+              // Errorhandling
+              // While what action with what params error happend
+              var error_action = {
+                "name": "getCurrentUserAnnotations",
+                "params": []
+              }
+              error_action.params.push(user_id);
+
+              dispatch({
+                "type": "ERROR",
+                "error": handleError(req, error_action)
+              });
+            };
+
+
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+    setCurrentUserAnnotations: function(user_id, node, object, always) {
+      user_id = user_id || Session.getUserID();
+      node = node || 'undefined';
+      object = object || {};
+      always = always || false;
+
+      var api_url = '/users/' + user_id + '/annotations';
+      var state_path = 'user.annotations';
+
+      if ((ApiHelpers.shouldCallNow(api_url)) || always) {
+
+        return function(dispatch) {
+
+          // Do async task
+          helpers.callAPI('GET', api_url, {}, {}, function(req) {
+            if (req.status == 200) {
+
+              var annotations = JSON.parse(req.response);
+              annotations[node] = object;
+              var response = {
+                "user_id": user_id,
+                "data": annotations
+              };
+              console.log('(✔) Data (' + api_url + '):', response);
+              response = addOptinomicExtras(response, api_url);
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": response,
+                "statePath": state_path
+              });
+
+              setTimeout(function() {
+                var put_parameters = {
+                  "value": JSON.stringify(annotations),
+                  "benign_change": "True",
+                };
+                // Do async task
+                helpers.callAPI('PUT', api_url, {}, put_parameters, function(req) {
+                  if (req.status == 204) {
+                    console.log('(✔) Saved ', node);
+                  } else {
+                    // Errorhandling
+                    // While what action with what params error happend
+                    var error_action = {
+                      "name": "setCurrentUserAnnotations",
+                      "params": []
+                    };
+
+                    error_action.params.push(user_id);
+                    error_action.params.push(node);
+                    error_action.params.push(object);
+                    error_action.params.push(always);
+
+                    dispatch({
+                      "type": "ERROR",
+                      "error": handleError(req, error_action)
+                    });
+                  };
+                });
+              }, 250);
+
+            } else {
+              // Errorhandling
+              // While what action with what params error happend
+              var error_action = {
+                "name": "setCurrentUserAnnotations",
+                "params": []
+              };
+
+              error_action.params.push(user_id);
+              error_action.params.push(node);
+              error_action.params.push(object);
+              error_action.params.push(always);
+
+              dispatch({
+                "type": "ERROR",
+                "error": handleError(req, error_action)
+              });
+            };
+
+
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+    getCurrentUserEvents: function(user_id, status) {
+
+      var api_url = '/users/' + user_id + '/events';
+      var state_path = 'user.events';
+
+      if (status) {
+        var parmeters = {
+          "status": status
+        };
+      } else {
+        var parmeters = {};
+      };
+
+      if (ApiHelpers.shouldCallNow(api_url)) {
+
+        return function(dispatch) {
+
+          // Do async task
+          helpers.callAPI('GET', api_url, parmeters, {}, function(req) {
+            if (req.status == 200) {
+
+              var events = JSON.parse(req.response);
+              events.user_events.forEach(function(item, itemID) {
+                event_pid = item.data.patient_id;
+                helpers.callAPI('GET', '/patients/' + event_pid, {}, {}, function(req) {
+                  if (req.status == 200) {
+
+                    var resp = JSON.parse(req.response);
+                    var patient = resp.patient;
+
+                    var response = {
+                      "data": patient.data,
+                      "extras": createPatientExtras(patient.data),
+                      "id": parseInt(patient.id),
+                      "pid": parseInt(patient.id)
+                    };
+
+                    item.patient = response;
+                  };
+                });
+              });
+
+              events.role_events.forEach(function(item, itemID) {
+                event_pid = item.data.patient_id;
+                helpers.callAPI('GET', '/patients/' + event_pid, {}, {}, function(req) {
+                  if (req.status == 200) {
+
+                    var resp = JSON.parse(req.response);
+                    var patient = resp.patient;
+
+                    var response = {
+                      "data": patient.data,
+                      "extras": createPatientExtras(patient.data),
+                      "id": parseInt(patient.id),
+                      "pid": parseInt(patient.id)
+                    };
+
+                    item.patient = response;
+                  };
+                });
+              });
+
+
+              var response = {
+                "user_id": user_id,
+                "data": events
+              };
+
+              var time = (events.role_events.length + events.user_events.length + 1) * 250;
+
+              setTimeout(function() {
+                dispatch({
+                  "type": "SET_OBJECT",
+                  "data": response,
+                  "statePath": state_path
+
+                });
+              }, time);
+
+
+              response = addOptinomicExtras(response, api_url);
+              console.log('(✔) Data (' + api_url + '):', response);
+
+            } else {
+              var response = {
+                "error": true,
+                "error_message": "Failed with status code: " + req.status,
+                "status_code": req.status
+              };
+              console.error('(!) Error: ', response);
+
+              response = addOptinomicExtras(response, api_url);
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": response,
+                "statePath": state_path
+
+              });
+            };
+
+
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+
+    // ----------------------------------
+    // Patient (Current)
+    // ----------------------------------
+
+    getCurrentPatient: function(pid) {
+
+      var api_url = '/patients/' + pid;
+      var state_path = 'patients.' + pid + '.info';
+
+      if (ApiHelpers.shouldCallNow(api_url)) {
+
+        return function(dispatch) {
+
+          // Do async task
+          helpers.callAPI('GET', api_url, {}, {}, function(req) {
+            if (req.status == 200) {
+
+              var resp = JSON.parse(req.response);
+
+              var patient = resp.patient;
+
+              var response = {
+                "data": patient.data,
+                "extras": createPatientExtras(patient.data),
+                "pid": parseInt(pid)
+              };
+
+              response = addOptinomicExtras(response, api_url);
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": response,
+                "statePath": state_path
+
+              });
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": parseInt(pid),
+                "statePath": 'current_patient.pid'
+
+              });
+              console.log('(✔) Data (' + api_url + '):', response);
+            } else {
+              // Errorhandling
+              // While what action with what params error happend
+              var error_action = {
+                "name": "getCurrentPatient",
+                "params": []
+              };
+              error_action.params.push(pid);
+
+              dispatch({
+                "type": "ERROR",
+                "error": handleError(req, error_action)
+              });
+            };
+
+
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+    getCurrentPatientAccess: function(pid) {
+
+      var api_url = '/patients/' + pid + '/access';
+      var state_path = 'patients.' + pid + '.access';
+
+
+      if (ApiHelpers.shouldCallNow(api_url)) {
+
+        return function(dispatch) {
+
+          // Do async task
+          helpers.callAPI('GET', api_url, {}, {}, function(req) {
+            if (req.status == 204) {
+
+              var response = {
+                "access": true,
+                "pid": parseInt(pid)
+              };
+
+              response = addOptinomicExtras(response, api_url);
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": parseInt(pid),
+                "statePath": 'current_patient.pid'
+              });
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": response,
+                "statePath": state_path
+              });
+
+              console.log('(✔) Data (' + api_url + '):', response);
+            } else {
+
+              var response = {
+                "access": false,
+                "pid": parseInt(pid)
+              };
+
+              response = addOptinomicExtras(response, api_url);
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": parseInt(pid),
+                "statePath": 'current_patient.pid'
+              });
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": response,
+                "statePath": state_path
+              });
+
+              console.log('(✔) Data (' + api_url + '):', response);
+
+            };
+
+
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+    getCurrentPatientStays: function(pid, always) {
+      always = always || false;
+      var api_url = '/patients/' + pid + '/stays';
+      var state_path = 'patients.' + pid + '.stays';
+
+      var shouldCallNow = ApiHelpers.shouldCallNow(api_url);
+
+      if (shouldCallNow || always) {
+
+        return function(dispatch) {
+
+          // Do async task
+          helpers.callAPI('GET', api_url, {}, {}, function(req) {
+
+            if (req.status == 200) {
+
+              var resp = JSON.parse(req.response);
+
+              var stays = resp.stays;
+              var stays_array = [];
+              stays.forEach(function(stay, ID) {
+                stays_array.push(stay.id);
+
+                stay.data.id = stay.id;
+                stay.data.fid = stay.id;
+                stay.extras = createStayExtras(stay.data);
+
+                var stay_response = {
+                  "data": stay.data,
+                  "extras": stay.extras,
+                  "id": stay.id,
+                  "fid": stay.id
+                };
+
+                dispatch({
+                  "type": "SET_OBJECT",
+                  "data": stay_response,
+                  "statePath": 'stays.' + stay.id + '.info'
+                });
+              });
+
+              var response = {
+                "data": stays_array
+              };
+
+              response = addOptinomicExtras(response, api_url);
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": response,
+                "statePath": state_path
+
+              });
+
+              console.log('(✔) Data (' + api_url + '):', response);
+            } else {
+              // Errorhandling
+              // While what action with what params error happend
+              var error_action = {
+                "name": "getCurrentPatientStays",
+                "params": []
+              };
+              error_action.params.push(pid);
+
+              dispatch({
+                "type": "ERROR",
+                "error": handleError(req, error_action)
+              });
+            };
+
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+    getCurrentPatientEvents: function(pid, store_events) {
+      if ((store_events === null) || (store_events === undefined)) {
+        store_events = true;
+      };
+
+      var api_url = '/patients/' + pid + '/events';
+      var state_path = 'patients.' + pid + '.events';
+
+
+      if (ApiHelpers.shouldCallNow(api_url + "_" + store_events)) {
+        return function(dispatch) {
+
+          // Do async task
+          helpers.callAPI('GET', api_url, {}, {}, function(req) {
+            if (req.status == 200) {
+
+              var resp = JSON.parse(req.response);
+
+              var events = resp.events;
+              var events_done = [];
+              var events_to_be_done = [];
+              var events_aborted = [];
+              var events_irrelevant = [];
+
+              // Get already stored events
+              var stored_events = store.getState();
+              if ("events" in stored_events) {
+                stored_events = stored_events.events;
+              } else {
+                stored_events = {};
+              };
+
+              events.forEach(function(event, ID) {
+                event.data.id = event.id;
+                event.data.event_id = event.id;
+                event.extras = createEventExtras(event.data);
+
+                if (event.data.status === 'done') {
+                  events_done.push(event.id);
+                };
+                if (event.data.status === 'to_be_done') {
+                  events_to_be_done.push(event.id);
+                };
+                if (event.data.status === 'aborted') {
+                  events_aborted.push(event.id);
+                };
+                if (event.data.status === 'irrelevant') {
+                  events_irrelevant.push(event.id);
+                };
+
+
+
+                // Store events - only if not already stored
+                if ((store_events) && (event.data.status !== 'irrelevant')) {
+                  Polymer.RenderStatus.afterNextRender(event, function() {
+                    if ((stored_events[event.id] === undefined) || (stored_events[event.id] === null)) {
+                      dispatch({
+                        "type": "SET_OBJECT",
+                        "data": event,
+                        "statePath": 'events.' + event.id
+                      });
+                    };
+                  });
+                };
+              });
+
+              var response = {
+                "data": {
+                  "done": events_done,
+                  "to_be_done": events_to_be_done,
+                  "aborted": events_aborted,
+                  "irrelevant": events_irrelevant
+                }
+              };
+
+              response = addOptinomicExtras(response, api_url);
+
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": response,
+                "statePath": state_path
+              });
+              console.log('(✔) Data (' + api_url + '):', response);
+            } else {
+              // Errorhandling
+              // While what action with what params error happend
+              var error_action = {
+                "name": "getCurrentPatientEvents",
+                "params": []
+              };
+              error_action.params.push(pid);
+
+              dispatch({
+                "type": "ERROR",
+                "error": handleError(req, error_action)
+              });
+            };
+
+
+
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+
+    // ----------------------------------
+    // Apps
+    // ----------------------------------
+
+    getApps: function() {
+
+      var api_url = '/modules';
+      var state_path = 'apps.all';
+
+      if (ApiHelpers.shouldCallNow(api_url)) {
+
+        return function(dispatch) {
+
+          var parameters = {}
+
+          // Do async task
+          helpers.callAPI('GET', api_url, parameters, {}, function(req) {
+            if (req.status == 200) {
+
+
+              var resp = JSON.parse(req.response);
+
+              // Sortieren nach App-Name
+              if (resp.patient_modules.length > 0) {
+
+
+                resp.patient_modules.sort(function(a, b) {
+                  var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+                  var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+                  if (nameA < nameB) {
+                    return -1;
+                  }
+                  if (nameA > nameB) {
+                    return 1;
+                  }
+                  return 0;
+                });
+                resp.current = {
+                  "found": false
+                };
+
+                resp.patient_modules.forEach(function(m, mID) {
+                  m.first_template = {
+                    "found": "false",
+                    "name": null
+                  };
+
+                  if (m.templates.length > 0) {
+                    m.first_template.name = m.templates["0"].name;
+                    m.first_template.found = true;
+                  };
+
+                  if (m.identifier === helpers.getAppID()) {
+                    resp.current.data = m;
+                    resp.current.name = m.name;
+                    resp.current.found = true;
+                  }
+
+                });
+
+              };
+              if (resp.user_modules.length > 0) {
+                resp.user_modules.sort(function(a, b) {
+                  var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+                  var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+                  if (nameA < nameB) {
+                    return -1;
+                  }
+                  if (nameA > nameB) {
+                    return 1;
+                  }
+                  return 0;
+                });
+
+                resp.user_modules.forEach(function(m, mID) {
+                  m.first_template = {
+                    "found": "false",
+                    "name": null
+                  };
+
+                  if (m.templates.length > 0) {
+                    m.first_template.name = m.templates["0"].name;
+                    m.first_template.found = true;
+                  };
+
+                  if (m.identifier === helpers.getAppID()) {
+                    resp.current.data = m;
+                    resp.current.name = m.name;
+                    resp.current.found = true;
+                  }
+                });
+              };
+
+
+
+              if (resp.current.found) {
+                resp.current = addOptinomicExtras(resp.current, api_url);
+                dispatch({
+                  "type": "SET_OBJECT",
+                  "data": resp.current,
+                  "statePath": 'apps.current'
+                });
+              };
+
+              var response = {
+                "data": {
+                  "patient_modules": resp.patient_modules,
+                  "user_modules": resp.user_modules
+                }
+              };
+
+              response = addOptinomicExtras(response, api_url);
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": response,
+                "statePath": state_path
+
+              });
+
+              console.log('(✔) Data (' + api_url + '):', response, parameters);
+            } else {
+              // Errorhandling
+              // While what action with what params error happend
+              var error_action = {
+                "name": "getApps",
+                "params": []
+              };
+
+              dispatch({
+                "type": "ERROR",
+                "error": handleError(req, error_action)
+              });
+            };
+
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+    getAppsActivations: function() {
+
+      // Unneded for now!
+
+      var api_url = '/module_activations';
+      var state_path = 'apps.activations';
+
+      if (ApiHelpers.shouldCallNow(api_url)) {
+
+        return function(dispatch) {
+
+          var parameters = {}
+
+          // Do async task
+          helpers.callAPI('GET', api_url, parameters, {}, function(req) {
+            if (req.status == 200) {
+
+              var resp = JSON.parse(req.response);
+
+              var response = {
+                "data": resp.module_activations
+              };
+
+              response = addOptinomicExtras(response, api_url);
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": response,
+                "statePath": state_path
+              });
+
+              console.log('(✔) Data (' + api_url + '):', response, parameters);
+            } else {
+              // Errorhandling
+              // While what action with what params error happend
+              var error_action = {
+                "name": "getAppsActivations",
+                "params": []
+              };
+
+              dispatch({
+                "type": "ERROR",
+                "error": handleError(req, error_action)
+              });
+            };
+
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+    getStayApps: function(pid, fid, always) {
+
+      always = always || false;
+      var api_url = '/patients/' + pid + '/modules';
+      var state_path = 'stays.' + fid + '.apps_activated';
+
+      if (always ||  (ApiHelpers.shouldCallNow(api_url + "?" + pid + "," + fid, 180))) {
+
+        return function(dispatch) {
+
+          var parameters = {}
+
+          if (fid !== undefined) {
+            parameters.stay_id = fid;
+          };
+
+          // Do async task
+          helpers.callAPI('GET', api_url, parameters, {}, function(req) {
+            if (req.status == 200) {
+
+              var resp = JSON.parse(req.response);
+
+              // Sortieren nach App-Name
+              if (resp.activated_patient_uses_modules.length > 0) {
+                resp.activated_patient_uses_modules.sort(function(a, b) {
+                  var nameA = a.module.name.toUpperCase(); // ignore upper and lowercase
+                  var nameB = b.module.name.toUpperCase(); // ignore upper and lowercase
+                  if (nameA < nameB) {
+                    return -1;
+                  }
+                  if (nameA > nameB) {
+                    return 1;
+                  }
+                  return 0;
+                });
+
+                resp.activated_patient_uses_modules.forEach(function(m, mID) {
+                  m.module.first_template = {
+                    "found": "false",
+                    "name": null
+                  };
+
+                  if (m.module.templates.length > 0) {
+                    m.module.first_template.name = m.module.templates["0"].name;
+                    m.module.first_template.found = true;
+                  };
+                });
+
+              };
+
+              if (resp.deactivated_modules.length > 0) {
+                resp.deactivated_modules.sort(function(a, b) {
+                  var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+                  var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+                  if (nameA < nameB) {
+                    return -1;
+                  }
+                  if (nameA > nameB) {
+                    return 1;
+                  }
+                  return 0;
+                });
+              };
+
+              var response = {
+                "activated": resp.activated_patient_uses_modules,
+                "deactivated": resp.deactivated_modules
+              };
+
+              response = addOptinomicExtras(response, api_url);
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": response,
+                "statePath": state_path
+
+              });
+
+              console.log('(✔) Data (' + api_url + '):', response, parameters);
+            } else {
+              // Errorhandling
+              // While what action with what params error happend
+              var error_action = {
+                "name": "getStayApps",
+                "params": []
+              };
+
+              error_action.params.push(pid);
+              error_action.params.push(fid);
+              error_action.params.push(always);
+
+              dispatch({
+                "type": "ERROR",
+                "error": handleError(req, error_action)
+              });
+            };
+
+
+
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+    activateApp: function(pid, fid, aid) {
+
+      var api_url = '/patients/' + pid + '/activate_module';
+
+      if (ApiHelpers.shouldCallNow(api_url + "?" + fid + "/" + aid)) {
+
+        return function(dispatch) {
+
+          var parameters = {}
+
+          if (fid !== undefined) {
+            parameters.module_identifier = aid;
+            parameters.stay_id = fid;
+          };
+
+          // Do async task
+          helpers.callAPI('POST', api_url, parameters, {}, function(req) {
+            if (req.status == 204) {
+              console.log('(✔) Success :: ', pid, fid, aid, ' activated');
+
+              // Make things refresh
+              dispatch('setObject', 'current_patient.fid', '');
+              dispatch('setObject', 'current_patient.fid', fid);
+
+            } else {
+              console.log('(!) Error :: ', pid, fid, aid, ' not activated');
+            };
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+    deactivateApp: function(pid, fid, aid) {
+
+      var api_url = '/patients/' + pid + '/deactivate_module';
+
+      if (ApiHelpers.shouldCallNow(api_url + "?" + fid + "/" + aid)) {
+
+        return function(dispatch) {
+
+          var parameters = {}
+
+          if (fid !== undefined) {
+            parameters.module_identifier = aid;
+            parameters.stay_id = fid;
+          };
+
+          // Do async task
+          helpers.callAPI('POST', api_url, parameters, {}, function(req) {
+            if (req.status == 204) {
+              console.log('(✔) Success :: ', pid, fid, aid, ' deactivated');
+
+              // Make things refresh
+              dispatch('setObject', 'current_patient.fid', '');
+              dispatch('setObject', 'current_patient.fid', fid);
+            } else {
+              console.log('(!) Error :: ', pid, fid, aid, ' not deactivated');
+            };
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+
+    // ----------------------------------
+    // Apps - User
+    // ----------------------------------
+
+    getUserApps: function(uid, always) {
+      always = always || false;
+      // GET /users/:user_id/modules
+      uid = uid || Session.getUserID();
+      var api_url = '/users/' + uid + '/modules';
+      var state_path = 'user.apps';
+
+      if ((always === true) || (ApiHelpers.shouldCallNow(api_url))) {
+
+        return function(dispatch) {
+
+          var parameters = {}
+
+          // Do async task
+          helpers.callAPI('GET', api_url, parameters, {}, function(req) {
+            if (req.status == 200) {
+
+              var resp = JSON.parse(req.response);
+
+
+              // user_uses_modules
+              var user_uses_modules = [];
+              resp.user_uses_modules.forEach(function(app, moduleID) {
+                if (app.module !== null) {
+
+                  app.module.first_template = {
+                    "found": "false",
+                    "name": null
+                  };
+
+                  if (app.module.templates.length > 0) {
+                    app.module.first_template.name = app.module.templates["0"].name;
+                    app.module.first_template.found = true;
+                  };
+
+                  user_uses_modules.push(app);
+
+                };
+              });
+
+              // console.warn('RESP:::', resp, user_uses_modules);
+
+              // Sortieren nach App-Name
+              if (user_uses_modules.length > 0) {
+                user_uses_modules.sort(function(a, b) {
+                  var nameA = a.module.name.toUpperCase(); // ignore upper and lowercase
+                  var nameB = b.module.name.toUpperCase(); // ignore upper and lowercase
+                  if (nameA < nameB) {
+                    return -1;
+                  }
+                  if (nameA > nameB) {
+                    return 1;
+                  }
+                  return 0;
+                });
+              };
+
+              var response = {
+                "data": user_uses_modules
+              };
+
+              response = addOptinomicExtras(response, api_url);
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": response,
+                "statePath": state_path
+              });
+
+              console.log('(✔) Data (' + api_url + '):', response, parameters);
+            } else {
+              // Errorhandling
+              // While what action with what params error happend
+              var error_action = {
+                "name": "getUserApps",
+                "params": []
+              };
+              error_action.params.push(uid);
+              error_action.params.push(always);
+
+              dispatch({
+                "type": "ERROR",
+                "error": handleError(req, error_action)
+              });
+            };
+
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+    activateUserApp: function(uid, aid) {
+
+      var api_url = '/users/' + uid + '/activate_module';
+
+      if (ApiHelpers.shouldCallNow(api_url + "?" + aid)) {
+
+        return function(dispatch) {
+
+          var parameters = {
+            "module_identifier": aid
+          }
+
+          // Do async task
+          helpers.callAPI('POST', api_url, parameters, {}, function(req) {
+            if (req.status == 204) {
+              console.log('(✔) Success :: ', uid, aid, ' activated');
+              this.dispatch('getUserApps', Session.getUserID(), true);
+            } else {
+              console.log('(!) Error :: ', uid, aid, ' not activated');
+            };
+          }.bind(this));
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+    deactivateUserApp: function(uid, aid) {
+
+      var api_url = '/users/' + uid + '/deactivate_module';
+
+      if (ApiHelpers.shouldCallNow(api_url + "?" + aid)) {
+
+        return function(dispatch) {
+
+          var parameters = {
+            "module_identifier": aid
+          }
+
+          // Do async task
+          helpers.callAPI('POST', api_url, parameters, {}, function(req) {
+            if (req.status == 204) {
+              console.log('(✔) Success :: ', uid, aid, ' deactivated');
+              this.dispatch('getUserApps', Session.getUserID(), true);
+            } else {
+              console.log('(!) Error :: ', uid, aid, ' not deactivated');
+            };
+          }.bind(this));
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+    // ----------------------------------
+    // App-Store
+    // ----------------------------------
+
+    activateAppStoreApp: function(module_identifier, version, name_overwrite) {
+
+      var api_url = '/module_activations';
+
+      return function(dispatch) {
+
+        var parameters = {
+          "module_identifier": module_identifier,
+          "version": version,
+          "name_overwrite": name_overwrite
+        }
+
+        // Do async task
+        helpers.callAPI('POST', api_url, parameters, {}, function(req) {
+          if (req.status == 200) {
+            console.log('(✔) Success :: Activated', module_identifier);
+            this.dispatch('getGenericCalls', '/modules', 'apps.all', '');
+            this.dispatch('getGenericCalls', '/module_activations', 'apps.activated', 'module_activations');
+            this.dispatch('getGenericCalls', '/modules/disabled', 'apps.disabled', '');
+            this.dispatch('getGenericCalls', '/modules/errors', 'apps.error', 'module_errors');
+          } else {
+
+            var error_text = "(!) Error :: Activation"
+            if (req.status == 400) {
+              error_text = error_text + " | Bad Request in case of validation error";
+            };
+            if (req.status == 409) {
+              error_text = error_text + " | Conflict in case of a problem with the module dependencies";
+            };
+            console.log(error_text, parameters);
+          };
+        }.bind(this));
+      };
+
+    },
+
+    deactivateAppStoreApp: function(activation_id) {
+
+      var api_url = '/module_activations/' + activation_id;
+
+      return function(dispatch) {
+
+        var parameters = {}
+
+        // Do async task
+        helpers.callAPI('DELETE', api_url, parameters, {}, function(req) {
+          if (req.status == 204) {
+            console.log('(✔) Success :: Deactivated', activation_id);
+            this.dispatch('getGenericCalls', '/modules', 'apps.all', '');
+            this.dispatch('getGenericCalls', '/module_activations', 'apps.activated', 'module_activations');
+            this.dispatch('getGenericCalls', '/modules/disabled', 'apps.disabled', '');
+            this.dispatch('getGenericCalls', '/modules/errors', 'apps.error', 'module_errors');
+          } else {
+            console.log('(!) Error :: Not Deactivated', activation_id);
+          };
+        }.bind(this));
+      };
+
+    },
+
+    renameAppStoreApp: function(activation_id, name_overwrite) {
+
+      var api_url = '/module_activations/' + activation_id;
+
+      return function(dispatch) {
+
+        var parameters = {
+          "name_overwrite": name_overwrite
+        }
+
+        // Do async task
+        helpers.callAPI('PUT', api_url, parameters, {}, function(req) {
+          if (req.status == 204) {
+            console.log('(✔) Success :: Renamed', activation_id, name_overwrite);
+            this.dispatch('getGenericCalls', '/modules', 'apps.all', '');
+          } else {
+            console.log('(!) Error :: Not renamed', activation_id, api_url, parameters);
+          };
+        }.bind(this));
+      };
+
+    },
+
+
+    // ----------------------------------
+    // Patient - Lists
+    // ----------------------------------
+
+    getAllPatients: function() {
+
+      var api_url = '/patients';
+      var state_path = 'patients_list.all';
+
+      if (ApiHelpers.shouldCallNow(api_url)) {
+
+        return function(dispatch) {
+
+          // Do async task
+          helpers.callAPI('GET', api_url, {}, {}, function(req) {
+            if (req.status == 200) {
+
+              var resp = JSON.parse(req.response);
+
+              var patients = resp.patients;
+              patients.forEach(function(patient, ID) {
+                patient.data.id = patient.id;
+                patient.data.fid = patient.id;
+                patient.extras = createPatientExtras(patient.data);
+              });
+
+              var response = {
+                "data": patients
+              };
+
+              response = addOptinomicExtras(response, api_url);
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": response,
+                "statePath": state_path
+
+              });
+
+              console.log('(✔) Data (' + api_url + '):', response);
+            } else {
+              // Errorhandling
+              // While what action with what params error happend
+              var error_action = {
+                "name": "getAllPatients",
+                "params": []
+              };
+
+              dispatch({
+                "type": "ERROR",
+                "error": handleError(req, error_action)
+              });
+            };
+
+
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+    getFilterPatients: function(filter) {
+
+      var api_url = '/patients';
+      var state_path = 'patients_list.filter';
+
+      if (ApiHelpers.shouldCallNow(api_url)) {
+
+        return function(dispatch) {
+
+          // Do async task
+          helpers.callAPI('GET', api_url, filter, {}, function(req) {
+            if (req.status == 200) {
+
+              var resp = JSON.parse(req.response);
+
+              var patients = resp.patients;
+              patients.forEach(function(patient, ID) {
+                patient.data.id = patient.id;
+                patient.data.fid = patient.id;
+                patient.extras = createPatientExtras(patient.data);
+              });
+
+              var response = {
+                "data": patients
+              };
+
+              response = addOptinomicExtras(response, api_url);
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": response,
+                "statePath": state_path
+              });
+
+              console.log('(✔) Data (' + api_url + '):', response);
+            } else {
+              // Errorhandling
+              // While what action with what params error happend
+              var error_action = {
+                "name": "getFilterPatients",
+                "params": []
+              };
+              error_action.params.push(filter);
+
+              dispatch({
+                "type": "ERROR",
+                "error": handleError(req, error_action)
+              });
+            };
+
+
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+    getWatchlistPatients: function(user_id) {
+
+      user_id = user_id || Session.getUserID();
+      var api_url = '/watchlist/' + user_id;
+      var state_path = 'patients_list.watchlist';
+
+
+      return function(dispatch) {
+
+        // Do async task
+        helpers.callAPI('GET', api_url, {}, {}, function(req) {
+          if (req.status == 200) {
+
+            var resp = JSON.parse(req.response);
+
+            var patients = resp.patients;
+
+
+            patients.forEach(function(patient, ID) {
+              patient.data.id = patient.id;
+              patient.data.fid = patient.id;
+              patient.extras = createPatientExtras(patient.data);
+            });
+
+            // Sortieren nach App-Name
+            if (patients.length > 0) {
+              patients.sort(function(a, b) {
+                var nameA = a.extras.name.toUpperCase(); // ignore upper and lowercase
+                var nameB = b.extras.name.toUpperCase(); // ignore upper and lowercase
+                if (nameA < nameB) {
+                  return -1;
+                }
+                if (nameA > nameB) {
+                  return 1;
+                }
+                return 0;
+              });
+            };
+
+            var response = {
+              "user_id": user_id,
+              "data": patients
+            };
+
+            response = addOptinomicExtras(response, api_url);
+            dispatch({
+              "type": "SET_OBJECT",
+              "data": response,
+              "statePath": state_path
+            });
+
+            console.log('(✔) Data (' + api_url + '):', response);
+          } else {
+            // Errorhandling
+            // While what action with what params error happend
+            var error_action = {
+              "name": "getWatchlistPatients",
+              "params": []
+            };
+            error_action.params.push(user_id);
+
+            dispatch({
+              "type": "ERROR",
+              "error": handleError(req, error_action)
+            });
+          };
+
+
+        });
+      };
+
+    },
+
+    getPGPatients: function(pg_id) {
+
+      pg_id = pg_id || 1;
+      var api_url = "/patient_groups/" + pg_id + "/patients";
+      var state_path = "patients_list.patient_groups." + pg_id;
+
+      if (ApiHelpers.shouldCallNow(api_url)) {
+
+        return function(dispatch) {
+
+          // Do async task
+          helpers.callAPI('GET', api_url, {}, {}, function(req) {
+            if (req.status == 200) {
+
+              var resp = JSON.parse(req.response);
+
+              var patients = resp.patients;
+              patients.forEach(function(patient, ID) {
+                patient.data.id = patient.id;
+                patient.data.fid = patient.id;
+                patient.extras = createPatientExtras(patient.data);
+              });
+
+              // Sortieren nach Name, Vorname
+              if (patients.length > 0) {
+                patients.sort(function(a, b) {
+                  var nameA = a.extras.name.toUpperCase() + a.data.birthdate; // ignore upper and lowercase
+                  var nameB = b.extras.name.toUpperCase() + b.data.birthdate; // ignore upper and lowercase
+                  if (nameA < nameB) {
+                    return -1;
+                  }
+                  if (nameA > nameB) {
+                    return 1;
+                  }
+                  return 0;
+                });
+              };
+
+              var response = {
+                "patient_group": pg_id,
+                "data": patients
+              };
+
+              response = addOptinomicExtras(response, api_url);
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": response,
+                "statePath": state_path
+              });
+              console.log('(✔) Data (' + api_url + '):', response);
+            } else {
+              // Errorhandling
+              // While what action with what params error happend
+              var error_action = {
+                "name": "getPGPatients",
+                "params": []
+              };
+              error_action.params.push(pg_id);
+
+              dispatch({
+                "type": "ERROR",
+                "error": handleError(req, error_action)
+              });
+            };
+
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+    getAllPG: function() {
+      var api_url = '/patient_groups';
+
+      if (ApiHelpers.shouldCallNow(api_url)) {
+
+        return function(dispatch) {
+
+          // Do async task
+          helpers.callAPI('GET', api_url, {}, {}, function(req) {
+            if (req.status == 200) {
+
+              var resp = JSON.parse(req.response);
+
+              var patient_groups = resp.patient_groups;
+              var patient_groups_array = [];
+              patient_groups.forEach(function(pg, pgID) {
+                patient_groups_array.push(pg.id);
+
+                pg.data.id = pg.id;
+
+                var pg_response = {
+                  "data": pg.data,
+                  "id": pg.id
+                };
+
+                dispatch({
+                  "type": "SET_OBJECT",
+                  "data": pg_response,
+                  "statePath": 'patient_groups.data.' + pg.id
+                });
+              });
+
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": patient_groups_array,
+                "statePath": 'patient_groups.all'
+              });
+
+              console.log('(✔) Data (' + api_url + '):', patient_groups_array);
+            } else {
+              // Errorhandling
+              // While what action with what params error happend
+              var error_action = {
+                "name": "getAllPG",
+                "params": []
+              };
+
+              dispatch({
+                "type": "ERROR",
+                "error": handleError(req, error_action)
+              });
+            };
+
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+    getUserPG: function() {
+
+      var api_url = '/patient_group_watchlist/' + Session.getUserID();
+
+      if (ApiHelpers.shouldCallNow(api_url)) {
+
+        return function(dispatch) {
+
+          // Do async task
+          helpers.callAPI('GET', api_url, {}, {}, function(req) {
+            if (req.status == 200) {
+
+              var resp = JSON.parse(req.response);
+
+              var patient_groups = resp.patient_groups;
+              var patient_groups_array = [];
+              patient_groups.forEach(function(pg, pgID) {
+                patient_groups_array.push(pg.id);
+
+                pg.data.id = pg.id;
+
+                var pg_response = {
+                  "data": pg.data,
+                  "id": pg.id
+                };
+
+                dispatch({
+                  "type": "SET_OBJECT",
+                  "data": pg_response,
+                  "statePath": 'patient_groups.data.' + pg.id
+                });
+              });
+
+
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": patient_groups,
+                "statePath": 'patient_groups.user'
+              });
+
+
+              console.log('(✔) Data (' + api_url + '):', patient_groups);
+            } else {
+              // Errorhandling
+              // While what action with what params error happend
+              var error_action = {
+                "name": "getUserPG",
+                "params": []
+              };
+
+              dispatch({
+                "type": "ERROR",
+                "error": handleError(req, error_action)
+              });
+            };
+
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+    // ----------------------------------
+    // Stay - Groups
+    // ----------------------------------
+
+    getAllSG: function() {
+      var api_url = '/stay_groups';
+
+      if (ApiHelpers.shouldCallNow(api_url)) {
+
+        return function(dispatch) {
+
+          // Do async task
+          helpers.callAPI('GET', api_url, {}, {}, function(req) {
+            if (req.status == 200) {
+
+              var resp = JSON.parse(req.response);
+
+              var stay_groups = resp.stay_groups;
+              var stay_groups_array = [];
+              stay_groups.forEach(function(pg, pgID) {
+                stay_groups_array.push(pg.id);
+
+                pg.data.id = pg.id;
+
+                var sg_response = {
+                  "data": pg.data,
+                  "id": pg.id
+                };
+
+                dispatch({
+                  "type": "SET_OBJECT",
+                  "data": sg_response,
+                  "statePath": 'stay_groups.data.' + pg.id
+                });
+              });
+
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": stay_groups_array,
+                "statePath": 'stay_groups.all'
+              });
+
+              console.log('(✔) Data (' + api_url + '):', stay_groups_array);
+            } else {
+              // Errorhandling
+              // While what action with what params error happend
+              var error_action = {
+                "name": "getAllSG",
+                "params": []
+              };
+
+              dispatch({
+                "type": "ERROR",
+                "error": handleError(req, error_action)
+              });
+            };
+
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+    getSGStays: function(sg_id) {
+
+      sg_id = sg_id || 1;
+      var api_url = "/stay_groups/" + sg_id + "/stays";
+      var state_path = "stays_list.stay_groups." + sg_id;
+
+      if (ApiHelpers.shouldCallNow(api_url)) {
+
+        return function(dispatch) {
+
+          // Do async task
+          helpers.callAPI('GET', api_url, {}, {}, function(req) {
+            if (req.status == 200) {
+
+              var resp = JSON.parse(req.response);
+
+              var stays = resp.stays;
+              stays.forEach(function(stay, ID) {
+                stay.data.id = stay.id;
+                stay.extras = createStayExtras(stay.data);
+              });
+
+              var response = {
+                "stay_group": parseInt(sg_id),
+                "data": stays
+              };
+
+              response = addOptinomicExtras(response, api_url);
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": response,
+                "statePath": state_path
+              });
+              console.log('(✔) Data (' + api_url + '):', response);
+            } else {
+              // Errorhandling
+              // While what action with what params error happend
+              var error_action = {
+                "name": "getSGStays",
+                "params": []
+              };
+              error_action.params.push(sg_id);
+
+              dispatch({
+                "type": "ERROR",
+                "error": handleError(req, error_action)
+              });
+            };
+
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+    // ----------------------------------
+    // Clinic
+    // ----------------------------------
+
+    getClinic: function() {
+
+      var api_url = '/clinic';
+      var state_path = 'clinic.info';
+
+
+      if (ApiHelpers.shouldCallNow(api_url)) {
+
+        return function(dispatch) {
+
+          // Do async task
+          helpers.callAPI('GET', api_url, {}, {}, function(req) {
+            if (req.status == 200) {
+
+              var resp = JSON.parse(req.response);
+              var clinic = resp.clinic;
+
+              var clinic_obj = {};
+              clinic.forEach(function(current, ID) {
+                clinic_obj[current[0]] = current[1];
+              });
+
+              var response = {
+                data: {
+                  "clinic_array": clinic,
+                  "clinic_obj": clinic_obj
+                }
+              };
+
+              response = addOptinomicExtras(response, api_url);
+              console.log('(✔) Data (' + api_url + '):', response);
+
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": response,
+                "statePath": state_path
+              });
+
+            } else {
+              // Errorhandling
+              // While what action with what params error happend
+              var error_action = {
+                "name": "getClinic",
+                "params": []
+              };
+
+              dispatch({
+                "type": "ERROR",
+                "error": handleError(req, error_action)
+              });
+            };
+
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+
+    // ----------------------------------
+    // System - Logs
+    // ----------------------------------
+
+    getLogs: function(filter) {
+
+      filter = filter || {};
+
+      var api_url = '/logs';
+      var state_path = 'logs';
+
+
+      if (ApiHelpers.shouldCallNow(api_url)) {
+
+        return function(dispatch) {
+
+          // Do async task
+          helpers.callAPI('GET', api_url, filter, {}, function(req) {
+            if (req.status == 200) {
+
+              var resp = JSON.parse(req.response);
+              var logs = resp.logs;
+
+              var response = {
+                data: logs
+              };
+
+              response = addOptinomicExtras(response, api_url);
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": response,
+                "statePath": state_path
+              });
+              console.log('(✔) Data (' + api_url + '):', response);
+            } else {
+              // Errorhandling
+              // While what action with what params error happend
+              var error_action = {
+                "name": "getLogs",
+                "params": []
+              };
+              error_action.params.push(filter);
+
+              dispatch({
+                "type": "ERROR",
+                "error": handleError(req, error_action)
+              });
+            };
+
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+
+    // ----------------------------------
+    // Generic
+    // ----------------------------------
+
+    setObject: function(statePath, myObject) {
+      return function(dispatch) {
+
+        myObject = myObject === undefined ? {} : myObject;
+        statePath = statePath === undefined ? 'undefined' : statePath;
+
+        dispatch({
+          type: 'SET_OBJECT',
+          data: myObject,
+          statePath: statePath
+        });
+
+      }
+    },
+
+    getGenericCalls: function(api_url, state_path, inner_path) {
+
+      inner_path = inner_path || null;
+
+      if (ApiHelpers.shouldCallNow(api_url + ' ' + state_path)) {
+
+        return function(dispatch) {
+
+          // Do async task
+          helpers.callAPI('GET', api_url, {}, {}, function(req) {
+            if (req.status == 200) {
+
+              var resp = JSON.parse(req.response);
+
+              if (inner_path !== null) {
+                resp = resp[inner_path];
+              };
+
+              var response = {
+                "data": resp
+              };
+
+              response = addOptinomicExtras(response, api_url);
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": response,
+                "statePath": state_path
+              });
+
+              console.log('(✔) Data (' + api_url + '):', response);
+            } else {
+              // Errorhandling
+              // While what action with what params error happend
+              var error_action = {
+                "name": "getGenericCalls",
+                "params": []
+              };
+              error_action.params.push(api_url);
+              error_action.params.push(state_path);
+              error_action.params.push(inner_path);
+
+              dispatch({
+                "type": "ERROR",
+                "error": handleError(req, error_action)
+              });
+            };
+
+
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+
+    // ----------------------------------
+    // App
+    // ----------------------------------
+
+    saveDeviceSize: function(current_size_obj) {
+      return function(dispatch) {
+
+
+        var response = {
+          "sizes": {
+            "small": false,
+            "medium": false,
+            "large": false,
+            "xlarge": false
+          },
+          "current": current_size_obj
+        };
+
+        response.sizes[current_size_obj.size] = true;
+
+        dispatch({
+          type: 'SAVE_DEVICE_SIZE_COMPLETE',
+          data: response
+        });
+      }
+    },
+
+    setCurrentSidebar: function(current_sidebar) {
+      return function(dispatch) {
+
+        dispatch({
+          type: 'SET_CURRENT_SIDEBAR_COMPLETE',
+          data: current_sidebar
+        });
+
+      }
+    },
+
+    getAppVersion: function() {
+
+      var api_url = '/version';
+      var state_path = 'app.version';
+
+      if (ApiHelpers.shouldCallNow(api_url)) {
+
+        return function(dispatch) {
+
+          // Do async task
+          helpers.callAPI('GET', api_url, {}, {}, function(req) {
+            if (req.status == 200) {
+
+              var resp = JSON.parse(req.response);
+              var version = resp.version
+
+              var response = {
+                "data": {
+                  "version": version,
+                  "short": version.substring(0, 7),
+                  "github": "https://github.com/ottigerb/therapy-server/commit/" + version,
+                }
+              };
+
+              response = addOptinomicExtras(response, api_url);
+              dispatch({
+                "type": "SET_OBJECT",
+                "data": response,
+                "statePath": state_path
+              });
+              console.log('(✔) Data (' + api_url + '):', response);
+            } else {
+              // Errorhandling
+              // While what action with what params error happend
+              var error_action = {
+                "name": "getAppVersion",
+                "params": []
+              };
+
+              dispatch({
+                "type": "ERROR",
+                "error": handleError(req, error_action)
+              });
+            };
+
+          });
+        };
+      } else {
+        return function(dispatch) {};
+      };
+    },
+
+
+    // ----------------------------------
+    // OPAPP
+    // ----------------------------------
+
+    actionSaveParams: function(params) {
+      return function(dispatch) {
+
+        dispatch({
+          "type": "SET_OBJECT",
+          "data": params,
+          "statePath": 'opapp.params'
+        });
+
+      }
+    },
+
+    actionGetSurveyResponses: function(requested_app_id) {
+
+      return function(dispatch) {
+
+        module_identifier = requested_app_id === undefined ? helpers.getAppID() : requested_app_id;
+        console.log('(?) actionGetSurveyResponses', module_identifier);
+
+
+        var current_stay_id = parseInt(helpers.getStayID());
+        var current_pid = parseInt(helpers.getPatientID());
+
+        var data_request = 'undefined';
+        var calculation_results_api_url = '/patients/' + current_pid + '/calculations/' + module_identifier;
+        if (current_stay_id) {
+          var api_url = '/stays/' + current_stay_id + '/survey_responses/' + module_identifier + '/full';
+          data_request = 'stay';
+        } else {
+          var api_url = '/patients/' + current_pid + '/survey_responses/' + module_identifier + '/full';
+          data_request = 'patient';
+        };
+
+        // Do async task
+        helpers.callAPI('GET', api_url, {}, {}, function(req) {
+
+          var app_id = requested_app_id === undefined ? helpers.getAppID() : requested_app_id;
+          //console.log('(?) actionGetSurveyResponses | app_id', app_id);
+
+          if (req.status == 200) {
+            var resp = JSON.parse(req.response);
+
+
+            helpers.callAPI('GET', calculation_results_api_url, {}, {}, function(inner_req) {
+
+              if (req.status == 200) {
+                var inner_resp = JSON.parse(inner_req.response);
+                var calculation_results = inner_resp.calculation_results;
+
+                // console.log('actionGetSurveyResponsesNew:: resp', resp, inner_resp);
+
+
+                // Reformat req
+                var return_array = [];
+                resp.survey_responses.forEach(function(current_response, srID) {
+                  var return_obj = {};
+
+                  return_obj.all_found = false;
+
+                  return_obj.app_id = null;
+                  return_obj.date = current_response.data.filled;
+
+                  return_obj.response_id = current_response.id;
+                  return_obj.response = current_response.data.response;
+
+                  return_obj.event = null;
+                  return_obj.event_found = false;
+                  return_obj.event_id = current_response.data.event_id;
+
+                  return_obj.patient = null;
+                  return_obj.patient_found = false;
+                  return_obj.patient_id = null;
+
+                  return_obj.stay = null;
+                  return_obj.stay_found = false;
+                  return_obj.stay_id = null;
+
+                  return_obj.patient_uses_module = null;
+                  return_obj.patient_uses_module_found = false;
+                  return_obj.patient_uses_module_id = null;
+
+                  return_obj.calculation = {};
+                  return_obj.calculation_found = false;
+                  return_obj.calculation_found_method = null;
+
+
+                  resp.events.forEach(function(current_event, eventID) {
+                    if (current_event.id === current_response.data.event_id) {
+                      return_obj.event_found = true;
+
+                      current_event.data.id = current_event.id;
+                      return_obj.event = current_event.data;
+                      return_obj.patient_uses_module_id = current_event.data.patient_uses_module_id;
+                      return_obj.patient_id = current_event.data.patient_id;
+                      return_obj.app_id = current_event.data.module;
+                      app_id = return_obj.app_id;
+                    };
+                  });
+
+
+                  if (return_obj.event_found) {
+                    resp.patients.forEach(function(current_patient, patientID) {
+                      if (current_patient.id === return_obj.patient_id) {
+                        return_obj.patient_found = true;
+
+                        current_patient.data.id = current_patient.id;
+                        current_patient.data.pid = current_patient.id;
+
+                        current_patient.data = createPatientExtras(current_patient.data);
+                        return_obj.patient = current_patient.data;
+                      };
+                    });
+
+                    resp.patient_uses_modules.forEach(function(current_pum, pumID) {
+                      if (current_pum.id === return_obj.patient_uses_module_id) {
+                        return_obj.patient_uses_module_found = true;
+                        current_pum.data.id = current_pum.id;
+                        return_obj.patient_uses_module = current_pum.data;
+                        return_obj.stay_id = current_pum.data.stay_id;
+
+                      };
+                    });
+                  };
+
+                  if (return_obj.stay_id) {
+                    resp.stays.forEach(function(current_stay, stayID) {
+                      if (current_stay.id === return_obj.stay_id) {
+                        return_obj.stay_found = true;
+
+                        current_stay.data.id = current_stay.id;
+                        current_stay.data.fid = current_stay.id;
+                        current_stay.data = createStayExtras(current_stay.data);
+
+                        return_obj.stay = current_stay.data;
+                      };
+                    });
+                  };
+
+                  // console.error('-> resp.calculations', resp.calculations);
+                  calculation_results.forEach(function(current_calculation_top, calculationID) {
+                    var calculation_name = current_calculation_top.name;
+
+
+                    if (current_calculation_top.result.length > 0) {
+                      current_calculation_top.result.forEach(function(current_calculation, calculationID) {
+                        var variant_info = false;
+                        if ("info" in current_calculation) {
+                          if ("response" in current_calculation.info) {
+                            variant_info = true;
+                          };
+                        };
+
+                        var variant_response = false;
+                        if ("response" in current_calculation) {
+                          if ("data" in current_calculation.response) {
+                            if ("response" in current_calculation.response.data) {
+                              variant_response = true;
+                            };
+                          };
+                        };
+
+                        if (variant_info) {
+                          var calc_resp = current_calculation.info.response;
+
+                          if (JSON.stringify(calc_resp) === JSON.stringify(return_obj.response)) {
+                            // console.log('(+) EQUAL: ', calc_resp);
+
+                            return_obj.calculation_found = true;
+                            return_obj.calculation_found_method = "variant_info";
+                            return_obj.calculation[calculation_name] = current_calculation;
+                          };
+                        };
+
+                        if (variant_response) {
+                          var calc_resp = current_calculation.response.data.response;
+
+                          if (JSON.stringify(calc_resp) === JSON.stringify(return_obj.response)) {
+                            // console.log('(+) EQUAL: ', calc_resp);
+
+                            return_obj.calculation_found = true;
+                            return_obj.calculation_found_method = "variant_response";
+                            return_obj.calculation[calculation_name] = current_calculation;
+
+                          } else {
+
+                            if ("TMTAError" in calc_resp) {
+                              // TMT - Special
+                              // console.error('DEBUG HERE ::', calc_resp, return_obj.response, current_calculation);
+
+                              if ((parseInt(calc_resp.TMTAError) === parseInt(return_obj.response.TMTAError)) &&
+                                (parseInt(calc_resp.TMTATime) === parseInt(return_obj.response.TMTATime)) &&
+                                (parseInt(calc_resp.TMTBError) === parseInt(return_obj.response.TMTBError)) &&
+                                (parseInt(calc_resp.TMTBTime) === parseInt(return_obj.response.TMTBTime)) &&
+                                (parseInt(calc_resp.Ausbildungsjahre) === parseInt(return_obj.response.Ausbildungsjahre)) &&
+                                (parseInt(calc_resp.Messzeitpunkt) === parseInt(return_obj.response.Messzeitpunkt))
+                              ) {
+
+                                return_obj.calculation_found = true;
+                                return_obj.calculation_found_method = "variant_response_tmt";
+                                return_obj.calculation[calculation_name] = current_calculation;
+                              };
+
+                            };
+
+                          };
+                        };
+                      });
+                    };
+                  });
+
+
+                  if (return_obj.calculation_found && return_obj.event_found && return_obj.patient_found && return_obj.stay_found && return_obj.patient_uses_module_found) {
+                    return_obj.all_found = true;
+                  };
+
+                  return_array.push(return_obj);
+                });
+
+
+                if (return_array.length > 0) {
+                  var have_data = true;
+
+                  // Sort
+                  return_array.sort(function(a, b) {
+                    var nameA = a.date.toUpperCase(); // ignore upper and lowercase
+                    var nameB = b.date.toUpperCase(); // ignore upper and lowercase
+                    if (nameA < nameB) {
+                      return -1;
+                    }
+                    if (nameA > nameB) {
+                      return 1;
+                    }
+                    return 0;
+                  });
+                } else {
+                  var have_data = false;
+                };
+
+                var response = {
+                  "date": new Date(),
+                  "data": return_array,
+                  "calculations_all": calculation_results,
+                  "have_data": have_data,
+                  "possible_data": true,
+                  "request": data_request,
+                  "pid": current_pid,
+                  "fid": current_stay_id,
+                  "app_id": app_id
+                };
+                console.log('(✔) Data (' + api_url + '):', response);
+
+
+
+                dispatch({
+                  "type": "SET_OBJECT",
+                  "data": response,
+                  "statePath": 'survey_responses.data.' + ApiHelpers.safeAppID(requested_app_id)
+                });
+
+
+              } else {
+                var response = {
+                  "error": true,
+                  "error_message": "Failed with status code: " + req.status,
+                  "status_code": req.status,
+                  "request": data_request,
+                  "app_id": app_id
+                };
+                console.error('(!) Error: ', response);
+              };
+            });
+
+          } else {
+            var response = {
+              "error": true,
+              "error_message": "Failed with status code: " + req.status,
+              "status_code": req.status,
+              "request": data_request,
+              "app_id": app_id
+            };
+            console.error('(!) Error: ', response);
+          };
+
+        });
+      }
+    },
+
+    actionGetUserAppCalculation: function(module_identifier, calculation_identifier) {
+      return function(dispatch) {
+
+        const api_url = '/calculations/' + module_identifier + '/' + calculation_identifier;
+        // Do async task
+        helpers.callAPI('GET', api_url, {}, {}, function(req) {
+          if (req.status == 200) {
+            var resp = JSON.parse(req.response);
+
+            var calculation_result = null;
+            if ("calculation_result" in resp) {
+              calculation_result = resp.calculation_result;
+            } else {
+              calculation_result = resp;
+            };
+
+            var _module_identifier = module_identifier.split('.').join('_');
+            var _calculation_identifier = calculation_identifier;
+            var module_calc = _module_identifier + "___" + _calculation_identifier;
+
+            var response = {
+              "date": new Date(),
+              "module_calc": module_calc,
+              "module_identifier": module_identifier,
+              "calculation_identifier": calculation_identifier,
+              "data": calculation_result
+            };
+
+            console.log('(✔) Data (' + api_url + '):', response);
+
+            dispatch({
+              type: 'GET_USERAPPCALCULATION_COMPLETE',
+              data: response
+            });
+
+          } else {
+            var response = {
+              "error": true,
+              "error_message": "Failed with status code: " + req.status,
+              "status_code": req.status
+            };
+            console.error('(!) Error: ', response);
+          };
+
+        });
+      }
+    },
+
+  }
+};
+
+  var ApiHelpers = (function() {
+
+  var encodeParams = function(obj) {
+    var str = [];
+    for (var p in obj) {
+      if (obj[p] != null && obj[p] != undefined) {
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+      }
+    }
+    return str.join("&");
+  };
+
+
+
+  var apiCalls = {
+    "update_older_x_seconds": 2,
+    "calls": {},
+    "requests": {},
+    "timestamp": {},
+  };
+
+
+  var shouldCallNow = function(path, update_if_older_x_seconds) {
+
+    return_value = false;
+    if (UserStore.getStarted()) {
+
+      update_if_older_x_seconds = update_if_older_x_seconds || apiCalls.update_older_x_seconds;
+
+      path = path || "undefined";
+      var reason = null;
+
+      apiCalls.requests[path] = apiCalls.requests[path] + 1 || 1;
+
+      // First Call is always allowed:
+      if (apiCalls.requests[path] === 1) {
+        return_value = true;
+        reason = "first_call";
+      };
+
+      // If last request is outdated then = true;
+      if (apiCalls.timestamp[path]) {
+        var duration = Math.floor((new Date() - Date.parse(apiCalls.timestamp[path])) / 1000);
+
+        if (duration > update_if_older_x_seconds) {
+          return_value = true;
+          reason = duration + " is older then: " + update_if_older_x_seconds;
+          apiCalls.timestamp[path] = apiCalls.timestamp[path] = new Date();
+        } else {
+          apiCalls.timestamp[path] = apiCalls.timestamp[path] = new Date();
+        };
+
+      } else {
+        apiCalls.timestamp[path] = apiCalls.timestamp[path] = new Date();
+      };
+
+      // Save executed calls:
+      if (return_value) {
+        apiCalls.calls[path] = apiCalls.calls[path] + 1 || 1;
+        // console.warn('(?) callAPI | shouldCallNow :: ', path, return_value, reason, apiCalls);
+      };
+    };
+
+    return return_value;
+
+  };
+
+  var clearShouldCallNow = function() {
+    apiCalls.calls = {};
+    apiCalls.requests = {};
+    apiCalls.timestamp = {};
+
+    console.warn('clearShouldCallNow CLEAR', apiCalls);
+  };
+
+  var createList = function(array, name) {
+    array = array || [];
+    name = name || null;
+
+    var list_object = {};
+    var count = array.length;
+
+    list_object[name + "_count"] = count;
+    array.forEach(function(i, iID) {
+      list_object[name + iID] = i;
+    });
+
+    return list_object;
+  };
+
+
+  var safeAppID = function(app_id) {
+    return app_id.split(".").join("_");
+  };
+
+
+  return {
+    shouldCallNow: shouldCallNow,
+    clearShouldCallNow: clearShouldCallNow,
+    createList: createList,
+    safeAppID: safeAppID
+  };
+
+})();
+
+  // ----------------------------
+// Helpers
+// ----------------------------
+
+// Add timestamp & API-URL to every request
+addOptinomicExtras = function(obj, api_url) {
+  api_url = api_url || null;
+  obj.api_timestamp = new Date().toISOString();
+  obj.api_url = api_url;
+  return obj;
+};
+
+
+// Add timestamp & API-URL to every request
+handleError = function(req, error_action) {
+
+  var error = {
+    "error": true,
+    "error_message": "Failed with status code: " + req.status,
+    "status": req.status,
+    "statusText": req.statusText,
+    "responseURL": req.responseURL,
+    "readyState": req.readyState,
+    "error_action": error_action
+  };
+
+  try {
+    var responseText = JSON.parse(req.responseText);
+    if ("error" in responseText) {
+      error.responseErrorText = responseText.error;
+    };
+  } catch (err) {
+    error.responseErrorText = null
+  };
+
+  if (req.status !== 0) {
+    console.error("(!) " + req.status + " (" + req.statusText + ")", error);
+    // window.location.href = "#/errors";
+  };
+
+  return error;
+};
+
+
+// Set Value on Obj
+function setValue(obj, access, value) {
+  //console.error('---> (setValue)', obj, access, value);
+
+  if (typeof(access) == 'string') {
+    access = access.split('.');
+  }
+  if (access.length > 1) {
+    var init = obj[access[0]] || {};
+    setValue(obj[access.shift()] = init, access, value);
+  } else {
+    obj[access[0]] = value;
+  }
+};
+
+
+debounce = function(fn, wait) {
+  var timeout = null;
+  var c = function() {
+    clearTimeout(timeout);
+    timeout = null;
+  };
+  var t = function(fn) {
+    timeout = setTimeout(fn, wait);
+  };
+  return function() {
+    var context = this;
+    var args = arguments;
+    var f = function() {
+      fn.apply(context, args);
+    };
+    timeout
+      ?
+      c() || t(f) : t(c) || f();
+  }
+}
+
+
+formatDateCH = function(date_string) {
+  date_string = date_string || null
+  if (date_string !== null) {
+
+    // 1952-11-19T00:00:00.000000000000Z
+    var year = parseInt(date_string.substring(0, 4));
+    var month = parseInt(date_string.substring(5, 7));
+    var day = parseInt(date_string.substring(8, 10));
+    var date_string_return = day + "." + month + "." + year
+
+    return date_string_return;
+  } else {
+    return null;
+  }
+};
+
+createPatientExtras = function(patient) {
+
+  function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  }
+
+
+  // patient.age = $filter('dateToAge')(patient.birthdate);
+  // patient.birthday = $filter('date')(patient.birthdate);
+
+  patient.extras = {};
+  patient.extras.age = getAge(patient.birthdate);
+
+  patient.extras.birthday = formatDateCH(patient.birthdate);
+  patient.extras.birthday_age = patient.extras.birthday + ' | ' + patient.extras.age;
+
+
+  patient.extras.name = patient.last_name + ' ' + patient.first_name;
+
+  if (patient.gender === 'male') {
+    patient.extras.ansprache = 'Herr';
+    patient.extras.anrede = 'Herr ' + patient.last_name;
+  } else {
+    patient.extras.ansprache = 'Frau';
+    patient.extras.anrede = 'Frau ' + patient.last_name;
+  };
+  patient.extras.full_name = patient.extras.ansprache + ' ' + patient.extras.name + ' (' + patient.extras.birthday_age + ')';
+
+  patient.extras.full_address = patient.address1 + ', ' + patient.zip_code + ' ' + patient.city;
+
+  var myPhone = '';
+  if (patient.phone_home) {
+    myPhone = patient.phone_home;
+  }
+  if (patient.phone_mobile) {
+    if (myPhone != '') {
+      myPhone = myPhone + ', ' + patient.phone_mobile;
+    } else {
+      myPhone = patient.phone_mobile;
+    }
+  }
+  patient.extras.phone = myPhone;
+  patient.extras.infoline = patient.extras.full_address
+
+  if (myPhone != '') {
+    patient.extras.infoline + ' | ' + patient.extras.phone;
+  };
+
+
+  // -----------------------------------
+  // Female = Pink | Male = Blue
+  // -----------------------------------
+  var myColor = "#3F51B5";
+  var myColorAccent = "#E91E63";
+  if (patient.gender === "female") {
+    myColor = "#E91E63";
+    myColorAccent = "#3F51B5";
+  }
+  patient.extras.color_main = myColor;
+  patient.extras.color_accent = myColorAccent;
+
+  return patient.extras;
+};
+
+createStayExtras = function(current_stay) {
+  current_stay.extras = {};
+  current_stay.extras.in_stay = false;
+
+  // Calculate - Duration of the stay
+  if (current_stay.stop) {
+    current_stay.extras.duration = Math.floor((Date.parse(current_stay.stop) - Date.parse(current_stay.start)) / 86400000);
+    current_stay.extras.duration = current_stay.extras.duration + 1; //incl. start & stop date
+  } else {
+    current_stay.extras.duration = Math.floor((new Date() - Date.parse(current_stay.start)) / 86400000);
+  };
+
+  // phase - translation
+  var phase = current_stay.phase;
+  var translated_de = "";
+  if (phase === 'before_stay') {
+    translated_de = "Bevorstehende Behandlung";
+    translated_en = "the stay starts in the future";
+  };
+  if (phase === 'in_stay') {
+    translated_de = "In aktueller Behandlung";
+    translated_en = "the patient is currently in stay";
+    current_stay.extras.in_stay = true;
+  };
+  if (phase === 'after_exit') {
+    translated_de = "Die Behandlung wurde vor weniger als 14 Tage beendet";
+    translated_en = "the stay ended less than 14 days ago (included)";
+  };
+  if (phase === 'frozen') {
+    translated_de = "Die Behandlung wurde manuell eingefroren";
+    translated_en = "the stay has manually been frozen (no more events, changes, ...)";
+  };
+  if (phase === 'unfrozen') {
+    translated_de = "Die Behandlung ist abgeschlossen, wurde jedoch zur Bearbeitung wieder geöffnet";
+    translated_en = "the stay is complete but has been unfrozen by somebody";
+  };
+  if (phase === 'complete') {
+    translated_de = "Die Behandlung wurde vor mehr als 14 Tage beendet";
+    translated_en = "the stay ended more than 14 days ago";
+  };
+  current_stay.extras.phase_de = translated_de;
+  current_stay.extras.phase_en = translated_en;
+
+  // from_to
+  current_stay.extras.beginn = formatDateCH(current_stay.start);
+  current_stay.extras.from_to = formatDateCH(current_stay.start);
+  current_stay.extras.from_to = current_stay.extras.from_to + ' - ';
+  if (current_stay.stop) {
+    current_stay.extras.from_to = current_stay.extras.from_to + formatDateCH(current_stay.stop);
+    current_stay.extras.ende = formatDateCH(current_stay.stop);
+  } else {
+    current_stay.extras.from_to = current_stay.extras.from_to + "Unbekannt";
+  };
+
+  return current_stay.extras;
+};
+
+createEventExtras = function(current_event) {
+  var extras = {};
+
+  extras.created_at = formatDateCH(current_event.created_at);
+  extras.due = formatDateCH(current_event.due);
+  extras.status = current_event.status.charAt(0).toUpperCase() + current_event.status.slice(1);
+
+  extras.status_de = "Undefined";
+  if (current_event.status === 'done') {
+    extras.status_de = "Erledigt";
+    extras.show_do_it_now = false;
+  };
+  if (current_event.status === 'to_be_done') {
+    extras.status_de = "Offen";
+    extras.show_do_it_now = true;
+  };
+  if (current_event.status === 'aborted') {
+    extras.status_de = "Abgebrochen";
+    extras.show_do_it_now = false;
+  };
+  if (current_event.status === 'irrelevant') {
+    extras.status_de = "Nicht relevant";
+    extras.show_do_it_now = false;
+  };
+
+  return extras;
+}
+
+
+
+  // ----------------------------  Redux Store ----------------------------
+
+  const store = Redux.createStore(reducer, Redux.applyMiddleware(ReduxThunk.default));
+
+  const ReduxBehavior = PolymerRedux(store);
+
+  UserStore.start();
+</script>
+
+<link rel="import" href="optinomic-elements/optinomic-title/optinomic-title.html">
+<link rel="import" href="iron-icons/iron-icons.html">
+<link rel="import" href="iron-pages/iron-pages.html">
+<link rel="import" href="neon-animation/web-animations.html">
+<link rel="import" href="paper-button/paper-button.html">
+<link rel="import" href="paper-icon-button/paper-icon-button.html">
+<link rel="import" href="paper-tooltip/paper-tooltip.html">
+<script>
+  opappBehavior = {
+
+    properties: {
+
+      // --------------------------- Clinic ---------------------------
+
+      _clinic_info: {
+        type: Object,
+        statePath: 'clinic.info.data.clinic_obj'
+      },
+
+      _clinic_extra_config: {
+        type: Object,
+        statePath: 'clinic.extra_config.data'
+      },
+
+      // --------------------------- Users ---------------------------
+
+      _users_all: {
+        type: Array,
+        statePath: 'users.users.data'
+      },
+
+      _users_roles: {
+        type: Array,
+        statePath: 'users.roles.data'
+      },
+
+      // --------------------------- Device ---------------------------
+
+      _device_current: {
+        type: Boolean,
+        statePath: 'device.current'
+      },
+
+      _is_small: {
+        type: Boolean,
+        statePath: 'device.sizes.small'
+      },
+      _is_medium: {
+        type: Boolean,
+        statePath: 'device.sizes.medium'
+      },
+      _is_large: {
+        type: Boolean,
+        statePath: 'device.sizes.large'
+      },
+      _is_xlarge: {
+        type: Boolean,
+        statePath: 'device.sizes.xlarge'
+      }
+    },
+
+    // --------------------------- Navigation ---------------------------
+
+    _forward: function (page) {
+      this.page = page;
+      window.location.href = "#/" + page;
+      //console.log('--> Forwarding to /', page);
+    },
+
+    _forward_user: function () {
+      window.location.href = "#/user";
+    },
+
+    // --------------------------- Lifecycle ---------------------------
+
+    created: function () {
+      // console.log('opappBehavior for ', this, 'enabled!');
+    }
+  };
+</script>
+
+
+<dom-module id="optinomic-app">
+    <template>
+        <style include="optinomic-styles">
+         :host {
+            display: block;
+        }
+        </style>
+        <div class="app_actions">
+            <template is="dom-if" if="[[!_show_help]]" restamp="true">
+                <paper-icon-button id="btn-help" class="grey" on-tap="_toggleHelp" icon="help-outline"></paper-icon-button>
+                <paper-tooltip for="btn-help" position="left">Hilfe | Readme anzeigen</paper-tooltip>
+            </template>
+            <template is="dom-if" if="[[_show_help]]" restamp="true">
+                <paper-icon-button id="btn-help" class="pink" on-tap="_toggleHelp" icon="close"></paper-icon-button>
+                <paper-tooltip for="btn-help" position="left">Hilfe | Readme schliessen</paper-tooltip>
+            </template>
+        </div>
+        <iron-pages id="pages" selected="[[_app_state]]" attr-for-selected="name" fallback-selection="app" role="main">
+            <div class="page" name="app">
+                <optinomic-template name="template"></optinomic-template>
+            </div>
+            <div class="page" name="help" style="padding:48px;">
+                <optinomic-title h1="[[_current_app.name]]" h2="[[_current_app.short_description]]" h3="Readme"></optinomic-title>
+                <div id="readme" class="animated readme_container"></div>
+                <div class="horizontal">
+                    <p class="caption">&nbsp;V.[[_current_app.version]] | [[_current_app.identifier]]</p>
+                    <paper-button class="grey" on-click="_toggleHelp">Schliessen</paper-button>
+                </div>
+                <template is="dom-if" if="[[_user.isAdmin]]">
+                    <div style="margin-top: 64px;margin-bottom: 24px;">
+                        <paper-icon-button class="pink" on-tap="_logState" icon="bug-report"></paper-icon-button>
+                        <paper-icon-button class="indigo" on-tap="_loadData" icon="refresh"></paper-icon-button>
+                    </div>
+                </template>
+            </div>
+        </iron-pages>
+    </template>
+
+    <script>
+        class optinomicApp extends ReduxBehavior(Polymer.Element) {
+        static get is() {
+            return 'optinomic-app';
+        }
+
+        static get actions() {
+            return AsyncActionsBehavior.actions;
+        }
+
+        static get properties() {
+            return {
+
+                _user: {
+                    type: Object,
+                    statePath: 'user.info.data'
+                },
+                _current_app: {
+                    type: Object,
+                    statePath: 'apps.current.data',
+                    observer: '_current_appChanged'
+                },
+                _current_patient_pid: {
+                    type: Number,
+                    statePath: 'current_patient.pid'
+                },
+                _app_state: {
+                    type: String,
+                    observer: '_newPageSelected'
+                }
+            };
+        }
+
+        // ---------------- Functions ----------------
+
+        _newPageSelected(newVal, oldVal) {
+
+            let pages = this.$.pages.children;
+
+            console.warn('ELSE', pages[newVal].className, this._show_help, pages);
+
+            if (this._show_help) {
+
+                // Run the animation on the newly selected page
+                if (!pages[newVal].className.includes('zoom-in')) {
+                    pages[newVal].className += ' zoom-in';
+                }
+
+                if (typeof oldVal !== 'undefined') {
+                    // Stop the animation of hidden pages
+                    pages[oldVal].className = pages[oldVal].className.split(' zoom-in').join('');
+                }
+            } else {
+
+                if (!pages[newVal].className.includes('fade-in')) {
+                    pages[newVal].className += ' fade-in';
+                }
+
+            };
+        }
+
+        _toggleHelp() {
+            this.set('_show_help', !this._show_help);
+
+            if (this._show_help) {
+                Polymer.RenderStatus.afterNextRender(this, function() {
+
+
+                    var readme = this.$.readme;
+                    readme.innerHTML = this._current_app.readme.html;
+
+                    this.set('_app_state', 'help');
+                });
+            } else {
+                this.set('_app_state', 'app');
+
+            };
+        }
+
+        _logState() {
+            this._debouncer = Polymer.Debouncer.debounce(this._debouncer, Polymer.Async.timeOut.after(250), () => {
+
+                var state = this.getState();
+                console.warn('(✔) OpApp-State', state);
+
+            });
+        }
+
+        // ---------------- Observers ----------------
+
+        _current_appChanged() {
+            this._debouncer = Polymer.Debouncer.debounce(this._debouncer, Polymer.Async.timeOut.after(250), () => {
+
+                try {
+                    if (this._current_app.type === 'patient') {
+                        this._loadPatientData();
+                    };
+                } catch (err) {
+                    console.warn('_current_appChanged', err, this._current_app);
+                };
+
+            });
+        }
+
+
+        // ---------------- Init ----------------
+
+
+        _loadData() {
+            Polymer.RenderStatus.afterNextRender(this, function() {
+                console.warn('(START) _loadData');
+
+                // loadData
+                this.dispatch('getCurrentUser');
+                this.dispatch('getApps');
+                this.dispatch('getClinic');
+
+            });
+        }
+
+        _loadPatientData() {
+            Polymer.RenderStatus.afterNextRender(this, function() {
+                console.warn('(START) _loadPatientData');
+
+                if ((this._current_patient_pid !== NaN) && (this._current_patient_pid !== 0) && (this._current_patient_access !== null)) {
+                    if (ApiHelpers.shouldCallNow('_loadPatientData_' + helpers.getPatientID(), 2)) {
+
+                        this.dispatch('getCurrentPatient', helpers.getPatientID());
+                        this.dispatch('getCurrentPatientStays', helpers.getPatientID());
+                        this.dispatch('getStayApps', helpers.getPatientID(), helpers.getStayID());
+
+                    };
+                };
+
+            });
+        }
+
+        _init() {
+            this.set('_show_help', false);
+            this.set('_app_state', 'app');
+
+            // Save Params
+            var params = {
+                "userID": parseInt(helpers.getUserID()),
+                "patientID": parseInt(helpers.getPatientID()),
+                "stayID": parseInt(helpers.getStayID()),
+                "token": helpers.getToken(),
+                "appName": helpers.getAppName(),
+                "appID": helpers.getAppID(),
+                "apiURL": helpers.getApiURL()
+            };
+            this.set('params', params);
+            this.dispatch('actionSaveParams', params);
+
+            // Save Params @ current_patient
+            // So we can share Behaviors from /client
+            var href = window.location.href;
+            var start = href.search("view/") + 5;
+            var end = href.search("#patient_id=");
+            var template = href.substr(start, (end - start));
+
+            var current_patient = {
+                "pid": parseInt(helpers.getPatientID()),
+                "fid": parseInt(helpers.getStayID()),
+                "aid": helpers.getAppID(),
+                "template": template
+            };
+            this.dispatch('setObject', 'current_patient', current_patient);
+
+            console.log('(✔) OpApp-Init', params, current_patient);
+
+            setTimeout(function() {
+                this._logState();
+            }.bind(this), 2500);
+
+        }
+
+        // ---------------- Lifecycle ----------------
+        ready() {
+            super.ready();
+            this._init();
+            this._loadData();
+        }
+    }
+
+    window.customElements.define(optinomicApp.is, optinomicApp);
+    
+    </script>
+</dom-module>
+
+<optinomic-app name="main"></optinomic-app>
+
+
+<link rel="import" href="polymer/polymer-element.html">
+<link rel="import" href="paper-button/paper-button.html">
+<link rel="import" href="paper-tooltip/paper-tooltip.html">
+
+<dom-module id="file-download">
+  <template>
+    <style include="optinomic-styles">
+      :host {
+        display: block;
+      }
+
+    </style>
+
+    <div>
+      <template is="dom-if" if="[[_filename_set]]">
+        <template is="dom-if" if="[[_button_mode]]">
+          <paper-button class$="[[buttonColor]]" on-click="_onDownloadFile">[[extension]]</paper-button>
+        </template>
+        <template is="dom-if" if="[[!_button_mode]]">
+          <paper-icon-button class$="[[buttonColor]]" on-click="_onDownloadFile" icon="[[icon]]"></paper-icon-button>
+        </template>
+      </template>
+      <paper-tooltip position="[[tooltip]]">[[_filename_full]]</paper-tooltip>
+      <a href="#" id="fileLink" hidden download$="[[_filename_full]]"></a>
+    </div>
+
+  </template>
+
+  <script>
+    class fileDownload extends Polymer.Element {
+
+      static get is() {
+        return 'file-download';
+      }
+
+      static get actions() {
+        return AsyncActionsBehavior.actions;
+      }
+
+      // Properties
+      static get properties() {
+        return {
+
+          file: {
+            type: Object,
+            observer: '_setFile'
+          },
+
+          name: {
+            type: Object,
+            observer: '_setFilename'
+          },
+
+          extension: {
+            type: String,
+            observer: '_setFilename'
+          },
+
+          dateprefix: {
+            type: Object,
+            value: true
+          },
+
+          stringify: {
+            type: Object,
+            value: true
+          },
+
+          icon: {
+            type: String,
+            observer: '_setMode'
+          },
+
+          tooltip: {
+            type: String,
+            value: 'top'
+          },
+
+          buttonColor: {
+            type: String,
+            value: 'grey'
+          }
+
+        };
+      }
+
+      // --------------- Functions ---------------
+
+      _onDownloadFile(e) {
+
+        var content = this._file;
+
+        e.preventDefault();
+        var myLink = this.$.fileLink;
+        const link = this._createFile(content);
+        myLink.href = link;
+        myLink.click();
+      }
+
+      _createFile(text) {
+        const textBlob = new Blob([text], {type: 'text/plain'});
+        return window.URL.createObjectURL(textBlob);
+      }
+
+      // --------------- Observers ---------------
+
+      _setMode() {
+        this._debouncer = Polymer.Debouncer.debounce(this._debouncer, Polymer.Async.timeOut.after(250), () => {
+
+          var _button_mode = true;
+          if ((this.icon !== null) && (this.icon !== undefined)) {
+            _button_mode = false;
+          };
+          this.set('_button_mode', _button_mode);
+
+        });
+      }
+
+      _setFile() {
+        this._setFileDebouncer = Polymer.Debouncer.debounce(this._setFileDebouncer, Polymer.Async.timeOut.after(200), () => {
+
+          var _file = null;
+          if ((this.file !== null) && (this.file !== undefined)) {
+            if (this.stringify) {
+              _file = JSON.stringify(this.file, null, 2);
+            } else {
+              _file = this.file;
+            };
+
+            this.set('_file', _file);
+          };
+
+        });
+      }
+
+      _setFilename() {
+        this._setFilenameDebouncer = Polymer.Debouncer.debounce(this._setFilenameDebouncer, Polymer.Async.timeOut.after(250), () => {
+
+          if ((this.name !== null) && (this.name !== undefined)) {
+            if ((this.extension !== null) && (this.extension !== undefined)) {
+
+              var getDatePrefix = function () {
+                var d = new Date();
+                var y = d.getFullYear();
+                var m = d.getMonth() + 1;
+                var t = d.getUTCDate();
+
+                if (m < 10) {
+                  m = "0" + m;
+                };
+
+                if (t < 10) {
+                  t = "0" + t;
+                };
+
+                return y + "_" + m + "_" + t + " - ";
+              }
+
+              var fn = "";
+              if (this.dateprefix) {
+                fn = getDatePrefix();
+              };
+
+              fn = fn + this.name + "." + this.extension;
+
+              this.set('_filename_full', fn);
+              this.set('_filename_set', true);
+
+            };
+          };
+
+        });
+      }
+
+      // --------------- Lifecycle ---------------
+
+      _init() {
+        this.set('_filename_set', false);
+        this.set('_button_mode', true);
+        // console.warn('_init :: fileDownload');
+      }
+
+      ready() {
+        super.ready();
+        this._init();
+      }
+    }
+
+    window.customElements.define(fileDownload.is, fileDownload);
+  </script>
+</dom-module>
+
+
+
+
+
+
+
+<link rel="import" href="polymer/polymer-element.html">
+<link rel="import" href="paper-input/paper-input.html">
+<link rel="import" href="juicy-jsoneditor/juicy-jsoneditor.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-combo-box.html">
+<link rel="import" href="vaadin-combo-box/vaadin-combo-box.html">
+
+<dom-module id="optinomic-template">
+    <template>
+        <style include="optinomic-styles">
+         :host {
+            display: block;
+            --right-top-height: 100%;
+            --right-bottom-height: 0;
+        }
+
+        .fullscreen {
+            height: calc(100vh - 64px);
+            width: 100%;
+        }
+
+        .page {
+            padding: 12px;
+        }
+
+        .request_container {
+            margin: 12px;
+            padding: 24px;
+            background-color: #F5F5F5;
+            color: #424242;
+            border-radius: 12px;
+        }
+
+        .field {
+            padding: 6px;
+        }
+        </style>
+        
+        
+        
+        
+        <div class="page">
+            <div class="request_container">
+                <div class="horizontal">
+                    <div class="flex">
+                        <h1>Request</h1>
+                    </div>
+                    <div class="field">
+                        <a href="https://doc.optinomic.org/V2/Developers/api.html" target="_blank">API-Documentation {{_user.is_admin}}</a>
+                    </div>
+                </div>
+                <template is="dom-if" if="{{!_user.is_admin}}">
+                    <h2>Admin's only</h2>
+                    <p>Sorry, this party is only for Admins!</p>
+                </template>
+                <div class="horizontal">
+                    <div style="height:250px;margin-right:6px">
+                        <vaadin-combo-box id="method" style="width:100%" value="{{_d.method.selected}}" label="" items="[[_d.method.all]]" item-value-path="" item-label-path="">
+                            <template>
+                                <paper-icon-item>
+                                    <paper-item-body two-line>
+                                        <div>
+                                            [[item]]
+                                        </div>
+                                    </paper-item-body>
+                                </paper-icon-item>
+                            </template>
+                        </vaadin-combo-box>
+                    </div>
+                    <div style="height:250px;" class="flex">
+                        <div style="margin-top:-2px;">
+                            <paper-input id="APIpath" placeholder="Enter the API path" value="{{path}}"></paper-input>
+                        </div>
+                    </div>
+                    <div style="height:200px;" class="">
+                        <template is="dom-if" if="{{!show_params}}">
+                            <paper-button class="grey" on-tap="_toggleParams">+ Params</paper-button>
+                        </template>
+                        <template is="dom-if" if="{{show_params}}">
+                            <paper-button class="grey" on-tap="_toggleParams">Close</paper-button>
+                        </template>
+                    </div>
+                </div>
+                <div style="margin-top:-200px;">
+                    <template is="dom-if" if="{{show_params}}">
+                        <div>
+                            <h6>Params</h6>
+                            <juicy-jsoneditor json="{{params}}" mode="code"></juicy-jsoneditor>
+                        </div>
+                    </template>
+                    <div class="horizontal" style="margin-top:24px;">
+                        <div class="flex">
+                            &nbsp;
+                        </div>
+                        <div class="field">
+                            <template is="dom-if" if="{{loading}}">
+                                <paper-spinner active style="margin-right:36px;"></paper-spinner>
+                            </template>
+                            <template is="dom-if" if="{{_user.is_admin}}">
+                            <template is="dom-if" if="{{!loading}}">
+                                <paper-button class="pink" on-tap="_runCall">Run</paper-button>
+                            </template>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <template is="dom-if" if="{{have_data}}">
+            <div class="page">
+                <div class="request_container">
+                    <div class="horizontal">
+                        <div class="flex">
+                            <h1>Response</h1>
+                        </div>
+                        <div class="field">
+                            <div class="field">
+                                <file-download icon="input" file="[[data]]" extension="json" name="[[filename]]" tooltip="left"></file-download>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <juicy-jsoneditor class="fullscreen" json="{{data}}" mode="code"></juicy-jsoneditor>
+                    </div>
+                </div>
+            </div>
+        </template>
+        
+        
+    </template>
+    <script>
+    class optinomicTemplate extends Polymer.mixinBehaviors([
+        opappBehavior
+    ], ReduxBehavior(Polymer.Element)) {
+
+        static get is() {
+            return 'optinomic-template';
+        }
+
+        static get actions() {
+            return AsyncActionsBehavior.actions;
+        }
+
+        // Properties
+        static get properties() {
+            return {
+                _user: {
+                    type: Object,
+                    statePath: 'user.info.data'
+                }
+            };
+        }
+
+        // --------------- Functions ---------------
+
+        _toggleParams() {
+            this.set('show_params', !this.show_params);
+        }
+
+        _runCall() {
+            
+            if (this._user.is_admin === true) {
+
+            var d = this.get('_d');
+            var path = this.$.APIpath;
+            var params = this.get('params');
+            console.log('_runCall', d.method.selected, path.value, params);
+
+            var filename = 'API_' + d.method.selected + path.value.split("/").join("_")
+            this.set('filename', filename);
+
+
+            this.set('data', null);
+            this.set('have_data', false);
+
+            this.set('loading', true);
+
+
+            helpers.callAPI(d.method.selected, path.value, params, {}, function(req) {
+                this.have_data = false;
+
+                try {
+                    if ("response" in req) {
+                        var resp = JSON.parse(req.response);
+                        this.set('data', resp);
+
+                        console.log('DATA', resp);
+                    } else {
+                        console.log(req.status, req);
+                        this.set('data', req);
+
+                    };
+
+                    this.set('have_data', true);
+
+                } catch (err) {
+                    alert("Error: Check your entries.  Error-Message:" + err.message);
+                }
+
+                this.loading = false;
+            }.bind(this));
+            
+            } else {
+                alert("Error: Admin only!");    
+            };
+        }
+
+
+        // --------------- Lifecycle ---------------
+
+        _init() {
+            var d = {};
+
+            // Falltyp
+            d.method = {
+                "all": [
+                    "GET", "POST", "PUT", "DELETE"
+                ]
+            };
+            d.method.selected = d.method.all[0];
+
+            this.set('path', '/patients');
+            this.set('params', {});
+
+            d.init_done = true;
+            this.set('_d', d);
+            this._d = d;
+            this.set('have_data', false);
+            this.set('show_params', false);
+            this.set('filename', '');
+            this.set('loading', false);
+            console.log('(INIT) API-Runner', d);
+        }
+
+        constructor() {
+            super();
+        }
+
+        ready() {
+            super.ready();
+
+            Polymer.RenderStatus.afterNextRender(this, function() {
+                this._init();
+            });
+        }
+    }
+
+    window.customElements.define(optinomicTemplate.is, optinomicTemplate);
+    </script>
+</dom-module>
+
+
+
+
+[javascript]
+
+
+[css]
+
+
+

@@ -1,110 +1,242 @@
 <link rel="import" href="polymer/polymer-element.html">
-<link rel="import" href="iron-pages/iron-pages.html">
-<link rel="import" href="optinomic-elements/optinomic-title/optinomic-title.html">
-<link rel="import" href="optinomic-elements/optinomic-clipboard/optinomic-clipboard.html">
+<link rel="import" href="paper-input/paper-input.html">
 <link rel="import" href="juicy-jsoneditor/juicy-jsoneditor.html">
-
-<link rel="import" href="vaadin-valo-theme/vaadin-button.html">
-<link rel="import" href="vaadin-valo-theme/vaadin-checkbox.html">
 <link rel="import" href="vaadin-valo-theme/vaadin-combo-box.html">
-<link rel="import" href="vaadin-valo-theme/vaadin-date-picker.html">
-<link rel="import" href="vaadin-valo-theme/vaadin-form-item.html">
-<link rel="import" href="vaadin-valo-theme/vaadin-form-layout.html">
-<link rel="import" href="vaadin-valo-theme/vaadin-grid.html">
-<link rel="import" href="vaadin-valo-theme/vaadin-overlay.html">
-<link rel="import" href="vaadin-valo-theme/vaadin-text-field.html">
-
-<link rel="import" href="vaadin-checkbox/vaadin-checkbox.html">
-<link rel="import" href="vaadin-grid/vaadin-grid.html">
-<link rel="import" href="vaadin-form-layout/vaadin-form-layout.html">
-<link rel="import" href="vaadin-text-field/vaadin-text-field.html">
-<link rel="import" href="vaadin-date-picker/vaadin-date-picker.html">
-<link rel="import" href="vaadin-split-layout/vaadin-split-layout.html">
-<link rel="import" href="vaadin-dialog/vaadin-dialog.html">
 <link rel="import" href="vaadin-combo-box/vaadin-combo-box.html">
-
 <dom-module id="optinomic-template">
-  <template>
-    <style include="optinomic-styles">
-      :host {
-        display: block;
-        --right-top-height: 100%;
-        --right-bottom-height: 0;
-      }
+    <template>
+        <style include="optinomic-styles">
+         :host {
+            display: block;
+            --right-top-height: 100%;
+            --right-bottom-height: 0;
+        }
 
-      .fullscreen {
-        height: calc(100vh);
-        min-height: calc(100vh);
-      }
+        .fullscreen {
+            height: calc(100vh - 64px);
+            width: 100%;
+        }
 
-      .page {
-        padding: 12px;
-      }
+        .page {
+            padding: 12px;
+        }
 
-    </style>
+        .request_container {
+            margin: 12px;
+            padding: 24px;
+            background-color: #F5F5F5;
+            color: #424242;
+            border-radius: 12px;
+        }
 
-    <div class="fullscreen">
-        <h2>API-Runner</h2>
-        <p>Hallo</p>
-
-        <a href="https://doc.optinomic.org/V2/Developers/api.html" target="_blank">API-Documentation</a>
-    </div>
-
-  </template>
-
-  <script>
+        .field {
+            padding: 6px;
+        }
+        </style>
+        <div class="page">
+            <div class="request_container">
+                <div class="horizontal">
+                    <div class="flex">
+                        <h1>Request</h1>
+                    </div>
+                    <div class="field">
+                        <a href="https://doc.optinomic.org/V2/Developers/api.html" target="_blank">API-Documentation {{_user.is_admin}}</a>
+                    </div>
+                </div>
+                <template is="dom-if" if="{{!_user.is_admin}}">
+                    <h2>Admin's only</h2>
+                    <p>Sorry, this party is only for Admins!</p>
+                </template>
+                <div class="horizontal">
+                    <div style="height:250px;margin-right:6px">
+                        <vaadin-combo-box id="method" style="width:100%" value="{{_d.method.selected}}" label="" items="[[_d.method.all]]" item-value-path="" item-label-path="">
+                            <template>
+                                <paper-icon-item>
+                                    <paper-item-body two-line>
+                                        <div>
+                                            [[item]]
+                                        </div>
+                                    </paper-item-body>
+                                </paper-icon-item>
+                            </template>
+                        </vaadin-combo-box>
+                    </div>
+                    <div style="height:250px;" class="flex">
+                        <div style="margin-top:-2px;">
+                            <paper-input id="APIpath" placeholder="Enter the API path" value="{{path}}"></paper-input>
+                        </div>
+                    </div>
+                    <div style="height:200px;" class="">
+                        <template is="dom-if" if="{{!show_params}}">
+                            <paper-button class="grey" on-tap="_toggleParams">+ Params</paper-button>
+                        </template>
+                        <template is="dom-if" if="{{show_params}}">
+                            <paper-button class="grey" on-tap="_toggleParams">Close</paper-button>
+                        </template>
+                    </div>
+                </div>
+                <div style="margin-top:-200px;">
+                    <template is="dom-if" if="{{show_params}}">
+                        <div>
+                            <h6>Params</h6>
+                            <juicy-jsoneditor json="{{params}}" mode="code"></juicy-jsoneditor>
+                        </div>
+                    </template>
+                    <div class="horizontal" style="margin-top:24px;">
+                        <div class="flex">
+                            &nbsp;
+                        </div>
+                        <div class="field">
+                            <template is="dom-if" if="{{loading}}">
+                                <paper-spinner active style="margin-right:36px;"></paper-spinner>
+                            </template>
+                            <template is="dom-if" if="{{_user.is_admin}}">
+                                <template is="dom-if" if="{{!loading}}">
+                                    <paper-button class="pink" on-tap="_runCall">Run</paper-button>
+                                </template>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <template is="dom-if" if="{{have_data}}">
+            <div class="page">
+                <div class="request_container">
+                    <div class="horizontal">
+                        <div class="flex">
+                            <h1>Response</h1>
+                        </div>
+                        <div class="field">
+                            <div class="field">
+                                <file-download icon="input" file="[[data]]" extension="json" name="[[filename]]" tooltip="left"></file-download>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <juicy-jsoneditor class="fullscreen" json="{{data}}" mode="code"></juicy-jsoneditor>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </template>
+    <script>
     class optinomicTemplate extends Polymer.mixinBehaviors([
-      opappBehavior, optinomicExportToolbox
+        opappBehavior
     ], ReduxBehavior(Polymer.Element)) {
 
-      static get is() {
-        return 'optinomic-template';
-      }
+        static get is() {
+            return 'optinomic-template';
+        }
 
-      static get actions() {
-        return AsyncActionsBehavior.actions;
-      }
+        static get actions() {
+            return AsyncActionsBehavior.actions;
+        }
 
-      // Properties
-      static get properties() {
-        return {
+        // Properties
+        static get properties() {
+            return {
+                _user: {
+                    type: Object,
+                    statePath: 'user.info.data'
+                }
+            };
+        }
 
-          _app_state: {
-            type: String,
-            value: 'start'
-          }
+        // --------------- Functions ---------------
 
-        };
-      }
+        _toggleParams() {
+            this.set('show_params', !this.show_params);
+        }
 
-      // --------------- Functions ---------------
+        _runCall() {
 
-      _something() {
-        
-      }
+            if (this._user.is_admin === true) {
 
-      
+                var d = this.get('_d');
+                var path = this.$.APIpath;
+                var params = this.get('params');
+                console.log('_runCall', d.method.selected, path.value, params);
+
+                var filename = 'API_' + d.method.selected + path.value.split("/").join("_")
+                this.set('filename', filename);
 
 
-      // --------------- Lifecycle ---------------
+                this.set('data', null);
+                this.set('have_data', false);
 
-      _init() {
-        console.warn('_init :: API-Runner');
-      }
+                this.set('loading', true);
 
-      constructor() {
-        super();
-      }
 
-      ready() {
-        super.ready();
+                helpers.callAPI(d.method.selected, path.value, params, {}, function(req) {
+                    this.have_data = false;
 
-        Polymer.RenderStatus.afterNextRender(this, function () {
-          this._init();
-        });
-      }
+                    try {
+                        if ("response" in req) {
+                            var resp = JSON.parse(req.response);
+                            this.set('data', resp);
+
+                            console.log('DATA', resp);
+                        } else {
+                            console.log(req.status, req);
+                            this.set('data', req);
+
+                        };
+
+                        this.set('have_data', true);
+
+                    } catch (err) {
+                        alert("Error: Check your entries.  Error-Message:" + err.message);
+                    }
+
+                    this.loading = false;
+                }.bind(this));
+
+            } else {
+                alert("Error: Admin only!");
+            };
+        }
+
+
+        // --------------- Lifecycle ---------------
+
+        _init() {
+            var d = {};
+
+            // Falltyp
+            d.method = {
+                "all": [
+                    "GET", "POST", "PUT", "DELETE"
+                ]
+            };
+            d.method.selected = d.method.all[0];
+
+            this.set('path', '/patients');
+            this.set('params', {});
+
+            d.init_done = true;
+            this.set('_d', d);
+            this._d = d;
+            this.set('have_data', false);
+            this.set('show_params', false);
+            this.set('filename', '');
+            this.set('loading', false);
+            console.log('(INIT) API-Runner', d);
+        }
+
+        constructor() {
+            super();
+        }
+
+        ready() {
+            super.ready();
+
+            Polymer.RenderStatus.afterNextRender(this, function() {
+                this._init();
+            });
+        }
     }
 
     window.customElements.define(optinomicTemplate.is, optinomicTemplate);
-  </script>
+    </script>
 </dom-module>
