@@ -81,6 +81,7 @@ const init = (user) => {
 
         // when we recieve messages in this chat, render them
         myChat.on('message', (message) => {
+            //console.log('current message', message);
             renderMessage(message);
         });
 
