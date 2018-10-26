@@ -40,9 +40,9 @@ min_lastpage = 4
 [event exit]
 responsibility = Admin
 type = before_exit
-days = 7
-time = 07:00
-due_after = 604800
+days = 10
+time = 08:00
+due_after = 259200
 overdue = ignore
 description = Erfassung der Patientenzufriedenheit
 survey = ZuePaZ_Suedhang
