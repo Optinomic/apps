@@ -2,8 +2,8 @@
 
 @font-face {
     font-family: "Material Design Icons";
-    src: url("https://cdn.rawgit.com/Optinomic/apps/master/lib/css/vendor/mdi/1.7.22/fonts/materialdesignicons-webfont.eot?v=1.7.22");
-    src: url("https://cdn.rawgit.com/Optinomic/apps/master/lib/css/vendor/mdi/1.7.22/fonts/materialdesignicons-webfont.eot?#iefix&v=1.7.22") format("embedded-opentype"), url("https://cdn.rawgit.com/Optinomic/apps/master/lib/css/vendor/mdi/1.7.22/fonts/materialdesignicons-webfont.woff2?v=1.7.22") format("woff2"), url("https://cdn.rawgit.com/Optinomic/apps/master/lib/css/vendor/mdi/1.7.22/fonts/materialdesignicons-webfont.woff?v=1.7.22") format("woff"), url("https://cdn.rawgit.com/Optinomic/apps/master/lib/css/vendor/mdi/1.7.22/fonts/materialdesignicons-webfont.ttf?v=1.7.22") format("truetype"), url("https://cdn.rawgit.com/Optinomic/apps/master/lib/css/vendor/mdi/1.7.22/fonts/materialdesignicons-webfont.svg?v=1.7.22#materialdesigniconsregular") format("svg");
+    src: url("https://cdn.jsdelivr.net/gh/Optinomic/apps/lib/css/vendor/mdi/1.7.22/fonts/materialdesignicons-webfont.eot?v=1.7.22");
+    src: url("https://cdn.jsdelivr.net/gh/Optinomic/apps/lib/css/vendor/mdi/1.7.22/fonts/materialdesignicons-webfont.eot?#iefix&v=1.7.22") format("embedded-opentype"), url("https://cdn.jsdelivr.net/gh/Optinomic/apps/lib/css/vendor/mdi/1.7.22/fonts/materialdesignicons-webfont.woff2?v=1.7.22") format("woff2"), url("https://cdn.jsdelivr.net/gh/Optinomic/apps/lib/css/vendor/mdi/1.7.22/fonts/materialdesignicons-webfont.woff?v=1.7.22") format("woff"), url("https://cdn.jsdelivr.net/gh/Optinomic/apps/lib/css/vendor/mdi/1.7.22/fonts/materialdesignicons-webfont.ttf?v=1.7.22") format("truetype"), url("https://cdn.jsdelivr.net/gh/Optinomic/apps/lib/css/vendor/mdi/1.7.22/fonts/materialdesignicons-webfont.svg?v=1.7.22#materialdesigniconsregular") format("svg");
     font-weight: normal;
     font-style: normal;
 }
